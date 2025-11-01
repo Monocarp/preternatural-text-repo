@@ -6,7 +6,7 @@ colorTo: purple
 sdk: gradio
 sdk_version: 4.49.1
 app_file: app.py
-pinned: true
+pinned: false
 license: mit
 tags:
   - paranormal
