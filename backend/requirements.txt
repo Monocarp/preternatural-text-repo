@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+haystack-ai
+sentence-transformers
+numpy
+faiss-cpu
+pandas  # For any data handling
+reportlab  # For PDF fallback
+python-docx  # For Word exports
+huggingface_hub  # For optional commits
+sqlalchemy  # For DB (start with SQLite)
