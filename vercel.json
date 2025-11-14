@@ -9,10 +9,11 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "frontend/dist"
+        "distDir": "dist"
       }
     }
   ],
+  "outputDirectory": "frontend/dist",
   "routes": [
     {
       "src": "/api/(.*)",
@@ -20,7 +21,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/$1"
     }
   ],
   "rewrites": [
