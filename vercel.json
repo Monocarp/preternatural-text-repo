@@ -3,10 +3,7 @@
   "builds": [
     {
       "src": "backend/main.py",
-      "use": "@vercel/python",
-      "config": {
-        "output": ".vercel/output/functions/api.func"
-      }
+      "use": "@vercel/python"
     },
     {
       "src": "frontend/package.json",
@@ -19,11 +16,17 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "dest": "backend/main.py"
     },
     {
       "src": "/(.*)",
       "dest": "/$1"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
