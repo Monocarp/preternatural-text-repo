@@ -18,23 +18,32 @@ from haystack.components.embedders import SentenceTransformersTextEmbedder
 from haystack.components.retrievers.in_memory import InMemoryEmbeddingRetriever, InMemoryBM25Retriever
 from haystack.components.joiners import DocumentJoiner
 from haystack.document_stores.in_memory import InMemoryDocumentStore
-
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from models import Base, Story, CodexNode, NodeStory
+from dotenv import load_dotenv
+# Load .env.local from project root (since we're in backend subdir)
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env.local'))
 logger = logging.getLogger(__name__)
-
 # Paths (relative to root from backend)
 books_dir = "../books/"
 data_dir = "../data/"
 document_store_path = os.path.join(data_dir, "document_store.json")
 codex_tree_path = os.path.join(data_dir, "codex_tree.json")
 stories_dict_path = os.path.join(data_dir, "stories_dict.json")
-
-# Global flat story storage
+# DB Connection
+DB_URL = os.getenv("POSTGRES_PRISMA_URL") # Pooled for serverless
+if DB_URL and "postgres" in DB_URL:
+    DB_URL = DB_URL.replace("postgres://", "postgresql://")
+engine = create_engine(DB_URL)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# Create tables if not exist
+Base.metadata.create_all(bind=engine)
+# Global flat story storage (in-memory cache; load from DB)
 stories_dict = {}
-
 # Lazy-load full MD texts and story positions {book_slug: data}
 full_mds = {}
 story_positions = {}
-
 def load_full_md(book_slug):
     if book_slug not in full_mds:
         md_path = os.path.join(books_dir, book_slug, "Full_Text.md")
@@ -46,7 +55,6 @@ def load_full_md(book_slug):
             logger.error(f"Failed to load Full_Text.md for {book_slug}: {e}")
             full_mds[book_slug] = ""
     return full_mds[book_slug]
-
 def load_story_positions(book_slug):
     if book_slug not in story_positions:
         pos_path = os.path.join(books_dir, book_slug, "story_positions.json")
@@ -58,12 +66,10 @@ def load_story_positions(book_slug):
             logger.error(f"Failed to load story_positions.json for {book_slug}: {e}")
             story_positions[book_slug] = {}
     return story_positions[book_slug]
-
 # Discover books dynamically
 books = [d for d in os.listdir(books_dir) if os.path.isdir(os.path.join(books_dir, d)) and not d.startswith('.')]
 sources = ["All Sources"] + sorted(books)
 logger.info(f"Discovered books: {sources}")
-
 # Load document store
 document_store = None
 if os.path.exists(document_store_path):
@@ -91,7 +97,6 @@ if os.path.exists(document_store_path):
         if not has_embeddings:
             logger.warning("No valid embeddings found; re-embedding...")
             from haystack.components.embedders import SentenceTransformersDocumentEmbedder
-            # Updated for local model loading
             import os
             MODEL_DIR = os.path.join(os.path.dirname(__file__), "models", "bge-large-en-v1.5")
             MODEL_PATH = MODEL_DIR if os.path.exists(MODEL_DIR) else "BAAI/bge-large-en-v1.5"
@@ -119,10 +124,8 @@ if os.path.exists(document_store_path):
 else:
     logger.error("document_store.json not found.")
     raise FileNotFoundError("document_store.json missing")
-
 # Set up Haystack pipelines
 logger.debug("Setting up Haystack pipelines...")
-# Updated for local model loading
 import os
 MODEL_DIR = os.path.join(os.path.dirname(__file__), "models", "bge-large-en-v1.5")
 MODEL_PATH = MODEL_DIR if os.path.exists(MODEL_DIR) else "BAAI/bge-large-en-v1.5"
@@ -142,12 +145,10 @@ both_pipeline.connect("embedder.embedding", "retriever_embedding.query_embedding
 both_pipeline.connect("retriever_embedding", "joiner")
 both_pipeline.connect("retriever_bm25", "joiner")
 logger.info(f"Both pipeline components: {list(both_pipeline.graph.nodes.keys())}")
-
 retriever_bm25_key = InMemoryBM25Retriever(document_store=document_store)
 keyword_pipeline = Pipeline()
 keyword_pipeline.add_component("retriever_bm25", retriever_bm25_key)
 logger.info(f"Keyword pipeline components: {list(keyword_pipeline.graph.nodes.keys())}")
-
 embedder_sem = SentenceTransformersTextEmbedder(model=MODEL_PATH, normalize_embeddings=True)
 retriever_embedding_sem = InMemoryEmbeddingRetriever(document_store=document_store)
 semantic_pipeline = Pipeline()
@@ -155,7 +156,6 @@ semantic_pipeline.add_component("embedder", embedder_sem)
 semantic_pipeline.add_component("retriever_embedding", retriever_embedding_sem)
 semantic_pipeline.connect("embedder.embedding", "retriever_embedding.query_embedding")
 logger.info(f"Semantic pipeline components: {list(semantic_pipeline.graph.nodes.keys())}")
-
 # Ported helpers (all below from app.py)
 def search_stories(query, source_filter=None, type_filter=None, search_mode="Both", top_k=1000, min_score=0.2):
     logger.info(f"Searching for query: {query}, source: {source_filter}, type: {type_filter}, mode: {search_mode}, min_score: {min_score}")
@@ -197,7 +197,7 @@ def search_stories(query, source_filter=None, type_filter=None, search_mode="Bot
                 content = doc.content
                 count = len(re.findall(pattern, content, re.IGNORECASE))
                 if count > 0:
-                    doc.score = count  # Use count as score for sorting by frequency
+                    doc.score = count # Use count as score for sorting by frequency
                     documents.append(doc)
         else:
             raise ValueError(f"Invalid search mode: {search_mode}")
@@ -231,7 +231,6 @@ def search_stories(query, source_filter=None, type_filter=None, search_mode="Bot
     if sorted_results:
         logger.info(f"Top result: {sorted_results[0]['title']} | Score: {sorted_results[0]['score']:.3f}")
     return sorted_results
-
 def render_md_with_scroll_and_highlight(book_slug, start_char, end_char, page, search_query=None):
     full_md = load_full_md(book_slug)
     try:
@@ -243,7 +242,7 @@ def render_md_with_scroll_and_highlight(book_slug, start_char, end_char, page, s
             delta = 0
             for m in escape_matches:
                 if m.start() < pos:
-                    delta += 3  # < or > adds 3 characters
+                    delta += 3 # < or > adds 3 characters
             return delta
         escaped_start = start_char + get_escape_delta(start_char)
         escaped_end = end_char + get_escape_delta(end_char)
@@ -282,7 +281,7 @@ def render_md_with_scroll_and_highlight(book_slug, start_char, end_char, page, s
                 delta = 0
                 for m in red_matches:
                     if m.start() < pos:
-                        delta += 33  # len('<span style="color: red;"></span>')
+                        delta += 33 # len('<span style="color: red;"></span>')
                 return delta
             adjusted_start += get_red_delta(adjusted_start)
             adjusted_end += get_red_delta(adjusted_end)
@@ -305,14 +304,12 @@ def render_md_with_scroll_and_highlight(book_slug, start_char, end_char, page, s
     except Exception as e:
         logger.error(f"Failed to render MD for {book_slug}: {e}")
         return "Error rendering story."
-
 def find_book_slug(title):
     for book_slug in books:
         positions = load_story_positions(book_slug)
         if title in positions:
             return book_slug
     raise ValueError(f"Book not found for title: {title}")
-
 def export_stories(stories, format='md', is_single=True):
     try:
         format = format.lower()
@@ -347,7 +344,7 @@ def export_stories(stories, format='md', is_single=True):
                 logger.warning("Pandoc failed; using reportlab fallback.")
                 c = canvas.Canvas(filepath, pagesize=letter)
                 y = 750
-                for line in content.split('\n')[:50]:  # Limit for prototype
+                for line in content.split('\n')[:50]: # Limit for prototype
                     c.drawString(50, y, line[:100])
                     y -= 15
                 c.save()
@@ -372,7 +369,6 @@ def export_stories(stories, format='md', is_single=True):
     except Exception as e:
         logger.error(f"Export failed: {e}")
         return None
-
 def export_updated_jsons(pending_updates):
     try:
         if not pending_updates:
@@ -396,8 +392,7 @@ def export_updated_jsons(pending_updates):
     except Exception as e:
         logger.error(f"JSON export failed: {e}")
         return "Export failed."
-
-# CATEGORIES dict (ported)
+# CATEGORIES dict (ported from HF app.py)
 CATEGORIES = {
     "Demonic Activity": {
         "Obsession": {
@@ -406,22 +401,235 @@ CATEGORIES = {
             "Anger": [],
             "Reduction of Voluntariness": []
         },
-        # ... (full dict as in original; truncated here for brevity, but include the entire one in your file)
-        "Supernatural Phenomena": {
-            "Time Slip": [],
-            "Time Loss": []
+        "Oppression": {
+            "Haunting Vexations": {
+                "Poltergeist": [],
+                "Shadow People": [],
+                "Sleep Paralysis": [],
+                "Static People": [],
+                "Glimmer Man": [],
+                "Flannel Man": []
+            },
+            "Physical Health Vexations": {
+                "Death": [],
+                "Bruise": [],
+                "Bite Marks": [],
+                "Scratches": [],
+                "Unexplained Physical Pain": [],
+                "Headaches": [],
+                "Insomnia": [],
+                "Bumps, Cysts, other Protrusions": [],
+                "Bone Dislocation": [],
+                "Distention of the Stomach": [],
+                "Nausea": [],
+                "Foul Breath": [],
+                "Miscarriages": [],
+                "Blocked Conception": [],
+                "Sexual Assault": [],
+                "Pronounced Sleep Behaviors/Manifestations": [],
+                "Minor Morphing": [],
+                "Suffocation": [],
+                "Choking": [],
+                "Serious Physical Injury": []
+            },
+            "Mental Health Vexations": {
+                "Weariness": [],
+                "Dreams": [],
+                "Depression": [],
+                "Anger": [],
+                "Emotional/Relational Block": [],
+                "Visual Hallucinations": [],
+                "Auditory Hallucinations": [],
+                "Severe Mental Disorder": []
+            },
+            "Peripheral Vexations": {
+                "Pets": [],
+                "Bugs/Pests": [],
+                "Financial": [],
+                "Occupational": [],
+                "Reputational": []
+            }
+        },
+        "Possession": {
+            "Speaking a Foreign Language": [],
+            "Occult Knowledge": [],
+            "Morphing": [],
+            "Strength": [],
+            "Appearance of Fortunae": {
+                "Nails": [],
+                "Glass": [],
+                "Cloth": [],
+                "Other": []
+            },
+            "Levitation": [],
+            "Superhuman Speed": [],
+            "Superhuman Agility": [],
+            "Gravitas": [],
+            "Sustained Unnatural Posture": [],
+            "Fasting": [],
+            "Secondary Signs": {
+                "Repugnance towards Holiness": [],
+                "Obscene Thoughts Around Holiness": [],
+                "Blocked Prayer": [],
+                "Aversion to Scripture": [],
+                "Illness around Holiness": [],
+                "Aversion to Sacred Names": [],
+                "Pain From Holy Items": [],
+                "Difficulty in Receiving Sacraments": [],
+                "Liturgical Calendar Suffering": [],
+                "Chronic Insomnia": [],
+                "Affected Dreams": [],
+                "Falsified Emotions": [],
+                "Speaking in Tongues": [],
+                "Possession-Specific Physical Vexation": {
+                    "Foul Odor": [],
+                    "Drastic Eating Changes": [],
+                    "Fluctuation in Body Temperature": [],
+                    "Diabolical Incandescence": []
+                },
+                "Suffering Spirituality": {
+                    "Fruitless Self-Satisfaction": [],
+                    "Anguish over sins": [],
+                    "Spiritual Security": [],
+                    "Self-Aggrandizing Behavior": [],
+                    "Contempt for little things (spiritual)": [],
+                    "Closed towards Spiritual Director": [],
+                    "Nonconformity with scripture and tradition": [],
+                    "animus delendi (destruction)": []
+                }
+            }
         }
+    },
+    "Ghostly Activity": {
+        "Family Member/Loved One": {
+            "Appearance": [],
+            "Voice": [],
+            "Behavior": [],
+            "Habitual Behavior": []
+        },
+        "Stranger": {
+            "Visual": [],
+            "Auditory": [],
+            "Behavior": [],
+            "Habitual Behavior": []
+        },
+        "Individual Connected To Place/Person": {
+            "Visual": [],
+            "Auditory": [],
+            "Behavior": [],
+            "Habitual Behavior": []
+        },
+        "Family Pet": {
+            "Visual": [],
+            "Auditory": [],
+            "Behavior": [],
+            "Habitual Behavior": []
+        },
+        "Other Animal": {
+            "Visual": [],
+            "Auditory": [],
+            "Behavior": [],
+            "Habitual Behavior": []
+        }
+    },
+    "Cryptid": {
+        "Canine": {
+            "Dogman": [],
+            "Werewolf": [],
+            "Chupacabra": [],
+            "Other": []
+        },
+        "Avian": {
+            "Thunderbird": [],
+            "Mothman": [],
+            "Other": []
+        },
+        "Bipedal": {
+            "Sasquatch": [],
+            "Humanoid": [],
+            "Other": []
+        },
+        "Aquatic": [],
+        "Feline": [],
+        "Cervidae": {
+            "Deer": [],
+            "Moose": []
+        }
+    },
+    "Fae": {
+        "Fairy": [],
+        "Nymph": [],
+        "Gnome": [],
+        "Other": []
+    },
+    "Witchcraft": {
+        "Flying": [],
+        "Levitation": [],
+        "Transportation": [],
+        "Cursing": [],
+        "Hagriding": [],
+        "Evil Eye": [],
+        "Abduction": {
+            "Child": [],
+            "Adult": [],
+            "Pet": [],
+            "Non-Pet Animal": []
+        },
+        "Physical Harm": [],
+        "Physical Harm To Children": [],
+        "Herbal/Natural": [],
+        "Divination": [],
+        "Harm to Crops": [],
+        "Harm to Livestock": [],
+        "Harm To Pets": [],
+        "Sacrificing Children": [],
+        "Indoctrinating Children": [],
+        "Black Sabbath": [],
+        "Ritual": {
+            "Black Sabbath": [],
+            "Contract with Demon": [],
+            "Contract with Another": [],
+            "Sacrilegious Baptism": [],
+            "Sacrifice": {
+                "Sacrificing a Person": {
+                    "Sacrificing a Family Member": {
+                        "Sacrificing a Parent": [],
+                        "Sacrificing a Child": [],
+                        "Sacrificing a Sibling": [],
+                        "Sacrificing a Grandparent": [],
+                        "Sacrificing an Aunt/Uncle": [],
+                        "Sacrificing a cousin": [],
+                        "Sacrificing a niece/nephew": []
+                    },
+                    "Sacrificing a Friend": [],
+                    "Sacrificing a known associate": [],
+                    "Sacrificing a stranger": []
+                },
+                "Sacrificing an Animal": [],
+                "Sacrificing a Family Member": []
+            },
+            "Rejection of Sacraments": {
+                "Rejection of Baptism": [],
+                "Rejection of Confirmation": [],
+                "Rejection of Confession": [],
+                "Rejection of Eucharist": [],
+                "Rejection of Marriage": [],
+                "Rejection of Holy Orders": []
+            }
+        }
+    },
+    "Supernatural Phenomena": {
+        "Time Slip": [],
+        "Time Loss": []
     }
-    # Note: Include the full CATEGORIES from the original code here
 }
-
-def load_codex_tree():
-    global stories_dict
+# Helper: Load/save codex_tree.json (pre-populate if empty)
+def load_codex_tree_from_json():
     if os.path.exists(codex_tree_path):
         with open(codex_tree_path, "r") as f:
             tree = json.load(f)
     else:
-        tree = dict(CATEGORIES)
+        tree = CATEGORIES.copy()
         def ensure_lists(d):
             for k, v in d.items():
                 if isinstance(v, dict):
@@ -429,297 +637,53 @@ def load_codex_tree():
                 else:
                     d[k] = []
         ensure_lists(tree)
-        save_codex_tree(tree)
-    if os.path.exists(stories_dict_path):
-        with open(stories_dict_path, "r") as f:
-            stories_dict = json.load(f)
-    else:
-        stories_dict = {}
+        save_codex_tree_to_json(tree)
     return tree
 
-def save_codex_tree(tree):
-    global stories_dict
-    os.makedirs(data_dir, exist_ok=True)
+def save_codex_tree_to_json(tree):
     with open(codex_tree_path, "w") as f:
         json.dump(tree, f, indent=4)
-    with open(stories_dict_path, "w") as f:
-        json.dump(stories_dict, f, indent=4)
-    # Optional auto-commit (keep for now; disable if not needed)
-    token = os.getenv("HF_TOKEN")
-    if token:
-        try:
-            api = HfApi(token=token)
-            api.upload_file(
-                path_or_fileobj=codex_tree_path,
-                path_in_repo=codex_tree_path,
-                repo_id="hetzerdj/preternatural-text-ui",
-                repo_type="space"
-            )
-            api.upload_file(
-                path_or_fileobj=stories_dict_path,
-                path_in_repo=stories_dict_path,
-                repo_id="hetzerdj/preternatural-text-ui",
-                repo_type="space"
-            )
-            logger.info("Auto-committed codex_tree.json and stories_dict.json to HF repo")
-        except Exception as e:
-            logger.error(f"Auto-commit failed: {e}")
-    else:
-        logger.info("HF_TOKEN not set; changes saved locally only")
-
-def assign_to_path(tree, path, story):
+# Load codex_tree (from DB, fallback to JSON if empty)
+def load_codex_tree():
     global stories_dict
-    title = story['title']
-    if title not in stories_dict:
-        stories_dict[title] = story
-    current = tree
-    for level in path[:-1]:
-        if level not in current:
-            current[level] = {}
-        if not isinstance(current[level], dict):
-            current[level] = {'_stories': current[level]}
-        current = current[level]
-    leaf = path[-1]
-    if leaf not in current:
-        current[leaf] = []
-    leaf_val = current[leaf]
-    if isinstance(leaf_val, list):
-        if title not in leaf_val:
-            leaf_val.append(title)
-    elif isinstance(leaf_val, dict):
-        if '_stories' not in leaf_val:
-            leaf_val['_stories'] = []
-        if title not in leaf_val['_stories']:
-            leaf_val['_stories'].append(title)
-    else:
-        raise ValueError("Invalid tree structure")
-    return tree
-
-def remove_from_path(tree, path, title):
-    current = tree
-    for level in path[:-1]:
-        if level not in current:
+    with SessionLocal() as db:
+        stories = db.query(Story).all()
+        stories_dict = {s.title: {
+            "title": s.title, "book_slug": s.book_slug, "pages": s.pages,
+            "keywords": s.keywords, "start_char": s.start_char, "end_char": s.end_char
+        } for s in stories}
+        if not stories:
+            print("No stories in DB - loading from story_positions.json")
+            stories_dict = load_all_stories()
+            # Insert if not exist
+            for title, s in stories_dict.items():
+                if not db.query(Story).filter_by(title=title).first():
+                    db.add(Story(**s))
+            db.commit()
+        
+        root_nodes = db.query(CodexNode).filter_by(parent_id=None).all()
+        if not root_nodes:
+            print("No codex nodes in DB - initializing from CATEGORIES")
+            tree_json = load_codex_tree_from_json()
+            # Insert from JSON
+            insert_recursive(tree_json)
+            db.commit()
+            root_nodes = db.query(CodexNode).filter_by(parent_id=None).all()
+        
+        def build_tree(node):
+            tree = {node.name: {}}
+            for child in node.children:
+                tree[node.name].update(build_tree(child))
             return tree
-        current = current[level]
-    leaf = path[-1]
-    if leaf in current:
-        leaf_val = current[leaf]
-        if isinstance(leaf_val, list) and title in leaf_val:
-            leaf_val.remove(title)
-        elif isinstance(leaf_val, dict) and '_stories' in leaf_val and title in leaf_val['_stories']:
-            leaf_val['_stories'].remove(title)
-    return tree
-
-def find_paths_for_title(tree, title, current_path=None, paths=None):
-    if current_path is None:
-        current_path = []
-    if paths is None:
-        paths = []
-    if isinstance(tree, dict):
-        if '_stories' in tree and title in tree['_stories']:
-            paths.append(current_path[:])
-        for key, value in tree.items():
-            if key != '_stories':
-                find_paths_for_title(value, title, current_path + [key], paths)
-    elif isinstance(tree, list):
-        if title in tree:
-            paths.append(current_path[:])
-    return paths
-
-def get_stories_at_path(tree, path):
-    global stories_dict
-    current = tree
-    for level in path:
-        if level not in current:
-            return []
-        current = current[level]
-    titles = []
-    def recurse(d):
-        if isinstance(d, list):
-            titles.extend(d)
-        elif isinstance(d, dict):
-            if '_stories' in d:
-                titles.extend(d['_stories'])
-            for v in d.values():
-                recurse(v)
-    recurse(current)
-    unique_titles = set(titles)
-    unique_stories = [stories_dict[title] for title in sorted(unique_titles) if title in stories_dict]
-    return unique_stories
-
-def path_to_string(path):
-    return " > ".join(path) if path else "Root"
-
-def render_static_story(story):
-    book_slug = story['book_slug']
-    full_md = load_full_md(book_slug)
-    text = full_md[story['start_char']:story['end_char']]
-    return f"# {story['title']}\n\n**Source**: {book_slug.replace('_', ' ').title()}\n**Pages**: {story['pages']}\n**Keywords**: {story['keywords']}\n\n{text}"
-
-def reset_hidden_page():
-    return "0"
-
-def set_hidden_page(selected):
-    if not selected:
-        return "1"
-    return selected['pages'].split('-')[0]
-
-def update_pending_after_changes(pending, selected, new_start, new_end, new_keywords):
-    if not selected:
-        return pending
-    book_slug = selected['book_slug']
-    title = selected['title']
-    orig_start = selected['start_char']
-    orig_end = selected['end_char']
-    orig_keywords = selected['keywords']
-    update_dict = {}
-    changed = False
-    if new_start != orig_start:
-        changed = True
-        update_dict['start_char'] = new_start
-    if new_end != orig_end:
-        changed = True
-        update_dict['end_char'] = new_end
-    if new_keywords != orig_keywords:
-        changed = True
-        kw_list = list(set([k.strip() for k in new_keywords.split(',') if k.strip()]))
-        update_dict['keywords'] = kw_list
-    if changed:
-        if book_slug not in pending:
-            pending[book_slug] = {}
-        pending[book_slug][title] = update_dict
-    elif book_slug in pending and title in pending[book_slug]:
-        del pending[book_slug][title]
-        if not pending[book_slug]:
-            del pending[book_slug]
-    return pending
-
-# Note: Removed Gradio-specific update_level* functions; these will be client-side in React
-
-def assign_category(l1, l2, l3, l4, l5, l6, tree, sel, start, end, kw):
-    if not sel:
+        
+        tree = {}
+        for root in root_nodes:
+            tree.update(build_tree(root))
         return tree
-    path = [p for p in [l1, l2, l3, l4, l5, l6] if p]
-    if not path:
-        return tree
-    story = {
-        "title": sel['title'],
-        "book_slug": sel['book_slug'],
-        "pages": sel['pages'],
-        "keywords": kw,
-        "start_char": int(start),
-        "end_char": int(end)
-    }
-    tree = assign_to_path(tree, path, story)
-    return tree
 
-def remove_category(l1, l2, l3, l4, l5, l6, tree, sel):
-    if not sel:
-        return tree
-    path = [p for p in [l1, l2, l3, l4, l5, l6] if p]
-    if not path:
-        return tree
-    return remove_from_path(tree, path, sel['title'])
+# Other functions remain the same
 
-def update_current_categories(selected, tree):
-    if not selected:
-        return "No story selected."
-    title = selected['title']
-    paths = find_paths_for_title(tree, title)
-    if not paths:
-        return "No categories assigned."
-    return "\n".join(" > ".join(p) for p in sorted(paths, key=lambda p: ''.join(p)))
 
-def update_tree_stories(l1, l2, l3, l4, l5, l6, tree):
-    path = [p for p in [l1, l2, l3, l4, l5, l6] if p]
-    stories = get_stories_at_path(tree, path)
-    choices = [s['title'] for s in stories]
-    return choices  # Adjusted for non-Gradio
-
-def select_tree_story(selected_title, l1, l2, l3, l4, l5, l6, tree):
-    if not selected_title:
-        return "No story selected.", "Static"
-    path = [p for p in [l1, l2, l3, l4, l5, l6] if p]
-    stories = get_stories_at_path(tree, path)
-    story = next((s for s in stories if s['title'] == selected_title), None)
-    if story:
-        return render_static_story(story), "Static"
-    return "Story not found.", "Static"
-
-def toggle_view_mode(selected_title, mode, l1, l2, l3, l4, l5, l6, tree):
-    path = [p for p in [l1, l2, l3, l4, l5, l6] if p]
-    stories = get_stories_at_path(tree, path)
-    story = next((s for s in stories if s['title'] == selected_title), None)
-    if not story:
-        return "Story not found.", "Static"
-    if mode == "Static":
-        page = story['pages'].split('-')[0]
-        html = render_md_with_scroll_and_highlight(story['book_slug'], story['start_char'], story['end_char'], page)
-        return html, "Book"
-    else:
-        return render_static_story(story), "Static"
-
-def save_and_status(tree):
-    save_codex_tree(tree)
-    return "Changes saved."
-
-# Note: Removed Gradio-specific update_results, select_story, etc.; these will be API/client
-
-def apply_phrase_boundaries(start_phrase, end_phrase, current_start, current_end, selected):
-    status = "Boundaries updated."
-    new_start = current_start
-    new_end = current_end
-    book_slug = selected.get('book_slug', 'unknown') if selected else 'unknown'
-    full_md = load_full_md(book_slug)
-    window_size = 5000
-    search_start = max(0, current_start - window_size)
-    search_end = min(len(full_md), current_end + window_size)
-    search_text = full_md[search_start:search_end]
-    if start_phrase:
-        match = re.search(re.escape(start_phrase), search_text, re.IGNORECASE)
-        if match:
-            new_start = search_start + match.end()
-        else:
-            status = "Start phrase not found near current range."
-    if end_phrase:
-        match = re.search(re.escape(end_phrase), search_text, re.IGNORECASE)
-        if match:
-            new_end = search_start + match.start()
-        else:
-            status = "End phrase not found near current range."
-    if new_start >= new_end:
-        status = "Invalid range after apply (start >= end) - no change."
-        return current_start, current_end, status
-    logger.debug(f"Applied boundaries: {new_start}-{new_end}")
-    return new_start, new_end, status
-
-def reset_boundaries(selected):
-    if not selected:
-        return 0, 0, "", "Reset to defaults."
-    return selected['start_char'], selected['end_char'], selected['keywords'], "Reset to originals."
-
-def add_to_list(cl, sel, start, end, keywords):
-    try:
-        if not sel:
-            return cl
-        if any(c['title'] == sel['title'] for c in cl):
-            return cl
-        return cl + [{"title": sel['title'], "pages": sel['pages'], "keywords": keywords, "start_char": start, "end_char": end, "book_slug": sel['book_slug']}]
-    except Exception as e:
-        logger.error(f"Add to list failed: {e}")
-        return cl
-
-def remove_from_list(cl, selected):
-    try:
-        if not selected:
-            return cl
-        for i, c in enumerate(cl):
-            if selected.startswith(c['title']):
-                del cl[i]
-                return cl[:]
-        return cl
-    except Exception as e:
-        logger.error(f"Remove from list failed: {e}")
-        return cl
-
-# Note: export_single and export_list are UI-specific; port to API as needed (return data_uri or bytes)
+def save_codex_tree_to_json(tree):
+    with open(codex_tree_path, "w") as f:
+        json.dump(tree, f, indent=4)
