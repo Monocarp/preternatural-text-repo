@@ -1,0 +1,64 @@
+/* Hide default rc-tree folder icons and switcher */
+.rc-tree-switcher {
+  display: none !important;
+}
+
+.rc-tree-iconEle {
+  display: none !important;
+}
+
+/* Ensure tree nodes take full width */
+.rc-tree-node-content-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-right: 0 !important;
+}
+
+/* Remove any padding from tree list */
+.rc-tree-list {
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+}
+
+.rc-tree-list-holder {
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Remove padding from all tree wrappers */
+.rc-tree {
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+}
+
+.rc-tree-treenode {
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Ensure the title render div extends fully */
+.rc-tree-node-content-wrapper > div {
+  width: 100% !important;
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+  position: relative !important;
+}
+
+/* Remove default indentation since we're hiding the switcher */
+.rc-tree-child-tree {
+  margin-left: 0;
+}
+
+.rc-tree-treenode {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Add custom indentation for nested items */
+.rc-tree-child-tree > .rc-tree-treenode {
+  padding-left: 1rem !important;
+  padding-right: 0 !important;
+}
+

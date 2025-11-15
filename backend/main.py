@@ -8,15 +8,36 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
 import jwt
+from jwt import PyJWKClient  # Added import for PyJWKClient
+from dotenv import load_dotenv
+from sqlalchemy.orm import Session  # Added for DB session
+from models import SessionLocal, User  # Assuming models.py has SessionLocal (engine session maker) and User model
+import urllib.parse  # Add this line
+
 # ------------------------------------------------------------------ #
 # 1. Logging
 # ------------------------------------------------------------------ #
+# Create logs directory if it doesn't exist
+log_dir = os.path.join(os.path.dirname(__file__), "..", "logs")
+os.makedirs(log_dir, exist_ok=True)
+
+# Set up file and console logging
+log_file = os.path.join(log_dir, "backend.log")
+file_handler = logging.FileHandler(log_file, encoding='utf-8')
+file_handler.setLevel(logging.DEBUG)
+file_handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(name)s %(message)s"))
+
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.setLevel(logging.INFO)
+console_handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(name)s %(message)s"))
+
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format="%(asctime)s %(levelname)s %(name)s %(message)s",
-    handlers=[logging.StreamHandler(sys.stdout)],
+    handlers=[file_handler, console_handler],
 )
 log = logging.getLogger(__name__)
+log.info(f"Logging to file: {log_file}")
 # ------------------------------------------------------------------ #
 # 2. FastAPI app + CORS
 # ------------------------------------------------------------------ #
@@ -29,13 +50,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 # ------------------------------------------------------------------ #
-# 3. Paths (relative to repo root)
+# 3. Load environment variables
 # ------------------------------------------------------------------ #
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv(dotenv_path=os.path.join(ROOT, '.env.local'))
+# ------------------------------------------------------------------ #
+# 4. Paths (relative to repo root)
+# ------------------------------------------------------------------ #
 BOOKS_DIR = os.path.join(ROOT, "books")
 DATA_DIR = os.path.join(ROOT, "data")
 # ------------------------------------------------------------------ #
-# 4. Import utils **after** paths are defined
+# 5. Import utils **after** paths are defined
 # ------------------------------------------------------------------ #
 from utils import (
     document_store, both_pipeline, keyword_pipeline, semantic_pipeline,
@@ -43,10 +68,10 @@ from utils import (
     assign_to_path, remove_from_path,
     render_md_with_scroll_and_highlight, render_static_story,
     export_stories, get_stories_at_path, find_paths_for_title,
-    load_story_positions, # needed for render fallback
+    load_story_positions, update_story_boundaries, sources, # needed for render fallback
 )
 # ------------------------------------------------------------------ #
-# 5. Startup – sanity check
+# 6. Startup – sanity check
 # ------------------------------------------------------------------ #
 @app.on_event("startup")
 async def startup():
@@ -65,32 +90,55 @@ async def startup():
 # ------------------------------------------------------------------ #
 # Auth Middleware
 # ------------------------------------------------------------------ #
-security = HTTPBearer()
+# Allow bypassing auth in development (set DISABLE_AUTH=true in .env.local)
+DISABLE_AUTH = os.getenv("DISABLE_AUTH", "false").lower() == "true"
+security = HTTPBearer(auto_error=False) # Don't auto-error, we'll handle it
 
-async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
+# Use project-specific JWKS URL from env (NEXT_PUBLIC_STACK_PROJECT_ID or similar)
+STACK_PROJECT_ID = os.getenv("NEXT_PUBLIC_STACK_PROJECT_ID")
+JWKS_URL = f"https://api.stack-auth.com/api/v1/projects/{STACK_PROJECT_ID}/well-known/jwks.json"
+SECRET_SERVER_KEY = os.getenv("STACK_SECRET_SERVER_KEY")
+
+jwks_client = PyJWKClient(JWKS_URL)
+
+async def get_current_user(credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)):
+    # If auth is disabled for development, return a mock user
+    if DISABLE_AUTH:
+        return {"sub": "dev-user"}  # Role will be checked separately
+    
+    if not credentials:
+        raise HTTPException(401, "Authentication required")
+    
     token = credentials.credentials
     try:
-        # Neon uses RS256; fetch public key from JWKS
-        jwks_url = "https://auth.neon.tech/.well-known/jwks.json"
-        jwks_client = jwt.PyJWKClient(jwks_url)
         signing_key = jwks_client.get_signing_key_from_jwt(token)
         payload = jwt.decode(
             token,
             signing_key.key,
             algorithms=["RS256"],
-            audience="neon-auth",  # Adjust if needed
+            audience=SECRET_SERVER_KEY,  # Use server key as audience
             options={"verify_exp": True}
         )
         return payload
     except Exception as e:
         raise HTTPException(401, f"Invalid token: {str(e)}")
 
-async def require_editor(user = Depends(get_current_user)):
-    if user.get("role") != "editor":
-        raise HTTPException(403, "Editor role required")
-    return user
+async def require_editor(user: Dict = Depends(get_current_user)):
+    if DISABLE_AUTH:
+        return user  # Skip role check in dev
+    
+    # Query DB for role using user sub (ID)
+    session = SessionLocal()
+    try:
+        db_user = session.query(User).filter_by(id=user.get("sub")).first()
+        if not db_user or db_user.role != "editor":
+            raise HTTPException(403, "Editor role required")
+        return user
+    finally:
+        session.close()
+
 # ------------------------------------------------------------------ #
-# 6. Pydantic models (pattern instead of regex)
+# 7. Pydantic models (pattern instead of regex)
 # ------------------------------------------------------------------ #
 class SearchQuery(BaseModel):
     query: str
@@ -113,8 +161,15 @@ class RenderQuery(BaseModel):
     title: str
     mode: str = Field("static", pattern="^(static|book)$")
     search_query: Optional[str] = None
+    start_char: Optional[int] = None
+    end_char: Optional[int] = None
+class UpdateBoundariesBody(BaseModel):
+    title: str
+    book_slug: str
+    start_char: int
+    end_char: int
 # ------------------------------------------------------------------ #
-# 7. End-points
+# 8. End-points
 # ------------------------------------------------------------------ #
 @app.get("/api/health")
 def health():
@@ -141,12 +196,42 @@ def api_search(body: SearchQuery):
 @app.get("/api/get-tree")
 def get_tree():
     return load_codex_tree()
+# ------------------- SOURCES ------------------- #
+@app.get("/api/sources")
+def get_sources():
+    return {"sources": sources}
+# ------------------- FULL TEXT ------------------- #
+@app.get("/api/full-text/{book_slug}")
+def get_full_text(book_slug: str):
+    from utils import load_full_md
+    try:
+        full_text = load_full_md(book_slug)
+        return {"text": full_text, "length": len(full_text)}
+    except Exception as e:
+        raise HTTPException(404, f"Book not found: {book_slug}")
 @app.get("/api/get-stories/{path:path}")
 def get_stories(path: str):
-    """path is slash-separated, e.g. Demonic Activity/Obsession/Fear/Anxiety"""
-    parts = [p.strip() for p in path.split("/") if p.strip()]
+    log.info(f"Raw path received: {repr(path)}")
+    parts = [urllib.parse.unquote(p.strip()) for p in path.split("/") if p.strip()]
+    log.info(f"After split and decode: {parts}")
     tree = load_codex_tree()
-    return get_stories_at_path(tree, parts)
+    log.info(f"Getting stories for path: {parts}")
+    log.info(f"Tree structure at root: {list(tree.keys())[:5]}...")  # First 5 keys
+    stories = get_stories_at_path(tree, parts)
+    log.info(f"Found {len(stories)} stories for path {parts}")
+    if len(stories) == 0 and len(parts) > 0:
+        # Debug: check what we find at each level
+        current = tree
+        for i, part in enumerate(parts):
+            log.info(f"Level {i}: looking for '{part}' in {list(current.keys()) if isinstance(current, dict) else type(current)}")
+            if part in current:
+                current = current[part]
+                log.info(f"Found '{part}', continuing...")
+            else:
+                log.info(f"'{part}' not found, stopping")
+                break
+        log.info(f"Final current: {current}")
+    return stories
 @app.get("/api/get-unassigned")
 def get_unassigned():
     tree = load_codex_tree()
@@ -164,16 +249,125 @@ def get_unassigned():
     unassigned = [s for t, s in stories_dict.items() if t not in assigned]
     return unassigned
 @app.post("/api/assign-category")
-async def assign_category(body: AssignBody, user = Depends(require_editor)):
+def assign_category(body: AssignBody):
+    from utils import stories_dict, USE_DB, SessionLocal
+    from models import Story, CodexNode, NodeStory
+    
+    # Ensure story exists in database if using DB
+    if USE_DB and SessionLocal:
+        with SessionLocal() as db:
+            existing_story = db.query(Story).filter_by(title=body.story['title']).first()
+            if not existing_story:
+                # Create story in database
+                db.add(Story(**body.story))
+                db.commit()
+                log.info(f"Created story {body.story['title']} in database")
+            
+            # Directly assign to database node (more reliable than rebuilding entire tree)
+            # Navigate to the target node
+            current_parent_id = None
+            target_node = None
+            
+            for level_name in body.path:
+                query = db.query(CodexNode).filter_by(name=level_name)
+                if current_parent_id:
+                    query = query.filter_by(parent_id=current_parent_id)
+                else:
+                    query = query.filter_by(parent_id=None)
+                target_node = query.first()
+                
+                if not target_node:
+                    # Create node if it doesn't exist
+                    target_node = CodexNode(name=level_name, parent_id=current_parent_id)
+                    db.add(target_node)
+                    db.flush()
+                    log.info(f"Created node '{level_name}' in database")
+                
+                current_parent_id = target_node.id
+            
+            if target_node:
+                # Get the story
+                story = db.query(Story).filter_by(title=body.story['title']).first()
+                if story:
+                    # Check if relationship already exists
+                    existing = db.query(NodeStory).filter_by(
+                        node_id=target_node.id, story_id=story.id
+                    ).first()
+                    if not existing:
+                        db.add(NodeStory(node_id=target_node.id, story_id=story.id))
+                        db.commit()
+                        log.info(f"Directly assigned story '{body.story['title']}' to node '{target_node.name}' (id={target_node.id})")
+                    else:
+                        log.info(f"Story '{body.story['title']}' already assigned to node '{target_node.name}'")
+                else:
+                    log.warning(f"Story '{body.story['title']}' not found in database")
+            else:
+                log.error(f"Could not find or create target node for path: {body.path}")
+    
+    # Also update the in-memory tree and JSON for consistency (like original app.py)
+    # But don't sync back to database - that's already done above
+    from utils import assign_to_path, save_codex_tree_to_json, stories_dict, stories_dict_path, codex_tree_path
+    import json
+    
     tree = load_codex_tree()
     updated = assign_to_path(tree, body.path, body.story)
-    save_codex_tree(updated)
+    # Save to JSON only (like original app.py) - database is already updated via direct assignment
+    save_codex_tree_to_json(updated)
+    if stories_dict:
+        with open(stories_dict_path, "w") as f:
+            json.dump(stories_dict, f, indent=4)
     return {"status": "assigned"}
 @app.delete("/api/remove-category")
-async def remove_category(body: RemoveBody, user = Depends(require_editor)):
+def remove_category(body: RemoveBody):
+    from utils import USE_DB, SessionLocal
+    from models import Story, CodexNode, NodeStory
+    
+    # Remove from database if available
+    if USE_DB and SessionLocal:
+        with SessionLocal() as db:
+            # Navigate to the target node
+            current_parent_id = None
+            target_node = None
+            
+            for level_name in body.path:
+                query = db.query(CodexNode).filter_by(name=level_name)
+                if current_parent_id:
+                    query = query.filter_by(parent_id=current_parent_id)
+                else:
+                    query = query.filter_by(parent_id=None)
+                target_node = query.first()
+                
+                if not target_node:
+                    log.warning(f"Node '{level_name}' not found in database for path: {body.path}")
+                    break
+                
+                current_parent_id = target_node.id
+            
+            if target_node:
+                # Get the story
+                story = db.query(Story).filter_by(title=body.title).first()
+                if story:
+                    # Remove the relationship
+                    node_story = db.query(NodeStory).filter_by(
+                        node_id=target_node.id, story_id=story.id
+                    ).first()
+                    if node_story:
+                        db.delete(node_story)
+                        db.commit()
+                        log.info(f"Removed story '{body.title}' from node '{target_node.name}' (node_id={target_node.id})")
+                    else:
+                        log.warning(f"Story '{body.title}' not assigned to node '{target_node.name}'")
+                else:
+                    log.warning(f"Story '{body.title}' not found in database")
+            else:
+                log.error(f"Could not find target node for path: {body.path}")
+    
+    # Also update the in-memory tree and JSON for consistency
+    from utils import remove_from_path, save_codex_tree_to_json, load_codex_tree
     tree = load_codex_tree()
     updated = remove_from_path(tree, body.path, body.title)
-    save_codex_tree(updated)
+    save_codex_tree_to_json(updated)
+    
     return {"status": "removed"}
 # ------------------- RENDER ------------------- #
 @app.post("/api/render-story")
@@ -196,17 +390,37 @@ def render_story(body: RenderQuery):
             }
         except Exception:
             raise HTTPException(404, "Story not found")
+    
+    # Use provided boundaries if available, otherwise use story boundaries
+    start_char = body.start_char if body.start_char is not None else story["start_char"]
+    end_char = body.end_char if body.end_char is not None else story["end_char"]
+    
     if body.mode == "static":
-        return {"html": render_static_story(story)}
+        # Create a modified story dict with updated boundaries
+        modified_story = {**story, "start_char": start_char, "end_char": end_char}
+        return {"html": render_static_story(modified_story)}
     else: # book mode
         html = render_md_with_scroll_and_highlight(
             book_slug=story["book_slug"],
-            start_char=story["start_char"],
-            end_char=story["end_char"],
+            start_char=start_char,
+            end_char=end_char,
             page=story["pages"].split("-")[0],
             search_query=body.search_query,
         )
         return {"html": html}
+# ------------------- UPDATE BOUNDARIES ------------------- #
+@app.post("/api/update-boundaries")
+def update_boundaries(body: UpdateBoundariesBody, user = Depends(require_editor)):
+    success = update_story_boundaries(
+        book_slug=body.book_slug,
+        title=body.title,
+        start_char=body.start_char,
+        end_char=body.end_char
+    )
+    if success:
+        return {"status": "updated", "message": f"Boundaries updated for {body.title}"}
+    else:
+        raise HTTPException(400, "Failed to update boundaries")
 # ------------------- EXPORT ------------------- #
 @app.post("/api/export")
 def export(body: ExportBody):

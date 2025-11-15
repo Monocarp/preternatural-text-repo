@@ -1,19 +1,37 @@
 // src/components/Login.tsx
-import { useState } from 'react'
-import { useStore } from '../store' // If using for user state
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { SignIn } from '@stackframe/react' // Updated import for correct package
 
 const Login = () => {
-  const [loading, setLoading] = useState(false)
-
-  const loginWithGitHub = () => {
-    setLoading(true)
-    window.location.href = 'https://auth.neon.tech/authorize?provider=github&redirect_uri=http://localhost:5173/callback'  // Change to your domain in prod
-  }
+  const [error, setError] = useState<string | null>(null)
+  const [searchParams] = useSearchParams()
+  
+  // Check for error in URL params (from callback)
+  useEffect(() => {
+    const errorParam = searchParams.get('error')
+    if (errorParam) {
+      setError(decodeURIComponent(errorParam))
+    }
+  }, [searchParams])
 
   return (
-    <button onClick={loginWithGitHub} disabled={loading} className="bg-blue-500 text-white px-4 py-2">
-      {loading ? 'Logging in...' : 'Login with GitHub'}
-    </button>
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-900">
+      <div className="bg-gray-800 p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h1 className="text-2xl font-bold text-white mb-6 text-center">Login Required</h1>
+        {error && (
+          <div className="mb-4 p-3 bg-red-900/50 border border-red-700 rounded text-red-200 text-sm">
+            {error}
+          </div>
+        )}
+        <SignIn /> {/* Handles GitHub login flow */}
+        {!error && (
+          <p className="mt-4 text-sm text-gray-400 text-center">
+            You need to be logged in to edit story boundaries.
+          </p>
+        )}
+      </div>
+    </div>
   )
 }
 

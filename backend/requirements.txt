@@ -10,3 +10,5 @@ python-docx  # For Word exports
 huggingface_hub  # For optional commits
 sqlalchemy  # For DB (start with SQLite)
 python-dotenv
+PyJWT  # For JWT authentication
+cryptography  # Required by PyJWT for RS256

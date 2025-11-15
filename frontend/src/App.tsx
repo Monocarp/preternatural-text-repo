@@ -1,20 +1,27 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Archive from './pages/Archive'
+import SearchCurate from './pages/SearchCurate'
+import Callback from './pages/Callback'
+import Login from './components/Login'
+import SidebarTree from './components/SidebarTree'
 
 function App() {
   return (
     <Router>
-      <div className="flex">
-        {/* Sidebar placeholder */}
-        <aside className="w-64 bg-gray-100 p-4">Sidebar Tree Here</aside>
-        <main className="flex-1 p-4">
+      <div className="flex h-screen bg-gray-900 text-white">
+        <SidebarTree />
+        <main className="flex-1 overflow-y-auto">
           <Routes>
-            <Route path="/" element={<div>Welcome to Story Archive</div>} />
-            <Route path="/search-curate" element={<div>Search & Curate Page</div>} />
+            <Route path="/" element={<Archive />} />
+            <Route path="/archive/*" element={<Archive />} />
+            <Route path="/search-curate" element={<SearchCurate />} />
+            <Route path="/callback" element={<Callback />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </main>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
