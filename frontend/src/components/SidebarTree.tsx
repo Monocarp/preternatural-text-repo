@@ -64,7 +64,7 @@ const SidebarTree = () => {
     ;(async () => {
       try {
         const u = await app.getUser()
-        const label = extractUserLabel(u)
+        const label = extractUserLabel(u as any)
         setCurrentUserEmail(label)
       } catch (_e) {
         setCurrentUserEmail(null)
@@ -75,7 +75,7 @@ const SidebarTree = () => {
     const refreshUser = async () => {
       try {
         const u = await app.getUser()
-        const label = extractUserLabel(u)
+        const label = extractUserLabel(u as any)
         if (label) {
           setCurrentUserEmail(label)
         } else {
