@@ -11,6 +11,12 @@
       "config": { "distDir": "dist" }
     }
   ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://preclinical-scaphoid-felisa.ngrok-free.dev/api/$1"
+    }
+  ],
   "routes": [
     {
       "src": "/api/(.*)",

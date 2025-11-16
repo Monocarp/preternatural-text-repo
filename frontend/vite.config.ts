@@ -16,7 +16,11 @@ export default defineConfig(({ mode }) => {
         'localhost'
       ],
       proxy: {
-        '/api': 'http://127.0.0.1:8000'
+        '/api': {
+          target: 'https://preclinical-scaphoid-felisa.ngrok-free.dev', // Your Ngrok URL
+          changeOrigin: true,
+          secure: false, // Required for Ngrok's self-signed cert in dev
+        }
       }
     },
     base: '/',

@@ -44,23 +44,23 @@ createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>
     <StackProvider app={app}>
       <StackTheme>
-        <TooltipProvider> {/* Wrap to provide context for Tooltip components */}
-          <Router>
-            <Routes>
+      <TooltipProvider> {/* Wrap to provide context for Tooltip components */}
+        <Router>
+          <Routes>
               {/* StackAuth handler route for OAuth callbacks */}
               <Route path="/handler/*" element={<HandlerRoutes />} />
               
               {/* App routes */}
-              <Route path="/" element={<Archive />} />
-              <Route path="/archive" element={<Archive />} />
+            <Route path="/" element={<Archive />} />
+            <Route path="/archive" element={<Archive />} />
               <Route path="/archive/:path/*" element={<Archive />} />
-              <Route path="/search-curate" element={<SearchCurate />} />
-              <Route path="/login" element={<Login />} />
+            <Route path="/search-curate" element={<SearchCurate />} />
+            <Route path="/login" element={<Login />} />
               {/* Fallback callback we previously used */}
-              <Route path="/callback" element={<Callback />} />
-            </Routes>
-          </Router>
-        </TooltipProvider>
+            <Route path="/callback" element={<Callback />} />
+          </Routes>
+        </Router>
+      </TooltipProvider>
       </StackTheme>
     </StackProvider>
   </QueryClientProvider>
