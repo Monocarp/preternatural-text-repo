@@ -1,6 +1,7 @@
 // src/components/SidebarTree.tsx
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useStackApp } from '@stackframe/react'
 import Tree from 'rc-tree'
 import 'rc-tree/assets/index.css'
 import './SidebarTree.css'
@@ -39,11 +40,61 @@ const buildTreeData = (current: any, pathSegments: string[] = []): TreeNode[] =>
 const SidebarTree = () => {
   const { tree, loadTree } = useStore()
   const navigate = useNavigate()
+  const app = useStackApp()
+  const [currentUserEmail, setCurrentUserEmail] = useState<string | null>(null)
   const [expandedKeys, setExpandedKeys] = useState<string[]>(['archive'])
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
+  const extractUserLabel = (user: any | null | undefined) => {
+    if (!user) return null
+    return (
+      user.email ??
+      user.primary_email ??
+      user.primaryEmail ??
+      user.display_name ??
+      user.displayName ??
+      user.name ??
+      null
+    )
+  }
+
   useEffect(() => {
     loadTree()
+    // Load current user (if any)
+    ;(async () => {
+      try {
+        const u = await app.getUser()
+        setCurrentUserEmail(u?.email ?? null)
+      } catch (_e) {
+        setCurrentUserEmail(null)
+      }
+    })()
+
+    // Keep auth state in sync when returning from OAuth, tab focus, etc.
+    const refreshUser = async () => {
+      try {
+        const u = await app.getUser()
+        const label = extractUserLabel(u)
+        if (label) {
+          setCurrentUserEmail(label)
+        } else {
+          setCurrentUserEmail(null)
+        }
+      } catch (_e) {
+        setCurrentUserEmail(null)
+      }
+    }
+    const onFocus = () => { refreshUser() }
+    const onVisibility = () => { if (document.visibilityState === 'visible') refreshUser() }
+    window.addEventListener('focus', onFocus)
+    document.addEventListener('visibilitychange', onVisibility)
+    const interval = setInterval(refreshUser, 5000)
+
+    return () => {
+      window.removeEventListener('focus', onFocus)
+      document.removeEventListener('visibilitychange', onVisibility)
+      clearInterval(interval)
+    }
   }, [])
 
   // Handle node title click (navigate to category page)
@@ -91,11 +142,14 @@ const SidebarTree = () => {
   const titleRender = (nodeData: any) => {
     const hasChildren = nodeData.children && nodeData.children.length > 0
     const isExpanded = expandedKeys.includes(nodeData.key)
+    const shouldTruncate = nodeData.title.length > 20
     
     return (
-      <div className="flex items-center w-full group relative pr-6">
+      <div className="flex items-center w-full group relative overflow-hidden">
         <span 
-          className="cursor-pointer hover:text-blue-400 flex-1 text-gray-200 pr-4"
+          className={`cursor-pointer hover:text-blue-400 text-gray-200 pr-2 ${shouldTruncate ? 'truncate' : ''}`}
+          style={shouldTruncate && hasChildren ? { maxWidth: 'calc(100% - 1.5rem)' } : undefined}
+          title={shouldTruncate ? nodeData.title : undefined}
           onClick={(e) => {
             e.stopPropagation()
             onTitleClick(e, nodeData)
@@ -105,7 +159,7 @@ const SidebarTree = () => {
         </span>
         {hasChildren && (
           <span
-            className="text-gray-500 text-xs cursor-pointer hover:text-gray-300 absolute right-0"
+            className="text-gray-500 text-xs cursor-pointer hover:text-gray-300 flex-shrink-0 ml-auto"
             onClick={(e) => {
               e.stopPropagation()
               // Toggle expansion
@@ -144,7 +198,7 @@ const SidebarTree = () => {
 
   return (
     <aside className={`h-full bg-gray-800 border-r border-gray-700 transition-all duration-300 ease-in-out flex flex-col relative ${
-      sidebarCollapsed ? 'w-12' : 'w-64'
+      sidebarCollapsed ? 'w-12' : 'w-96'
     }`}>
       {/* Header with Toggle Button */}
       <div className={`p-3 border-b border-gray-700 flex items-center ${sidebarCollapsed ? 'justify-center' : 'justify-between'} bg-gray-800`}>
@@ -246,6 +300,72 @@ const SidebarTree = () => {
           </button>
         </div>
       )}
+
+      {/* Footer: Auth controls */}
+      <div className="border-t border-gray-700 p-3 bg-gray-800">
+        {!sidebarCollapsed ? (
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-gray-300 text-xs truncate" title={currentUserEmail || ''}>
+              {currentUserEmail ? currentUserEmail : 'Not signed in'}
+            </span>
+            {currentUserEmail ? (
+              <button
+                onClick={async (e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  try { await (app as any).signOut?.() } catch {}
+                  setCurrentUserEmail(null)
+                  navigate('/')
+                }}
+                className="px-2 py-1 text-sm rounded border border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600"
+                title="Sign out"
+              >
+                Sign out
+              </button>
+            ) : (
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  navigate('/login')
+                }}
+                className="px-2 py-1 text-sm rounded border border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600"
+                title="Sign in"
+              >
+                Sign in
+              </button>
+            )}
+          </div>
+        ) : (
+          <div className="flex items-center justify-center">
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                if (currentUserEmail) {
+                  (async () => { try { await (app as any).signOut?.() } catch {} })()
+                  setCurrentUserEmail(null)
+                  navigate('/')
+                } else {
+                  navigate('/login')
+                }
+              }}
+              className="p-2 hover:bg-gray-700 rounded transition-colors"
+              title={currentUserEmail ? 'Sign out' : 'Sign in'}
+            >
+              {currentUserEmail ? (
+                <svg className="w-5 h-5 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h9m0 0l-3-3m3 3l-3 3M9 5v.01M9 19v.01M4 9v.01M4 15v.01" />
+                </svg>
+              )}
+            </button>
+          </div>
+        )}
+      </div>
     </aside>
   )
 }

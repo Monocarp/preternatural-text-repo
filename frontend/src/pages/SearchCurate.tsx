@@ -1,7 +1,8 @@
 // src/pages/SearchCurate.tsx
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { useStackApp } from '@stackframe/react'
+import apiClient from '../utils/axios'
 import SidebarTree from '../components/SidebarTree'
 
 interface SearchResult {
@@ -17,6 +18,7 @@ interface SearchResult {
 
 const SearchCurate = () => {
   const navigate = useNavigate()
+  const app = useStackApp()
   const [query, setQuery] = useState('')
   const [sourceFilter, setSourceFilter] = useState('All Sources')
   const [typeFilter, setTypeFilter] = useState('Both')
@@ -46,7 +48,7 @@ const SearchCurate = () => {
 
   // Load available sources and codex tree on mount
   useEffect(() => {
-    axios.get('/api/sources')
+    apiClient.get('/sources')
       .then(res => {
         setSources(res.data.sources || ['All Sources'])
       })
@@ -55,7 +57,7 @@ const SearchCurate = () => {
         setSources(['All Sources'])
       })
     
-    axios.get('/api/get-tree')
+    apiClient.get('/get-tree')
       .then(res => {
         setCodexTree(res.data)
       })
@@ -108,7 +110,7 @@ const SearchCurate = () => {
     
     setSearching(true)
     try {
-      const res = await axios.post('/api/search', {
+      const res = await apiClient.post('/search', {
         query: query.trim(),
         source_filter: sourceFilter,
         type_filter: typeFilter,
@@ -135,7 +137,7 @@ const SearchCurate = () => {
     setEditMode(false) // Exit edit mode when selecting new story
     setLoading(true)
     try {
-      const res = await axios.post('/api/render-story', {
+      const res = await apiClient.post('/render-story', {
         title: story.title,
         mode: 'static',
         search_query: story.search_query
@@ -161,7 +163,7 @@ const SearchCurate = () => {
     setEditMode(true)
     try {
       // Load full text
-      const res = await axios.get(`/api/full-text/${selectedStory.book_slug}`)
+      const res = await apiClient.get(`/full-text/${selectedStory.book_slug}`)
       setFullText(res.data.text)
       setEditedStart(selectedStory.start_char)
       setEditedEnd(selectedStory.end_char)
@@ -289,7 +291,7 @@ const SearchCurate = () => {
     
     setAssigning(true)
     try {
-      await axios.post('/api/assign-category', {
+      await apiClient.post('/assign-category', {
         path: selectedPath,
         story: {
           title: selectedStory.title,
@@ -302,7 +304,7 @@ const SearchCurate = () => {
       })
       
       // Reload tree to get updated assignments
-      const treeRes = await axios.get('/api/get-tree')
+      const treeRes = await apiClient.get('/get-tree')
       setCodexTree(treeRes.data)
       
       const assignedPath = selectedPath.join(' > ')
@@ -315,7 +317,12 @@ const SearchCurate = () => {
       alert(`Story assigned to ${assignedPath}`)
     } catch (err: any) {
       console.error('Error assigning category:', err)
-      alert('Failed to assign category. Please try again.')
+      const status = err?.response?.status
+      if (status === 401 || status === 403) {
+        alert('You must be signed in as an editor to assign categories.')
+      } else {
+        alert('Failed to assign category. Please try again.')
+      }
     } finally {
       setAssigning(false)
     }
@@ -331,7 +338,7 @@ const SearchCurate = () => {
     
     setAssigning(true)
     try {
-      await axios.delete('/api/remove-category', {
+      await apiClient.delete('/remove-category', {
         data: {
           path: path,
           title: selectedStory.title
@@ -339,13 +346,18 @@ const SearchCurate = () => {
       })
       
       // Reload tree to get updated assignments
-      const treeRes = await axios.get('/api/get-tree')
+      const treeRes = await apiClient.get('/get-tree')
       setCodexTree(treeRes.data)
       
       alert(`Story removed from ${path.join(' > ')}`)
     } catch (err: any) {
       console.error('Error removing category:', err)
-      alert('Failed to remove category. Please try again.')
+      const status = err?.response?.status
+      if (status === 401 || status === 403) {
+        alert('You must be signed in as an editor to remove categories.')
+      } else {
+        alert('Failed to remove category. Please try again.')
+      }
     } finally {
       setAssigning(false)
     }
@@ -383,29 +395,25 @@ const SearchCurate = () => {
     
     setLoading(true)
     try {
-      // Get token from localStorage
-      const token = localStorage.getItem('token')
-      if (!token) {
+      // Check if user is authenticated (apiClient will automatically add token via interceptor)
+      const user = await app.getUser()
+      if (!user) {
         const shouldLogin = confirm('You must be logged in to save boundaries. Would you like to log in now?')
         if (shouldLogin) {
           // Save current location so we can return after login
-          localStorage.setItem('returnTo', window.location.pathname + window.location.search)
+          sessionStorage.setItem('returnTo', window.location.pathname + window.location.search)
           navigate('/login')
         }
         setLoading(false)
         return
       }
       
-      // First, persist the boundaries to the backend
-      await axios.post('/api/update-boundaries', {
+      // First, persist the boundaries to the backend (token added automatically by interceptor)
+      await apiClient.post('/update-boundaries', {
         title: selectedStory.title,
         book_slug: selectedStory.book_slug,
         start_char: editedStart,
         end_char: editedEnd
-      }, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
       })
       
       // Update the selected story with new boundaries
@@ -417,7 +425,7 @@ const SearchCurate = () => {
       setSelectedStory(updatedStory)
       
       // Reload the story view with new boundaries
-      const res = await axios.post('/api/render-story', {
+      const res = await apiClient.post('/render-story', {
         title: selectedStory.title,
         mode: storyMode,
         search_query: selectedStory.search_query,
@@ -441,7 +449,7 @@ const SearchCurate = () => {
     
     setLoading(true)
     try {
-      const res = await axios.post('/api/render-story', {
+      const res = await apiClient.post('/render-story', {
         title: selectedStory.title,
         mode: mode,
         search_query: selectedStory.search_query,

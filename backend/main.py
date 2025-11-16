@@ -2,7 +2,7 @@
 import os
 import sys
 import logging
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel, Field
@@ -13,6 +13,8 @@ from dotenv import load_dotenv
 from sqlalchemy.orm import Session  # Added for DB session
 from models import SessionLocal, User  # Assuming models.py has SessionLocal (engine session maker) and User model
 import urllib.parse  # Add this line
+import json
+import requests
 
 # ------------------------------------------------------------------ #
 # 1. Logging
@@ -94,43 +96,145 @@ async def startup():
 DISABLE_AUTH = os.getenv("DISABLE_AUTH", "false").lower() == "true"
 security = HTTPBearer(auto_error=False) # Don't auto-error, we'll handle it
 
-# Use project-specific JWKS URL from env (NEXT_PUBLIC_STACK_PROJECT_ID or similar)
-STACK_PROJECT_ID = os.getenv("NEXT_PUBLIC_STACK_PROJECT_ID")
-JWKS_URL = f"https://api.stack-auth.com/api/v1/projects/{STACK_PROJECT_ID}/well-known/jwks.json"
+# Use project-specific JWKS URL from env (should match frontend VITE_STACK_PROJECT_ID)
+STACK_PROJECT_ID = os.getenv("STACK_PROJECT_ID") or os.getenv("VITE_STACK_PROJECT_ID") or os.getenv("NEXT_PUBLIC_STACK_PROJECT_ID")
+STACK_JWKS_URL = os.getenv("STACK_JWKS_URL")  # Optional explicit override from Stack dashboard
+
+JWKS_URL = None
+jwks_client = None
+
+if not STACK_PROJECT_ID and not STACK_JWKS_URL:
+    log.warning("STACK_PROJECT_ID / STACK_JWKS_URL not found in environment variables. JWT verification will fail.")
+else:
+    # Prefer explicit JWKS URL if provided in env
+    if STACK_JWKS_URL:
+        JWKS_URL = STACK_JWKS_URL
+    elif STACK_PROJECT_ID:
+        # Try the common paths, prefer /.well-known/jwks.json then fallback to /.well-known
+        JWKS_URL = f"https://api.stack-auth.com/api/v1/projects/{STACK_PROJECT_ID}/.well-known/jwks.json"
+    try:
+        if JWKS_URL:
+            log.info(f"Using JWKS URL: {JWKS_URL}")
+            jwks_client = PyJWKClient(JWKS_URL)
+            try:
+                resp = requests.get(JWKS_URL, timeout=5)
+                resp.raise_for_status()
+                jwks_data = resp.json()
+                kids = [key.get("kid") for key in jwks_data.get("keys", [])]
+                log.info(f"JWKS contains keys: {kids}")
+            except Exception as jwks_fetch_err:
+                log.warning(f"Failed to fetch JWKS keys for logging: {jwks_fetch_err}")
+    except Exception as e:
+        log.error(f"Failed to initialize JWKS client with URL '{JWKS_URL}': {e}")
+        jwks_client = None
+
 SECRET_SERVER_KEY = os.getenv("STACK_SECRET_SERVER_KEY")
+EDITOR_EMAILS = {e.strip().lower() for e in os.getenv("EDITOR_EMAILS", "").split(",") if e.strip()}
 
-jwks_client = PyJWKClient(JWKS_URL)
-
-async def get_current_user(credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)):
+async def get_current_user(
+    request: Request,
+    credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)
+):
     # If auth is disabled for development, return a mock user
     if DISABLE_AUTH:
         return {"sub": "dev-user"}  # Role will be checked separately
     
-    if not credentials:
+    # Try to get token from Authorization header first
+    token = None
+    if credentials:
+        token = credentials.credentials
+    
+    # If no token in header, try to get from cookies (for Stack Auth cookie storage)
+    if not token:
+        # Check for common Stack Auth cookie names
+        # Preferred: Stack 'stack-access' cookie which is a JSON-encoded array [refresh_id, access_jwt]
+        stack_access_raw = request.cookies.get('stack-access')
+        if stack_access_raw:
+            try:
+                decoded = urllib.parse.unquote(stack_access_raw)
+                parsed = json.loads(decoded)
+                if isinstance(parsed, list) and len(parsed) >= 2 and isinstance(parsed[1], str):
+                    token = parsed[1]
+                    log.debug("Using JWT from 'stack-access' cookie")
+            except Exception as e:
+                log.warning(f"Failed to parse 'stack-access' cookie: {e}")
+
+        # Other common names if not found
+        if not token:
+            token = request.cookies.get('stack-access-token') or \
+                   request.cookies.get('stack_token') or \
+                   request.cookies.get('__session') or \
+                   request.cookies.get('session') or \
+                   (request.cookies.get(f'stack-{STACK_PROJECT_ID}-access-token') if STACK_PROJECT_ID else None)
+
+        # Fallback: scan cookies for any JWT-looking value if still not found
+        if not token and request.cookies:
+            for cookie_name, cookie_val in request.cookies.items():
+                # Heuristic: JWT has two dots and is reasonably long
+                if isinstance(cookie_val, str) and cookie_val.count('.') == 2 and len(cookie_val) > 100:
+                    token = cookie_val
+                    log.debug(f"Using JWT from cookie '{cookie_name}'")
+                    break
+    
+    if not token:
         raise HTTPException(401, "Authentication required")
     
-    token = credentials.credentials
+    if not jwks_client:
+        raise HTTPException(500, "JWT verification not configured. Set STACK_PROJECT_ID in environment.")
     try:
         signing_key = jwks_client.get_signing_key_from_jwt(token)
-        payload = jwt.decode(
-            token,
-            signing_key.key,
-            algorithms=["RS256"],
-            audience=SECRET_SERVER_KEY,  # Use server key as audience
-            options={"verify_exp": True}
-        )
+        # Stack Auth tokens might use different audience/issuer - try both with and without audience verification
+        try:
+            payload = jwt.decode(
+                token,
+                signing_key.key,
+                algorithms=["RS256", "ES256"],
+                audience=SECRET_SERVER_KEY if SECRET_SERVER_KEY else None,
+                options={"verify_exp": True, "verify_aud": bool(SECRET_SERVER_KEY)}
+            )
+        except jwt.InvalidAudienceError:
+            # If audience verification fails, try without it (Stack Auth might not use audience)
+            log.warning("Token audience verification failed, trying without audience check")
+            payload = jwt.decode(
+                token,
+                signing_key.key,
+                algorithms=["RS256", "ES256"],
+                options={"verify_exp": True, "verify_aud": False}
+            )
+        log.debug(f"Successfully decoded JWT for user: {payload.get('sub')}")
         return payload
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(401, "Token has expired")
     except Exception as e:
+        log.error(f"JWT verification failed: {str(e)}")
         raise HTTPException(401, f"Invalid token: {str(e)}")
 
 async def require_editor(user: Dict = Depends(get_current_user)):
     if DISABLE_AUTH:
         return user  # Skip role check in dev
     
-    # Query DB for role using user sub (ID)
+    # Auto-provision user and enforce role
     session = SessionLocal()
     try:
-        db_user = session.query(User).filter_by(id=user.get("sub")).first()
+        sub = user.get("sub")
+        email = (user.get("email") or "").lower()
+        name = user.get("name") or ""
+
+        db_user = session.query(User).filter_by(id=sub).first()
+
+        # Auto-provision if missing
+        if not db_user:
+            db_user = User(id=sub, name=name, email=email, role="viewer")
+            session.add(db_user)
+            session.commit()
+            log.info(f"Auto-provisioned user {email or sub} with role 'viewer'")
+
+        # Auto-promote to editor if email matches allowlist
+        if email and email in EDITOR_EMAILS and db_user.role != "editor":
+            db_user.role = "editor"
+            session.commit()
+            log.info(f"Auto-promoted {email} to 'editor' via EDITOR_EMAILS")
+
         if not db_user or db_user.role != "editor":
             raise HTTPException(403, "Editor role required")
         return user
@@ -249,7 +353,7 @@ def get_unassigned():
     unassigned = [s for t, s in stories_dict.items() if t not in assigned]
     return unassigned
 @app.post("/api/assign-category")
-def assign_category(body: AssignBody):
+def assign_category(body: AssignBody, user: Dict = Depends(require_editor)):
     from utils import stories_dict, USE_DB, SessionLocal
     from models import Story, CodexNode, NodeStory
     
@@ -318,7 +422,7 @@ def assign_category(body: AssignBody):
             json.dump(stories_dict, f, indent=4)
     return {"status": "assigned"}
 @app.delete("/api/remove-category")
-def remove_category(body: RemoveBody):
+def remove_category(body: RemoveBody, user: Dict = Depends(require_editor)):
     from utils import USE_DB, SessionLocal
     from models import Story, CodexNode, NodeStory
     

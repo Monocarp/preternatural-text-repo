@@ -1,43 +1,44 @@
 // src/pages/Callback.tsx
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-// # import jwtDecode from 'jwt-decode'
-import { jwtDecode } from 'jwt-decode'
+import { useStackApp } from '@stackframe/react'
 
 const Callback = () => {
   const navigate = useNavigate()
+  const app = useStackApp()
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    const token = params.get('token')
-    const error = params.get('error')
-    const errorDescription = params.get('error_description')
+    // Stack Auth handles OAuth callbacks automatically when using tokenStore: 'cookie'
+    // The SignIn component should have already processed the callback and set cookies
+    // We just need to wait a moment for the auth state to sync, then redirect
     
-    if (error) {
-      console.error('Auth error:', error, errorDescription)
-      // Redirect to login with error message
-      navigate(`/login?error=${encodeURIComponent(errorDescription || error)}`)
-      return
-    }
-    
-    if (token) {
+    const checkAuth = async () => {
       try {
-        localStorage.setItem('token', token)
-        const decoded = jwtDecode(token)
-        console.log('Authenticated user:', decoded)
-        // Redirect to the page they were trying to access, or home
-        const returnTo = localStorage.getItem('returnTo') || '/'
-        localStorage.removeItem('returnTo')
-        navigate(returnTo)
+        // Wait a moment for Stack Auth to process the callback
+        await new Promise(resolve => setTimeout(resolve, 500))
+        
+        // Check if user is authenticated
+        const user = await app.getUser()
+        if (user) {
+          console.log('Authenticated user:', user)
+          // Redirect to the page they were trying to access, or home
+          const returnTo = sessionStorage.getItem('returnTo') || localStorage.getItem('returnTo') || '/'
+          sessionStorage.removeItem('returnTo')
+          localStorage.removeItem('returnTo')
+          navigate(returnTo)
+        } else {
+          // If not authenticated after callback, redirect to login
+          console.warn('User not authenticated after callback')
+          navigate('/login?error=Authentication failed')
+        }
       } catch (err) {
-        console.error('Error decoding token:', err)
-        navigate('/login?error=Invalid token')
+        console.error('Error checking auth state:', err)
+        navigate('/login?error=Authentication error')
       }
-    } else {
-      console.warn('No token in callback URL')
-      navigate('/login?error=No token received')
     }
-  }, [navigate])
+    
+    checkAuth()
+  }, [navigate, app])
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-900 text-white">

@@ -1,11 +1,12 @@
 // src/components/Login.tsx
 import { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import { SignIn } from '@stackframe/react' // Updated import for correct package
 
 const Login = () => {
   const [error, setError] = useState<string | null>(null)
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
   
   // Check for error in URL params (from callback)
   useEffect(() => {
@@ -24,12 +25,25 @@ const Login = () => {
             {error}
           </div>
         )}
-        <SignIn /> {/* Handles GitHub login flow */}
+        <SignIn /> {/* Handles GitHub/Google login flow */}
         {!error && (
           <p className="mt-4 text-sm text-gray-400 text-center">
             You need to be logged in to edit story boundaries.
           </p>
         )}
+        <div className="mt-6 text-center">
+          <button
+            onClick={() => {
+              const returnTo = sessionStorage.getItem('returnTo') || localStorage.getItem('returnTo') || '/'
+              sessionStorage.removeItem('returnTo')
+              localStorage.removeItem('returnTo')
+              navigate(returnTo)
+            }}
+            className="text-sm text-gray-300 hover:text-blue-400 underline"
+          >
+            Continue without signing in
+          </button>
+        </div>
       </div>
     </div>
   )
