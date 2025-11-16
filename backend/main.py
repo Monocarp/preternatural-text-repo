@@ -275,6 +275,11 @@ class UpdateBoundariesBody(BaseModel):
 # ------------------------------------------------------------------ #
 # 8. End-points
 # ------------------------------------------------------------------ #
+@app.get("/")
+def root():
+    """Simple root endpoint to handle health checks and reduce 404 noise."""
+    return {"status": "API is running", "docs": "/docs"}
+
 @app.get("/api/health")
 def health():
     books = len([d for d in os.listdir(BOOKS_DIR)
