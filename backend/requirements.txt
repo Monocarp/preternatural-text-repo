@@ -12,3 +12,5 @@ sqlalchemy  # For DB (start with SQLite)
 python-dotenv
 PyJWT  # For JWT authentication
 cryptography  # Required by PyJWT for RS256
+psycopg2-binary
+gunicorn
