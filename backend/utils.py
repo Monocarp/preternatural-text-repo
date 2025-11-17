@@ -213,7 +213,7 @@ retriever_bm25_key = InMemoryBM25Retriever(document_store=document_store)
 keyword_pipeline = Pipeline()
 keyword_pipeline.add_component("retriever_bm25", retriever_bm25_key)
 logger.info(f"Keyword pipeline components: {list(keyword_pipeline.graph.nodes.keys())}")
-embedder_sem = SentenceTransformersTextEmbedder(model=MODEL_PATH, normalize_embeddings=True)
+embedder_sem = SentenceTransformersTextEmbedder(model=MODEL_PATH, normalize_embeddings=True, model_kwargs={'device': 'cpu', 'torch_dtype': torch.float16}) # For Render deployment optimization
 retriever_embedding_sem = InMemoryEmbeddingRetriever(document_store=document_store)
 semantic_pipeline = Pipeline()
 semantic_pipeline.add_component("embedder", embedder_sem)
