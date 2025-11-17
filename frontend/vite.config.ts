@@ -17,9 +17,9 @@ export default defineConfig(({ mode }) => {
       ],
       proxy: {
         '/api': {
-          target: 'https://preclinical-scaphoid-felisa.ngrok-free.dev', // Your Ngrok URL
+          target: 'https://preternatural-text-repo.onrender.com', // Render backend - stable production URL
           changeOrigin: true,
-          secure: false, // Required for Ngrok's self-signed cert in dev
+          secure: true, // Use secure HTTPS for production
         }
       }
     },
