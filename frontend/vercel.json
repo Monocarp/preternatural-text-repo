@@ -3,6 +3,10 @@
     {
       "source": "/api/(.*)",
       "destination": "https://preternatural-text-repo.onrender.com/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
