@@ -374,7 +374,7 @@ def render_static_story(story):
     book_slug = story['book_slug']
     full_md = load_full_md(book_slug)
     text = full_md[story['start_char']:story['end_char']]
-    return f"# {story['title']}\n\n**Source**: {book_slug.replace('_', ' ').title()}\n**Pages**: {story['pages']}\n**Keywords**: {story['keywords']}\n\n{text}"
+    return text  # Frontend already displays metadata in header, so just return the story text
 
 def find_book_slug(title):
     for book_slug in books:
