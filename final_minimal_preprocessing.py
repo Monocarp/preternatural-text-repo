@@ -1,0 +1,136 @@
+# Final minimal preprocessing - leveraging your clean input format
+# Assumes: 
+# - Page markers are standardized as [Page XXX]
+# - Footnotes are already stripped
+# - You manually chunk by 10-15 pages
+
+import spacy
+import re
+
+# Load the best model for sentence detection
+nlp = spacy.load("en_core_web_trf")
+
+def prepare_chunk_for_extraction(markdown_chunk: str, book_title: str, start_page: int) -> str:
+    """
+    Minimal preprocessing with your standardized format
+    """
+    
+    # Since footnotes are stripped and pages standardized, we only need
+    # to protect common abbreviations from sentence splitting
+    protected_text = markdown_chunk
+    
+    # Common abbreviations in historical/religious texts
+    abbrevs = ["Fr", "Dr", "Mr", "Mrs", "St", "Rev", "pp", "p", "ch", "vol", 
+               "etc", "viz", "i.e", "e.g", "cf", "Mt", "Mk", "Lk", "Jn"]
+    
+    for abbrev in abbrevs:
+        # Protect the dot after abbreviations
+        protected_text = re.sub(f'\\b{abbrev}\\.', f'{abbrev}<!DOT!>', protected_text, flags=re.I)
+    
+    # Process with spaCy
+    doc = nlp(protected_text)
+    
+    sentences = []
+    current_page = start_page
+    
+    for sent_idx, sent in enumerate(doc.sents):
+        sent_text = sent.text.strip()
+        if not sent_text:
+            continue
+            
+        # Restore dots
+        sent_text = sent_text.replace("<!DOT!>", ".")
+        
+        # Extract page from your standardized markers
+        page_match = re.search(r'\[Page (\d+)\]', sent_text)
+        if page_match:
+            current_page = int(page_match.group(1))
+            # Since you manually chunk, we can trust these page markers completely
+        
+        # Simple, clean markers
+        marked = f"[S{sent_idx}][P{current_page}] {sent_text}"
+        sentences.append(marked)
+    
+    marked_text = "\n".join(sentences)
+    
+    # Focused prompt
+    prompt = f"""BOOK: {book_title}
+
+EXTRACT ALL supernatural/paranormal/miraculous/magical incidents from the text below.
+
+CRITICAL RULES:
+1. Extract EVERYTHING - even single sentences like "she was possessed" 
+2. Start and end at [S#] markers (sentence boundaries)
+3. If starting with he/she/it/they, expand backwards until the person is identified
+
+FORMAT each story as:
+<div align="center"><b>[Descriptive Title]</b></div>
+<div align="center">"{book_title}" Pages X-Y</div>
+
+[Verbatim text]
+
+Use [P#] markers for page ranges. Missing a story is worse than including a borderline case.
+
+TEXT:
+{marked_text}"""
+
+    return prompt
+
+
+def clean_extracted_output(extracted_text: str) -> str:
+    """Remove markers from final output"""
+    # Remove sentence/page markers
+    cleaned = re.sub(r'\[S\d+\]\[P\d+\]\s*', '', extracted_text)
+    return cleaned
+
+
+# Even simpler version if you want to remove ALL complexity
+def ultra_minimal_prep(chunk: str, book_title: str) -> str:
+    """
+    Ultra-minimal version - just mark sentences, trust spaCy completely
+    """
+    doc = nlp(chunk)
+    
+    sentences = []
+    current_page = 1
+    
+    for i, sent in enumerate(doc.sents):
+        text = sent.text.strip()
+        if not text:
+            continue
+            
+        # Update page if found
+        if page := re.search(r'\[Page (\d+)\]', text):
+            current_page = int(page.group(1))
+        
+        sentences.append(f"[{i}|{current_page}] {text}")
+    
+    return f"""Extract ALL supernatural stories from "{book_title}":
+
+RULES:
+- Include everything supernatural (even 1 sentence)
+- Use [#|#] markers for clean boundaries  
+- Expand backwards if pronouns unclear
+
+{chr(10).join(sentences)}"""
+
+
+# Test it
+if __name__ == "__main__":
+    test_chunk = """[Page 45]
+Fr. Bernard witnessed a possession most terrible. The woman spoke in tongues. 
+She levitated above her bed.
+
+[Page 46]
+This same woman vomited nails. The Bishop performed exorcism. Seven demons 
+revealed themselves."""
+    
+    result = prepare_chunk_for_extraction(test_chunk, "Test Book", 45)
+    print("PREPARED PROMPT:")
+    print(result)
+    print("\n" + "="*50 + "\n")
+    
+    # Show ultra-minimal version too
+    result2 = ultra_minimal_prep(test_chunk, "Test Book")
+    print("ULTRA-MINIMAL VERSION:")
+    print(result2)
