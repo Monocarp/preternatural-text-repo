@@ -7,6 +7,16 @@ from google.colab import files, userdata
 import os
 import re
 
+# Ensure preprocessing helpers from Step 1 are available
+try:
+    prepare_chunk_for_extraction
+    clean_extracted_output
+except NameError as exc:
+    raise RuntimeError(
+        "Step 2 requires the helper functions defined in Step 1. "
+        "Please run the Step 1 cell in this runtime before executing Step 2."
+    ) from exc
+
 # Set up the Grok API client
 client = OpenAI(
     api_key=userdata.get('GROK_API_KEY'),
@@ -116,9 +126,13 @@ def extract_text_from_md(file_path):
     print(f"Read {file_path} → {len(text):,} characters")
     return text
 
-def save_stories_to_md(stories, book_title):
+def save_stories_to_md(stories, book_title, output_dir=None):
     safe_title = re.sub(r'[^\w\s-]', '', book_title).strip().replace(' ', '_')
-    filename = f"extracted_stories_{safe_title}.md"
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+        filename = os.path.join(output_dir, "Stories.md")
+    else:
+        filename = f"extracted_stories_{safe_title}.md"
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(stories if stories else "No supernatural stories extracted.")
     print(f"Saved → {filename}")
@@ -130,6 +144,10 @@ def get_part_number(filename):
 
 # ========================== Main workflow ==========================
 book_title = input("Please enter the exact book title: ").strip()
+book_slug_input = input("Optional: enter the book slug/folder name (leave blank to auto-generate): ").strip()
+book_slug = book_slug_input if book_slug_input else re.sub(r'[^\w]+', '_', book_title.lower()).strip('_')
+book_dir = os.path.join("/content/books", book_slug)
+os.makedirs(book_dir, exist_ok=True)
 
 print("\nUpload your cleaned Markdown files (part 1.md, part 2.md, etc.)")
 uploaded = files.upload()
@@ -143,10 +161,20 @@ for filename in sorted_files:
         print(f"\n{'='*60}")
         print(f"Processing: {filename}")
         text = extract_text_from_md(filename)
-        stories = extract_supernatural_stories(text, book_title)
 
-        if stories and stories != "No supernatural stories extracted.":
-            all_stories.append(stories)
+        # Determine starting page for this chunk
+        start_page_match = re.search(r'\[Page (\d+)\]', text)
+        start_page = int(start_page_match.group(1)) if start_page_match else 1
+
+        # Preprocess chunk using Step 1 helpers
+        prepared_text = prepare_chunk_for_extraction(text, book_title, start_page)
+
+        # Run extraction + clean markers out
+        raw_stories = extract_supernatural_stories(prepared_text, book_title)
+        stories = clean_extracted_output(raw_stories) if raw_stories else raw_stories
+
+        if stories and stories.strip() != "No supernatural stories extracted.":
+            all_stories.append(stories.strip())
     else:
         print(f"Skipping non-markdown file: {filename}")
 
@@ -157,5 +185,5 @@ print("\n" + "="*60)
 print("FINAL COMBINED EXTRACTION COMPLETE")
 print("="*60)
 
-final_filename = save_stories_to_md(final_output, book_title)
+final_filename = save_stories_to_md(final_output, book_title, output_dir=book_dir)
 files.download(final_filename)

@@ -3,12 +3,21 @@
 # - Page markers are standardized as [Page XXX]
 # - Footnotes are already stripped
 # - You manually chunk by 10-15 pages
+#
+# Run these once per Colab runtime:
+# !pip install -q spacy
+# !python -m spacy download en_core_web_trf
 
 import spacy
 import re
 
-# Load the best model for sentence detection
-nlp = spacy.load("en_core_web_trf")
+# Load the best model for sentence detection (download on demand if needed)
+try:
+    nlp = spacy.load("en_core_web_trf")
+except OSError:
+    from spacy.cli import download as spacy_download
+    spacy_download("en_core_web_trf")
+    nlp = spacy.load("en_core_web_trf")
 
 def prepare_chunk_for_extraction(markdown_chunk: str, book_title: str, start_page: int) -> str:
     """
