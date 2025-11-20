@@ -1,0 +1,528 @@
+# Step 4: Batch Preprocess Multiple Books with FAISS for Paranormal Text Repository (Incremental Mode)
+# Processes books in /books/book_slug/ (Full_Text.md, Stories.md, grouped_index.md)
+# Supports appending: Loads existing FAISS/index if present, processes only new/updated books
+# Outputs: Per-book story_positions.json (if new), updated shared FAISS index (faiss_index.bin), documents.json, document_store.json
+# Run locally/Colab, commit updates to HF repo for step 5
+
+!pip install haystack-ai==2.5.1 sentence-transformers==3.1.1 faiss-cpu==1.8.0 numpy==1.26.4
+
+import os
+import json
+import re
+import difflib
+from collections import Counter
+import numpy as np
+import faiss
+from haystack import Pipeline, Document
+from haystack.components.embedders import SentenceTransformersDocumentEmbedder
+from haystack.document_stores.in_memory import InMemoryDocumentStore
+from google.colab import files
+
+# Setup directories
+books_dir = "/content/books/"  # Upload books here (e.g., /books/christian_mysticism_vol_iv/)
+data_dir = "/content/data/"    # Shared outputs
+os.makedirs(books_dir, exist_ok=True)
+os.makedirs(data_dir, exist_ok=True)
+
+# ========================== Pronoun/context helpers ==========================
+
+PRONOUNS = {
+    "he", "she", "they", "them", "him", "her", "it", "this", "that", "these", "those",
+    "his", "hers", "their", "theirs", "its"
+}
+
+def needs_context(full_text: str, start_char: int, lookahead_chars: int = 250) -> bool:
+    """
+    Heuristic: scan the first `lookahead_chars` of the story.
+    If we see a pronoun before seeing any name-like capitalized word,
+    we assume we need backward context.
+    """
+    snippet = full_text[start_char:start_char + lookahead_chars]
+    tokens = re.findall(r"[A-Za-z']+", snippet)
+
+    seen_name_like = False
+
+    for token in tokens:
+        lower = token.lower()
+
+        # Treat capitalized non-pronouns as name-like (Father, Urbain, Sister, Agnes, etc.)
+        if token and token[0].isupper() and lower not in PRONOUNS:
+            seen_name_like = True
+
+        # If we hit a pronoun before seeing a name-like token, we need context
+        if lower in PRONOUNS and not seen_name_like:
+            return True
+
+    return False
+
+
+def expand_backward(full_md: str, start_char: int, max_sentences: int = 4, max_extra_chars: int = 800) -> int:
+    """
+    Walk backward from `start_char`, collecting up to `max_sentences` sentences
+    and at most `max_extra_chars` characters. Ignores page markers, only cares
+    about punctuation and character bounds.
+    Returns the new start_char (may be unchanged).
+    """
+    if start_char <= 0:
+        return start_char
+
+    prefix = full_md[:start_char]
+
+    # Split into sentences based on ., ?, or ! followed by whitespace
+    sentences = re.split(r'(?<=[\.!?])\s+', prefix)
+    sentences = [s for s in sentences if s.strip()]
+
+    if not sentences:
+        return start_char
+
+    context = []
+    total_chars = 0
+
+    # Walk backward through sentences until we hit limits
+    for s in reversed(sentences):
+        s = s.strip()
+        if not s:
+            continue
+        # +1 for a space when we join them back
+        if total_chars + len(s) + 1 > max_extra_chars:
+            break
+        context.append(s)
+        total_chars += len(s) + 1
+        if len(context) >= max_sentences:
+            break
+
+    if not context:
+        return start_char
+
+    # Reconstruct the context text in the correct order
+    context_text = " ".join(reversed(context))
+
+    new_start_candidate = start_char - len(context_text)
+    if new_start_candidate < 0:
+        new_start_candidate = 0
+
+    # Optional: try to align to a sentence boundary before new_start_candidate.
+    # We search backward for punctuation + space in the slice up to new_start_candidate.
+    boundary_slice = full_md[:new_start_candidate]
+    # Reverse that slice to search from the end
+    reversed_slice = boundary_slice[::-1]
+
+    # Look for pattern like ". " or "? " or "! "
+    boundary_match = re.search(r'\s[\.!?]', reversed_slice)
+    if boundary_match:
+        # boundary_match.start() is index in reversed string
+        boundary_pos_from_end = boundary_match.start()
+        # Convert back to forward index: position of punctuation in original string
+        punctuation_pos = new_start_candidate - boundary_pos_from_end - 2  # adjust because of reverse + pattern length
+        new_start_candidate = max(punctuation_pos + 2, 0)  # move past punctuation and space
+
+    return new_start_candidate
+
+# Parse index.md for story metadata
+def parse_index_md(index_path, story_titles, book_slug):
+    with open(index_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    pattern = r"^(.*?) - (\d+)(?:-(\d+))?$"
+    matches = re.findall(pattern, content, re.MULTILINE)
+    index_data = {}
+    for desc, start_page, end_page in matches:
+        desc = desc.strip()
+        pages = f"{start_page}" if not end_page else f"{start_page}-{end_page}"
+        keywords = [desc.lower()]
+        if "demon" in desc.lower():
+            keywords.extend(["possession", "demonic possession"])
+        elif "witch" in desc.lower():
+            keywords.append("witch trials")
+        index_data[desc] = {"pages": pages, "keywords": keywords}
+    story_index_map = {}
+    for title in story_titles:
+        norm_title = re.sub(r"[^\w\s]", "", title.lower().strip('- '))
+        close_match = difflib.get_close_matches(norm_title, [re.sub(r"[^\w\s]", "", k.lower()) for k in index_data.keys()], n=1, cutoff=0.5)
+        if close_match:
+            matched_key = next(k for k in index_data if re.sub(r"[^\w\s]", "", k.lower()) == close_match[0])
+            story_index_map[title] = index_data[matched_key]
+            print(f"Debug: Matched title '{title}' to index key '{matched_key}' with pages {index_data[matched_key]['pages']} in {book_slug}")
+        else:
+            story_index_map[title] = {"pages": "Unknown", "keywords": [re.sub(r"[^\w\s]", "", title.lower())]}
+            if "demon" in title.lower():
+                story_index_map[title]["keywords"].append("demonic possession")
+            print(f"Debug: No index match for title '{title}' in {book_slug}, defaulting to 'Unknown' pages")
+    return story_index_map
+
+# Locate story positions in full MD
+def locate_story_positions(full_md_path, stories_md_path, index_md_path, book_slug, book_path):
+    with open(full_md_path, "r", encoding="utf-8") as f:
+        full_md = f.read()
+    with open(stories_md_path, "r", encoding="utf-8") as f:
+        stories_md = f.read()
+
+    stories = re.split(r"<div align=\"center\"><b>(.*?)</b></div>", stories_md, flags=re.IGNORECASE)
+    story_data = []
+    for i in range(1, len(stories), 2):
+        title = stories[i].strip()
+        page_match = re.search(r'<div align="center">"[^"]+" Pages? (\d+)(?:-(\d+))?</div>', stories[i+1], flags=re.IGNORECASE)
+        page_range = page_match.group(1) if page_match else "Unknown"
+        if page_match and page_match.group(2):
+            page_range = f"{page_match.group(1)}-{page_match.group(2)}"
+        content_start = stories[i+1].find('</div>') + 6 if '</div>' in stories[i+1] else 0
+        content = stories[i+1][content_start:].strip()
+        story_data.append({"title": title, "page_range": page_range, "content": content})
+        print(f"Debug: Parsed story '{title}' with page range '{page_range}' in {book_slug}")
+
+    index_data = parse_index_md(index_md_path, [s["title"] for s in story_data], book_slug)
+
+    page_splits = re.split(r"\s*\[?\s*Page\s*[:\s]*(\d+)\s*\]?\s*", full_md, flags=re.IGNORECASE)
+    pages = {}
+    char_offset = 0
+    print(f"Debug: Page splits found: {len(page_splits)//2} pages in {book_slug}")
+    for i in range(1, len(page_splits), 2):
+        page_num = int(page_splits[i])
+        page_content = page_splits[i+1]
+        pages[page_num] = {"content": page_content, "start_char": char_offset}
+        char_offset += len(page_content)
+        print(f"Debug: Page {page_num} starts at char {pages[page_num]['start_char']}, content (first 100 chars): {repr(page_content[:100])}... in {book_slug}")
+
+    def normalize(text):
+        text = re.sub(r"<div.*?>.*?</div>", "", text, flags=re.IGNORECASE)
+        text = re.sub(r"\"[^\"]+\" Pages? \d+(-\d+)?", "", text)
+        text = re.sub(r"[,:;.!?]", "", text)
+        return re.sub(r"\s+", " ", text.strip().lower())
+
+    story_positions = {}
+
+    for story in story_data:
+        title = story["title"]
+        content = story["content"]
+        title_page_range = story["page_range"]
+
+        first_sentence_match = re.search(r"^.*?\.", content)
+        first_sentence = first_sentence_match.group(0) if first_sentence_match else content[:100]
+
+        norm_content = normalize(content)
+        norm_first_sentence = normalize(first_sentence)
+
+        print(f"Debug: Normalized content for '{title}' (first 200 chars): {repr(norm_content[:200])}... in {book_slug}")
+        print(f"Debug: Normalized first sentence for '{title}' (first 100 chars): {repr(norm_first_sentence[:100])}... in {book_slug}")
+
+        target_pages = []
+        if title_page_range != "Unknown":
+            try:
+                start_page = int(title_page_range.split('-')[0])
+                target_pages = [start_page-3, start_page-2, start_page-1, start_page, start_page+1, start_page+2, start_page+3]
+                if '-' in title_page_range:
+                    end_page = int(title_page_range.split('-')[1])
+                    target_pages.extend([end_page-3, end_page-2, end_page-1, end_page, end_page+1, end_page+2, end_page+3])
+                target_pages = list(set([p for p in target_pages if p in pages]))
+                print(f"Debug: Using title page range '{title_page_range}' for '{title}', target_pages: {target_pages} in {book_slug}")
+            except ValueError:
+                target_pages = []
+
+        if not target_pages:
+            pages_str = index_data.get(title, {"pages": "Unknown"})["pages"]
+            if pages_str != "Unknown":
+                try:
+                    start_page = int(pages_str.split('-')[0])
+                    target_pages = [start_page-3, start_page-2, start_page-1, start_page, start_page+1, start_page+2, start_page+3]
+                    if '-' in pages_str:
+                        end_page = int(pages_str.split('-')[1])
+                        target_pages.extend([end_page-3, end_page-2, end_page-1, end_page, end_page+1, end_page+2, end_page+3])
+                    target_pages = list(set([p for p in target_pages if p in pages]))
+                    print(f"Debug: Using index page range '{pages_str}' for '{title}', target_pages: {target_pages} in {book_slug}")
+                except ValueError:
+                    target_pages = []
+
+        print(f"Debug: Searching for '{title}' in pages: {target_pages if target_pages else 'all pages (Unknown)'} in {book_slug}")
+
+        start_char = -1
+        end_char = -1
+        max_ratio = 0
+        for page_num in target_pages:
+            norm_page_content = normalize(pages[page_num]["content"])
+            print(f"Debug: Normalized page {page_num} content (first 200 chars): {repr(norm_page_content[:200])}... in {book_slug}")
+            start_idx = norm_page_content.find(norm_first_sentence)
+            if start_idx != -1:
+                orig_start = full_md.find(pages[page_num]["content"]) + start_idx
+                end_char = orig_start + len(content)
+                start_char = orig_start
+                snippet = full_md[max(0, orig_start-50):min(len(full_md), orig_start+len(content)+50)]
+                print(f"Debug: Exact first-sentence match for '{title}' on page {page_num}, start_char: {orig_start}, end_char: {end_char}, snippet: {repr(snippet[:200])}... in {book_slug}")
+                break
+
+        if start_char == -1:
+            for page_num in target_pages:
+                norm_page_content = normalize(pages[page_num]["content"])
+                content_len = len(norm_first_sentence)
+                window_size = min(content_len, len(norm_page_content))
+                max_ratio = 0
+                best_start = -1
+                for j in range(len(norm_page_content) - window_size + 1):
+                    substring = norm_page_content[j:j + window_size]
+                    ratio = difflib.SequenceMatcher(None, norm_first_sentence, substring).ratio()
+                    if ratio > max_ratio:
+                        max_ratio = ratio
+                        best_start = j
+                if max_ratio >= 0.8:
+                    orig_start = full_md.find(pages[page_num]["content"]) + best_start
+                    end_char = orig_start + len(content)
+                    start_char = orig_start
+                    snippet = full_md[max(0, orig_start-50):min(len(full_md), orig_start+len(content)+50)]
+                    print(f"Debug: Fuzzy first-sentence match for '{title}' on page {page_num}, ratio: {max_ratio:.3f}, start_char: {orig_start}, end_char: {end_char}, snippet: {repr(snippet[:200])}... in {book_slug}")
+                    break
+            if not target_pages or max_ratio < 0.8:
+                print(f"Debug: No match (exact or fuzzy) for '{title}' in target pages, max_ratio: {max_ratio:.3f} in {book_slug}")
+
+        if start_char == -1:
+            keywords = index_data.get(title, {"keywords": [re.sub(r"[^\w\s]", "", title.lower())]})["keywords"]
+            keyword_pattern = ' '.join(keywords[:3])
+            print(f"Debug: Trying keyword pattern for '{title}': {keyword_pattern} in {book_slug}")
+            match_start = re.search(re.escape(keyword_pattern), full_md, re.IGNORECASE)
+            if match_start:
+                start_char = match_start.start()
+                end_char = full_md.find("\n\n", start_char + len(content))
+                if end_char == -1:
+                    end_char = len(full_md)
+                print(f"Debug: Keyword match found for '{title}', start_char: {start_char}, end_char: {end_char} in {book_slug}")
+            else:
+                print(f"Debug: No keyword match for '{title}' in {book_slug}")
+                pages_str = title_page_range if title_page_range != "Unknown" else index_data.get(title, {"pages": "Unknown"})["pages"]
+                print(f"Debug: Trying page fallback for '{title}', pages: {pages_str} in {book_slug}")
+                start_page = pages_str.split('-')[0]
+                try:
+                    start_page = int(start_page)
+                    start_char = -1
+                    page_pattern = re.compile(r"\s*\[?\s*Page\s*[:\s]*" + str(start_page) + r"\s*\]?\s*", re.IGNORECASE)
+                    match = page_pattern.search(full_md)
+                    if match:
+                        start_char = match.start()
+                        print(f"Debug: Page marker found for '{title}': Page {start_page} in {book_slug}")
+                    if start_char != -1:
+                        snippet_start = max(0, start_char - 100)
+                        snippet_end = min(len(full_md), start_char + len(content) + 100)
+                        print(f"Debug: Full MD snippet around Page {start_page} for '{title}' (chars {snippet_start}:{snippet_end}): {repr(full_md[snippet_start:snippet_end])}... in {book_slug}")
+                        if '-' in pages_str:
+                            end_page = int(pages_str.split('-')[1])
+                            end_page_pattern = re.compile(r"\s*\[?\s*Page\s*[:\s]*" + str(end_page) + r"\s*\]?\s*", re.IGNORECASE)
+                            end_match = end_page_pattern.search(full_md, start_char)
+                            end_char = end_match.start() if end_match else len(full_md)
+                        else:
+                            end_char = full_md.find("\n\n", start_char + len(content))
+                            if end_char == -1:
+                                end_char = len(full_md)
+                    else:
+                        print(f"Debug: No page markers found for '{title}' for Page {start_page} in {book_slug}")
+                        start_char = -1
+                        end_char = -1
+                except ValueError:
+                    start_char = -1
+                    end_char = -1
+                    print(f"Debug: Invalid page number for '{title}', pages: {pages_str} in {book_slug}")
+
+        print(f"Debug: For title '{title}', start_char: {start_char}, end_char: {end_char} in {book_slug}")
+
+        # ==================== Pronoun-context expansion hook ====================
+        if start_char != -1 and end_char != -1:
+            if needs_context(full_md, start_char, lookahead_chars=250):
+                print(f"Debug: Story '{title}' appears to need context (early pronoun before any name), expanding backward in {book_slug}")
+                new_start = expand_backward(full_md, start_char, max_sentences=4, max_extra_chars=800)
+
+                if new_start != start_char:
+                    context_added = full_md[new_start:start_char]
+                    print(f"Debug: Expanded '{title}' from char {start_char} to {new_start}, added {len(context_added)} chars of context")
+                    print(f"Debug: Context preview for '{title}': {repr(context_added[:150])}...")
+                    start_char = new_start
+                else:
+                    print(f"Debug: Context check for '{title}' requested expansion, but expand_backward did not change start_char")
+
+        # ==================== Save final positions (with verbatim) ====================
+        verbatim_text = ""
+        if start_char != -1 and end_char != -1:
+            try:
+                verbatim_text = full_md[start_char:end_char]
+            except Exception as e:
+                print(f"Warning: Failed to slice verbatim text for '{title}' in {book_slug}: {e}")
+
+        story_positions[title] = {
+            "start_char": start_char,
+            "end_char": end_char,
+            "pages": title_page_range if title_page_range != "Unknown" else index_data.get(title, {"pages": "Unknown"})["pages"],
+            "keywords": index_data.get(title, {"keywords": [re.sub(r"[^\w\s]", "", title.lower())]})["keywords"],
+            "verbatim": verbatim_text
+        }
+
+    # Write to existing book_path (preserves case)
+    positions_path = os.path.join(book_path, "story_positions.json")
+    try:
+        with open(positions_path, "w", encoding="utf-8") as f:
+            json.dump(story_positions, f)
+        files.download(positions_path)
+    except Exception as e:
+        print(f"Error writing {positions_path}: {e}")
+        raise
+    return story_positions
+
+# Chunk full MD with story annotations
+def chunk_full_md(md_path, story_positions, book_slug, chunk_size=400):
+    with open(md_path, "r", encoding="utf-8") as f:
+        md_content = f.read()
+
+    pages = re.split(r"\s*\[?\s*Page\s*[:\s]*(\d+)\s*\]?\s*", md_content, flags=re.IGNORECASE)
+    chunks = []
+    chunk_id = 0
+    current_chunk = ""
+    current_page = 1
+    char_offset = 0
+
+    for i in range(1, len(pages), 2):
+        page_num = int(pages[i])
+        page_text = pages[i+1].strip()
+        current_chunk += f"[Page {page_num}]\n\n" + page_text + "\n\n"
+
+        chunk_start_char = char_offset
+        chunk_end_char = char_offset + len(current_chunk)
+
+        related_stories = []
+        for title, pos in story_positions.items():
+            if pos["start_char"] != -1 and pos["start_char"] < chunk_end_char and pos["end_char"] > chunk_start_char:
+                related_stories.append({
+                    "title": title,
+                    "start_char": max(pos["start_char"], chunk_start_char),
+                    "end_char": min(pos["end_char"], chunk_end_char),
+                    "pages": pos["pages"],
+                    "keywords": pos["keywords"]
+                })
+
+        heading_matches = re.findall(r"# (.*?)\n", current_chunk)
+        non_story_keywords = [h.lower() for h in heading_matches]
+        if not non_story_keywords and not related_stories:
+            word_counts = Counter(re.findall(r'\w+', current_chunk.lower()))
+            non_story_keywords = [word for word, count in word_counts.most_common(5)]
+
+        all_keywords = set(non_story_keywords)
+        for story in related_stories:
+            all_keywords.update(story["keywords"][:5])
+        keywords_str = ", ".join(list(all_keywords)[:5]) if all_keywords else ""
+        if keywords_str:
+            current_chunk += "\nKeywords: " + keywords_str
+
+        if len(current_chunk.split()) > chunk_size:
+            chunk_meta = {
+                "book": book_slug,
+                "source": book_slug.replace('_', ' '),
+                "pages": f"{current_page}-{page_num}",
+                "chunk_id": f"{book_slug}_{chunk_id}",
+                "keywords": keywords_str
+            }
+            if related_stories:
+                chunk_meta["type"] = "story"
+                chunk_meta["stories"] = related_stories
+            else:
+                chunk_meta["type"] = "non_story"
+
+            chunks.append(Document(content=current_chunk.strip(), meta=chunk_meta))
+            chunk_id += 1
+            char_offset += len(current_chunk)
+            current_chunk = ""
+            current_page = page_num + 1
+
+    if current_chunk:
+        chunk_meta = {
+            "book": book_slug,
+            "source": book_slug.replace('_', ' '),
+            "pages": f"{current_page}-{page_num}",
+            "chunk_id": f"{book_slug}_{chunk_id}",
+            "keywords": keywords_str
+        }
+        if related_stories:
+            chunk_meta["type"] = "story"
+            chunk_meta["stories"] = related_stories
+        else:
+            chunk_meta["type"] = "non_story"
+
+        chunks.append(Document(content=current_chunk.strip(), meta=chunk_meta))
+
+    return chunks
+
+# Batch preprocess with FAISS (incremental/append mode)
+def batch_preprocess():
+    # Load existing FAISS index and metadata if present
+    dimension = 1024  # BAAI/bge-large-en-v1.5
+    faiss_path = os.path.join(data_dir, "faiss_index.bin")
+    docs_path = os.path.join(data_dir, "documents.json")
+    if os.path.exists(faiss_path) and os.path.exists(docs_path):
+        faiss_index = faiss.read_index(faiss_path)
+        with open(docs_path, "r") as f:
+            doc_metadata = json.load(f)
+        existing_books = set(m['meta'].get('book', 'unknown') for m in doc_metadata)
+        print(f"Loaded existing FAISS index ({faiss_index.ntotal} vectors) and metadata ({len(doc_metadata)} docs). Existing books: {existing_books}")
+
+        # Load existing docs for Haystack (to merge with new)
+        all_docs = []
+        for meta in doc_metadata:
+            doc = Document(
+                id=meta["id"],
+                content=meta["content"],
+                meta=meta["meta"],
+                embedding=np.array(meta.get("embedding", [])) if "embedding" in meta else None  # Restore if saved as list
+            )
+            all_docs.append(doc)
+    else:
+        faiss_index = faiss.IndexFlatL2(dimension)
+        doc_metadata = []
+        existing_books = set()
+        all_docs = []  # Empty for new runs
+        print("No existing index found; starting fresh.")
+
+    # Add or adjust this list when you want to re-run existing books with new logic
+    force_reprocess = ['christian_mysticism_vol_iv']
+
+    embedder = SentenceTransformersDocumentEmbedder(model="BAAI/bge-large-en-v1.5", normalize_embeddings=True)
+    embedder.warm_up()
+
+    processed_count = 0
+    for book_dir in os.listdir(books_dir):
+        book_path = os.path.join(books_dir, book_dir)
+        if os.path.isdir(book_path):
+            book_slug = book_dir.lower().replace(' ', '_')
+            if book_slug in existing_books and book_slug not in force_reprocess:
+                print(f"Skipping already processed book: {book_slug}")
+                continue
+            full_md = os.path.join(book_path, "Full_Text.md")
+            stories_md = os.path.join(book_path, "Stories.md")
+            index_md = os.path.join(book_path, "grouped_index.md")
+            if all(os.path.exists(p) for p in [full_md, stories_md, index_md]):
+                print(f"Processing new book {book_slug}...")
+                story_positions = locate_story_positions(full_md, stories_md, index_md, book_slug, book_path)
+                chunks = chunk_full_md(full_md, story_positions, book_slug)
+
+                # Embed chunks
+                embedded_docs = embedder.run(chunks)["documents"]
+                for doc in embedded_docs:
+                    if doc.embedding is not None:
+                        faiss_index.add(np.array([doc.embedding], dtype=np.float32))
+                        all_docs.append(doc)
+                        doc_metadata.append({
+                            "id": doc.id,
+                            "content": doc.content,
+                            "meta": doc.meta
+                        })
+                print(f"Appended {len(chunks)} chunks for {book_slug}")
+                processed_count += 1
+
+    if processed_count == 0:
+        print("No new books to process; outputs unchanged.")
+
+    # Save updated FAISS index and metadata
+    faiss.write_index(faiss_index, faiss_path)
+    with open(docs_path, "w") as f:
+        json.dump(doc_metadata, f)
+    files.download(faiss_path)
+    files.download(docs_path)
+
+    # Update Haystack document_store.json (full resave with all docs)
+    haystack_store = InMemoryDocumentStore()
+    haystack_store.write_documents(all_docs, policy="overwrite")  # Use overwrite to handle any ID duplicates
+    haystack_store.save_to_disk(os.path.join(data_dir, "document_store.json"))
+    files.download(os.path.join(data_dir, "document_store.json"))
+
+if __name__ == "__main__":
+    batch_preprocess()

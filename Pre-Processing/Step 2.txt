@@ -1,0 +1,161 @@
+# Install required libraries
+!pip install -q openai
+
+# Import necessary modules
+from openai import OpenAI
+from google.colab import files, userdata
+import os
+import re
+
+# Set up the Grok API client
+client = OpenAI(
+    api_key=userdata.get('GROK_API_KEY'),
+    base_url="https://api.x.ai/v1"
+)
+
+# Model name
+MODEL = "grok-4-fast-reasoning"   # change if you switch to a different variant later
+
+# ========================== FIXED SYSTEM PROMPT (moved almost everything here) ==========================
+SYSTEM_PROMPT = """
+You are the world's most exhaustive and precise verbatim extractor of supernatural, paranormal, miraculous, magical, or otherwise odd occurrences from historical, medieval, and scholarly texts.
+
+FUNDAMENTAL RULE (APPLY ALWAYS)
+• COMPLETENESS IS PARAMOUNT. Extract EVERY single incident that fits the definition, no matter how short, passing, or minor. When in doubt, extract it. Missing stories is worse than including borderline cases.
+
+WHAT COUNTS AS AN EXTRACTABLE STORY
+✓ EXTRACT these types of content (including one-sentence mentions and testimonies):
+- "X was possessed by a demon"
+- "Miracles occurred at [location]"
+- "According to testimony, Y saw the devil"
+- "Legend says Z could fly"
+- "The trial records show A confessed to witchcraft"
+- "The author mentions that B was bewitched"
+- "As an example of possession, consider C who..."
+- Any named individuals + supernatural events in ANY combination
+• Critical: Historical analysis, theological discussion, legal commentary, philosophical argument — if they mention or give examples of specific incidents, extract the incidents verbatim.
+
+✗ DO NOT EXTRACT:
+- Pure theory or abstract doctrine (e.g., "Demons are fallen angels")
+- Purely general statements without specifics (e.g., "Witches meet at sabbaths", "Many were possessed")
+
+
+VERBATIM RULES — NO ALTERATION
+• VERBATIM ONLY — NEVER TRUNCATE OR SUMMARIZE. Copy the exact original text word-for-word, preserving all original wording, casing, punctuation, and formatting within the excerpt.
+• NEVER change capitalization, punctuation, spelling, or wording.
+• If the same story appears multiple times with slight differences, include the longest version and append any unique verbatim sentences from the shorter versions at the end, separated by " --- ".
+
+STORY BOUNDARIES & SENTENCE RULES
+• Every individual story extraction MUST begin at the start of a sentence and MUST end at the end of a sentence. NEVER start or end mid-sentence.
+• If the sentence boundary requirement would create ambiguous pronouns, expand the excerpt (backward and/or forward) to include antecedent context so the excerpt is self-contained.
+• If extending to the sentence boundary would include unrelated material, prefer including that extra material rather than cutting mid-sentence.
+
+NO AMBIGUOUS PRONOUNS
+• ALWAYS include antecedent context. If a pronoun appears whose antecedent is not inside the extraction, expand the extraction using original sentences until the antecedent is explicit. Do not guess or insert names — include only original text.
+
+UNIQUENESS, MERGING, AND THE " --- " RULE
+• A story is unique if it has a distinct event, actors, location, or outcome.
+• Combine only identical or near-identical retellings. When combining, append unique sentences from shorter or variant retellings separated by " --- ".
+• For scattered mentions of the same event across the text, you may assemble them into a single extraction using " --- " between verbatim segments, but only when doing so preserves chronological/coherent sense and does not conflate distinct events.
+• Do NOT merge stories that differ in any significant detail.
+
+FORMAT (EXACT)
+• Each extraction must use this exact header format (replace placeholders as specified):
+  <div align="center"><b>[Concise Descriptive Title Based Solely on Content]</b></div>
+  <div align="center">"{book_title}" Pages X-Y</div>
+
+• Use the exact book title provided in the {book_title} placeholder — do NOT infer or use any title from the source text.
+• Page ranges may be non-consecutive (e.g., Pages 45-47, 192, 305-307).
+• After the two header lines, place the full verbatim story text here, including all original formatting and quotes.
+• Separate multiple story extractions with exactly ONE blank line.
+• If no stories are found, output only the single line:
+  No supernatural stories extracted.
+
+ADDITIONAL PRACTICAL RULES
+• Start/end extracts at sentence boundaries even if this requires including full paragraphs or additional sentences for context.
+• Include context for unclear pronouns or references so each extraction is self-contained.
+• Extract liberally — better to include borderline/extra items than to miss a true incident.
+• You have unlimited output length — be exhaustive.
+
+MINDSET
+• You are mining for supernatural events hidden in any type of text: scholarly articles, legal records, theological works, chronicles, folklore, trial transcripts, etc. Treat passing mentions, testimonies, legends, trial references, and examples as extractable stories.
+
+EXAMPLES (for annotator-style guidance)
+• Extract: "Johanna was possessed at Loudun." (one sentence; must be extracted verbatim)
+• Extract: "The trial records show A confessed to witchcraft." (include verbatim and page range)
+• Do NOT extract: "Demons are fallen angels." (pure theory)
+"""
+
+# ========================== Extraction function ==========================
+def extract_supernatural_stories(text: str, book_title: str):
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT.format(book_title=book_title)},
+        {"role": "user", "content": text}
+    ]
+
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=messages,
+        temperature=0.0,
+        max_tokens=500_000  # safe with 2M context window
+    )
+
+    # === REAL TOKEN COUNTING ===
+    usage = response.usage
+    print(f"API usage → Prompt: {usage.prompt_tokens:,} | Completion: {usage.completion_tokens:,} | "
+          f"Total: {usage.total_tokens:,} tokens")
+
+    stories = response.choices[0].message.content.strip()
+    print(f"Extracted {len(stories):,} characters of stories\n")
+    return stories
+
+# ========================== Helper functions (unchanged except minor polish) ==========================
+def extract_text_from_md(file_path):
+    with open(file_path, 'r', encoding='utf-8') as f:
+        text = f.read()
+    print(f"Read {file_path} → {len(text):,} characters")
+    return text
+
+def save_stories_to_md(stories, book_title):
+    safe_title = re.sub(r'[^\w\s-]', '', book_title).strip().replace(' ', '_')
+    filename = f"extracted_stories_{safe_title}.md"
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.write(stories if stories else "No supernatural stories extracted.")
+    print(f"Saved → {filename}")
+    return filename
+
+def get_part_number(filename):
+    match = re.search(r'part[ _-]?(\d+)', filename, re.IGNORECASE)
+    return int(match.group(1)) if match else float('inf')
+
+# ========================== Main workflow ==========================
+book_title = input("Please enter the exact book title: ").strip()
+
+print("\nUpload your cleaned Markdown files (part 1.md, part 2.md, etc.)")
+uploaded = files.upload()
+
+sorted_files = sorted(uploaded.keys(), key=get_part_number)
+
+all_stories = []
+
+for filename in sorted_files:
+    if filename.lower().endswith('.md'):
+        print(f"\n{'='*60}")
+        print(f"Processing: {filename}")
+        text = extract_text_from_md(filename)
+        stories = extract_supernatural_stories(text, book_title)
+
+        if stories and stories != "No supernatural stories extracted.":
+            all_stories.append(stories)
+    else:
+        print(f"Skipping non-markdown file: {filename}")
+
+# Combine everything
+final_output = '\n\n'.join(all_stories) if all_stories else "No supernatural stories extracted."
+
+print("\n" + "="*60)
+print("FINAL COMBINED EXTRACTION COMPLETE")
+print("="*60)
+
+final_filename = save_stories_to_md(final_output, book_title)
+files.download(final_filename)
