@@ -1,2019 +1,299 @@
 {
-    "Demonic Possession Healed by Saint Walbert's Cross at Valombrosa": {
-        "title": "Demonic Possession Healed by Saint Walbert's Cross at Valombrosa",
+    "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed at Valombrosa": {
+        "title": "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed at Valombrosa",
         "book_slug": "christian_mysticism_vol_iv",
-        "pages": "4",
-        "keywords": "- possessed visitors to valombrosa",
-        "start_char": 8891,
-        "end_char": 10446
+        "pages": "3-4",
+        "keywords": "",
+        "start_char": 8922,
+        "end_char": 10477
     },
-    "Possessed Healed at the Tomb of Saint Cajetanus in Naples": {
-        "title": "Possessed Healed at the Tomb of Saint Cajetanus in Naples",
+    "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples": {
+        "title": "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
         "book_slug": "christian_mysticism_vol_iv",
         "pages": "4",
         "keywords": "tomb of saint cajetanus in naples",
-        "start_char": 10472,
-        "end_char": 10864
+        "start_char": 10489,
+        "end_char": 10881
     },
-    "Deliverance of the Possessed at the Grave of Saint Ubaldus in Gubbio": {
-        "title": "Deliverance of the Possessed at the Grave of Saint Ubaldus in Gubbio",
+    "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio": {
+        "title": "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio",
         "book_slug": "christian_mysticism_vol_iv",
         "pages": "4",
         "keywords": "relics of st. ubaldus in gubbio",
-        "start_char": 10859,
-        "end_char": 11338
+        "start_char": 10882,
+        "end_char": 11361
     },
-    "Freedom from Possession at the Grave of Saint Leontius in Mur": {
-        "title": "Freedom from Possession at the Grave of Saint Leontius in Mur",
+    "Other Graves and Holy Sites Where the Possessed Were Freed": {
+        "title": "Other Graves and Holy Sites Where the Possessed Were Freed",
         "book_slug": "christian_mysticism_vol_iv",
         "pages": "4",
-        "keywords": "grave of saint leontius in mur",
-        "start_char": 11330,
-        "end_char": 11393
+        "keywords": "",
+        "start_char": 11363,
+        "end_char": 12031
     },
-    "Healings of Demonic Affliction at the Grave of Saint Amalberga in Teinst": {
-        "title": "Healings of Demonic Affliction at the Grave of Saint Amalberga in Teinst",
+    "Ancient Desert Fathers Said to Be Both Holy and Possessed": {
+        "title": "Ancient Desert Fathers Said to Be Both Holy and Possessed",
         "book_slug": "christian_mysticism_vol_iv",
         "pages": "4",
-        "keywords": "healings of demonic affliction at the grave of saint amalberga in teinst, demonic possession",
-        "start_char": 11393,
-        "end_char": 11465
+        "keywords": "ailment from heel to head in possession",
+        "start_char": 12033,
+        "end_char": 12856
     },
-    "Overthrow of Demonic Image and Healings at Helfersberg": {
-        "title": "Overthrow of Demonic Image and Healings at Helfersberg",
+    "St. Eustochia of Padua Reported as Both Holy and Possessed": {
+        "title": "St. Eustochia of Padua Reported as Both Holy and Possessed",
         "book_slug": "christian_mysticism_vol_iv",
-        "pages": "4",
-        "keywords": "reality of demonic influence via malleus, possession, demonic possession",
-        "start_char": 11463,
-        "end_char": 11688
+        "pages": "5",
+        "keywords": "",
+        "start_char": 12869,
+        "end_char": 14079
     },
-    "The Possession of Peter Bernardi in Areia": {
-        "title": "The Possession of Peter Bernardi in Areia",
+    "Girolamo Saligario’s Testimony on Extraordinary Spiritual Phenomena of Eustochia": {
+        "title": "Girolamo Saligario’s Testimony on Extraordinary Spiritual Phenomena of Eustochia",
         "book_slug": "christian_mysticism_vol_iv",
-        "pages": "9-10",
-        "keywords": "- possession of quercy convent",
-        "start_char": 37321,
-        "end_char": 39329
+        "pages": "5",
+        "keywords": "",
+        "start_char": 14081,
+        "end_char": 15535
     },
-    "The Possessed Woman from Calcia and the Necromancer Monk": {
-        "title": "The Possessed Woman from Calcia and the Necromancer Monk",
+    "Saligario’s Treatise on Malignant Spirits, Demonic Deceits, and Apparitions": {
+        "title": "Saligario’s Treatise on Malignant Spirits, Demonic Deceits, and Apparitions",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "5-6",
+        "keywords": "capricious vs traditional demonic practice in manichaeism",
+        "start_char": 16361,
+        "end_char": 18326
+    },
+    "Manuscript of Miracles Occurring Daily at the Grave of Blessed Eustochia": {
+        "title": "Manuscript of Miracles Occurring Daily at the Grave of Blessed Eustochia",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "6",
+        "keywords": "",
+        "start_char": 18616,
+        "end_char": 19381
+    },
+    "Violent Possession and Threshold Charm of Peter Bernardi of Areia": {
+        "title": "Violent Possession and Threshold Charm of Peter Bernardi of Areia",
         "book_slug": "christian_mysticism_vol_iv",
         "pages": "10-11",
-        "keywords": "- possession from falling sickness",
-        "start_char": 40122,
-        "end_char": 42198
+        "keywords": "",
+        "start_char": 37335,
+        "end_char": 39343
     },
-    "The Old Woman with the Amulet at Valombrosa": {
-        "title": "The Old Woman with the Amulet at Valombrosa",
+    "Possessed Woman of Calcia, Necromantic Formula, and Death of the Monk at Perusium": {
+        "title": "Possessed Woman of Calcia, Necromantic Formula, and Death of the Monk at Perusium",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "10-11",
+        "keywords": "",
+        "start_char": 40160,
+        "end_char": 42302
+    },
+    "Old Woman’s Possession and Amulet Containing Divine Names": {
+        "title": "Old Woman’s Possession and Amulet Containing Divine Names",
         "book_slug": "christian_mysticism_vol_iv",
         "pages": "11",
-        "keywords": "- old woman recites creed at valombrosa",
-        "start_char": 42472,
-        "end_char": 43439
+        "keywords": "- fivefold possession as fourth stage",
+        "start_char": 42304,
+        "end_char": 43443
     },
-    "The Possessed Girl from Citt\u00e0 di Castello and the Enamored Priest": {
-        "title": "The Possessed Girl from Citt\u00e0 di Castello and the Enamored Priest",
+    "Possession of the Girl from Città di Castello and Demon’s Accusation of a Priest": {
+        "title": "Possession of the Girl from Città di Castello and Demon’s Accusation of a Priest",
         "book_slug": "christian_mysticism_vol_iv",
         "pages": "11",
-        "keywords": "- girl from citt\u00e0 di castello",
-        "start_char": 43694,
-        "end_char": 44381
+        "keywords": "- girl from città di castello",
+        "start_char": 43445,
+        "end_char": 44418
     },
-    "The Woman Possessed by Sorcery at St. Gandolph": {
-        "title": "The Woman Possessed by Sorcery at St. Gandolph",
+    "Woman Punished with Possession for Attempted Sorcery at St. Gandolph": {
+        "title": "Woman Punished with Possession for Attempted Sorcery at St. Gandolph",
         "book_slug": "christian_mysticism_vol_iv",
-        "pages": "11-12",
-        "keywords": "- woman at st. gandolph",
-        "start_char": 44362,
-        "end_char": 44816
+        "pages": "11",
+        "keywords": "",
+        "start_char": 44420,
+        "end_char": 44874
     },
-    "Heretics Walking on Water Dispelled by the Sacrament": {
-        "title": "Heretics Walking on Water Dispelled by the Sacrament",
+    "Albigensian Heretics Walking on Water and Drowning When the Eucharist Is Cast into the River": {
+        "title": "Albigensian Heretics Walking on Water and Drowning When the Eucharist Is Cast into the River",
         "book_slug": "christian_mysticism_vol_iv",
         "pages": "21-22",
-        "keywords": "desecrating power of counter-sacraments",
-        "start_char": 76466,
-        "end_char": 77903
+        "keywords": "",
+        "start_char": 76467,
+        "end_char": 77904
     },
-    "Heretic's Demonic Vision in the Cave": {
-        "title": "Heretic's Demonic Vision in the Cave",
+    "Heretic’s Demonic Palace Vision of Christ and the Saints Dispelled by the Eucharist": {
+        "title": "Heretic’s Demonic Palace Vision of Christ and the Saints Dispelled by the Eucharist",
         "book_slug": "christian_mysticism_vol_iv",
         "pages": "22-23",
-        "keywords": "- hears demonic voices alone, possession, demonic possession",
-        "start_char": 78051,
-        "end_char": 80339
+        "keywords": "",
+        "start_char": 78057,
+        "end_char": 80345
     },
-    "Priest's Demonic Mountain Paradise": {
-        "title": "Priest's Demonic Mountain Paradise",
+    "Priest Carried Through the Air to a Demonic Feast and Disenchanting the Queen with the Eucharist": {
+        "title": "Priest Carried Through the Air to a Demonic Feast and Disenchanting the Queen with the Eucharist",
         "book_slug": "christian_mysticism_vol_iv",
-        "pages": "22-23",
-        "keywords": "- test on demonic marks, possession, demonic possession",
-        "start_char": 80276,
-        "end_char": 83086
+        "pages": "23-24",
+        "keywords": "",
+        "start_char": 80347,
+        "end_char": 83158
     },
-    "Knight Encounters Demon at Crossroads": {
-        "title": "Knight Encounters Demon at Crossroads",
+    "Knight at the Crossroads Sees and Speaks with the Devil from Within a Magic Circle": {
+        "title": "Knight at the Crossroads Sees and Speaks with the Devil from Within a Magic Circle",
         "book_slug": "christian_mysticism_vol_iv",
         "pages": "25-26",
-        "keywords": "- powder at crossroads",
-        "start_char": 85365,
-        "end_char": 87605
+        "keywords": "",
+        "start_char": -1,
+        "end_char": -1
     },
-    "Man Drawn Out of Necromantic Circle and Dies": {
-        "title": "Man Drawn Out of Necromantic Circle and Dies",
+    "The Jurist’s Pact With Satan And Failed Return To God": {
+        "title": "The Jurist’s Pact With Satan And Failed Return To God",
         "book_slug": "christian_mysticism_vol_iv",
-        "pages": "26",
-        "keywords": "- terrified and drawn out of necromantic circle",
-        "start_char": 87540,
-        "end_char": 87729
+        "pages": "27-36",
+        "keywords": "- cross with railing and cursing",
+        "start_char": 92559,
+        "end_char": 117990
     },
-    "Students Summon Demons in Toledo": {
-        "title": "Students Summon Demons in Toledo",
+    "Manichaean Demon‑Cult Rites, Cannibal Communion, And A Prophetic Demoniac": {
+        "title": "Manichaean Demon‑Cult Rites, Cannibal Communion, And A Prophetic Demoniac",
         "book_slug": "christian_mysticism_vol_iv",
-        "pages": "26",
-        "keywords": "stages of demonic possession, possession, demonic possession",
-        "start_char": 87724,
-        "end_char": 88484
+        "pages": "37-39",
+        "keywords": "",
+        "start_char": 121879,
+        "end_char": 130664
     },
-    "The Unrepentant Magician's Pact with the Demon": {
-        "title": "The Unrepentant Magician's Pact with the Demon",
+    "Possession of a Jewish Woman in Ferrara and Exorcism by R. Chaim Vital": {
+        "title": "Possession of a Jewish Woman in Ferrara and Exorcism by R. Chaim Vital",
         "book_slug": "christian_mysticism_vol_iv",
-        "pages": "27-39",
-        "keywords": "- de rais blood contract with demon, possession, demonic possession",
-        "start_char": 92558,
-        "end_char": 130685
-    },
-    "The Possession of a Jewish Woman in Ferrara": {
-        "title": "The Possession of a Jewish Woman in Ferrara",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "40",
+        "pages": "40-41",
         "keywords": "- of jewish woman in ferrara",
-        "start_char": 132944,
-        "end_char": 133119
+        "start_char": 132536,
+        "end_char": 134726
     },
-    "The Exorcism of the Possessed Widow by R. Chaim Vital": {
-        "title": "The Exorcism of the Possessed Widow by R. Chaim Vital",
+    "Ritual for Invoking Unclean Spirits via Shadow Magic": {
+        "title": "Ritual for Invoking Unclean Spirits via Shadow Magic",
         "book_slug": "christian_mysticism_vol_iv",
-        "pages": "40",
-        "keywords": "- claim of possession from birth",
-        "start_char": 133116,
-        "end_char": 134696
+        "pages": "41",
+        "keywords": "",
+        "start_char": 135423,
+        "end_char": 136426
     },
-    "The False Messiah Moses and the Drowning in Crete": {
-        "title": "The False Messiah Moses and the Drowning in Crete",
+    "Jewish Sorcerers Transforming into Animals and Traveling Preternaturally": {
+        "title": "Jewish Sorcerers Transforming into Animals and Traveling Preternaturally",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "41",
+        "keywords": "- transforming into animals remy",
+        "start_char": 136428,
+        "end_char": 136840
+    },
+    "Women’s Pacts with Shedim and Nocturnal Sabbaths": {
+        "title": "Women’s Pacts with Shedim and Nocturnal Sabbaths",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "41",
+        "keywords": "- women than men at sabbath",
+        "start_char": 136842,
+        "end_char": 137244
+    },
+    "Incubi, Succubi, and the Begetting of Ruchin": {
+        "title": "Incubi, Succubi, and the Begetting of Ruchin",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "41",
+        "keywords": "- von sains strangling and heart-crushing of children",
+        "start_char": 137246,
+        "end_char": 138502
+    },
+    "False Moses of Crete and Demonic Ruach from the Dark Side": {
+        "title": "False Moses of Crete and Demonic Ruach from the Dark Side",
         "book_slug": "christian_mysticism_vol_iv",
         "pages": "42",
-        "keywords": "- messiah moses of crete 432",
-        "start_char": 140214,
-        "end_char": 140890
+        "keywords": "- test on demonic marks",
+        "start_char": 140237,
+        "end_char": 140913
     },
-    "The Prophecies and Visions of Sabbatai Zevi's Messianic Movement": {
-        "title": "The Prophecies and Visions of Sabbatai Zevi's Messianic Movement",
+    "Prophetic Ecstasies and Glossolalia in the Sabbatai Zevi Movement": {
+        "title": "Prophetic Ecstasies and Glossolalia in the Sabbatai Zevi Movement",
         "book_slug": "christian_mysticism_vol_iv",
         "pages": "42-43",
         "keywords": "prophecies affirming sabbatai zevi as messiah",
-        "start_char": 140877,
-        "end_char": 142653
-    },
-    "The Myth of Lamia and the Lamiae": {
-        "title": "The Myth of Lamia and the Lamiae",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "62-63",
-        "keywords": "myth of lamia daughter of bel and libya",
-        "start_char": 213179,
-        "end_char": 214119
-    },
-    "St. Taurinus Binds the Demon of Diana": {
-        "title": "St. Taurinus Binds the Demon of Diana",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "64",
-        "keywords": "- taurinus, bishop of corbeil",
-        "start_char": 216714,
-        "end_char": 217410
-    },
-    "The Night-Riding Women and St. Germanus": {
-        "title": "The Night-Riding Women and St. Germanus",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "64-65",
-        "keywords": "- night wolf transformation",
-        "start_char": 218164,
-        "end_char": 218747
-    },
-    "The Gellone and the Newborn Emperor Maurice": {
-        "title": "The Gellone and the Newborn Emperor Maurice",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "65",
-        "keywords": "- in byzantium and emperor maurice",
-        "start_char": 219560,
-        "end_char": 219835
-    },
-    "The Night Ride to the Walnut Tree of Benevento": {
-        "title": "The Night Ride to the Walnut Tree of Benevento",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "65",
-        "keywords": "the night ride to the walnut tree of benevento",
-        "start_char": 220203,
-        "end_char": 220905
-    },
-    "Herodias Attempts to Touch the Jordan River": {
-        "title": "Herodias Attempts to Touch the Jordan River",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "65",
-        "keywords": "- by herodias to touch jordan waters",
-        "start_char": 220894,
-        "end_char": 221863
-    },
-    "St. Bernardino Destroys the Pagan Spring in Arezzo": {
-        "title": "St. Bernardino Destroys the Pagan Spring in Arezzo",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "66",
-        "keywords": "- burgomasters father and son confirming account",
-        "start_char": 224035,
-        "end_char": 224821
-    },
-    "St. Benedict Finds Apollo Temple at Monte Cassino": {
-        "title": "St. Benedict Finds Apollo Temple at Monte Cassino",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "66",
-        "keywords": "apollo temple at monte cassino",
-        "start_char": 223447,
-        "end_char": 223573
-    },
-    "Bishop Barbatus Fells the Sacred Lombard Tree": {
-        "title": "Bishop Barbatus Fells the Sacred Lombard Tree",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "66",
-        "keywords": "bishop barbatus fells the sacred lombard tree",
-        "start_char": 223573,
-        "end_char": 223955
-    },
-    "The Opening of the Elves' Dwelling in Frisia": {
-        "title": "The Opening of the Elves' Dwelling in Frisia",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "66-67",
-        "keywords": "elves' dwelling opening in frisia",
-        "start_char": 225205,
-        "end_char": 226104
-    },
-    "Visions of Tents and Singing Psalms During Preaching in Scotland": {
-        "title": "Visions of Tents and Singing Psalms During Preaching in Scotland",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "75-76",
-        "keywords": "- arins and sabellius teachings in frisia",
-        "start_char": 248898,
-        "end_char": 250353
-    },
-    "The Podest\u00e0's Deadly Visit to the Witches' Sabbath in Mandrisio": {
-        "title": "The Podest\u00e0's Deadly Visit to the Witches' Sabbath in Mandrisio",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "77",
-        "keywords": "podest\u00e0 leading to sabbath spectacle",
-        "start_char": 253639,
-        "end_char": 254880
-    },
-    "Saint Borromeo's Campaign Against Witchcraft in the Valley of Mesolcina": {
-        "title": "Saint Borromeo's Campaign Against Witchcraft in the Valley of Mesolcina",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "77-79",
-        "keywords": "- efforts against witchcraft contracts, witch trials",
-        "start_char": 254852,
-        "end_char": 261651
-    },
-    "The Shape-Shifting Sorcerers of German Switzerland": {
-        "title": "The Shape-Shifting Sorcerers of German Switzerland",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "79",
-        "keywords": "- in german switzerland",
-        "start_char": 262436,
-        "end_char": 263395
-    },
-    "The Witchcraft Outbreak and Trials in Mohra": {
-        "title": "The Witchcraft Outbreak and Trials in Mohra",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "80",
-        "keywords": "1669 witchcraft commission in mohra, witch trials",
-        "start_char": 264227,
-        "end_char": 265071
-    },
-    "The Demonic Haunting of the Danish Family in K\u00f8ge": {
-        "title": "The Demonic Haunting of the Danish Family in K\u00f8ge",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "81-86",
-        "keywords": "dispelling demonic phantom with eucharist pyx, possession, demonic possession",
-        "start_char": 268156,
-        "end_char": 287525
-    },
-    "The Torment of the Three Brothers from Rheinbischofsheim": {
-        "title": "The Torment of the Three Brothers from Rheinbischofsheim",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "87-91",
-        "keywords": "the torment of the three brothers from rheinbischofsheim",
-        "start_char": 288438,
-        "end_char": 306342
-    },
-    "The Piacenza Man's Witches' Sabbath": {
-        "title": "The Piacenza Man's Witches' Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "92-93",
-        "keywords": "high magnate status at witches' sabbath, witch trials",
-        "start_char": 307955,
-        "end_char": 310333
-    },
-    "The Spirit Teasing the Country Girl": {
-        "title": "The Spirit Teasing the Country Girl",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "94-95",
-        "keywords": "- spirit entering through loins",
-        "start_char": 317182,
-        "end_char": 318468
-    },
-    "The Household Spirit in Love with the Servant Girl in Bologna": {
-        "title": "The Household Spirit in Love with the Servant Girl in Bologna",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "95",
-        "keywords": "the household spirit in love with the servant girl in bologna",
-        "start_char": 318697,
-        "end_char": 319839
-    },
-    "The Poltergeist Pranks with the Thirteen-Year-Old Girl": {
-        "title": "The Poltergeist Pranks with the Thirteen-Year-Old Girl",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "95",
-        "keywords": "- pranks on thirteen-year-old girl",
-        "start_char": 319813,
-        "end_char": 320490
-    },
-    "The Witchcraft Confession of Anna Bayerin in M\u00fclldorf": {
-        "title": "The Witchcraft Confession of Anna Bayerin in M\u00fclldorf",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "96-98",
-        "keywords": "1669 witchcraft commission in mohra, witch trials",
-        "start_char": 322061,
-        "end_char": 330432
-    },
-    "The Prophets' School in Dauphin\u00e9": {
-        "title": "The Prophets' School in Dauphin\u00e9",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "99-100",
-        "keywords": "prophets' school in c\u00e9vennes",
-        "start_char": 334403,
-        "end_char": 343130
-    },
-    "The Demonic Seduction of Magdalena Bavent": {
-        "title": "The Demonic Seduction of Magdalena Bavent",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "100-107",
-        "keywords": "- confessions of magdalena bavent",
-        "start_char": 343155,
-        "end_char": 364825
-    },
-    "The Demonic Deceptions of Magdalena del Cruz": {
-        "title": "The Demonic Deceptions of Magdalena del Cruz",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "108-114",
-        "keywords": "- ss elections of magdalena",
-        "start_char": 365221,
-        "end_char": 384688
-    },
-    "The Possession and Exorcism of Johanna Fery": {
-        "title": "The Possession and Exorcism of Johanna Fery",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "116-126",
-        "keywords": "two-year exorcism of johanna",
-        "start_char": 387317,
-        "end_char": 419559
-    },
-    "The Imprisoned Witches Transported to the Sabbath": {
-        "title": "The Imprisoned Witches Transported to the Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "132-134",
-        "keywords": "instant transport to sabbath",
-        "start_char": 438211,
-        "end_char": 444046
-    },
-    "Johanna Michaelis's Confused Vision at the Sabbath": {
-        "title": "Johanna Michaelis's Confused Vision at the Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "134",
-        "keywords": "- of confession at sabbath",
-        "start_char": 445738,
-        "end_char": 446238
-    },
-    "Three States of Attending the Sabbath": {
-        "title": "Three States of Attending the Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "134-135",
-        "keywords": "- ss of the sabbath",
-        "start_char": 446312,
-        "end_char": 447649
-    },
-    "The Ice-Cold Wife Before the Sabbath": {
-        "title": "The Ice-Cold Wife Before the Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "135",
-        "keywords": "ice-cold body in wife before sabbath",
-        "start_char": 447622,
-        "end_char": 447811
-    },
-    "The Devil's Mark on Witches and Sorcerers": {
-        "title": "The Devil's Mark on Witches and Sorcerers",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "137-139",
-        "keywords": "- performing marking on sorcerers",
-        "start_char": 454718,
-        "end_char": 459482
-    },
-    "Johanna d'Abadie's Testimony on Consuming Children's Corpses": {
-        "title": "Johanna d'Abadie's Testimony on Consuming Children's Corpses",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "141-142",
-        "keywords": "- d'abadie testimony on child consumption",
-        "start_char": 469720,
-        "end_char": 470499
-    },
-    "Logro\u00f1o Witch Trial Exhumations and Cannibalistic Feasts": {
-        "title": "Logro\u00f1o Witch Trial Exhumations and Cannibalistic Feasts",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "142",
-        "keywords": "logro\u00f1o witch trials 1610, witch trials",
-        "start_char": 470484,
-        "end_char": 471363
-    },
-    "Sucking Blood and Distributing Children's Remains at the Sabbath": {
-        "title": "Sucking Blood and Distributing Children's Remains at the Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "142",
-        "keywords": "- balcon eating child's ear at sabbath",
-        "start_char": 471432,
-        "end_char": 471836
-    },
-    "The Woman from Labourt Roasting a Child": {
-        "title": "The Woman from Labourt Roasting a Child",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "142",
-        "keywords": "- von sains roasting and boiling children",
-        "start_char": 471829,
-        "end_char": 472175
-    },
-    "Hell-Flames at the Logro\u00f1o Sabbath": {
-        "title": "Hell-Flames at the Logro\u00f1o Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "143",
-        "keywords": "amusements at witches' sabbath, witch trials",
-        "start_char": 474570,
-        "end_char": 474947
-    },
-    "Maria Dindarte's Encounter with Satan Changing Shape": {
-        "title": "Maria Dindarte's Encounter with Satan Changing Shape",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "145",
-        "keywords": "- encounter with old man demon, possession, demonic possession",
-        "start_char": 481907,
-        "end_char": 482103
-    },
-    "Margarethe von Sare's Testimony on the Silken Bed": {
-        "title": "Margarethe von Sare's Testimony on the Silken Bed",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "145",
-        "keywords": "- von sains testimony on sabbath rituals",
-        "start_char": 482764,
-        "end_char": 483058
-    },
-    "Jeanette d'Abadie's Testimony on Incestuous Mingling at the Sabbath": {
-        "title": "Jeanette d'Abadie's Testimony on Incestuous Mingling at the Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "145-146",
-        "keywords": "incestuous pairings at sabbath",
-        "start_char": 484232,
-        "end_char": 484895
-    },
-    "Petron the Shepherd's Rigidity with Abrahele": {
-        "title": "Petron the Shepherd's Rigidity with Abrahele",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "146",
-        "keywords": "petron shepherd of dalheim",
-        "start_char": 485225,
-        "end_char": 485478
-    },
-    "The Children of Adam from Demonic Debauchery": {
-        "title": "The Children of Adam from Demonic Debauchery",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "146",
-        "keywords": "- of adam from sabbath debauchery",
-        "start_char": 486103,
-        "end_char": 486450
-    },
-    "Women Giving Birth to Elves or Evil Things": {
-        "title": "Women Giving Birth to Elves or Evil Things",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "146",
-        "keywords": "- women in childbirth against elves",
-        "start_char": 487388,
-        "end_char": 487773
-    },
-    "The Levitation of Fana Haquart": {
-        "title": "The Levitation of Fana Haquart",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "149-150",
-        "keywords": "- vision of nature",
-        "start_char": 486100,
-        "end_char": 486100
-    },
-    "The Flying Witch of Navarre": {
-        "title": "The Flying Witch of Navarre",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "150-151",
-        "keywords": "- following witch to new house, witch trials",
-        "start_char": 489890,
-        "end_char": 489890
-    },
-    "Peasants Hanging in Trees During Storm": {
-        "title": "Peasants Hanging in Trees During Storm",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "151",
-        "keywords": "- peter tarantusius healing during mass",
-        "start_char": 493448,
-        "end_char": 493448
-    },
-    "Men Falling from Cloud in Bellmont": {
-        "title": "Men Falling from Cloud in Bellmont",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "151",
-        "keywords": "- falling to ground in possession",
-        "start_char": 493448,
-        "end_char": 493448
-    },
-    "Margaretha Warma on the Storm-Torn Oak": {
-        "title": "Margaretha Warma on the Storm-Torn Oak",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "151-152",
-        "keywords": "asked if that was all the glory for the day",
-        "start_char": 493448,
-        "end_char": 493448
-    },
-    "Woman Falling from Cloud at Calais": {
-        "title": "Woman Falling from Cloud at Calais",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "152",
-        "keywords": "- woman from calcia",
-        "start_char": 497230,
-        "end_char": 497230
-    },
-    "Peasant Witnessing Witches' Revel on the Plain": {
-        "title": "Peasant Witnessing Witches' Revel on the Plain",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "152-153",
-        "keywords": "covenant with seed of the dragon",
-        "start_char": 497230,
-        "end_char": 497230
-    },
-    "Priest Observing Witches' Assembly": {
-        "title": "Priest Observing Witches' Assembly",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "153",
-        "keywords": "- impressing witch's mark, witch trials",
-        "start_char": 499892,
-        "end_char": 499892
-    },
-    "Peasant's Anointed Journey to Benevento Walnut Tree": {
-        "title": "Peasant's Anointed Journey to Benevento Walnut Tree",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "154",
-        "keywords": "peasants anointed journey to benevento walnut tree",
-        "start_char": 502909,
-        "end_char": 502909
-    },
-    "Witch of Loches Transported to Bordeaux": {
-        "title": "Witch of Loches Transported to Bordeaux",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "154",
-        "keywords": "- transformed into women",
-        "start_char": 502909,
-        "end_char": 502909
-    },
-    "Thirteen-Year-Old Girl at Spoleto Sabbath": {
-        "title": "Thirteen-Year-Old Girl at Spoleto Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "154-155",
-        "keywords": "- pranks on thirteen-year-old girl",
-        "start_char": 502909,
-        "end_char": 502909
-    },
-    "Sorcerer and Man's Flight to Sabbath": {
-        "title": "Sorcerer and Man's Flight to Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "155",
-        "keywords": "distorted sight at sabbath",
-        "start_char": 506238,
-        "end_char": 506238
-    },
-    "Peasant and the Enchanted Cup from the Hill": {
-        "title": "Peasant and the Enchanted Cup from the Hill",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "155-156",
-        "keywords": "- pins and needles from mouth",
-        "start_char": 506238,
-        "end_char": 506238
-    },
-    "Claudius Chotey's Encounter with Dancing Witches": {
-        "title": "Claudius Chotey's Encounter with Dancing Witches",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "156",
-        "keywords": "- encounter with old man demon, possession, demonic possession",
-        "start_char": 509204,
-        "end_char": 509204
-    },
-    "Butcher Discovering Witches' Goblets in the Wood": {
-        "title": "Butcher Discovering Witches' Goblets in the Wood",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "156-157",
-        "keywords": "confiscation of witch goods in trier, witch trials",
-        "start_char": 529894,
-        "end_char": 529894
-    },
-    "Invisible Abduction of Conrad Eysenkopf": {
-        "title": "Invisible Abduction of Conrad Eysenkopf",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "157-158",
-        "keywords": "insincere abjuration to inquisitor",
-        "start_char": 529894,
-        "end_char": 529894
-    },
-    "Michael from Longen's Late Arrival at Sabbath": {
-        "title": "Michael from Longen's Late Arrival at Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "158",
-        "keywords": "- child remains by satan at sabbath",
-        "start_char": 529894,
-        "end_char": 529894
-    },
-    "Martin of Corlingen Thrown into Bushes": {
-        "title": "Martin of Corlingen Thrown into Bushes",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "158",
-        "keywords": "scourge thrown in face",
-        "start_char": 529894,
-        "end_char": 529894
-    },
-    "Anna Meisenbein's Family Quarrel at Sabbath": {
-        "title": "Anna Meisenbein's Family Quarrel at Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "158",
-        "keywords": "domingina maletena jump wager at sabbath",
-        "start_char": 529894,
-        "end_char": 529894
-    },
-    "Servant Thrown Down in Oostbruck": {
-        "title": "Servant Thrown Down in Oostbruck",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "159",
-        "keywords": "breviary thrown in choir",
-        "start_char": 529894,
-        "end_char": 529894
-    },
-    "Catharina de Landalde's Irresistible Desire for Sabbath": {
-        "title": "Catharina de Landalde's Irresistible Desire for Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "160-161",
-        "keywords": "cave near estate for sabbath",
-        "start_char": 529894,
-        "end_char": 529894
-    },
-    "Maria de Ralde's Swift Foot Journey to Sabbath": {
-        "title": "Maria de Ralde's Swift Foot Journey to Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "161",
-        "keywords": "- rapture to sabbath",
-        "start_char": 529894,
-        "end_char": 529894
-    },
-    "Barbara Ragel's Exhaustion After Witch Ride": {
-        "title": "Barbara Ragel's Exhaustion After Witch Ride",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "161",
-        "keywords": "rapport manifestation after will surrender",
-        "start_char": 529894,
-        "end_char": 529894
-    },
-    "The Girl from St. P\u00e9e Forced to Attend Sabbath in Sare": {
-        "title": "The Girl from St. P\u00e9e Forced to Attend Sabbath in Sare",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "162",
-        "keywords": "- to attend sabbath for sorcery",
-        "start_char": 536915,
-        "end_char": 537087
-    },
-    "Catharina von Naguille's Daylight Sabbath Attendance": {
-        "title": "Catharina von Naguille's Daylight Sabbath Attendance",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "162",
-        "keywords": "yearning for sabbath attendance",
-        "start_char": 539096,
-        "end_char": 539260
-    },
-    "Katharina Kuffa's Count of Sabbath Attendees": {
-        "title": "Katharina Kuffa's Count of Sabbath Attendees",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "163",
-        "keywords": "yearning for sabbath attendance",
-        "start_char": 541034,
-        "end_char": 541187
-    },
-    "The Massive Gathering at Hunderalse Heath": {
-        "title": "The Massive Gathering at Hunderalse Heath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "163",
-        "keywords": "- shattering dragon's head",
-        "start_char": 541184,
-        "end_char": 541328
-    },
-    "Janua von Banno's Astonishment at the Multitude": {
-        "title": "Janua von Banno's Astonishment at the Multitude",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "163",
-        "keywords": "turning backs to sacrament at sabbath elevation",
-        "start_char": 541497,
-        "end_char": 541614
-    },
-    "Jeannette of Belloc's Testimony of Animal Transformations at the Sabbath": {
-        "title": "Jeannette of Belloc's Testimony of Animal Transformations at the Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "163",
-        "keywords": "mazetta wife of lorenz testimony on sabbath",
-        "start_char": 542972,
-        "end_char": 543431
-    },
-    "Jeannette d'Abadie's Testimony of Transformations and Transoceanic Journeys": {
-        "title": "Jeannette d'Abadie's Testimony of Transformations and Transoceanic Journeys",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "163-164",
-        "keywords": "- d'abadie testimony on child consumption",
-        "start_char": 543415,
-        "end_char": 544459
-    },
-    "Abbe Rousseau's Encounter with the Enraged Toad": {
-        "title": "Abbe Rousseau's Encounter with the Enraged Toad",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "164",
-        "keywords": "- encounter with old man demon, possession, demonic possession",
-        "start_char": 545299,
-        "end_char": 546116
-    },
-    "The Priest from Soissons and the Poisonous Toad Ritual": {
-        "title": "The Priest from Soissons and the Poisonous Toad Ritual",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "164-165",
-        "keywords": "- from soissons baptizing toad",
-        "start_char": 546836,
-        "end_char": 547900
-    },
-    "The Hermit Dominicus's Vision of Demons": {
-        "title": "The Hermit Dominicus's Vision of Demons",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "165-166",
-        "keywords": "- day visions of demons, possession, demonic possession",
-        "start_char": 548935,
-        "end_char": 551585
-    },
-    "The Monk of Clairvaux's Visions of Demons and Departing Soul": {
-        "title": "The Monk of Clairvaux's Visions of Demons and Departing Soul",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "166-167",
-        "keywords": "- awake visions of demons, possession, demonic possession",
-        "start_char": 551622,
-        "end_char": 554685
-    },
-    "Maria de Ralde's First Encounter with Satan at the Sabbath": {
-        "title": "Maria de Ralde's First Encounter with Satan at the Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "167",
-        "keywords": "- cries 'not one will betray me' at sabbath",
-        "start_char": 556891,
-        "end_char": 557441
-    },
-    "The Healer in Blois": {
-        "title": "The Healer in Blois",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "325",
-        "keywords": "- healing of broken ribs",
-        "start_char": 1031045,
-        "end_char": 1031045
-    },
-    "Jeanette d'Abadie's Vision of the Horned Master": {
-        "title": "Jeanette d'Abadie's Vision of the Horned Master",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "167",
-        "keywords": "meat dishes illusion during fast",
-        "start_char": 557428,
-        "end_char": 558531
-    },
-    "The Prisoners from Logro\u00f1o's Description of the Master": {
-        "title": "The Prisoners from Logro\u00f1o's Description of the Master",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "168",
-        "keywords": "- from oratory of the marais",
-        "start_char": 558598,
-        "end_char": 559746
-    },
-    "Aleria Belhora's Sight of Headless Demons": {
-        "title": "Aleria Belhora's Sight of Headless Demons",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "168",
-        "keywords": "alexander vi reading demon names, possession, demonic possession",
-        "start_char": 561031,
-        "end_char": 561867
-    },
-    "Desiderius Foucant's Annual Sacrifice to His Spirit": {
-        "title": "Desiderius Foucant's Annual Sacrifice to His Spirit",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "170",
-        "keywords": "- foucant's annual offering to spirit",
-        "start_char": 566573,
-        "end_char": 566745
-    },
-    "The Woman from Biarritz's Lament Over the Sabbath": {
-        "title": "The Woman from Biarritz's Lament Over the Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "171",
-        "keywords": "- blood from children at sabbath",
-        "start_char": 568272,
-        "end_char": 568602
-    },
-    "Domingina Maletena's Miraculous Jump from Mount La Rhune": {
-        "title": "Domingina Maletena's Miraculous Jump from Mount La Rhune",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "174-175",
-        "keywords": "domingina maletena jump wager at sabbath",
-        "start_char": 579430,
-        "end_char": 580261
-    },
-    "Nicolaa Laghernhard's Encounter with the Demonic Dance": {
-        "title": "Nicolaa Laghernhard's Encounter with the Demonic Dance",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "175-176",
-        "keywords": "nicolaa laghernhard demonic dance vision, possession, demonic possession",
-        "start_char": 580586,
-        "end_char": 583642
-    },
-    "Johanna Dibasson's Description of the Sabbath as Paradise": {
-        "title": "Johanna Dibasson's Description of the Sabbath as Paradise",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "176",
-        "keywords": "consternation of spirits at saint appearance",
-        "start_char": 583657,
-        "end_char": 584117
-    },
-    "Maria de la Ralde's Yearning for the Sabbath": {
-        "title": "Maria de la Ralde's Yearning for the Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "176",
-        "keywords": "proclaimed princess of the sabbath",
-        "start_char": 584108,
-        "end_char": 585876
-    },
-    "The Offering of Children to the Devil in Castile": {
-        "title": "The Offering of Children to the Devil in Castile",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "177-178",
-        "keywords": "- offering children at sabbath reception",
-        "start_char": 587058,
-        "end_char": 588049
-    },
-    "The White Angel Protecting Children in E\u00fcfdal": {
-        "title": "The White Angel Protecting Children in E\u00fcfdal",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "178",
-        "keywords": "- von sains hanging children by genitals",
-        "start_char": 588505,
-        "end_char": 589045
-    },
-    "The Devil's Baptism and Vow of Louis Gaufredy": {
-        "title": "The Devil's Baptism and Vow of Louis Gaufredy",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "178-179",
-        "keywords": "- testimony against gaufredi",
-        "start_char": 589033,
-        "end_char": 591425
-    },
-    "The Woman Who Trampled the Host for Thirty Years": {
-        "title": "The Woman Who Trampled the Host for Thirty Years",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "181",
-        "keywords": "- woman hag in somersetshire",
-        "start_char": 600146,
-        "end_char": 600632
-    },
-    "The Floating Priest During Black Mass": {
-        "title": "The Floating Priest During Black Mass",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "184",
-        "keywords": "- during black mass",
-        "start_char": 609480,
-        "end_char": 610090
-    },
-    "The Possession and Sabbaths of Magdalena Bavent": {
-        "title": "The Possession and Sabbaths of Magdalena Bavent",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "185-189",
-        "keywords": "- confessions of magdalena bavent",
-        "start_char": 611268,
-        "end_char": 624751
-    },
-    "The Liturgy of the Sabbath According to Maria von Sains": {
-        "title": "The Liturgy of the Sabbath According to Maria von Sains",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "190-191",
-        "keywords": "- of tournay arrest of maria von sains",
-        "start_char": 624859,
-        "end_char": 629232
-    },
-    "Beelzebub's Sermon on Trinity Sunday": {
-        "title": "Beelzebub's Sermon on Trinity Sunday",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "191-192",
-        "keywords": "- sermon on trinity sunday",
-        "start_char": 629203,
-        "end_char": 631229
-    },
-    "The Moonstruck Sorceresses and Hecate": {
-        "title": "The Moonstruck Sorceresses and Hecate",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "192",
-        "keywords": "- house as sorceress residence",
-        "start_char": 631438,
-        "end_char": 633898
-    },
-    "The Demonic Priests and Nuns of Louviers": {
-        "title": "The Demonic Priests and Nuns of Louviers",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "194-196",
-        "keywords": "degenerate priests in louviers",
-        "start_char": 640400,
-        "end_char": 647474
-    },
-    "Louis Goffredy's Demonic Pact and Seduction of Magdalena": {
-        "title": "Louis Goffredy's Demonic Pact and Seduction of Magdalena",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "196-199",
-        "keywords": "- gaufredi seduction of magdalena",
-        "start_char": 647474,
-        "end_char": 653841
-    },
-    "The Invention of the Olla Podrida Demonic Potion": {
-        "title": "The Invention of the Olla Podrida Demonic Potion",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "199-200",
-        "keywords": "aversion to pastor in demonic possession, possession, demonic possession",
-        "start_char": 655646,
-        "end_char": 657028
-    },
-    "The Miraculous Healing of Sister Margaretha": {
-        "title": "The Miraculous Healing of Sister Margaretha",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "200-201",
-        "keywords": "- refusal of cousin marriage",
-        "start_char": 658339,
-        "end_char": 661181
-    },
-    "The Discovery of Hidden Magical Talismans in Louviers Convent": {
-        "title": "The Discovery of Hidden Magical Talismans in Louviers Convent",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "201-204",
-        "keywords": "debaucheries in louviers convent",
-        "start_char": 663798,
-        "end_char": 673186
-    },
-    "The Spiritual Possessions in the Convent of Louviers": {
-        "title": "The Spiritual Possessions in the Convent of Louviers",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "205-216",
-        "keywords": "- possession in quercy convent 1491",
-        "start_char": 673345,
-        "end_char": 705321
-    },
-    "The Possessions in the Auxonne Convent": {
-        "title": "The Possessions in the Auxonne Convent",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "218-222",
-        "keywords": "- possession in quercy convent 1491",
-        "start_char": 729755,
-        "end_char": 729755
-    },
-    "The Possessions in the Louviers Convent": {
-        "title": "The Possessions in the Louviers Convent",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "224-228",
-        "keywords": "- possession in quercy convent 1491",
-        "start_char": 729755,
-        "end_char": 729755
-    },
-    "The Dancing Possession Epidemic in Li\u00e8ge": {
-        "title": "The Dancing Possession Epidemic in Li\u00e8ge",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "228-230",
-        "keywords": "- tact in possession revelations",
-        "start_char": 731351,
-        "end_char": 731351
-    },
-    "Basque Children Abducted to the Sabbath": {
-        "title": "Basque Children Abducted to the Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "232-233",
-        "keywords": "roasted child eaten at sabbath",
-        "start_char": 741636,
-        "end_char": 741636
-    },
-    "Johanna du Hard's Paralysis by Sorceress": {
-        "title": "Johanna du Hard's Paralysis by Sorceress",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "232",
-        "keywords": "- on johanna thomana for sorcery",
-        "start_char": 741636,
-        "end_char": 741636
-    },
-    "Corneille Brolu Taken by Witch in Cat Form": {
-        "title": "Corneille Brolu Taken by Witch in Cat Form",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "232",
-        "keywords": "trampled ground with goat and cattle footprints",
-        "start_char": 741636,
-        "end_char": 741636
-    },
-    "Swedish Elfdale Children Abducted to the Sabbath": {
-        "title": "Swedish Elfdale Children Abducted to the Sabbath",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "232-233",
-        "keywords": "- blood from children at sabbath",
-        "start_char": 741636,
-        "end_char": 741636
-    },
-    "The Apple-Induced Nervous Disorder in Bayonne": {
-        "title": "The Apple-Induced Nervous Disorder in Bayonne",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "233-234",
-        "keywords": "- appended to disposition",
-        "start_char": 744827,
-        "end_char": 744827
-    },
-    "Transmission of Falling Sickness and Layra by Witches from Amou": {
-        "title": "Transmission of Falling Sickness and Layra by Witches from Amou",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "234-235",
-        "keywords": "- possession from falling sickness",
-        "start_char": 748134,
-        "end_char": 748134
-    },
-    "Violone of St. Jehan's Attack During Accusation": {
-        "title": "Violone of St. Jehan's Attack During Accusation",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "235",
-        "keywords": "imprisonment for knot-tying accusation",
-        "start_char": 749767,
-        "end_char": 749767
-    },
-    "Broqueiron's Confessions of Transmitting Maladies to Humans, Animals, and Plants": {
-        "title": "Broqueiron's Confessions of Transmitting Maladies to Humans, Animals, and Plants",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "235",
-        "keywords": "broqueirons confessions of transmitting maladies to humans animals and plants",
-        "start_char": 749767,
-        "end_char": 749767
-    },
-    "The Sorcery and Possessions of Renata S\u00e4nger": {
-        "title": "The Sorcery and Possessions of Renata S\u00e4nger",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "235-242",
-        "keywords": "theodor d\u00f6derlin possession case",
-        "start_char": 749767,
-        "end_char": 749767
-    },
-    "The Possessed Nuns of Quercy": {
-        "title": "The Possessed Nuns of Quercy",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "243-244",
-        "keywords": "- possession of quercy convent",
-        "start_char": 784480,
-        "end_char": 786358
-    },
-    "The Possessed Nuns of Kentorp": {
-        "title": "The Possessed Nuns of Kentorp",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "244-245",
-        "keywords": "- tests on possessed women",
-        "start_char": 786386,
-        "end_char": 791225
-    },
-    "The Demonic Plague in the Monastery of Werte": {
-        "title": "The Demonic Plague in the Monastery of Werte",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "245-247",
-        "keywords": "- demonic temptation after exorcism, possession, demonic possession",
-        "start_char": 791281,
-        "end_char": 798291
-    },
-    "The Possessed Orphans of Amsterdam": {
-        "title": "The Possessed Orphans of Amsterdam",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "248-249",
-        "keywords": "- in possessed woman's house",
-        "start_char": 798298,
-        "end_char": 802778
-    },
-    "The Afflicted Children of the Hoorn Orphanage": {
-        "title": "The Afflicted Children of the Hoorn Orphanage",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "249-250",
-        "keywords": "- of 300 children by witches in mohra, witch trials",
-        "start_char": 802762,
-        "end_char": 806605
-    },
-    "The Demonic Children in Bourignon's Ryssel Institution": {
-        "title": "The Demonic Children in Bourignon's Ryssel Institution",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "251",
-        "keywords": "- demonic speech in various shapes, possession, demonic possession",
-        "start_char": 806680,
-        "end_char": 808270
-    },
-    "The Four Demons Possessing Mother Johanna of Loudun": {
-        "title": "The Four Demons Possessing Mother Johanna of Loudun",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "253",
-        "keywords": "- in mother johanna of loudun",
-        "start_char": 812969,
-        "end_char": 814623
-    },
-    "The Young Man and the Spirit Serug": {
-        "title": "The Young Man and the Spirit Serug",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "257-260",
-        "keywords": "- spirit serug",
-        "start_char": 826308,
-        "end_char": 834739
-    },
-    "The Bewitched Woman of Lyon Vomiting Needles and Pegs": {
-        "title": "The Bewitched Woman of Lyon Vomiting Needles and Pegs",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "261-262",
-        "keywords": "bewitched woman in lyon, witch trials",
-        "start_char": 839229,
-        "end_char": 842500
-    },
-    "The Possessed Child of Utrecht Vomiting Inedible Objects": {
-        "title": "The Possessed Child of Utrecht Vomiting Inedible Objects",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "263",
-        "keywords": "- possessed children",
-        "start_char": 842674,
-        "end_char": 845499
-    },
-    "Maria von M\u00f6rl's Torments with Vomited Objects and Bed Infestations": {
-        "title": "Maria von M\u00f6rl's Torments with Vomited Objects and Bed Infestations",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "264-267",
-        "keywords": "driving demons with sign of cross and angelic salutation, possession, demonic possession",
-        "start_char": 845773,
-        "end_char": 855435
-    },
-    "Gertrud Fischer's Demonic Greed for Swallowing Money and Needles": {
-        "title": "Gertrud Fischer's Demonic Greed for Swallowing Money and Needles",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "268-270",
-        "keywords": "gertrud fischers demonic greed for swallowing money and needles, demonic possession",
-        "start_char": 859489,
-        "end_char": 866779
-    },
-    "Elizabeth Style's Butterfly Familiar": {
-        "title": "Elizabeth Style's Butterfly Familiar",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "272-272",
-        "keywords": "elizabeth style of stoketrister",
-        "start_char": 872651,
-        "end_char": 873109
-    },
-    "Alice Dicke's Breast-Sucking Spirit": {
-        "title": "Alice Dicke's Breast-Sucking Spirit",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "272-272",
-        "keywords": "breast-sucking familiar spirit",
-        "start_char": 873099,
-        "end_char": 873235
-    },
-    "Christina Green's Hedgehog Imp": {
-        "title": "Christina Green's Hedgehog Imp",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "272-272",
-        "keywords": "christina green of brewham",
-        "start_char": 873232,
-        "end_char": 873585
-    },
-    "Theodor D\u00f6derlin's Parasitic Animal Infestation": {
-        "title": "Theodor D\u00f6derlin's Parasitic Animal Infestation",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "272-278",
-        "keywords": "theodor d\u00f6derlin possession case",
-        "start_char": 875257,
-        "end_char": 889415
-    },
-    "Widow in Bergamo Hearing Demonic Voices": {
-        "title": "Widow in Bergamo Hearing Demonic Voices",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "282-283",
-        "keywords": "ingeburg hearing demonic laugh, possession, demonic possession",
-        "start_char": 909032,
-        "end_char": 909719
-    },
-    "Pious Woman Plagued by Incubus for Ten Years": {
-        "title": "Pious Woman Plagued by Incubus for Ten Years",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "283",
-        "keywords": "- dogging husband for fourteen years",
-        "start_char": 909799,
-        "end_char": 910360
-    },
-    "Woman Tempted by Incubus for Eight Years": {
-        "title": "Woman Tempted by Incubus for Eight Years",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "283",
-        "keywords": "- exerted by incubus victim",
-        "start_char": 910348,
-        "end_char": 910602
-    },
-    "Twenty-Year-Old Girl's Indirect Consent to Incubus": {
-        "title": "Twenty-Year-Old Girl's Indirect Consent to Incubus",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "283",
-        "keywords": "indirect consent to incubus by avoiding prayer",
-        "start_char": 910665,
-        "end_char": 911979
-    },
-    "Young Merchant Plagued by Succubus as Beloved Girl": {
-        "title": "Young Merchant Plagued by Succubus as Beloved Girl",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "283-284",
-        "keywords": "- merchant possessed by succubus",
-        "start_char": 911950,
-        "end_char": 912958
-    },
-    "Woman's Familiarity with Incubus Leading to Blasphemy": {
-        "title": "Woman's Familiarity with Incubus Leading to Blasphemy",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "284",
-        "keywords": "- familiarity with nuns",
-        "start_char": 913026,
-        "end_char": 913408
-    },
-    "Thirty-Five-Year-Old Possessed Woman's Demonic Abuse": {
-        "title": "Thirty-Five-Year-Old Possessed Woman's Demonic Abuse",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "284-285",
-        "keywords": "- in possessed woman's house",
-        "start_char": 913400,
-        "end_char": 916313
-    },
-    "Man in Koblenz Driven by Irresistible Force": {
-        "title": "Man in Koblenz Driven by Irresistible Force",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "285",
-        "keywords": "- in convent presence",
-        "start_char": 916338,
-        "end_char": 916905
-    },
-    "Two Sisters Haunted by Pressing Shadow": {
-        "title": "Two Sisters Haunted by Pressing Shadow",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "285",
-        "keywords": "twisted fingers and toes in possession",
-        "start_char": 916891,
-        "end_char": 917767
-    },
-    "Boy Witnesses Black Figure Over Matron": {
-        "title": "Boy Witnesses Black Figure Over Matron",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "285-286",
-        "keywords": "- figure over matron",
-        "start_char": 917748,
-        "end_char": 918652
-    },
-    "Pious Virgin in Basel Resists Incubus": {
-        "title": "Pious Virgin in Basel Resists Incubus",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "286",
-        "keywords": "- pious virgin in basel",
-        "start_char": 918629,
-        "end_char": 919196
-    },
-    "Young Man Wrestles Hag in Somersetshire": {
-        "title": "Young Man Wrestles Hag in Somersetshire",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "286-287",
-        "keywords": "- woman hag in somersetshire",
-        "start_char": 919186,
-        "end_char": 922365
-    },
-    "Nun's Indirect Consent and Transfer to Christine": {
-        "title": "Nun's Indirect Consent and Transfer to Christine",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "287",
-        "keywords": "- ointment and skin transformation",
-        "start_char": 922453,
-        "end_char": 924424
-    },
-    "Youth in Bergomese Territory Attacked by Old Woman Apparition": {
-        "title": "Youth in Bergomese Territory Attacked by Old Woman Apparition",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "287-289",
-        "keywords": "youth possession in bergomese territory 1645",
-        "start_char": 924377,
-        "end_char": 927880
-    },
-    "Girl in Bergamo Exorcised from Clergyman Incubus": {
-        "title": "Girl in Bergamo Exorcised from Clergyman Incubus",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "289-290",
-        "keywords": "- exorcism command freeing from incubus",
-        "start_char": 927944,
-        "end_char": 931009
-    },
-    "Woman Freed by St. Cajetan from Serpent Demons": {
-        "title": "Woman Freed by St. Cajetan from Serpent Demons",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "290",
-        "keywords": "- cajetan driving out serpent demons, possession, demonic possession",
-        "start_char": 931024,
-        "end_char": 932661
-    },
-    "Mabertha's Demonic Nymphomania and False Graces": {
-        "title": "Mabertha's Demonic Nymphomania and False Graces",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "291-294",
-        "keywords": "- nymphomania in false mystic",
-        "start_char": 934778,
-        "end_char": 942732
-    },
-    "Nun Seduced by Angel Fasting into Incubus": {
-        "title": "Nun Seduced by Angel Fasting into Incubus",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "294-295",
-        "keywords": "maiden seduced by demon as youth, possession, demonic possession",
-        "start_char": 942773,
-        "end_char": 945927
-    },
-    "Demonic Familiarity in Cloister Nuns": {
-        "title": "Demonic Familiarity in Cloister Nuns",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "295",
-        "keywords": "- familiarity with nuns",
-        "start_char": 945942,
-        "end_char": 947457
-    },
-    "Nuns in Hessimont Plagued by Zither-Playing Spirit": {
-        "title": "Nuns in Hessimont Plagued by Zither-Playing Spirit",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "295-296",
-        "keywords": "shining cloud expelling spirits",
-        "start_char": 947428,
-        "end_char": 948119
-    },
-    "Dog Spirit Haunting Cologne Diocese Nuns": {
-        "title": "Dog Spirit Haunting Cologne Diocese Nuns",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "296",
-        "keywords": "- of sorcery in cologne diocese",
-        "start_char": 948102,
-        "end_char": 948627
-    },
-    "Nazareth Nuns in Cologne Spreading Demonic Acts": {
-        "title": "Nazareth Nuns in Cologne Spreading Demonic Acts",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "296",
-        "keywords": "nazareth convent in cologne",
-        "start_char": 948616,
-        "end_char": 951381
-    },
-    "The Youth's Deadly Philtrum": {
-        "title": "The Youth's Deadly Philtrum",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "297-298",
-        "keywords": "youth's death by maleficium",
-        "start_char": 956842,
-        "end_char": 957976
-    },
-    "The Lustful Garden Spot": {
-        "title": "The Lustful Garden Spot",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "298",
-        "keywords": "the lustful garden spot",
-        "start_char": 957943,
-        "end_char": 958668
-    },
-    "The Buried Menstruation's Effect": {
-        "title": "The Buried Menstruation's Effect",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "298",
-        "keywords": "- tearing and restoration of dress",
-        "start_char": 958652,
-        "end_char": 959284
-    },
-    "The Mad Love Bond": {
-        "title": "The Mad Love Bond",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "299",
-        "keywords": "hilarion's case of love bond",
-        "start_char": 962017,
-        "end_char": 962180
-    },
-    "The Venetian Merchant's Daughter": {
-        "title": "The Venetian Merchant's Daughter",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "299-300",
-        "keywords": "seventeen-year-old merchant's daughter in venice",
-        "start_char": 962176,
-        "end_char": 963316
-    },
-    "Johann Hilpat's Possession": {
-        "title": "Johann Hilpat's Possession",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "300",
-        "keywords": "- hilpat possession case",
-        "start_char": 963282,
-        "end_char": 963967
-    },
-    "The Genoese Youth's Love Sickness": {
-        "title": "The Genoese Youth's Love Sickness",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "300-301",
-        "keywords": "- youth love sickness 1589",
-        "start_char": 964064,
-        "end_char": 966217
-    },
-    "Maria Elisabeth de Ranfain's Possession": {
-        "title": "Maria Elisabeth de Ranfain's Possession",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "301-303",
-        "keywords": "- elisabeth de ranfain possession",
-        "start_char": 966157,
-        "end_char": 971609
-    },
-    "The Bergamo Magicians and the Cow": {
-        "title": "The Bergamo Magicians and the Cow",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "302-303",
-        "keywords": "- pain from magician's touch",
-        "start_char": 971668,
-        "end_char": 973404
-    },
-    "The Knot-Tying in Poitou": {
-        "title": "The Knot-Tying in Poitou",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "303-304",
-        "keywords": "nestelkn\u00fcpfen in poitou",
-        "start_char": 973450,
-        "end_char": 976304
-    },
-    "Leopardus the Hermit Slayer": {
-        "title": "Leopardus the Hermit Slayer",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "305",
-        "keywords": "leopardus the hermit slayer",
-        "start_char": 980959,
-        "end_char": 981291
-    },
-    "Gilles de Rais and the Child Sacrifices": {
-        "title": "Gilles de Rais and the Child Sacrifices",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "305-308",
-        "keywords": "- de rais child sacrifices",
-        "start_char": 981514,
-        "end_char": 989638
-    },
-    "The Bernese Child Thieves": {
-        "title": "The Bernese Child Thieves",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "308",
-        "keywords": "- de rais child sacrifices",
-        "start_char": 989726,
-        "end_char": 990378
-    },
-    "Stadelin's Child Killings": {
-        "title": "Stadelin's Child Killings",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "308",
-        "keywords": "- confessions of child killing",
-        "start_char": 990367,
-        "end_char": 990556
-    },
-    "The Midwife of Thann": {
-        "title": "The Midwife of Thann",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "308",
-        "keywords": "alice dicke of wincanton",
-        "start_char": 990550,
-        "end_char": 991332
-    },
-    "The Stolen Child of Wellferdingen": {
-        "title": "The Stolen Child of Wellferdingen",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "308-309",
-        "keywords": "- master reply to child offering",
-        "start_char": 991310,
-        "end_char": 991892
-    },
-    "Bernhard's Wife and Child Murder": {
-        "title": "Bernhard's Wife and Child Murder",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "309",
-        "keywords": "bernhard's wife roasting own child",
-        "start_char": 991874,
-        "end_char": 992176
-    },
-    "Androgina's Deadly Anointings": {
-        "title": "Androgina's Deadly Anointings",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "309",
-        "keywords": "androgina anointing door handles for death",
-        "start_char": 992487,
-        "end_char": 992878
-    },
-    "Marie von Sains' Child Sacrifices": {
-        "title": "Marie von Sains' Child Sacrifices",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "309-310",
-        "keywords": "- de rais child sacrifices",
-        "start_char": 992966,
-        "end_char": 995337
-    },
-    "The Werewolf Pact and Transformations of Peter Bourgot and Michael Verdung": {
-        "title": "The Werewolf Pact and Transformations of Peter Bourgot and Michael Verdung",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "311-313",
-        "keywords": "the werewolf pact and transformations of peter bourgot and michael verdung",
-        "start_char": 1001622,
-        "end_char": 1006464
-    },
-    "The Werewolf Trial and Confinement of Jean Grenier": {
-        "title": "The Werewolf Trial and Confinement of Jean Grenier",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "314-318",
-        "keywords": "- lancre visit to jean grenier 1610",
-        "start_char": 1006512,
-        "end_char": 1018261
-    },
-    "The She-Wolf Transformation and Distant Attacks": {
-        "title": "The She-Wolf Transformation and Distant Attacks",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "320",
-        "keywords": "michael's wolf transformation",
-        "start_char": 1024529,
-        "end_char": 1025150
-    },
-    "The Captured Werewolf's Flight and Confessions": {
-        "title": "The Captured Werewolf's Flight and Confessions",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "320",
-        "keywords": "- bouley arrest and confession",
-        "start_char": 1025222,
-        "end_char": 1026507
-    },
-    "The Werewolf Atrocities of Peter Stumpf": {
-        "title": "The Werewolf Atrocities of Peter Stumpf",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "321",
-        "keywords": "garnier werewolf at dole court",
-        "start_char": 1026467,
-        "end_char": 1027220
-    },
-    "The Cat Transformation and Child Killing of Barbelina Ragel": {
-        "title": "The Cat Transformation and Child Killing of Barbelina Ragel",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "321",
-        "keywords": "the cat transformation and child killing of barbelina ragel",
-        "start_char": 1027895,
-        "end_char": 1028469
-    },
-    "The Supernatural Marks on the Prioress of St. Ursula in Loudun": {
-        "title": "The Supernatural Marks on the Prioress of St. Ursula in Loudun",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "322-323",
-        "keywords": "the supernatural marks on the prioress of st ursula in loudun",
-        "start_char": 1031048,
-        "end_char": 1034306
-    },
-    "The Mysterious Body Marks of the Pious Woman Observed by B. Haan": {
-        "title": "The Mysterious Body Marks of the Pious Woman Observed by B. Haan",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "323-324",
-        "keywords": "the mysterious body marks of the pious woman observed by b haan",
-        "start_char": 1034273,
-        "end_char": 1036675
-    },
-    "The Old Woman and the Sick Child": {
-        "title": "The Old Woman and the Sick Child",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "325",
-        "keywords": "- of old woman as witch, witch trials",
-        "start_char": 1031045,
-        "end_char": 1031045
-    },
-    "Valentine Greatrakes' Miraculous Healings": {
-        "title": "Valentine Greatrakes' Miraculous Healings",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "326-327",
-        "keywords": "- letters burning for healing",
-        "start_char": 1032873,
-        "end_char": 1032873
-    },
-    "Elspeth Rule and the Dying Man": {
-        "title": "Elspeth Rule and the Dying Man",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "327-328",
-        "keywords": "- garments and white bed in phantasm",
-        "start_char": 1036408,
-        "end_char": 1036408
-    },
-    "Beigis Tod's Apparitions to Alexander Fairlie": {
-        "title": "Beigis Tod's Apparitions to Alexander Fairlie",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "328",
-        "keywords": "- apparition of old woman",
-        "start_char": 1040195,
-        "end_char": 1040195
-    },
-    "The English Soldier's Sudden Death": {
-        "title": "The English Soldier's Sudden Death",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "328",
-        "keywords": "- du bois illness and death",
-        "start_char": 1040195,
-        "end_char": 1040195
-    },
-    "Christian Marwik's Deadly Touch on Margareth Craigie": {
-        "title": "Christian Marwik's Deadly Touch on Margareth Craigie",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "328",
-        "keywords": "christian marwiks deadly touch on margareth craigie",
-        "start_char": 1040195,
-        "end_char": 1040195
-    },
-    "Jean Craig's Madness Inflicted on Beatrix Sandilands": {
-        "title": "Jean Craig's Madness Inflicted on Beatrix Sandilands",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "328",
-        "keywords": "- years affliction after husband's death",
-        "start_char": 1040195,
-        "end_char": 1040195
-    },
-    "Christian Wilson's Curse and the Gray Cat": {
-        "title": "Christian Wilson's Curse and the Gray Cat",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "328",
-        "keywords": "- of christian children to antichrist",
-        "start_char": 1040195,
-        "end_char": 1040195
-    },
-    "Petrus Recordi's Love Spells with Images": {
-        "title": "Petrus Recordi's Love Spells with Images",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "329",
-        "keywords": "gerolzhofen mass witch burnings, witch trials",
-        "start_char": 1043289,
-        "end_char": 1043289
-    },
-    "The North Berwick Witches' Storm Against King James": {
-        "title": "The North Berwick Witches' Storm Against King James",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "330-332",
-        "keywords": "- of bewitchment against bametie, witch trials",
-        "start_char": 1046644,
-        "end_char": 1046644
-    },
-    "Witches Raising Storms in Lorraine": {
-        "title": "Witches Raising Storms in Lorraine",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "332-333",
-        "keywords": "advanced witches preparing own ointment, witch trials",
-        "start_char": 1053391,
-        "end_char": 1053391
-    },
-    "The Weather Lake on Lykaeus": {
-        "title": "The Weather Lake on Lykaeus",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "333",
-        "keywords": "- heat like flames",
-        "start_char": 1056792,
-        "end_char": 1056792
-    },
-    "The Demonic Lake on Canigou": {
-        "title": "The Demonic Lake on Canigou",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "333",
-        "keywords": "- kind demonic advice on virtue, possession, demonic possession",
-        "start_char": 1056792,
-        "end_char": 1056792
-    },
-    "The Mummelsee and Throwing Stones": {
-        "title": "The Mummelsee and Throwing Stones",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "333",
-        "keywords": "- piling and throwing of stones",
-        "start_char": 1056792,
-        "end_char": 1056792
-    },
-    "The Witchcraft Confessions of the Knights Templar": {
-        "title": "The Witchcraft Confessions of the Knights Templar",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "338-339",
-        "keywords": "- witch confessions due to poverty, witch trials",
-        "start_char": 1083577,
-        "end_char": 1084203
-    },
-    "The Bewitchment of Charles VI": {
-        "title": "The Bewitchment of Charles VI",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "306",
-        "keywords": "noble descent of gilles de rais",
-        "start_char": 982650,
-        "end_char": 983684
-    },
-    "Necromancers at the Courts": {
-        "title": "Necromancers at the Courts",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "387",
-        "keywords": "garnier werewolf at dole court",
-        "start_char": 1250631,
-        "end_char": 1251345
-    },
-    "The Sorcery Accusation Against the Maid of Orleans": {
-        "title": "The Sorcery Accusation Against the Maid of Orleans",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "87-88",
-        "keywords": "counter-sorcery against demonic torment, possession, demonic possession",
-        "start_char": 290406,
-        "end_char": 294146
-    },
-    "The Malefice Accusation Against Louis XI": {
-        "title": "The Malefice Accusation Against Louis XI",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "353-356",
-        "keywords": "- witch accusation salem, witch trials",
-        "start_char": 1132992,
-        "end_char": 1142923
-    },
-    "Queen Joan's Arrest for Sorcery": {
-        "title": "Queen Joan's Arrest for Sorcery",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "86",
-        "keywords": "- on johanna thomana for sorcery",
-        "start_char": 286602,
-        "end_char": 287526
-    },
-    "The Sorcery of the Duchess of Gloucester": {
-        "title": "The Sorcery of the Duchess of Gloucester",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "164-165",
-        "keywords": "- grey of toulouse",
-        "start_char": 545287,
-        "end_char": 547939
-    },
-    "The Withering of Richard III's Arm": {
-        "title": "The Withering of Richard III's Arm",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "261-262",
-        "keywords": "- emerging from heart and arm",
-        "start_char": 839217,
-        "end_char": 841214
-    },
-    "Sorcery Accusations in the War of the Roses": {
-        "title": "Sorcery Accusations in the War of the Roses",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "293",
-        "keywords": "brief accusation of sorcery then hardening",
-        "start_char": 939269,
-        "end_char": 940157
-    },
-    "The Fall of Man and Divine Judgment": {
-        "title": "The Fall of Man and Divine Judgment",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "344-345",
-        "keywords": "the fall of man and divine judgment",
-        "start_char": 1104589,
-        "end_char": 1108721
-    },
-    "The Crucifixion as Demonic Judgment and Resurrection": {
-        "title": "The Crucifixion as Demonic Judgment and Resurrection",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "345-346",
-        "keywords": "caution in judgment on deceptions",
-        "start_char": 1108805,
-        "end_char": 1110287
-    },
-    "The Confessions of Trois Echelles": {
-        "title": "The Confessions of Trois Echelles",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "346-347",
-        "keywords": "- confessions of child killing",
-        "start_char": 1111830,
-        "end_char": 1112781
-    },
-    "The Sorcerous Victory of the Huns over Sigebert": {
-        "title": "The Sorcerous Victory of the Huns over Sigebert",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "349",
-        "keywords": "huns sorcery against sigebert",
-        "start_char": 1122128,
-        "end_char": 1122234
-    },
-    "The Obsession of the Goodwin Girl in 1602": {
-        "title": "The Obsession of the Goodwin Girl in 1602",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "352",
-        "keywords": "goodwin girl possession 1680",
-        "start_char": 1130622,
-        "end_char": 1131943
-    },
-    "The Salem Witch Trials of 1692": {
-        "title": "The Salem Witch Trials of 1692",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "352-356",
-        "keywords": "salem witch trials 1692, witch trials",
-        "start_char": 1131909,
-        "end_char": 1146528
-    },
-    "The Water Ordeal of Five Suspects in the Seine, 1696": {
-        "title": "The Water Ordeal of Five Suspects in the Seine, 1696",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "359",
-        "keywords": "the water ordeal of five suspects in the seine 1696",
-        "start_char": 1153325,
-        "end_char": 1153831
-    },
-    "The Old Woman and the Water Ordeal in Linn": {
-        "title": "The Old Woman and the Water Ordeal in Linn",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "359",
-        "keywords": "- woman water ordeal suicide",
-        "start_char": 1154315,
-        "end_char": 1155022
-    },
-    "The Pact and Crimes of Sorcerer Monk Johannes del Vaulx": {
-        "title": "The Pact and Crimes of Sorcerer Monk Johannes del Vaulx",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "363-368",
-        "keywords": "the pact and crimes of sorcerer monk johannes del vaulx",
-        "start_char": 1166038,
-        "end_char": 1185741
-    },
-    "The Clairvoyant Visions of Del Vaulr": {
-        "title": "The Clairvoyant Visions of Del Vaulr",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "369-371",
-        "keywords": "- and execution of del vaulx",
-        "start_char": 1189109,
-        "end_char": 1197553
-    },
-    "The Arras Waldensian Witch Trials": {
-        "title": "The Arras Waldensian Witch Trials",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "372-383",
-        "keywords": "salem witch trials 1692, witch trials",
-        "start_char": 1198704,
-        "end_char": 1237670
-    },
-    "The Witches' Conspiracy Against King James I": {
-        "title": "The Witches' Conspiracy Against King James I",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "386-386",
-        "keywords": "- testimony against gaufredi",
-        "start_char": 1245070,
-        "end_char": 1246899
-    },
-    "The Death of Sir Lewis Bellenden from a Demon's Appearance": {
-        "title": "The Death of Sir Lewis Bellenden from a Demon's Appearance",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "386-386",
-        "keywords": "grunting of many swine in demon appearance, possession, demonic possession",
-        "start_char": 1247029,
-        "end_char": 1247146
-    },
-    "The Werewolf Trial in Besan\u00e7on": {
-        "title": "The Werewolf Trial in Besan\u00e7on",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "387-387",
-        "keywords": "besan\u00e7on werewolf trial 1521",
-        "start_char": 1248458,
-        "end_char": 1248505
-    },
-    "The Werewolf Garnier at Dole": {
-        "title": "The Werewolf Garnier at Dole",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "387-387",
-        "keywords": "garnier werewolf at dole court",
-        "start_char": 1248907,
-        "end_char": 1248949
-    },
-    "The Witch Persecutions in Trier": {
-        "title": "The Witch Persecutions in Trier",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "388-388",
-        "keywords": "- witch persecution 1587-1593, witch trials",
-        "start_char": 1253030,
-        "end_char": 1255528
-    },
-    "The Demonic Possession of Magdalena von Palnd and Louise Capelle": {
-        "title": "The Demonic Possession of Magdalena von Palnd and Louise Capelle",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "389-392",
-        "keywords": "five demons possessing magdalena, possession, demonic possession",
-        "start_char": 1256036,
-        "end_char": 1269636
-    },
-    "The Demonic Possessions in the Brigittine Convent": {
-        "title": "The Demonic Possessions in the Brigittine Convent",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "393-396",
-        "keywords": "- possession in quercy convent 1491",
-        "start_char": 1269684,
-        "end_char": 1280816
-    },
-    "The Demonic Possession of the Louviers Nuns": {
-        "title": "The Demonic Possession of the Louviers Nuns",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "197-199",
-        "keywords": "stages of demonic possession, possession, demonic possession",
-        "start_char": 648012,
-        "end_char": 653933
-    },
-    "The Possession of the Ursulines in Loudun and the Trial of Urbain Grandier": {
-        "title": "The Possession of the Ursulines in Loudun and the Trial of Urbain Grandier",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "403-414",
-        "keywords": "the possession of the ursulines in loudun and the trial of urbain grandier",
-        "start_char": 1303514,
-        "end_char": 1342809
-    },
-    "The Witch-Finder Hopkins Put to the Water Test": {
-        "title": "The Witch-Finder Hopkins Put to the Water Test",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "415-416",
-        "keywords": "- witch confessions due to poverty, witch trials",
-        "start_char": 1345102,
-        "end_char": 1345297
-    },
-    "The Trial of Jane Wenham for Consorting with the Devil": {
-        "title": "The Trial of Jane Wenham for Consorting with the Devil",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "416",
-        "keywords": "- angel warning against devil",
-        "start_char": 1345969,
-        "end_char": 1346291
-    },
-    "The Execution of Mother Hicks and Her Daughter for Raising a Storm": {
-        "title": "The Execution of Mother Hicks and Her Daughter for Raising a Storm",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "416",
-        "keywords": "the execution of mother hicks and her daughter for raising a storm",
-        "start_char": 1346283,
-        "end_char": 1346428
-    },
-    "The Witchcraft Confession of Brigitta of Serresheim": {
-        "title": "The Witchcraft Confession of Brigitta of Serresheim",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "421",
-        "keywords": "child-eating in witchcraft confessions, witch trials",
-        "start_char": 1360884,
-        "end_char": 1362620
-    },
-    "The Mass Witch Hunts and Burnings in Gerolzhofen": {
-        "title": "The Mass Witch Hunts and Burnings in Gerolzhofen",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "422",
-        "keywords": "gerolzhofen mass witch burnings, witch trials",
-        "start_char": 1362894,
-        "end_char": 1365380
-    },
-    "The Innocent Confession Related by George Mackenzie": {
-        "title": "The Innocent Confession Related by George Mackenzie",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "422-423",
-        "keywords": "hessimont convent possession near neumagen",
-        "start_char": 1366091,
-        "end_char": 1366751
-    },
-    "Father Surin's Exorcism of the Possessed Johanna in Loudun": {
-        "title": "Father Surin's Exorcism of the Possessed Johanna in Loudun",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "432-433",
-        "keywords": "- surin exorcism of prioress loudun",
-        "start_char": 1393991,
-        "end_char": 1397925
-    },
-    "The Nurse's Command over Nature in Hercules Oetaeus": {
-        "title": "The Nurse's Command over Nature in Hercules Oetaeus",
-        "book_slug": "investigations_into_magic_volume_2",
-        "pages": "34-34",
-        "keywords": "- 's the intricacy of nature on spirits",
-        "start_char": 146775,
-        "end_char": 147511
+        "start_char": 140915,
+        "end_char": 141908
+    },
+    "Prophecy to Pechina and Miraculous Reading of Sins by Moses Servil": {
+        "title": "Prophecy to Pechina and Miraculous Reading of Sins by Moses Servil",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "43",
+        "keywords": "",
+        "start_char": 141922,
+        "end_char": 142704
+    },
+    "Miracles at the Relics of Alleged Child-Martyr Victims": {
+        "title": "Miracles at the Relics of Alleged Child-Martyr Victims",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "45",
+        "keywords": "- diocese relics and churches",
+        "start_char": 150561,
+        "end_char": 151055
+    },
+    "Alleged Ritual Murder and Miracles of Hugh of Lincoln": {
+        "title": "Alleged Ritual Murder and Miracles of Hugh of Lincoln",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "46",
+        "keywords": "",
+        "start_char": 151977,
+        "end_char": 153099
+    },
+    "Alleged Ritual Murder of Werner of Oberwesel and Miraculous Host Motive": {
+        "title": "Alleged Ritual Murder of Werner of Oberwesel and Miraculous Host Motive",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "46",
+        "keywords": "",
+        "start_char": 153113,
+        "end_char": 153981
+    },
+    "Alleged Theft and Desecration of the Eucharist and Crucifixion of a Child at La Guardia": {
+        "title": "Alleged Theft and Desecration of the Eucharist and Crucifixion of a Child at La Guardia",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "47",
+        "keywords": "",
+        "start_char": 155124,
+        "end_char": 156569
+    },
+    "Alleged Ritual Murder and Cult of Simon of Trent": {
+        "title": "Alleged Ritual Murder and Cult of Simon of Trent",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "47-48",
+        "keywords": "",
+        "start_char": 156571,
+        "end_char": 162539
+    },
+    "Alleged Ritual Murder of Sebastian Novello and Executions in Venice": {
+        "title": "Alleged Ritual Murder of Sebastian Novello and Executions in Venice",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "49",
+        "keywords": "",
+        "start_char": 162565,
+        "end_char": 163661
+    },
+    "Further Alleged Child Sacrifices and Crucifixions, Including Regensburg and Punie": {
+        "title": "Further Alleged Child Sacrifices and Crucifixions, Including Regensburg and Punie",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "49",
+        "keywords": "",
+        "start_char": 163675,
+        "end_char": 165274
+    },
+    "Demonic Fury and the Entrance of Hell into the World": {
+        "title": "Demonic Fury and the Entrance of Hell into the World",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "50",
+        "keywords": "remorse and repentance of del vaulx",
+        "start_char": 165276,
+        "end_char": 166291
+    },
+    "Supernatural Powers of the Schem-Hamphorasch and Wonders Worked by It": {
+        "title": "Supernatural Powers of the Schem-Hamphorasch and Wonders Worked by It",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "50",
+        "keywords": "",
+        "start_char": 166305,
+        "end_char": 167796
     },
     "Famous Schools of Dark Magic in Salamanca, Toledo, Norcia, and Visignian Cave": {
         "title": "Famous Schools of Dark Magic in Salamanca, Toledo, Norcia, and Visignian Cave",
@@ -2063,8 +343,8 @@
         "start_char": 16383,
         "end_char": 16383
     },
-    "The Nobleman from Li\u00e8ge's Pact with the Devil": {
-        "title": "The Nobleman from Li\u00e8ge's Pact with the Devil",
+    "The Nobleman from Liège's Pact with the Devil": {
+        "title": "The Nobleman from Liège's Pact with the Devil",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "6-6",
         "keywords": "- on manes as spirits of the dead",
@@ -2107,12 +387,12 @@
         "title": "Jean del Vaulx's Pact with the Devil",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "9-9",
-        "keywords": "isabelle pard\u00e9e witch trial, witch trials",
+        "keywords": "isabelle pardée witch trial, witch trials",
         "start_char": 41858,
         "end_char": 42088
     },
-    "Th\u00e9odore Maillot and the Evil Spirit's Deception": {
-        "title": "Th\u00e9odore Maillot and the Evil Spirit's Deception",
+    "Théodore Maillot and the Evil Spirit's Deception": {
+        "title": "Théodore Maillot and the Evil Spirit's Deception",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "13-14",
         "keywords": "- on evil spirits and sensory deception",
@@ -2399,13 +679,13 @@
         "start_char": 145303,
         "end_char": 146700
     },
-    "Pope Benedict X Appears": {
-        "title": "Pope Benedict X Appears",
+    "The Nurse's Command over Nature in Hercules Oetaeus": {
+        "title": "The Nurse's Command over Nature in Hercules Oetaeus",
         "book_slug": "investigations_into_magic_volume_2",
-        "pages": "166-166",
-        "keywords": "- denial of apparitions",
-        "start_char": 707347,
-        "end_char": 707652
+        "pages": "34-34",
+        "keywords": "- 's the intricacy of nature on spirits",
+        "start_char": 146775,
+        "end_char": 147511
     },
     "The Vainglorious Magician's Transformations in Claudian": {
         "title": "The Vainglorious Magician's Transformations in Claudian",
@@ -2695,8 +975,8 @@
         "start_char": 201562,
         "end_char": 201879
     },
-    "R\u00e9my's Insect and Animal Plagues": {
-        "title": "R\u00e9my's Insect and Animal Plagues",
+    "Rémy's Insect and Animal Plagues": {
+        "title": "Rémy's Insect and Animal Plagues",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "47-48",
         "keywords": "sin and merit in animals",
@@ -2895,8 +1175,8 @@
         "start_char": 232728,
         "end_char": 232812
     },
-    "R\u00e9my's Deceptive Money Examples": {
-        "title": "R\u00e9my's Deceptive Money Examples",
+    "Rémy's Deceptive Money Examples": {
+        "title": "Rémy's Deceptive Money Examples",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "53-54",
         "keywords": "- deceptive echoes",
@@ -3059,7 +1339,7 @@
         "title": "The Woman and the Monkeys on the Uninhabited Island",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "61-62",
-        "keywords": "- de le\u00f3n on andean monkey hybrids",
+        "keywords": "- de león on andean monkey hybrids",
         "start_char": 265984,
         "end_char": 268287
     },
@@ -3083,7 +1363,7 @@
         "title": "The Hybrid Children from Men and Monkeys in the Andes",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "62",
-        "keywords": "- de le\u00f3n on andean monkey hybrids",
+        "keywords": "- de león on andean monkey hybrids",
         "start_char": 269561,
         "end_char": 269988
     },
@@ -3263,8 +1543,8 @@
         "start_char": 356683,
         "end_char": 358123
     },
-    "Claude Choteau's Encounter with the Mor\u00e8le Cleft Dancers": {
-        "title": "Claude Choteau's Encounter with the Mor\u00e8le Cleft Dancers",
+    "Claude Choteau's Encounter with the Morèle Cleft Dancers": {
+        "title": "Claude Choteau's Encounter with the Morèle Cleft Dancers",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "83-84",
         "keywords": "jesuit brethren encounter with devil child beggar",
@@ -3911,8 +2191,8 @@
         "start_char": 448780,
         "end_char": 449373
     },
-    "The Insensitive Mark of Isabelle Pard\u00e9e": {
-        "title": "The Insensitive Mark of Isabelle Pard\u00e9e",
+    "The Insensitive Mark of Isabelle Pardée": {
+        "title": "The Insensitive Mark of Isabelle Pardée",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "106-106",
         "keywords": "- as seductive woman to apelles",
@@ -4279,8 +2559,8 @@
         "start_char": 508111,
         "end_char": 508426
     },
-    "The Magical Exploits of Rom\u00e1n Ram\u00edrez": {
-        "title": "The Magical Exploits of Rom\u00e1n Ram\u00edrez",
+    "The Magical Exploits of Román Ramírez": {
+        "title": "The Magical Exploits of Román Ramírez",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "119-122",
         "keywords": "- the samaritan's boasts of miracles",
@@ -4875,7 +3155,7 @@
         "title": "Vision of St Fructuosus and Martyrs Entering Heaven",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "153-153",
-        "keywords": "apparition of st ursula and st gereon defending k\u00f6ln",
+        "keywords": "apparition of st ursula and st gereon defending köln",
         "start_char": 656444,
         "end_char": 656793
     },
@@ -5487,11 +3767,11 @@
         "start_char": 700610,
         "end_char": 700761
     },
-    "St James Aids Fern\u00e1n Gonz\u00e1lez": {
-        "title": "St James Aids Fern\u00e1n Gonz\u00e1lez",
+    "St James Aids Fernán González": {
+        "title": "St James Aids Fernán González",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "164-164",
-        "keywords": "st james aids fern\u00e1n gonz\u00e1lez",
+        "keywords": "st james aids fernán gonzález",
         "start_char": 701382,
         "end_char": 701940
     },
@@ -5611,7 +3891,7 @@
         "title": "St Isidore Appears to Alfonso of Castile",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "166-166",
-        "keywords": "- apparition to alfonso king of le\u00f3n",
+        "keywords": "- apparition to alfonso king of león",
         "start_char": 706130,
         "end_char": 706320
     },
@@ -5622,6 +3902,14 @@
         "keywords": "- on hail-guards in cleonae",
         "start_char": 706453,
         "end_char": 707242
+    },
+    "Pope Benedict X Appears": {
+        "title": "Pope Benedict X Appears",
+        "book_slug": "investigations_into_magic_volume_2",
+        "pages": "166-166",
+        "keywords": "- denial of apparitions",
+        "start_char": 707347,
+        "end_char": 707652
     },
     "St Norbert Appears to Household": {
         "title": "St Norbert Appears to Household",
@@ -6375,11 +4663,11 @@
         "start_char": 914021,
         "end_char": 914156
     },
-    "The Devil as a Horse to the Comte de M\u00e2con": {
-        "title": "The Devil as a Horse to the Comte de M\u00e2con",
+    "The Devil as a Horse to the Comte de Mâcon": {
+        "title": "The Devil as a Horse to the Comte de Mâcon",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "214-214",
-        "keywords": "- the deacon on comte de m\u00e2con horse",
+        "keywords": "- the deacon on comte de mâcon horse",
         "start_char": 914157,
         "end_char": 914225
     },
@@ -6415,11 +4703,11 @@
         "start_char": 914938,
         "end_char": 915025
     },
-    "The Devil as a Snake to L\u00e9onard de Corbiac": {
-        "title": "The Devil as a Snake to L\u00e9onard de Corbiac",
+    "The Devil as a Snake to Léonard de Corbiac": {
+        "title": "The Devil as a Snake to Léonard de Corbiac",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "215-215",
-        "keywords": "- appearing to l\u00e9onard de corbiac as snake",
+        "keywords": "- appearing to léonard de corbiac as snake",
         "start_char": 915025,
         "end_char": 915057
     },
@@ -6579,7 +4867,7 @@
         "title": "The Speaking Skull of a Magician",
         "book_slug": "investigations_into_magic_volume_2",
         "pages": "216-216",
-        "keywords": "th\u00e9odore maillot as magician",
+        "keywords": "théodore maillot as magician",
         "start_char": 921388,
         "end_char": 921549
     },

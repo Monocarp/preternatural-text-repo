@@ -9,7 +9,7 @@ from reportlab.pdfgen import canvas
 import logging
 from collections import Counter
 import numpy as np
-import torch  # For torch.float16 in model_kwargs
+import torch # For torch.float16 in model_kwargs
 import base64
 import zipfile
 import io
@@ -68,8 +68,9 @@ def load_full_md(book_slug):
             logger.error(f"Failed to load Full_Text.md for {book_slug}: {e}")
             full_mds[book_slug] = ""
     return full_mds[book_slug]
-def load_story_positions(book_slug):
-    if book_slug not in story_positions:
+def load_story_positions(book_slug, force_reload=False):
+    """Load story positions from JSON file. If force_reload=True, always read from disk."""
+    if force_reload or book_slug not in story_positions:
         pos_path = os.path.join(books_dir, book_slug, "story_positions.json")
         try:
             with open(pos_path, "r", encoding="utf-8") as f:
@@ -79,7 +80,6 @@ def load_story_positions(book_slug):
             logger.error(f"Failed to load story_positions.json for {book_slug}: {e}")
             story_positions[book_slug] = {}
     return story_positions[book_slug]
-
 def save_story_positions(book_slug):
     """Save story positions to JSON file"""
     pos_path = os.path.join(books_dir, book_slug, "story_positions.json")
@@ -91,29 +91,28 @@ def save_story_positions(book_slug):
     except Exception as e:
         logger.error(f"Failed to save story_positions.json for {book_slug}: {e}")
         return False
-
 def update_story_boundaries(book_slug, title, start_char, end_char):
     """Update story boundaries in both JSON and database"""
     # Load positions if not already loaded
     positions = load_story_positions(book_slug)
-    
+   
     if title not in positions:
         logger.warning(f"Story {title} not found in {book_slug}")
         return False
-    
+   
     # Update in-memory cache
     positions[title]["start_char"] = start_char
     positions[title]["end_char"] = end_char
     story_positions[book_slug] = positions
-    
+   
     # Update stories_dict cache
     if title in stories_dict:
         stories_dict[title]["start_char"] = start_char
         stories_dict[title]["end_char"] = end_char
-    
+   
     # Save to JSON file
     save_success = save_story_positions(book_slug)
-    
+   
     # Update database if available
     if USE_DB and SessionLocal:
         try:
@@ -129,7 +128,7 @@ def update_story_boundaries(book_slug, title, start_char, end_char):
                     logger.warning(f"Story {title} not found in database")
         except Exception as e:
             logger.error(f"Failed to update database for {title}: {e}")
-    
+   
     return save_success
 # Discover books dynamically
 books = [d for d in os.listdir(books_dir) if os.path.isdir(os.path.join(books_dir, d)) and not d.startswith('.')]
@@ -374,8 +373,7 @@ def render_static_story(story):
     book_slug = story['book_slug']
     full_md = load_full_md(book_slug)
     text = full_md[story['start_char']:story['end_char']]
-    return text  # Frontend already displays metadata in header, so just return the story text
-
+    return text # Frontend already displays metadata in header, so just return the story text
 def find_book_slug(title):
     for book_slug in books:
         positions = load_story_positions(book_slug)
@@ -711,22 +709,18 @@ def load_codex_tree_from_json():
         ensure_lists(tree)
         save_codex_tree_to_json(tree)
     return tree
-
 def save_codex_tree_to_json(tree):
     with open(codex_tree_path, "w") as f:
         json.dump(tree, f, indent=4)
-
 def merge_trees(existing_tree, new_tree):
     """Recursively merge two tree structures, preserving stories"""
     if isinstance(existing_tree, dict) and isinstance(new_tree, dict):
         merged = {}
         # Get all keys from both trees
         all_keys = set(existing_tree.keys()) | set(new_tree.keys())
-
         for key in all_keys:
             existing_val = existing_tree.get(key)
             new_val = new_tree.get(key)
-
             if existing_val is not None and new_val is not None:
                 # Both have values - merge recursively
                 merged[key] = merge_trees(existing_val, new_val)
@@ -736,7 +730,6 @@ def merge_trees(existing_tree, new_tree):
             else:
                 # Only new has value
                 merged[key] = new_val
-
         return merged
     elif isinstance(existing_tree, list) and isinstance(new_tree, list):
         # Merge lists (stories) - combine and deduplicate
@@ -747,7 +740,6 @@ def merge_trees(existing_tree, new_tree):
         # Type mismatch or one is empty - prefer the one with actual content
         existing_is_story_list = isinstance(existing_tree, list) and len(existing_tree) > 0
         new_is_story_list = isinstance(new_tree, list) and len(new_tree) > 0
-
         if existing_is_story_list and not new_is_story_list:
             logger.info(f"Preferring existing story list: {existing_tree} over {new_tree}")
             return existing_tree
@@ -764,15 +756,18 @@ def merge_trees(existing_tree, new_tree):
             else:
                 # Same types or both empty - keep existing
                 return existing_tree
-
 # Helper functions for loading stories and managing tree
 def load_all_stories():
     """Load stories from story_positions.json in each book folder"""
+    global story_positions
+    # Clear cache to force fresh read from disk
+    story_positions.clear()
     stories_dict = {}
     for book_slug in os.listdir(books_dir):
         book_path = os.path.join(books_dir, book_slug)
         if os.path.isdir(book_path) and not book_slug.startswith('.'):
-            positions = load_story_positions(book_slug)
+            # Force reload from disk by passing force_reload=True
+            positions = load_story_positions(book_slug, force_reload=True)
             for title, details in positions.items():
                 stories_dict[title] = {
                     "title": title,
@@ -784,13 +779,12 @@ def load_all_stories():
                 }
     logger.info(f"Loaded {len(stories_dict)} stories from story_positions.json across books")
     return stories_dict
-
 def insert_recursive(tree_json, db, parent_id=None):
     """Recursively insert tree nodes into database"""
     for name, value in tree_json.items():
         node = CodexNode(name=name, parent_id=parent_id)
         db.add(node)
-        db.flush()  # Get ID
+        db.flush() # Get ID
         if isinstance(value, list):
             for title in value:
                 story = db.query(Story).filter_by(title=title).first()
@@ -798,10 +792,12 @@ def insert_recursive(tree_json, db, parent_id=None):
                     db.add(NodeStory(node_id=node.id, story_id=story.id))
         elif isinstance(value, dict):
             insert_recursive(value, db, node.id)
-
-def get_stories_at_path(tree, path):
+def get_stories_at_path(tree, path, stories_dict_ref=None):
     """Get stories at a given path in the tree - like original app.py"""
     global stories_dict
+    # Use provided reference if given, otherwise use global
+    if stories_dict_ref is None:
+        stories_dict_ref = stories_dict
     logger.info(f"get_stories_at_path called with path: {path}")
     current = tree
     for level in path:
@@ -811,7 +807,6 @@ def get_stories_at_path(tree, path):
             return []
         current = current[level]
         logger.info(f"Navigated to '{level}', current is now: {type(current)}")
-
     # Once we reach the target path, collect ALL stories at or below this level
     titles = []
     def recurse(node):
@@ -828,56 +823,108 @@ def get_stories_at_path(tree, path):
             for key, value in node.items():
                 if key != '_stories':
                     recurse(value)
-
     recurse(current)
     logger.info(f"Total titles collected: {titles}")
-
     # Resolve to full story objects
     unique_titles = set(titles)
-    result = [stories_dict[title] for title in unique_titles if title in stories_dict]
+    # DEBUG: Log stories_dict size and sample before lookup
+    logger.info(f"DEBUG get_stories_at_path: stories_dict_ref has {len(stories_dict_ref)} stories")
+    if stories_dict_ref:
+        sample_title = next(iter(stories_dict_ref.keys()))
+        sample = stories_dict_ref[sample_title]
+        logger.info(f"DEBUG SAMPLE STORY: '{sample_title}' start_char={sample.get('start_char')} end_char={sample.get('end_char')}")
+    
+    result = [stories_dict_ref[title] for title in unique_titles if title in stories_dict_ref]
     logger.info(f"Returning {len(result)} stories: {[s['title'] for s in result]}")
+    # DEBUG: Log first story's positions to verify they're fresh
+    if result:
+        first_story = result[0]
+        logger.info(f"DEBUG RETURNING STORY: '{first_story['title']}' start_char={first_story.get('start_char')} end_char={first_story.get('end_char')}")
     return result
-
 # Load codex_tree (from DB, fallback to JSON if empty or DB unavailable)
-def load_codex_tree():
+# _syncing_json_to_db: internal flag to prevent infinite recursion when syncing
+def load_codex_tree(_syncing_json_to_db=False):
     global stories_dict
-    # If database is not available, use JSON fallback
+    # ALWAYS load fresh from disk first — source of truth for stories
+    disk_stories = load_all_stories()
+    stories_dict = disk_stories.copy()
+
+    # If DB is enabled, sync disk → DB (upsert)
+    # IMPORTANT: Do this in a SEPARATE session, then close it completely
+    # before building the tree, so tree-building gets fresh Story objects
+    # Also expire any cached Story objects to ensure relationships load fresh data
+    if USE_DB and SessionLocal:
+        try:
+            with SessionLocal() as db:
+                updated_story_ids = []
+                for title, data in disk_stories.items():
+                    story = db.query(Story).filter_by(title=title).first()
+                    if story:
+                        story.book_slug = data["book_slug"]
+                        story.pages = data["pages"]
+                        story.keywords = data["keywords"]
+                        story.start_char = data["start_char"]
+                        story.end_char = data["end_char"]
+                        updated_story_ids.append(story.id)
+                    else:
+                        new_story = Story(**data)
+                        db.add(new_story)
+                        db.flush()  # Get ID
+                        updated_story_ids.append(new_story.id)
+                db.commit()
+                logger.info(f"Synced {len(disk_stories)} stories from disk to DB")
+                # Expire all Story objects to ensure they're reloaded fresh
+                # This ensures relationships in tree-building will load fresh Story data
+                from sqlalchemy.orm import Session
+                for story_id in updated_story_ids:
+                    story_obj = db.query(Story).get(story_id)
+                    if story_obj:
+                        db.expire(story_obj)
+            # Session is now closed - this ensures fresh data when we load tree
+        except Exception as e:
+            logger.error(f"DB sync failed (non-fatal, using disk data): {e}")
+
+    # ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
+    # FORCE WRITE stories_dict.json on every startup
+    # ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
+    try:
+        with open(stories_dict_path, "w", encoding="utf-8") as f:
+            json.dump(stories_dict, f, indent=4, ensure_ascii=False)
+        logger.info(f"Force-updated {stories_dict_path} on server start ({len(stories_dict)} stories)")
+    except Exception as e:
+        logger.error(f"Failed to force-write stories_dict.json: {e}")
+    # ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
+
+    # Fallback if no DB
     if not USE_DB or SessionLocal is None:
         logger.info("Using JSON fallback for codex tree")
         tree = load_codex_tree_from_json()
         # Load stories from JSON files
         stories_dict = load_all_stories()
         return tree
-    
+   
     try:
+        # IMPORTANT: Use a FRESH session after syncing stories above
+        # This ensures node.stories relationships load fresh Story objects
         with SessionLocal() as db:
-            stories = db.query(Story).all()
-            stories_dict = {s.title: {
-                "title": s.title, "book_slug": s.book_slug, "pages": s.pages,
-                "keywords": s.keywords, "start_char": s.start_char, "end_char": s.end_char
-            } for s in stories}
-            if not stories:
-                logger.info("No stories in DB - loading from story_positions.json")
-                stories_dict = load_all_stories()
-                # Insert if not exist
-                for title, s in stories_dict.items():
-                    if not db.query(Story).filter_by(title=title).first():
-                        db.add(Story(**s))
-                db.commit()
-            
             root_nodes = db.query(CodexNode).filter_by(parent_id=None).all()
             if not root_nodes:
-                logger.info("No codex nodes in DB - initializing from CATEGORIES")
+                logger.info("No codex nodes in DB - initializing from codex_tree.json")
                 tree_json = load_codex_tree_from_json()
                 # Insert from JSON
                 insert_recursive(tree_json, db)
                 db.commit()
                 root_nodes = db.query(CodexNode).filter_by(parent_id=None).all()
-            
+                logger.info("Initialized codex nodes from JSON")
+            # NOTE: If DB already has nodes, we don't sync JSON → DB here
+            # The tree structure comes from DB relationships, not from JSON
+            # If JSON is updated, it needs to be explicitly synced via save_codex_tree()
+           
             # Eagerly load all relationships recursively to avoid lazy loading issues
+            # Use selectinload to ensure we get fresh Story objects from the database
             from sqlalchemy.orm import selectinload
             from models import NodeStory
-            
+           
             # Use a recursive strategy to load all nodes with their relationships
             def load_all_nodes_recursive():
                 """Load all nodes with their stories and children relationships"""
@@ -888,10 +935,10 @@ def load_codex_tree():
                     selectinload(CodexNode.children).selectinload(CodexNode.children).selectinload(CodexNode.stories),
                     selectinload(CodexNode.children).selectinload(CodexNode.children).selectinload(CodexNode.children).selectinload(CodexNode.stories)
                 ).all()
-                
+               
                 # Create a lookup dict for fast access
                 nodes_by_id = {node.id: node for node in all_nodes}
-                
+               
                 # Rebuild parent-child relationships
                 for node in all_nodes:
                     if node.parent_id and node.parent_id in nodes_by_id:
@@ -899,7 +946,7 @@ def load_codex_tree():
                         if node not in parent.children:
                             parent.children.append(node)
                             logger.debug(f"Added {node.name} as child of {parent.name}")
-                
+               
                 # Debug: Check if Fear/Anxiety is in the tree
                 fear_node = next((n for n in all_nodes if n.name == 'Fear/Anxiety'), None)
                 if fear_node:
@@ -917,11 +964,11 @@ def load_codex_tree():
                             logger.info(f"FEAR/ANXIETY PARENT: {parent_node.name}, children={[c.name for c in parent_node.children] if parent_node.children else []}")
                 else:
                     logger.warning("FEAR/ANXIETY NODE NOT FOUND IN DATABASE!")
-                
+               
                 return [node for node in all_nodes if node.parent_id is None]
-            
+           
             root_nodes_with_relations = load_all_nodes_recursive()
-            
+           
             def build_tree(node):
                 """Build tree structure including stories from database relationships"""
                 # Special logging for Fear/Anxiety
@@ -931,7 +978,7 @@ def load_codex_tree():
                     logger.info(f"Node object: id={node.id}, name={node.name}, parent_id={getattr(node, 'parent_id', None)}")
                     logger.info(f"Has stories attr: {hasattr(node, 'stories')}")
                     logger.info(f"Node.stories type: {type(node.stories) if hasattr(node, 'stories') else 'N/A'}")
-                
+               
                 try:
                     # Get stories for this node (should be eagerly loaded)
                     # Debug: Check what we actually have
@@ -945,24 +992,24 @@ def load_codex_tree():
                             logger.info(f"FEAR/ANXIETY DEBUG: list(node.stories): {stories_list}")
                         except Exception as e:
                             logger.error(f"FEAR/ANXIETY DEBUG: Error accessing node.stories: {e}")
-                    
+                   
                     story_titles = [s.title for s in node.stories] if hasattr(node, 'stories') and node.stories else []
                     if is_fear_anxiety:
                         logger.info(f"FEAR/ANXIETY: story_titles after extraction: {story_titles}")
                     if story_titles:
                         logger.info(f"Building tree for node '{node.name}' with {len(story_titles)} stories: {story_titles}")
-                    
+                   
                     # If node has stories and no children, use list format
                     # Otherwise, use dict with _stories key
                     children_list = list(node.children) if hasattr(node, 'children') and node.children else []
                     if is_fear_anxiety:
                         logger.info(f"FEAR/ANXIETY: children_list: {[c.name for c in children_list]}")
-                    
+                   
                     logger.info(f"Node '{node.name}': {len(story_titles)} stories, {len(children_list)} children")
                 except Exception as e:
                     logger.error(f"Error in build_tree for node '{node.name}': {e}", exc_info=True)
                     return {node.name: {}}
-                
+               
                 if story_titles and len(children_list) == 0:
                     # Leaf node with stories - use list format
                     tree = {node.name: story_titles}
@@ -973,12 +1020,12 @@ def load_codex_tree():
                     if story_titles:
                         tree[node.name]['_stories'] = story_titles
                         logger.info(f"Added _stories to '{node.name}': {tree[node.name]}")
-                    
+                   
                     # Add children (relationships should already be loaded)
                     for child in children_list:
                         child_tree = build_tree(child)
                         logger.info(f"Merging child '{child.name}' into '{node.name}': {child_tree}")
-                        
+                       
                         # Do NOT merge duplicate keys across different parent contexts
                         # Each node should exist under its correct parent path only
                         # The database should not have duplicate names under the same parent
@@ -986,18 +1033,17 @@ def load_codex_tree():
                             if child_key in tree[node.name]:
                                 logger.error(f"Unexpected duplicate child '{child_key}' found under '{node.name}'. This indicates a database integrity issue. Skipping child: {child_value}")
                                 continue
-
                             # Normal merge for new keys
                             tree[node.name][child_key] = child_value
-                    
+                   
                     # Special check for nodes we know have stories
                     if node.name == 'Fear/Anxiety':
                         logger.info(f"FEAR/ANXIETY DEBUG: tree={tree}, story_titles={story_titles}, children_list={[c.name for c in children_list]}")
                         logger.info(f"FEAR/ANXIETY DEBUG: tree[node.name]={tree[node.name]}")
-                
+               
                 logger.info(f"Final tree for '{node.name}': {tree}")
                 return tree
-            
+           
             tree = {}
             for root in root_nodes_with_relations:
                 root_tree = build_tree(root)
@@ -1009,7 +1055,7 @@ def load_codex_tree():
                         tree[root_key] = merge_trees(tree[root_key], root_value)
                     else:
                         tree[root_key] = root_value
-            
+           
             # Log summary of tree structure for debugging
             def count_stories_in_tree(t):
                 count = 0
@@ -1024,10 +1070,27 @@ def load_codex_tree():
                     count += len(t)
                     logger.debug(f"Found {len(t)} stories in list: {t}")
                 return count
-            
+           
             total_stories = count_stories_in_tree(tree)
             logger.info(f"Loaded codex tree from database with {total_stories} total story assignments")
             
+            # If DB tree has no story assignments, check if JSON has them and sync
+            if total_stories == 0 and not _syncing_json_to_db:
+                json_tree = load_codex_tree_from_json()
+                json_stories = count_stories_in_tree(json_tree)
+                if json_stories > 0:
+                    logger.warning(f"DB tree has no story assignments, but JSON has {json_stories}. Syncing JSON → DB...")
+                    # Save JSON tree to DB to update relationships
+                    # save_codex_tree doesn't call load_codex_tree, so this is safe
+                    try:
+                        save_codex_tree(json_tree)
+                        logger.info(f"Synced codex_tree.json → DB. Rebuilding tree from DB...")
+                        # Rebuild tree after sync (with flag to prevent infinite recursion)
+                        return load_codex_tree(_syncing_json_to_db=True)
+                    except Exception as e:
+                        logger.error(f"Failed to sync JSON → DB: {e}. Using JSON tree directly.")
+                        return json_tree
+           
             # Also log the actual tree structure for the node we know has stories
             if 'Demonic Activity' in tree:
                 da = tree['Demonic Activity']
@@ -1046,39 +1109,38 @@ def load_codex_tree():
                         logger.info(f"Obsession keys but no Fear/Anxiety: {list(obs.keys())}")
                 elif isinstance(da, dict):
                     logger.info(f"Demonic Activity is dict but no Obsession: {list(da.keys())}")
-            
+           
             return tree
     except Exception as e:
         logger.error(f"Error loading codex tree from database: {e}. Falling back to JSON.")
         tree = load_codex_tree_from_json()
         stories_dict = load_all_stories()
         return tree
-
 def save_codex_tree(tree):
     """Save codex tree to JSON file and database (if available), optionally to HuggingFace"""
     global stories_dict
     os.makedirs(data_dir, exist_ok=True)
-    
+   
     # Always save to JSON (for fallback and local development)
     save_codex_tree_to_json(tree)
-    
+   
     # Also save stories_dict if it exists
     if stories_dict:
         with open(stories_dict_path, "w") as f:
             json.dump(stories_dict, f, indent=4)
-    
+   
     # Save to database if available
     if USE_DB and SessionLocal:
         try:
             with SessionLocal() as db:
                 from models import CodexNode, NodeStory, Story
-                
+               
                 def save_tree_to_db(node_dict, parent_id=None, path=[]):
                     """Recursively save tree structure to database"""
                     for name, value in node_dict.items():
                         if name == '_stories':
                             continue
-                        
+                       
                         # Find or create node
                         query = db.query(CodexNode).filter_by(name=name)
                         if parent_id:
@@ -1086,12 +1148,12 @@ def save_codex_tree(tree):
                         else:
                             query = query.filter_by(parent_id=None)
                         node = query.first()
-                        
+                       
                         if not node:
                             node = CodexNode(name=name, parent_id=parent_id)
                             db.add(node)
-                            db.flush()  # Get ID
-                        
+                            db.flush() # Get ID
+                       
                         # Get current stories for this node from database - query fresh to avoid stale relationships
                         from sqlalchemy.orm import selectinload
                         fresh_node = db.query(CodexNode).options(
@@ -1099,7 +1161,7 @@ def save_codex_tree(tree):
                         ).filter_by(id=node.id).first()
                         current_story_ids = {s.id for s in fresh_node.stories} if fresh_node and fresh_node.stories else set()
                         expected_titles = set()
-                        
+                       
                         # Handle stories at this node
                         if isinstance(value, list):
                             # Leaf node with stories (list format)
@@ -1108,7 +1170,7 @@ def save_codex_tree(tree):
                             # Check for _stories key (intermediate node with stories)
                             if '_stories' in value:
                                 expected_titles = set(value['_stories'])
-                        
+                       
                         # Update relationships: add missing, remove extra
                         for title in expected_titles:
                             story = db.query(Story).filter_by(title=title).first()
@@ -1119,15 +1181,15 @@ def save_codex_tree(tree):
                                     logger.info(f"Added story '{title}' to node '{name}' (node_id={node.id}, story_id={story.id})")
                             else:
                                 logger.warning(f"Story '{title}' not found in database, skipping assignment to '{name}'")
-                        
+                       
                         # Flush to ensure relationships are persisted
                         db.flush()
-                        
+                       
                         # Verify relationships were actually created by querying NodeStory directly
                         if expected_titles:
                             node_story_count = db.query(NodeStory).filter_by(node_id=node.id).count()
                             logger.info(f"NodeStory records for node '{name}' (id={node.id}): {node_story_count}")
-                            
+                           
                             # Log current state after update - query fresh with eager loading
                             from sqlalchemy.orm import selectinload
                             # Expire the node to force a fresh load
@@ -1142,30 +1204,30 @@ def save_codex_tree(tree):
                                 # Debug: list all NodeStory records for this node
                                 all_node_stories = db.query(NodeStory).filter_by(node_id=node.id).all()
                                 logger.warning(f"NodeStory records: {[(ns.node_id, ns.story_id) for ns in all_node_stories]}")
-                        
+                       
                         # DON'T remove relationships - only add them
                         # This prevents us from deleting relationships that were added directly to the database
                         # but aren't yet in the in-memory tree structure
                         # Removal should be done explicitly via the remove-category endpoint
                         # if expected_titles and 'updated_node' in locals():
-                        #     for story in updated_node.stories:
-                        #         if story.title not in expected_titles:
-                        #             db.query(NodeStory).filter_by(
-                        #                 node_id=node.id, story_id=story.id
-                        #             ).delete()
-                        #             logger.info(f"Removed story '{story.title}' from node '{name}'")
-                        
+                        # for story in updated_node.stories:
+                        # if story.title not in expected_titles:
+                        # db.query(NodeStory).filter_by(
+                        # node_id=node.id, story_id=story.id
+                        # ).delete()
+                        # logger.info(f"Removed story '{story.title}' from node '{name}'")
+                       
                         # Recursively process children
                         if isinstance(value, dict):
                             save_tree_to_db(value, node.id, path + [name])
-                
+               
                 save_tree_to_db(tree)
                 db.commit()
                 logger.info("Saved codex tree to database")
         except Exception as e:
             logger.error(f"Error saving codex tree to database: {e}")
             # Continue to save JSON even if DB save fails
-    
+   
     # Optional auto-commit to HuggingFace
     token = os.getenv("HF_TOKEN")
     if token:
@@ -1189,7 +1251,6 @@ def save_codex_tree(tree):
             logger.error(f"Auto-commit failed: {e}")
     else:
         logger.info("HF_TOKEN not set; changes saved locally only")
-
 def assign_to_path(tree, path, story):
     """Assign story to path in tree"""
     global stories_dict
@@ -1219,7 +1280,6 @@ def assign_to_path(tree, path, story):
     else:
         raise ValueError("Invalid tree structure")
     return tree
-
 def remove_from_path(tree, path, title):
     """Remove story from path in tree"""
     current = tree
@@ -1235,7 +1295,6 @@ def remove_from_path(tree, path, title):
         elif isinstance(leaf_val, dict) and '_stories' in leaf_val and title in leaf_val['_stories']:
             leaf_val['_stories'].remove(title)
     return tree
-
 def find_paths_for_title(tree, title, current_path=None, paths=None):
     """Find all paths for a title in the tree"""
     if current_path is None:
