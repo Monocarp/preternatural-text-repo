@@ -40,10 +40,6 @@ const SearchCurate = () => {
   const [selectingStart, setSelectingStart] = useState(true) // true = selecting start, false = selecting end
   const textContainerRef = useRef<HTMLDivElement>(null)
   
-  // Title editing state
-  const [editingTitle, setEditingTitle] = useState(false)
-  const [newTitle, setNewTitle] = useState('')
-  
   // Category assignment state
   const [codexTree, setCodexTree] = useState<any>(null)
   const [selectedPath, setSelectedPath] = useState<string[]>([])
@@ -287,56 +283,6 @@ const SearchCurate = () => {
     }
     setEditMode(false)
     setFullText('')
-  }
-  
-  // Handle title editing
-  const handleEditTitle = () => {
-    if (!selectedStory) return
-    setEditingTitle(true)
-    setNewTitle(selectedStory.title)
-  }
-
-  const handleSaveTitle = async () => {
-    if (!selectedStory || !newTitle.trim() || newTitle === selectedStory.title) {
-      setEditingTitle(false)
-      return
-    }
-
-    try {
-      const user = await app.getUser()
-      if (!user) {
-        alert('You must be logged in to edit titles.')
-        return
-      }
-
-      await apiClient.post('/update-title', {
-        old_title: selectedStory.title,
-        new_title: newTitle.trim(),
-        book_slug: selectedStory.book_slug
-      })
-
-      // Update the selected story
-      const updatedStory = { ...selectedStory, title: newTitle.trim() }
-      setSelectedStory(updatedStory)
-
-      // Update results
-      setResults(prev => prev.map(r => 
-        r.title === selectedStory.title && r.book_slug === selectedStory.book_slug 
-          ? { ...r, title: newTitle.trim() } 
-          : r
-      ))
-
-      setEditingTitle(false)
-      setNewTitle('')
-    } catch (err: any) {
-      console.error('Error updating title:', err)
-      alert('Failed to update title. Please try again.')
-    }
-  }
-
-  const handleCancelTitleEdit = () => {
-    setEditingTitle(false)
-    setNewTitle('')
   }
 
   const handleAssignCategory = async () => {
