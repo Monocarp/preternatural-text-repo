@@ -1,12 +1,4 @@
 {
-    "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed at Valombrosa": {
-        "title": "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed at Valombrosa",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "3-4",
-        "keywords": "saint walberts cross and arm used to test and heal the possessed at valombrosa",
-        "start_char": 8922,
-        "end_char": 10477
-    },
     "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples": {
         "title": "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
         "book_slug": "christian_mysticism_vol_iv",
@@ -294,6 +286,14 @@
         "keywords": "supernatural powers of the schemhamphorasch and wonders worked by it",
         "start_char": 166305,
         "end_char": 167796
+    },
+    "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed inValombrosa": {
+        "title": "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed inValombrosa",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "3-4",
+        "keywords": "saint walberts cross and arm used to test and heal the possessed at valombrosa",
+        "start_char": 8922,
+        "end_char": 10477
     },
     "Famous Schools of Dark Magic in Salamanca, Toledo, Norcia, and Visignian Cave": {
         "title": "Famous Schools of Dark Magic in Salamanca, Toledo, Norcia, and Visignian Cave",

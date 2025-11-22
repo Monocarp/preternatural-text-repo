@@ -70,7 +70,7 @@ from utils import (
     assign_to_path, remove_from_path,
     render_md_with_scroll_and_highlight, render_static_story,
     export_stories, get_stories_at_path, find_paths_for_title,
-    load_story_positions, update_story_boundaries, sources, # needed for render fallback
+    load_story_positions, update_story_boundaries, update_story_title, sources, # needed for render fallback
 )
 # ------------------------------------------------------------------ #
 # 6. Startup – sanity check
@@ -272,6 +272,10 @@ class UpdateBoundariesBody(BaseModel):
     book_slug: str
     start_char: int
     end_char: int
+class UpdateTitleBody(BaseModel):
+    old_title: str
+    new_title: str
+    book_slug: str
 # ------------------------------------------------------------------ #
 # 8. End-points
 # ------------------------------------------------------------------ #
@@ -534,6 +538,18 @@ def update_boundaries(body: UpdateBoundariesBody, user = Depends(require_editor)
         return {"status": "updated", "message": f"Boundaries updated for {body.title}"}
     else:
         raise HTTPException(400, "Failed to update boundaries")
+# ------------------- UPDATE TITLE ------------------- #
+@app.post("/api/update-title")
+def update_title(body: UpdateTitleBody, user = Depends(require_editor)):
+    success = update_story_title(
+        book_slug=body.book_slug,
+        old_title=body.old_title,
+        new_title=body.new_title
+    )
+    if success:
+        return {"status": "updated", "message": f"Title updated from '{body.old_title}' to '{body.new_title}'"}
+    else:
+        raise HTTPException(400, "Failed to update title")
 # ------------------- EXPORT ------------------- #
 @app.post("/api/export")
 def export(body: ExportBody):

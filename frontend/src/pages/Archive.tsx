@@ -6,11 +6,13 @@ import axios from 'axios'
 import { useStore } from '../store'
 import SidebarTree from '../components/SidebarTree'
 import { decodeRoutePath, encodePathSegmentsForRoute } from '../utils/path'
+import { useStackApp } from '@stackframe/react'
 
 const Archive = () => {
   const location = useLocation()
   const { path = '' } = useParams<{ path?: string }>()
   const navigate = useNavigate()
+  const app = useStackApp()
   
   // Extract path from location.pathname to ensure we detect URL changes
   // React Router's :path* might not trigger useParams updates properly
@@ -21,6 +23,8 @@ const Archive = () => {
   const { stories, loadStories, loading, error } = useStore()
   const [storyContents, setStoryContents] = useState<Record<string, string>>({})
   const [storyModes, setStoryModes] = useState<Record<string, 'static' | 'book'>>({})
+  const [editingTitle, setEditingTitle] = useState<string | null>(null)
+  const [newTitle, setNewTitle] = useState('')
 
   const decodedPath = useMemo(() => {
     // Use pathFromLocation instead of useParams path - React Router's :path* doesn't update reliably
@@ -56,6 +60,81 @@ const Archive = () => {
       useStore.getState().selectedPath = []
     }
   }, [decodedPath, isUnassigned, loadStories, location.pathname])
+
+  // Handle title editing
+  const handleEditTitle = (story: any) => {
+    setEditingTitle(story.title)
+    setNewTitle(story.title)
+  }
+
+  const handleSaveTitle = async (story: any) => {
+    if (!newTitle.trim() || newTitle === story.title) {
+      setEditingTitle(null)
+      return
+    }
+
+    // Check if title already exists in this book
+    const existingStory = stories.find(s => 
+      s.title.toLowerCase() === newTitle.trim().toLowerCase() && 
+      s.book_slug === story.book_slug && 
+      s.title !== story.title
+    )
+    if (existingStory) {
+      alert('A story with this title already exists in this book.')
+      return
+    }
+
+    try {
+      const user = await app.getUser()
+      if (!user) {
+        alert('You must be logged in to edit titles.')
+        return
+      }
+
+      await axios.post('/api/update-title', {
+        old_title: story.title,
+        new_title: newTitle.trim(),
+        book_slug: story.book_slug
+      })
+
+      // Update the story in the store
+      const updatedStories = stories.map(s => 
+        s.title === story.title ? { ...s, title: newTitle.trim() } : s
+      )
+      useStore.getState().setStories(updatedStories)
+
+      // Update story contents key
+      if (storyContents[story.title]) {
+        setStoryContents(prev => {
+          const updated = { ...prev }
+          delete updated[story.title]
+          updated[newTitle.trim()] = prev[story.title]
+          return updated
+        })
+      }
+
+      // Update story modes key
+      if (storyModes[story.title]) {
+        setStoryModes(prev => {
+          const updated = { ...prev }
+          delete updated[story.title]
+          updated[newTitle.trim()] = prev[story.title]
+          return updated
+        })
+      }
+
+      setEditingTitle(null)
+      setNewTitle('')
+    } catch (err: any) {
+      console.error('Error updating title:', err)
+      alert('Failed to update title. Please try again.')
+    }
+  }
+
+  const handleCancelEdit = () => {
+    setEditingTitle(null)
+    setNewTitle('')
+  }
 
   // Load story content when toggling modes
   const handleToggleMode = async (story: any, mode: 'static' | 'book') => {
@@ -177,32 +256,72 @@ const Archive = () => {
 
           {!loading && stories.length > 0 && (
             <div className="space-y-3">
-            {stories.map((story: any) => {
+            {stories.map((story: any, index: number) => {
               const currentMode = storyModes[story.title] || 'static'
               const storyContent = storyContents[story.title]
               
               return (
                 <Disclosure 
-                  key={story.title} 
+                  key={`${story.book_slug}-${story.title}-${index}`} 
                   as="div" 
-                  className="border border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-shadow bg-gray-800"
+                  className="border border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-shadow bg-gray-800 relative"
                 >
                   <DisclosureButton 
-                    className="w-full p-4 hover:bg-gray-700 relative"
+                    className="w-full p-4 hover:bg-gray-700"
                     onClick={() => handleStoryOpen(story)}
                   >
-                    <div className="flex items-center justify-center">
-                      <div className="text-center">
-                        <h3 className="text-lg font-semibold text-white">{story.title}</h3>
+                    <div className="flex items-center justify-between">
+                      <div className="flex-1 text-center pr-8">
+                        {editingTitle === story.title ? (
+                          <div className="flex items-center justify-center gap-2">
+                            <input
+                              type="text"
+                              value={newTitle}
+                              onChange={(e) => setNewTitle(e.target.value)}
+                              onKeyPress={(e) => {
+                                if (e.key === 'Enter') handleSaveTitle(story)
+                                if (e.key === 'Escape') handleCancelEdit()
+                              }}
+                              className="flex-1 px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-lg font-semibold"
+                              autoFocus
+                              placeholder="Press Enter to save, Escape to cancel"
+                            />
+                          </div>
+                        ) : (
+                          <h3 className="text-lg font-semibold text-white">{story.title}</h3>
+                        )}
                         <div className="mt-1 text-sm text-gray-300">
                           <span className="font-medium">{story.book_slug}</span>
                           {story.pages && <span className="ml-2">• Pages: {story.pages}</span>}
                           {story.keywords && <span className="ml-2">• Keywords: {story.keywords}</span>}
                         </div>
                       </div>
+                      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">▼</span>
                     </div>
-                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">▼</span>
                   </DisclosureButton>
+                  {editingTitle === story.title ? (
+                    <div className="absolute top-4 right-12 flex gap-1">
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleSaveTitle(story) }}
+                        className="px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-sm"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleCancelEdit() }}
+                        className="px-2 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 text-sm"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={(e) => { e.stopPropagation(); handleEditTitle(story) }}
+                      className="absolute top-4 right-12 px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+                    >
+                      Edit
+                    </button>
+                  )}
                   <DisclosurePanel className="p-4 pt-0">
                     <div className="mt-4 border-t border-gray-700 pt-4">
                       {storyContent ? (

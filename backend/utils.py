@@ -129,6 +129,105 @@ def update_story_boundaries(book_slug, title, start_char, end_char):
             logger.error(f"Failed to update database for {title}: {e}")
    
     return save_success
+def update_story_title(book_slug, old_title, new_title):
+    """Update story title in JSON, database, and all references"""
+    # Update codex tree first
+    try:
+        tree = load_codex_tree()
+        def replace_title_in_tree(node):
+            if isinstance(node, dict):
+                for key, value in node.items():
+                    if key == '_stories' and isinstance(value, list):
+                        for i, t in enumerate(value):
+                            if t == old_title:
+                                value[i] = new_title
+                    elif isinstance(value, (dict, list)):
+                        replace_title_in_tree(value)
+            elif isinstance(node, list):
+                for i, t in enumerate(node):
+                    if t == old_title:
+                        node[i] = new_title
+        replace_title_in_tree(tree)
+        save_codex_tree_to_json(tree)
+        logger.info(f"Updated codex tree: replaced '{old_title}' with '{new_title}'")
+    except Exception as e:
+        logger.error(f"Failed to update codex tree: {e}")
+        # Don't fail the whole operation
+
+    # Load positions if not already loaded
+    positions = load_story_positions(book_slug)
+   
+    if old_title not in positions:
+        logger.warning(f"Story '{old_title}' not found in {book_slug}")
+   
+    if old_title in positions:
+        positions[new_title] = positions.pop(old_title)
+        story_positions[book_slug] = positions
+   
+    # Update stories_dict cache
+    if old_title in stories_dict:
+        story_data = stories_dict.pop(old_title)
+        story_data["title"] = new_title
+        stories_dict[new_title] = story_data
+   
+    # Save to JSON files
+    save_success = save_story_positions(book_slug)
+    
+    # Also save stories_dict.json
+    try:
+        with open(stories_dict_path, "w") as f:
+            json.dump(stories_dict, f, indent=4)
+    except Exception as e:
+        logger.error(f"Failed to save stories_dict.json: {e}")
+   
+    # Update database if available
+    if USE_DB and SessionLocal:
+        try:
+            from models import Story
+            with SessionLocal() as db:
+                story = db.query(Story).filter_by(title=old_title, book_slug=book_slug).first()
+                if story:
+                    story.title = new_title
+                    db.commit()
+                    logger.info(f"Updated story title in database: '{old_title}' -> '{new_title}'")
+                    # Note: NodeStory relationships are preserved via story.id (foreign key)
+                else:
+                    logger.warning(f"Story '{old_title}' not found in database")
+        except Exception as e:
+            logger.error(f"Failed to update database title for '{old_title}': {e}")
+            return False
+   
+    # Update document store metadata
+    if document_store:
+        try:
+            # Find all documents that contain this story and update the title
+            updated_docs = []
+            for doc in document_store.filter_documents({}):
+                if "stories" in doc.meta:
+                    story_updated = False
+                    for story in doc.meta["stories"]:
+                        if story.get("title") == old_title:
+                            story["title"] = new_title
+                            story_updated = True
+                    if story_updated:
+                        updated_docs.append(doc)
+            
+            if updated_docs:
+                # Convert ALL numpy embeddings to lists for JSON serialization before saving
+                for doc in document_store.filter_documents({}):
+                    if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
+                        doc.embedding = doc.embedding.tolist()
+                # Re-save the document store with updated metadata
+                document_store.delete_documents([doc.id for doc in updated_docs])
+                document_store.write_documents(updated_docs)
+                # Save to disk
+                document_store.save_to_disk(document_store_path)
+                logger.info(f"Updated document store metadata for {len(updated_docs)} documents and saved to disk")
+        except Exception as e:
+            logger.error(f"Failed to update document store metadata: {e}")
+            # Don't fail the whole operation for this
+
+    return True
 # Discover books dynamically
 books = [d for d in os.listdir(books_dir) if os.path.isdir(os.path.join(books_dir, d)) and not d.startswith('.')]
 sources = ["All Sources"] + sorted(books)
@@ -157,42 +256,21 @@ if os.path.exists(document_store_path):
                     logger.warning(f"Failed to convert embedding for doc {doc.id}: {e}; setting to None")
                     doc.embedding = None
         has_embeddings = any(doc.embedding is not None and len(doc.embedding) == 1024 for doc in loaded_docs)
-        if not has_embeddings:
-            logger.warning("No valid embeddings found; re-embedding...")
-            from haystack.components.embedders import SentenceTransformersDocumentEmbedder
-            import os
-            MODEL_DIR = os.path.join(os.path.dirname(__file__), "models", "bge-large-en-v1.5")
-            MODEL_PATH = MODEL_DIR if os.path.exists(MODEL_DIR) else "BAAI/bge-large-en-v1.5"
-            embedder = SentenceTransformersDocumentEmbedder(model=MODEL_PATH, normalize_embeddings=True)
-            embedder.warm_up()
-            try:
-                valid_docs = [doc for doc in loaded_docs if doc.content and len(doc.content.strip()) >= 10]
-                if not valid_docs:
-                    raise ValueError("No valid documents for re-embedding")
-                embedded_docs = embedder.run(valid_docs)["documents"]
-                document_store.delete_documents([doc.id for doc in loaded_docs])
-                document_store.write_documents(embedded_docs)
-            except Exception as e:
-                logger.error(f"Re-embedding failed: {e}")
-                raise
-        # Force re-index if needed
-        logger.info("Re-writing documents to new store for index rebuild...")
-        new_store = InMemoryDocumentStore(embedding_similarity_function="cosine")
-        new_store.write_documents(loaded_docs)
-        document_store = new_store
-        logger.info(f"Index rebuilt, store has {document_store.count_documents()} documents")
+        logger.info(f"Documents have valid embeddings: {has_embeddings}")
+        # Re-embedding disabled - embeddings should be pre-computed
     except Exception as e:
-        logger.error(f"Failed to load/re-embed document store: {e}")
-        raise
+        logger.error(f"Failed to load document store: {e}. Creating new empty document store.")
+        document_store = InMemoryDocumentStore()
 else:
     logger.error("document_store.json not found.")
-    raise FileNotFoundError("document_store.json missing")
+    document_store = InMemoryDocumentStore()
 # Set up Haystack pipelines
 logger.debug("Setting up Haystack pipelines...")
 import os
 MODEL_DIR = os.path.join(os.path.dirname(__file__), "models", "bge-large-en-v1.5")
 MODEL_PATH = MODEL_DIR if os.path.exists(MODEL_DIR) else "BAAI/bge-large-en-v1.5"
 embedder_both = SentenceTransformersTextEmbedder(model=MODEL_PATH, normalize_embeddings=True)
+embedder_both.warm_up()
 retriever_embedding_both = InMemoryEmbeddingRetriever(document_store=document_store)
 retriever_bm25_both = InMemoryBM25Retriever(document_store=document_store)
 joiner = DocumentJoiner(
@@ -213,6 +291,7 @@ keyword_pipeline = Pipeline()
 keyword_pipeline.add_component("retriever_bm25", retriever_bm25_key)
 logger.info(f"Keyword pipeline components: {list(keyword_pipeline.graph.nodes.keys())}")
 embedder_sem = SentenceTransformersTextEmbedder(model=MODEL_PATH, normalize_embeddings=True)
+embedder_sem.warm_up()
 retriever_embedding_sem = InMemoryEmbeddingRetriever(document_store=document_store)
 semantic_pipeline = Pipeline()
 semantic_pipeline.add_component("embedder", embedder_sem)
@@ -265,6 +344,9 @@ def search_stories(query, source_filter=None, type_filter=None, search_mode="Bot
         else:
             raise ValueError(f"Invalid search mode: {search_mode}")
         logger.debug(f"Retrieved docs: {len(documents)}")
+        if documents:
+            logger.info(f"Sample doc meta: {documents[0].meta}")
+            logger.info(f"Sample doc score: {documents[0].score}")
     except Exception as e:
         logger.error(f"Search pipeline failed: {e}")
         return []
@@ -279,6 +361,7 @@ def search_stories(query, source_filter=None, type_filter=None, search_mode="Bot
             
             for story in stories:
                 title = story["title"]
+                logger.debug(f"Checking story '{title}' in book '{book_slug}', score {doc.score}, min_score {min_score}, start_char {positions.get(title, {}).get('start_char', -1)}")
                 if doc.score > min_score and title not in grouped and positions.get(title, {}).get("start_char", -1) != -1:
                     grouped[title] = {
                         "title": title,
