@@ -11,7 +11,13 @@ load_dotenv(dotenv_path=os.path.join(ROOT, '.env.local'))
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-engine = create_engine(DATABASE_URL)
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True,  # Test connections before using them
+    pool_recycle=3600,   # Recycle connections after 1 hour
+    pool_size=5,         # Maximum number of connections to keep
+    max_overflow=10      # Maximum number of connections that can be created beyond pool_size
+)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()

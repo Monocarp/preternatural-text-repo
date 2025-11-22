@@ -1,13 +1,4 @@
 {
-    "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples": {
-        "start_char": 10489,
-        "end_char": 10881,
-        "pages": "4",
-        "keywords": [
-            "tomb of saint cajetanus in naples"
-        ],
-        "verbatim": "The tomb of the holy Cajetanus in Naples was just as celebrated as he was helpful to those sick from the demon: hence he was visited even down to recent times by such persons, who filled everything around them with their howling and the lamentations of their oppressed spirits, and hung all the walls with stones, nails, tufts of hair and similar rubbish as trophies of the saint's victories."
-    },
     "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio": {
         "start_char": 10882,
         "end_char": 11361,
@@ -327,7 +318,7 @@
         ],
         "verbatim": "To the frequently recurring tales of poisoned wells were then joined those of the power of poison‑brewers extended also over the other elements, of weather‑making, and of the devastation of the vegetable world. One knows what power the Jews have ascribed to the Schem‑Hamphoraſch: it not only unlocks the word of man, but makes below the voice of animals intelligible, above the speech of ministering angels and the demons of the abyss; it makes the world of thought accessible and opens the view into the future. He who knew how to bind the Word could create a new world; Moses worked his wonders by it, the prophets prophesied by it, even Jesus --- who learned it from Jehoshua in Egypt --- brought forth wondrous things by it. It embraced not only, like the name Jehova, God's essence within itself, but at the same time also his omnipotence, omniscience, truth, righteousness, and mercy; it was written at the entrance of the Temple of Jerusalem on the stone that Jacob had anointed with oil; but in the burning of the Temple in the time of the Romans it was lost together with the stone; and the later Jews devised substitutes for it, and their legend has much to praise about what their rabbis effected with them. It is the symbol of the higher mysticism and prophetic gift as it existed in earlier Israel, but it retreated with the first captivity, and with the beginning of Christianity it was wholly lost; whereupon deceitful human contrivances and wicked witchcraft took its place."
     },
-    "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed inValombrosa": {
+    "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed in Valombrosa": {
         "start_char": 8922,
         "end_char": 10477,
         "pages": "3-4",
@@ -335,5 +326,14 @@
             "saint walberts cross and arm used to test and heal the possessed at valombrosa"
         ],
         "verbatim": "We mention first the Camaldolese monastery of Valombrosa, half a day's journey from Florence. Saint Walbert, contemporary of Gregory VII and founder of the order, had there erected an oratory to the Blessed Virgin. In his life he had, when a dying monk was grievously terrified by a vision of a demon, driven it off with a cross which he took from the hand of the dying man. The monks preserved the cross there, and it soon served to test the possessed with it to determine whether they were truly demonic. Later the arm that had borne the crucifix to victory was also discovered; and from that time the Church of Our Lady at Valombrosa became a refuge for the possessed for all Tuscany; indeed, they came in swarms even as far as the borders of France. The healings increased, and since the year 1450 the occurrences had also found someone to record them in writing. \\[Page 4\\]\n\nResponding to the urging of the physician Laurentius, who had been present on the spot, Hieronymus of Raggiolo, an active and very pious man, from what he there found, learned from credible old people, and saw with his own eyes, compiled eighteen books on the demonic healings. The confidence in which the holy place and its founder were held was so great that, as he reports in Book XVII, merely from the Getica region in Tuscany and the surrounding territories, every month---except in the depths of winter---three to four possessed persons, women and men, and people of every rank, came to seek deliverance; and hardly had they obtained it when they were again replaced by"
+    },
+    "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples": {
+        "start_char": 10489,
+        "end_char": 10881,
+        "pages": "4",
+        "keywords": [
+            "tomb of saint cajetanus in naples"
+        ],
+        "verbatim": "The tomb of the holy Cajetanus in Naples was just as celebrated as he was helpful to those sick from the demon: hence he was visited even down to recent times by such persons, who filled everything around them with their howling and the lamentations of their oppressed spirits, and hung all the walls with stones, nails, tufts of hair and similar rubbish as trophies of the saint's victories."
     }
 }

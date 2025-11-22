@@ -273,15 +273,17 @@ const Archive = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex-1 text-center pr-8">
                         {editingTitle === story.title ? (
-                          <div className="flex items-center justify-center gap-2">
+                          <div className="flex items-center justify-center gap-2" onClick={(e) => e.stopPropagation()}>
                             <input
                               type="text"
                               value={newTitle}
                               onChange={(e) => setNewTitle(e.target.value)}
-                              onKeyPress={(e) => {
+                              onKeyDown={(e) => {
                                 if (e.key === 'Enter') handleSaveTitle(story)
                                 if (e.key === 'Escape') handleCancelEdit()
+                                e.stopPropagation()
                               }}
+                              onClick={(e) => e.stopPropagation()}
                               className="flex-1 px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-lg font-semibold"
                               autoFocus
                               placeholder="Press Enter to save, Escape to cancel"

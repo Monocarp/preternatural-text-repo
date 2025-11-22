@@ -1,12 +1,4 @@
 {
-    "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples": {
-        "title": "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "4",
-        "keywords": "tomb of saint cajetanus in naples",
-        "start_char": 10489,
-        "end_char": 10881
-    },
     "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio": {
         "title": "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio",
         "book_slug": "christian_mysticism_vol_iv",
@@ -287,13 +279,21 @@
         "start_char": 166305,
         "end_char": 167796
     },
-    "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed inValombrosa": {
-        "title": "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed inValombrosa",
+    "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed in Valombrosa": {
+        "title": "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed in Valombrosa",
         "book_slug": "christian_mysticism_vol_iv",
         "pages": "3-4",
         "keywords": "saint walberts cross and arm used to test and heal the possessed at valombrosa",
         "start_char": 8922,
         "end_char": 10477
+    },
+    "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples": {
+        "title": "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "4",
+        "keywords": "tomb of saint cajetanus in naples",
+        "start_char": 10489,
+        "end_char": 10881
     },
     "Famous Schools of Dark Magic in Salamanca, Toledo, Norcia, and Visignian Cave": {
         "title": "Famous Schools of Dark Magic in Salamanca, Toledo, Norcia, and Visignian Cave",
