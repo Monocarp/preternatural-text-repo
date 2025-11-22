@@ -68,9 +68,8 @@ def load_full_md(book_slug):
             logger.error(f"Failed to load Full_Text.md for {book_slug}: {e}")
             full_mds[book_slug] = ""
     return full_mds[book_slug]
-def load_story_positions(book_slug, force_reload=False):
-    """Load story positions from JSON file. If force_reload=True, always read from disk."""
-    if force_reload or book_slug not in story_positions:
+def load_story_positions(book_slug):
+    if book_slug not in story_positions:
         pos_path = os.path.join(books_dir, book_slug, "story_positions.json")
         try:
             with open(pos_path, "r", encoding="utf-8") as f:
@@ -271,23 +270,30 @@ def search_stories(query, source_filter=None, type_filter=None, search_mode="Bot
         return []
     grouped = {}
     for doc in documents:
-        stories = doc.meta.get("stories", [])
-        book_slug = doc.meta.get("book", "unknown")
-        positions = load_story_positions(book_slug)
-        for story in stories:
-            title = story["title"]
-            if doc.score > min_score and title not in grouped and positions.get(title, {}).get("start_char", -1) != -1:
-                grouped[title] = {
-                    "title": title,
-                    "book_slug": book_slug,
-                    "pages": story["pages"],
-                    "keywords": ', '.join(positions.get(title, {}).get("keywords", [])),
-                    "start_char": positions.get(title, {}).get("start_char", 0),
-                    "end_char": positions.get(title, {}).get("end_char", len(load_full_md(book_slug))),
-                    "score": doc.score
-                }
-            elif title in grouped:
-                grouped[title]["score"] = max(grouped[title]["score"], doc.score)
+        try:
+            stories = doc.meta.get("stories", [])
+            book_slug = doc.meta.get("book", "unknown")
+            positions = load_story_positions(book_slug)
+            full_text = load_full_md(book_slug)
+            text_length = len(full_text) if full_text else 0
+            
+            for story in stories:
+                title = story["title"]
+                if doc.score > min_score and title not in grouped and positions.get(title, {}).get("start_char", -1) != -1:
+                    grouped[title] = {
+                        "title": title,
+                        "book_slug": book_slug,
+                        "pages": story["pages"],
+                        "keywords": ', '.join(positions.get(title, {}).get("keywords", [])),
+                        "start_char": positions.get(title, {}).get("start_char", 0),
+                        "end_char": positions.get(title, {}).get("end_char", text_length),
+                        "score": doc.score
+                    }
+                elif title in grouped:
+                    grouped[title]["score"] = max(grouped[title]["score"], doc.score)
+        except Exception as e:
+            logger.error(f"Error processing document for book {doc.meta.get('book', 'unknown')}: {e}", exc_info=True)
+            continue
     sorted_results = sorted(grouped.values(), key=lambda x: x["score"], reverse=True)
     if search_mode == "Exact":
         sorted_results = [{**r, "search_query": query} for r in sorted_results]
@@ -759,15 +765,11 @@ def merge_trees(existing_tree, new_tree):
 # Helper functions for loading stories and managing tree
 def load_all_stories():
     """Load stories from story_positions.json in each book folder"""
-    global story_positions
-    # Clear cache to force fresh read from disk
-    story_positions.clear()
     stories_dict = {}
     for book_slug in os.listdir(books_dir):
         book_path = os.path.join(books_dir, book_slug)
         if os.path.isdir(book_path) and not book_slug.startswith('.'):
-            # Force reload from disk by passing force_reload=True
-            positions = load_story_positions(book_slug, force_reload=True)
+            positions = load_story_positions(book_slug)
             for title, details in positions.items():
                 stories_dict[title] = {
                     "title": title,
@@ -792,12 +794,9 @@ def insert_recursive(tree_json, db, parent_id=None):
                     db.add(NodeStory(node_id=node.id, story_id=story.id))
         elif isinstance(value, dict):
             insert_recursive(value, db, node.id)
-def get_stories_at_path(tree, path, stories_dict_ref=None):
+def get_stories_at_path(tree, path):
     """Get stories at a given path in the tree - like original app.py"""
     global stories_dict
-    # Use provided reference if given, otherwise use global
-    if stories_dict_ref is None:
-        stories_dict_ref = stories_dict
     logger.info(f"get_stories_at_path called with path: {path}")
     current = tree
     for level in path:
@@ -827,60 +826,48 @@ def get_stories_at_path(tree, path, stories_dict_ref=None):
     logger.info(f"Total titles collected: {titles}")
     # Resolve to full story objects
     unique_titles = set(titles)
-    # DEBUG: Log stories_dict size and sample before lookup
-    logger.info(f"DEBUG get_stories_at_path: stories_dict_ref has {len(stories_dict_ref)} stories")
-    if stories_dict_ref:
-        sample_title = next(iter(stories_dict_ref.keys()))
-        sample = stories_dict_ref[sample_title]
-        logger.info(f"DEBUG SAMPLE STORY: '{sample_title}' start_char={sample.get('start_char')} end_char={sample.get('end_char')}")
-    
-    result = [stories_dict_ref[title] for title in unique_titles if title in stories_dict_ref]
+    result = [stories_dict[title] for title in unique_titles if title in stories_dict]
     logger.info(f"Returning {len(result)} stories: {[s['title'] for s in result]}")
-    # DEBUG: Log first story's positions to verify they're fresh
-    if result:
-        first_story = result[0]
-        logger.info(f"DEBUG RETURNING STORY: '{first_story['title']}' start_char={first_story.get('start_char')} end_char={first_story.get('end_char')}")
     return result
 # Load codex_tree (from DB, fallback to JSON if empty or DB unavailable)
-# _syncing_json_to_db: internal flag to prevent infinite recursion when syncing
-def load_codex_tree(_syncing_json_to_db=False):
+def load_codex_tree():
     global stories_dict
     # ALWAYS load fresh from disk first — source of truth for stories
     disk_stories = load_all_stories()
     stories_dict = disk_stories.copy()
 
     # If DB is enabled, sync disk → DB (upsert)
-    # IMPORTANT: Do this in a SEPARATE session, then close it completely
-    # before building the tree, so tree-building gets fresh Story objects
-    # Also expire any cached Story objects to ensure relationships load fresh data
+    # CRITICAL: This updates Story records but preserves NodeStory assignments
     if USE_DB and SessionLocal:
         try:
             with SessionLocal() as db:
-                updated_story_ids = []
+                # Track which story IDs existed before and after sync
+                existing_story_ids = {s.id for s in db.query(Story).all()}
+                
                 for title, data in disk_stories.items():
                     story = db.query(Story).filter_by(title=title).first()
                     if story:
+                        # Update existing story - preserves NodeStory relationships
                         story.book_slug = data["book_slug"]
                         story.pages = data["pages"]
                         story.keywords = data["keywords"]
                         story.start_char = data["start_char"]
                         story.end_char = data["end_char"]
-                        updated_story_ids.append(story.id)
                     else:
+                        # Create new story - will have no assignments initially
                         new_story = Story(**data)
                         db.add(new_story)
-                        db.flush()  # Get ID
-                        updated_story_ids.append(new_story.id)
+                        db.flush()  # Get the ID
                 db.commit()
-                logger.info(f"Synced {len(disk_stories)} stories from disk to DB")
-                # Expire all Story objects to ensure they're reloaded fresh
-                # This ensures relationships in tree-building will load fresh Story data
-                from sqlalchemy.orm import Session
-                for story_id in updated_story_ids:
-                    story_obj = db.query(Story).get(story_id)
-                    if story_obj:
-                        db.expire(story_obj)
-            # Session is now closed - this ensures fresh data when we load tree
+                
+                # After commit, check for newly added stories
+                new_story_ids = {s.id for s in db.query(Story).all()}
+                added_stories = new_story_ids - existing_story_ids
+                
+                if added_stories:
+                    logger.info(f"Added {len(added_stories)} new stories to DB")
+                    
+                logger.info(f"Synced {len(disk_stories)} stories from disk to DB (updated existing, preserved assignments)")
         except Exception as e:
             logger.error(f"DB sync failed (non-fatal, using disk data): {e}")
 
@@ -904,24 +891,17 @@ def load_codex_tree(_syncing_json_to_db=False):
         return tree
    
     try:
-        # IMPORTANT: Use a FRESH session after syncing stories above
-        # This ensures node.stories relationships load fresh Story objects
         with SessionLocal() as db:
             root_nodes = db.query(CodexNode).filter_by(parent_id=None).all()
             if not root_nodes:
-                logger.info("No codex nodes in DB - initializing from codex_tree.json")
+                logger.info("No codex nodes in DB - initializing from CATEGORIES")
                 tree_json = load_codex_tree_from_json()
                 # Insert from JSON
                 insert_recursive(tree_json, db)
                 db.commit()
                 root_nodes = db.query(CodexNode).filter_by(parent_id=None).all()
-                logger.info("Initialized codex nodes from JSON")
-            # NOTE: If DB already has nodes, we don't sync JSON → DB here
-            # The tree structure comes from DB relationships, not from JSON
-            # If JSON is updated, it needs to be explicitly synced via save_codex_tree()
            
             # Eagerly load all relationships recursively to avoid lazy loading issues
-            # Use selectinload to ensure we get fresh Story objects from the database
             from sqlalchemy.orm import selectinload
             from models import NodeStory
            
@@ -1073,23 +1053,6 @@ def load_codex_tree(_syncing_json_to_db=False):
            
             total_stories = count_stories_in_tree(tree)
             logger.info(f"Loaded codex tree from database with {total_stories} total story assignments")
-            
-            # If DB tree has no story assignments, check if JSON has them and sync
-            if total_stories == 0 and not _syncing_json_to_db:
-                json_tree = load_codex_tree_from_json()
-                json_stories = count_stories_in_tree(json_tree)
-                if json_stories > 0:
-                    logger.warning(f"DB tree has no story assignments, but JSON has {json_stories}. Syncing JSON → DB...")
-                    # Save JSON tree to DB to update relationships
-                    # save_codex_tree doesn't call load_codex_tree, so this is safe
-                    try:
-                        save_codex_tree(json_tree)
-                        logger.info(f"Synced codex_tree.json → DB. Rebuilding tree from DB...")
-                        # Rebuild tree after sync (with flag to prevent infinite recursion)
-                        return load_codex_tree(_syncing_json_to_db=True)
-                    except Exception as e:
-                        logger.error(f"Failed to sync JSON → DB: {e}. Using JSON tree directly.")
-                        return json_tree
            
             # Also log the actual tree structure for the node we know has stories
             if 'Demonic Activity' in tree:
@@ -1109,6 +1072,12 @@ def load_codex_tree(_syncing_json_to_db=False):
                         logger.info(f"Obsession keys but no Fear/Anxiety: {list(obs.keys())}")
                 elif isinstance(da, dict):
                     logger.info(f"Demonic Activity is dict but no Obsession: {list(da.keys())}")
+           
+            # CRITICAL: Sync the DB tree back to JSON to keep them in sync
+            # This ensures that if someone updates story_positions.json and the server restarts,
+            # the codex_tree.json reflects the current DB state with all assignments preserved
+            save_codex_tree_to_json(tree)
+            logger.info(f"Synced DB tree structure to codex_tree.json ({total_stories} assignments preserved)")
            
             return tree
     except Exception as e:

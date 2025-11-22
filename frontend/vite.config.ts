@@ -17,9 +17,9 @@ export default defineConfig(({ mode }) => {
       ],
       proxy: {
         '/api': {
-          target: 'https://preternatural-text-repo.onrender.com', // Render backend - stable production URL
+          target: 'http://localhost:8000', // Local backend for development
           changeOrigin: true,
-          secure: true, // Use secure HTTPS for production
+          secure: false,
         }
       }
     },
