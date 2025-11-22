@@ -292,15 +292,19 @@ def health():
 # ------------------- SEARCH ------------------- #
 @app.post("/api/search")
 def api_search(body: SearchQuery):
-    results = search_stories(
-        query=body.query,
-        source_filter=body.source_filter,
-        type_filter=body.type_filter,
-        search_mode=body.search_mode,
-        top_k=body.top_k,
-        min_score=body.min_score,
-    )
-    return {"results": results}
+    try:
+        results = search_stories(
+            query=body.query,
+            source_filter=body.source_filter,
+            type_filter=body.type_filter,
+            search_mode=body.search_mode,
+            top_k=body.top_k,
+            min_score=body.min_score,
+        )
+        return {"results": results}
+    except Exception as e:
+        log.error(f"Search failed: {str(e)}", exc_info=True)
+        raise HTTPException(500, f"Search failed: {str(e)}")
 # ------------------- TREE ------------------- #
 @app.get("/api/get-tree")
 def get_tree():
@@ -324,18 +328,10 @@ def get_stories(path: str):
     parts = [urllib.parse.unquote(p.strip()) for p in path.split("/") if p.strip()]
     log.info(f"After split and decode: {parts}")
     tree = load_codex_tree()
-    # Import stories_dict AFTER load_codex_tree() to ensure we have the updated version
-    from utils import stories_dict as fresh_stories_dict
     log.info(f"Getting stories for path: {parts}")
     log.info(f"Tree structure at root: {list(tree.keys())[:5]}...")  # First 5 keys
-    log.info(f"DEBUG: fresh_stories_dict has {len(fresh_stories_dict)} stories")
-    # Pass the fresh stories_dict explicitly to ensure we use the updated version
-    stories = get_stories_at_path(tree, parts, stories_dict_ref=fresh_stories_dict)
+    stories = get_stories_at_path(tree, parts)
     log.info(f"Found {len(stories)} stories for path {parts}")
-    # DEBUG: Log first story's actual start_char/end_char to verify they're correct
-    if stories:
-        first = stories[0]
-        log.info(f"DEBUG RETURNING STORY: '{first['title']}' start_char={first.get('start_char')} end_char={first.get('end_char')} book={first.get('book_slug')}")
     if len(stories) == 0 and len(parts) > 0:
         # Debug: check what we find at each level
         current = tree
@@ -489,12 +485,8 @@ def remove_category(body: RemoveBody, user: Dict = Depends(require_editor)):
 # ------------------- RENDER ------------------- #
 @app.post("/api/render-story")
 def render_story(body: RenderQuery):
-    import utils
-    from utils import find_book_slug, load_codex_tree
-    # Refresh stories_dict to ensure we have latest data
-    load_codex_tree()
-    # Access stories_dict via utils module to get updated version
-    story = utils.stories_dict.get(body.title)
+    from utils import stories_dict, find_book_slug
+    story = stories_dict.get(body.title)
     if not story:
         # fallback: search by title across all books
         try:
