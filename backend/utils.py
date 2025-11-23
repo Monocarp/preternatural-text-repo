@@ -1014,30 +1014,28 @@ def insert_recursive(tree_json, db, parent_id=None):
         elif isinstance(value, dict):
             insert_recursive(value, db, node.id)
 def enrich_stories_with_book_metadata(stories):
-    """Add book metadata (title, author, year) to story objects"""
-    if not USE_DB or not SessionLocal:
-        return stories
+    """Add book metadata (title, author, year) to story objects using preloaded cache"""
+    enriched = []
+    for story in stories:
+        enriched_story = story.copy()
+        book_slug = story.get('book_slug')
+        
+        # Use the preloaded cache instead of querying the database
+        if book_slug and book_slug in _book_metadata_cache:
+            book_meta = _book_metadata_cache[book_slug]
+            enriched_story['book_title'] = book_meta.get('book_title', book_slug)
+            enriched_story['book_author'] = book_meta.get('book_author', 'Unknown')
+            enriched_story['book_year'] = book_meta.get('book_year', '')
+        else:
+            # Fallback: use book_slug as title if not in cache
+            logger.debug(f"Book metadata not found in cache for {book_slug}")
+            enriched_story['book_title'] = book_slug.replace('_', ' ').title() if book_slug else 'Unknown'
+            enriched_story['book_author'] = 'Unknown'
+            enriched_story['book_year'] = ''
+        
+        enriched.append(enriched_story)
     
-    try:
-        with SessionLocal() as db:
-            # Get all books at once
-            books = {book.slug: book for book in db.query(Book).all()}
-            
-            # Enrich each story
-            enriched = []
-            for story in stories:
-                enriched_story = story.copy()
-                book = books.get(story.get('book_slug'))
-                if book:
-                    enriched_story['book_title'] = book.title
-                    enriched_story['book_author'] = book.author
-                    enriched_story['book_year'] = book.year
-                enriched.append(enriched_story)
-            
-            return enriched
-    except Exception as e:
-        logger.error(f"Error enriching stories with book metadata: {e}")
-        return stories
+    return enriched
 
 def get_stories_at_path(tree, path):
     """Get stories at a given path in the tree - like original app.py"""
