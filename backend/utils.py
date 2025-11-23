@@ -120,10 +120,33 @@ def clear_book_metadata_cache():
 
 def preload_book_metadata():
     """Preload all book metadata at startup to avoid any DB queries during search"""
+    global _book_metadata_cache
+    
     if not USE_DB or not SessionLocal:
-        logger.info("Skipping book metadata preload (no database)")
+        logger.info("No database - loading book metadata from stories_meta.json files")
+        # Fallback: Load from JSON files
+        try:
+            for book_slug in os.listdir(books_dir):
+                book_path = os.path.join(books_dir, book_slug)
+                if os.path.isdir(book_path) and not book_slug.startswith('.'):
+                    meta_path = os.path.join(book_path, "stories_meta.json")
+                    if os.path.exists(meta_path):
+                        try:
+                            with open(meta_path, "r", encoding="utf-8") as f:
+                                meta = json.load(f)
+                            _book_metadata_cache[book_slug] = {
+                                "book_title": meta.get("book_title", book_slug),
+                                "book_author": meta.get("book_author", "Unknown"),
+                                "book_year": meta.get("book_year", "")
+                            }
+                        except Exception as e:
+                            logger.warning(f"Failed to load metadata from {meta_path}: {e}")
+            logger.info(f"Loaded metadata from JSON files for {len(_book_metadata_cache)} books")
+        except Exception as e:
+            logger.error(f"Failed to load book metadata from JSON: {e}")
         return
     
+    # Database available - load from DB
     try:
         with SessionLocal() as db:
             from models import Book
@@ -134,9 +157,27 @@ def preload_book_metadata():
                     "book_author": book.author,
                     "book_year": book.year
                 }
-        logger.info(f"Preloaded metadata for {len(_book_metadata_cache)} books")
+        logger.info(f"Preloaded metadata from database for {len(_book_metadata_cache)} books")
     except Exception as e:
-        logger.error(f"Failed to preload book metadata: {e}")
+        logger.error(f"Failed to preload book metadata from database: {e}")
+        # Fallback to JSON if DB fails
+        logger.info("Falling back to JSON files for book metadata")
+        for book_slug in os.listdir(books_dir):
+            book_path = os.path.join(books_dir, book_slug)
+            if os.path.isdir(book_path) and not book_slug.startswith('.'):
+                meta_path = os.path.join(book_path, "stories_meta.json")
+                if os.path.exists(meta_path):
+                    try:
+                        with open(meta_path, "r", encoding="utf-8") as f:
+                            meta = json.load(f)
+                        _book_metadata_cache[book_slug] = {
+                            "book_title": meta.get("book_title", book_slug),
+                            "book_author": meta.get("book_author", "Unknown"),
+                            "book_year": meta.get("book_year", "")
+                        }
+                    except Exception as e:
+                        logger.warning(f"Failed to load metadata from {meta_path}: {e}")
+        logger.info(f"Loaded metadata from JSON fallback for {len(_book_metadata_cache)} books")
 # Lazy-load full MD texts and story positions {book_slug: data}
 full_mds = {}
 story_positions = {}
@@ -1098,6 +1139,44 @@ def sync_disk_to_db():
     
     logger.info("Starting disk → DB sync...")
     start_time = time.monotonic()
+    
+    # First, sync book metadata from stories_meta.json files
+    if USE_DB and SessionLocal:
+        try:
+            with SessionLocal() as db:
+                from models import Book
+                for book_slug in os.listdir(books_dir):
+                    book_path = os.path.join(books_dir, book_slug)
+                    if os.path.isdir(book_path) and not book_slug.startswith('.'):
+                        meta_path = os.path.join(book_path, "stories_meta.json")
+                        if os.path.exists(meta_path):
+                            try:
+                                with open(meta_path, "r", encoding="utf-8") as f:
+                                    meta = json.load(f)
+                                
+                                # Check if book already exists
+                                book = db.query(Book).filter_by(slug=book_slug).first()
+                                if book:
+                                    # Update existing book
+                                    book.title = meta.get("book_title", book_slug)
+                                    book.author = meta.get("book_author", "Unknown")
+                                    book.year = meta.get("book_year", "")
+                                else:
+                                    # Create new book
+                                    book = Book(
+                                        slug=book_slug,
+                                        title=meta.get("book_title", book_slug),
+                                        author=meta.get("book_author", "Unknown"),
+                                        year=meta.get("book_year", "")
+                                    )
+                                    db.add(book)
+                                logger.info(f"Synced book metadata for '{book_slug}': {meta.get('book_title')}")
+                            except Exception as e:
+                                logger.warning(f"Failed to load stories_meta.json for {book_slug}: {e}")
+                db.commit()
+                logger.info("Book metadata sync complete")
+        except Exception as e:
+            logger.error(f"Failed to sync book metadata: {e}")
     
     # Load all stories from disk (source of truth)
     disk_stories = load_all_stories()
