@@ -23,9 +23,40 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import Base, Story, CodexNode, NodeStory
 from dotenv import load_dotenv
+import time
 # Load .env.local from project root (since we're in backend subdir)
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env.local'))
 logger = logging.getLogger(__name__)
+
+# ------------------------------------------------------------------ #
+# Cache Management
+# ------------------------------------------------------------------ #
+_tree_cache = None
+_cache_timestamp = 0
+_last_data_change = 0
+
+def invalidate_cache():
+    """Mark cache as invalid - call this whenever data changes"""
+    global _last_data_change
+    _last_data_change = time.monotonic()
+    logger.info(f"Cache invalidated at timestamp {_last_data_change:.2f}")
+
+def get_cached_tree():
+    """Get tree from cache, reload if invalidated"""
+    global _tree_cache, _cache_timestamp, _last_data_change
+    
+    if _tree_cache is None:
+        logger.info("Loading tree for the first time")
+        _tree_cache = load_codex_tree()
+        _cache_timestamp = time.monotonic()
+    elif _last_data_change > _cache_timestamp:
+        logger.info(f"Cache expired (last change: {_last_data_change:.2f}, cache from: {_cache_timestamp:.2f}), reloading tree")
+        _tree_cache = load_codex_tree()
+        _cache_timestamp = time.monotonic()
+    else:
+        logger.debug(f"Using cached tree (age: {time.monotonic() - _cache_timestamp:.2f}s)")
+    
+    return _tree_cache
 # Paths (relative to root from backend)
 books_dir = "../books/"
 data_dir = "../data/"
@@ -128,6 +159,10 @@ def update_story_boundaries(book_slug, title, start_char, end_char):
         except Exception as e:
             logger.error(f"Failed to update database for {title}: {e}")
    
+    # Invalidate cache since data changed
+    invalidate_cache()
+    logger.info(f"Invalidated cache after updating boundaries for {title}")
+   
     return save_success
 def update_story_title(book_slug, old_title, new_title):
     """Update story title in JSON, database, and all references"""
@@ -226,6 +261,10 @@ def update_story_title(book_slug, old_title, new_title):
         except Exception as e:
             logger.error(f"Failed to update document store metadata: {e}")
             # Don't fail the whole operation for this
+
+    # Invalidate cache since data changed
+    invalidate_cache()
+    logger.info(f"Invalidated cache after updating title from '{old_title}' to '{new_title}'")
 
     return True
 # Discover books dynamically
@@ -912,19 +951,34 @@ def get_stories_at_path(tree, path):
     result = [stories_dict[title] for title in unique_titles if title in stories_dict]
     logger.info(f"Returning {len(result)} stories: {[s['title'] for s in result]}")
     return result
-# Load codex_tree (from DB, fallback to JSON if empty or DB unavailable)
-def load_codex_tree():
+# ------------------------------------------------------------------ #
+# Disk → DB Sync (Heavy Operation)
+# ------------------------------------------------------------------ #
+def sync_disk_to_db():
+    """Heavy operation: Read all story_positions.json files and sync to database.
+    Call this only on server startup or explicit reload via /api/reload-stories.
+    """
     global stories_dict
-    # ALWAYS load fresh from disk first — source of truth for stories
+    
+    logger.info("Starting disk → DB sync...")
+    start_time = time.monotonic()
+    
+    # Load all stories from disk (source of truth)
     disk_stories = load_all_stories()
     stories_dict = disk_stories.copy()
-
+    
+    # Write stories_dict.json for consistency
+    try:
+        with open(stories_dict_path, "w", encoding="utf-8") as f:
+            json.dump(stories_dict, f, indent=4, ensure_ascii=False)
+        logger.info(f"Updated {stories_dict_path} with {len(stories_dict)} stories")
+    except Exception as e:
+        logger.error(f"Failed to write stories_dict.json: {e}")
+    
     # If DB is enabled, sync disk → DB (upsert)
-    # CRITICAL: This updates Story records but preserves NodeStory assignments
     if USE_DB and SessionLocal:
         try:
             with SessionLocal() as db:
-                # Track which story IDs existed before and after sync
                 existing_story_ids = {s.id for s in db.query(Story).all()}
                 
                 for title, data in disk_stories.items():
@@ -937,40 +991,50 @@ def load_codex_tree():
                         story.start_char = data["start_char"]
                         story.end_char = data["end_char"]
                     else:
-                        # Create new story - will have no assignments initially
+                        # Create new story
                         new_story = Story(**data)
                         db.add(new_story)
-                        db.flush()  # Get the ID
+                        db.flush()
                 db.commit()
                 
-                # After commit, check for newly added stories
                 new_story_ids = {s.id for s in db.query(Story).all()}
                 added_stories = new_story_ids - existing_story_ids
                 
                 if added_stories:
                     logger.info(f"Added {len(added_stories)} new stories to DB")
-                    
-                logger.info(f"Synced {len(disk_stories)} stories from disk to DB (updated existing, preserved assignments)")
+                
+                elapsed = time.monotonic() - start_time
+                logger.info(f"Synced {len(disk_stories)} stories from disk to DB in {elapsed:.2f}s")
         except Exception as e:
-            logger.error(f"DB sync failed (non-fatal, using disk data): {e}")
+            logger.error(f"DB sync failed: {e}")
+    else:
+        elapsed = time.monotonic() - start_time
+        logger.info(f"Loaded {len(disk_stories)} stories from disk (no DB) in {elapsed:.2f}s")
 
-    # ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
-    # FORCE WRITE stories_dict.json on every startup
-    # ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
-    try:
-        with open(stories_dict_path, "w", encoding="utf-8") as f:
-            json.dump(stories_dict, f, indent=4, ensure_ascii=False)
-        logger.info(f"Force-updated {stories_dict_path} on server start ({len(stories_dict)} stories)")
-    except Exception as e:
-        logger.error(f"Failed to force-write stories_dict.json: {e}")
-    # ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
+# ------------------------------------------------------------------ #
+# Load Codex Tree (Lightweight Operation)
+# ------------------------------------------------------------------ #
+def load_codex_tree():
+    """Lightweight operation: Build tree from database or JSON fallback.
+    Does NOT sync from disk - that's done by sync_disk_to_db().
+    """
+    global stories_dict
+    
+    logger.info("Building codex tree...")
+    start_time = time.monotonic()
 
-    # Fallback if no DB
+    # Fallback if no DB - load from JSON
     if not USE_DB or SessionLocal is None:
         logger.info("Using JSON fallback for codex tree")
         tree = load_codex_tree_from_json()
-        # Load stories from JSON files
-        stories_dict = load_all_stories()
+        
+        # Ensure stories_dict is loaded
+        if not stories_dict:
+            with open(stories_dict_path, "r") as f:
+                stories_dict = json.load(f)
+        
+        elapsed = time.monotonic() - start_time
+        logger.info(f"Loaded tree from JSON in {elapsed:.2f}s")
         return tree
    
     try:
@@ -1156,22 +1220,30 @@ def load_codex_tree():
                 elif isinstance(da, dict):
                     logger.info(f"Demonic Activity is dict but no Obsession: {list(da.keys())}")
            
-            # CRITICAL: Sync the DB tree back to JSON to keep them in sync
-            # This ensures that if someone updates story_positions.json and the server restarts,
-            # the codex_tree.json reflects the current DB state with all assignments preserved
+            # Save tree to JSON for backup/consistency
             save_codex_tree_to_json(tree)
-            logger.info(f"Synced DB tree structure to codex_tree.json ({total_stories} assignments preserved)")
-           
+            
+            elapsed = time.monotonic() - start_time
+            logger.info(f"Built tree from DB with {total_stories} assignments in {elapsed:.2f}s")
             return tree
     except Exception as e:
         logger.error(f"Error loading codex tree from database: {e}. Falling back to JSON.")
         tree = load_codex_tree_from_json()
-        stories_dict = load_all_stories()
+        
+        # Ensure stories_dict is loaded
+        if not stories_dict:
+            with open(stories_dict_path, "r") as f:
+                stories_dict = json.load(f)
+        
+        elapsed = time.monotonic() - start_time
+        logger.info(f"Loaded tree from JSON fallback in {elapsed:.2f}s")
         return tree
 def save_codex_tree(tree):
     """Save codex tree to JSON file and database (if available), optionally to HuggingFace"""
     global stories_dict
     os.makedirs(data_dir, exist_ok=True)
+    
+    logger.info("Saving codex tree...")
    
     # Always save to JSON (for fallback and local development)
     save_codex_tree_to_json(tree)
@@ -1279,6 +1351,10 @@ def save_codex_tree(tree):
         except Exception as e:
             logger.error(f"Error saving codex tree to database: {e}")
             # Continue to save JSON even if DB save fails
+    
+    # Invalidate cache after saving
+    invalidate_cache()
+    logger.info("Cache invalidated after saving codex tree")
    
     # Optional auto-commit to HuggingFace
     token = os.getenv("HF_TOKEN")

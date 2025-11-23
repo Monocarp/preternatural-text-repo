@@ -301,29 +301,6 @@ const Archive = () => {
                       <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">▼</span>
                     </div>
                   </DisclosureButton>
-                  {editingTitle === story.title ? (
-                    <div className="absolute top-4 right-12 flex gap-1">
-                      <button
-                        onClick={(e) => { e.stopPropagation(); handleSaveTitle(story) }}
-                        className="px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-sm"
-                      >
-                        Save
-                      </button>
-                      <button
-                        onClick={(e) => { e.stopPropagation(); handleCancelEdit() }}
-                        className="px-2 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 text-sm"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={(e) => { e.stopPropagation(); handleEditTitle(story) }}
-                      className="absolute top-4 right-12 px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
-                    >
-                      Edit
-                    </button>
-                  )}
                   <DisclosurePanel className="p-4 pt-0">
                     <div className="mt-4 border-t border-gray-700 pt-4">
                       {storyContent ? (
@@ -350,6 +327,29 @@ const Archive = () => {
                             className="px-4 py-2 rounded text-sm bg-gray-700 text-gray-200 hover:bg-gray-600"
                           >
                             Static View
+                          </button>
+                        )}
+                        {editingTitle === story.title ? (
+                          <>
+                            <button
+                              onClick={(e) => { e.stopPropagation(); handleSaveTitle(story) }}
+                              className="px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-sm"
+                            >
+                              Save
+                            </button>
+                            <button
+                              onClick={(e) => { e.stopPropagation(); handleCancelEdit() }}
+                              className="px-2 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 text-sm"
+                            >
+                              Cancel
+                            </button>
+                          </>
+                        ) : (
+                          <button
+                            onClick={(e) => { e.stopPropagation(); handleEditTitle(story) }}
+                            className="px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+                          >
+                            Edit
                           </button>
                         )}
                       </div>

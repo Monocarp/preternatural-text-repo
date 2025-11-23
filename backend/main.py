@@ -66,7 +66,7 @@ DATA_DIR = os.path.join(ROOT, "data")
 # ------------------------------------------------------------------ #
 from utils import (
     document_store, both_pipeline, keyword_pipeline, semantic_pipeline,
-    search_stories, load_codex_tree, save_codex_tree,
+    search_stories, load_codex_tree, save_codex_tree, sync_disk_to_db, get_cached_tree, invalidate_cache,
     assign_to_path, remove_from_path,
     render_md_with_scroll_and_highlight, render_static_story,
     export_stories, get_stories_at_path, find_paths_for_title,
@@ -79,7 +79,15 @@ from utils import (
 async def startup():
     if document_store is None:
         raise RuntimeError("document_store failed to initialise")
-    load_codex_tree() # warms the global tree + stories_dict
+    
+    # ONE-TIME heavy operation: Sync disk → DB
+    log.info("Performing initial disk → DB sync...")
+    sync_disk_to_db()
+    
+    # Initial tree load (now lightweight)
+    log.info("Loading codex tree...")
+    load_codex_tree()
+    
     # Warm-up embedding model
     log.info("Warming up embedding model...")
     dummy_results = both_pipeline.run({
@@ -312,7 +320,7 @@ def api_search(body: SearchQuery):
 # ------------------- TREE ------------------- #
 @app.get("/api/get-tree")
 def get_tree():
-    return load_codex_tree()
+    return get_cached_tree()
 # ------------------- SOURCES ------------------- #
 @app.get("/api/sources")
 def get_sources():
@@ -331,7 +339,7 @@ def get_stories(path: str):
     log.info(f"Raw path received: {repr(path)}")
     parts = [urllib.parse.unquote(p.strip()) for p in path.split("/") if p.strip()]
     log.info(f"After split and decode: {parts}")
-    tree = load_codex_tree()
+    tree = get_cached_tree()
     log.info(f"Getting stories for path: {parts}")
     log.info(f"Tree structure at root: {list(tree.keys())[:5]}...")  # First 5 keys
     stories = get_stories_at_path(tree, parts)
@@ -351,7 +359,7 @@ def get_stories(path: str):
     return stories
 @app.get("/api/get-unassigned")
 def get_unassigned():
-    tree = load_codex_tree()
+    tree = get_cached_tree()
     from utils import stories_dict
     assigned = set()
     def walk(node):
@@ -426,13 +434,17 @@ def assign_category(body: AssignBody, user: Dict = Depends(require_editor)):
     from utils import assign_to_path, save_codex_tree_to_json, stories_dict, stories_dict_path, codex_tree_path
     import json
     
-    tree = load_codex_tree()
+    tree = get_cached_tree()
     updated = assign_to_path(tree, body.path, body.story)
     # Save to JSON only (like original app.py) - database is already updated via direct assignment
     save_codex_tree_to_json(updated)
     if stories_dict:
         with open(stories_dict_path, "w") as f:
             json.dump(stories_dict, f, indent=4)
+    
+    # Invalidate cache since we changed the tree
+    invalidate_cache()
+    
     return {"status": "assigned"}
 @app.delete("/api/remove-category")
 def remove_category(body: RemoveBody, user: Dict = Depends(require_editor)):
@@ -480,10 +492,13 @@ def remove_category(body: RemoveBody, user: Dict = Depends(require_editor)):
                 log.error(f"Could not find target node for path: {body.path}")
     
     # Also update the in-memory tree and JSON for consistency
-    from utils import remove_from_path, save_codex_tree_to_json, load_codex_tree
-    tree = load_codex_tree()
+    from utils import remove_from_path, save_codex_tree_to_json
+    tree = get_cached_tree()
     updated = remove_from_path(tree, body.path, body.title)
     save_codex_tree_to_json(updated)
+    
+    # Invalidate cache since we changed the tree
+    invalidate_cache()
     
     return {"status": "removed"}
 # ------------------- RENDER ------------------- #
@@ -557,6 +572,35 @@ def export(body: ExportBody):
     if not result:
         raise HTTPException(500, "Export failed")
     return result # {mime, data (base64), filename}
+
+# ------------------- RELOAD STORIES ------------------- #
+@app.post("/api/reload-stories")
+def reload_stories(user = Depends(require_editor)):
+    """Force reload of stories from disk and sync to DB.
+    Useful after running pre-processing scripts or updating story_positions.json files.
+    """
+    try:
+        log.info("Manual reload triggered by user")
+        
+        # Perform full disk → DB sync
+        sync_disk_to_db()
+        
+        # Invalidate cache to force tree reload
+        invalidate_cache()
+        
+        # Force immediate reload to verify it worked
+        tree = get_cached_tree()
+        
+        from utils import stories_dict
+        return {
+            "status": "success",
+            "message": "Stories reloaded from disk and synced to database",
+            "story_count": len(stories_dict),
+            "tree_categories": len(tree)
+        }
+    except Exception as e:
+        log.error(f"Reload failed: {e}", exc_info=True)
+        raise HTTPException(500, f"Reload failed: {str(e)}")
 # ------------------------------------------------------------------ #
 if __name__ == "__main__":
     import uvicorn
