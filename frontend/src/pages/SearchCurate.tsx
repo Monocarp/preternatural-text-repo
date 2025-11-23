@@ -27,6 +27,7 @@ const SearchCurate = () => {
   const [typeFilter, setTypeFilter] = useState('Both')
   const [searchMode, setSearchMode] = useState('Both')
   const [minScore, setMinScore] = useState(0.1)
+  const [assignmentFilter, setAssignmentFilter] = useState('all')
   const [sources, setSources] = useState<string[]>(['All Sources'])
   const [results, setResults] = useState<SearchResult[]>([])
   const [selectedStory, setSelectedStory] = useState<SearchResult | null>(null)
@@ -119,7 +120,8 @@ const SearchCurate = () => {
         type_filter: typeFilter,
         search_mode: searchMode,
         top_k: 1000,
-        min_score: minScore
+        min_score: minScore,
+        assignment_filter: assignmentFilter
       })
       setResults(res.data.results || [])
       if (res.data.results && res.data.results.length > 0) {
@@ -563,6 +565,19 @@ const SearchCurate = () => {
                 onChange={(e) => setMinScore(parseFloat(e.target.value))}
                 className="w-full"
               />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">Assignment Status</label>
+              <select
+                value={assignmentFilter}
+                onChange={(e) => setAssignmentFilter(e.target.value)}
+                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="all">All Stories</option>
+                <option value="assigned">Assigned Only</option>
+                <option value="unassigned">Unassigned Only</option>
+              </select>
             </div>
 
             <button

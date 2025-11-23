@@ -353,7 +353,7 @@ const Archive = () => {
                             onClick={(e) => { e.stopPropagation(); handleEditTitle(story) }}
                             className="px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
                           >
-                            Edit
+                            Edit Title
                           </button>
                         )}
                       </div>

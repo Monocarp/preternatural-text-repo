@@ -36,9 +36,10 @@ _cache_timestamp = 0
 _last_data_change = 0
 
 def invalidate_cache():
-    """Mark cache as invalid - call this whenever data changes"""
+    """Invalidate both tree and assigned titles caches."""
     global _last_data_change
     _last_data_change = time.monotonic()
+    clear_assigned_titles_cache()  # Add this line
     logger.info(f"Cache invalidated at timestamp {_last_data_change:.2f}")
 
 def get_cached_tree():
@@ -259,6 +260,8 @@ def update_story_boundaries(book_slug, title, start_char, end_char):
     return save_success
 def update_story_title(book_slug, old_title, new_title):
     """Update story title in JSON, database, and all references"""
+    global stories_dict, document_store
+    
     # Update codex tree first
     try:
         tree = load_codex_tree()
@@ -329,9 +332,16 @@ def update_story_title(book_slug, old_title, new_title):
     if document_store:
         try:
             # Find all documents that contain this story and update the title
+            # Story-level documents have title directly in meta, not nested under "stories"
             updated_docs = []
             for doc in document_store.filter_documents({}):
-                if "stories" in doc.meta:
+                # Check if this is a story document with matching title
+                if doc.meta.get("title") == old_title:
+                    doc.meta["title"] = new_title
+                    updated_docs.append(doc)
+                    logger.info(f"Found document to update: {doc.id} with title '{old_title}'")
+                # Also check for any nested stories arrays (for backward compatibility)
+                elif "stories" in doc.meta:
                     story_updated = False
                     for story in doc.meta["stories"]:
                         if story.get("title") == old_title:
@@ -341,6 +351,7 @@ def update_story_title(book_slug, old_title, new_title):
                         updated_docs.append(doc)
             
             if updated_docs:
+                logger.info(f"Updating {len(updated_docs)} documents in document store")
                 # Convert ALL numpy embeddings to lists for JSON serialization before saving
                 for doc in document_store.filter_documents({}):
                     if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
@@ -351,8 +362,10 @@ def update_story_title(book_slug, old_title, new_title):
                 # Save to disk
                 document_store.save_to_disk(document_store_path)
                 logger.info(f"Updated document store metadata for {len(updated_docs)} documents and saved to disk")
+            else:
+                logger.warning(f"No documents found with title '{old_title}' in document store")
         except Exception as e:
-            logger.error(f"Failed to update document store metadata: {e}")
+            logger.error(f"Failed to update document store metadata: {e}", exc_info=True)
             # Don't fail the whole operation for this
 
     # Invalidate cache since data changed
@@ -431,7 +444,7 @@ semantic_pipeline.add_component("retriever_embedding", retriever_embedding_sem)
 semantic_pipeline.connect("embedder.embedding", "retriever_embedding.query_embedding")
 logger.info(f"Semantic pipeline components: {list(semantic_pipeline.graph.nodes.keys())}")
 # Ported helpers (all below from app.py)
-def search_stories(query, source_filter=None, type_filter=None, search_mode="Both", top_k=1000, min_score=0.2):
+def search_stories(query, source_filter=None, type_filter=None, search_mode="Both", top_k=1000, min_score=0.2, assignment_filter="all"):
     """
     Search for stories using story-level embeddings (Phase 1 optimization).
     Now searches story documents directly instead of chunks.
@@ -540,6 +553,15 @@ def search_stories(query, source_filter=None, type_filter=None, search_mode="Bot
     
     # Sort by score (should already be sorted, but ensure it)
     sorted_results = sorted(stories, key=lambda x: x["score"], reverse=True)
+    
+    # Add assignment filtering logic
+    if assignment_filter and assignment_filter != "all":
+        assigned_titles = get_assigned_titles_set()
+        if assignment_filter == "assigned":
+            sorted_results = [s for s in sorted_results if s['title'] in assigned_titles]
+        elif assignment_filter == "unassigned":
+            sorted_results = [s for s in sorted_results if s['title'] not in assigned_titles]
+        logger.info(f"Filtered to {len(sorted_results)} {assignment_filter} stories")
     
     logger.info(f"Search returned {len(sorted_results)} story results for query: '{query}'")
     if sorted_results:
@@ -1688,3 +1710,41 @@ def find_paths_for_title(tree, title, current_path=None, paths=None):
         if title in tree:
             paths.append(current_path[:])
     return paths
+
+# ------------------------------------------------------------------ #
+# Cache for assigned story titles (set of strings)
+# ------------------------------------------------------------------ #
+_assigned_titles_cache = None
+
+def get_assigned_titles_set():
+    """Get cached set of assigned story titles, building if needed."""
+    global _assigned_titles_cache
+    if _assigned_titles_cache is None:
+        rebuild_assigned_titles_cache()
+    return _assigned_titles_cache
+
+def rebuild_assigned_titles_cache():
+    """Rebuild the cache of assigned story titles by walking the codex tree."""
+    global _assigned_titles_cache
+    tree = get_cached_tree()
+    assigned = set()
+    
+    def walk(node):
+        if isinstance(node, dict):
+            if "_stories" in node:
+                assigned.update(node["_stories"])
+            for v in node.values():
+                if isinstance(v, (dict, list)):
+                    walk(v)
+        elif isinstance(node, list):
+            assigned.update(node)
+    
+    walk(tree)
+    _assigned_titles_cache = assigned
+    logger.info(f"Rebuilt assigned titles cache with {len(assigned)} titles")
+
+def clear_assigned_titles_cache():
+    """Clear the assigned titles cache."""
+    global _assigned_titles_cache
+    _assigned_titles_cache = None
+    logger.debug("Cleared assigned titles cache")

@@ -1,68 +1,4 @@
 {
-    "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed at Valombrosa": {
-        "title": "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed at Valombrosa",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "3-4",
-        "keywords": "saint walberts cross and arm used to test and heal the possessed at valombrosa",
-        "start_char": 8922,
-        "end_char": 10477
-    },
-    "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples": {
-        "title": "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "4",
-        "keywords": "tomb of saint cajetanus in naples",
-        "start_char": 10489,
-        "end_char": 10881
-    },
-    "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio": {
-        "title": "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "4",
-        "keywords": "relics of st. ubaldus in gubbio",
-        "start_char": 10882,
-        "end_char": 11361
-    },
-    "Other Graves and Holy Sites Where the Possessed Were Freed": {
-        "title": "Other Graves and Holy Sites Where the Possessed Were Freed",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "4",
-        "keywords": "other graves and holy sites where the possessed were freed",
-        "start_char": 11363,
-        "end_char": 12031
-    },
-    "Ancient Desert Fathers Said to Be Both Holy and Possessed": {
-        "title": "Ancient Desert Fathers Said to Be Both Holy and Possessed",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "4",
-        "keywords": "ailment from heel to head in possession",
-        "start_char": 12033,
-        "end_char": 12856
-    },
-    "St. Eustochia of Padua Reported as Both Holy and Possessed": {
-        "title": "St. Eustochia of Padua Reported as Both Holy and Possessed",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "5",
-        "keywords": "st eustochia of padua reported as both holy and possessed",
-        "start_char": 12869,
-        "end_char": 14079
-    },
-    "Girolamo Saligario’s Testimony on Extraordinary Spiritual Phenomena of Eustochia": {
-        "title": "Girolamo Saligario’s Testimony on Extraordinary Spiritual Phenomena of Eustochia",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "5-6",
-        "keywords": "girolamo saligarios testimony on extraordinary spiritual phenomena of eustochia",
-        "start_char": 14081,
-        "end_char": 15535
-    },
-    "Saligario’s Treatise on Malignant Spirits, Demonic Deceits, and Angelic Help": {
-        "title": "Saligario’s Treatise on Malignant Spirits, Demonic Deceits, and Angelic Help",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "5-6",
-        "keywords": "capricious vs traditional demonic practice in manichaeism, possession, demonic possession",
-        "start_char": 16361,
-        "end_char": 18326
-    },
     "Manuscript of Miracles Occurring Daily at the Grave of Blessed Eustochia": {
         "title": "Manuscript of Miracles Occurring Daily at the Grave of Blessed Eustochia",
         "book_slug": "christian_mysticism_vol_iv",
@@ -2286,5 +2222,69 @@
         "keywords": "conversations with demons in convent, possession, demonic possession",
         "start_char": 1394021,
         "end_char": 1397942
+    },
+    "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed at Valombrosa": {
+        "title": "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed at Valombrosa",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "3-4",
+        "keywords": "saint walberts cross and arm used to test and heal the possessed at valombrosa",
+        "start_char": 8922,
+        "end_char": 10477
+    },
+    "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples": {
+        "title": "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "4",
+        "keywords": "tomb of saint cajetanus in naples",
+        "start_char": 10489,
+        "end_char": 10881
+    },
+    "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio": {
+        "title": "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "4",
+        "keywords": "relics of st. ubaldus in gubbio",
+        "start_char": 10882,
+        "end_char": 11361
+    },
+    "Saligario’s Treatise on Malignant Spirits, Demonic Deceits, and Angelic Help": {
+        "title": "Saligario’s Treatise on Malignant Spirits, Demonic Deceits, and Angelic Help",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "5-6",
+        "keywords": "capricious vs traditional demonic practice in manichaeism, possession, demonic possession",
+        "start_char": 16361,
+        "end_char": 18326
+    },
+    "Ancient Desert Fathers Said to Be Both Holy and Possessed": {
+        "title": "Ancient Desert Fathers Said to Be Both Holy and Possessed",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "4",
+        "keywords": "ailment from heel to head in possession",
+        "start_char": 12033,
+        "end_char": 12856
+    },
+    "Other Graves and Holy Sites Where the Possessed Were Freed": {
+        "title": "Other Graves and Holy Sites Where the Possessed Were Freed",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "4",
+        "keywords": "other graves and holy sites where the possessed were freed",
+        "start_char": 11363,
+        "end_char": 12031
+    },
+    "St. Eustochia of Padua Reported as Both Holy and Possessed": {
+        "title": "St. Eustochia of Padua Reported as Both Holy and Possessed",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "5",
+        "keywords": "st eustochia of padua reported as both holy and possessed",
+        "start_char": 12869,
+        "end_char": 14079
+    },
+    "Girolamo Saligario’s Testimony on Extraordinary Spiritual Phenomena of Eustochia": {
+        "title": "Girolamo Saligario’s Testimony on Extraordinary Spiritual Phenomena of Eustochia",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "5-6",
+        "keywords": "girolamo saligarios testimony on extraordinary spiritual phenomena of eustochia",
+        "start_char": 14081,
+        "end_char": 15535
     }
 }

@@ -72,6 +72,7 @@ from utils import (
     render_md_with_scroll_and_highlight, render_static_story,
     export_stories, get_stories_at_path, find_paths_for_title,
     load_story_positions, update_story_boundaries, update_story_title, sources, # needed for render fallback
+    rebuild_assigned_titles_cache,  # Add this import
 )
 # ------------------------------------------------------------------ #
 # 6. Startup – sanity check
@@ -92,6 +93,10 @@ async def startup():
     # Initial tree load (now lightweight)
     log.info("Loading codex tree...")
     load_codex_tree()
+    
+    # Initialize assigned titles cache
+    log.info("Building assigned titles cache...")
+    rebuild_assigned_titles_cache()  # Add this line
     
     # Warm-up embedding model
     log.info("Warming up embedding model...")
@@ -264,6 +269,7 @@ class SearchQuery(BaseModel):
     search_mode: Optional[str] = "Both"
     top_k: int = Field(1000, ge=1, le=5000)
     min_score: float = Field(0.1, ge=0.0, le=1.0)
+    assignment_filter: Optional[str] = "all"
 class AssignBody(BaseModel):
     path: List[str] # e.g. ["Demonic Activity","Obsession","Fear/Anxiety"]
     story: Dict[str, Any]
@@ -329,6 +335,7 @@ def api_search(body: SearchQuery):
             search_mode=body.search_mode,
             top_k=body.top_k,
             min_score=body.min_score,
+            assignment_filter=body.assignment_filter,  # Add this line
         )
         return {"results": results}
     except Exception as e:
@@ -584,7 +591,7 @@ def remove_category(body: RemoveBody, user: Dict = Depends(require_editor)):
 # ------------------- RENDER ------------------- #
 @app.post("/api/render-story")
 def render_story(body: RenderQuery):
-    from utils import stories_dict, find_book_slug
+    from utils import stories_dict, find_book_slug, USE_DB, SessionLocal
     story = stories_dict.get(body.title)
     if not story:
         # fallback: search by title across all books
@@ -601,7 +608,29 @@ def render_story(body: RenderQuery):
                 "end_char": pos.get("end_char", 0),
             }
         except Exception:
-            raise HTTPException(404, "Story not found")
+            # Final fallback: check the database in case the story was renamed
+            # and stories_dict hasn't been reloaded yet
+            if USE_DB and SessionLocal:
+                try:
+                    from models import Story
+                    with SessionLocal() as db:
+                        db_story = db.query(Story).filter_by(title=body.title).first()
+                        if db_story:
+                            story = {
+                                "title": db_story.title,
+                                "book_slug": db_story.book_slug,
+                                "pages": db_story.pages or "",
+                                "keywords": db_story.keywords or "",
+                                "start_char": db_story.start_char or 0,
+                                "end_char": db_story.end_char or 0,
+                            }
+                        else:
+                            raise HTTPException(404, "Story not found")
+                except Exception as e:
+                    log.error(f"Error querying database for story '{body.title}': {e}")
+                    raise HTTPException(404, "Story not found")
+            else:
+                raise HTTPException(404, "Story not found")
     
     # Use provided boundaries if available, otherwise use story boundaries
     start_char = body.start_char if body.start_char is not None else story["start_char"]
