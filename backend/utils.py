@@ -21,7 +21,7 @@ from haystack.components.joiners import DocumentJoiner
 from haystack.document_stores.in_memory import InMemoryDocumentStore
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Base, Story, CodexNode, NodeStory
+from models import Base, Book, Story, CodexNode, NodeStory
 from dotenv import load_dotenv
 import time
 # Load .env.local from project root (since we're in backend subdir)
@@ -85,6 +85,58 @@ else:
     logger.info("No database URL provided. Using JSON storage.")
 # Global flat story storage (in-memory cache; load from DB)
 stories_dict = {}
+
+# Cache for book metadata to avoid repeated DB queries
+_book_metadata_cache = {}
+
+def get_book_metadata(book_slug):
+    """Get book metadata with caching to avoid repeated DB queries"""
+    if book_slug in _book_metadata_cache:
+        return _book_metadata_cache[book_slug]
+    
+    book_info = {}
+    if USE_DB and SessionLocal:
+        try:
+            with SessionLocal() as db:
+                from models import Book
+                book = db.query(Book).filter_by(slug=book_slug).first()
+                if book:
+                    book_info = {
+                        "book_title": book.title,
+                        "book_author": book.author,
+                        "book_year": book.year
+                    }
+        except Exception as e:
+            logger.debug(f"Could not fetch book metadata for {book_slug}: {e}")
+    
+    _book_metadata_cache[book_slug] = book_info
+    return book_info
+
+def clear_book_metadata_cache():
+    """Clear the book metadata cache (call when books are updated)"""
+    global _book_metadata_cache
+    _book_metadata_cache = {}
+    logger.info("Cleared book metadata cache")
+
+def preload_book_metadata():
+    """Preload all book metadata at startup to avoid any DB queries during search"""
+    if not USE_DB or not SessionLocal:
+        logger.info("Skipping book metadata preload (no database)")
+        return
+    
+    try:
+        with SessionLocal() as db:
+            from models import Book
+            books = db.query(Book).all()
+            for book in books:
+                _book_metadata_cache[book.slug] = {
+                    "book_title": book.title,
+                    "book_author": book.author,
+                    "book_year": book.year
+                }
+        logger.info(f"Preloaded metadata for {len(_book_metadata_cache)} books")
+    except Exception as e:
+        logger.error(f"Failed to preload book metadata: {e}")
 # Lazy-load full MD texts and story positions {book_slug: data}
 full_mds = {}
 story_positions = {}
@@ -402,6 +454,9 @@ def search_stories(query, source_filter=None, type_filter=None, search_mode="Bot
                 title = story["title"]
                 logger.debug(f"Checking story '{title}' in book '{book_slug}', score {doc.score}, min_score {min_score}, start_char {positions.get(title, {}).get('start_char', -1)}")
                 if doc.score > min_score and title not in grouped and positions.get(title, {}).get("start_char", -1) != -1:
+                    # Get book metadata using cached function (fast!)
+                    book_info = get_book_metadata(book_slug)
+                    
                     grouped[title] = {
                         "title": title,
                         "book_slug": book_slug,
@@ -409,7 +464,8 @@ def search_stories(query, source_filter=None, type_filter=None, search_mode="Bot
                         "keywords": ', '.join(positions.get(title, {}).get("keywords", [])),
                         "start_char": positions.get(title, {}).get("start_char", 0),
                         "end_char": positions.get(title, {}).get("end_char", text_length),
-                        "score": doc.score
+                        "score": doc.score,
+                        **book_info
                     }
                 elif title in grouped:
                     grouped[title]["score"] = max(grouped[title]["score"], doc.score)
@@ -916,6 +972,32 @@ def insert_recursive(tree_json, db, parent_id=None):
                     db.add(NodeStory(node_id=node.id, story_id=story.id))
         elif isinstance(value, dict):
             insert_recursive(value, db, node.id)
+def enrich_stories_with_book_metadata(stories):
+    """Add book metadata (title, author, year) to story objects"""
+    if not USE_DB or not SessionLocal:
+        return stories
+    
+    try:
+        with SessionLocal() as db:
+            # Get all books at once
+            books = {book.slug: book for book in db.query(Book).all()}
+            
+            # Enrich each story
+            enriched = []
+            for story in stories:
+                enriched_story = story.copy()
+                book = books.get(story.get('book_slug'))
+                if book:
+                    enriched_story['book_title'] = book.title
+                    enriched_story['book_author'] = book.author
+                    enriched_story['book_year'] = book.year
+                enriched.append(enriched_story)
+            
+            return enriched
+    except Exception as e:
+        logger.error(f"Error enriching stories with book metadata: {e}")
+        return stories
+
 def get_stories_at_path(tree, path):
     """Get stories at a given path in the tree - like original app.py"""
     global stories_dict
@@ -950,10 +1032,64 @@ def get_stories_at_path(tree, path):
     unique_titles = set(titles)
     result = [stories_dict[title] for title in unique_titles if title in stories_dict]
     logger.info(f"Returning {len(result)} stories: {[s['title'] for s in result]}")
-    return result
+    # Enrich with book metadata
+    return enrich_stories_with_book_metadata(result)
 # ------------------------------------------------------------------ #
 # Disk → DB Sync (Heavy Operation)
 # ------------------------------------------------------------------ #
+def sync_books_from_metadata(db):
+    """Sync Book records from stories_meta.json files in book folders.
+    Returns count of books synced.
+    """
+    from datetime import datetime
+    
+    synced_count = 0
+    for folder in os.listdir(books_dir):
+        folder_path = os.path.join(books_dir, folder)
+        if not os.path.isdir(folder_path) or folder.startswith('.'):
+            continue
+        
+        meta_path = os.path.join(folder_path, "stories_meta.json")
+        if not os.path.exists(meta_path):
+            logger.debug(f"No stories_meta.json in {folder}")
+            continue
+        
+        try:
+            with open(meta_path, 'r', encoding='utf-8') as f:
+                meta = json.load(f)
+            
+            # Use folder name as canonical slug
+            slug = folder
+            title = meta.get("book_title", folder.replace('_', ' ').title())
+            author = meta.get("book_author", "Unknown")
+            year = meta.get("book_year", "")
+            
+            # Upsert book
+            book = db.query(Book).filter_by(slug=slug).first()
+            if book:
+                book.title = title
+                book.author = author
+                book.year = year
+                book.updated_at = datetime.utcnow()
+            else:
+                book = Book(
+                    slug=slug,
+                    title=title,
+                    author=author,
+                    year=year,
+                    created_at=datetime.utcnow(),
+                    updated_at=datetime.utcnow()
+                )
+                db.add(book)
+            db.flush()
+            synced_count += 1
+            
+        except Exception as e:
+            logger.error(f"Error syncing book metadata from {meta_path}: {e}")
+            continue
+    
+    return synced_count
+
 def sync_disk_to_db():
     """Heavy operation: Read all story_positions.json files and sync to database.
     Call this only on server startup or explicit reload via /api/reload-stories.
@@ -979,20 +1115,30 @@ def sync_disk_to_db():
     if USE_DB and SessionLocal:
         try:
             with SessionLocal() as db:
+                # First, sync Book metadata from stories_meta.json files
+                books_synced = sync_books_from_metadata(db)
+                logger.info(f"Synced {books_synced} books from metadata")
+                
+                # Build book_slug -> book_id mapping
+                book_map = {book.slug: book.id for book in db.query(Book).all()}
+                
                 existing_story_ids = {s.id for s in db.query(Story).all()}
                 
                 for title, data in disk_stories.items():
                     story = db.query(Story).filter_by(title=title).first()
+                    book_id = book_map.get(data["book_slug"])
+                    
                     if story:
                         # Update existing story - preserves NodeStory relationships
                         story.book_slug = data["book_slug"]
+                        story.book_id = book_id
                         story.pages = data["pages"]
                         story.keywords = data["keywords"]
                         story.start_char = data["start_char"]
                         story.end_char = data["end_char"]
                     else:
-                        # Create new story
-                        new_story = Story(**data)
+                        # Create new story with book relationship
+                        new_story = Story(**data, book_id=book_id)
                         db.add(new_story)
                         db.flush()
                 db.commit()

@@ -14,6 +14,9 @@ interface SearchResult {
   end_char: number
   score: number
   search_query?: string
+  book_title?: string
+  book_author?: string
+  book_year?: string
 }
 
 const SearchCurate = () => {
@@ -590,11 +593,13 @@ const SearchCurate = () => {
               >
                 <div className="font-medium text-sm">{result.title}</div>
                 <div className="text-xs text-gray-400 mt-1">
-                  {result.book_slug} • Score: {result.score.toFixed(3)}
+                  {result.book_title || result.book_slug.replace(/_/g, ' ')}
+                  {result.book_author && ` • ${result.book_author}`}
+                  {result.book_year && ` (${result.book_year})`}
                 </div>
-                {result.pages && (
-                  <div className="text-xs text-gray-400">Pages: {result.pages}</div>
-                )}
+                <div className="text-xs text-gray-500 mt-0.5">
+                  Pages: {result.pages} • Score: {result.score.toFixed(3)}
+                </div>
               </button>
             ))}
           </div>

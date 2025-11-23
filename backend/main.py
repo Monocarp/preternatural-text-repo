@@ -67,6 +67,7 @@ DATA_DIR = os.path.join(ROOT, "data")
 from utils import (
     document_store, both_pipeline, keyword_pipeline, semantic_pipeline,
     search_stories, load_codex_tree, save_codex_tree, sync_disk_to_db, get_cached_tree, invalidate_cache,
+    preload_book_metadata, clear_book_metadata_cache,
     assign_to_path, remove_from_path,
     render_md_with_scroll_and_highlight, render_static_story,
     export_stories, get_stories_at_path, find_paths_for_title,
@@ -83,6 +84,10 @@ async def startup():
     # ONE-TIME heavy operation: Sync disk → DB
     log.info("Performing initial disk → DB sync...")
     sync_disk_to_db()
+    
+    # Preload book metadata to avoid DB queries during search
+    log.info("Preloading book metadata...")
+    preload_book_metadata()
     
     # Initial tree load (now lightweight)
     log.info("Loading codex tree...")
@@ -284,6 +289,18 @@ class UpdateTitleBody(BaseModel):
     old_title: str
     new_title: str
     book_slug: str
+
+class BookResponse(BaseModel):
+    id: int
+    slug: str
+    title: str
+    author: Optional[str]
+    year: Optional[str]
+    story_count: Optional[int] = 0
+
+    class Config:
+        from_attributes = True
+
 # ------------------------------------------------------------------ #
 # 8. End-points
 # ------------------------------------------------------------------ #
@@ -325,6 +342,68 @@ def get_tree():
 @app.get("/api/sources")
 def get_sources():
     return {"sources": sources}
+
+# ------------------- BOOKS ------------------- #
+@app.get("/api/books", response_model=List[BookResponse])
+def get_books():
+    """Get all books with story counts"""
+    from models import Book
+    try:
+        with SessionLocal() as db:
+            books = db.query(Book).all()
+            result = []
+            for book in books:
+                result.append({
+                    "id": book.id,
+                    "slug": book.slug,
+                    "title": book.title,
+                    "author": book.author,
+                    "year": book.year,
+                    "story_count": len(book.stories) if book.stories else 0
+                })
+            return result
+    except Exception as e:
+        log.error(f"Failed to fetch books: {e}")
+        raise HTTPException(500, f"Failed to fetch books: {str(e)}")
+
+@app.get("/api/books/{slug}")
+def get_book(slug: str, include_stories: bool = False):
+    """Get a single book by slug, optionally with its stories"""
+    from models import Book
+    try:
+        with SessionLocal() as db:
+            book = db.query(Book).filter_by(slug=slug).first()
+            if not book:
+                raise HTTPException(404, f"Book not found: {slug}")
+            
+            result = {
+                "id": book.id,
+                "slug": book.slug,
+                "title": book.title,
+                "author": book.author,
+                "year": book.year,
+                "story_count": len(book.stories) if book.stories else 0
+            }
+            
+            if include_stories:
+                result["stories"] = [
+                    {
+                        "title": story.title,
+                        "pages": story.pages,
+                        "keywords": story.keywords,
+                        "start_char": story.start_char,
+                        "end_char": story.end_char
+                    }
+                    for story in book.stories
+                ]
+            
+            return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        log.error(f"Failed to fetch book {slug}: {e}")
+        raise HTTPException(500, f"Failed to fetch book: {str(e)}")
+
 # ------------------- FULL TEXT ------------------- #
 @app.get("/api/full-text/{book_slug}")
 def get_full_text(book_slug: str):
@@ -372,7 +451,8 @@ def get_unassigned():
             assigned.update(node)
     walk(tree)
     unassigned = [s for t, s in stories_dict.items() if t not in assigned]
-    return unassigned
+    from utils import enrich_stories_with_book_metadata
+    return enrich_stories_with_book_metadata(unassigned)
 @app.post("/api/assign-category")
 def assign_category(body: AssignBody, user: Dict = Depends(require_editor)):
     from utils import stories_dict, USE_DB, SessionLocal
@@ -584,6 +664,10 @@ def reload_stories(user = Depends(require_editor)):
         
         # Perform full disk → DB sync
         sync_disk_to_db()
+        
+        # Clear and reload book metadata cache
+        clear_book_metadata_cache()
+        preload_book_metadata()
         
         # Invalidate cache to force tree reload
         invalidate_cache()

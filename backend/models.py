@@ -32,15 +32,30 @@ class User(Base):
     deleted_at = Column(DateTime, nullable=True)
     role = Column(String)
 
+class Book(Base):
+    __tablename__ = "books"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    slug = Column(String(100), unique=True, nullable=False, index=True)
+    title = Column(String(255), nullable=False)
+    author = Column(String(255))
+    year = Column(String(10))
+    created_at = Column(DateTime)
+    updated_at = Column(DateTime)
+    # Relationship to stories
+    stories = relationship("Story", back_populates="book")
+
 class Story(Base):
     __tablename__ = "stories"
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(255), unique=True, nullable=False)
-    book_slug = Column(String(100), nullable=False)
+    book_slug = Column(String(100), nullable=False)  # Keep for backwards compatibility
+    book_id = Column(Integer, ForeignKey("books.id"), nullable=True)  # New FK relationship
     pages = Column(String(50))
     keywords = Column(Text)
     start_char = Column(Integer, default=0)
     end_char = Column(Integer, default=0)
+    # Relationships
+    book = relationship("Book", back_populates="stories")
     categories = relationship("CodexNode", secondary="node_stories", back_populates="stories")
 
 class CodexNode(Base):
