@@ -1,32 +1,40 @@
-# Install required libraries
+# ========================== INSTALL & IMPORTS ==========================
 !pip install -q openai
 
-# Import necessary modules
 from openai import OpenAI
-from google.colab import files, userdata
+from google.colab import userdata   # ← this is the Colab-native way (best)
 import os
 import re
+import json
+from datetime import datetime
+from google.colab import files
 
-# Ensure preprocessing helpers from Step 1 are available
+# ========================== OPENAI API KEY – FIXED & BULLETPROOF ==========================
+# Option 1 (recommended): Add your key once in Colab → Sidebar → "Secrets" → name it OPENAI_API_KEY
+# Option 2 (fallback): it will just ask you interactively if the secret is missing
+
 try:
-    prepare_chunk_for_extraction
-    clean_extracted_output
-except NameError as exc:
-    raise RuntimeError(
-        "Step 2 requires the helper functions defined in Step 1. "
-        "Please run the Step 1 cell in this runtime before executing Step 2."
-    ) from exc
+    api_key = userdata.get('OPENAI_API_KEY')       # ← Colab Secrets (silent, no prompt)
+except Exception:
+    api_key = None                                 # Secret not found → fall back to input
 
-# Set up the Grok API client
-client = OpenAI(
-    api_key=userdata.get('GROK_API_KEY'),
-    base_url="https://api.x.ai/v1"
-)
+if not api_key:
+    api_key = input("Enter your OpenAI API key: ").strip()
 
-# Model name
-MODEL = "grok-4-fast-reasoning"   # change if you switch to a different variant later
+if not api_key:
+    raise ValueError("OpenAI API key is required!")
 
-# ========================== FIXED SYSTEM PROMPT (moved almost everything here) ==========================
+# Now this line will NEVER fail
+client = OpenAI(api_key=api_key)
+
+MODEL = "gpt-5.1-2025-11-13"   # or whatever model you actually use
+print("OpenAI client ready!")
+
+# ========================== HELPER: SLUG ==========================
+def make_slug(text: str) -> str:
+    return re.sub(r'[^\w\s-]', '', text).strip().lower().replace(' ', '-')
+
+# ========================== SYSTEM PROMPT (your full one) ==========================
 SYSTEM_PROMPT = """
 You are the world's most exhaustive and precise verbatim extractor of supernatural, paranormal, miraculous, magical, or otherwise odd occurrences from historical, medieval, and scholarly texts.
 
@@ -96,94 +104,90 @@ EXAMPLES (for annotator-style guidance)
 • Do NOT extract: "Demons are fallen angels." (pure theory)
 """
 
-# ========================== Extraction function ==========================
+# ========================== EXTRACTION FUNCTION ==========================
 def extract_supernatural_stories(text: str, book_title: str):
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT.format(book_title=book_title)},
         {"role": "user", "content": text}
     ]
-
     response = client.chat.completions.create(
         model=MODEL,
         messages=messages,
         temperature=0.0,
-        max_tokens=500_000  # safe with 2M context window
     )
-
-    # === REAL TOKEN COUNTING ===
     usage = response.usage
-    print(f"API usage → Prompt: {usage.prompt_tokens:,} | Completion: {usage.completion_tokens:,} | "
-          f"Total: {usage.total_tokens:,} tokens")
+    print(f"Tokens → Prompt: {usage.prompt_tokens:,} | Completion: {usage.completion_tokens:,} | Total: {usage.total_tokens:,}")
+    return response.choices[0].message.content.strip()
 
-    stories = response.choices[0].message.content.strip()
-    print(f"Extracted {len(stories):,} characters of stories\n")
-    return stories
+# ========================== MAIN WORKFLOW ==========================
+print("SUPERNATURAL STORY EXTRACTOR\n")
 
-# ========================== Helper functions (unchanged except minor polish) ==========================
-def extract_text_from_md(file_path):
-    with open(file_path, 'r', encoding='utf-8') as f:
-        text = f.read()
-    print(f"Read {file_path} → {len(text):,} characters")
-    return text
+# 1. Human enters the correct metadata (this is the source of truth!)
+book_title = input("Exact book title: ").strip()
+book_author = input("Author (optional): ").strip() or "Unknown"
+book_year_str = input("Publication year (optional): ").strip()
+book_year = book_year_str if book_year_str.isdigit() else None
 
-def save_stories_to_md(stories, book_title, output_dir=None):
-    safe_title = re.sub(r'[^\w\s-]', '', book_title).strip().replace(' ', '_')
-    if output_dir:
-        os.makedirs(output_dir, exist_ok=True)
-        filename = os.path.join(output_dir, "Stories.md")
-    else:
-        filename = f"extracted_stories_{safe_title}.md"
-    with open(filename, 'w', encoding='utf-8') as f:
-        f.write(stories if stories else "No supernatural stories extracted.")
-    print(f"Saved → {filename}")
-    return filename
+book_slug = make_slug(book_title)
 
-def get_part_number(filename):
-    match = re.search(r'part[ _-]?(\d+)', filename, re.IGNORECASE)
-    return int(match.group(1)) if match else float('inf')
+print(f"\nBook slug generated: {book_slug}")
+print(f"Title: {book_title}")
+print(f"Author: {book_author}")
+print(f"Year: {book_year or 'N/A'}\n")
 
-# ========================== Main workflow ==========================
-book_title = input("Please enter the exact book title: ").strip()
-book_slug_input = input("Optional: enter the book slug/folder name (leave blank to auto-generate): ").strip()
-book_slug = book_slug_input if book_slug_input else re.sub(r'[^\w]+', '_', book_title.lower()).strip('_')
-book_dir = os.path.join("/content/books", book_slug)
-os.makedirs(book_dir, exist_ok=True)
+# Confirm before proceeding
+input("Looks good? Press Enter to continue, or Ctrl+C to cancel...")
 
-print("\nUpload your cleaned Markdown files (part 1.md, part 2.md, etc.)")
+# 2. Upload Markdown parts
+print("\nUpload your cleaned Markdown files (part1.md, part2.md, etc.)")
 uploaded = files.upload()
-
-sorted_files = sorted(uploaded.keys(), key=get_part_number)
+sorted_files = sorted(uploaded.keys(), key=lambda f: (
+    999 if not re.search(r'part[ _-]?(\d+)', f, re.I) else 
+    int(re.search(r'part[ _-]?(\d+)', f, re.I).group(1))
+))
 
 all_stories = []
-
 for filename in sorted_files:
-    if filename.lower().endswith('.md'):
-        print(f"\n{'='*60}")
-        print(f"Processing: {filename}")
-        text = extract_text_from_md(filename)
+    if not filename.lower().endswith('.md'):
+        print(f"Skipping non-md: {filename}")
+        continue
+        
+    print(f"\nProcessing → {filename}")
+    text = open(filename, 'rb').read().decode('utf-8', errors='ignore')
+    stories = extract_supernatural_stories(text, book_title)
+    
+    if stories and "No supernatural stories extracted" not in stories:
+        all_stories.append(stories)
 
-        # Determine starting page for this chunk
-        start_page_match = re.search(r'\[Page (\d+)\]', text)
-        start_page = int(start_page_match.group(1)) if start_page_match else 1
+final_stories = "\n\n".join(all_stories) if all_stories else "No supernatural stories extracted."
 
-        # Preprocess chunk using Step 1 helpers
-        prepared_text = prepare_chunk_for_extraction(text, book_title, start_page)
+# 3. Save the extracted stories + a tiny metadata sidecar
+safe_name = re.sub(r'[^\w\s-]', '', book_title).strip()[:50]
+base_filename = f"extracted_stories_{book_slug}"
 
-        # Run extraction + clean markers out
-        raw_stories = extract_supernatural_stories(prepared_text, book_title)
-        stories = clean_extracted_output(raw_stories) if raw_stories else raw_stories
+# Main stories file
+stories_file = f"{base_filename}.md"
+with open(stories_file, "w", encoding="utf-8") as f:
+    f.write(final_stories)
+print(f"\nSaved → {stories_file}")
 
-        if stories and stories.strip() != "No supernatural stories extracted.":
-            all_stories.append(stories.strip())
-    else:
-        print(f"Skipping non-markdown file: {filename}")
+# Tiny metadata JSON (this is what your real ingestion script will love)
+metadata = {
+    "book_slug": book_slug,
+    "book_title": book_title,
+    "book_author": book_author,
+    "book_year": book_year,
+    "extracted_at": datetime.utcnow().isoformat() + "Z",
+    "source_files": list(uploaded.keys())
+}
 
-# Combine everything
-final_output = '\n\n'.join(all_stories) if all_stories else "No supernatural stories extracted."
+metadata_file = f"{base_filename}_meta.json"
+with open(metadata_file, "w", encoding="utf-8") as f:
+    json.dump(metadata, f, indent=2)
 
-print("\n" + "="*60)
-print("FINAL COMBINED EXTRACTION COMPLETE")
-print("="*60)
+print(f"Metadata saved → {metadata_file}")
+print("\nBoth files are ready! Download them and feed to your ingestion script.")
 
-final_filename = save_stories_to_md(final_output, book_title, output_dir=book_dir)
-files.download(final_filename)
+# 4. Auto-download both files
+files.download(stories_file)
+files.download(metadata_file)

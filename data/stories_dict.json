@@ -1,4 +1,20 @@
 {
+    "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed at Valombrosa": {
+        "title": "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed at Valombrosa",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "3-4",
+        "keywords": "saint walberts cross and arm used to test and heal the possessed at valombrosa",
+        "start_char": 8922,
+        "end_char": 10477
+    },
+    "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples": {
+        "title": "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "4",
+        "keywords": "tomb of saint cajetanus in naples",
+        "start_char": 10489,
+        "end_char": 10881
+    },
     "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio": {
         "title": "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio",
         "book_slug": "christian_mysticism_vol_iv",
@@ -1797,7 +1813,7 @@
         "pages": "355-357",
         "keywords": "psellus account of demonic promises and phantasms, possession, demonic possession",
         "start_char": 1139257,
-        "end_char": 1146633
+        "end_char": 1146620
     },
     "Witch Marks, Demonic Affection, and the Toad’s Foot on the Eye": {
         "title": "Witch Marks, Demonic Affection, and the Toad’s Foot on the Eye",
@@ -2270,21 +2286,5 @@
         "keywords": "conversations with demons in convent, possession, demonic possession",
         "start_char": 1394021,
         "end_char": 1397942
-    },
-    "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed at Valombrosa": {
-        "title": "Saint Walbert’s Cross and Arm Used to Test and Heal the Possessed at Valombrosa",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "3-4",
-        "keywords": "saint walberts cross and arm used to test and heal the possessed at valombrosa",
-        "start_char": 8922,
-        "end_char": 10477
-    },
-    "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples": {
-        "title": "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
-        "book_slug": "christian_mysticism_vol_iv",
-        "pages": "4",
-        "keywords": "tomb of saint cajetanus in naples",
-        "start_char": 10489,
-        "end_char": 10881
     }
 }

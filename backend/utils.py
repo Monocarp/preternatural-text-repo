@@ -432,14 +432,27 @@ semantic_pipeline.connect("embedder.embedding", "retriever_embedding.query_embed
 logger.info(f"Semantic pipeline components: {list(semantic_pipeline.graph.nodes.keys())}")
 # Ported helpers (all below from app.py)
 def search_stories(query, source_filter=None, type_filter=None, search_mode="Both", top_k=1000, min_score=0.2):
+    """
+    Search for stories using story-level embeddings (Phase 1 optimization).
+    Now searches story documents directly instead of chunks.
+    """
     logger.info(f"Searching for query: {query}, source: {source_filter}, type: {type_filter}, mode: {search_mode}, min_score: {min_score}")
-    filters = {"operator": "AND", "conditions": []}
+    
+    # Build filters - force story-level search by default
+    filters = {"operator": "AND", "conditions": [
+        {"field": "type", "operator": "==", "value": "story"}  # PHASE 1: Only search story-level docs
+    ]}
+    
     if source_filter and source_filter != "All Sources":
         filters["conditions"].append({"field": "book", "operator": "==", "value": source_filter})
-    if type_filter and type_filter != "Both":
-        filters["conditions"].append({"field": "type", "operator": "==", "value": type_filter.lower()})
+    
+    # Note: type_filter (Story/Non-Story) is now handled by default story-level filtering
+    # If you need chunk search for commentary in future, add a search_level parameter
+    
     logger.debug(f"Applying filters: {filters}")
     filters_param = filters if filters["conditions"] else None
+    
+    # Run search pipeline
     try:
         if search_mode == "Both":
             results = both_pipeline.run({
@@ -462,63 +475,76 @@ def search_stories(query, source_filter=None, type_filter=None, search_mode="Bot
         elif search_mode == "Exact":
             all_docs = document_store.filter_documents(filters=filters_param)
             documents = []
-            query = query.strip()
-            if ' ' in query:
-                pattern = re.escape(query)
+            query_text = query.strip()
+            if ' ' in query_text:
+                pattern = re.escape(query_text)
             else:
-                pattern = r'\b' + re.escape(query) + r'\b'
+                pattern = r'\b' + re.escape(query_text) + r'\b'
             for doc in all_docs:
                 content = doc.content
                 count = len(re.findall(pattern, content, re.IGNORECASE))
                 if count > 0:
-                    doc.score = count # Use count as score for sorting by frequency
+                    doc.score = count  # Use count as score for sorting by frequency
                     documents.append(doc)
         else:
             raise ValueError(f"Invalid search mode: {search_mode}")
-        logger.debug(f"Retrieved docs: {len(documents)}")
+        
+        logger.debug(f"Retrieved {len(documents)} story documents")
         if documents:
             logger.info(f"Sample doc meta: {documents[0].meta}")
             logger.info(f"Sample doc score: {documents[0].score}")
     except Exception as e:
-        logger.error(f"Search pipeline failed: {e}")
+        logger.error(f"Search pipeline failed: {e}", exc_info=True)
         return []
-    grouped = {}
+    
+    # PHASE 1 CHANGE: Process story-level documents directly (no grouping needed)
+    stories = []
     for doc in documents:
         try:
-            stories = doc.meta.get("stories", [])
-            book_slug = doc.meta.get("book", "unknown")
-            positions = load_story_positions(book_slug)
-            full_text = load_full_md(book_slug)
-            text_length = len(full_text) if full_text else 0
+            # Check score threshold
+            if doc.score <= min_score:
+                continue
             
-            for story in stories:
-                title = story["title"]
-                logger.debug(f"Checking story '{title}' in book '{book_slug}', score {doc.score}, min_score {min_score}, start_char {positions.get(title, {}).get('start_char', -1)}")
-                if doc.score > min_score and title not in grouped and positions.get(title, {}).get("start_char", -1) != -1:
-                    # Get book metadata using cached function (fast!)
-                    book_info = get_book_metadata(book_slug)
-                    
-                    grouped[title] = {
-                        "title": title,
-                        "book_slug": book_slug,
-                        "pages": story["pages"],
-                        "keywords": ', '.join(positions.get(title, {}).get("keywords", [])),
-                        "start_char": positions.get(title, {}).get("start_char", 0),
-                        "end_char": positions.get(title, {}).get("end_char", text_length),
-                        "score": doc.score,
-                        **book_info
-                    }
-                elif title in grouped:
-                    grouped[title]["score"] = max(grouped[title]["score"], doc.score)
+            # Extract story info from document metadata
+            title = doc.meta.get("title")
+            book_slug = doc.meta.get("book", "unknown")
+            
+            if not title:
+                logger.warning(f"Story document missing title: {doc.meta}")
+                continue
+            
+            # Get book metadata (cached at startup)
+            book_info = get_book_metadata(book_slug)
+            
+            # Build story result
+            story_result = {
+                "title": title,
+                "book_slug": book_slug,
+                "pages": doc.meta.get("pages", "Unknown"),
+                "keywords": doc.meta.get("keywords", ""),
+                "start_char": doc.meta.get("start_char", 0),
+                "end_char": doc.meta.get("end_char", 0),
+                "score": doc.score,
+                **book_info
+            }
+            
+            # Add search_query for Exact mode (for highlighting)
+            if search_mode == "Exact":
+                story_result["search_query"] = query
+            
+            stories.append(story_result)
+            
         except Exception as e:
-            logger.error(f"Error processing document for book {doc.meta.get('book', 'unknown')}: {e}", exc_info=True)
+            logger.error(f"Error processing story document: {e}", exc_info=True)
             continue
-    sorted_results = sorted(grouped.values(), key=lambda x: x["score"], reverse=True)
-    if search_mode == "Exact":
-        sorted_results = [{**r, "search_query": query} for r in sorted_results]
-    logger.info(f"Search returned {len(sorted_results)} results for query: {query}")
+    
+    # Sort by score (should already be sorted, but ensure it)
+    sorted_results = sorted(stories, key=lambda x: x["score"], reverse=True)
+    
+    logger.info(f"Search returned {len(sorted_results)} story results for query: '{query}'")
     if sorted_results:
-        logger.info(f"Top result: {sorted_results[0]['title']} | Score: {sorted_results[0]['score']:.3f}")
+        logger.info(f"Top result: '{sorted_results[0]['title']}' | Score: {sorted_results[0]['score']:.3f}")
+    
     return sorted_results
 def render_md_with_scroll_and_highlight(book_slug, start_char, end_char, page, search_query=None):
     full_md = load_full_md(book_slug)
