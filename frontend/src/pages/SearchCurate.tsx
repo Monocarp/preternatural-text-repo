@@ -50,6 +50,16 @@ const SearchCurate = () => {
   const [currentAssignments, setCurrentAssignments] = useState<string[][]>([])
   const [assigning, setAssigning] = useState(false)
 
+  // New story mode state
+  const [newStoryMode, setNewStoryMode] = useState(false)
+  const [newStoryStart, setNewStoryStart] = useState<number | null>(null)
+  const [newStoryEnd, setNewStoryEnd] = useState<number | null>(null)
+  const [newStorySelectingStart, setNewStorySelectingStart] = useState(true)
+  const [newStoryTitle, setNewStoryTitle] = useState('')
+  const [newStoryKeywords, setNewStoryKeywords] = useState('')
+  const [newStoryPages, setNewStoryPages] = useState('')
+  const [addingStory, setAddingStory] = useState(false)
+
   // Load available sources and codex tree on mount
   useEffect(() => {
     apiClient.get('/sources')
@@ -140,6 +150,7 @@ const SearchCurate = () => {
   const handleSelectStory = async (story: SearchResult) => {
     setSelectedStory(story)
     setEditMode(false) // Exit edit mode when selecting new story
+    setNewStoryMode(false) // Exit new story mode when selecting existing story
     setLoading(true)
     try {
       const res = await apiClient.post('/render-story', {
@@ -288,6 +299,45 @@ const SearchCurate = () => {
     }
     setEditMode(false)
     setFullText('')
+  }
+
+  const handleDeleteStory = async () => {
+    if (!selectedStory) return
+    
+    const confirmDelete = confirm(`Are you sure you want to delete "${selectedStory.title}"?\n\nThis will remove it from:\n- Story positions (${selectedStory.book_slug})\n- Database\n- Document store\n- All category assignments\n- Pending queue (if present)\n\nThis action cannot be undone.`)
+    
+    if (!confirmDelete) return
+    
+    try {
+      const res = await apiClient.delete(`/delete-story/${encodeURIComponent(selectedStory.title)}`)
+      
+      if (res.data.status === 'success') {
+        alert(`Story "${selectedStory.title}" deleted successfully.`)
+        
+        // Remove from search results
+        setResults(prev => prev.filter(r => r.title !== selectedStory.title))
+        
+        // Clear selected story
+        setSelectedStory(null)
+        setStoryContent('')
+        
+        // Refresh tree
+        const treeRes = await apiClient.get('/get-tree')
+        setCodexTree(treeRes.data)
+        
+        // Notify pending badge to refresh
+        window.dispatchEvent(new Event('pendingStoriesChanged'))
+      }
+    } catch (err: any) {
+      console.error('Error deleting story:', err)
+      const status = err?.response?.status
+      if (status === 401 || status === 403) {
+        alert('You must be signed in as an editor to delete stories.')
+      } else {
+        const errorMsg = err.response?.data?.detail || 'Failed to delete story.'
+        alert(errorMsg)
+      }
+    }
   }
 
   const handleAssignCategory = async () => {
@@ -486,6 +536,184 @@ const SearchCurate = () => {
     }
   }
 
+  // Enter new story mode
+  const handleEnterNewStoryMode = async () => {
+    if (!selectedStory) return
+    
+    setLoading(true)
+    setNewStoryMode(true)
+    setEditMode(false) // Exit edit mode if active
+    try {
+      // Load full text for the book
+      const res = await apiClient.get(`/full-text/${selectedStory.book_slug}`)
+      setFullText(res.data.text)
+      setNewStoryStart(null)
+      setNewStoryEnd(null)
+      setNewStorySelectingStart(true)
+      setNewStoryTitle('')
+      setNewStoryKeywords('')
+      setNewStoryPages('')
+    } catch (err) {
+      console.error('Error loading full text:', err)
+      setNewStoryMode(false)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Handle text click for new story selection
+  const handleNewStoryTextClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!newStoryMode || !fullText || !textContainerRef.current) return
+    
+    e.preventDefault()
+    const textContainer = textContainerRef.current
+    const clickX = e.clientX
+    const clickY = e.clientY
+    
+    // Create a range at the click point
+    const range = document.caretRangeFromPoint?.(clickX, clickY)
+    if (!range) return
+    
+    // Calculate character position by walking through text nodes
+    let charPos = 0
+    const walker = document.createTreeWalker(
+      textContainer,
+      NodeFilter.SHOW_TEXT,
+      null
+    )
+    
+    let node: Node | null
+    while ((node = walker.nextNode())) {
+      const textNode = node as Text
+      if (range.startContainer === textNode) {
+        charPos += range.startOffset
+        break
+      } else if (range.startContainer.contains?.(textNode) || textNode.contains?.(range.startContainer)) {
+        // If the range is within this text node's parent, calculate offset
+        if (range.startContainer.nodeType === Node.TEXT_NODE) {
+          const rangeText = (range.startContainer as Text).textContent || ''
+          const beforeRange = textContainer.textContent?.indexOf(rangeText, charPos) || charPos
+          charPos = beforeRange + range.startOffset
+        } else {
+          charPos += textNode.textContent?.length || 0
+        }
+        break
+      } else {
+        charPos += textNode.textContent?.length || 0
+      }
+    }
+    
+    // Fallback: use textContent if walker didn't find it
+    if (charPos === 0 && range.startContainer.nodeType === Node.TEXT_NODE) {
+      const allText = textContainer.textContent || ''
+      const clickedText = (range.startContainer as Text).textContent || ''
+      const index = allText.indexOf(clickedText)
+      if (index !== -1) {
+        charPos = index + range.startOffset
+      }
+    }
+    
+    // Ensure valid range
+    charPos = Math.min(Math.max(0, charPos), fullText.length)
+    
+    if (newStorySelectingStart) {
+      setNewStoryStart(charPos)
+      setNewStorySelectingStart(false) // Switch to selecting end
+    } else {
+      // Ensure end is after start
+      setNewStoryEnd(Math.max(charPos, newStoryStart || 0))
+      setNewStorySelectingStart(true) // Switch back to selecting start for next click
+    }
+  }
+
+  // Cancel new story mode
+  const handleCancelNewStory = () => {
+    setNewStoryMode(false)
+    setFullText('')
+    setNewStoryStart(null)
+    setNewStoryEnd(null)
+    setNewStoryTitle('')
+    setNewStoryKeywords('')
+    setNewStoryPages('')
+  }
+
+  // Add new story
+  const handleAddNewStory = async () => {
+    if (!selectedStory || newStoryStart === null || newStoryEnd === null || !newStoryTitle.trim()) return
+    
+    if (!confirm(`Add new story "${newStoryTitle}" to ${selectedStory.book_slug.replace(/_/g, ' ')}?`)) {
+      return
+    }
+    
+    setAddingStory(true)
+    try {
+      const response = await apiClient.post('/add-story', {
+        book_slug: selectedStory.book_slug,
+        title: newStoryTitle.trim(),
+        keywords: newStoryKeywords.trim(),
+        pages: newStoryPages.trim(),
+        start_char: newStoryStart,
+        end_char: newStoryEnd
+      })
+      
+      console.log('Add story response:', response.data)
+      
+      // Check if overlap warning was returned
+      if (response.data?.status === 'overlap_warning') {
+        const overlaps = response.data.overlaps || []
+        const overlapMsg = overlaps.map((o: any) => `  • ${o.title} (${o.overlap_percent}% overlap)`).join('\n')
+        const confirmMsg = `Warning: This story overlaps with existing stories:\n\n${overlapMsg}\n\nAdd anyway?`
+        
+        if (!confirm(confirmMsg)) {
+          setAddingStory(false)
+          return
+        }
+        
+        // Retry with force_overlap flag
+        const retryResponse = await apiClient.post('/add-story', {
+          book_slug: selectedStory.book_slug,
+          title: newStoryTitle.trim(),
+          keywords: newStoryKeywords.trim(),
+          pages: newStoryPages.trim(),
+          start_char: newStoryStart,
+          end_char: newStoryEnd,
+          force_overlap: true
+        })
+        
+        const pendingCount = retryResponse.data?.pending_count || 1
+        alert(`Story "${newStoryTitle}" added successfully! ${pendingCount} stories pending reindexing.`)
+      } else {
+        // Success - no overlaps
+        const pendingCount = response.data?.pending_count || 1
+        alert(`Story "${newStoryTitle}" added successfully! ${pendingCount} stories pending reindexing.`)
+      }
+      
+      // Trigger a custom event to notify PendingStoriesBadge to refresh
+      window.dispatchEvent(new CustomEvent('pendingStoriesChanged'))
+      
+      // Exit new story mode
+      setNewStoryMode(false)
+      setFullText('')
+      setNewStoryStart(null)
+      setNewStoryEnd(null)
+      setNewStoryTitle('')
+      setNewStoryKeywords('')
+      setNewStoryPages('')
+    } catch (err: any) {
+      console.error('Error adding story:', err)
+      const status = err?.response?.status
+      if (status === 401 || status === 403) {
+        alert('You must be signed in as an editor to add stories.')
+      } else if (status === 409) {
+        alert('This story overlaps with an existing story. Please adjust the boundaries.')
+      } else {
+        alert('Failed to add story. Please try again.')
+      }
+    } finally {
+      setAddingStory(false)
+    }
+  }
+
   return (
     <div className="flex h-screen bg-gray-900 text-white">
       {/* Sidebar Navigation */}
@@ -630,7 +858,7 @@ const SearchCurate = () => {
       <div className="flex-1 flex flex-col bg-gray-900">
         <div className="p-4 border-b border-gray-700">
           <h2 className="text-lg font-semibold">Story Viewer</h2>
-          {selectedStory && !editMode && (
+          {selectedStory && !editMode && !newStoryMode && (
             <div className="mt-2 flex gap-2 flex-wrap">
               <button
                 onClick={() => handleToggleMode('static')}
@@ -657,6 +885,18 @@ const SearchCurate = () => {
                 className="px-4 py-2 rounded text-sm bg-green-600 text-white hover:bg-green-700 transition-colors"
               >
                 Adjust Boundaries
+              </button>
+              <button
+                onClick={handleEnterNewStoryMode}
+                className="px-4 py-2 rounded text-sm bg-purple-600 text-white hover:bg-purple-700 transition-colors"
+              >
+                Add New Story
+              </button>
+              <button
+                onClick={handleDeleteStory}
+                className="px-4 py-2 rounded text-sm bg-red-600 text-white hover:bg-red-700 transition-colors"
+              >
+                Delete Story
               </button>
             </div>
           )}
@@ -688,10 +928,77 @@ const SearchCurate = () => {
               </div>
             </div>
           )}
+          {newStoryMode && (
+            <div className="mt-2 space-y-3">
+              <div className="text-sm text-gray-300">
+                {newStorySelectingStart ? (
+                  <span>Click to set <strong className="text-green-400">START</strong> position for new story</span>
+                ) : (
+                  <span>Click to set <strong className="text-yellow-400">END</strong> position for new story</span>
+                )}
+              </div>
+              
+              {/* Story Details Form */}
+              <div className="grid grid-cols-1 gap-3">
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-gray-300">Story Title *</label>
+                  <input
+                    type="text"
+                    value={newStoryTitle}
+                    onChange={(e) => setNewStoryTitle(e.target.value)}
+                    placeholder="Enter story title"
+                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-gray-300">Keywords</label>
+                  <input
+                    type="text"
+                    value={newStoryKeywords}
+                    onChange={(e) => setNewStoryKeywords(e.target.value)}
+                    placeholder="e.g., ghost, haunting, supernatural"
+                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-gray-300">Pages</label>
+                  <input
+                    type="text"
+                    value={newStoryPages}
+                    onChange={(e) => setNewStoryPages(e.target.value)}
+                    placeholder="e.g., 45-52"
+                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+              </div>
+              
+              <div className="flex gap-2">
+                <button
+                  onClick={handleAddNewStory}
+                  disabled={!newStoryTitle.trim() || newStoryStart === null || newStoryEnd === null || addingStory}
+                  className="px-4 py-2 rounded text-sm bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  {addingStory ? 'Adding...' : 'Add Story'}
+                </button>
+                <button
+                  onClick={handleCancelNewStory}
+                  className="px-4 py-2 rounded text-sm bg-gray-700 text-gray-200 hover:bg-gray-600 transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+              
+              {newStoryStart !== null && newStoryEnd !== null && (
+                <div className="text-xs text-gray-400">
+                  Start: {newStoryStart.toLocaleString()} | End: {newStoryEnd.toLocaleString()} | Length: {(newStoryEnd - newStoryStart).toLocaleString()} chars
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">
-          {loading && !editMode ? (
+          {loading && !editMode && !newStoryMode ? (
             <div className="flex items-center justify-center h-full text-gray-400">
               Loading story...
             </div>
@@ -721,6 +1028,49 @@ const SearchCurate = () => {
                 <span className="bg-red-600 bg-opacity-30 text-red-200">
                   {fullText.substring(editedEnd)}
                 </span>
+              </div>
+            </div>
+          ) : newStoryMode && fullText ? (
+            <div className="h-full">
+              {newStoryStart !== null && newStoryEnd !== null && (
+                <div className="mb-4 p-3 bg-gray-800 rounded border border-gray-700">
+                  <div className="text-sm text-gray-300 mb-2">
+                    <span className="inline-block w-32">New Story Range:</span>
+                    <span className="text-green-400">{newStoryStart.toLocaleString()}</span>
+                    <span className="mx-2">to</span>
+                    <span className="text-yellow-400">{newStoryEnd.toLocaleString()}</span>
+                  </div>
+                  <div className="text-xs text-gray-400">
+                    Preview: {fullText.substring(newStoryStart, Math.min(newStoryStart + 100, newStoryEnd))}...
+                  </div>
+                </div>
+              )}
+              <div
+                ref={textContainerRef}
+                onClick={handleNewStoryTextClick}
+                className="bg-gray-800 border border-gray-700 rounded p-4 cursor-text select-none font-mono text-sm leading-relaxed"
+                style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
+              >
+                {newStoryStart !== null && newStoryEnd !== null ? (
+                  <>
+                    {fullText.substring(0, newStoryStart)}
+                    <span className="bg-green-600 bg-opacity-50 text-green-200 px-1 rounded">
+                      {fullText.substring(newStoryStart, newStoryEnd)}
+                    </span>
+                    <span className="bg-yellow-600 bg-opacity-30 text-yellow-200">
+                      {fullText.substring(newStoryEnd)}
+                    </span>
+                  </>
+                ) : newStoryStart !== null ? (
+                  <>
+                    {fullText.substring(0, newStoryStart)}
+                    <span className="bg-green-600 bg-opacity-50 text-green-200 px-1 rounded">
+                      {fullText.substring(newStoryStart)}
+                    </span>
+                  </>
+                ) : (
+                  fullText
+                )}
               </div>
             </div>
           ) : selectedStory ? (

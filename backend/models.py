@@ -1,5 +1,5 @@
 # backend/models.py
-from sqlalchemy import create_engine, Column, Integer, String, Text, ForeignKey, DateTime
+from sqlalchemy import create_engine, Column, Integer, String, Text, ForeignKey, DateTime, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from dotenv import load_dotenv
@@ -54,6 +54,7 @@ class Story(Base):
     keywords = Column(Text)
     start_char = Column(Integer, default=0)
     end_char = Column(Integer, default=0)
+    indexed = Column(Boolean, default=False)  # Add this line
     # Relationships
     book = relationship("Book", back_populates="stories")
     categories = relationship("CodexNode", secondary="node_stories", back_populates="stories")

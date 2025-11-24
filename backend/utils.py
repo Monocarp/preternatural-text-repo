@@ -15,7 +15,7 @@ import zipfile
 import io
 from huggingface_hub import HfApi
 from haystack import Pipeline, Document
-from haystack.components.embedders import SentenceTransformersTextEmbedder
+from haystack.components.embedders import SentenceTransformersTextEmbedder, SentenceTransformersDocumentEmbedder
 from haystack.components.retrievers.in_memory import InMemoryEmbeddingRetriever, InMemoryBM25Retriever
 from haystack.components.joiners import DocumentJoiner
 from haystack.document_stores.in_memory import InMemoryDocumentStore
@@ -352,13 +352,26 @@ def update_story_title(book_slug, old_title, new_title):
             
             if updated_docs:
                 logger.info(f"Updating {len(updated_docs)} documents in document store")
-                # Convert ALL numpy embeddings to lists for JSON serialization before saving
-                for doc in document_store.filter_documents({}):
+                # Convert embeddings to lists for updated docs
+                for doc in updated_docs:
                     if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
                         doc.embedding = doc.embedding.tolist()
                 # Re-save the document store with updated metadata
                 document_store.delete_documents([doc.id for doc in updated_docs])
                 document_store.write_documents(updated_docs)
+                
+                # Convert ALL document embeddings to lists before saving
+                all_docs = list(document_store.filter_documents({}))
+                docs_to_convert = []
+                for doc in all_docs:
+                    if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
+                        doc.embedding = doc.embedding.tolist()
+                        docs_to_convert.append(doc)
+                
+                if docs_to_convert:
+                    document_store.delete_documents([doc.id for doc in docs_to_convert])
+                    document_store.write_documents(docs_to_convert)
+                
                 # Save to disk
                 document_store.save_to_disk(document_store_path)
                 logger.info(f"Updated document store metadata for {len(updated_docs)} documents and saved to disk")
@@ -443,6 +456,9 @@ semantic_pipeline.add_component("embedder", embedder_sem)
 semantic_pipeline.add_component("retriever_embedding", retriever_embedding_sem)
 semantic_pipeline.connect("embedder.embedding", "retriever_embedding.query_embedding")
 logger.info(f"Semantic pipeline components: {list(semantic_pipeline.graph.nodes.keys())}")
+# Document embedder for reindexing (batch embedding of documents)
+embedder_doc = SentenceTransformersDocumentEmbedder(model=MODEL_PATH, normalize_embeddings=True)
+embedder_doc.warm_up()
 # Ported helpers (all below from app.py)
 def search_stories(query, source_filter=None, type_filter=None, search_mode="Both", top_k=1000, min_score=0.2, assignment_filter="all"):
     """
@@ -1748,3 +1764,62 @@ def clear_assigned_titles_cache():
     global _assigned_titles_cache
     _assigned_titles_cache = None
     logger.debug("Cleared assigned titles cache")
+
+# ------------------------------------------------------------------ #
+# Pending Stories Queue Management
+# ------------------------------------------------------------------ #
+pending_stories_path = os.path.join(data_dir, "pending_stories.json")
+
+def load_pending_stories():
+    """Load pending stories from disk"""
+    if os.path.exists(pending_stories_path):
+        try:
+            with open(pending_stories_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error(f"Failed to load pending_stories.json: {e}")
+            return []
+    return []
+
+def save_pending_stories(pending_stories):
+    """Save pending stories to disk"""
+    try:
+        os.makedirs(data_dir, exist_ok=True)
+        with open(pending_stories_path, "w", encoding="utf-8") as f:
+            json.dump(pending_stories, f, indent=2, ensure_ascii=False)
+        logger.info(f"Saved {len(pending_stories)} pending stories")
+        return True
+    except Exception as e:
+        logger.error(f"Failed to save pending_stories.json: {e}")
+        return False
+
+def check_story_overlap(book_slug, new_start, new_end, exclude_title=None):
+    """
+    Check if new story overlaps with existing stories
+    Returns: (has_overlap, overlapping_stories)
+    """
+    positions = load_story_positions(book_slug)
+    overlaps = []
+    
+    for title, pos in positions.items():
+        if title == exclude_title:
+            continue
+            
+        existing_start = pos.get("start_char", -1)
+        existing_end = pos.get("end_char", -1)
+        
+        if existing_start == -1 or existing_end == -1:
+            continue
+        
+        # Check for overlap: two ranges overlap if one doesn't end before the other starts
+        if not (new_end <= existing_start or new_start >= existing_end):
+            overlap_size = min(new_end, existing_end) - max(new_start, existing_start)
+            overlap_percent = (overlap_size / (new_end - new_start)) * 100
+            
+            overlaps.append({
+                "title": title,
+                "overlap_chars": overlap_size,
+                "overlap_percent": round(overlap_percent, 2)
+            })
+    
+    return len(overlaps) > 0, overlaps

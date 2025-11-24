@@ -15,6 +15,7 @@ from models import SessionLocal, User  # Assuming models.py has SessionLocal (en
 import urllib.parse  # Add this line
 import json
 import requests
+from datetime import datetime
 
 # ------------------------------------------------------------------ #
 # 1. Logging
@@ -73,6 +74,7 @@ from utils import (
     export_stories, get_stories_at_path, find_paths_for_title,
     load_story_positions, update_story_boundaries, update_story_title, sources, # needed for render fallback
     rebuild_assigned_titles_cache,  # Add this import
+    engine,  # Add this for migration
 )
 # ------------------------------------------------------------------ #
 # 6. Startup – sanity check
@@ -237,6 +239,9 @@ async def require_editor(user: Dict = Depends(get_current_user)):
         sub = user.get("sub")
         email = (user.get("email") or "").lower()
         name = user.get("name") or ""
+        
+        log.info(f"require_editor: checking user sub={sub}, email={email}, name={name}")
+        log.info(f"require_editor: EDITOR_EMAILS={EDITOR_EMAILS}, email in list={email in EDITOR_EMAILS}")
 
         db_user = session.query(User).filter_by(id=sub).first()
 
@@ -252,8 +257,11 @@ async def require_editor(user: Dict = Depends(get_current_user)):
             db_user.role = "editor"
             session.commit()
             log.info(f"Auto-promoted {email} to 'editor' via EDITOR_EMAILS")
+        
+        log.info(f"require_editor: db_user.role={db_user.role if db_user else None}, required=editor")
 
         if not db_user or db_user.role != "editor":
+            log.warning(f"Access denied: user {email or sub} has role '{db_user.role if db_user else None}', needs 'editor'")
             raise HTTPException(403, "Editor role required")
         return user
     finally:
@@ -295,6 +303,21 @@ class UpdateTitleBody(BaseModel):
     old_title: str
     new_title: str
     book_slug: str
+
+class AddStoryBody(BaseModel):
+    book_slug: str
+    title: str
+    start_char: int
+    end_char: int
+    pages: str
+    keywords: str = ""
+    force_overlap: bool = False
+
+class ReindexResponse(BaseModel):
+    status: str
+    indexed_count: int
+    duration_seconds: float
+    errors: List[str] = []
 
 class BookResponse(BaseModel):
     id: int
@@ -674,6 +697,440 @@ def update_title(body: UpdateTitleBody, user = Depends(require_editor)):
         return {"status": "updated", "message": f"Title updated from '{body.old_title}' to '{body.new_title}'"}
     else:
         raise HTTPException(400, "Failed to update title")
+# ------------------- ADD STORY ------------------- #
+@app.post("/api/add-story")
+def add_story(body: AddStoryBody, user = Depends(require_editor)):
+    """
+    Add a new story to a book's story_positions.json and pending queue.
+    Story will be searchable after running /api/reindex-pending.
+    """
+    try:
+        # 1. Validate book exists
+        book_path = os.path.join(BOOKS_DIR, body.book_slug)
+        if not os.path.isdir(book_path):
+            raise HTTPException(404, f"Book not found: {body.book_slug}")
+        
+        # 2. Load full text to validate positions
+        from utils import load_full_md
+        full_md = load_full_md(body.book_slug)
+        if not full_md:
+            raise HTTPException(404, f"Full_Text.md not found for {body.book_slug}")
+        
+        # 3. Validate positions
+        if body.start_char < 0 or body.end_char > len(full_md):
+            raise HTTPException(400, f"Character positions out of bounds (0-{len(full_md)})")
+        
+        if body.end_char <= body.start_char:
+            raise HTTPException(400, "end_char must be greater than start_char")
+        
+        # 4. Extract and validate story text
+        story_text = full_md[body.start_char:body.end_char].strip()
+        if not story_text:
+            raise HTTPException(400, "Story text is empty")
+        
+        if len(story_text) < 50:
+            raise HTTPException(400, f"Story too short ({len(story_text)} chars). Minimum 50 characters.")
+        
+        # 5. Check for duplicate title
+        from utils import load_story_positions
+        positions = load_story_positions(body.book_slug)
+        if body.title in positions:
+            raise HTTPException(400, f"Story title '{body.title}' already exists in {body.book_slug}")
+        
+        # 6. Check for overlaps
+        from utils import check_story_overlap
+        has_overlap, overlaps = check_story_overlap(body.book_slug, body.start_char, body.end_char)
+        
+        log.info(f"Overlap check: has_overlap={has_overlap}, force_overlap={body.force_overlap}, overlaps={len(overlaps) if has_overlap else 0}")
+        
+        if has_overlap and not body.force_overlap:
+            # Return overlap warning, require confirmation
+            log.info(f"Returning overlap warning for '{body.title}': {overlaps}")
+            return {
+                "status": "overlap_warning",
+                "message": "Story overlaps with existing stories",
+                "overlaps": overlaps,
+                "requires_confirmation": True
+            }
+        
+        # 7. Parse keywords
+        keywords_list = [k.strip() for k in body.keywords.split(",") if k.strip()]
+        
+        # 8. Update story_positions.json
+        positions[body.title] = {
+            "start_char": body.start_char,
+            "end_char": body.end_char,
+            "pages": body.pages,
+            "keywords": keywords_list
+        }
+        from utils import story_positions, save_story_positions
+        story_positions[body.book_slug] = positions
+        save_success = save_story_positions(body.book_slug)
+        
+        if not save_success:
+            raise HTTPException(500, "Failed to save story_positions.json")
+        
+        # 9. Add to database (if enabled) with indexed=false
+        from utils import USE_DB, SessionLocal
+        if USE_DB and SessionLocal:
+            try:
+                with SessionLocal() as db:
+                    from models import Story, Book
+                    
+                    book = db.query(Book).filter_by(slug=body.book_slug).first()
+                    if book:
+                        story = Story(
+                            title=body.title,
+                            book_id=book.id,
+                            book_slug=body.book_slug,
+                            pages=body.pages,
+                            keywords=",".join(keywords_list),
+                            start_char=body.start_char,
+                            end_char=body.end_char
+                        )
+                        db.add(story)
+                        db.commit()
+                        log.info(f"Added story '{body.title}' to database (not yet indexed)")
+            except Exception as e:
+                log.error(f"Failed to add story to database: {e}")
+                # Don't fail the entire operation if DB fails
+        
+        # 10. Add to pending queue
+        from utils import load_pending_stories, save_pending_stories
+        pending = load_pending_stories()
+        pending.append({
+            "title": body.title,
+            "book_slug": body.book_slug,
+            "start_char": body.start_char,
+            "end_char": body.end_char,
+            "pages": body.pages,
+            "keywords": keywords_list,
+            "added_by": user.get("email", user.get("sub", "unknown")),
+            "added_at": datetime.utcnow().isoformat() + "Z"
+        })
+        save_pending_stories(pending)
+        
+        # 11. Invalidate cache
+        from utils import invalidate_cache
+        invalidate_cache()
+        
+        log.info(f"Story '{body.title}' added to {body.book_slug} by {user.get('email')} (pending embedding)")
+        
+        return {
+            "status": "success",
+            "message": f"Story '{body.title}' saved successfully. Will be searchable after reindexing.",
+            "story": {
+                "title": body.title,
+                "book_slug": body.book_slug,
+                "pages": body.pages,
+                "start_char": body.start_char,
+                "end_char": body.end_char,
+                "length": len(story_text),
+                "indexed": False
+            },
+            "pending_count": len(pending),
+            "overlap_warnings": [f"{o['title']} ({o['overlap_percent']}% overlap)" for o in overlaps] if has_overlap else []
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        log.error(f"Failed to add story: {e}", exc_info=True)
+        raise HTTPException(500, f"Failed to add story: {str(e)}")
+
+# ------------------- DELETE STORY ------------------- #
+@app.delete("/api/delete-story/{title}")
+def delete_story(title: str, user = Depends(require_editor)):
+    """
+    Delete a story from story_positions.json, database, and document store.
+    Also removes it from the codex tree and pending queue if present.
+    """
+    try:
+        from utils import stories_dict, story_positions, save_story_positions, load_pending_stories, save_pending_stories
+        from utils import document_store, document_store_path
+        import numpy as np
+        
+        log.info(f"Deleting story '{title}' requested by {user.get('email')}")
+        
+        # 1. Find which book this story belongs to
+        book_slug = None
+        for slug, positions in story_positions.items():
+            if title in positions:
+                book_slug = slug
+                break
+        
+        if not book_slug:
+            raise HTTPException(404, f"Story '{title}' not found in any book")
+        
+        # 2. Remove from story_positions.json
+        from utils import load_story_positions
+        positions = load_story_positions(book_slug)
+        if title in positions:
+            del positions[title]
+            story_positions[book_slug] = positions
+            save_story_positions(book_slug)
+            log.info(f"Removed '{title}' from story_positions.json for {book_slug}")
+        
+        # 3. Remove from stories_dict cache
+        if title in stories_dict:
+            del stories_dict[title]
+        
+        # 4. Remove from database (if enabled)
+        from utils import USE_DB
+        if USE_DB and SessionLocal:
+            try:
+                with SessionLocal() as db:
+                    from models import Story, NodeStory
+                    
+                    # Delete story (cascade will handle NodeStory relationships)
+                    story = db.query(Story).filter_by(title=title).first()
+                    if story:
+                        db.delete(story)
+                        db.commit()
+                        log.info(f"Deleted story '{title}' from database")
+            except Exception as e:
+                log.error(f"Failed to delete from database: {e}")
+                # Don't fail the entire operation
+        
+        # 5. Remove from document store
+        try:
+            # Find document by title in meta
+            docs = document_store.filter_documents({"field": "meta.title", "operator": "==", "value": title})
+            if docs:
+                doc_ids = [doc.id for doc in docs]
+                document_store.delete_documents(doc_ids)
+                
+                # Convert all embeddings to lists before saving
+                all_docs = list(document_store.filter_documents({}))
+                docs_to_update = []
+                for doc in all_docs:
+                    if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
+                        doc.embedding = doc.embedding.tolist()
+                        docs_to_update.append(doc)
+                
+                if docs_to_update:
+                    document_store.delete_documents([doc.id for doc in docs_to_update])
+                    document_store.write_documents(docs_to_update)
+                
+                document_store.save_to_disk(document_store_path)
+                log.info(f"Removed '{title}' from document store ({len(doc_ids)} documents)")
+        except Exception as e:
+            log.error(f"Failed to remove from document store: {e}")
+            # Don't fail the entire operation
+        
+        # 6. Remove from codex tree (if assigned)
+        try:
+            tree = get_cached_tree()
+            from utils import find_paths_for_title, remove_from_path, save_codex_tree
+            
+            paths = find_paths_for_title(tree, title)
+            if paths:
+                for path in paths:
+                    tree = remove_from_path(tree, path, title)
+                save_codex_tree(tree)
+                log.info(f"Removed '{title}' from {len(paths)} category assignments")
+        except Exception as e:
+            log.error(f"Failed to remove from codex tree: {e}")
+            # Don't fail the entire operation
+        
+        # 7. Remove from pending queue (if present)
+        try:
+            pending = load_pending_stories()
+            original_count = len(pending)
+            pending = [p for p in pending if p.get("title") != title]
+            if len(pending) < original_count:
+                save_pending_stories(pending)
+                log.info(f"Removed '{title}' from pending queue")
+        except Exception as e:
+            log.error(f"Failed to remove from pending queue: {e}")
+        
+        # 8. Invalidate cache
+        invalidate_cache()
+        
+        log.info(f"Successfully deleted story '{title}' from {book_slug}")
+        
+        return {
+            "status": "success",
+            "message": f"Story '{title}' deleted successfully",
+            "book_slug": book_slug
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        log.error(f"Failed to delete story: {e}", exc_info=True)
+        raise HTTPException(500, f"Failed to delete story: {str(e)}")
+
+# ------------------- PENDING STORIES COUNT ------------------- #
+@app.get("/api/pending-stories-count")
+def get_pending_stories_count():
+    """Get count of stories pending embedding"""
+    try:
+        from utils import load_pending_stories
+        pending = load_pending_stories()
+        return {"count": len(pending)}
+    except Exception as e:
+        log.error(f"Failed to get pending count: {e}")
+        return {"count": 0}
+
+# ------------------- REINDEX PENDING STORIES ------------------- #
+@app.post("/api/reindex-pending")
+def reindex_pending_stories(user = Depends(require_editor)):
+    """
+    Batch embed all pending stories and add them to document store.
+    This makes them searchable via the main search function.
+    """
+    import time
+    start_time = time.time()
+    
+    try:
+        # 1. Load pending stories
+        from utils import load_pending_stories
+        pending = load_pending_stories()
+        
+        if not pending:
+            return {
+                "status": "success",
+                "message": "No pending stories to index",
+                "indexed_count": 0,
+                "duration_seconds": 0
+            }
+        
+        log.info(f"Reindexing {len(pending)} pending stories...")
+        
+        # 2. Prepare documents for embedding
+        from haystack import Document
+        stories_to_embed = []
+        errors = []
+        
+        for story_data in pending:
+            try:
+                book_slug = story_data["book_slug"]
+                title = story_data["title"]
+                start_char = story_data["start_char"]
+                end_char = story_data["end_char"]
+                
+                # Load full text
+                from utils import load_full_md
+                full_md = load_full_md(book_slug)
+                if not full_md:
+                    errors.append(f"{title}: Full_Text.md not found")
+                    continue
+                
+                # Extract story text
+                story_text = full_md[start_char:end_char].strip()
+                if not story_text:
+                    errors.append(f"{title}: Empty story text")
+                    continue
+                
+                # Create document
+                doc = Document(
+                    content=story_text,
+                    meta={
+                        "type": "story",
+                        "title": title,
+                        "book": book_slug,
+                        "source": book_slug.replace('_', ' '),
+                        "pages": story_data.get("pages", "Unknown"),
+                        "keywords": ", ".join(story_data.get("keywords", [])),
+                        "start_char": start_char,
+                        "end_char": end_char
+                    }
+                )
+                stories_to_embed.append(doc)
+                
+            except Exception as e:
+                log.error(f"Error preparing story {story_data.get('title')}: {e}")
+                errors.append(f"{story_data.get('title', 'Unknown')}: {str(e)}")
+        
+        if not stories_to_embed:
+            raise HTTPException(400, f"No valid stories to embed. Errors: {errors}")
+        
+        # 3. Batch embed all stories
+        log.info(f"Embedding {len(stories_to_embed)} stories...")
+        from utils import embedder_doc
+        result = embedder_doc.run(stories_to_embed)
+        embedded_docs = result["documents"]
+        
+        log.info(f"Embedded {len(embedded_docs)} stories successfully")
+        
+        # 4. Add to document store
+        from utils import document_store, document_store_path
+        import numpy as np
+        
+        # Remove any existing documents with the same IDs to avoid duplicates
+        existing_ids = [doc.id for doc in embedded_docs]
+        document_store.delete_documents(existing_ids)
+        
+        # Convert new document embeddings to lists before writing
+        for doc in embedded_docs:
+            if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
+                doc.embedding = doc.embedding.tolist()
+        
+        document_store.write_documents(embedded_docs)
+        
+        # 5. Convert ALL existing document embeddings to lists for JSON serialization
+        all_docs = list(document_store.filter_documents({}))
+        docs_to_update = []
+        for doc in all_docs:
+            if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
+                doc.embedding = doc.embedding.tolist()
+                docs_to_update.append(doc)
+        
+        # Rewrite documents with converted embeddings
+        if docs_to_update:
+            document_store.delete_documents([doc.id for doc in docs_to_update])
+            document_store.write_documents(docs_to_update)
+        
+        document_store.save_to_disk(document_store_path)
+        
+        log.info(f"Updated document_store.json with {len(embedded_docs)} new stories")
+        
+        # 5. Update database indexed flags (if enabled)
+        from utils import USE_DB
+        if USE_DB and SessionLocal:
+            try:
+                with SessionLocal() as db:
+                    from models import Story
+                    for story_data in pending:
+                        story = db.query(Story).filter_by(
+                            title=story_data["title"],
+                            book_slug=story_data["book_slug"]
+                        ).first()
+                        if story:
+                            story.indexed = True
+                    db.commit()
+                    log.info(f"Updated {len(pending)} stories to indexed=True in database")
+            except Exception as e:
+                log.error(f"Failed to update database: {e}")
+                # Don't fail the operation if DB update fails
+        
+        # 6. Clear pending queue
+        from utils import save_pending_stories
+        save_pending_stories([])
+        
+        # 7. Invalidate cache
+        from utils import invalidate_cache
+        invalidate_cache()
+        
+        duration = time.time() - start_time
+        
+        log.info(f"Reindex complete: {len(embedded_docs)} stories indexed in {duration:.2f}s")
+        
+        return {
+            "status": "success",
+            "message": f"Successfully indexed {len(embedded_docs)} stories",
+            "indexed_count": len(embedded_docs),
+            "duration_seconds": round(duration, 2),
+            "errors": errors if errors else []
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        log.error(f"Reindex failed: {e}", exc_info=True)
+        raise HTTPException(500, f"Reindex failed: {str(e)}")
+
 # ------------------- EXPORT ------------------- #
 @app.post("/api/export")
 def export(body: ExportBody):
@@ -681,6 +1138,41 @@ def export(body: ExportBody):
     if not result:
         raise HTTPException(500, "Export failed")
     return result # {mime, data (base64), filename}
+
+# ------------------- MIGRATE DATABASE ------------------- #
+@app.post("/api/migrate-db")
+def migrate_database(user = Depends(require_editor)):
+    """Recreate database tables to apply schema changes.
+    WARNING: This will drop all existing data!
+    """
+    try:
+        log.info("Starting database migration...")
+        
+        # Drop all tables
+        from models import Base
+        Base.metadata.drop_all(bind=engine)
+        log.info("Dropped all existing tables")
+        
+        # Recreate all tables
+        Base.metadata.create_all(bind=engine)
+        log.info("Recreated all tables with new schema")
+        
+        # Reload stories from disk to repopulate
+        sync_disk_to_db()
+        
+        # Clear and reload caches
+        clear_book_metadata_cache()
+        preload_book_metadata()
+        invalidate_cache()
+        
+        return {
+            "status": "success",
+            "message": "Database migrated successfully. All data reloaded from disk."
+        }
+        
+    except Exception as e:
+        log.error(f"Migration failed: {e}", exc_info=True)
+        raise HTTPException(500, f"Migration failed: {str(e)}")
 
 # ------------------- RELOAD STORIES ------------------- #
 @app.post("/api/reload-stories")
