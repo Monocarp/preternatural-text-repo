@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Archive from './pages/Archive'
 import SearchCurate from './pages/SearchCurate'
 import Callback from './pages/Callback'
+import BookArchive from './pages/BookArchive'
+import BookDetail from './pages/BookDetail'
 import Login from './components/Login'
 import SidebarTree from './components/SidebarTree'
 
@@ -15,6 +17,8 @@ function App() {
             <Route path="/" element={<Archive />} />
             <Route path="/archive/*" element={<Archive />} />
             <Route path="/search-curate" element={<SearchCurate />} />
+            <Route path="/book-archive" element={<BookArchive />} />
+            <Route path="/book-archive/:slug" element={<BookDetail />} />
             <Route path="/callback" element={<Callback />} />
             <Route path="/login" element={<Login />} />
           </Routes>

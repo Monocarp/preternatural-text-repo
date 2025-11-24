@@ -8,6 +8,8 @@ import { useLocation } from 'react-router-dom'
 import { setStackApp } from './utils/axios'
 import Archive from './pages/Archive'
 import SearchCurate from './pages/SearchCurate'
+import BookArchive from './pages/BookArchive'
+import BookDetail from './pages/BookDetail'
 import Login from './components/Login'
 import Callback from './pages/Callback'
 import './index.css' // Tailwind
@@ -55,6 +57,8 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/archive" element={<Archive />} />
               <Route path="/archive/:path/*" element={<Archive />} />
             <Route path="/search-curate" element={<SearchCurate />} />
+            <Route path="/book-archive" element={<BookArchive />} />
+            <Route path="/book-archive/:slug" element={<BookDetail />} />
             <Route path="/login" element={<Login />} />
               {/* Fallback callback we previously used */}
             <Route path="/callback" element={<Callback />} />
