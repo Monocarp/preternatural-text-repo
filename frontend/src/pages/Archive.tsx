@@ -191,9 +191,6 @@ const Archive = () => {
           delete updated[story.title]
           return updated
         })
-        
-        // Notify pending badge to refresh
-        window.dispatchEvent(new Event('pendingStoriesChanged'))
       }
     } catch (err: any) {
       console.error('Error deleting story:', err)
@@ -373,7 +370,7 @@ const Archive = () => {
         }
         
         // Retry with force_overlap flag
-        const retryResponse = await axios.post('/api/add-story', {
+        await axios.post('/api/add-story', {
           book_slug: newStoryBookSlug,
           title: newStoryTitle.trim(),
           keywords: newStoryKeywords.trim(),
@@ -383,16 +380,11 @@ const Archive = () => {
           force_overlap: true
         })
         
-        const pendingCount = retryResponse.data?.pending_count || 1
-        alert(`Story "${newStoryTitle}" added successfully! ${pendingCount} stories pending reindexing.`)
+        alert(`Story "${newStoryTitle}" added successfully and is now searchable!`)
       } else {
         // Success - no overlaps
-        const pendingCount = response.data?.pending_count || 1
-        alert(`Story "${newStoryTitle}" added successfully! ${pendingCount} stories pending reindexing.`)
+        alert(`Story "${newStoryTitle}" added successfully and is now searchable!`)
       }
-      
-      // Trigger a custom event to notify PendingStoriesBadge to refresh
-      window.dispatchEvent(new CustomEvent('pendingStoriesChanged'))
       
       // Exit new story mode
       setNewStoryMode(false)

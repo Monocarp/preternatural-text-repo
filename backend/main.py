@@ -697,12 +697,12 @@ def update_title(body: UpdateTitleBody, user = Depends(require_editor)):
         return {"status": "updated", "message": f"Title updated from '{body.old_title}' to '{body.new_title}'"}
     else:
         raise HTTPException(400, "Failed to update title")
-# ------------------- ADD STORY ------------------- #
+# ------------------- ADD STORY (IMMEDIATE INDEXING) ------------------- #
 @app.post("/api/add-story")
 def add_story(body: AddStoryBody, user = Depends(require_editor)):
     """
-    Add a new story to a book's story_positions.json and pending queue.
-    Story will be searchable after running /api/reindex-pending.
+    Add a new story to a book and immediately index it for search.
+    Story is searchable as soon as this endpoint returns.
     """
     try:
         # 1. Validate book exists
@@ -770,7 +770,9 @@ def add_story(body: AddStoryBody, user = Depends(require_editor)):
         if not save_success:
             raise HTTPException(500, "Failed to save story_positions.json")
         
-        # 9. Add to database (if enabled) with indexed=false
+        log.info(f"Saved story '{body.title}' to story_positions.json")
+        
+        # 9. Add to database (if enabled)
         from utils import USE_DB, SessionLocal
         if USE_DB and SessionLocal:
             try:
@@ -790,35 +792,73 @@ def add_story(body: AddStoryBody, user = Depends(require_editor)):
                         )
                         db.add(story)
                         db.commit()
-                        log.info(f"Added story '{body.title}' to database (not yet indexed)")
+                        log.info(f"Added story '{body.title}' to database")
             except Exception as e:
                 log.error(f"Failed to add story to database: {e}")
                 # Don't fail the entire operation if DB fails
         
-        # 10. Add to pending queue
-        from utils import load_pending_stories, save_pending_stories
-        pending = load_pending_stories()
-        pending.append({
+        # 10. IMMEDIATE INDEXING: Embed the story right now
+        log.info(f"Embedding story '{body.title}' immediately...")
+        from haystack import Document
+        from utils import embedder_doc, document_store, document_store_path
+        import numpy as np
+        
+        story_doc = Document(
+            content=story_text,
+            meta={
+                "type": "story",
+                "title": body.title,
+                "book": body.book_slug,
+                "source": body.book_slug.replace('_', ' '),
+                "pages": body.pages,
+                "keywords": ", ".join(keywords_list),
+                "start_char": body.start_char,
+                "end_char": body.end_char
+            }
+        )
+        
+        # Embed the story
+        result = embedder_doc.run([story_doc])
+        embedded_doc = result["documents"][0]
+        
+        # Convert embedding to list for JSON serialization
+        if embedded_doc.embedding is not None and isinstance(embedded_doc.embedding, np.ndarray):
+            embedded_doc.embedding = embedded_doc.embedding.tolist()
+        
+        # Add to document store
+        document_store.write_documents([embedded_doc])
+        
+        # Convert ALL embeddings to lists before saving
+        all_docs = list(document_store.filter_documents({}))
+        for doc in all_docs:
+            if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
+                doc.embedding = doc.embedding.tolist()
+        
+        document_store.save_to_disk(document_store_path)
+        
+        log.info(f"Story '{body.title}' embedded and added to document store")
+        
+        # 11. Update stories_dict cache
+        from utils import stories_dict
+        stories_dict[body.title] = {
             "title": body.title,
             "book_slug": body.book_slug,
-            "start_char": body.start_char,
-            "end_char": body.end_char,
             "pages": body.pages,
-            "keywords": keywords_list,
-            "added_by": user.get("email", user.get("sub", "unknown")),
-            "added_at": datetime.utcnow().isoformat() + "Z"
-        })
-        save_pending_stories(pending)
+            "keywords": ", ".join(keywords_list),
+            "start_char": body.start_char,
+            "end_char": body.end_char
+        }
+        log.info(f"Updated stories_dict cache with '{body.title}'")
         
-        # 11. Invalidate cache
+        # 12. Invalidate cache
         from utils import invalidate_cache
         invalidate_cache()
         
-        log.info(f"Story '{body.title}' added to {body.book_slug} by {user.get('email')} (pending embedding)")
+        log.info(f"Story '{body.title}' added to {body.book_slug} by {user.get('email')} and is now searchable!")
         
         return {
             "status": "success",
-            "message": f"Story '{body.title}' saved successfully. Will be searchable after reindexing.",
+            "message": f"Story '{body.title}' saved and indexed successfully. It is now searchable!",
             "story": {
                 "title": body.title,
                 "book_slug": body.book_slug,
@@ -826,9 +866,8 @@ def add_story(body: AddStoryBody, user = Depends(require_editor)):
                 "start_char": body.start_char,
                 "end_char": body.end_char,
                 "length": len(story_text),
-                "indexed": False
+                "indexed": True
             },
-            "pending_count": len(pending),
             "overlap_warnings": [f"{o['title']} ({o['overlap_percent']}% overlap)" for o in overlaps] if has_overlap else []
         }
         
@@ -960,176 +999,6 @@ def delete_story(title: str, user = Depends(require_editor)):
     except Exception as e:
         log.error(f"Failed to delete story: {e}", exc_info=True)
         raise HTTPException(500, f"Failed to delete story: {str(e)}")
-
-# ------------------- PENDING STORIES COUNT ------------------- #
-@app.get("/api/pending-stories-count")
-def get_pending_stories_count():
-    """Get count of stories pending embedding"""
-    try:
-        from utils import load_pending_stories
-        pending = load_pending_stories()
-        return {"count": len(pending)}
-    except Exception as e:
-        log.error(f"Failed to get pending count: {e}")
-        return {"count": 0}
-
-# ------------------- REINDEX PENDING STORIES ------------------- #
-@app.post("/api/reindex-pending")
-def reindex_pending_stories(user = Depends(require_editor)):
-    """
-    Batch embed all pending stories and add them to document store.
-    This makes them searchable via the main search function.
-    """
-    import time
-    start_time = time.time()
-    
-    try:
-        # 1. Load pending stories
-        from utils import load_pending_stories
-        pending = load_pending_stories()
-        
-        if not pending:
-            return {
-                "status": "success",
-                "message": "No pending stories to index",
-                "indexed_count": 0,
-                "duration_seconds": 0
-            }
-        
-        log.info(f"Reindexing {len(pending)} pending stories...")
-        
-        # 2. Prepare documents for embedding
-        from haystack import Document
-        stories_to_embed = []
-        errors = []
-        
-        for story_data in pending:
-            try:
-                book_slug = story_data["book_slug"]
-                title = story_data["title"]
-                start_char = story_data["start_char"]
-                end_char = story_data["end_char"]
-                
-                # Load full text
-                from utils import load_full_md
-                full_md = load_full_md(book_slug)
-                if not full_md:
-                    errors.append(f"{title}: Full_Text.md not found")
-                    continue
-                
-                # Extract story text
-                story_text = full_md[start_char:end_char].strip()
-                if not story_text:
-                    errors.append(f"{title}: Empty story text")
-                    continue
-                
-                # Create document
-                doc = Document(
-                    content=story_text,
-                    meta={
-                        "type": "story",
-                        "title": title,
-                        "book": book_slug,
-                        "source": book_slug.replace('_', ' '),
-                        "pages": story_data.get("pages", "Unknown"),
-                        "keywords": ", ".join(story_data.get("keywords", [])),
-                        "start_char": start_char,
-                        "end_char": end_char
-                    }
-                )
-                stories_to_embed.append(doc)
-                
-            except Exception as e:
-                log.error(f"Error preparing story {story_data.get('title')}: {e}")
-                errors.append(f"{story_data.get('title', 'Unknown')}: {str(e)}")
-        
-        if not stories_to_embed:
-            raise HTTPException(400, f"No valid stories to embed. Errors: {errors}")
-        
-        # 3. Batch embed all stories
-        log.info(f"Embedding {len(stories_to_embed)} stories...")
-        from utils import embedder_doc
-        result = embedder_doc.run(stories_to_embed)
-        embedded_docs = result["documents"]
-        
-        log.info(f"Embedded {len(embedded_docs)} stories successfully")
-        
-        # 4. Add to document store
-        from utils import document_store, document_store_path
-        import numpy as np
-        
-        # Remove any existing documents with the same IDs to avoid duplicates
-        existing_ids = [doc.id for doc in embedded_docs]
-        document_store.delete_documents(existing_ids)
-        
-        # Convert new document embeddings to lists before writing
-        for doc in embedded_docs:
-            if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
-                doc.embedding = doc.embedding.tolist()
-        
-        document_store.write_documents(embedded_docs)
-        
-        # 5. Convert ALL existing document embeddings to lists for JSON serialization
-        all_docs = list(document_store.filter_documents({}))
-        docs_to_update = []
-        for doc in all_docs:
-            if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
-                doc.embedding = doc.embedding.tolist()
-                docs_to_update.append(doc)
-        
-        # Rewrite documents with converted embeddings
-        if docs_to_update:
-            document_store.delete_documents([doc.id for doc in docs_to_update])
-            document_store.write_documents(docs_to_update)
-        
-        document_store.save_to_disk(document_store_path)
-        
-        log.info(f"Updated document_store.json with {len(embedded_docs)} new stories")
-        
-        # 5. Update database indexed flags (if enabled)
-        from utils import USE_DB
-        if USE_DB and SessionLocal:
-            try:
-                with SessionLocal() as db:
-                    from models import Story
-                    for story_data in pending:
-                        story = db.query(Story).filter_by(
-                            title=story_data["title"],
-                            book_slug=story_data["book_slug"]
-                        ).first()
-                        if story:
-                            story.indexed = True
-                    db.commit()
-                    log.info(f"Updated {len(pending)} stories to indexed=True in database")
-            except Exception as e:
-                log.error(f"Failed to update database: {e}")
-                # Don't fail the operation if DB update fails
-        
-        # 6. Clear pending queue
-        from utils import save_pending_stories
-        save_pending_stories([])
-        
-        # 7. Invalidate cache
-        from utils import invalidate_cache
-        invalidate_cache()
-        
-        duration = time.time() - start_time
-        
-        log.info(f"Reindex complete: {len(embedded_docs)} stories indexed in {duration:.2f}s")
-        
-        return {
-            "status": "success",
-            "message": f"Successfully indexed {len(embedded_docs)} stories",
-            "indexed_count": len(embedded_docs),
-            "duration_seconds": round(duration, 2),
-            "errors": errors if errors else []
-        }
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        log.error(f"Reindex failed: {e}", exc_info=True)
-        raise HTTPException(500, f"Reindex failed: {str(e)}")
 
 # ------------------- EXPORT ------------------- #
 @app.post("/api/export")

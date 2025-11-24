@@ -1823,3 +1823,11 @@ def check_story_overlap(book_slug, new_start, new_end, exclude_title=None):
             })
     
     return len(overlaps) > 0, overlaps
+
+# ------------------------------------------------------------------ #
+# Document Embedder (for immediate story indexing)
+# ------------------------------------------------------------------ #
+# Create a dedicated embedder for adding new stories
+embedder_doc = SentenceTransformersDocumentEmbedder(model=MODEL_PATH, normalize_embeddings=True)
+embedder_doc.warm_up()
+logger.info("Document embedder initialized for add-story feature")

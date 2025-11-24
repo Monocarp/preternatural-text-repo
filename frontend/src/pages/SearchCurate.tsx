@@ -324,9 +324,6 @@ const SearchCurate = () => {
         // Refresh tree
         const treeRes = await apiClient.get('/get-tree')
         setCodexTree(treeRes.data)
-        
-        // Notify pending badge to refresh
-        window.dispatchEvent(new Event('pendingStoriesChanged'))
       }
     } catch (err: any) {
       console.error('Error deleting story:', err)
@@ -670,7 +667,7 @@ const SearchCurate = () => {
         }
         
         // Retry with force_overlap flag
-        const retryResponse = await apiClient.post('/add-story', {
+        await apiClient.post('/add-story', {
           book_slug: selectedStory.book_slug,
           title: newStoryTitle.trim(),
           keywords: newStoryKeywords.trim(),
@@ -680,16 +677,11 @@ const SearchCurate = () => {
           force_overlap: true
         })
         
-        const pendingCount = retryResponse.data?.pending_count || 1
-        alert(`Story "${newStoryTitle}" added successfully! ${pendingCount} stories pending reindexing.`)
+        alert(`Story "${newStoryTitle}" added successfully and is now searchable!`)
       } else {
         // Success - no overlaps
-        const pendingCount = response.data?.pending_count || 1
-        alert(`Story "${newStoryTitle}" added successfully! ${pendingCount} stories pending reindexing.`)
+        alert(`Story "${newStoryTitle}" added successfully and is now searchable!`)
       }
-      
-      // Trigger a custom event to notify PendingStoriesBadge to refresh
-      window.dispatchEvent(new CustomEvent('pendingStoriesChanged'))
       
       // Exit new story mode
       setNewStoryMode(false)

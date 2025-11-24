@@ -7,7 +7,6 @@ import 'rc-tree/assets/index.css'
 import './SidebarTree.css'
 import { useStore } from '../store'
 import { encodePathSegmentsForRoute } from '../utils/path'
-import PendingStoriesBadge from './PendingStoriesBadge'
 
 type TreeNode = {
   key: string
@@ -242,10 +241,6 @@ const SidebarTree = () => {
             </svg>
             <span>Search & Curate</span>
           </button>
-          {/* NEW: Add pending stories badge */}
-          <div className="px-3 py-1">
-            <PendingStoriesBadge />
-          </div>
         </div>
       )}
 
