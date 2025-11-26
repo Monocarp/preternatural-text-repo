@@ -1,104 +1,196 @@
 ---
-title: Preternatural Text Repository UI
+title: Preternatural Text Repository
 emoji: 👻
-colorFrom: indigo
-colorTo: purple
-sdk: gradio
-sdk_version: 5.49.1
-app_file: app.py
-pinned: false
-tags:
-- paranormal
-- historical-texts
-- semantic-search
-- haystack
-- gradio
-short_description: Dashboard
+short_description: Search and curate paranormal stories from historical texts
 ---
-# Paranormal Text Repository
 
-[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/hetzerdj/paranormal-text-ui)  
+# Preternatural Text Repository
+
 ![GitHub License](https://img.shields.io/github/license/hetzerdj/paranormal-text-repo)  
 ![GitHub Repo stars](https://img.shields.io/github/stars/hetzerdj/paranormal-text-repo?style=social)
 
 ## Overview
 
-This repository hosts the backend data and frontend code for a scalable system designed to extract, index, search, and curate stories of preternatural phenomena from a wide range of texts. Currently limited to a few examples texts, the project aims to expand to 100+ texts.
+A scalable system for extracting, indexing, searching, and curating stories of preternatural phenomena from historical texts. Currently includes several example texts with plans to expand to 100+ volumes.
 
-The system processes DOCX files into Markdown, extracts stories with pagination, embeds them for semantic search (using Haystack and FAISS), and provides an interactive Gradio-based UI for querying, viewing, editing boundaries, curating lists, and exporting to MD/PDF/Word. It's built for research, such as analyzing motifs in paranormal events.
+### Key Features
+- **Hybrid semantic search** — combines keyword (BM25) and embedding-based search using Haystack AI
+- **Multi-book support** — process and search across multiple historical texts
+- **Hierarchical categorization** — organize stories into a "Codex Tree" taxonomy (Demonic Activity, Ghostly Activity, Cryptids, etc.)
+- **Boundary editing** — adjust story start/end positions with visual highlighting
+- **React production UI** — search, curate, and manage stories with real-time updates
+- **AI-assisted development** — structured workflow for sustainable feature development
 
-- **Key Features**:
-  - Semantic hybrid search (e.g., "demonic activity" matches "possession").
-  - Multi-book support with incremental processing.
-  - Three-panel UI: Search results, full-text viewer with auto-scroll/highlight, curated list.
-  - Exports for motif analysis.
-  - Open-source stack: Python, Haystack, Sentence Transformers, Gradio, FAISS.
+### Tech Stack
+| Layer | Technology |
+|-------|----------|
+| Search Engine | Haystack AI 2.x, Sentence Transformers (bge-large-en-v1.5), FAISS |
+| Backend API | FastAPI, SQLAlchemy, PostgreSQL |
+| Frontend UI | React 19, TypeScript, Vite, Tailwind CSS, Zustand |
+| Auth | Stack Auth (JWT-based) |
+| Development | Continue.dev, Claude AI, git-based workflows |
 
-This is a **beta version**—core functionality is implemented, but we're iterating on scalability, UI polish, and additional books.
+---
 
-## Demo
+## Development Approach
 
-Try the interactive dashboard on Hugging Face Spaces: [Paranormal Text UI](https://huggingface.co/spaces/hetzerdj/paranormal-text-ui).
+This project uses a **sustainable AI-assisted development workflow** that keeps the codebase manageable without dumping entire files into prompts. Key documents:
 
-- Search example: "witch trials" → Lists matching stories with pages/keywords.
-- View/Edit: Auto-scrolls to page, highlight story, adjust boundaries via sliders/phrases.
-- Curate/Export: Build lists and download as MD/PDF/Word.
+- **[CONTEXT.md](./CONTEXT.md)** — Development context for AI assistants (architecture, module responsibilities, conventions)
+- **[TECH_DEBT_BACKLOG.md](./TECH_DEBT_BACKLOG.md)** — Prioritized refactoring tasks with acceptance criteria
+- **GitHub branch naming:** `ai/task-name-YYYYMMDD` for AI-generated changes
+
+---
+
+## Architecture
+
+```
+┌─────────────────┐      ┌─────────────────────┐      ┌─────────────┐
+│   Data Layer    │ ───► │   Search Engine     │ ───► │     UI      │
+│                 │      │                     │      │             │
+│ books/          │      │ backend/main.py     │      │ frontend/   │
+│ data/           │      │ backend/utils/      │      │ (React)     │
+│ Pre-Processing/ │      │ (FastAPI)           │      │             │
+└─────────────────┘      └─────────────────────┘      └─────────────┘
+        │                         │                          │
+        ▼                         ▼                          ▼
+  document_store.json       /api/* endpoints          React components
+  story_positions.json      Haystack pipelines        Zustand state
+  codex_tree.json           JWT auth                  Tailwind styling
+```
+
+See [CONTEXT.md](./CONTEXT.md) for architecture deep-dive and [REPO_SUMMARY.md](./REPO_SUMMARY.md) for API documentation.
+
+---
+
+## Quick Start
+
+### Prerequisites
+- Python 3.10+
+- Node.js 18+
+- PostgreSQL (for production backend)
+
+### 1. Clone & Install
+
+```bash
+git clone https://github.com/Monocarp/preternatural-text-repo.git
+cd preternatural-text-repo
+```
+
+### 2. Run the Full Stack (Backend + Frontend)
+
+**Backend:**
+```bash
+cd backend
+pip install -r requirements.txt
+# Create .env.local with DATABASE_URL, STACK_PROJECT_ID, etc.
+uvicorn main:app --reload --port 8000
+```
+
+**Frontend:**
+```bash
+cd frontend
+npm install
+npm run dev
+# Opens at http://localhost:5173
+```
+
+---
 
 ## File Structure
 
 ```
-paranormal-text-repo/
-├── app.py                  # Gradio UI script (deployed to HF Spaces)
-├── requirements.txt        # Dependencies for HF build
-├── books/                  # Book data (subdirs per book, e.g., christian_mysticism_volume_iv/)
-│   ├── book_slug/          # Example: christian_mysticism_volume_iv
-│   │   ├── Full_Text.md    # Full Markdown text with [Page X] markers
-│   │   ├── Stories.md      # Extracted stories
-│   │   ├── grouped_index.md# Indexed terms with pages
-│   │   └── story_positions.json # Char positions, pages, keywords for stories
-├── data/                   # Shared backend data
-│   ├── document_store.json # Haystack in-memory store with embeddings
-│   ├── faiss_index.bin     # FAISS vector index (via Git LFS)
-│   └── documents.json      # Metadata for documents
-├── README.md               # This file
-└── .gitattributes          # Git LFS tracking patterns
+preternatural-text-repo/
+├── CONTEXT.md                # Development context for AI assistants
+├── TECH_DEBT_BACKLOG.md      # Prioritized refactoring tasks
+├── REPO_SUMMARY.md           # API documentation
+│
+├── backend/                  # FastAPI production API
+│   ├── main.py               # All API endpoints
+│   ├── models.py             # SQLAlchemy models
+│   ├── utils/                # Modular utilities (P2-1)
+│   │   ├── __init__.py       # Re-exports for backwards compatibility
+│   │   ├── rendering.py      # Story rendering functions
+│   │   ├── cache.py          # Tree/metadata caching
+│   │   ├── storage.py        # File I/O operations
+│   │   └── export.py         # Export to PDF/DOCX/JSON
+│   ├── utils_legacy.py       # Core infra (pipelines, search, DB ops)
+│   └── requirements.txt
+│
+├── frontend/                 # React production UI
+│   ├── src/
+│   │   ├── App.tsx
+│   │   ├── store.ts          # Zustand state
+│   │   ├── pages/            # SearchCurate, Archive, BookDetail
+│   │   └── components/       # SidebarTree, Login
+│   └── package.json
+│
+├── books/                    # Per-book data
+│   └── {book_slug}/
+│       ├── Full_Text.md      # Source text with [Page X] markers
+│       ├── story_positions.json
+│       └── Stories.md
+│
+├── data/                     # Shared data stores
+│   ├── document_store.json   # Haystack embeddings (Git LFS)
+│   ├── codex_tree.json       # Category hierarchy
+│   └── stories_dict.json     # Flat story lookup
+│
+└── Pre-Processing/           # Text extraction scripts (private)
 ```
 
-Large files (e.g., .md, .json, .bin) are managed via Git LFS for efficiency.
+---
 
-## Setup and Usage
+## Adding New Books
 
-### Local Development
-1. Clone the repo: `git clone https://github.com/hetzerdj/paranormal-text-repo.git`
-2. Install dependencies: `pip install -r requirements.txt` (also needs `apt install pandoc` on Linux).
-3. Run the UI: `python app.py` → Opens at http://localhost:7860.
-4. To add new books:
-   - Run preprocessing scripts (Steps 1-4 from project docs) in Colab/local to generate/update `books/` and `data/`.
-   - Commit and push: `git add . && git commit -m "Add new book" && git push`.
+1. Process DOCX source via preprocessing scripts → generates `Full_Text.md`, `story_positions.json`
+2. Place output in `books/{book_slug}/`
+3. Run `backend/ingest_book.py` to embed and index
+4. Update `data/codex_tree.json` with initial categories
+5. Commit and push
 
-### Deployment on Hugging Face Spaces
-- The UI is deployed at [hetzerdj/paranormal-text-ui](https://huggingface.co/spaces/hetzerdj/paranormal-text-ui).
-- Syncs automatically with this GitHub repo (push changes here → HF rebuilds).
-- Free tier sufficient; scales to 100+ books with <0.5s queries.
+Effort: ~15-30 minutes per book depending on length.
 
-### Adding Books (Scaling)
-- Process new DOCX texts via the batch script (Step 4) for incremental embedding. (Pre-processing is not publicly available code)
-- Effort: ~5-20 min per book addition.
-- Target: 100 texts; test multi-book searches for any issues.
+---
 
-## Technologies
-- **Backend**: Haystack (search/embedding), FAISS (vector store), Sentence Transformers (all-MiniLM-L6-v2).
-- **UI**: Gradio (dashboard).
-- **Processing**: python-docx, pandoc, difflib for extraction/matching.
-- **Deployment**: Hugging Face Spaces, GitHub for persistence.
+## API Reference
+
+Full endpoint documentation in [`REPO_SUMMARY.md`](./REPO_SUMMARY.md#key-public-interfaces-as-of-2025-11-25).
+
+Key endpoints:
+| Endpoint | Description |
+|----------|-------------|
+| `POST /api/search` | Hybrid search across all books |
+| `GET /api/get-tree` | Fetch category hierarchy |
+| `POST /api/assign-category` | Assign story to category path |
+| `POST /api/render-story` | Get HTML rendering of a story |
+| `POST /api/add-story` | Add new story with immediate indexing |
+
+---
 
 ## Contributing
-- Fork the repo and submit pull requests for new books, UI features, or bug fixes.
-- Issues: Report bugs or suggest enhancements via GitHub Issues.
-- License: MIT (feel free to use/modify).
+
+1. Fork the repo
+2. Create a feature branch: `ai/task-name-YYYYMMDD` or `fix/issue-name`
+3. Pick a task from [TECH_DEBT_BACKLOG.md](./TECH_DEBT_BACKLOG.md) or open an issue
+4. Reference [CONTEXT.md](./CONTEXT.md) for architecture and module responsibilities
+5. Verify acceptance criteria before submitting PR
+6. Submit pull request with task ID and summary
+
+Issues and enhancement suggestions welcome via GitHub Issues.
+
+---
+
+## License
+
+MIT — see [LICENSE](./LICENSE)
+
+---
 
 ## Credits
-- Texts: Public domain historical works (e.g., Joseph Von Gorres).
-- Tools: Open-source libraries as listed.
 
-For questions, contact via GitHub or HF discussions. Beta feedback appreciated! 🚀
+- **Texts**: Public domain historical works
+- **Search**: [Haystack AI](https://haystack.deepset.ai/)
+- **Embeddings**: [BAAI/bge-large-en-v1.5](https://huggingface.co/BAAI/bge-large-en-v1.5)
+- **UI**: [React](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/)
+- **State**: [Zustand](https://github.com/pmndrs/zustand)

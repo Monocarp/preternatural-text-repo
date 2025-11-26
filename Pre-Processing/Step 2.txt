@@ -142,7 +142,7 @@ input("Looks good? Press Enter to continue, or Ctrl+C to cancel...")
 print("\nUpload your cleaned Markdown files (part1.md, part2.md, etc.)")
 uploaded = files.upload()
 sorted_files = sorted(uploaded.keys(), key=lambda f: (
-    999 if not re.search(r'part[ _-]?(\d+)', f, re.I) else 
+    999 if not re.search(r'part[ _-]?(\d+)', f, re.I) else
     int(re.search(r'part[ _-]?(\d+)', f, re.I).group(1))
 ))
 
@@ -151,11 +151,11 @@ for filename in sorted_files:
     if not filename.lower().endswith('.md'):
         print(f"Skipping non-md: {filename}")
         continue
-        
+
     print(f"\nProcessing → {filename}")
     text = open(filename, 'rb').read().decode('utf-8', errors='ignore')
     stories = extract_supernatural_stories(text, book_title)
-    
+
     if stories and "No supernatural stories extracted" not in stories:
         all_stories.append(stories)
 

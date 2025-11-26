@@ -20,27 +20,40 @@ from datetime import datetime
 # ------------------------------------------------------------------ #
 # 1. Logging
 # ------------------------------------------------------------------ #
+from logging.handlers import RotatingFileHandler
+
 # Create logs directory if it doesn't exist
 log_dir = os.path.join(os.path.dirname(__file__), "..", "logs")
 os.makedirs(log_dir, exist_ok=True)
 
-# Set up file and console logging
+# Read log level from environment (default INFO for production)
+# Set LOG_LEVEL=DEBUG for verbose logging during development
+LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
+log_level = getattr(logging, LOG_LEVEL, logging.INFO)
+
+# Set up rotating file handler (10MB max, keep 5 backups)
 log_file = os.path.join(log_dir, "backend.log")
-file_handler = logging.FileHandler(log_file, encoding='utf-8')
-file_handler.setLevel(logging.DEBUG)
+file_handler = RotatingFileHandler(
+    log_file, 
+    maxBytes=10*1024*1024,  # 10MB
+    backupCount=5,
+    encoding='utf-8'
+)
+file_handler.setLevel(log_level)
 file_handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(name)s %(message)s"))
 
+# Console always shows INFO+ (less noisy for terminal)
 console_handler = logging.StreamHandler(sys.stdout)
 console_handler.setLevel(logging.INFO)
 console_handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(name)s %(message)s"))
 
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=log_level,
     format="%(asctime)s %(levelname)s %(name)s %(message)s",
     handlers=[file_handler, console_handler],
 )
 log = logging.getLogger(__name__)
-log.info(f"Logging to file: {log_file}")
+log.info(f"Logging to file: {log_file} (level={LOG_LEVEL})")
 # ------------------------------------------------------------------ #
 # 2. FastAPI app + CORS
 # ------------------------------------------------------------------ #
@@ -81,6 +94,8 @@ from utils import (
 # ------------------------------------------------------------------ #
 @app.on_event("startup")
 async def startup():
+    from search import USE_DIRECT_SEARCH
+    
     if document_store is None:
         raise RuntimeError("document_store failed to initialise")
     
@@ -102,12 +117,24 @@ async def startup():
     
     # Warm-up embedding model
     log.info("Warming up embedding model...")
-    dummy_results = both_pipeline.run({
-        "embedder": {"text": "warmup query"},
-        "retriever_embedding": {"top_k": 1, "filters": None},
-        "retriever_bm25": {"query": "warmup query", "top_k": 1, "filters": None}
-    })
-    log.info("Embedding model warmed up")
+    
+    if USE_DIRECT_SEARCH:
+        # Direct engine warm-up
+        from search.engine import get_search_engine
+        engine = get_search_engine()
+        engine.warm_up()
+        # Test search
+        test_results = engine.search("warmup query", top_k=1)
+        log.info(f"Direct search engine warmed up (test returned {len(test_results)} results)")
+    else:
+        # Legacy Haystack warm-up
+        dummy_results = both_pipeline.run({
+            "embedder": {"text": "warmup query"},
+            "retriever_embedding": {"top_k": 1, "filters": None},
+            "retriever_bm25": {"query": "warmup query", "top_k": 1, "filters": None}
+        })
+        log.info("Haystack embedding model warmed up")
+    
     log.info("API ready – docs:%s", document_store.count_documents())
 # ------------------------------------------------------------------ #
 # Auth Middleware
@@ -445,43 +472,33 @@ def get_full_text(book_slug: str):
         raise HTTPException(404, f"Book not found: {book_slug}")
 @app.get("/api/get-stories/{path:path}")
 def get_stories(path: str):
-    log.info(f"Raw path received: {repr(path)}")
+    log.debug(f"Raw path received: {repr(path)}")
     parts = [urllib.parse.unquote(p.strip()) for p in path.split("/") if p.strip()]
-    log.info(f"After split and decode: {parts}")
+    log.debug(f"After split and decode: {parts}")
     tree = get_cached_tree()
-    log.info(f"Getting stories for path: {parts}")
-    log.info(f"Tree structure at root: {list(tree.keys())[:5]}...")  # First 5 keys
+    log.debug(f"Getting stories for path: {parts}")
+    log.debug(f"Tree structure at root: {list(tree.keys())[:5]}...")  # First 5 keys
     stories = get_stories_at_path(tree, parts)
-    log.info(f"Found {len(stories)} stories for path {parts}")
+    log.debug(f"Found {len(stories)} stories for path {parts}")
     if len(stories) == 0 and len(parts) > 0:
         # Debug: check what we find at each level
         current = tree
         for i, part in enumerate(parts):
-            log.info(f"Level {i}: looking for '{part}' in {list(current.keys()) if isinstance(current, dict) else type(current)}")
+            log.debug(f"Level {i}: looking for '{part}' in {list(current.keys()) if isinstance(current, dict) else type(current)}")
             if part in current:
                 current = current[part]
-                log.info(f"Found '{part}', continuing...")
+                log.debug(f"Found '{part}', continuing...")
             else:
-                log.info(f"'{part}' not found, stopping")
+                log.debug(f"'{part}' not found, stopping")
                 break
-        log.info(f"Final current: {current}")
+        log.debug(f"Final current: {current}")
     return stories
 @app.get("/api/get-unassigned")
 def get_unassigned():
-    tree = get_cached_tree()
-    from utils import stories_dict
-    assigned = set()
-    def walk(node):
-        if isinstance(node, dict):
-            if "_stories" in node:
-                assigned.update(node["_stories"])
-            for v in node.values():
-                walk(v)
-        elif isinstance(node, list):
-            assigned.update(node)
-    walk(tree)
+    from utils import stories_dict, enrich_stories_with_book_metadata
+    from utils.cache import get_assigned_titles_set
+    assigned = get_assigned_titles_set()
     unassigned = [s for t, s in stories_dict.items() if t not in assigned]
-    from utils import enrich_stories_with_book_metadata
     return enrich_stories_with_book_metadata(unassigned)
 @app.post("/api/assign-category")
 def assign_category(body: AssignBody, user: Dict = Depends(require_editor)):
@@ -799,44 +816,78 @@ def add_story(body: AddStoryBody, user = Depends(require_editor)):
         
         # 10. IMMEDIATE INDEXING: Embed the story right now
         log.info(f"Embedding story '{body.title}' immediately...")
-        from haystack import Document
-        from utils import embedder_doc, document_store, document_store_path
+        from search import USE_DIRECT_SEARCH
         import numpy as np
         
-        story_doc = Document(
-            content=story_text,
-            meta={
-                "type": "story",
-                "title": body.title,
-                "book": body.book_slug,
-                "source": body.book_slug.replace('_', ' '),
-                "pages": body.pages,
-                "keywords": ", ".join(keywords_list),
-                "start_char": body.start_char,
-                "end_char": body.end_char
-            }
-        )
-        
-        # Embed the story
-        result = embedder_doc.run([story_doc])
-        embedded_doc = result["documents"][0]
-        
-        # Convert embedding to list for JSON serialization
-        if embedded_doc.embedding is not None and isinstance(embedded_doc.embedding, np.ndarray):
-            embedded_doc.embedding = embedded_doc.embedding.tolist()
-        
-        # Add to document store
-        document_store.write_documents([embedded_doc])
-        
-        # Convert ALL embeddings to lists before saving
-        all_docs = list(document_store.filter_documents({}))
-        for doc in all_docs:
-            if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
-                doc.embedding = doc.embedding.tolist()
-        
-        document_store.save_to_disk(document_store_path)
-        
-        log.info(f"Story '{body.title}' embedded and added to document store")
+        if USE_DIRECT_SEARCH:
+            # Direct FAISS + SQLite engine
+            from search.engine import get_search_engine
+            from search.models import StoryDocument
+            
+            engine = get_search_engine()
+            
+            # Create StoryDocument
+            doc_id = f"{body.book_slug}_{hash(body.title) & 0xFFFFFFFF}"
+            story_doc = StoryDocument(
+                id=doc_id,
+                content=story_text,
+                meta={
+                    "type": "story",
+                    "title": body.title,
+                    "book": body.book_slug,
+                    "source": body.book_slug.replace('_', ' '),
+                    "pages": body.pages,
+                    "keywords": ", ".join(keywords_list),
+                    "start_char": body.start_char,
+                    "end_char": body.end_char
+                },
+                embedding=None  # Will be generated by engine
+            )
+            
+            # Add to engine (handles embedding + FAISS + FTS5)
+            engine.add_document(story_doc)
+            engine.save()
+            
+            log.info(f"Story '{body.title}' embedded and added to Direct search engine")
+        else:
+            # Legacy Haystack
+            from haystack import Document
+            from utils import embedder_doc, document_store, document_store_path
+            
+            story_doc = Document(
+                content=story_text,
+                meta={
+                    "type": "story",
+                    "title": body.title,
+                    "book": body.book_slug,
+                    "source": body.book_slug.replace('_', ' '),
+                    "pages": body.pages,
+                    "keywords": ", ".join(keywords_list),
+                    "start_char": body.start_char,
+                    "end_char": body.end_char
+                }
+            )
+            
+            # Embed the story
+            result = embedder_doc.run([story_doc])
+            embedded_doc = result["documents"][0]
+            
+            # Convert embedding to list for JSON serialization
+            if embedded_doc.embedding is not None and isinstance(embedded_doc.embedding, np.ndarray):
+                embedded_doc.embedding = embedded_doc.embedding.tolist()
+            
+            # Add to document store
+            document_store.write_documents([embedded_doc])
+            
+            # Convert ALL embeddings to lists before saving
+            all_docs = list(document_store.filter_documents({}))
+            for doc in all_docs:
+                if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
+                    doc.embedding = doc.embedding.tolist()
+            
+            document_store.save_to_disk(document_store_path)
+            
+            log.info(f"Story '{body.title}' embedded and added to Haystack document store")
         
         # 11. Update stories_dict cache
         from utils import stories_dict
@@ -886,8 +937,6 @@ def delete_story(title: str, user = Depends(require_editor)):
     """
     try:
         from utils import stories_dict, story_positions, save_story_positions, load_pending_stories, save_pending_stories
-        from utils import document_store, document_store_path
-        import numpy as np
         
         log.info(f"Deleting story '{title}' requested by {user.get('email')}")
         
@@ -931,31 +980,56 @@ def delete_story(title: str, user = Depends(require_editor)):
                 log.error(f"Failed to delete from database: {e}")
                 # Don't fail the entire operation
         
-        # 5. Remove from document store
-        try:
-            # Find document by title in meta
-            docs = document_store.filter_documents({"field": "meta.title", "operator": "==", "value": title})
-            if docs:
-                doc_ids = [doc.id for doc in docs]
-                document_store.delete_documents(doc_ids)
+        # 5. Remove from document store / search engine
+        from search import USE_DIRECT_SEARCH
+        
+        if USE_DIRECT_SEARCH:
+            # Direct FAISS + SQLite engine
+            try:
+                from search.engine import get_search_engine
+                engine = get_search_engine()
                 
-                # Convert all embeddings to lists before saving
-                all_docs = list(document_store.filter_documents({}))
-                docs_to_update = []
-                for doc in all_docs:
-                    if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
-                        doc.embedding = doc.embedding.tolist()
-                        docs_to_update.append(doc)
+                # Find and delete documents with matching title
+                for doc_id in list(engine.faiss_index.id_map):
+                    meta = engine.faiss_index.get_metadata(doc_id)
+                    if meta and meta.get("title") == title:
+                        engine.delete_document(doc_id)
+                        log.info(f"Removed '{title}' from Direct search engine")
+                        break
                 
-                if docs_to_update:
-                    document_store.delete_documents([doc.id for doc in docs_to_update])
-                    document_store.write_documents(docs_to_update)
+                engine.save()
+            except Exception as e:
+                log.error(f"Failed to remove from Direct search engine: {e}")
+                # Don't fail the entire operation
+        else:
+            # Legacy Haystack
+            try:
+                from utils import document_store, document_store_path
+                import numpy as np
                 
-                document_store.save_to_disk(document_store_path)
-                log.info(f"Removed '{title}' from document store ({len(doc_ids)} documents)")
-        except Exception as e:
-            log.error(f"Failed to remove from document store: {e}")
-            # Don't fail the entire operation
+                # Find document by title in meta
+                docs = document_store.filter_documents({"field": "meta.title", "operator": "==", "value": title})
+                if docs:
+                    doc_ids = [doc.id for doc in docs]
+                    document_store.delete_documents(doc_ids)
+                    
+                    # Convert all embeddings to lists before saving
+                    all_docs = list(document_store.filter_documents({}))
+                    docs_to_update = []
+                    for doc in all_docs:
+                        if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
+                            doc.embedding = doc.embedding.tolist()
+                            docs_to_update.append(doc)
+                    
+                    if docs_to_update:
+                        document_store.delete_documents([doc.id for doc in docs_to_update])
+                        document_store.write_documents(docs_to_update)
+                    
+                    document_store.save_to_disk(document_store_path)
+                    log.info(f"Removed '{title}' from Haystack document store ({len(doc_ids)} documents)")
+            except Exception as e:
+                log.error(f"Failed to remove from Haystack document store: {e}")
+                # Don't fail the entire operation
         
         # 6. Remove from codex tree (if assigned)
         try:

@@ -2,230 +2,236 @@
     "Demonic Activity": {
         "Oppression": {
             "Haunting Vexations": {
-                "Glimmer Man": {},
-                "Sleep Paralysis": {},
-                "Static People": {},
                 "Poltergeist": {},
+                "Sleep Paralysis": {},
+                "Glimmer Man": {},
+                "Static People": {},
                 "Shadow People": {},
                 "Flannel Man": {}
             },
             "Mental Health Vexations": {
-                "Dreams": {},
-                "Visual Hallucinations": {},
                 "Severe Mental Disorder": {},
-                "Anger": {},
                 "Weariness": {},
+                "Anger": {},
                 "Auditory Hallucinations": {},
+                "Dreams": {},
+                "Emotional/Relational Block": {},
                 "Depression": {},
-                "Emotional/Relational Block": {}
+                "Visual Hallucinations": {}
             },
             "Peripheral Vexations": {
-                "Reputational": {},
-                "Occupational": {},
+                "Bugs/Pests": {},
                 "Financial": {},
                 "Pets": {},
-                "Bugs/Pests": {}
+                "Occupational": {},
+                "Reputational": {}
             },
             "Physical Health Vexations": {
-                "Unexplained Physical Pain": {},
-                "Serious Physical Injury": {},
-                "Scratches": {},
+                "Sexual Assault": {},
+                "Headaches": {},
+                "Bumps, Cysts, other Protrusions": {},
+                "Blocked Conception": {},
+                "Minor Morphing": {},
+                "Choking": {},
                 "Bruise": {},
+                "Insomnia": {},
+                "Scratches": {},
+                "Bite Marks": {},
                 "Distention of the Stomach": {},
                 "Death": {},
-                "Bumps, Cysts, other Protrusions": {},
-                "Miscarriages": {},
-                "Sexual Assault": {},
                 "Pronounced Sleep Behaviors/Manifestations": {},
-                "Nausea": {},
-                "Minor Morphing": {},
-                "Blocked Conception": {},
-                "Foul Breath": {},
                 "Bone Dislocation": {},
-                "Headaches": {},
-                "Choking": {},
-                "Bite Marks": {},
-                "Insomnia": {},
-                "Suffocation": {}
+                "Foul Breath": {},
+                "Miscarriages": {},
+                "Serious Physical Injury": {},
+                "Nausea": {},
+                "Suffocation": {},
+                "Unexplained Physical Pain": {}
             }
         },
+        "_stories": [],
         "Possession": {
-            "Secondary Signs": {
-                "Suffering Spirituality": {
-                    "Spiritual Security": {},
-                    "Fruitless Self-Satisfaction": {},
-                    "Self-Aggrandizing Behavior": {},
-                    "Closed towards Spiritual Director": {},
-                    "Nonconformity with scripture and tradition": {},
-                    "Contempt for little things (spiritual)": {},
-                    "Anguish over sins": {},
-                    "animus delendi (destruction)": {}
-                },
-                "Chronic Insomnia": {},
-                "Pain From Holy Items": {},
-                "Repugnance towards Holiness": {},
-                "Speaking in Tongues": {},
-                "Blocked Prayer": {},
-                "Difficulty in Receiving Sacraments": {},
-                "Affected Dreams": {},
-                "Illness around Holiness": {},
-                "Possession-Specific Physical Vexation": {
-                    "Diabolical Incandescence": {},
-                    "Foul Odor": {},
-                    "Fluctuation in Body Temperature": {},
-                    "Drastic Eating Changes": {}
-                },
-                "Liturgical Calendar Suffering": {},
-                "Obscene Thoughts Around Holiness": {},
-                "Aversion to Sacred Names": {},
-                "Aversion to Scripture": {},
-                "Falsified Emotions": {}
+            "Appearance of Fortunae": {
+                "Other": {},
+                "Glass": {},
+                "Nails": {},
+                "Cloth": {}
             },
             "Superhuman Agility": {},
-            "Sustained Unnatural Posture": {},
-            "Strength": {},
-            "Appearance of Fortunae": {
-                "Cloth": {},
-                "Other": {},
-                "Nails": {},
-                "Glass": {}
-            },
-            "Morphing": {},
-            "Levitation": {},
-            "Fasting": {},
-            "Speaking a Foreign Language": {},
-            "Superhuman Speed": {},
-            "Occult Knowledge": {},
-            "Gravitas": {},
             "_stories": [
                 "Stages of Demonic Possession in Magdalena and the Role of Asmodeus"
-            ]
+            ],
+            "Levitation": {},
+            "Occult Knowledge": {},
+            "Secondary Signs": {
+                "Difficulty in Receiving Sacraments": {},
+                "Repugnance towards Holiness": {},
+                "Speaking in Tongues": {},
+                "Aversion to Sacred Names": {},
+                "Falsified Emotions": {},
+                "Pain From Holy Items": {},
+                "Affected Dreams": {},
+                "Possession-Specific Physical Vexation": {
+                    "Fluctuation in Body Temperature": {},
+                    "Drastic Eating Changes": {},
+                    "Diabolical Incandescence": {},
+                    "Foul Odor": {}
+                },
+                "Liturgical Calendar Suffering": {},
+                "Aversion to Scripture": {},
+                "Blocked Prayer": {},
+                "Illness around Holiness": {},
+                "Suffering Spirituality": {
+                    "Self-Aggrandizing Behavior": {},
+                    "animus delendi (destruction)": {},
+                    "Fruitless Self-Satisfaction": {},
+                    "Closed towards Spiritual Director": {},
+                    "Contempt for little things (spiritual)": {},
+                    "Spiritual Security": {},
+                    "Anguish over sins": {},
+                    "Nonconformity with scripture and tradition": {}
+                },
+                "Chronic Insomnia": {},
+                "Obscene Thoughts Around Holiness": {}
+            },
+            "Strength": {},
+            "Superhuman Speed": {},
+            "Morphing": {},
+            "Gravitas": {},
+            "Fasting": {},
+            "Sustained Unnatural Posture": {},
+            "Speaking a Foreign Language": {}
         },
         "Obsession": {
             "Anger": {},
+            "Emotional Guilt": {},
             "Fear/Anxiety": {},
-            "Reduction of Voluntariness": {},
-            "Emotional Guilt": {}
-        },
-        "_stories": {}
+            "Reduction of Voluntariness": {}
+        }
     },
     "Ghostly Activity": {
         "Family Member/Loved One": {
-            "Voice": {},
+            "Appearance": {},
             "Habitual Behavior": {},
             "Behavior": {},
-            "Appearance": {}
+            "Voice": {}
         },
-        "Individual Connected To Place/Person": {
-            "Auditory": {},
-            "Habitual Behavior": {},
-            "Visual": {},
-            "Behavior": {}
-        },
+        "_stories": [
+            "Dante\u2019s Devil Alichino and the Demonic Roots of Harlequins and Clowns"
+        ],
         "Family Pet": {
             "Auditory": {},
             "Habitual Behavior": {},
-            "Visual": {},
-            "Behavior": {}
-        },
-        "Other Animal": {
-            "Auditory": {},
-            "Habitual Behavior": {},
-            "Visual": {},
-            "Behavior": {}
+            "Behavior": {},
+            "Visual": {}
         },
         "Stranger": {
             "Auditory": {},
             "Habitual Behavior": {},
-            "Visual": {},
-            "Behavior": {}
+            "Behavior": {},
+            "Visual": {}
+        },
+        "Individual Connected To Place/Person": {
+            "Auditory": {},
+            "Habitual Behavior": {},
+            "Behavior": {},
+            "Visual": {}
+        },
+        "Other Animal": {
+            "Auditory": {},
+            "Habitual Behavior": {},
+            "Behavior": {},
+            "Visual": {}
         }
     },
     "Cryptid": {
-        "Aquatic": {},
-        "Cervidae": {
-            "Deer": {},
-            "Moose": {}
-        },
-        "Canine": {
-            "Werewolf": {},
-            "Chupacabra": {},
-            "Other": {},
-            "Dogman": {}
-        },
         "Avian": {
+            "Other": {},
             "Thunderbird": {},
-            "Mothman": {},
-            "Other": {}
+            "Mothman": {}
         },
         "Bipedal": {
             "Other": {},
             "Sasquatch": {},
             "Humanoid": {}
         },
-        "Feline": {}
+        "Aquatic": {},
+        "Cervidae": {
+            "Deer": {},
+            "Moose": {}
+        },
+        "Canine": {
+            "Other": {},
+            "Werewolf": {},
+            "Chupacabra": {},
+            "Dogman": {}
+        },
+        "Feline": {},
+        "_stories": [
+            "The Oostbruck Servant with Dislocated Feet"
+        ]
     },
     "Fae": {
         "Other": {},
-        "Gnome": {},
         "Nymph": {},
+        "Gnome": {},
         "Fairy": {}
     },
     "Witchcraft": {
-        "Indoctrinating Children": {},
-        "Harm to Livestock": {},
+        "Divination": {},
+        "Black Sabbath": {},
+        "Evil Eye": {},
+        "Physical Harm": {},
+        "Transportation": {},
+        "Harm to Crops": {},
+        "Levitation": {},
+        "Cursing": {},
+        "Sacrificing Children": {},
         "Ritual": {
+            "Black Sabbath": {},
+            "Contract with Another": {},
+            "Contract with Demon": {},
             "Rejection of Sacraments": {
                 "Rejection of Holy Orders": {},
-                "Rejection of Baptism": {},
-                "Rejection of Confirmation": {},
                 "Rejection of Marriage": {},
-                "Rejection of Eucharist": {},
-                "Rejection of Confession": {}
+                "Rejection of Baptism": {},
+                "Rejection of Confession": {},
+                "Rejection of Confirmation": {},
+                "Rejection of Eucharist": {}
             },
             "Sacrifice": {
                 "Sacrificing an Animal": {},
                 "Sacrificing a Person": {
-                    "Sacrificing a known associate": {},
                     "Sacrificing a stranger": {},
+                    "Sacrificing a known associate": {},
+                    "Sacrificing a Friend": {},
                     "Sacrificing a Family Member": {
-                        "Sacrificing an Aunt/Uncle": {},
-                        "Sacrificing a cousin": {},
-                        "Sacrificing a Sibling": {},
-                        "Sacrificing a niece/nephew": {},
                         "Sacrificing a Child": {},
+                        "Sacrificing a cousin": {},
+                        "Sacrificing a niece/nephew": {},
                         "Sacrificing a Parent": {},
-                        "Sacrificing a Grandparent": {}
-                    },
-                    "Sacrificing a Friend": {}
+                        "Sacrificing a Grandparent": {},
+                        "Sacrificing an Aunt/Uncle": {},
+                        "Sacrificing a Sibling": {}
+                    }
                 },
                 "Sacrificing a Family Member": {}
             },
-            "Contract with Demon": {},
-            "Black Sabbath": {},
-            "Contract with Another": {},
             "Sacrilegious Baptism": {}
         },
-        "Abduction": {
-            "Pet": {},
-            "Child": {},
-            "Adult": {},
-            "Non-Pet Animal": {}
-        },
-        "Evil Eye": {},
-        "Cursing": {},
         "Herbal/Natural": {},
-        "Harm To Pets": {},
-        "Physical Harm": {},
-        "Levitation": {},
+        "Abduction": {
+            "Child": {},
+            "Pet": {},
+            "Non-Pet Animal": {},
+            "Adult": {}
+        },
         "Flying": {},
-        "Hagriding": {},
-        "Transportation": {},
-        "Black Sabbath": {},
         "Physical Harm To Children": {},
-        "Divination": {},
-        "Sacrificing Children": {},
-        "Harm to Crops": {}
+        "Harm to Livestock": {},
+        "Harm To Pets": {},
+        "Hagriding": {},
+        "Indoctrinating Children": {}
     },
     "Supernatural Phenomena": {
         "Time Slip": {},

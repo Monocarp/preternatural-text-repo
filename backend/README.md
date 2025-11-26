@@ -90,7 +90,17 @@ Create a `.env.local` file in the project root if you want to use a database:
 ```
 POSTGRES_PRISMA_URL=your_database_url_here
 HF_TOKEN=your_huggingface_token_here
+LOG_LEVEL=INFO          # Set to DEBUG for verbose logging (default: INFO)
 ```
 
 The backend will work without these - it will use JSON file storage instead.
+
+## Logging
+
+Logs are written to `logs/backend.log` with automatic rotation (10MB max, keeps 5 backup files).
+
+- **Production (default):** `LOG_LEVEL=INFO` — clean logs, errors easily searchable
+- **Development:** `LOG_LEVEL=DEBUG` — verbose output for debugging
+
+Console output is always INFO level regardless of file log level.
 

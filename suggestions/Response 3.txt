@@ -1,0 +1,445 @@
+You’re basically asking: “How do I turn my AI into a sane, cheap staff engineer that actually remembers my codebase, doesn’t torch tokens, and doesn’t wreck architecture?”
+
+Let’s design that as a system, not a one-off prompt.
+
+I’ll outline a concrete, minimal stack you can implement over time:
+
+1. **Overall architecture of the AI-dev loop**
+2. **How to store & serve code context (so you never dump the whole repo)**
+3. **A standard “feature pipeline” from ‘Add X’ → plan → edits → review**
+4. **Guardrails against hallucinations / conflicts**
+5. **Cost-control tactics for the long term**
+6. **How you stay “final human in the loop” without micromanaging**
+
+I’ll keep this language-agnostic but give Node/React-flavored examples.
+
+---
+
+## 1. Macro architecture of the AI-assisted dev system
+
+Think of your setup as three layers:
+
+1. **Project Memory Layer**
+
+   * Light metadata about:
+
+     * Files
+     * Modules and responsibilities
+     * Major flows (e.g. “story ingestion”, “search & filters”, “tag graph navigation”)
+     * Important invariants and conventions
+   * Stored in a small set of *design docs* and *index files*, not inside the AI.
+
+2. **Code Context Layer**
+
+   * Ability to retrieve *just the relevant slices of the repo* for a task.
+   * Uses either:
+
+     * A local embeddings index (e.g. text-embedding model + SQLite / Chroma / pgvector), or
+     * A simple “code map” + grep-style search for a first iteration.
+   * This is what prevents you from stuffing the entire repo into the prompt.
+
+3. **Workflows Layer** (this is where the LLM actually works)
+   For every task (“Add scoped search inside a tag branch”), you run a fixed *pipeline*:
+
+   1. **Task scoping & planning**
+   2. **Context selection**
+   3. **Patch proposal (per-file, small contexts)**
+   4. **Automated checks (lint, tests, typecheck)**
+   5. **LLM review pass**
+   6. **Your review & merge**
+
+Everything you want is basically: *make that pipeline repeatable, cheap, and consistent*.
+
+---
+
+## 2. Storing knowledge about the codebase (without overloading prompts)
+
+### 2.1. Create a *Project Bible* that the AI always sees
+
+This is a small, hand-maintained file or folder that you *do* keep in-context on most tasks:
+
+* `docs/architecture/overview.md`
+* `docs/architecture/frontend.md`
+* `docs/architecture/backend.md`
+* `docs/architecture/search-and-tags.md`
+* `docs/conventions.md` (naming, error handling, logging, etc.)
+
+These should be short and curated. Think:
+
+* Purpose of the project (Preternatural Text Repo, domain concepts).
+* Core domain models:
+
+  * Story, Tag, TagBranch, Corpus, User, etc.
+* High-level architecture:
+
+  * Node API (Express / Nest / whatever)
+  * React client (where the search UI lives)
+  * DB schema outline, especially around:
+
+    * stories
+    * tags
+    * story_tag relations
+* Important invariants, e.g.:
+
+  * “A story can belong to multiple tag branches”
+  * “Search is always filtered by user’s permissions”
+  * “Tag graphs are stored as adjacency list in table X”
+
+The point: **these docs are the “mind” of the system**.
+They are small enough to always be included or at least easily loaded.
+
+---
+
+### 2.2. Maintain a *code map* for quick orientation
+
+Create a generated file like `docs/code-map.json` or `docs/code-map.md` with entries like:
+
+```json
+[
+  {
+    "path": "backend/src/search/searchService.ts",
+    "responsibility": "Full-text search and filters for stories",
+    "exports": ["searchStories", "buildSearchQuery"],
+    "dependsOn": ["db/client", "tags/tagService"]
+  },
+  {
+    "path": "frontend/src/features/search/SearchPage.tsx",
+    "responsibility": "Search UI for stories, including filter controls"
+  }
+]
+```
+
+You can generate/update this periodically with a small script that:
+
+* Walks the repo
+* Reads the first comment block or JSDoc-style header from each file
+* Updates this map
+
+The AI uses the code map to decide *which files to request*, not to read the entire repo.
+
+---
+
+### 2.3. Optional: local embeddings index for finer-grained lookup
+
+If you’re okay with a bit more setup, add:
+
+* A script: `tools/index-code.ts`
+
+  * Chunks code files (e.g. 200–400 tokens each).
+  * Sends each chunk to an embedding model.
+  * Stores: `{chunk_id, file_path, start_line, end_line, embedding}` in SQLite / Chroma / etc.
+
+Then you can:
+
+* For a given task (“scoped search inside a tag branch”):
+
+  1. Ask LLM to output **search queries** like:
+
+     * “tag branch search”
+     * “search filters”
+     * “tag filter UI”
+  2. Use these queries to retrieve top-k chunks from the embeddings DB.
+  3. Include *only those chunks* in the LLM prompt for planning or patch generation.
+
+This is *huge* for:
+
+* Keeping prompts small
+* Avoiding hallucination when the relevant code is far from where you think
+
+But even without embeddings, a decent start is:
+
+* Grep / ripgrep-based search directed by the AI:
+
+  * “Search for ‘searchStories’”
+  * “Search for ‘TagBranch’”
+  * Then include the matching files/regions.
+
+---
+
+## 3. A standard “feature pipeline”
+
+Here’s how “Add feature X (scoped search inside a tag branch)” would run in your system.
+
+### Step 1 – Task spec
+
+You give a short natural-language description:
+
+> Add scoped search inside a tag branch.
+>
+> * On the search page, if the user is currently viewing a tag branch, searches should only include stories in that branch.
+> * Need UI affordance to show and optionally clear the scope.
+> * Must not break existing global search.
+
+You should also tell the system context type:
+
+* Feature
+* Refactor
+* Bug fix
+
+---
+
+### Step 2 – LLM: planning with *minimal context*
+
+Prompt includes:
+
+* The **Project Bible** docs.
+* The **code map**.
+* The task description.
+
+Ask for a structured plan:
+
+* Files likely affected (by path and role)
+* New entities or DB changes (if any)
+* Steps in order:
+
+  1. Confirm domain behavior
+  2. Adjust backend API
+  3. Adjust frontend state shape
+  4. Update UI
+  5. Add tests
+
+Return something like:
+
+```json
+{
+  "affectedFiles": [
+    "backend/src/search/searchService.ts",
+    "backend/src/api/routes/searchRoutes.ts",
+    "frontend/src/features/search/SearchPage.tsx",
+    "frontend/src/features/search/searchSlice.ts"
+  ],
+  "plan": [
+    "Update backend search to accept optional tagBranchId for scoping",
+    "Wire tagBranchId from current view context to search API",
+    "Update search UI to show active tag scope and a 'Clear scope' option",
+    "Add unit tests for scoped search, ensure global search remains default"
+  ]
+}
+```
+
+You store this plan (e.g., `tasks/2025-11-25_scoped-tag-search.json`) so you can audit later.
+
+---
+
+### Step 3 – Context selection per plan step
+
+For each step, your automation:
+
+* Loads only the relevant files from `affectedFiles`.
+* Optionally uses embeddings/grep to hone in on the right functions.
+* Constructs a prompt with:
+
+  * The relevant snippets (or full small files)
+  * The plan step description
+  * Your conventions (from Project Bible)
+
+Then asks the LLM for:
+
+* A patch (unified diff) for exactly those files, or
+* An updated version of the file section.
+
+Example pattern to ask for:
+
+> You see the current content of `backend/src/search/searchService.ts`.
+> Implement the backend part of step 1. Output a unified diff only, no explanation.
+
+You apply the patch locally and run tests.
+
+---
+
+### Step 4 – Automated checks
+
+After applying all patches for the plan:
+
+* Run:
+
+  * `npm test` / `pnpm test`
+  * `npm run lint`
+  * `npm run typecheck` (if TS)
+* Collect:
+
+  * Pass/fail
+  * Error messages
+  * Maybe test names that fail
+
+If something breaks:
+
+* You create a “fix” sub-task with:
+
+  * The failing test output
+  * The relevant file snippets
+* Ask the LLM for a minimal patch that resolves the specific failures.
+
+This keeps the AI focused on real breakage, not “maybe I’ll rewrite half the system”.
+
+---
+
+### Step 5 – LLM review
+
+Once it compiles/tests:
+
+Feed the LLM:
+
+* The task spec
+* The plan
+* The final diffs
+* Summaries of key invariants from the Project Bible
+
+Ask it explicitly to:
+
+* Check for:
+
+  * Violations of existing conventions
+  * Potential security/perf issues
+  * API inconsistencies
+* Summarize in bullets:
+
+  * “Looks good”
+  * “Watch out for X”
+  * “Consider adding a test for Y”
+
+You use this as a *code review helper*, not as final authority.
+
+---
+
+### Step 6 – Your review & merge
+
+Your responsibility shrinks to:
+
+* Reading the short plan and diffs
+* Skimming the LLM review notes
+* Making the final call:
+
+  * Accept
+  * Request changes (and open a new task)
+  * Revert parts manually if something feels off
+
+You are **not** scanning hundreds of lines of code blindly; you’re looking at structured, bounded changes.
+
+---
+
+## 4. Guardrails against hallucinations and conflicts
+
+Key principles:
+
+1. **Never let the model “imagine” files it can’t see.**
+
+   * In prompts, say:
+
+     > You may *not* assume the existence of undefined modules or functions. If you need something new, define it in the current file or explicitly say what new file is required.
+
+2. **No repo-wide rewrites in a single task.**
+
+   * Limit each task to:
+
+     * ≤ N files modified (e.g. 5–8)
+     * ≤ X lines per file (approx)
+   * For big changes, the plan should spawn *subtasks*.
+
+3. **Always ask for diffs, not raw files, when possible.**
+
+   * This prevents “oh I’ll just re-emmit the whole 600-line file but with subtle bugs”.
+
+4. **Versioning + branches.**
+
+   * Each AI task gets its own git branch: `ai/scoped-tag-search-YYYYMMDD`.
+   * You can later diff, revert, or cherry-pick without chaos.
+
+5. **Model instructions at the top of every prompt:**
+
+   * “You are editing an existing, real codebase.”
+   * “You must respect the existing architecture and conventions described.”
+   * “Do not introduce new technologies/libraries without explicit instruction.”
+   * “If uncertain, state assumptions clearly in comments before changing behavior.”
+
+This alone massively reduces architecture drift.
+
+---
+
+## 5. Cost control tactics
+
+You want cheap + reliable; here are the main levers:
+
+1. **Aggressive context pruning**
+
+   * Never send the whole file if you only need a function. Send:
+
+     * The function
+     * A bit of surrounding context
+     * Relevant type/interface definitions
+
+2. **Use small models for “search & locate” + large models for “surgical edits”**
+
+   * If you have access to multiple models:
+
+     * Use the cheaper/smaller one to:
+
+       * Interpret tasks
+       * Decide which files/functions matter
+     * Use the bigger one only for final patch generation and review, on small contexts.
+
+3. **Cache & reuse context**
+
+   * Store frequently-used docs in your local orchestrator so you’re not repeatedly embedding/sending them.
+   * Example: Architectural docs rarely change → don’t re-embed them every time.
+
+4. **Batch operations**
+
+   * If a task affects 3 frontend files and 2 backend files:
+
+     * Group each side into 1–2 prompts, not 7 micro-prompts.
+
+5. **Early “decision” prompts**
+
+   * Before doing any code edits, run a tiny prompt:
+
+     * “Is this a backend-only, frontend-only, or cross-cutting change?”
+   * That avoids paying for irrelevant context.
+
+---
+
+## 6. Your role as “final human in the loop”
+
+Your job becomes:
+
+* **Defining tasks clearly.**
+
+  * Behavior-focused, not implementation-focused:
+
+    * “Scoped search in current tag branch”
+    * “Tag graph visualization in sidebar”
+
+* **Shepherding architecture.**
+
+  * Occasionally update the Project Bible & conventions.
+  * Reject changes that violate your mental model of the app.
+
+* **Approving plans, not line edits.**
+
+  * When the plan looks wrong, fix *the plan* before any code is written.
+  * Once the plan is right, code changes stay smaller and more predictable.
+
+* **Occasional manual refactors.**
+
+  * Sometimes you’ll see: “The AI is working around a bad abstraction.”
+    That’s your signal to do a human-driven refactor and then update the docs.
+
+---
+
+## If you want, next step:
+
+I can help you **design the actual orchestrator** for this:
+
+* A simple Node CLI like `pnpm ai-task "Add scoped search inside a tag branch"`.
+* It would:
+
+  * Save the task
+  * Ask the model for a plan
+  * Fetch relevant files
+  * Ask for diffs
+  * Apply patches + run tests
+  * Output a summary and a git branch name for you to review
+
+Or we can start even smaller:
+
+* Draft your first `docs/architecture/overview.md` tailored to your Preternatural Text repo, based on what you’ve told me about supernatural story tagging, FAISS, etc., so the rest of this system has a spine to hang on.

@@ -1,0 +1,189 @@
+"--- /dev/null
++++ backend/utils/cache.py
+@@ -0,0 +1,209 @@
++import logging
++import time
++import json
++
++from utils_legacy import load_codex_tree, SessionLocal, USE_DB, books_dir, logger
++
++# Cache globals for tree
++_tree_cache = None
++_cache_timestamp = 0
++_last_data_change = 0
++
++# Cache for book metadata
++_book_metadata_cache = {}
++
++# Cache for assigned story titles
++_assigned_titles_cache = None
++
++def invalidate_cache():
++    \"\"\"Invalidate both tree and assigned titles caches.\"\"\"
++    global _last_data_change
++    _last_data_change = time.monotonic()
++    clear_assigned_titles_cache()
++    logger.info(f\"Cache invalidated at timestamp {_last_data_change:.2f}\")
++
++def get_cached_tree():
++    \"\"\"Get tree from cache, reload if invalidated\"\"\"
++    global _tree_cache, _cache_timestamp, _last_data_change
++    
++    if _tree_cache is None:
++        logger.info(\"Loading tree for the first time\")
++        _tree_cache = load_codex_tree()
++        _cache_timestamp = time.monotonic()
++    elif _last_data_change > _cache_timestamp:
++        logger.info(f\"Cache expired (last change: {_last_data_change:.2f}, cache from: {_cache_timestamp:.2f}), reloading tree\")
++        _tree_cache = load_codex_tree()
++        _cache_timestamp = time.monotonic()
++    else:
++        logger.debug(f\"Using cached tree (age: {time.monotonic() - _cache_timestamp:.2f}s)\")
++    
++    return _tree_cache
++
++def get_book_metadata(book_slug):
++    \"\"\"Get book metadata with caching to avoid repeated DB queries\"\"\"
++    if book_slug in _book_metadata_cache:
++        return _book_metadata_cache[book_slug]
++    
++    book_info = {}
++    if USE_DB and SessionLocal:
++        try:
++            with SessionLocal() as db:
++                from models import Book
++                book = db.query(Book).filter_by(slug=book_slug).first()
++                if book:
++                    book_info = {
++                        \"book_title\": book.title,
++                        \"book_author\": book.author,
++                        \"book_year\": book.year
++                    }
++        except Exception as e:
++            logger.debug(f\"Could not fetch book metadata for {book_slug}: {e}\")
++    
++    _book_metadata_cache[book_slug] = book_info
++    return book_info
++
++def clear_book_metadata_cache():
++    \"\"\"Clear the book metadata cache (call when books are updated)\"\"\"
++    global _book_metadata_cache
++    _book_metadata_cache = {}
++    logger.info(\"Cleared book metadata cache\")
++
++def preload_book_metadata():
++    \"\"\"Preload all book metadata at startup to avoid any DB queries during search\"\"\"
++    global _book_metadata_cache
++    
++    if not USE_DB or not SessionLocal:
++        logger.info(\"No database - loading book metadata from stories_meta.json files\")
++        # Fallback: Load from JSON files
++        try:
++            import os
++            for book_slug in os.listdir(books_dir):
++                book_path = os.path.join(books_dir, book_slug)
++                if os.path.isdir(book_path) and not book_slug.startswith('.'):
++                    meta_path = os.path.join(book_path, \"stories_meta.json\")
++                    if os.path.exists(meta_path):
++                        try:
++                            with open(meta_path, \"r\", encoding=\"utf-8\") as f:
++                                meta = json.load(f)
++                            _book_metadata_cache[book_slug] = {
++                                \"book_title\": meta.get(\"book_title\", book_slug),
++                                \"book_author\": meta.get(\"book_author\", \"Unknown\"),
++                                \"book_year\": meta.get(\"book_year\", \"\")
++                            }
++                        except Exception as e:
++                            logger.warning(f\"Failed to load metadata from {meta_path}: {e}\")
++            logger.info(f\"Loaded metadata from JSON files for {len(_book_metadata_cache)} books\")
++        except Exception as e:
++            logger.error(f\"Failed to load book metadata from JSON: {e}\")
++        return
++    
++    # Database available - load from DB
++    try:
++        with SessionLocal() as db:
++            from models import Book
++            books = db.query(Book).all()
++            for book in books:
++                _book_metadata_cache[book.slug] = {
++                    \"book_title\": book.title,
++                    \"book_author\": book.author,
++                    \"book_year\": book.year
++                }
++        logger.info(f\"Preloaded metadata from database for {len(_book_metadata_cache)} books\")
++    except Exception as e:
++        logger.error(f\"Failed to preload book metadata from database: {e}\")
++        # Fallback to JSON if DB fails
++        logger.info(\"Falling back to JSON files for book metadata\")
++        import os
++        for book_slug in os.listdir(books_dir):
++            book_path = os.path.join(books_dir, book_slug)
++            if os.path.isdir(book_path) and not book_slug.startswith('.'):
++                meta_path = os.path.join(book_path, \"stories_meta.json\")
++                if os.path.exists(meta_path):
++                    try:
++                        with open(meta_path, \"r\", encoding=\"utf-8\") as f:
++                            meta = json.load(f)
++                        _book_metadata_cache[book_slug] = {
++                            \"book_title\": meta.get(\"book_title\", book_slug),
++                            \"book_author\": meta.get(\"book_author\", \"Unknown\"),
++                            \"book_year\": meta.get(\"book_year\", \"\")
++                        }
++                    except Exception as e:
++                        logger.warning(f\"Failed to load metadata from {meta_path}: {e}\")
++        logger.info(f\"Loaded metadata from JSON fallback for {len(_book_metadata_cache)} books\")
++
++def get_assigned_titles_set():
++    \"\"\"Get cached set of assigned story titles, building if needed.\"\"\"
++    global _assigned_titles_cache
++    if _assigned_titles_cache is None:
++        rebuild_assigned_titles_cache()
++    return _assigned_titles_cache
++
++def rebuild_assigned_titles_cache():
++    \"\"\"Rebuild the cache of assigned story titles by walking the codex tree.\"\"\"
++    global _assigned_titles_cache
++    tree = get_cached_tree()
++    assigned = set()
++    
++    def walk(node):
++        if isinstance(node, dict):
++            if \"_stories\" in node:
++                assigned.update(node[\"_stories\"])
++            for v in node.values():
++                if isinstance(v, (dict, list)):
++                    walk(v)
++        elif isinstance(node, list):
++            assigned.update(node)
++    
++    walk(tree)
++    _assigned_titles_cache = assigned
++    logger.info(f\"Rebuilt assigned titles cache with {len(assigned)} titles\")
++
++def clear_assigned_titles_cache():
++    \"\"\"Clear the assigned titles cache.\"\"\"
++    global _assigned_titles_cache
++    _assigned_titles_cache = None
++    logger.debug(\"Cleared assigned titles cache\")
+
+--- backend/utils/__init__.py
++++ backend/utils/__init__.py
+@@ -1,3 +1,19 @@
++from utils_legacy import *
+ from .rendering import render_md_with_scroll_and_highlight, render_static_story, find_book_slug
++from .cache import invalidate_cache, get_cached_tree, get_book_metadata, clear_book_metadata_cache, preload_book_metadata, get_assigned_titles_set, rebuild_assigned_titles_cache, clear_assigned_titles_cache
++
++__all__ = [
++    \"render_md_with_scroll_and_highlight\", 
++    \"render_static_story\", 
++    \"find_book_slug\",
++    \"invalidate_cache\",
++    \"get_cached_tree\",
++    \"get_book_metadata\",
++    \"clear_book_metadata_cache\",
++    \"preload_book_metadata\",
++    \"get_assigned_titles_set\",
++    \"rebuild_assigned_titles_cache\",
++    \"clear_assigned_titles_cache\"
++]"
