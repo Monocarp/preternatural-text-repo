@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
+import ReactMarkdown from 'react-markdown'
 import axios from '../utils/axios'
 import SidebarTree from '../components/SidebarTree'
 
@@ -122,10 +123,15 @@ const BookDetail = () => {
 
   if (loading) {
     return (
-      <div className="max-w-6xl mx-auto px-6 py-6">
-        <div className="text-center py-8">
-          <p className="text-gray-400">Loading book...</p>
-        </div>
+      <div className="flex h-screen">
+        <SidebarTree />
+        <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
+            <div className="text-center py-8">
+              <p className="text-gray-400">Loading book...</p>
+            </div>
+          </div>
+        </main>
       </div>
     )
   }
@@ -134,8 +140,8 @@ const BookDetail = () => {
     return (
       <div className="flex h-screen">
         <SidebarTree />
-        <main className="flex-1 overflow-y-auto bg-gray-900">
-          <div className="max-w-6xl mx-auto px-6 py-6">
+        <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
             <div className="bg-red-900 border border-red-700 rounded p-4 mb-4 text-center">
               <p className="text-red-200">{error || 'Book not found'}</p>
             </div>
@@ -156,8 +162,8 @@ const BookDetail = () => {
   return (
     <div className="flex h-screen">
       <SidebarTree />
-      <main className="flex-1 overflow-y-auto bg-gray-900">
-        <div className="max-w-6xl mx-auto px-6 py-6">
+      <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
           {/* Breadcrumb */}
           <nav className="text-sm text-gray-400 mb-4">
             <button
@@ -210,8 +216,8 @@ const BookDetail = () => {
 
       {/* Content Area */}
       {view === 'text' && (
-        <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-white mb-4">Full Text</h2>
+        <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 md:p-10">
+          <h2 className="text-xl font-semibold text-white mb-6 text-center">Full Text</h2>
           {loadingText && (
             <div className="text-center py-8">
               <p className="text-gray-400">Loading text...</p>
@@ -220,10 +226,39 @@ const BookDetail = () => {
           {!loadingText && fullText && (
             <div
               ref={textViewerRef}
-              className="bg-gray-900 border border-gray-700 rounded p-4 font-mono text-sm leading-relaxed max-h-[70vh] overflow-y-auto text-gray-300"
-              style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
+              className="bg-gray-900 border border-gray-700 rounded-lg p-6 md:p-10 max-h-[75vh] overflow-y-auto"
             >
-              {fullText}
+              <div 
+                className="mx-auto text-gray-200"
+                style={{ 
+                  fontFamily: "'Libre Baskerville', Georgia, 'Times New Roman', serif",
+                  maxWidth: '65ch',
+                  lineHeight: '1.9',
+                  fontSize: '1.05rem'
+                }}
+              >
+                <ReactMarkdown
+                  components={{
+                    h1: ({children}) => <h1 className="text-2xl font-bold text-white mt-10 mb-6 border-b border-gray-700 pb-3">{children}</h1>,
+                    h2: ({children}) => <h2 className="text-xl font-semibold text-white mt-8 mb-4">{children}</h2>,
+                    h3: ({children}) => <h3 className="text-lg font-semibold text-gray-100 mt-6 mb-3">{children}</h3>,
+                    p: ({children}) => <p className="mb-5 text-gray-200">{children}</p>,
+                    blockquote: ({children}) => (
+                      <blockquote className="border-l-4 border-blue-500 pl-5 py-2 my-6 italic text-gray-300 bg-gray-800/50 rounded-r">
+                        {children}
+                      </blockquote>
+                    ),
+                    strong: ({children}) => <strong className="font-semibold text-white">{children}</strong>,
+                    em: ({children}) => <em className="italic text-gray-100">{children}</em>,
+                    ul: ({children}) => <ul className="list-disc list-inside mb-5 space-y-2">{children}</ul>,
+                    ol: ({children}) => <ol className="list-decimal list-inside mb-5 space-y-2">{children}</ol>,
+                    li: ({children}) => <li className="text-gray-200">{children}</li>,
+                    hr: () => <hr className="my-8 border-gray-700" />,
+                  }}
+                >
+                  {fullText}
+                </ReactMarkdown>
+              </div>
             </div>
           )}
         </div>

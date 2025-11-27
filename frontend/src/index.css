@@ -30,11 +30,18 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Override Vite default - let Tailwind handle heading sizes */
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* Ensure flex containers don't overflow */
+* {
+  box-sizing: border-box;
 }
 
 /* Removed global button styles - using Tailwind classes instead */

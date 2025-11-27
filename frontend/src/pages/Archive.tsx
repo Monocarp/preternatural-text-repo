@@ -1,10 +1,11 @@
 // src/pages/Archive.tsx
 import { useEffect, useMemo, useState, useRef } from 'react'
-import { useParams, useNavigate, useLocation } from 'react-router-dom'
+import { useParams, useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import axios from 'axios'
 import { useStore } from '../store'
 import SidebarTree from '../components/SidebarTree'
+import { SubcategoryFilter } from '../components/SubcategoryFilter'
 import { decodeRoutePath, encodePathSegmentsForRoute } from '../utils/path'
 import { useStackApp } from '@stackframe/react'
 
@@ -12,6 +13,7 @@ const Archive = () => {
   const location = useLocation()
   const { path = '' } = useParams<{ path?: string }>()
   const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
   const app = useStackApp()
   
   // Extract path from location.pathname to ensure we detect URL changes
@@ -20,7 +22,7 @@ const Archive = () => {
     const match = location.pathname.match(/^\/archive\/(.+)$/)
     return match ? match[1] : ''
   }, [location.pathname])
-  const { stories, loadStories, loading, error } = useStore()
+  const { stories, loadStories, loading, error, tree, loadTree } = useStore()
   const [storyContents, setStoryContents] = useState<Record<string, string>>({})
   const [storyModes, setStoryModes] = useState<Record<string, 'static' | 'book'>>({})
   const [editingTitle, setEditingTitle] = useState<string | null>(null)
@@ -39,6 +41,15 @@ const Archive = () => {
   const [fullText, setFullText] = useState<string>('')
   const textContainerRef = useRef<HTMLDivElement>(null)
 
+  // Boundary editing state
+  const [editingBoundaries, setEditingBoundaries] = useState<string | null>(null) // story title being edited
+  const [editingBoundariesStory, setEditingBoundariesStory] = useState<any>(null)
+  const [editedStart, setEditedStart] = useState<number>(0)
+  const [editedEnd, setEditedEnd] = useState<number>(0)
+  const [boundarySelectingStart, setBoundarySelectingStart] = useState(true)
+  const [savingBoundaries, setSavingBoundaries] = useState(false)
+  const boundaryTextContainerRef = useRef<HTMLDivElement>(null)
+
   const decodedPath = useMemo(() => {
     // Use pathFromLocation instead of useParams path - React Router's :path* doesn't update reliably
     const pathToUse = pathFromLocation || path
@@ -54,7 +65,36 @@ const Archive = () => {
   const isUnassigned =
     decodedPath.length === 1 && decodedPath[0].toLowerCase() === 'unassigned'
 
-  // Load stories based on URL path
+  // Subcategory filter state from URL
+  const selectedSubcats = useMemo(() => {
+    const subcatsParam = searchParams.get('subcats')
+    return subcatsParam ? subcatsParam.split(',').filter(s => s.trim()) : []
+  }, [searchParams])
+
+  // Extract subcategory names from tree for current path
+  const subcategoryNames = useMemo(() => {
+    if (!tree || Object.keys(tree).length === 0 || decodedPath.length === 0) return []
+    
+    // Navigate to current node in tree
+    let node = tree
+    for (const part of decodedPath) {
+      if (!node || typeof node !== 'object' || !(part in node)) return []
+      node = node[part]
+    }
+    
+    // Get child keys excluding '_stories'
+    if (!node || typeof node !== 'object') return []
+    return Object.keys(node).filter(k => k !== '_stories').sort()
+  }, [tree, decodedPath])
+
+  // Load tree if not loaded
+  useEffect(() => {
+    if (!tree || Object.keys(tree).length === 0) {
+      loadTree()
+    }
+  }, [tree, loadTree])
+
+  // Load stories based on URL path (with optional subcategory filter)
   useEffect(() => {
     if (isUnassigned) {
       // Load unassigned stories
@@ -65,14 +105,23 @@ const Archive = () => {
         })
         .catch(err => console.error('Error loading unassigned:', err))
     } else if (decodedPath.length > 0) {
-      // Load stories for the category path (only if we have a path)
-      loadStories(decodedPath)
+      // Load stories for the category path (with optional subcategory filter)
+      const pathStr = decodedPath.map(p => encodeURIComponent(p)).join('/')
+      const subcatsParam = selectedSubcats.length > 0 ? `?subcats=${selectedSubcats.join(',')}` : ''
+      const url = `/api/get-stories/${pathStr}${subcatsParam}`
+      
+      axios.get(url)
+        .then(res => {
+          useStore.getState().setStories(res.data)
+          useStore.getState().selectedPath = decodedPath
+        })
+        .catch(err => console.error('Error loading stories:', err))
     } else {
       // Root archive - don't load stories, just show empty state
       useStore.getState().setStories([])
       useStore.getState().selectedPath = []
     }
-  }, [decodedPath, isUnassigned, loadStories, location.pathname])
+  }, [decodedPath, isUnassigned, selectedSubcats, location.pathname])
 
   // Handle title editing
   const handleEditTitle = (story: any) => {
@@ -237,6 +286,180 @@ const Archive = () => {
     } catch (err) {
       console.error('Error loading story:', err)
     }
+  }
+
+  // Enter boundary editing mode for a story
+  const handleAdjustBoundaries = async (story: any) => {
+    setEditingBoundaries(story.title)
+    setEditingBoundariesStory(story)
+    setEditedStart(story.start_char)
+    setEditedEnd(story.end_char)
+    setBoundarySelectingStart(true)
+    setEditingTitle(null) // Exit title editing if active
+    setNewStoryMode(false) // Exit new story mode if active
+    
+    try {
+      const res = await axios.get(`/api/full-text/${story.book_slug}`)
+      setFullText(res.data.text)
+    } catch (err) {
+      console.error('Error loading full text:', err)
+      setEditingBoundaries(null)
+      setEditingBoundariesStory(null)
+    }
+  }
+
+  // Auto-scroll to story position when entering boundary edit mode
+  useEffect(() => {
+    if (editingBoundaries && fullText && boundaryTextContainerRef.current && editingBoundariesStory) {
+      setTimeout(() => {
+        const textContainer = boundaryTextContainerRef.current
+        if (!textContainer) return
+        
+        // Find the highlighted span (the story content)
+        const highlight = textContainer.querySelector('span.bg-blue-600') as HTMLElement
+        if (highlight) {
+          // Scroll the container to center the highlight
+          const containerRect = textContainer.getBoundingClientRect()
+          const highlightRect = highlight.getBoundingClientRect()
+          const relativeTop = highlightRect.top - containerRect.top + textContainer.scrollTop
+          const containerHeight = textContainer.clientHeight
+          textContainer.scrollTop = relativeTop - (containerHeight / 2) + (highlightRect.height / 2)
+        }
+      }, 150)
+    }
+  }, [editingBoundaries, fullText, editingBoundariesStory])
+
+  // Handle click on text to set boundary position
+  const handleBoundaryTextClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!editingBoundaries || !fullText || !boundaryTextContainerRef.current) return
+    
+    e.preventDefault()
+    const textContainer = boundaryTextContainerRef.current
+    const clickX = e.clientX
+    const clickY = e.clientY
+    
+    // Create a range at the click point
+    const range = document.caretRangeFromPoint?.(clickX, clickY)
+    if (!range) return
+    
+    // Calculate character position by walking through text nodes
+    let charPos = 0
+    const walker = document.createTreeWalker(
+      textContainer,
+      NodeFilter.SHOW_TEXT,
+      null
+    )
+    
+    let node: Node | null
+    while ((node = walker.nextNode())) {
+      const textNode = node as Text
+      if (range.startContainer === textNode) {
+        charPos += range.startOffset
+        break
+      } else if (range.startContainer.contains?.(textNode) || textNode.contains?.(range.startContainer)) {
+        if (range.startContainer.nodeType === Node.TEXT_NODE) {
+          const rangeText = (range.startContainer as Text).textContent || ''
+          const beforeRange = textContainer.textContent?.indexOf(rangeText, charPos) || charPos
+          charPos = beforeRange + range.startOffset
+        } else {
+          charPos += textNode.textContent?.length || 0
+        }
+        break
+      } else {
+        charPos += textNode.textContent?.length || 0
+      }
+    }
+    
+    // Fallback: use textContent if walker didn't find it
+    if (charPos === 0 && range.startContainer.nodeType === Node.TEXT_NODE) {
+      const allText = textContainer.textContent || ''
+      const clickedText = (range.startContainer as Text).textContent || ''
+      const index = allText.indexOf(clickedText)
+      if (index !== -1) {
+        charPos = index + range.startOffset
+      }
+    }
+    
+    // Ensure valid range
+    charPos = Math.min(Math.max(0, charPos), fullText.length)
+    
+    if (boundarySelectingStart) {
+      setEditedStart(charPos)
+      setBoundarySelectingStart(false) // Switch to selecting end
+    } else {
+      // Ensure end is after start
+      setEditedEnd(Math.max(charPos, editedStart))
+      setBoundarySelectingStart(true) // Switch back to selecting start for next click
+    }
+  }
+
+  // Save boundary changes
+  const handleSaveBoundaries = async () => {
+    if (!editingBoundariesStory) return
+    
+    const user = await app.getUser()
+    if (!user) {
+      alert('You must be logged in to save boundaries.')
+      return
+    }
+    
+    setSavingBoundaries(true)
+    try {
+      await axios.post('/api/update-boundaries', {
+        title: editingBoundariesStory.title,
+        book_slug: editingBoundariesStory.book_slug,
+        start_char: editedStart,
+        end_char: editedEnd
+      })
+      
+      // Reload the story content with new boundaries
+      const currentMode = storyModes[editingBoundariesStory.title] || 'static'
+      const res = await axios.post('/api/render-story', {
+        title: editingBoundariesStory.title,
+        mode: currentMode,
+        start_char: editedStart,
+        end_char: editedEnd
+      })
+      
+      setStoryContents(prev => ({
+        ...prev,
+        [editingBoundariesStory.title]: res.data.html
+      }))
+      
+      // Update story in the stories list
+      const updatedStories = stories.map(s => 
+        s.title === editingBoundariesStory.title 
+          ? { ...s, start_char: editedStart, end_char: editedEnd }
+          : s
+      )
+      useStore.getState().setStories(updatedStories)
+      
+      alert('Boundaries saved successfully!')
+      
+      // Exit edit mode
+      setEditingBoundaries(null)
+      setEditingBoundariesStory(null)
+      setFullText('')
+    } catch (err: any) {
+      console.error('Error saving boundaries:', err)
+      const status = err?.response?.status
+      if (status === 401 || status === 403) {
+        alert('You must be signed in as an editor to save boundaries.')
+      } else {
+        alert('Failed to save boundaries. Please try again.')
+      }
+    } finally {
+      setSavingBoundaries(false)
+    }
+  }
+
+  // Cancel boundary editing
+  const handleCancelBoundaryEdit = () => {
+    setEditingBoundaries(null)
+    setEditingBoundariesStory(null)
+    setFullText('')
+    setEditedStart(0)
+    setEditedEnd(0)
   }
 
   // Enter new story mode
@@ -446,8 +669,8 @@ const Archive = () => {
   return (
     <div className="flex h-screen">
       <SidebarTree />
-      <main className="flex-1 overflow-y-auto bg-gray-900">
-        <div className="max-w-4xl mx-auto px-6 py-6">
+      <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
           <div className="mb-6">
             <nav className="text-sm text-gray-400 mb-2 text-center">
               {getBreadcrumb().map((part, idx) => (
@@ -476,10 +699,28 @@ const Archive = () => {
               ))}
             </nav>
             <h1 className="text-3xl font-bold text-white text-center">{getPageTitle()}</h1>
-            {stories.length > 0 && (
-              <p className="text-gray-300 mt-2 text-center">{stories.length} {stories.length === 1 ? 'story' : 'stories'}</p>
-            )}
           </div>
+
+          {/* Subcategory Filter */}
+          {!isUnassigned && decodedPath.length > 0 && (
+            <SubcategoryFilter
+              subcategories={subcategoryNames}
+              selectedSubcats={selectedSubcats}
+              onFilterChange={(selected) => {
+                if (selected.length === 0) {
+                  // Remove subcats param entirely
+                  searchParams.delete('subcats')
+                } else {
+                  searchParams.set('subcats', selected.join(','))
+                }
+                setSearchParams(searchParams)
+              }}
+            />
+          )}
+
+          {stories.length > 0 && (
+            <p className="text-gray-300 mb-4 text-center">{stories.length} {stories.length === 1 ? 'story' : 'stories'}</p>
+          )}
 
           {newStoryMode && (
             <div className="mb-6 p-4 bg-gray-800 rounded-lg border border-purple-700">
@@ -657,6 +898,12 @@ const Archive = () => {
                         >
                           Add New Story
                         </button>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); handleAdjustBoundaries(story) }}
+                          className="px-4 py-2 rounded text-sm bg-green-600 text-white hover:bg-green-700"
+                        >
+                          Adjust Boundaries
+                        </button>
                         {editingTitle === story.title ? (
                           <>
                             <button
@@ -736,6 +983,59 @@ const Archive = () => {
                 ) : (
                   fullText
                 )}
+              </div>
+            </div>
+          )}
+
+          {/* Boundary Editing Panel */}
+          {editingBoundaries && fullText && editingBoundariesStory && (
+            <div className="mt-6 p-4 bg-gray-800 rounded-lg border border-green-700">
+              <div className="text-center mb-4">
+                <h2 className="text-xl font-semibold text-white mb-2">Adjust Story Boundaries</h2>
+                <p className="text-gray-300">Editing: <span className="font-medium text-green-400">{editingBoundariesStory.title}</span></p>
+              </div>
+              
+              <div className="text-sm text-gray-300 mb-4 text-center">
+                {boundarySelectingStart ? (
+                  <span>Click to set <strong className="text-blue-400">START</strong> position</span>
+                ) : (
+                  <span>Click to set <strong className="text-red-400">END</strong> position</span>
+                )}
+              </div>
+              
+              <div className="flex justify-center gap-2 mb-4">
+                <button
+                  onClick={handleSaveBoundaries}
+                  disabled={savingBoundaries}
+                  className="px-6 py-2 rounded text-sm bg-green-600 text-white hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  {savingBoundaries ? 'Saving...' : 'Save Boundaries'}
+                </button>
+                <button
+                  onClick={handleCancelBoundaryEdit}
+                  className="px-6 py-2 rounded text-sm bg-gray-700 text-gray-200 hover:bg-gray-600 transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+              
+              <div className="text-xs text-gray-400 text-center mb-4">
+                Start: {editedStart.toLocaleString()} | End: {editedEnd.toLocaleString()} | Length: {(editedEnd - editedStart).toLocaleString()} chars
+              </div>
+              
+              <div
+                ref={boundaryTextContainerRef}
+                onClick={handleBoundaryTextClick}
+                className="bg-gray-900 border border-gray-700 rounded p-4 cursor-text select-none font-mono text-sm leading-relaxed max-h-96 overflow-y-auto"
+                style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
+              >
+                {fullText.substring(0, editedStart)}
+                <span className="bg-blue-600 bg-opacity-50 text-blue-200 px-1 rounded">
+                  {fullText.substring(editedStart, editedEnd)}
+                </span>
+                <span className="text-gray-400">
+                  {fullText.substring(editedEnd)}
+                </span>
               </div>
             </div>
           )}

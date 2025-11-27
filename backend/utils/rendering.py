@@ -87,7 +87,7 @@ def render_md_with_scroll_and_highlight(book_slug, start_char, end_char, page, s
             md_with_red[adjusted_end:]
         )
         html = f"""
-        <div id="book-context-container" style="height: 500px; overflow-y: scroll; font-family: Arial; white-space: pre-wrap; background-color: #1f2937; color: #f3f4f6; padding: 1rem; border-radius: 0.5rem;">{highlighted}</div>
+        <div id="book-context-container" style="height: 500px; overflow-y: scroll; font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif; white-space: pre-wrap; background-color: #1f2937; color: #e5e7eb; padding: 1.5rem 2rem; border-radius: 0.5rem; line-height: 1.9; font-size: 1.05rem; max-width: 65ch; margin: 0 auto;">{highlighted}</div>
         """
         return html
     except Exception as e:

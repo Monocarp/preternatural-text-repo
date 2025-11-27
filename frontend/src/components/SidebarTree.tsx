@@ -43,7 +43,24 @@ const SidebarTree = () => {
   const app = useStackApp()
   const [currentUserEmail, setCurrentUserEmail] = useState<string | null>(null)
   const [expandedKeys, setExpandedKeys] = useState<string[]>(['archive'])
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  // Auto-collapse sidebar on smaller screens (< 1024px)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 1024
+    }
+    return false
+  })
+
+  // Listen for window resize to auto-collapse/expand
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setSidebarCollapsed(true)
+      }
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const extractUserLabel = (user: any | null | undefined) => {
     if (!user) return null
@@ -198,8 +215,8 @@ const SidebarTree = () => {
   ]
 
   return (
-    <aside className={`h-full bg-gray-800 border-r border-gray-700 transition-all duration-300 ease-in-out flex flex-col relative ${
-      sidebarCollapsed ? 'w-12' : 'w-96'
+    <aside className={`h-full bg-gray-800 border-r border-gray-700 transition-all duration-300 ease-in-out flex flex-col relative flex-shrink-0 ${
+      sidebarCollapsed ? 'w-12' : 'w-64 lg:w-80 xl:w-96'
     }`}>
       {/* Header with Toggle Button */}
       <div className={`p-3 border-b border-gray-700 flex items-center ${sidebarCollapsed ? 'justify-center' : 'justify-between'} bg-gray-800`}>

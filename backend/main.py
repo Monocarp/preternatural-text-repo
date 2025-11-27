@@ -471,14 +471,21 @@ def get_full_text(book_slug: str):
     except Exception as e:
         raise HTTPException(404, f"Book not found: {book_slug}")
 @app.get("/api/get-stories/{path:path}")
-def get_stories(path: str):
+def get_stories(path: str, subcats: Optional[str] = None):
     log.debug(f"Raw path received: {repr(path)}")
     parts = [urllib.parse.unquote(p.strip()) for p in path.split("/") if p.strip()]
     log.debug(f"After split and decode: {parts}")
     tree = get_cached_tree()
     log.debug(f"Getting stories for path: {parts}")
     log.debug(f"Tree structure at root: {list(tree.keys())[:5]}...")  # First 5 keys
-    stories = get_stories_at_path(tree, parts)
+    
+    if subcats:
+        from tree.queries import get_stories_for_subcats
+        subcat_list = [s.strip() for s in subcats.split(",") if s.strip()]
+        log.debug(f"Filtering by subcategories: {subcat_list}")
+        stories = get_stories_for_subcats(tree, parts, subcat_list)
+    else:
+        stories = get_stories_at_path(tree, parts)
     log.debug(f"Found {len(stories)} stories for path {parts}")
     if len(stories) == 0 and len(parts) > 0:
         # Debug: check what we find at each level
