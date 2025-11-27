@@ -14,10 +14,13 @@ import re
 import logging
 from collections import defaultdict
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Tuple, Callable
+from typing import List, Dict, Any, Optional, Tuple, Callable, TYPE_CHECKING
 import numpy as np
 
-from sentence_transformers import SentenceTransformer
+# Lazy import SentenceTransformer to avoid 10s+ PyTorch load on module import
+# It will be imported on first use in SearchEngine.embedder property
+if TYPE_CHECKING:
+    from sentence_transformers import SentenceTransformer
 
 from .models import StoryDocument
 from .faiss_index import FAISSIndexManager
@@ -145,9 +148,10 @@ class SearchEngine:
         logger.info(f"FTS5 index: {fts_count} documents")
     
     @property
-    def embedder(self) -> SentenceTransformer:
-        """Lazy-load the embedding model."""
+    def embedder(self) -> "SentenceTransformer":
+        """Lazy-load the embedding model (defers ~10s PyTorch import)."""
         if self._embedder is None:
+            from sentence_transformers import SentenceTransformer
             logger.info(f"Loading embedding model: {self.model_path}")
             self._embedder = SentenceTransformer(self.model_path)
             logger.info("Embedding model loaded")
