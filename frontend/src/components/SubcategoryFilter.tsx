@@ -6,7 +6,7 @@ interface SubcategoryFilterProps {
   onFilterChange: (selected: string[]) => void;
 }
 
-export function SubcategoryFilter(props: SubcategoryFilterProps): JSX.Element {
+export function SubcategoryFilter(props: SubcategoryFilterProps) {
   const { subcategories, selectedSubcats, onFilterChange } = props;
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
