@@ -579,6 +579,13 @@ def assign_category(body: AssignBody, user: Dict = Depends(require_editor)):
     # Invalidate cache since we changed the tree
     invalidate_cache()
     
+    # Auto-sync to GitHub
+    try:
+        from sync.github_sync import on_category_change
+        on_category_change("Assign", body.story['title'], body.path)
+    except Exception as e:
+        log.debug(f"GitHub sync skipped: {e}")
+    
     return {"status": "assigned"}
 @app.delete("/api/remove-category")
 def remove_category(body: RemoveBody, user: Dict = Depends(require_editor)):
@@ -633,6 +640,13 @@ def remove_category(body: RemoveBody, user: Dict = Depends(require_editor)):
     
     # Invalidate cache since we changed the tree
     invalidate_cache()
+    
+    # Auto-sync to GitHub
+    try:
+        from sync.github_sync import on_category_change
+        on_category_change("Remove", body.title, body.path)
+    except Exception as e:
+        log.debug(f"GitHub sync skipped: {e}")
     
     return {"status": "removed"}
 # ------------------- RENDER ------------------- #
