@@ -667,9 +667,9 @@ const Archive = () => {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen h-[100dvh] max-h-screen max-w-[100vw] overflow-hidden">
       <SidebarTree />
-      <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0">
+      <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0 max-w-full">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
           <div className="mb-6">
             <nav className="text-sm text-gray-400 mb-2 text-center">

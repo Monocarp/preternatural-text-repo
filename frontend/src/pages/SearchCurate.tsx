@@ -707,14 +707,14 @@ const SearchCurate = () => {
   }
 
   return (
-    <div className="flex h-screen bg-gray-900 text-white">
+    <div className="flex h-screen h-[100dvh] max-h-screen max-w-[100vw] overflow-hidden bg-gray-900 text-white">
       {/* Sidebar Navigation */}
       <SidebarTree />
       
       {/* Main Content Area */}
-      <div className="flex-1 flex overflow-hidden min-w-0">
+      <div className="flex-1 flex overflow-hidden min-w-0 max-w-full">
         {/* Left Panel - Search & Results */}
-        <div className="w-64 lg:w-80 border-r border-gray-700 flex flex-col bg-gray-800 flex-shrink-0">
+        <div className="w-[20vw] min-w-[240px] max-w-[320px] border-r border-gray-700 flex flex-col bg-gray-800 flex-shrink overflow-hidden">
         <div className="p-4 border-b border-gray-700">
           <h2 className="text-lg font-semibold mb-4">Search & Curate</h2>
           
@@ -847,8 +847,8 @@ const SearchCurate = () => {
       </div>
 
       {/* Middle Panel - Story Viewer */}
-      <div className="flex-1 flex flex-col bg-gray-900 min-w-0">
-        <div className="p-4 border-b border-gray-700">
+      <div className="flex-1 flex flex-col bg-gray-900 min-w-0 overflow-hidden">
+        <div className="p-4 border-b border-gray-700 flex-shrink-0">
           <h2 className="text-lg font-semibold">Story Viewer</h2>
           {selectedStory && !editMode && !newStoryMode && (
             <div className="mt-2 flex gap-2 flex-wrap">
@@ -1081,7 +1081,7 @@ const SearchCurate = () => {
       </div>
 
       {/* Right Panel - Category Assignment */}
-      <div className="w-64 lg:w-80 border-l border-gray-700 bg-gray-800 p-4 overflow-y-auto flex-shrink-0 hidden md:block">
+      <div className="w-[20vw] min-w-[240px] max-w-[320px] border-l border-gray-700 bg-gray-800 p-4 overflow-y-auto flex-shrink hidden lg:block">
         <h2 className="text-lg font-semibold mb-4">Category Assignment</h2>
         
         {!selectedStory ? (

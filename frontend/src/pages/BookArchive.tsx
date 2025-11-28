@@ -41,9 +41,9 @@ const BookArchive = () => {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen h-[100dvh] max-h-screen max-w-[100vw] overflow-hidden">
       <SidebarTree />
-      <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0">
+      <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0 max-w-full">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
           <div className="mb-6">
         <h1 className="text-3xl font-bold text-white text-center">Book Archive</h1>

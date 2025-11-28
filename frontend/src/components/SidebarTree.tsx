@@ -216,7 +216,7 @@ const SidebarTree = () => {
 
   return (
     <aside className={`h-full bg-gray-800 border-r border-gray-700 transition-all duration-300 ease-in-out flex flex-col relative flex-shrink-0 ${
-      sidebarCollapsed ? 'w-12' : 'w-64 lg:w-80 xl:w-96'
+      sidebarCollapsed ? 'w-12' : 'w-[15vw] min-w-[200px] max-w-[280px]'
     }`}>
       {/* Header with Toggle Button */}
       <div className={`p-3 border-b border-gray-700 flex items-center ${sidebarCollapsed ? 'justify-center' : 'justify-between'} bg-gray-800`}>

@@ -30,6 +30,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
   overflow-x: hidden;
 }
 
@@ -42,6 +43,42 @@ h1, h2, h3, h4, h5, h6 {
 /* Ensure flex containers don't overflow */
 * {
   box-sizing: border-box;
+}
+
+/* Ensure full viewport height for app container */
+html, body, #root {
+  height: 100%;
+  height: 100dvh; /* Dynamic viewport height */
+}
+
+/* Prevent content from exceeding viewport */
+.flex {
+  max-width: 100vw;
+}
+
+/* Responsive panel scaling for smaller screens */
+@media (max-width: 1200px) {
+  /* Reduce panel widths on medium screens */
+  .w-\[20vw\] {
+    width: 22vw;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Further reduce panel widths on smaller screens */
+  .w-\[20vw\] {
+    width: 25vw;
+  }
+  .w-\[15vw\] {
+    width: 18vw;
+  }
+}
+
+/* Ensure text doesn't overflow in panels */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* Removed global button styles - using Tailwind classes instead */

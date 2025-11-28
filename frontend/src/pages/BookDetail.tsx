@@ -727,9 +727,9 @@ const BookDetail = () => {
 
   if (loading) {
     return (
-      <div className="flex h-screen">
+      <div className="flex h-screen h-[100dvh] max-h-screen max-w-[100vw] overflow-hidden">
         <SidebarTree />
-        <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0">
+        <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0 max-w-full">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
             <div className="text-center py-8">
               <p className="text-gray-400">Loading book...</p>
@@ -742,9 +742,9 @@ const BookDetail = () => {
 
   if (error || !book) {
     return (
-      <div className="flex h-screen">
+      <div className="flex h-screen h-[100dvh] max-h-screen max-w-[100vw] overflow-hidden">
         <SidebarTree />
-        <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0">
+        <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0 max-w-full">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
             <div className="bg-red-900 border border-red-700 rounded p-4 mb-4 text-center">
               <p className="text-red-200">{error || 'Book not found'}</p>
@@ -764,9 +764,9 @@ const BookDetail = () => {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen h-[100dvh] max-h-screen max-w-[100vw] overflow-hidden">
       <SidebarTree />
-      <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0">
+      <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0 max-w-full">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
           {/* Breadcrumb */}
           <nav className="text-sm text-gray-400 mb-4">
