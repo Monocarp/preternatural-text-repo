@@ -1186,13 +1186,16 @@ def reload_stories(user = Depends(require_editor)):
 
 # ------------------- CLEANUP SEARCH INDEX ------------------- #
 @app.post("/api/cleanup-search-index")
-def cleanup_search_index(user = Depends(require_editor)):
+def cleanup_search_index():
     """
     Remove orphaned entries from search indices.
     
     Finds stories in the FAISS/FTS search index that no longer exist in
     story_positions.json and removes them. Useful for fixing stale search
     results after story deletions.
+    
+    Note: No auth required - this is a safe cleanup operation that only
+    removes entries not in story_positions.json.
     """
     from search import USE_DIRECT_SEARCH
     
