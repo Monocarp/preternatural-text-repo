@@ -65,11 +65,25 @@ const BookDetail = () => {
   const [newStoryKeywords, setNewStoryKeywords] = useState('')
   const [newStoryPages, setNewStoryPages] = useState('')
   const [addingStory, setAddingStory] = useState(false)
+  
+  // Category assignment state
+  const [codexTree, setCodexTree] = useState<any>(null)
+  const [selectedPath, setSelectedPath] = useState<string[]>([])
+  const [currentAssignments, setCurrentAssignments] = useState<string[][]>([])
+  const [assigning, setAssigning] = useState(false)
 
   useEffect(() => {
     if (slug) {
       loadBook()
     }
+    // Load codex tree for category assignment
+    axios.get('/get-tree')
+      .then(res => {
+        setCodexTree(res.data)
+      })
+      .catch(err => {
+        console.error('Error loading codex tree:', err)
+      })
   }, [slug])
 
   // Auto-scroll to story position when entering boundary edit mode
@@ -92,6 +106,145 @@ const BookDetail = () => {
       }, 150)
     }
   }, [editingBoundary, fullText, selectedStory])
+
+  // Load current assignments when story is selected
+  useEffect(() => {
+    if (!selectedStory || !codexTree) {
+      setCurrentAssignments([])
+      return
+    }
+    
+    // Find all paths where this story is assigned
+    const findAssignments = (node: any, path: string[] = []): string[][] => {
+      const assignments: string[][] = []
+      
+      if (typeof node === 'object' && node !== null) {
+        // Check if this node has stories
+        if (Array.isArray(node)) {
+          if (node.includes(selectedStory.title)) {
+            assignments.push([...path])
+          }
+        } else if (node._stories && Array.isArray(node._stories)) {
+          if (node._stories.includes(selectedStory.title)) {
+            assignments.push([...path])
+          }
+        }
+        
+        // Recursively check children
+        for (const [key, value] of Object.entries(node)) {
+          if (key !== '_stories') {
+            assignments.push(...findAssignments(value, [...path, key]))
+          }
+        }
+      }
+      
+      return assignments
+    }
+    
+    const assignments = findAssignments(codexTree)
+    setCurrentAssignments(assignments)
+  }, [selectedStory, codexTree])
+
+  // Helper function to get nested options for path selection
+  const getPathOptions = (tree: any, currentPath: string[] = []): string[] => {
+    if (!tree || typeof tree !== 'object') return []
+    
+    let node = tree
+    for (const level of currentPath) {
+      if (node[level]) {
+        node = node[level]
+      } else {
+        return []
+      }
+    }
+    
+    // Get keys that are not _stories
+    return Object.keys(node).filter(key => key !== '_stories')
+  }
+
+  // Handle path level selection
+  const handlePathLevelChange = (level: number, value: string) => {
+    const newPath = selectedPath.slice(0, level)
+    if (value) {
+      newPath.push(value)
+    }
+    setSelectedPath(newPath)
+  }
+
+  // Handle category assignment
+  const handleAssignCategory = async () => {
+    if (!selectedStory || selectedPath.length === 0) return
+    
+    setAssigning(true)
+    try {
+      await axios.post('/assign-category', {
+        path: selectedPath,
+        story: {
+          title: selectedStory.title,
+          book_slug: selectedStory.book_slug,
+          pages: selectedStory.pages,
+          keywords: selectedStory.keywords,
+          start_char: selectedStory.start_char,
+          end_char: selectedStory.end_char
+        }
+      })
+      
+      // Reload tree to get updated assignments
+      const treeRes = await axios.get('/get-tree')
+      setCodexTree(treeRes.data)
+      
+      const assignedPath = selectedPath.join(' > ')
+      // Clear selected path
+      setSelectedPath([])
+      
+      alert(`Story assigned to ${assignedPath}`)
+    } catch (err: any) {
+      console.error('Error assigning category:', err)
+      const status = err?.response?.status
+      if (status === 401 || status === 403) {
+        alert('You must be signed in as an editor to assign categories.')
+      } else {
+        alert('Failed to assign category. Please try again.')
+      }
+    } finally {
+      setAssigning(false)
+    }
+  }
+  
+  // Handle category removal
+  const handleRemoveCategory = async (path: string[]) => {
+    if (!selectedStory) return
+    
+    if (!confirm(`Remove "${selectedStory.title}" from ${path.join(' > ')}?`)) {
+      return
+    }
+    
+    setAssigning(true)
+    try {
+      await axios.delete('/remove-category', {
+        data: {
+          path: path,
+          title: selectedStory.title
+        }
+      })
+      
+      // Reload tree to get updated assignments
+      const treeRes = await axios.get('/get-tree')
+      setCodexTree(treeRes.data)
+      
+      alert(`Story removed from ${path.join(' > ')}`)
+    } catch (err: any) {
+      console.error('Error removing category:', err)
+      const status = err?.response?.status
+      if (status === 401 || status === 403) {
+        alert('You must be signed in as an editor to remove categories.')
+      } else {
+        alert('Failed to remove category. Please try again.')
+      }
+    } finally {
+      setAssigning(false)
+    }
+  }
 
   const loadBook = async () => {
     try {
@@ -1229,6 +1382,127 @@ const BookDetail = () => {
                     >
                       Delete Story
                     </button>
+                  </div>
+                  
+                  {/* Category Assignment Section */}
+                  <div className="mt-4 pt-3 border-t border-gray-600">
+                    <h5 className="text-xs font-medium mb-2 text-gray-300">Category Assignment</h5>
+                    
+                    {/* Current Assignments */}
+                    <div className="mb-3">
+                      <p className="text-xs text-gray-400 mb-1">Current Assignments:</p>
+                      {currentAssignments.length === 0 ? (
+                        <p className="text-xs text-gray-500 italic">Not assigned</p>
+                      ) : (
+                        <div className="space-y-1">
+                          {currentAssignments.map((path, idx) => (
+                            <div
+                              key={idx}
+                              className="flex items-center justify-between p-1.5 bg-gray-800 rounded text-xs"
+                            >
+                              <span className="text-gray-200 truncate flex-1 mr-1">{path.join(' > ')}</span>
+                              <button
+                                onClick={() => handleRemoveCategory(path)}
+                                disabled={assigning}
+                                className="px-1.5 py-0.5 text-xs bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex-shrink-0"
+                              >
+                                ×
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Assign to Category */}
+                    <div>
+                      <p className="text-xs text-gray-400 mb-1">Assign to:</p>
+                      <div className="space-y-1.5 mb-2">
+                        {codexTree ? (
+                          <>
+                            {/* Level 1 */}
+                            <select
+                              value={selectedPath[0] || ''}
+                              onChange={(e) => handlePathLevelChange(0, e.target.value)}
+                              className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            >
+                              <option value="">Select category...</option>
+                              {getPathOptions(codexTree, []).map((option) => (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
+                            
+                            {/* Level 2 */}
+                            {selectedPath.length >= 1 && getPathOptions(codexTree, [selectedPath[0]]).length > 0 && (
+                              <select
+                                value={selectedPath[1] || ''}
+                                onChange={(e) => handlePathLevelChange(1, e.target.value)}
+                                className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                              >
+                                <option value="">Select subcategory...</option>
+                                {getPathOptions(codexTree, [selectedPath[0]]).map((option) => (
+                                  <option key={option} value={option}>
+                                    {option}
+                                  </option>
+                                ))}
+                              </select>
+                            )}
+                            
+                            {/* Level 3 */}
+                            {selectedPath.length >= 2 && getPathOptions(codexTree, [selectedPath[0], selectedPath[1]]).length > 0 && (
+                              <select
+                                value={selectedPath[2] || ''}
+                                onChange={(e) => handlePathLevelChange(2, e.target.value)}
+                                className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                              >
+                                <option value="">Select subcategory...</option>
+                                {getPathOptions(codexTree, [selectedPath[0], selectedPath[1]]).map((option) => (
+                                  <option key={option} value={option}>
+                                    {option}
+                                  </option>
+                                ))}
+                              </select>
+                            )}
+                            
+                            {/* Level 4 */}
+                            {selectedPath.length >= 3 && getPathOptions(codexTree, [selectedPath[0], selectedPath[1], selectedPath[2]]).length > 0 && (
+                              <select
+                                value={selectedPath[3] || ''}
+                                onChange={(e) => handlePathLevelChange(3, e.target.value)}
+                                className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                              >
+                                <option value="">Select subcategory...</option>
+                                {getPathOptions(codexTree, [selectedPath[0], selectedPath[1], selectedPath[2]]).map((option) => (
+                                  <option key={option} value={option}>
+                                    {option}
+                                  </option>
+                                ))}
+                              </select>
+                            )}
+                          </>
+                        ) : (
+                          <p className="text-xs text-gray-500">Loading categories...</p>
+                        )}
+                      </div>
+                      
+                      {/* Selected Path Display */}
+                      {selectedPath.length > 0 && (
+                        <div className="mb-2 p-1.5 bg-gray-800 rounded text-xs text-gray-300 truncate">
+                          <span className="font-medium">{selectedPath.join(' > ')}</span>
+                        </div>
+                      )}
+                      
+                      {/* Assign Button */}
+                      <button
+                        onClick={handleAssignCategory}
+                        disabled={selectedPath.length === 0 || assigning}
+                        className="w-full px-3 py-1.5 bg-green-600 text-white rounded text-sm hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      >
+                        {assigning ? 'Assigning...' : 'Assign'}
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
