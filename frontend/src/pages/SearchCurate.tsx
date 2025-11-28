@@ -36,6 +36,14 @@ const SearchCurate = () => {
   const [loading, setLoading] = useState(false)
   const [searching, setSearching] = useState(false)
   
+  // Collapsible filters state - auto-collapse on smaller screens
+  const [filtersExpanded, setFiltersExpanded] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerHeight > 800
+    }
+    return true
+  })
+  
   // Boundary editing state
   const [editMode, setEditMode] = useState(false)
   const [fullText, setFullText] = useState<string>('')
@@ -714,133 +722,144 @@ const SearchCurate = () => {
       {/* Main Content Area */}
       <div className="flex-1 flex overflow-hidden min-w-0 max-w-full">
         {/* Left Panel - Search & Results */}
-        <div className="w-[20vw] min-w-[240px] max-w-[320px] border-r border-gray-700 flex flex-col bg-gray-800 flex-shrink overflow-hidden">
-        <div className="p-4 border-b border-gray-700">
-          <h2 className="text-lg font-semibold mb-4">Search & Curate</h2>
+        <div className="w-[22vw] min-w-[260px] max-w-[350px] border-r border-gray-700 flex flex-col bg-gray-800 flex-shrink-0 overflow-hidden">
+        <div className="p-3 border-b border-gray-700 flex-shrink-0">
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-base font-semibold">Search & Curate</h2>
+            <button
+              onClick={() => setFiltersExpanded(!filtersExpanded)}
+              className="text-xs text-gray-400 hover:text-white px-2 py-1 rounded bg-gray-700 hover:bg-gray-600"
+            >
+              {filtersExpanded ? 'Hide Filters' : 'Show Filters'}
+            </button>
+          </div>
           
-          {/* Search Form */}
-          <div className="space-y-3">
-            <div>
-              <label className="block text-sm font-medium mb-1">Search Query</label>
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                placeholder="e.g., demonic possession"
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">Source</label>
-              <select
-                value={sourceFilter}
-                onChange={(e) => setSourceFilter(e.target.value)}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                {sources.map((source) => (
-                  <option key={source} value={source}>
-                    {source}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">Type</label>
-              <select
-                value={typeFilter}
-                onChange={(e) => setTypeFilter(e.target.value)}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option>Both</option>
-                <option>Story</option>
-                <option>Non-Story</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">Search Mode</label>
-              <select
-                value={searchMode}
-                onChange={(e) => setSearchMode(e.target.value)}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="Both">Both (Hybrid)</option>
-                <option value="Keywords">Keywords (Exact/Phrase Matches)</option>
-                <option value="Semantic">Semantic (Conceptual Similarity)</option>
-                <option value="Exact">Exact (Word/Phrase)</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">Min Score: {minScore.toFixed(2)}</label>
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.05"
-                value={minScore}
-                onChange={(e) => setMinScore(parseFloat(e.target.value))}
-                className="w-full"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">Assignment Status</label>
-              <select
-                value={assignmentFilter}
-                onChange={(e) => setAssignmentFilter(e.target.value)}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="all">All Stories</option>
-                <option value="assigned">Assigned Only</option>
-                <option value="unassigned">Unassigned Only</option>
-              </select>
-            </div>
-
+          {/* Search Query - Always visible */}
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+              placeholder="Search stories..."
+              className="flex-1 px-2 py-1.5 bg-gray-700 border border-gray-600 rounded text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
             <button
               onClick={handleSearch}
               disabled={searching || !query.trim()}
-              className="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-3 py-1.5 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {searching ? 'Searching...' : 'Search'}
+              {searching ? '...' : 'Go'}
             </button>
           </div>
+          
+          {/* Collapsible Filters */}
+          {filtersExpanded && (
+            <div className="mt-3 space-y-2">
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="block text-xs font-medium mb-1 text-gray-400">Source</label>
+                  <select
+                    value={sourceFilter}
+                    onChange={(e) => setSourceFilter(e.target.value)}
+                    className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-sm text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  >
+                    {sources.map((source) => (
+                      <option key={source} value={source}>
+                        {source}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium mb-1 text-gray-400">Type</label>
+                  <select
+                    value={typeFilter}
+                    onChange={(e) => setTypeFilter(e.target.value)}
+                    className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-sm text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  >
+                    <option>Both</option>
+                    <option>Story</option>
+                    <option>Non-Story</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="block text-xs font-medium mb-1 text-gray-400">Search Mode</label>
+                  <select
+                    value={searchMode}
+                    onChange={(e) => setSearchMode(e.target.value)}
+                    className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-sm text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  >
+                    <option value="Both">Hybrid</option>
+                    <option value="Keywords">Keywords</option>
+                    <option value="Semantic">Semantic</option>
+                    <option value="Exact">Exact</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium mb-1 text-gray-400">Assignment</label>
+                  <select
+                    value={assignmentFilter}
+                    onChange={(e) => setAssignmentFilter(e.target.value)}
+                    className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-sm text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  >
+                    <option value="all">All</option>
+                    <option value="assigned">Assigned</option>
+                    <option value="unassigned">Unassigned</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium mb-1 text-gray-400">Min Score: {minScore.toFixed(2)}</label>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.05"
+                  value={minScore}
+                  onChange={(e) => setMinScore(parseFloat(e.target.value))}
+                  className="w-full h-1"
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Results List */}
-        <div className="flex-1 overflow-y-auto p-4">
-          <div className="mb-2 text-sm text-gray-400">
+        <div className="flex-1 overflow-y-auto p-2">
+          <div className="mb-1 text-xs text-gray-400 px-1">
             {results.length} {results.length === 1 ? 'story' : 'stories'} found
           </div>
-          <div className="space-y-2">
+          <div className="space-y-1">
             {results.map((result, idx) => (
               <button
                 key={`${result.book_slug}-${result.title}-${idx}`}
                 onClick={() => handleSelectStory(result)}
-                className={`w-full text-left p-3 rounded border transition-colors ${
+                className={`w-full text-left p-2 rounded border transition-colors ${
                   selectedStory?.title === result.title && selectedStory?.book_slug === result.book_slug
                     ? 'bg-blue-600 border-blue-500 text-white'
                     : 'bg-gray-700 border-gray-600 text-gray-200 hover:bg-gray-600'
                 }`}
               >
-                <div className="font-medium text-sm">{result.title}</div>
-                <div className="text-xs text-gray-400 mt-1">
+                <div className="font-medium text-sm leading-tight">{result.title}</div>
+                <div className="text-xs text-gray-400 mt-0.5 truncate">
                   {result.book_title || result.book_slug.replace(/_/g, ' ')}
-                  {result.book_author && ` • ${result.book_author}`}
-                  {result.book_year && ` (${result.book_year})`}
                 </div>
-                <div className="text-xs text-gray-500 mt-0.5">
-                  Pages: {result.pages} • Score: {result.score.toFixed(3)}
+                <div className="text-xs text-gray-500">
+                  p.{result.pages} • {result.score.toFixed(2)}
                 </div>
               </button>
             ))}
           </div>
           {results.length === 0 && !searching && (
-            <div className="text-center text-gray-500 mt-8">
-              {query ? 'No results found. Try a different query.' : 'Enter a search query to begin.'}
+            <div className="text-center text-gray-500 text-sm mt-4 px-2">
+              {query ? 'No results found.' : 'Enter a query to search.'}
             </div>
           )}
         </div>
@@ -1081,34 +1100,34 @@ const SearchCurate = () => {
       </div>
 
       {/* Right Panel - Category Assignment */}
-      <div className="w-[20vw] min-w-[240px] max-w-[320px] border-l border-gray-700 bg-gray-800 p-4 overflow-y-auto flex-shrink hidden lg:block">
-        <h2 className="text-lg font-semibold mb-4">Category Assignment</h2>
+      <div className="w-[18vw] min-w-[220px] max-w-[300px] border-l border-gray-700 bg-gray-800 p-3 overflow-y-auto flex-shrink-0 hidden lg:block">
+        <h2 className="text-base font-semibold mb-3">Category Assignment</h2>
         
         {!selectedStory ? (
-          <div className="text-gray-500 text-sm">
-            Select a story from the search results to assign it to a category.
+          <div className="text-gray-500 text-xs">
+            Select a story to assign it to a category.
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3">
             {/* Current Assignments */}
             <div>
-              <h3 className="text-sm font-medium mb-2 text-gray-300">Current Assignments</h3>
+              <h3 className="text-xs font-medium mb-1.5 text-gray-300">Current Assignments</h3>
               {currentAssignments.length === 0 ? (
-                <div className="text-sm text-gray-500 italic">Not assigned to any category</div>
+                <div className="text-xs text-gray-500 italic">Not assigned</div>
               ) : (
-                <div className="space-y-2">
+                <div className="space-y-1">
                   {currentAssignments.map((path, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center justify-between p-2 bg-gray-700 rounded text-sm"
+                      className="flex items-center justify-between p-1.5 bg-gray-700 rounded text-xs"
                     >
-                      <span className="text-gray-200">{path.join(' > ')}</span>
+                      <span className="text-gray-200 truncate flex-1 mr-1">{path.join(' > ')}</span>
                       <button
                         onClick={() => handleRemoveCategory(path)}
                         disabled={assigning}
-                        className="px-2 py-1 text-xs bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="px-1.5 py-0.5 text-xs bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex-shrink-0"
                       >
-                        Remove
+                        ×
                       </button>
                     </div>
                   ))}
@@ -1118,17 +1137,17 @@ const SearchCurate = () => {
             
             {/* Assign to Category */}
             <div>
-              <h3 className="text-sm font-medium mb-2 text-gray-300">Assign to Category</h3>
+              <h3 className="text-xs font-medium mb-1.5 text-gray-300">Assign to Category</h3>
               
               {/* Path Selection Dropdowns */}
-              <div className="space-y-2 mb-3">
+              <div className="space-y-1.5 mb-2">
                 {codexTree ? (
                   <>
                     {/* Level 1 */}
                     <select
                       value={selectedPath[0] || ''}
                       onChange={(e) => handlePathLevelChange(0, e.target.value)}
-                      className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
                     >
                       <option value="">Select category...</option>
                       {getPathOptions(codexTree, []).map((option) => (
@@ -1143,7 +1162,7 @@ const SearchCurate = () => {
                       <select
                         value={selectedPath[1] || ''}
                         onChange={(e) => handlePathLevelChange(1, e.target.value)}
-                        className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
                       >
                         <option value="">Select subcategory...</option>
                         {getPathOptions(codexTree, [selectedPath[0]]).map((option) => (
@@ -1159,7 +1178,7 @@ const SearchCurate = () => {
                       <select
                         value={selectedPath[2] || ''}
                         onChange={(e) => handlePathLevelChange(2, e.target.value)}
-                        className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
                       >
                         <option value="">Select subcategory...</option>
                         {getPathOptions(codexTree, [selectedPath[0], selectedPath[1]]).map((option) => (
@@ -1175,7 +1194,7 @@ const SearchCurate = () => {
                       <select
                         value={selectedPath[3] || ''}
                         onChange={(e) => handlePathLevelChange(3, e.target.value)}
-                        className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
                       >
                         <option value="">Select subcategory...</option>
                         {getPathOptions(codexTree, [selectedPath[0], selectedPath[1], selectedPath[2]]).map((option) => (
@@ -1187,14 +1206,14 @@ const SearchCurate = () => {
                     )}
                   </>
                 ) : (
-                  <div className="text-sm text-gray-500">Loading categories...</div>
+                  <div className="text-xs text-gray-500">Loading categories...</div>
                 )}
               </div>
               
               {/* Selected Path Display */}
               {selectedPath.length > 0 && (
-                <div className="mb-3 p-2 bg-gray-700 rounded text-sm text-gray-300">
-                  Selected: <span className="font-medium">{selectedPath.join(' > ')}</span>
+                <div className="mb-2 p-1.5 bg-gray-700 rounded text-xs text-gray-300 truncate">
+                  <span className="font-medium">{selectedPath.join(' > ')}</span>
                 </div>
               )}
               
@@ -1202,9 +1221,9 @@ const SearchCurate = () => {
               <button
                 onClick={handleAssignCategory}
                 disabled={selectedPath.length === 0 || assigning}
-                className="w-full px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-full px-3 py-1.5 bg-green-600 text-white rounded text-sm hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                {assigning ? 'Assigning...' : 'Assign to Category'}
+                {assigning ? 'Assigning...' : 'Assign'}
               </button>
             </div>
           </div>
