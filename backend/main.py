@@ -1017,13 +1017,12 @@ def delete_story(title: str, user = Depends(require_editor)):
                 from search.engine import get_search_engine
                 engine = get_search_engine()
                 
-                # Find and delete documents with matching title
-                for doc_id in list(engine.faiss_index.id_map):
-                    meta = engine.faiss_index.get_metadata(doc_id)
-                    if meta and meta.get("title") == title:
-                        engine.delete_document(doc_id)
-                        log.info(f"Removed '{title}' from Direct search engine")
-                        break
+                # Delete by title from both FAISS and FTS indices
+                deleted = engine.delete_by_title(title)
+                if deleted:
+                    log.info(f"Removed '{title}' from Direct search engine ({deleted} entries)")
+                else:
+                    log.warning(f"'{title}' not found in Direct search engine")
                 
                 engine.save()
             except Exception as e:
@@ -1184,6 +1183,71 @@ def reload_stories(user = Depends(require_editor)):
     except Exception as e:
         log.error(f"Reload failed: {e}", exc_info=True)
         raise HTTPException(500, f"Reload failed: {str(e)}")
+
+# ------------------- CLEANUP SEARCH INDEX ------------------- #
+@app.post("/api/cleanup-search-index")
+def cleanup_search_index(user = Depends(require_editor)):
+    """
+    Remove orphaned entries from search indices.
+    
+    Finds stories in the FAISS/FTS search index that no longer exist in
+    story_positions.json and removes them. Useful for fixing stale search
+    results after story deletions.
+    """
+    from search import USE_DIRECT_SEARCH
+    
+    if not USE_DIRECT_SEARCH:
+        raise HTTPException(400, "Cleanup only supported for Direct search engine")
+    
+    try:
+        from search.engine import get_search_engine
+        from utils import story_positions
+        
+        engine = get_search_engine()
+        
+        # Build set of all valid titles from story_positions
+        valid_titles = set()
+        for book_slug, positions in story_positions.items():
+            valid_titles.update(positions.keys())
+        
+        log.info(f"Valid titles in story_positions: {len(valid_titles)}")
+        
+        # Find orphaned titles in FAISS index
+        orphaned_titles = set()
+        for doc_id in list(engine.faiss_index.id_map):
+            meta = engine.faiss_index.get_metadata(doc_id)
+            if meta:
+                title = meta.get("title")
+                if title and title not in valid_titles:
+                    orphaned_titles.add(title)
+        
+        log.info(f"Found {len(orphaned_titles)} orphaned titles in search index")
+        
+        # Delete orphaned entries
+        deleted_count = 0
+        for title in orphaned_titles:
+            count = engine.delete_by_title(title)
+            deleted_count += count
+            log.info(f"Removed orphaned story: '{title}' ({count} entries)")
+        
+        # Save updated indices
+        if deleted_count > 0:
+            engine.save()
+        
+        # Invalidate caches
+        invalidate_cache()
+        
+        return {
+            "status": "success",
+            "message": f"Cleaned up {len(orphaned_titles)} orphaned stories ({deleted_count} index entries)",
+            "orphaned_titles": list(orphaned_titles),
+            "valid_story_count": len(valid_titles)
+        }
+        
+    except Exception as e:
+        log.error(f"Search index cleanup failed: {e}", exc_info=True)
+        raise HTTPException(500, f"Cleanup failed: {str(e)}")
+
 # ------------------------------------------------------------------ #
 if __name__ == "__main__":
     import uvicorn

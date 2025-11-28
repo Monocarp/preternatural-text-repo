@@ -330,6 +330,35 @@ class FTS5Index:
             
             return deleted
     
+    def delete_by_title(self, title: str) -> int:
+        """
+        Delete all documents matching a title.
+        
+        Args:
+            title: Story title to delete
+        
+        Returns:
+            Number of documents deleted
+        """
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # First, get doc_ids matching this title from FTS table
+            cursor.execute("SELECT doc_id FROM stories_fts WHERE title = ?", (title,))
+            doc_ids = [row['doc_id'] for row in cursor.fetchall()]
+            
+            if not doc_ids:
+                return 0
+            
+            # Delete from both tables
+            placeholders = ','.join('?' * len(doc_ids))
+            cursor.execute(f"DELETE FROM stories_fts WHERE doc_id IN ({placeholders})", doc_ids)
+            cursor.execute(f"DELETE FROM stories_meta WHERE doc_id IN ({placeholders})", doc_ids)
+            
+            conn.commit()
+            logger.info(f"Deleted {len(doc_ids)} documents with title '{title}' from FTS5 index")
+            return len(doc_ids)
+    
     def delete_by_book(self, book_slug: str) -> int:
         """
         Delete all documents for a book.

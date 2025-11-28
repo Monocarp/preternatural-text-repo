@@ -518,6 +518,39 @@ class SearchEngine:
         fts_removed = self.fts_index.delete_document(doc_id)
         return faiss_removed or fts_removed
     
+    def delete_by_title(self, title: str) -> int:
+        """
+        Delete all documents with a given title from both indices.
+        
+        More reliable than delete_document when doc_ids might differ between indices.
+        
+        Args:
+            title: Story title to delete
+        
+        Returns:
+            Total number of documents deleted
+        """
+        deleted_count = 0
+        
+        # Delete from FAISS by finding all doc_ids with this title
+        doc_ids_to_remove = []
+        for doc_id in list(self.faiss_index.id_map):
+            meta = self.faiss_index.get_metadata(doc_id)
+            if meta and meta.get("title") == title:
+                doc_ids_to_remove.append(doc_id)
+        
+        if doc_ids_to_remove:
+            deleted_count += self.faiss_index.remove_documents(doc_ids_to_remove)
+            logger.info(f"Removed {len(doc_ids_to_remove)} FAISS entries for '{title}'")
+        
+        # Delete from FTS by title (independent of FAISS doc_ids)
+        fts_deleted = self.fts_index.delete_by_title(title)
+        if fts_deleted:
+            deleted_count += fts_deleted
+            logger.info(f"Removed {fts_deleted} FTS entries for '{title}'")
+        
+        return deleted_count
+    
     def save(self) -> None:
         """Save indices to disk."""
         self.faiss_index.save(str(self.faiss_path))
