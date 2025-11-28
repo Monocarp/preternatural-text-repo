@@ -26,7 +26,7 @@ def _load_full_md_cached(book_slug: str, books_dir: str) -> str:
     """
     md_path = os.path.join(books_dir, book_slug, "Full_Text.md")
     try:
-        with open(md_path, "r", encoding="utf-8") as f:
+        with open(md_path, "r", encoding="utf-8-sig") as f:
             content = f.read()
         logger.debug(f"Loaded Full_Text.md for {book_slug}, length: {len(content)}")
         return content
@@ -75,7 +75,7 @@ def load_story_positions(book_slug: str) -> dict:
     if book_slug not in app_state.story_positions:
         pos_path = os.path.join(app_state.books_dir, book_slug, "story_positions.json")
         try:
-            with open(pos_path, "r", encoding="utf-8") as f:
+            with open(pos_path, "r", encoding="utf-8-sig") as f:
                 app_state.story_positions[book_slug] = json.load(f)
             logger.debug(
                 f"Loaded story_positions for {book_slug} "

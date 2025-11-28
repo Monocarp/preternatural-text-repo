@@ -28,7 +28,7 @@ def load_codex_tree_from_json() -> dict:
         The tree dictionary
     """
     if os.path.exists(app_state.codex_tree_path):
-        with open(app_state.codex_tree_path, "r") as f:
+        with open(app_state.codex_tree_path, "r", encoding="utf-8-sig") as f:
             tree = json.load(f)
     else:
         tree = CATEGORIES.copy()
