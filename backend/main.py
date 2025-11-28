@@ -1190,7 +1190,7 @@ def cleanup_search_index():
     """
     Remove orphaned entries from search indices.
     
-    Finds stories in the FAISS/FTS search index that no longer exist in
+    Finds stories in the search index that no longer exist in
     story_positions.json and removes them. Useful for fixing stale search
     results after story deletions.
     
@@ -1198,44 +1198,80 @@ def cleanup_search_index():
     removes entries not in story_positions.json.
     """
     from search import USE_DIRECT_SEARCH
+    from utils import story_positions
     
-    if not USE_DIRECT_SEARCH:
-        raise HTTPException(400, "Cleanup only supported for Direct search engine")
+    # Build set of all valid titles from story_positions
+    valid_titles = set()
+    for book_slug, positions in story_positions.items():
+        valid_titles.update(positions.keys())
+    
+    log.info(f"Valid titles in story_positions: {len(valid_titles)}")
+    
+    orphaned_titles = set()
+    deleted_count = 0
     
     try:
-        from search.engine import get_search_engine
-        from utils import story_positions
-        
-        engine = get_search_engine()
-        
-        # Build set of all valid titles from story_positions
-        valid_titles = set()
-        for book_slug, positions in story_positions.items():
-            valid_titles.update(positions.keys())
-        
-        log.info(f"Valid titles in story_positions: {len(valid_titles)}")
-        
-        # Find orphaned titles in FAISS index
-        orphaned_titles = set()
-        for doc_id in list(engine.faiss_index.id_map):
-            meta = engine.faiss_index.get_metadata(doc_id)
-            if meta:
-                title = meta.get("title")
+        if USE_DIRECT_SEARCH:
+            # Direct FAISS + SQLite engine
+            from search.engine import get_search_engine
+            engine = get_search_engine()
+            
+            # Find orphaned titles in FAISS index
+            for doc_id in list(engine.faiss_index.id_map):
+                meta = engine.faiss_index.get_metadata(doc_id)
+                if meta:
+                    title = meta.get("title")
+                    if title and title not in valid_titles:
+                        orphaned_titles.add(title)
+            
+            log.info(f"Found {len(orphaned_titles)} orphaned titles in Direct search index")
+            
+            # Delete orphaned entries
+            for title in orphaned_titles:
+                count = engine.delete_by_title(title)
+                deleted_count += count
+                log.info(f"Removed orphaned story: '{title}' ({count} entries)")
+            
+            # Save updated indices
+            if deleted_count > 0:
+                engine.save()
+        else:
+            # Legacy Haystack document store
+            from utils import document_store, document_store_path
+            import numpy as np
+            
+            # Get all documents and find orphaned ones
+            all_docs = list(document_store.filter_documents({}))
+            log.info(f"Total documents in Haystack store: {len(all_docs)}")
+            
+            orphaned_doc_ids = []
+            for doc in all_docs:
+                title = doc.meta.get("title") if doc.meta else None
                 if title and title not in valid_titles:
                     orphaned_titles.add(title)
-        
-        log.info(f"Found {len(orphaned_titles)} orphaned titles in search index")
-        
-        # Delete orphaned entries
-        deleted_count = 0
-        for title in orphaned_titles:
-            count = engine.delete_by_title(title)
-            deleted_count += count
-            log.info(f"Removed orphaned story: '{title}' ({count} entries)")
-        
-        # Save updated indices
-        if deleted_count > 0:
-            engine.save()
+                    orphaned_doc_ids.append(doc.id)
+            
+            log.info(f"Found {len(orphaned_titles)} orphaned titles ({len(orphaned_doc_ids)} documents)")
+            
+            # Delete orphaned documents
+            if orphaned_doc_ids:
+                document_store.delete_documents(orphaned_doc_ids)
+                deleted_count = len(orphaned_doc_ids)
+                
+                # Convert remaining embeddings to lists before saving
+                remaining_docs = list(document_store.filter_documents({}))
+                docs_to_update = []
+                for doc in remaining_docs:
+                    if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
+                        doc.embedding = doc.embedding.tolist()
+                        docs_to_update.append(doc)
+                
+                if docs_to_update:
+                    document_store.delete_documents([doc.id for doc in docs_to_update])
+                    document_store.write_documents(docs_to_update)
+                
+                document_store.save_to_disk(document_store_path)
+                log.info(f"Saved updated Haystack document store")
         
         # Invalidate caches
         invalidate_cache()
