@@ -163,6 +163,13 @@ def update_story_boundaries(book_slug: str, title: str, start_char: int, end_cha
     invalidate_cache()
     logger.info(f"Invalidated cache after updating boundaries for {title}")
     
+    # Auto-sync to GitHub
+    try:
+        from sync.github_sync import on_story_boundary_change
+        on_story_boundary_change(book_slug, title)
+    except Exception as e:
+        logger.debug(f"GitHub sync skipped: {e}")
+    
     return save_success
 
 
@@ -262,5 +269,12 @@ def update_story_title(book_slug: str, old_title: str, new_title: str) -> bool:
     # Invalidate cache since data changed
     invalidate_cache()
     logger.info(f"Invalidated cache after updating title from '{old_title}' to '{new_title}'")
+
+    # Auto-sync to GitHub
+    try:
+        from sync.github_sync import on_story_title_change
+        on_story_title_change(book_slug, old_title, new_title)
+    except Exception as e:
+        logger.debug(f"GitHub sync skipped: {e}")
 
     return True

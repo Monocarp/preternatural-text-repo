@@ -317,3 +317,11 @@ def save_codex_tree(tree: dict) -> None:
             logger.info("Auto-committed to HF repo")
         except Exception as e:
             logger.error(f"Auto-commit failed: {e}")
+    
+    # Auto-commit to GitHub (for local dev sync)
+    try:
+        from sync.github_sync import sync_codex_tree
+        sync_codex_tree("Update category tree")
+    except Exception as e:
+        logger.debug(f"GitHub sync skipped: {e}")
+

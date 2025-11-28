@@ -85,6 +85,8 @@ USE_DIRECT_SEARCH=true             # Use new search engine
 ENABLE_RERANKER=false              # Cross-encoder (disabled)
 EDITOR_EMAILS=email1,email2        # Editor access list
 DISABLE_AUTH=true                  # Local dev only
+GITHUB_TOKEN=ghp_xxx               # Auto-sync changes to GitHub (production)
+GITHUB_REPO=Monocarp/preternatural-text-repo  # Target repo (optional)
 ```
 
 ---

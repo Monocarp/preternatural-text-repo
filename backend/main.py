@@ -912,6 +912,13 @@ def add_story(body: AddStoryBody, user = Depends(require_editor)):
         from utils import invalidate_cache
         invalidate_cache()
         
+        # 13. Auto-sync to GitHub
+        try:
+            from sync.github_sync import on_story_added
+            on_story_added(body.book_slug, body.title)
+        except Exception as e:
+            log.debug(f"GitHub sync skipped: {e}")
+        
         log.info(f"Story '{body.title}' added to {body.book_slug} by {user.get('email')} and is now searchable!")
         
         return {
@@ -1066,6 +1073,13 @@ def delete_story(title: str, user = Depends(require_editor)):
         
         # 8. Invalidate cache
         invalidate_cache()
+        
+        # 9. Auto-sync to GitHub
+        try:
+            from sync.github_sync import on_story_deleted
+            on_story_deleted(book_slug, title)
+        except Exception as e:
+            log.debug(f"GitHub sync skipped: {e}")
         
         log.info(f"Successfully deleted story '{title}' from {book_slug}")
         
