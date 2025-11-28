@@ -1,6 +1,6 @@
 # Backend Context
 
-**Last Updated:** 2025-11-26
+**Last Updated:** 2025-11-27
 
 ## Quick Overview
 
@@ -14,6 +14,7 @@ backend/
 ├── models.py         # SQLAlchemy ORM: User, Story, Book, CodexNode
 ├── state.py          # Centralized app state (app_state singleton)
 ├── utils_legacy.py   # Backwards-compat shim for old imports
+├── ingest_book.py    # CLI script to ingest books into PostgreSQL
 ├── search/           # NEW: Direct FAISS + SQLite search engine
 ├── storage/          # Book/story file operations
 ├── tree/             # Codex tree operations
@@ -89,9 +90,12 @@ state.py
 | `/api/remove-category` | POST | Editor | Remove story from category |
 | `/api/render-story` | POST | No | Get story HTML with highlighting |
 | `/api/update-boundaries` | POST | Editor | Edit story char positions |
+| `/api/update-title` | POST | Editor | Rename a story |
 | `/api/add-story` | POST | Editor | Create new story |
+| `/api/delete-story/{title}` | DELETE | Editor | Remove story from all stores |
 | `/api/books` | GET | No | List all books |
-| `/api/books/{slug}` | GET | No | Get book details |
+| `/api/books/{slug}` | GET | No | Get book details + stories |
+| `/api/full-text/{slug}` | GET | No | Get full book text |
 
 ## Database Schema (models.py)
 

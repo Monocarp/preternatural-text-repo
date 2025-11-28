@@ -1,6 +1,6 @@
 # Frontend Context
 
-**Last Updated:** 2025-11-26
+**Last Updated:** 2025-11-27
 
 ## Overview
 
@@ -68,7 +68,45 @@ Sidebar width: `w-64 lg:w-80 xl:w-96`
 | `Archive.tsx` | `/archive/*` | Sidebar + Main | Browse stories by category |
 | `SearchCurate.tsx` | `/search-curate` | Sidebar + Left + Center + Right | Search, view, categorize |
 | `BookArchive.tsx` | `/book-archive` | Sidebar + Main | List all books |
-| `BookDetail.tsx` | `/book-archive/:slug` | Sidebar + Main | Book stories + full text |
+| `BookDetail.tsx` | `/book-archive/:slug` | Sidebar + Main | Book info, stories, full text, **story review** |
+
+## BookDetail.tsx Views
+
+The BookDetail page has four view tabs:
+
+| Tab | Purpose | Features |
+|-----|---------|----------|
+| **Book Info** | Display book metadata | Title, author, year, description |
+| **View Text** | Read full book text | Libre Baskerville font, page markers |
+| **View Stories** | Expandable story list | Static/Book Context toggle per story |
+| **Story Review** | Visual story boundary editor | See below |
+
+### Story Review Tab Features
+
+The Story Review tab provides a visual editor for reviewing and editing story boundaries:
+
+1. **Highlighted Text Display**
+   - Full book text with all stories highlighted in distinct colors
+   - 6-color palette cycles through stories by position
+   - Click on highlighted region to select story
+   - Non-story text (gaps) shown in readable gray
+
+2. **Story Sidebar**
+   - Stories listed by character position (sorted)
+   - Click to select and scroll to story in text
+   - Color coordination between list and text highlights
+
+3. **Selected Story Actions**
+   - **Edit Boundaries**: Click-to-set start/end positions with auto-scroll
+   - **Edit Title**: Inline title editing with save/cancel
+   - **Delete Story**: Confirmation dialog with full cleanup
+   - **+ New Story**: Create new story by selecting text region
+
+4. **New Story Mode**
+   - Purple border indicates new story mode
+   - Click to set start/end positions
+   - Form for title, keywords, pages
+   - Overlap detection with force-add option
 
 ## Component Dependencies
 
@@ -83,6 +121,12 @@ SearchCurate.tsx (~1200 lines - needs refactoring)
   ├── Search panel (left)
   ├── Story viewer (center)
   └── Category assignment (right)
+
+BookDetail.tsx (~1300 lines)
+  ├── Book info panel
+  ├── Full text viewer
+  ├── Stories list (with expand/collapse)
+  └── Story Review (with boundary editing)
 ```
 
 ## State Management
@@ -117,6 +161,18 @@ interface AppState {
 - Borders: `border-gray-700`
 - Accent: `bg-blue-600`, `text-blue-400`
 
+### Story Review Color Palette
+```tsx
+const STORY_COLORS = [
+  { bg: 'bg-blue-600/40', border: 'border-blue-500', text: 'text-blue-200' },
+  { bg: 'bg-green-600/40', border: 'border-green-500', text: 'text-green-200' },
+  { bg: 'bg-purple-600/40', border: 'border-purple-500', text: 'text-purple-200' },
+  { bg: 'bg-amber-600/40', border: 'border-amber-500', text: 'text-amber-200' },
+  { bg: 'bg-cyan-600/40', border: 'border-cyan-500', text: 'text-cyan-200' },
+  { bg: 'bg-rose-600/40', border: 'border-rose-500', text: 'text-rose-200' },
+]
+```
+
 ### Typography (Full Text View)
 ```tsx
 // BookDetail.tsx - Libre Baskerville for book reading
@@ -134,7 +190,7 @@ style={{
 | Archive | `/api/get-tree`, `/api/get-stories/{path}` |
 | SearchCurate | `/api/search`, `/api/render-story`, `/api/assign-category` |
 | BookArchive | `/api/books` |
-| BookDetail | `/api/books/{slug}`, `/api/full-text/{slug}` |
+| BookDetail | `/api/books/{slug}`, `/api/full-text/{slug}`, `/api/update-boundaries`, `/api/update-title`, `/api/add-story`, `/api/delete-story/{title}` |
 | SidebarTree | `/api/get-tree` |
 
 ## Adding a New Page
@@ -163,6 +219,7 @@ style={{
 ## Known Tech Debt
 
 - `SearchCurate.tsx` is ~1200 lines - should split into sub-components
+- `BookDetail.tsx` is ~1300 lines - Story Review could be extracted
 - No TypeScript interfaces for API responses
 - Tree is re-fetched on every page mount (should cache in store)
 

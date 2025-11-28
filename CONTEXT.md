@@ -1,6 +1,6 @@
 # Preternatural Text Repository — Development Context
 
-**Last Updated:** 2025-11-26  
+**Last Updated:** 2025-11-27  
 **Purpose:** Quick reference for AI-assisted development.
 
 ---
@@ -9,7 +9,7 @@
 
 A scalable system for extracting, indexing, searching, and curating stories of preternatural phenomena from historical texts. React frontend + FastAPI backend with hybrid semantic search.
 
-**Current Scale:** 2 volumes, 925 stories  
+**Current Scale:** 5 volumes, 900+ stories  
 **Target Scale:** 100+ volumes
 
 ---
@@ -51,9 +51,14 @@ A scalable system for extracting, indexing, searching, and curating stories of p
    - 3x faster search (0.5s → 0.14s)
    - Feature flag: `USE_DIRECT_SEARCH=true`
 
-2. **Responsive UI:** Auto-collapsing sidebar, mobile-friendly layouts
+2. **Story Review Tab:** Visual editor in BookDetail showing all stories highlighted
+   - Click-to-select stories in full text
+   - Inline boundary editing with auto-scroll
+   - Edit title, delete story, add new story
 
-3. **Full Text Typography:** Libre Baskerville font, markdown rendering
+3. **Responsive UI:** Auto-collapsing sidebar, mobile-friendly layouts
+
+4. **Full Text Typography:** Libre Baskerville font, markdown rendering
 
 ---
 
@@ -66,6 +71,8 @@ A scalable system for extracting, indexing, searching, and curating stories of p
 | Frontend routing | `frontend/src/main.tsx` |
 | Story rendering | `backend/utils/rendering.py` |
 | Database models | `backend/models.py` |
+| Story Review UI | `frontend/src/pages/BookDetail.tsx` |
+| Book ingestion | `backend/ingest_book.py` |
 
 ---
 

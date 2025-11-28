@@ -17,7 +17,9 @@ A scalable system for extracting, indexing, searching, and curating stories of p
 - **Hybrid semantic search** — combines keyword (BM25) and embedding-based search using Haystack AI
 - **Multi-book support** — process and search across multiple historical texts
 - **Hierarchical categorization** — organize stories into a "Codex Tree" taxonomy (Demonic Activity, Ghostly Activity, Cryptids, etc.)
-- **Boundary editing** — adjust story start/end positions with visual highlighting
+- **Story Review** — visual editor showing all stories highlighted in book text with inline boundary editing
+- **Boundary editing** — adjust story start/end positions with click-to-select and auto-scroll
+- **Story management** — add new stories, edit titles, delete stories directly from the UI
 - **React production UI** — search, curate, and manage stories with real-time updates
 - **AI-assisted development** — structured workflow for sustainable feature development
 
@@ -165,6 +167,11 @@ Key endpoints:
 | `POST /api/assign-category` | Assign story to category path |
 | `POST /api/render-story` | Get HTML rendering of a story |
 | `POST /api/add-story` | Add new story with immediate indexing |
+| `POST /api/update-boundaries` | Update story start/end character positions |
+| `POST /api/update-title` | Rename a story |
+| `DELETE /api/delete-story/{title}` | Remove a story from all stores |
+| `GET /api/books/{slug}` | Get book details with stories |
+| `GET /api/full-text/{slug}` | Get full book text for review |
 
 ---
 
