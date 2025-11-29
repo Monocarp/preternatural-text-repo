@@ -17,8 +17,8 @@ engine = create_engine(db_url)
 Session = sessionmaker(bind=engine)
 
 with Session() as db:
-    # Delete the story that was just deleted from UI
-    result = db.execute(text("DELETE FROM stories WHERE title LIKE '%Saligario%Treatise%' RETURNING title"))
+    # Delete the story
+    result = db.execute(text("DELETE FROM stories WHERE title LIKE '%Manuscript of Miracles%Eustochia%' RETURNING title"))
     deleted = result.fetchall()
     db.commit()
     

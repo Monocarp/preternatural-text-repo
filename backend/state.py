@@ -138,7 +138,13 @@ class AppState:
             if "postgres" in db_url:
                 db_url = db_url.replace("postgres://", "postgresql://")
             try:
-                self.engine = create_engine(db_url)
+                self.engine = create_engine(
+                    db_url,
+                    pool_pre_ping=True,  # Test connections before using them
+                    pool_recycle=300,    # Recycle connections after 5 minutes (serverless friendly)
+                    pool_size=5,
+                    max_overflow=10
+                )
                 self.SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
                 Base.metadata.create_all(bind=self.engine)
                 self.USE_DB = True
