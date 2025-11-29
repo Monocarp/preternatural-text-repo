@@ -929,29 +929,37 @@ const Archive = () => {
                                 autoFocus
                                 placeholder="ghost, haunting, supernatural"
                               />
-                              <button
+                              <span
+                                role="button"
+                                tabIndex={0}
                                 onClick={(e) => { e.stopPropagation(); handleSaveKeywords(story) }}
-                                disabled={savingKeywords}
-                                className="px-1.5 py-0.5 bg-green-600 text-white rounded hover:bg-green-700 text-xs disabled:opacity-50"
+                                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); handleSaveKeywords(story) } }}
+                                className={`px-1.5 py-0.5 bg-green-600 text-white rounded hover:bg-green-700 text-xs cursor-pointer ${savingKeywords ? 'opacity-50 pointer-events-none' : ''}`}
                               >
                                 ✓
-                              </button>
-                              <button
+                              </span>
+                              <span
+                                role="button"
+                                tabIndex={0}
                                 onClick={(e) => { e.stopPropagation(); handleCancelKeywordsEdit() }}
-                                className="px-1.5 py-0.5 bg-gray-600 text-white rounded hover:bg-gray-700 text-xs"
+                                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); handleCancelKeywordsEdit() } }}
+                                className="px-1.5 py-0.5 bg-gray-600 text-white rounded hover:bg-gray-700 text-xs cursor-pointer"
                               >
                                 ✕
-                              </button>
+                              </span>
                             </span>
                           ) : (
                             <span className="ml-2 inline-flex items-center gap-1">
                               • Keywords: {story.keywords || <span className="italic">none</span>}
-                              <button
+                              <span
+                                role="button"
+                                tabIndex={0}
                                 onClick={(e) => { e.stopPropagation(); handleEditKeywords(story) }}
-                                className="ml-1 px-1 py-0.5 bg-gray-600 text-white rounded hover:bg-gray-700 text-xs"
+                                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); handleEditKeywords(story) } }}
+                                className="ml-1 px-1 py-0.5 bg-gray-600 text-white rounded hover:bg-gray-700 text-xs cursor-pointer"
                               >
                                 ✎
-                              </button>
+                              </span>
                             </span>
                           )}
                         </div>
