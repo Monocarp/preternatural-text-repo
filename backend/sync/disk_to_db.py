@@ -293,6 +293,22 @@ def sync_disk_to_db() -> None:
                 if added_stories:
                     logger.info(f"Added {len(added_stories)} new stories to DB")
                 
+                # DELETE stories from DB that are no longer on disk (critical for sync!)
+                disk_titles = set(disk_stories.keys())
+                db_stories = db.query(Story).all()
+                stories_to_delete = []
+                
+                for story in db_stories:
+                    if story.title not in disk_titles:
+                        stories_to_delete.append(story)
+                        logger.info(f"Will delete orphaned story from DB: '{story.title}'")
+                
+                if stories_to_delete:
+                    for story in stories_to_delete:
+                        db.delete(story)
+                    db.commit()
+                    logger.info(f"Deleted {len(stories_to_delete)} orphaned stories from DB (not on disk)")
+                
                 elapsed = time.monotonic() - start_time
                 logger.info(f"Synced {len(disk_stories)} stories from disk to DB in {elapsed:.2f}s")
         except Exception as e:
