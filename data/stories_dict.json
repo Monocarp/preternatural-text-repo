@@ -5,7 +5,7 @@
         "pages": "3-4",
         "keywords": "saint walberts cross and arm used to test and heal the possessed at valombrosa",
         "start_char": 8922,
-        "end_char": 10489
+        "end_char": 10477
     },
     "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples": {
         "title": "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
@@ -31,6 +31,54 @@
         "start_char": 11363,
         "end_char": 12031
     },
+    "Ancient Desert Fathers Said to Be Both Holy and Possessed": {
+        "title": "Ancient Desert Fathers Said to Be Both Holy and Possessed",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "4",
+        "keywords": "ailment from heel to head in possession",
+        "start_char": 12033,
+        "end_char": 12856
+    },
+    "St. Eustochia of Padua Reported as Both Holy and Possessed": {
+        "title": "St. Eustochia of Padua Reported as Both Holy and Possessed",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "5",
+        "keywords": "st eustochia of padua reported as both holy and possessed",
+        "start_char": 12869,
+        "end_char": 14079
+    },
+    "Girolamo Saligario’s Testimony on Extraordinary Spiritual Phenomena of Eustochia": {
+        "title": "Girolamo Saligario’s Testimony on Extraordinary Spiritual Phenomena of Eustochia",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "5-6",
+        "keywords": "girolamo saligarios testimony on extraordinary spiritual phenomena of eustochia",
+        "start_char": 14081,
+        "end_char": 15535
+    },
+    "Saligario’s Treatise on Malignant Spirits, Demonic Deceits, and Angelic Help": {
+        "title": "Saligario’s Treatise on Malignant Spirits, Demonic Deceits, and Angelic Help",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "5-6",
+        "keywords": "capricious vs traditional demonic practice in manichaeism, possession, demonic possession",
+        "start_char": 16361,
+        "end_char": 18326
+    },
+    "Manuscript of Miracles Occurring Daily at the Grave of Blessed Eustochia": {
+        "title": "Manuscript of Miracles Occurring Daily at the Grave of Blessed Eustochia",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "6",
+        "keywords": "manuscript of miracles occurring daily at the grave of blessed eustochia",
+        "start_char": 18616,
+        "end_char": 19381
+    },
+    "Lost Life of Eustochia and Manuscript of Her Miracles Rediscovered in Episcopal Archives": {
+        "title": "Lost Life of Eustochia and Manuscript of Her Miracles Rediscovered in Episcopal Archives",
+        "book_slug": "christian_mysticism_vol_iv",
+        "pages": "6-7",
+        "keywords": "lost life of eustochia and manuscript of her miracles rediscovered in episcopal archives",
+        "start_char": 19383,
+        "end_char": 22879
+    },
     "Violent Possession and Exorcism of Peter Bernardi of Areia": {
         "title": "Violent Possession and Exorcism of Peter Bernardi of Areia",
         "book_slug": "christian_mysticism_vol_iv",
@@ -44,7 +92,7 @@
         "book_slug": "christian_mysticism_vol_iv",
         "pages": "10-11",
         "keywords": "possessed woman from calcia necromantic formula and death of the monk at perusium",
-        "start_char": 40214,
+        "start_char": 40160,
         "end_char": 42290
     },
     "Old Woman’s Possession, Magical Amulet with Divine Names, and Exorcism by Burning": {

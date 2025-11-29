@@ -169,6 +169,46 @@ def sync_stories_dict(reason: str = "Update stories metadata") -> bool:
     )
 
 
+def sync_document_store(reason: str = "Update document store") -> bool:
+    """Sync document_store.json to GitHub (Haystack search index)."""
+    from state import app_state
+    
+    local_path = os.path.join(app_state.data_dir, "document_store.json")
+    
+    if not os.path.exists(local_path):
+        logger.warning(f"document_store.json not found at {local_path}")
+        return False
+    
+    timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+    commit_msg = f"[auto] {reason} ({timestamp})"
+    
+    return sync_file_to_github(
+        local_path=local_path,
+        repo_path="data/document_store.json",
+        commit_message=commit_msg
+    )
+
+
+def sync_documents_json(reason: str = "Update documents") -> bool:
+    """Sync documents.json to GitHub (Haystack documents)."""
+    from state import app_state
+    
+    local_path = os.path.join(app_state.data_dir, "documents.json")
+    
+    if not os.path.exists(local_path):
+        logger.warning(f"documents.json not found at {local_path}")
+        return False
+    
+    timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+    commit_msg = f"[auto] {reason} ({timestamp})"
+    
+    return sync_file_to_github(
+        local_path=local_path,
+        repo_path="data/documents.json",
+        commit_message=commit_msg
+    )
+
+
 def sync_story_positions(book_slug: str, reason: str = "Update story positions") -> bool:
     """Sync a book's story_positions.json to GitHub."""
     from state import app_state
@@ -254,6 +294,9 @@ def on_story_deleted(book_slug: str, title: str):
         include_stories_dict=True,
         reason=f"Delete story '{title}'"
     )
+    # Also sync document store so search index persists
+    sync_document_store(f"Delete story '{title}'")
+    sync_documents_json(f"Delete story '{title}'")
 
 
 def on_category_change(action: str, title: str, path: List[str]):

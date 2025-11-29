@@ -1273,6 +1273,16 @@ def cleanup_search_index():
                 document_store.save_to_disk(document_store_path)
                 log.info(f"Saved updated Haystack document store")
         
+        # Sync document store to GitHub so changes persist across deploys
+        if deleted_count > 0:
+            try:
+                from sync.github_sync import sync_document_store, sync_documents_json
+                sync_document_store(f"Cleanup: removed {len(orphaned_titles)} orphaned stories")
+                sync_documents_json(f"Cleanup: removed {len(orphaned_titles)} orphaned stories")
+                log.info("Synced document store to GitHub")
+            except Exception as e:
+                log.warning(f"Failed to sync document store to GitHub: {e}")
+        
         # Invalidate caches
         invalidate_cache()
         
@@ -1280,7 +1290,8 @@ def cleanup_search_index():
             "status": "success",
             "message": f"Cleaned up {len(orphaned_titles)} orphaned stories ({deleted_count} index entries)",
             "orphaned_titles": list(orphaned_titles),
-            "valid_story_count": len(valid_titles)
+            "valid_story_count": len(valid_titles),
+            "synced_to_github": deleted_count > 0
         }
         
     except Exception as e:
