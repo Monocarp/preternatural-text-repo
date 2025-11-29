@@ -19,6 +19,38 @@ from storage.books import load_story_positions
 logger = logging.getLogger(__name__)
 
 
+def cleanup_orphaned_node_stories(db) -> int:
+    """
+    Remove NodeStory entries that reference non-existent stories.
+    
+    This handles cases where stories were deleted but their category
+    assignments (NodeStory) remain.
+    
+    Args:
+        db: Database session
+    
+    Returns:
+        Number of orphaned entries deleted
+    """
+    from models import NodeStory, Story
+    
+    # Find NodeStory entries that reference non-existent story IDs
+    valid_story_ids = {s.id for s in db.query(Story.id).all()}
+    
+    orphaned = db.query(NodeStory).filter(
+        ~NodeStory.story_id.in_(valid_story_ids)
+    ).all()
+    
+    if orphaned:
+        for ns in orphaned:
+            db.delete(ns)
+        db.commit()
+        logger.info(f"Deleted {len(orphaned)} orphaned NodeStory entries")
+        return len(orphaned)
+    
+    return 0
+
+
 def load_all_stories() -> dict:
     """
     Load all stories from story_positions.json files across all books.
@@ -308,6 +340,9 @@ def sync_disk_to_db() -> None:
                         db.delete(story)
                     db.commit()
                     logger.info(f"Deleted {len(stories_to_delete)} orphaned stories from DB (not on disk)")
+                    
+                    # Also cleanup any orphaned NodeStory entries
+                    cleanup_orphaned_node_stories(db)
                 
                 elapsed = time.monotonic() - start_time
                 logger.info(f"Synced {len(disk_stories)} stories from disk to DB in {elapsed:.2f}s")

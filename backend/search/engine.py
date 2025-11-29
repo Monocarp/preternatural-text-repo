@@ -563,6 +563,57 @@ class SearchEngine:
         if meta is None:
             meta = self.fts_index.get_metadata(doc_id)
         return meta
+    
+    def cleanup_orphaned_entries(self, valid_titles: set) -> Tuple[int, List[str]]:
+        """
+        Remove entries from search indices that are not in the valid_titles set.
+        
+        This ensures the search index stays in sync with story_positions.json.
+        Should be called on startup after loading story_positions from disk.
+        
+        Args:
+            valid_titles: Set of story titles that should exist in the index
+        
+        Returns:
+            Tuple of (deleted_count, list of deleted titles)
+        """
+        orphaned_titles = set()
+        
+        # Find orphaned titles in FAISS index
+        for doc_id in list(self.faiss_index.id_map):
+            meta = self.faiss_index.get_metadata(doc_id)
+            if meta:
+                title = meta.get("title")
+                if title and title not in valid_titles:
+                    orphaned_titles.add(title)
+        
+        # Find orphaned titles in FTS index
+        fts_titles = self.fts_index.get_all_titles()
+        for title in fts_titles:
+            if title and title not in valid_titles:
+                orphaned_titles.add(title)
+        
+        if not orphaned_titles:
+            logger.info("No orphaned entries found in search indices")
+            return 0, []
+        
+        logger.info(f"Found {len(orphaned_titles)} orphaned titles in search indices")
+        
+        # Delete orphaned entries
+        deleted_count = 0
+        deleted_titles = []
+        
+        for title in orphaned_titles:
+            count = self.delete_by_title(title)
+            deleted_count += count
+            deleted_titles.append(title)
+            logger.info(f"Removed orphaned story from search index: '{title}' ({count} entries)")
+        
+        # Save updated indices
+        if deleted_count > 0:
+            self.save()
+        
+        return deleted_count, deleted_titles
 
 
 # Global search engine instance (initialized by init_search_engine)

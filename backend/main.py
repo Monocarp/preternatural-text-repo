@@ -115,6 +115,47 @@ async def startup():
     log.info("Building assigned titles cache...")
     rebuild_assigned_titles_cache()  # Add this line
     
+    # Cleanup orphaned entries from search index (stories deleted from disk but still in index)
+    log.info("Cleaning up orphaned search index entries...")
+    from utils import story_positions
+    valid_titles = set()
+    for book_slug, positions in story_positions.items():
+        valid_titles.update(positions.keys())
+    log.info(f"Valid titles from disk: {len(valid_titles)}")
+    
+    if USE_DIRECT_SEARCH:
+        # Direct engine cleanup
+        from search.engine import get_search_engine
+        engine = get_search_engine()
+        deleted_count, deleted_titles = engine.cleanup_orphaned_entries(valid_titles)
+        if deleted_count > 0:
+            log.info(f"Removed {deleted_count} orphaned entries from search index: {deleted_titles}")
+    else:
+        # Legacy Haystack cleanup (manual)
+        try:
+            import numpy as np
+            from utils import document_store_path
+            all_docs = list(document_store.filter_documents({}))
+            orphaned_ids = []
+            orphaned_titles = []
+            for doc in all_docs:
+                title = doc.meta.get("title") if doc.meta else None
+                if title and title not in valid_titles:
+                    orphaned_ids.append(doc.id)
+                    if title not in orphaned_titles:
+                        orphaned_titles.append(title)
+            if orphaned_ids:
+                document_store.delete_documents(orphaned_ids)
+                # Save updated document store
+                remaining_docs = list(document_store.filter_documents({}))
+                for doc in remaining_docs:
+                    if doc.embedding is not None and isinstance(doc.embedding, np.ndarray):
+                        doc.embedding = doc.embedding.tolist()
+                document_store.save_to_disk(document_store_path)
+                log.info(f"Removed {len(orphaned_ids)} orphaned documents from Haystack: {orphaned_titles}")
+        except Exception as e:
+            log.warning(f"Failed to cleanup Haystack orphaned entries: {e}")
+    
     # Warm-up embedding model
     log.info("Warming up embedding model...")
     

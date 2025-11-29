@@ -490,6 +490,18 @@ class FTS5Index:
             conn.commit()
             logger.info("Cleared FTS5 index")
     
+    def get_all_titles(self) -> List[str]:
+        """
+        Get all unique story titles in the FTS index.
+        
+        Returns:
+            List of all unique titles
+        """
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT DISTINCT title FROM stories_fts WHERE title IS NOT NULL AND title != ''")
+            return [row['title'] for row in cursor.fetchall()]
+    
     def vacuum(self) -> None:
         """Optimize the database (reclaim space after deletions)."""
         with self._get_connection() as conn:
