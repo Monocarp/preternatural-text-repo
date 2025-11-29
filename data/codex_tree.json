@@ -200,7 +200,11 @@
         "Cursing": {},
         "Divination": {},
         "Evil Eye": {},
-        "Flying": {},
+        "Flying": {
+            "_stories": [
+                "Demonic Vision Dismissed With Eucharist"
+            ]
+        },
         "Hagriding": {},
         "Harm To Pets": {},
         "Harm to Crops": {},
