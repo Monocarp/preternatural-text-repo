@@ -59,7 +59,13 @@ class AppState:
         # Database connection state
         # ------------------------------------------------------------------ #
         import os
-        self.DB_URL: Optional[str] = os.getenv("POSTGRES_PRISMA_URL")
+        # Check multiple possible env var names (Vercel uses NEON_ prefix)
+        self.DB_URL: Optional[str] = (
+            os.getenv("DATABASE_URL") or 
+            os.getenv("POSTGRES_PRISMA_URL") or
+            os.getenv("NEON_DATABASE_URL") or
+            os.getenv("NEON_POSTGRES_PRISMA_URL")
+        )
         self.USE_DB: bool = False
         self.engine: Any = None
         self.SessionLocal: Any = None

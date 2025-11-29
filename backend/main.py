@@ -1049,7 +1049,6 @@ def delete_story(title: str, user = Depends(require_editor)):
                         log.warning(f"Story '{title}' not found in database to delete")
             except Exception as e:
                 log.error(f"Failed to delete from database: {e}")
-                # Don't fail the entire operation
         
         # 5. Remove from document store / search engine
         from search import USE_DIRECT_SEARCH

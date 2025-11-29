@@ -16,9 +16,9 @@ db_url = db_url.replace('postgres://', 'postgresql://')
 engine = create_engine(db_url)
 Session = sessionmaker(bind=engine)
 
-# Delete the orphaned story
 with Session() as db:
-    result = db.execute(text("DELETE FROM stories WHERE title = 'St. Eustochia of Padua Reported as Both Holy and Possessed' RETURNING title"))
+    # Delete the story that was deleted from UI but not DB
+    result = db.execute(text("DELETE FROM stories WHERE title LIKE '%Girolamo Saligario%' RETURNING title"))
     deleted = result.fetchall()
     db.commit()
     
@@ -27,6 +27,7 @@ with Session() as db:
     else:
         print("Story not found")
     
-    # Verify
-    result = db.execute(text('SELECT COUNT(*) FROM stories'))
-    print(f'Total stories now: {result.scalar()}')
+    # Show remaining
+    result = db.execute(text("SELECT title FROM stories WHERE title LIKE '%Eustochia%'"))
+    rows = result.fetchall()
+    print(f'Remaining Eustochia stories ({len(rows)})')

@@ -9,7 +9,13 @@ import os
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 load_dotenv(dotenv_path=os.path.join(ROOT, '.env.local'))
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+# Check multiple possible env var names (Vercel uses NEON_ prefix)
+DATABASE_URL = (
+    os.getenv("DATABASE_URL") or 
+    os.getenv("POSTGRES_PRISMA_URL") or
+    os.getenv("NEON_DATABASE_URL") or
+    os.getenv("NEON_POSTGRES_PRISMA_URL")
+)
 
 engine = create_engine(
     DATABASE_URL,
