@@ -615,7 +615,7 @@ def assign_category(body: AssignBody, user: Dict = Depends(require_editor)):
     save_codex_tree_to_json(updated)
     if stories_dict:
         with open(stories_dict_path, "w") as f:
-            json.dump(stories_dict, f, indent=4)
+            json.dump(stories_dict, f, indent=4, sort_keys=True)
     
     # Invalidate cache since we changed the tree
     invalidate_cache()

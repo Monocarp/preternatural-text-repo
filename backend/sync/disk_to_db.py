@@ -282,7 +282,7 @@ def sync_disk_to_db() -> None:
     # Write stories_dict.json for consistency
     try:
         with open(app_state.stories_dict_path, "w", encoding="utf-8") as f:
-            json.dump(app_state.stories_dict, f, indent=4, ensure_ascii=False)
+            json.dump(app_state.stories_dict, f, indent=4, ensure_ascii=False, sort_keys=True)
         logger.info(f"Updated stories_dict.json with {len(app_state.stories_dict)} stories")
     except Exception as e:
         logger.error(f"Failed to write stories_dict.json: {e}")

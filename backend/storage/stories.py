@@ -243,7 +243,7 @@ def update_story_title(book_slug: str, old_title: str, new_title: str) -> bool:
     # Also save stories_dict.json
     try:
         with open(app_state.stories_dict_path, "w") as f:
-            json.dump(app_state.stories_dict, f, indent=4)
+            json.dump(app_state.stories_dict, f, indent=4, sort_keys=True)
     except Exception as e:
         logger.error(f"Failed to save stories_dict.json: {e}")
    

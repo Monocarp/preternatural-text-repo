@@ -229,7 +229,7 @@ class FAISSIndexManager:
             "dimension": self.dimension
         }
         with open(mapping_path, 'w', encoding='utf-8') as f:
-            json.dump(mapping_data, f)
+            json.dump(mapping_data, f, sort_keys=True)
         
         logger.info(f"Saved FAISS index ({self.index.ntotal} vectors) to {index_path}")
     

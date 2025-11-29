@@ -646,9 +646,9 @@ def save_codex_tree(tree):
     global stories_dict
     os.makedirs(data_dir, exist_ok=True)
     with open(codex_tree_path, "w") as f:
-        json.dump(tree, f, indent=4)
+        json.dump(tree, f, indent=4, sort_keys=True)
     with open(stories_dict_path, "w") as f:
-        json.dump(stories_dict, f, indent=4)
+        json.dump(stories_dict, f, indent=4, sort_keys=True)
     # Optional auto-commit
     token = os.getenv("HF_TOKEN")
     if token:

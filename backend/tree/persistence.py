@@ -54,7 +54,7 @@ def save_codex_tree_to_json(tree: dict) -> None:
         tree: The tree dictionary to save
     """
     with open(app_state.codex_tree_path, "w") as f:
-        json.dump(tree, f, indent=4)
+        json.dump(tree, f, indent=4, sort_keys=True)
 
 
 def insert_recursive(tree_json: dict, db, parent_id: int = None) -> None:
@@ -236,7 +236,7 @@ def save_codex_tree(tree: dict) -> None:
     # Also save stories_dict if it exists
     if app_state.stories_dict:
         with open(app_state.stories_dict_path, "w") as f:
-            json.dump(app_state.stories_dict, f, indent=4)
+            json.dump(app_state.stories_dict, f, indent=4, sort_keys=True)
    
     # Save to database if available
     if app_state.USE_DB and app_state.SessionLocal:
