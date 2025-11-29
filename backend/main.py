@@ -1033,10 +1033,10 @@ def delete_story(title: str, user = Depends(require_editor)):
             del stories_dict[title]
         
         # 4. Remove from database (if enabled)
-        from utils import USE_DB
-        if USE_DB and SessionLocal:
+        from utils import USE_DB, SessionLocal as UtilsSessionLocal
+        if USE_DB and UtilsSessionLocal:
             try:
-                with SessionLocal() as db:
+                with UtilsSessionLocal() as db:
                     from models import Story, NodeStory
                     
                     # Delete story (cascade will handle NodeStory relationships)
@@ -1045,6 +1045,8 @@ def delete_story(title: str, user = Depends(require_editor)):
                         db.delete(story)
                         db.commit()
                         log.info(f"Deleted story '{title}' from database")
+                    else:
+                        log.warning(f"Story '{title}' not found in database to delete")
             except Exception as e:
                 log.error(f"Failed to delete from database: {e}")
                 # Don't fail the entire operation
