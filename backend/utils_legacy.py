@@ -75,6 +75,7 @@ from storage import (
     save_story_positions,
     update_story_boundaries,
     update_story_title,
+    update_story_keywords,
     load_pending_stories,
     save_pending_stories,
     check_story_overlap,

@@ -187,10 +187,10 @@ style={{
 
 | Component | Endpoints |
 |-----------|-----------|
-| Archive | `/api/get-tree`, `/api/get-stories/{path}` |
-| SearchCurate | `/api/search`, `/api/render-story`, `/api/assign-category` |
+| Archive | `/api/get-tree`, `/api/get-stories/{path}`, `/api/update-keywords`, `/api/update-title`, `/api/delete-story/{title}` |
+| SearchCurate | `/api/search`, `/api/render-story`, `/api/assign-category`, `/api/update-keywords` |
 | BookArchive | `/api/books` |
-| BookDetail | `/api/books/{slug}`, `/api/full-text/{slug}`, `/api/update-boundaries`, `/api/update-title`, `/api/add-story`, `/api/delete-story/{title}` |
+| BookDetail | `/api/books/{slug}`, `/api/full-text/{slug}`, `/api/update-boundaries`, `/api/update-title`, `/api/update-keywords`, `/api/add-story`, `/api/delete-story/{title}` |
 | SidebarTree | `/api/get-tree` |
 
 ## Adding a New Page

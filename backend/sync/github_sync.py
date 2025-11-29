@@ -280,6 +280,12 @@ def on_story_title_change(book_slug: str, old_title: str, new_title: str):
     )
 
 
+def on_story_keywords_change(book_slug: str, title: str):
+    """Call after updating story keywords."""
+    sync_story_positions(book_slug, f"Update keywords for '{title}'")
+    sync_stories_dict(f"Update keywords for '{title}'")
+
+
 def on_story_added(book_slug: str, title: str):
     """Call after adding a new story."""
     sync_story_positions(book_slug, f"Add story '{title}'")

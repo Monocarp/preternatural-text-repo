@@ -68,6 +68,11 @@ const SearchCurate = () => {
   const [newStoryPages, setNewStoryPages] = useState('')
   const [addingStory, setAddingStory] = useState(false)
 
+  // Keywords editing state
+  const [editingKeywords, setEditingKeywords] = useState(false)
+  const [editedKeywords, setEditedKeywords] = useState('')
+  const [savingKeywords, setSavingKeywords] = useState(false)
+
   // Load available sources and codex tree on mount
   useEffect(() => {
     apiClient.get('/sources')
@@ -343,6 +348,63 @@ const SearchCurate = () => {
         alert(errorMsg)
       }
     }
+  }
+
+  // Keywords editing handlers
+  const handleStartEditKeywords = () => {
+    if (!selectedStory) return
+    setEditingKeywords(true)
+    setEditedKeywords(selectedStory.keywords || '')
+  }
+
+  const handleSaveKeywords = async () => {
+    if (!selectedStory) return
+    
+    setSavingKeywords(true)
+    try {
+      const user = await app.getUser()
+      if (!user) {
+        alert('You must be logged in to edit keywords.')
+        setSavingKeywords(false)
+        return
+      }
+
+      await apiClient.post('/update-keywords', {
+        title: selectedStory.title,
+        book_slug: selectedStory.book_slug,
+        keywords: editedKeywords.trim()
+      })
+
+      // Update local state
+      const updatedStory = { ...selectedStory, keywords: editedKeywords.trim() }
+      setSelectedStory(updatedStory)
+      
+      // Update in results list
+      setResults(prev => prev.map(r => 
+        r.title === selectedStory.title && r.book_slug === selectedStory.book_slug
+          ? { ...r, keywords: editedKeywords.trim() }
+          : r
+      ))
+
+      setEditingKeywords(false)
+      setEditedKeywords('')
+      alert('Keywords updated successfully!')
+    } catch (err: any) {
+      console.error('Error updating keywords:', err)
+      const status = err?.response?.status
+      if (status === 401 || status === 403) {
+        alert('You must be signed in as an editor to edit keywords.')
+      } else {
+        alert('Failed to update keywords. Please try again.')
+      }
+    } finally {
+      setSavingKeywords(false)
+    }
+  }
+
+  const handleCancelEditKeywords = () => {
+    setEditingKeywords(false)
+    setEditedKeywords('')
   }
 
   const handleAssignCategory = async () => {
@@ -1102,17 +1164,60 @@ const SearchCurate = () => {
 
       {/* Right Panel - Category Assignment */}
       <div className="w-[18vw] min-w-[220px] max-w-[300px] border-l border-gray-700 bg-gray-800 p-3 overflow-y-auto flex-shrink-0 hidden lg:block">
-        <h2 className="text-base font-semibold mb-3">Category Assignment</h2>
+        <h2 className="text-base font-semibold mb-3">Story Details</h2>
         
         {!selectedStory ? (
           <div className="text-gray-500 text-xs">
-            Select a story to assign it to a category.
+            Select a story to view and edit details.
           </div>
         ) : (
           <div className="space-y-3">
+            {/* Keywords Section */}
+            <div>
+              <h3 className="text-xs font-medium mb-1.5 text-gray-300">Keywords</h3>
+              {editingKeywords ? (
+                <div className="space-y-2">
+                  <input
+                    type="text"
+                    value={editedKeywords}
+                    onChange={(e) => setEditedKeywords(e.target.value)}
+                    placeholder="e.g., ghost, haunting, supernatural"
+                    className="w-full px-2 py-1.5 bg-gray-700 border border-gray-600 rounded text-white text-xs placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  />
+                  <div className="flex gap-1">
+                    <button
+                      onClick={handleSaveKeywords}
+                      disabled={savingKeywords}
+                      className="flex-1 px-2 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      {savingKeywords ? 'Saving...' : 'Save'}
+                    </button>
+                    <button
+                      onClick={handleCancelEditKeywords}
+                      className="flex-1 px-2 py-1 text-xs bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-start justify-between gap-2">
+                  <p className="text-xs text-gray-400 flex-1">
+                    {selectedStory.keywords || <span className="italic">No keywords</span>}
+                  </p>
+                  <button
+                    onClick={handleStartEditKeywords}
+                    className="px-2 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors flex-shrink-0"
+                  >
+                    Edit
+                  </button>
+                </div>
+              )}
+            </div>
+
             {/* Current Assignments */}
             <div>
-              <h3 className="text-xs font-medium mb-1.5 text-gray-300">Current Assignments</h3>
+              <h3 className="text-xs font-medium mb-1.5 text-gray-300">Category Assignments</h3>
               {currentAssignments.length === 0 ? (
                 <div className="text-xs text-gray-500 italic">Not assigned</div>
               ) : (

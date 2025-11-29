@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState, useRef } from 'react'
 import { useParams, useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
-import axios from 'axios'
+import axios from '../utils/axios'
 import { useStore } from '../store'
 import SidebarTree from '../components/SidebarTree'
 import { SubcategoryFilter } from '../components/SubcategoryFilter'
@@ -49,6 +49,11 @@ const Archive = () => {
   const [boundarySelectingStart, setBoundarySelectingStart] = useState(true)
   const [savingBoundaries, setSavingBoundaries] = useState(false)
   const boundaryTextContainerRef = useRef<HTMLDivElement>(null)
+
+  // Keywords editing state
+  const [editingKeywords, setEditingKeywords] = useState<string | null>(null) // story title being edited
+  const [editedKeywords, setEditedKeywords] = useState('')
+  const [savingKeywords, setSavingKeywords] = useState(false)
 
   const decodedPath = useMemo(() => {
     // Use pathFromLocation instead of useParams path - React Router's :path* doesn't update reliably
@@ -98,7 +103,7 @@ const Archive = () => {
   useEffect(() => {
     if (isUnassigned) {
       // Load unassigned stories
-      axios.get('/api/get-unassigned')
+      axios.get('/get-unassigned')
         .then(res => {
           useStore.getState().setStories(res.data)
           useStore.getState().selectedPath = ['unassigned']
@@ -108,7 +113,7 @@ const Archive = () => {
       // Load stories for the category path (with optional subcategory filter)
       const pathStr = decodedPath.map(p => encodeURIComponent(p)).join('/')
       const subcatsParam = selectedSubcats.length > 0 ? `?subcats=${selectedSubcats.join(',')}` : ''
-      const url = `/api/get-stories/${pathStr}${subcatsParam}`
+      const url = `/get-stories/${pathStr}${subcatsParam}`
       
       axios.get(url)
         .then(res => {
@@ -153,7 +158,7 @@ const Archive = () => {
         return
       }
 
-      await axios.post('/api/update-title', {
+      await axios.post('/update-title', {
         old_title: story.title,
         new_title: newTitle.trim(),
         book_slug: story.book_slug
@@ -214,7 +219,7 @@ const Archive = () => {
       const token = await app.getAuthJson()
       const accessToken = token?.accessToken
       
-      const res = await axios.delete(`/api/delete-story/${encodeURIComponent(story.title)}`, {
+      const res = await axios.delete(`/delete-story/${encodeURIComponent(story.title)}`, {
         headers: { 'Authorization': `Bearer ${accessToken}` }
       })
       
@@ -223,7 +228,7 @@ const Archive = () => {
         
         // Refresh the current view
         if (isUnassigned) {
-          const unassignedRes = await axios.get('/api/get-unassigned')
+          const unassignedRes = await axios.get('/get-unassigned')
           useStore.getState().setStories(unassignedRes.data)
         } else if (decodedPath.length > 0) {
           loadStories(decodedPath)
@@ -248,10 +253,61 @@ const Archive = () => {
     }
   }
 
+  // Keywords editing handlers
+  const handleEditKeywords = (story: any) => {
+    setEditingKeywords(story.title)
+    setEditedKeywords(story.keywords || '')
+  }
+
+  const handleSaveKeywords = async (story: any) => {
+    if (!story) return
+    
+    setSavingKeywords(true)
+    try {
+      const user = await app.getUser()
+      if (!user) {
+        alert('You must be logged in to edit keywords.')
+        setSavingKeywords(false)
+        return
+      }
+
+      await axios.post('/update-keywords', {
+        title: story.title,
+        book_slug: story.book_slug,
+        keywords: editedKeywords.trim()
+      })
+
+      // Update in store
+      const updatedStories = stories.map(s => 
+        s.title === story.title ? { ...s, keywords: editedKeywords.trim() } : s
+      )
+      useStore.getState().setStories(updatedStories)
+
+      setEditingKeywords(null)
+      setEditedKeywords('')
+      alert('Keywords updated successfully!')
+    } catch (err: any) {
+      console.error('Error updating keywords:', err)
+      const status = err?.response?.status
+      if (status === 401 || status === 403) {
+        alert('You must be signed in as an editor to edit keywords.')
+      } else {
+        alert('Failed to update keywords. Please try again.')
+      }
+    } finally {
+      setSavingKeywords(false)
+    }
+  }
+
+  const handleCancelKeywordsEdit = () => {
+    setEditingKeywords(null)
+    setEditedKeywords('')
+  }
+
   // Load story content when toggling modes
   const handleToggleMode = async (story: any, mode: 'static' | 'book') => {
     try {
-      const res = await axios.post('/api/render-story', {
+      const res = await axios.post('/render-story', {
         title: story.title,
         mode: mode,
         search_query: undefined
@@ -299,7 +355,7 @@ const Archive = () => {
     setNewStoryMode(false) // Exit new story mode if active
     
     try {
-      const res = await axios.get(`/api/full-text/${story.book_slug}`)
+      const res = await axios.get(`/full-text/${story.book_slug}`)
       setFullText(res.data.text)
     } catch (err) {
       console.error('Error loading full text:', err)
@@ -405,7 +461,7 @@ const Archive = () => {
     
     setSavingBoundaries(true)
     try {
-      await axios.post('/api/update-boundaries', {
+      await axios.post('/update-boundaries', {
         title: editingBoundariesStory.title,
         book_slug: editingBoundariesStory.book_slug,
         start_char: editedStart,
@@ -414,7 +470,7 @@ const Archive = () => {
       
       // Reload the story content with new boundaries
       const currentMode = storyModes[editingBoundariesStory.title] || 'static'
-      const res = await axios.post('/api/render-story', {
+      const res = await axios.post('/render-story', {
         title: editingBoundariesStory.title,
         mode: currentMode,
         start_char: editedStart,
@@ -469,7 +525,7 @@ const Archive = () => {
     setEditingTitle(null) // Exit title editing if active
     try {
       // Load full text for the book
-      const res = await axios.get(`/api/full-text/${bookSlug}`)
+      const res = await axios.get(`/full-text/${bookSlug}`)
       setFullText(res.data.text)
       setNewStoryStart(null)
       setNewStoryEnd(null)
@@ -570,7 +626,7 @@ const Archive = () => {
     
     setAddingStory(true)
     try {
-      const response = await axios.post('/api/add-story', {
+      const response = await axios.post('/add-story', {
         book_slug: newStoryBookSlug,
         title: newStoryTitle.trim(),
         keywords: newStoryKeywords.trim(),
@@ -593,7 +649,7 @@ const Archive = () => {
         }
         
         // Retry with force_overlap flag
-        await axios.post('/api/add-story', {
+        await axios.post('/add-story', {
           book_slug: newStoryBookSlug,
           title: newStoryTitle.trim(),
           keywords: newStoryKeywords.trim(),
@@ -621,7 +677,7 @@ const Archive = () => {
       
       // Reload stories to include the new one (though it won't be immediately searchable)
       if (isUnassigned) {
-        axios.get('/api/get-unassigned')
+        axios.get('/get-unassigned')
           .then(res => {
             useStore.getState().setStories(res.data)
           })
@@ -858,7 +914,46 @@ const Archive = () => {
                         </div>
                         <div className="mt-0.5 text-xs text-gray-500">
                           {story.pages && <span>Pages: {story.pages}</span>}
-                          {story.keywords && <span className="ml-2">• Keywords: {story.keywords}</span>}
+                          {editingKeywords === story.title ? (
+                            <span className="ml-2 inline-flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
+                              • Keywords:
+                              <input
+                                type="text"
+                                value={editedKeywords}
+                                onChange={(e) => setEditedKeywords(e.target.value)}
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter') { e.stopPropagation(); handleSaveKeywords(story) }
+                                  if (e.key === 'Escape') { e.stopPropagation(); handleCancelKeywordsEdit() }
+                                }}
+                                className="px-1.5 py-0.5 bg-gray-700 border border-gray-600 rounded text-white text-xs w-48"
+                                autoFocus
+                                placeholder="ghost, haunting, supernatural"
+                              />
+                              <button
+                                onClick={(e) => { e.stopPropagation(); handleSaveKeywords(story) }}
+                                disabled={savingKeywords}
+                                className="px-1.5 py-0.5 bg-green-600 text-white rounded hover:bg-green-700 text-xs disabled:opacity-50"
+                              >
+                                ✓
+                              </button>
+                              <button
+                                onClick={(e) => { e.stopPropagation(); handleCancelKeywordsEdit() }}
+                                className="px-1.5 py-0.5 bg-gray-600 text-white rounded hover:bg-gray-700 text-xs"
+                              >
+                                ✕
+                              </button>
+                            </span>
+                          ) : (
+                            <span className="ml-2 inline-flex items-center gap-1">
+                              • Keywords: {story.keywords || <span className="italic">none</span>}
+                              <button
+                                onClick={(e) => { e.stopPropagation(); handleEditKeywords(story) }}
+                                className="ml-1 px-1 py-0.5 bg-gray-600 text-white rounded hover:bg-gray-700 text-xs"
+                              >
+                                ✎
+                              </button>
+                            </span>
+                          )}
                         </div>
                       </div>
                       <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">▼</span>

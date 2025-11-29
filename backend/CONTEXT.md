@@ -91,6 +91,7 @@ state.py
 | `/api/render-story` | POST | No | Get story HTML with highlighting |
 | `/api/update-boundaries` | POST | Editor | Edit story char positions |
 | `/api/update-title` | POST | Editor | Rename a story |
+| `/api/update-keywords` | POST | Editor | Edit story keywords |
 | `/api/add-story` | POST | Editor | Create new story |
 | `/api/delete-story/{title}` | DELETE | Editor | Remove story from all stores |
 | `/api/books` | GET | No | List all books |

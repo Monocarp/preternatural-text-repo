@@ -56,6 +56,11 @@ const BookDetail = () => {
   const [editingTitle, setEditingTitle] = useState(false)
   const [newTitle, setNewTitle] = useState('')
   
+  // Edit keywords state
+  const [editingKeywords, setEditingKeywords] = useState(false)
+  const [editedKeywords, setEditedKeywords] = useState('')
+  const [savingKeywords, setSavingKeywords] = useState(false)
+  
   // New story state
   const [newStoryMode, setNewStoryMode] = useState(false)
   const [newStoryStart, setNewStoryStart] = useState<number | null>(null)
@@ -613,6 +618,54 @@ const BookDetail = () => {
   const handleCancelEditTitle = () => {
     setEditingTitle(false)
     setNewTitle('')
+  }
+
+  // Edit keywords handlers
+  const handleStartEditKeywords = () => {
+    if (!selectedStory) return
+    setEditingKeywords(true)
+    setEditedKeywords(selectedStory.keywords || '')
+  }
+
+  const handleSaveKeywords = async () => {
+    if (!selectedStory || !slug) return
+    
+    setSavingKeywords(true)
+    try {
+      await axios.post('/update-keywords', {
+        title: selectedStory.title,
+        book_slug: slug,
+        keywords: editedKeywords.trim()
+      })
+
+      // Update the story in local state
+      const updatedStories = stories.map(s => 
+        s.title === selectedStory.title ? { ...s, keywords: editedKeywords.trim() } : s
+      )
+      setStories(updatedStories)
+      
+      // Update selected story
+      setSelectedStory({ ...selectedStory, keywords: editedKeywords.trim() })
+
+      setEditingKeywords(false)
+      setEditedKeywords('')
+      alert('Keywords updated successfully!')
+    } catch (err: any) {
+      console.error('Error updating keywords:', err)
+      const status = err?.response?.status
+      if (status === 401 || status === 403) {
+        alert('You must be signed in as an editor to edit keywords.')
+      } else {
+        alert('Failed to update keywords. Please try again.')
+      }
+    } finally {
+      setSavingKeywords(false)
+    }
+  }
+
+  const handleCancelEditKeywords = () => {
+    setEditingKeywords(false)
+    setEditedKeywords('')
   }
 
   // Delete story handler
@@ -1357,7 +1410,43 @@ const BookDetail = () => {
                   )}
                   <div className="text-xs text-gray-300 space-y-1">
                     {selectedStory.pages && <p>Pages: {selectedStory.pages}</p>}
-                    {selectedStory.keywords && <p>Keywords: {selectedStory.keywords}</p>}
+                    {editingKeywords ? (
+                      <div className="space-y-1">
+                        <p className="text-gray-400">Keywords:</p>
+                        <input
+                          type="text"
+                          value={editedKeywords}
+                          onChange={(e) => setEditedKeywords(e.target.value)}
+                          placeholder="ghost, haunting, supernatural"
+                          className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs"
+                        />
+                        <div className="flex gap-1">
+                          <button
+                            onClick={handleSaveKeywords}
+                            disabled={savingKeywords}
+                            className="flex-1 px-2 py-1 bg-green-600 hover:bg-green-700 text-white text-xs rounded disabled:opacity-50"
+                          >
+                            {savingKeywords ? '...' : 'Save'}
+                          </button>
+                          <button
+                            onClick={handleCancelEditKeywords}
+                            className="flex-1 px-2 py-1 bg-gray-600 hover:bg-gray-500 text-white text-xs rounded"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-1">
+                        <p className="flex-1">Keywords: {selectedStory.keywords || <span className="italic text-gray-500">none</span>}</p>
+                        <button
+                          onClick={handleStartEditKeywords}
+                          className="px-1.5 py-0.5 bg-gray-600 text-white rounded hover:bg-gray-500 text-xs"
+                        >
+                          ✎
+                        </button>
+                      </div>
+                    )}
                     <p>Characters: {selectedStory.start_char.toLocaleString()} – {selectedStory.end_char.toLocaleString()}</p>
                     <p>Length: {(selectedStory.end_char - selectedStory.start_char).toLocaleString()} chars</p>
                   </div>

@@ -4,7 +4,7 @@ Storage module - File I/O operations for books, stories, and pending queue.
 
 This module handles all disk operations:
 - Loading/saving book full text and story positions
-- Updating story boundaries and titles
+- Updating story boundaries, titles, and keywords
 - Managing the pending stories queue
 """
 
@@ -18,6 +18,7 @@ from .books import (
 from .stories import (
     update_story_boundaries,
     update_story_title,
+    update_story_keywords,
 )
 from .pending import (
     load_pending_stories,
@@ -35,6 +36,7 @@ __all__ = [
     # Story operations
     "update_story_boundaries",
     "update_story_title",
+    "update_story_keywords",
     # Pending queue
     "load_pending_stories",
     "save_pending_stories",
