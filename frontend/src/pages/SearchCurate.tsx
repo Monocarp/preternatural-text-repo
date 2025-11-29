@@ -646,7 +646,8 @@ const SearchCurate = () => {
   const handleAddNewStory = async () => {
     if (!selectedStory || newStoryStart === null || newStoryEnd === null || !newStoryTitle.trim()) return
     
-    if (!confirm(`Add new story "${newStoryTitle}" to ${selectedStory.book_slug.replace(/_/g, ' ')}?`)) {
+    const bookName = selectedStory.book_slug ? selectedStory.book_slug.replace(/_/g, ' ') : 'Unknown Book'
+    if (!confirm(`Add new story "${newStoryTitle}" to ${bookName}?`)) {
       return
     }
     
@@ -849,7 +850,7 @@ const SearchCurate = () => {
               >
                 <div className="font-medium text-sm leading-tight">{result.title}</div>
                 <div className="text-xs text-gray-400 mt-0.5 truncate">
-                  {result.book_title || result.book_slug.replace(/_/g, ' ')}
+                  {result.book_title || (result.book_slug ? result.book_slug.replace(/_/g, ' ') : 'Unknown Book')}
                 </div>
                 <div className="text-xs text-gray-500">
                   p.{result.pages} • {result.score.toFixed(2)}

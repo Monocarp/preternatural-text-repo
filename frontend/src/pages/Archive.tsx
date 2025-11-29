@@ -852,7 +852,7 @@ const Archive = () => {
                           <h3 className="text-lg font-semibold text-white">{story.title}</h3>
                         )}
                         <div className="mt-1 text-sm text-gray-400">
-                          <span className="font-medium">{story.book_title || story.book_slug.replace(/_/g, ' ')}</span>
+                          <span className="font-medium">{story.book_title || (story.book_slug ? story.book_slug.replace(/_/g, ' ') : 'Unknown Book')}</span>
                           {story.book_author && <span className="ml-2">• {story.book_author}</span>}
                           {story.book_year && <span className="ml-2">({story.book_year})</span>}
                         </div>

@@ -522,9 +522,13 @@ def get_stories(path: str, subcats: Optional[str] = None):
     
     if subcats:
         from tree.queries import get_stories_for_subcats
+        from utils import stories_dict, enrich_stories_with_book_metadata
         subcat_list = [s.strip() for s in subcats.split(",") if s.strip()]
         log.debug(f"Filtering by subcategories: {subcat_list}")
-        stories = get_stories_for_subcats(tree, parts, subcat_list)
+        # get_stories_for_subcats returns just titles, need to resolve to full objects
+        titles = get_stories_for_subcats(tree, parts, subcat_list)
+        stories = [stories_dict[title] for title in titles if title in stories_dict]
+        stories = enrich_stories_with_book_metadata(stories)
     else:
         stories = get_stories_at_path(tree, parts)
     log.debug(f"Found {len(stories)} stories for path {parts}")
