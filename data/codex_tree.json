@@ -46,7 +46,11 @@
                 "Dreams": {},
                 "Emotional/Relational Block": {},
                 "Severe Mental Disorder": {},
-                "Visual Hallucinations": {},
+                "Visual Hallucinations": {
+                    "_stories": [
+                        "Demonic Vision Dismissed With Eucharist"
+                    ]
+                },
                 "Weariness": {}
             },
             "Peripheral Vexations": {
