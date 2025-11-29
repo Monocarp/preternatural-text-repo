@@ -2654,5 +2654,27 @@
             "Sacrament",
             "miracle"
         ]
+    },
+    "Demonic Vision Dismissed With Eucharist": {
+        "start_char": 80347,
+        "end_char": 83169,
+        "pages": "22-23",
+        "keywords": [
+            "Picus of Mirandola",
+            "Rhaetian Alps",
+            "Eucharist",
+            "Priest",
+            "Sacrament",
+            "pyx",
+            "levitation",
+            "flight",
+            "mountain",
+            "ring-dances",
+            "throne",
+            "demonic vision",
+            "impersonation of Mary",
+            "false signs",
+            "Emperor Maximilian"
+        ]
     }
 }
