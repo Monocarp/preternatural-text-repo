@@ -119,6 +119,9 @@ class AppState:
         self.keyword_pipeline: Any = None     # BM25 only
         self.semantic_pipeline: Any = None    # Embedding only
         
+        # Initialize database connection
+        self.init_database()
+        
         # Discover books on init
         self.discover_books()
         

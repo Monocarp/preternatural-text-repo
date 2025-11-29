@@ -1037,7 +1037,7 @@ def delete_story(title: str, user = Depends(require_editor)):
         if USE_DB and UtilsSessionLocal:
             try:
                 with UtilsSessionLocal() as db:
-                    from models import Story, NodeStory
+                    from models import Story
                     
                     # Delete story (cascade will handle NodeStory relationships)
                     story = db.query(Story).filter_by(title=title).first()

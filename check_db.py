@@ -17,8 +17,8 @@ engine = create_engine(db_url)
 Session = sessionmaker(bind=engine)
 
 with Session() as db:
-    # Delete the story that was deleted from UI but not DB
-    result = db.execute(text("DELETE FROM stories WHERE title LIKE '%Girolamo Saligario%' RETURNING title"))
+    # Delete the story that was just deleted from UI
+    result = db.execute(text("DELETE FROM stories WHERE title LIKE '%Saligario%Treatise%' RETURNING title"))
     deleted = result.fetchall()
     db.commit()
     
@@ -27,7 +27,5 @@ with Session() as db:
     else:
         print("Story not found")
     
-    # Show remaining
-    result = db.execute(text("SELECT title FROM stories WHERE title LIKE '%Eustochia%'"))
-    rows = result.fetchall()
-    print(f'Remaining Eustochia stories ({len(rows)})')
+    result = db.execute(text('SELECT COUNT(*) FROM stories'))
+    print(f'Total stories: {result.scalar()}')
