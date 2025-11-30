@@ -1,6 +1,6 @@
 # Frontend Context
 
-**Last Updated:** 2025-11-27
+**Last Updated:** 2025-11-29
 
 ## Overview
 
@@ -18,6 +18,267 @@ frontend/src/
 ├── components/        # Reusable UI components
 └── utils/             # axios config, path helpers
 ```
+
+---
+
+## Function Reference
+
+### Entry Point: `main.tsx`
+
+| Element | Type | Purpose |
+|---------|------|---------|
+| `stackApp` | StackClientApp | Stack Auth client with cookie-based token storage |
+| `queryClient` | QueryClient | React Query client for data caching |
+| `<StackProvider>` | Provider | Wraps app with Stack Auth context |
+| `<StackTheme>` | Provider | Applies dark theme to Stack Auth components |
+| `<QueryClientProvider>` | Provider | Wraps app with React Query context |
+| `<TooltipProvider>` | Provider | Radix UI tooltip context |
+| **Routes** | | |
+| `/` | Route | → `<Archive />` (category browser) |
+| `/archive/:path*` | Route | → `<Archive />` (nested category) |
+| `/search-curate` | Route | → `<SearchCurate />` (search & edit) |
+| `/book-archive` | Route | → `<BookArchive />` (book list) |
+| `/book-archive/:slug` | Route | → `<BookDetail />` (single book) |
+| `/login` | Route | → `<Login />` (auth page) |
+| `/callback` | Route | → `<Callback />` (OAuth callback) |
+
+---
+
+### State Management: `store.ts`
+
+| Function/Property | Signature | Purpose |
+|-------------------|-----------|---------|
+| `useStore` | `create<State>()` | Zustand store hook |
+| **State Properties** | | |
+| `tree` | `any` | Codex tree hierarchy from `/api/get-tree` |
+| `loading` | `boolean` | Global loading state |
+| `error` | `string \| null` | Error message |
+| `stories` | `any[]` | Currently displayed stories |
+| `selectedPath` | `string[]` | Current category path segments |
+| `selectedStory` | `any \| null` | Currently selected story for detail view |
+| **Actions** | | |
+| `loadTree()` | `() => Promise<void>` | Fetches codex tree from API, sets `tree` state |
+| `loadStories(path)` | `(path: string[]) => Promise<void>` | Fetches stories for category path, sets `stories` & `selectedPath` |
+| `selectStory(story)` | `(story: any) => void` | Sets `selectedStory` state |
+| `toggleMode(title, mode, query?)` | `(title, mode, query?) => Promise<void>` | Renders story in static/book mode, updates `selectedStory.html` |
+| `setStories(stories)` | `(stories: any[]) => void` | Direct setter for stories array |
+
+---
+
+### Utils: `axios.ts`
+
+| Function/Variable | Signature | Purpose |
+|-------------------|-----------|---------|
+| `appInstance` | `StackClientApp \| null` | Module-level reference to Stack Auth app |
+| `setStackApp(app)` | `(app: StackClientApp) => void` | Sets the Stack Auth app instance for token access |
+| `getAccessToken()` | `() => Promise<string \| null>` | Extracts access token from cookies (stack-access-token, etc.) |
+| `apiClient` | `AxiosInstance` | Pre-configured axios with `/api` baseURL, auth interceptor |
+| **Request Interceptor** | | Adds `Authorization: Bearer {token}` header if available |
+| **Response Interceptor** | | On 401, stores return URL in sessionStorage, redirects to `/login` |
+
+---
+
+### Utils: `path.ts`
+
+| Function | Signature | Purpose |
+|----------|-----------|---------|
+| `encodePathSegmentsForApi(segments)` | `(segments: string[]) => string` | Single URL-encode, joins with `/` for API calls |
+| `encodePathSegmentsForRoute(segments)` | `(segments: string[]) => string` | Double URL-encode for React Router (browser decodes once) |
+| `decodeRoutePath(path)` | `(path?: string) => string[]` | Splits path by `/`, double-decodes each segment, handles edge cases |
+
+---
+
+### Page: `Archive.tsx`
+
+Main category browser with story list and editing capabilities.
+
+| Function | Signature | Purpose |
+|----------|-----------|---------|
+| **State** | | |
+| `decodedPath` | `useMemo` | Extracts and decodes path from URL |
+| `isUnassigned` | `boolean` | True if viewing `/archive/unassigned` |
+| `subcategoryNames` | `useMemo` | Extracts child category names from tree for filter dropdown |
+| `selectedSubcats` | `useMemo` | Parses `?subcats=` URL param for filtering |
+| **Story Operations** | | |
+| `handleEditTitle(story)` | `(story) => void` | Enters title editing mode for story |
+| `handleSaveTitle(story)` | `(story) => Promise<void>` | POSTs `/update-title`, updates local state |
+| `handleCancelEdit()` | `() => void` | Exits title editing mode |
+| `handleDeleteStory(story)` | `(story) => Promise<void>` | DELETEs `/delete-story/{title}` with confirmation |
+| `handleEditKeywords(story)` | `(story) => void` | Enters keywords editing mode |
+| `handleSaveKeywords(story)` | `(story) => Promise<void>` | POSTs `/update-keywords`, updates local state |
+| `handleCancelKeywordsEdit()` | `() => void` | Exits keywords editing mode |
+| **View Toggle** | | |
+| `handleToggleMode(story, mode)` | `(story, 'static' \| 'book') => Promise<void>` | POSTs `/render-story`, caches HTML, auto-scrolls in book mode |
+| `handleStoryOpen(story)` | `(story) => Promise<void>` | Loads story content if not cached (called on Disclosure open) |
+| **Boundary Editing** | | |
+| `handleAdjustBoundaries(story)` | `(story) => Promise<void>` | Enters boundary edit mode, fetches `/full-text/{slug}` |
+| `handleBoundaryTextClick(e)` | `(e: MouseEvent) => void` | Calculates char position from click, sets start/end |
+| `handleSaveBoundaries()` | `() => Promise<void>` | POSTs `/update-boundaries`, re-renders story |
+| `handleCancelBoundaryEdit()` | `() => void` | Exits boundary editing mode |
+| **New Story Creation** | | |
+| `handleEnterNewStoryMode(bookSlug)` | `(bookSlug) => Promise<void>` | Enters new story mode, loads full text |
+| `handleNewStoryTextClick(e)` | `(e: MouseEvent) => void` | Click-to-set start/end for new story region |
+| `handleAddNewStory()` | `() => Promise<void>` | POSTs `/add-story` with overlap detection |
+| `handleCancelNewStory()` | `() => void` | Exits new story mode |
+| **Navigation** | | |
+| `getPageTitle()` | `() => string` | Returns breadcrumb title (last path segment or "Story Archive") |
+| `getBreadcrumb()` | `() => string[]` | Returns full breadcrumb path array |
+
+---
+
+### Page: `SearchCurate.tsx`
+
+Three-panel search, view, and category assignment interface.
+
+| Function | Signature | Purpose |
+|----------|-----------|---------|
+| **Search** | | |
+| `handleSearch()` | `() => Promise<void>` | POSTs `/search` with query, filters; populates results |
+| **Story Selection** | | |
+| `handleSelectStory(story)` | `(story: SearchResult) => Promise<void>` | Sets selected story, loads static view, initializes boundary state |
+| **View Toggle** | | |
+| `handleToggleMode(mode)` | `('static' \| 'book') => Promise<void>` | Switches story view mode, auto-scrolls in book context |
+| **Boundary Editing** | | |
+| `handleAdjustBoundaries()` | `() => Promise<void>` | Enters edit mode, loads full text for selected story's book |
+| `handleTextClick(e)` | `(e: MouseEvent) => void` | Click handler to set start/end char positions |
+| `handleSaveBoundaries()` | `() => Promise<void>` | Persists boundaries via `/update-boundaries`, re-renders |
+| `handleCancelEdit()` | `() => void` | Reverts to original boundaries, exits edit mode |
+| **Story Deletion** | | |
+| `handleDeleteStory()` | `() => Promise<void>` | DELETEs story with confirmation, removes from results |
+| **Keywords Editing** | | |
+| `handleStartEditKeywords()` | `() => void` | Enters keywords edit mode |
+| `handleSaveKeywords()` | `() => Promise<void>` | POSTs `/update-keywords`, updates local state |
+| `handleCancelEditKeywords()` | `() => void` | Exits keywords edit mode |
+| **New Story Creation** | | |
+| `handleEnterNewStoryMode()` | `() => Promise<void>` | Loads full text for selected story's book |
+| `handleNewStoryTextClick(e)` | `(e: MouseEvent) => void` | Click-to-set new story boundaries |
+| `handleAddNewStory()` | `() => Promise<void>` | POSTs `/add-story` with overlap handling |
+| `handleCancelNewStory()` | `() => void` | Exits new story mode |
+| **Category Assignment** | | |
+| `getPathOptions(tree, currentPath)` | `(tree, path) => string[]` | Gets available child categories for path selection dropdowns |
+| `handlePathLevelChange(level, value)` | `(level, value) => void` | Updates selected path at given depth |
+| `handleAssignCategory()` | `() => Promise<void>` | POSTs `/assign-category`, refreshes tree |
+| `handleRemoveCategory(path)` | `(path) => Promise<void>` | DELETEs `/remove-category`, refreshes tree |
+
+---
+
+### Page: `BookArchive.tsx`
+
+Simple book listing page.
+
+| Function | Signature | Purpose |
+|----------|-----------|---------|
+| `loadBooks()` | `() => Promise<void>` | GETs `/books`, populates book list |
+| `handleBookClick(slug)` | `(slug: string) => void` | Navigates to `/book-archive/{slug}` |
+
+---
+
+### Page: `BookDetail.tsx`
+
+Comprehensive book view with text, stories, and visual story review editor.
+
+| Function | Signature | Purpose |
+|----------|-----------|---------|
+| **Data Loading** | | |
+| `loadBook()` | `() => Promise<void>` | GETs `/books/{slug}?include_stories=true` |
+| `loadFullText()` | `() => Promise<void>` | GETs `/full-text/{slug}`, caches text |
+| **View Switching** | | |
+| `handleViewText()` | `() => void` | Switches to full text view, loads text if needed |
+| `handleViewStories()` | `() => void` | Switches to story list view |
+| `handleViewReview()` | `() => void` | Switches to Story Review view, loads text |
+| **Story Review** | | |
+| `sortedStories` | `useMemo` | Stories sorted by `start_char` with color indices |
+| `reviewSegments` | `useMemo` | Builds gap/story segments for highlighted text display |
+| `handleStoryClick(story)` | `(story) => void` | Selects/deselects story in review mode |
+| `scrollToStory(story)` | `(story) => void` | Scrolls review container to story position |
+| **Boundary Editing (Review)** | | |
+| `handleStartBoundaryEdit()` | `() => void` | Enters boundary edit mode for selected story |
+| `handleBoundaryClick(e)` | `(e: MouseEvent) => void` | Click-to-set start/end positions |
+| `editingSegments` | `useMemo` | Builds before/selected/after segments for edit display |
+| `handleSaveBoundaries()` | `() => Promise<void>` | POSTs `/update-boundaries`, updates local state |
+| `handleCancelBoundaryEdit()` | `() => void` | Exits boundary editing |
+| **Title/Keywords Editing** | | |
+| `handleStartEditTitle()` | `() => void` | Enters title edit mode |
+| `handleSaveTitle()` | `() => Promise<void>` | POSTs `/update-title`, updates state |
+| `handleCancelEditTitle()` | `() => void` | Exits title edit mode |
+| `handleStartEditKeywords()` | `() => void` | Enters keywords edit mode |
+| `handleSaveKeywords()` | `() => Promise<void>` | POSTs `/update-keywords`, updates state |
+| `handleCancelEditKeywords()` | `() => void` | Exits keywords edit mode |
+| **Story Deletion** | | |
+| `handleDeleteStory()` | `() => Promise<void>` | DELETEs selected story with confirmation |
+| **New Story Creation** | | |
+| `handleEnterNewStoryMode()` | `() => void` | Enters new story mode |
+| `handleNewStoryTextClick(e)` | `(e: MouseEvent) => void` | Click-to-set boundaries for new story |
+| `newStorySegments` | `useMemo` | Builds segments for new story preview |
+| `handleAddNewStory()` | `() => Promise<void>` | POSTs `/add-story` with overlap handling |
+| `handleCancelNewStory()` | `() => void` | Exits new story mode |
+| **Category Assignment** | | |
+| `getPathOptions(tree, currentPath)` | `(tree, path) => string[]` | Gets child categories for dropdowns |
+| `handlePathLevelChange(level, value)` | `(level, value) => void` | Updates path selection |
+| `handleAssignCategory()` | `() => Promise<void>` | Assigns story to selected path |
+| `handleRemoveCategory(path)` | `(path) => Promise<void>` | Removes story from category |
+| **Story List View** | | |
+| `handleToggleMode(story, mode)` | `(story, mode) => Promise<void>` | Renders story in static/book mode |
+| `handleStoryOpen(story)` | `(story) => Promise<void>` | Loads story content on expand |
+
+---
+
+### Page: `Callback.tsx`
+
+OAuth callback handler.
+
+| Function | Signature | Purpose |
+|----------|-----------|---------|
+| `checkAuth()` | `() => Promise<void>` | Waits 500ms, checks auth state, redirects to returnTo or `/login` |
+
+---
+
+### Component: `Login.tsx`
+
+Authentication page with Stack Auth SignIn component.
+
+| Function | Signature | Purpose |
+|----------|-----------|---------|
+| `useEffect` | | Checks URL for `?error=` param, displays error message |
+| "Continue without signing in" button | | Reads `returnTo` from storage, navigates there |
+
+---
+
+### Component: `SidebarTree.tsx`
+
+Collapsible navigation sidebar with category tree.
+
+| Function | Signature | Purpose |
+|----------|-----------|---------|
+| **Tree Building** | | |
+| `buildTreeData(current, pathSegments)` | `(node, path) => TreeNode[]` | Recursively builds rc-tree compatible node structure |
+| **Auth State** | | |
+| `extractUserLabel(user)` | `(user) => string \| null` | Extracts display name/email from Stack Auth user object |
+| **Event Handlers** | | |
+| `onTitleClick(e, node)` | `(e, node) => void` | Navigates to category path when clicking node title |
+| `onExpand(expandedKeys)` | `(keys) => void` | Updates expanded keys state |
+| `titleRender(nodeData)` | `(nodeData) => JSX` | Custom renderer: title (clickable) + expand arrow |
+| `onSelect()` | `() => void` | No-op (navigation handled by title click) |
+| **Sidebar Toggle** | | |
+| Auto-collapse | `useEffect` | Collapses sidebar on window resize < 1024px |
+| Toggle button | | Expands/collapses sidebar manually |
+| **Auth Controls** | | |
+| Sign out button | | Calls `app.signOut()`, clears user state |
+| Sign in button | | Navigates to `/login` |
+
+---
+
+### Component: `SubcategoryFilter.tsx`
+
+Dropdown checkbox filter for subcategories.
+
+| Function | Signature | Purpose |
+|----------|-----------|---------|
+| `handleCheckboxChange(subcat, checked)` | `(subcat, checked) => void` | Adds/removes subcat from selection, calls `onFilterChange` |
+| `handleClearFilters()` | `() => void` | Clears all selections |
+| Click outside handler | `useEffect` | Closes dropdown when clicking outside |
+
+---
 
 ## Critical Architectural Decisions
 

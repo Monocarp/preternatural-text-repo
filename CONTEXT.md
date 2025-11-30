@@ -1,6 +1,6 @@
 # Preternatural Text Repository — Development Context
 
-**Last Updated:** 2025-11-27  
+**Last Updated:** 2025-11-29  
 **Purpose:** Quick reference for AI-assisted development.
 
 ---
@@ -178,5 +178,5 @@ $env:USE_DIRECT_SEARCH='true'; $env:DISABLE_AUTH='true'; python -m uvicorn main:
 - `backend/search/CONTEXT.md` - Search engine internals
 - `frontend/CONTEXT.md` - React pages, components, styling
 - `data/CONTEXT.md` - Data files and what NOT to read
-- `TECH_DEBT_BACKLOG.md` - Remaining improvement tasks
+- `documentation/TECH_DEBT_BACKLOG.md` - Remaining improvement tasks
 

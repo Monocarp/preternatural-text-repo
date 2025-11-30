@@ -39,7 +39,7 @@ A scalable system for extracting, indexing, searching, and curating stories of p
 This project uses a **sustainable AI-assisted development workflow** that keeps the codebase manageable without dumping entire files into prompts. Key documents:
 
 - **[CONTEXT.md](./CONTEXT.md)** — Development context for AI assistants (architecture, module responsibilities, conventions)
-- **[TECH_DEBT_BACKLOG.md](./TECH_DEBT_BACKLOG.md)** — Prioritized refactoring tasks with acceptance criteria
+- **[TECH_DEBT_BACKLOG.md](./documentation/TECH_DEBT_BACKLOG.md)** — Prioritized refactoring tasks with acceptance criteria
 - **GitHub branch naming:** `ai/task-name-YYYYMMDD` for AI-generated changes
 
 ---
@@ -104,8 +104,8 @@ npm run dev
 ```
 preternatural-text-repo/
 ├── CONTEXT.md                # Development context for AI assistants
-├── TECH_DEBT_BACKLOG.md      # Prioritized refactoring tasks
-├── REPO_SUMMARY.md           # API documentation
+├── documentation/
+│   └── TECH_DEBT_BACKLOG.md  # Prioritized refactoring tasks
 │
 ├── backend/                  # FastAPI production API
 │   ├── main.py               # All API endpoints
@@ -179,7 +179,7 @@ Key endpoints:
 
 1. Fork the repo
 2. Create a feature branch: `ai/task-name-YYYYMMDD` or `fix/issue-name`
-3. Pick a task from [TECH_DEBT_BACKLOG.md](./TECH_DEBT_BACKLOG.md) or open an issue
+3. Pick a task from [TECH_DEBT_BACKLOG.md](./documentation/TECH_DEBT_BACKLOG.md) or open an issue
 4. Reference [CONTEXT.md](./CONTEXT.md) for architecture and module responsibilities
 5. Verify acceptance criteria before submitting PR
 6. Submit pull request with task ID and summary
