@@ -223,11 +223,9 @@
         "Ritual": {
             "Black Sabbath": {},
             "Contract with Another": {},
-            "Contract with Demon": {
-                "_stories": [
-                    "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
-                ]
-            },
+            "Contract with Demon": [
+                "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+            ],
             "Rejection of Sacraments": {
                 "Rejection of Baptism": {},
                 "Rejection of Confession": {},
