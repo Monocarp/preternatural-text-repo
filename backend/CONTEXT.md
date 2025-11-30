@@ -10,7 +10,15 @@ FastAPI backend serving the Preternatural Text search and curation system.
 
 ```
 backend/
-├── main.py           # FastAPI app, all HTTP endpoints (~1400 lines)
+├── main.py           # FastAPI app entry point (~180 lines)
+├── routes/           # API endpoint modules (NEW - split from main.py)
+│   ├── __init__.py   # Router exports
+│   ├── dependencies.py # Auth, Pydantic models, shared deps
+│   ├── search.py     # /api/search, /api/sources
+│   ├── tree.py       # /api/get-tree, category assignment
+│   ├── stories.py    # Story CRUD, rendering
+│   ├── books.py      # Book listing, full text
+│   └── admin.py      # Export, migrations, cleanup
 ├── models.py         # SQLAlchemy ORM: User, Story, Book, CodexNode, NodeStory
 ├── state.py          # Centralized app state (AppState singleton)
 ├── utils_legacy.py   # Backwards-compat shim for old imports
@@ -66,13 +74,19 @@ books/ecology_of_souls_volume_i/
 
 ```
 main.py
+  ├── routes/ (API routers)
+  │   ├── search.py → utils (search_stories)
+  │   ├── tree.py → utils (get_cached_tree, assign_to_path)
+  │   ├── stories.py → utils (story CRUD functions)
+  │   ├── books.py → models, utils (load_full_md)
+  │   └── admin.py → utils (sync, export)
   ├── models.py (ORM)
   ├── state.py (app_state)
-  ├── search/ (search_stories)
-  ├── tree/ (load_codex_tree, assign_to_path)
-  ├── storage/ (load_full_md, update_story_boundaries)
-  ├── sync/ (sync_disk_to_db)
-  └── utils/ (rendering, caching)
+  └── utils/ (startup imports)
+
+routes/dependencies.py
+  ├── models.py (SessionLocal, User)
+  └── jwt/PyJWKClient (auth)
 
 search/
   ├── engine.py ← faiss_index.py, fts_index.py
@@ -83,22 +97,47 @@ state.py
   └── NO DEPENDENCIES (intentionally isolated)
 ```
 
-## Key Endpoints (main.py)
+## Key Endpoints
 
+### Search Routes (`routes/search.py`)
 | Endpoint | Method | Auth | Purpose |
 |----------|--------|------|---------|
-| `/api/search` | POST | No | Hybrid search |
-| `/api/get-tree` | GET | No | Fetch codex tree |
+| `/api/search` | POST | No | Hybrid semantic + keyword search |
+| `/api/sources` | GET | No | List available book sources |
+
+### Tree Routes (`routes/tree.py`)
+| Endpoint | Method | Auth | Purpose |
+|----------|--------|------|---------|
+| `/api/get-tree` | GET | No | Fetch full codex tree |
+| `/api/get-stories/{path}` | GET | No | Get stories at tree path |
+| `/api/get-unassigned` | GET | No | Get uncategorized stories |
 | `/api/assign-category` | POST | Editor | Add story to category |
-| `/api/remove-category` | POST | Editor | Remove story from category |
-| `/api/render-story` | POST | No | Get story HTML with highlighting |
+| `/api/remove-category` | DELETE | Editor | Remove story from category |
+
+### Story Routes (`routes/stories.py`)
+| Endpoint | Method | Auth | Purpose |
+|----------|--------|------|---------|
+| `/api/render-story` | POST | No | Get story HTML (static or book context) |
 | `/api/update-boundaries` | POST | Editor | Edit story char positions |
 | `/api/update-title` | POST | Editor | Rename a story |
 | `/api/update-keywords` | POST | Editor | Edit story keywords |
-| `/api/add-story` | POST | Editor | Create new story |
+| `/api/add-story` | POST | Editor | Create new story + index immediately |
 | `/api/delete-story/{title}` | DELETE | Editor | Remove story from all stores |
-| `/api/books` | GET | No | List all books |
-| `/api/books/{slug}` | GET | No | Get book details + stories |
+
+### Book Routes (`routes/books.py`)
+| Endpoint | Method | Auth | Purpose |
+|----------|--------|------|---------|
+| `/api/books` | GET | No | List all books with story counts |
+| `/api/books/{slug}` | GET | No | Get book details (optionally with stories) |
+| `/api/full-text/{book_slug}` | GET | No | Get book full markdown text |
+
+### Admin Routes (`routes/admin.py`)
+| Endpoint | Method | Auth | Purpose |
+|----------|--------|------|---------|
+| `/api/export` | POST | No | Export stories to markdown/PDF/Word |
+| `/api/migrate-db` | POST | Editor | Recreate DB tables from disk |
+| `/api/reload-stories` | POST | Editor | Force reload from disk |
+| `/api/cleanup-search-index` | POST | No | Remove orphaned search entries |
 | `/api/full-text/{slug}` | GET | No | Get full book text |
 
 ## Database Schema (models.py)
