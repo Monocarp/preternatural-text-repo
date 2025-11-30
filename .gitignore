@@ -5,5 +5,4 @@ logs/
 __pycache__/
 *.pyc
 preternatural-text-ui/
-data/stories_fts.db
 venv/
