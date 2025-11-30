@@ -306,6 +306,39 @@ class FTS5Index:
         # Join with spaces (FTS5 default is AND)
         return ' '.join(filtered)
     
+    def update_keywords(self, title: str, keywords: str) -> int:
+        """
+        Update keywords for all documents with the given title.
+        
+        Args:
+            title: Story title to update
+            keywords: New keywords string
+        
+        Returns:
+            Number of documents updated
+        """
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # First get doc_ids for this title
+            cursor.execute("SELECT doc_id FROM stories_fts WHERE title = ?", (title,))
+            doc_ids = [row['doc_id'] for row in cursor.fetchall()]
+            
+            if not doc_ids:
+                logger.debug(f"No documents found for title '{title}' in FTS5")
+                return 0
+            
+            # Update keywords in metadata table
+            for doc_id in doc_ids:
+                cursor.execute(
+                    "UPDATE stories_meta SET keywords = ? WHERE doc_id = ?",
+                    (keywords, doc_id)
+                )
+            
+            conn.commit()
+            logger.debug(f"Updated keywords for {len(doc_ids)} documents with title '{title}'")
+            return len(doc_ids)
+    
     def delete_document(self, doc_id: str) -> bool:
         """
         Delete a document from the index.

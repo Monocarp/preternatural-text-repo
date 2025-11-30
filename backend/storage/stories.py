@@ -119,7 +119,7 @@ def _update_document_store_keywords(title: str, keywords: str) -> None:
     from search import USE_DIRECT_SEARCH
     
     if USE_DIRECT_SEARCH:
-        # Direct engine: update FAISS metadata
+        # Direct engine: update both FAISS and FTS5 metadata
         try:
             from search.engine import get_search_engine
             engine = get_search_engine()
@@ -131,6 +131,11 @@ def _update_document_store_keywords(title: str, keywords: str) -> None:
                     meta["keywords"] = keywords
                     engine.faiss_index.update_metadata(doc_id, meta)
                     logger.info(f"Updated FAISS keywords metadata for doc {doc_id}")
+            
+            # Update FTS5 metadata
+            updated_count = engine.fts_index.update_keywords(title, keywords)
+            if updated_count > 0:
+                logger.info(f"Updated FTS5 keywords for {updated_count} documents")
             
             engine.save()
             logger.info(f"Saved search indices after keywords update")
