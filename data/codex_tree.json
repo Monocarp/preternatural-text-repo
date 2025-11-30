@@ -221,7 +221,11 @@
         "Physical Harm": {},
         "Physical Harm To Children": {},
         "Ritual": {
-            "Black Sabbath": {},
+            "Black Sabbath": {
+                "_stories": [
+                    "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+                ]
+            },
             "Contract with Another": {},
             "Contract with Demon": [
                 "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
