@@ -1,0 +1,453 @@
+# Git Diffs - November 29, 2025
+# Generated from uncommitted changes in preternatural-text-repo
+
+================================================================================
+## NEW FILE: frontend/src/hooks/useStoryOperations.ts
+================================================================================
+
+diff --git a/frontend/src/hooks/useStoryOperations.ts b/frontend/src/hooks/useStoryOperations.ts
+new file mode 100644
+--- /dev/null
++++ b/frontend/src/hooks/useStoryOperations.ts
+@@ -0,0 +1,616 @@
++/**
++ * Shared hooks for story operations across Archive, BookDetail, and SearchCurate pages.
++ * 
++ * Centralizes the logic for:
++ * - Boundary editing (update start/end character positions)
++ * - Title editing
++ * - Keywords editing
++ * - New story creation
++ * - Text position picking (click-to-select character position)
++ */
++
++import { useState, useCallback } from 'react'
++import type { RefObject } from 'react'
++import axios from '../utils/axios'
++
++// ============================================================================
++// Types
++// ============================================================================
++
++export interface Story {
++  title: string
++  book_slug: string
++  start_char: number
++  end_char: number
++  keywords?: string
++  pages?: string
++  [key: string]: any
++}
++
++export interface BoundaryEditorState {
++  editing: boolean
++  editedStart: number
++  editedEnd: number
++  saving: boolean
++  selectingStart: boolean
++}
++
++export interface NewStoryState {
++  active: boolean
++  bookSlug: string
++  start: number | null
++  end: number | null
++  selectingStart: boolean
++  title: string
++  keywords: string
++  pages: string
++  adding: boolean
++}
++
++// ============================================================================
++// useStoryBoundaries - Edit story start/end character positions
++// ============================================================================
++
++export interface UseStoryBoundariesOptions {
++  onSuccess?: (story: Story, newStart: number, newEnd: number) => void
++  onError?: (error: any) => void
++}
++
++export function useStoryBoundaries(options: UseStoryBoundariesOptions = {}) {
++  const [state, setState] = useState<BoundaryEditorState>({
++    editing: false,
++    editedStart: 0,
++    editedEnd: 0,
++    saving: false,
++    selectingStart: true,
++  })
++
++  const startEditing = useCallback((story: Story) => {
++    setState({
++      editing: true,
++      editedStart: story.start_char,
++      editedEnd: story.end_char,
++      saving: false,
++      selectingStart: true,
++    })
++  }, [])
++
++  // ... (full implementation ~600 lines)
++}
++
++// ============================================================================
++// useStoryTitle - Edit story title
++// ============================================================================
++// ============================================================================
++// useStoryKeywords - Edit story keywords  
++// ============================================================================
++// ============================================================================
++// useNewStoryCreator - Create new stories
++// ============================================================================
++// ============================================================================
++// calculateCharacterPosition - Click-to-select character position
++// ============================================================================
+
+================================================================================
+## MODIFIED: frontend/src/pages/BookDetail.tsx
+================================================================================
+
+diff --git a/frontend/src/pages/BookDetail.tsx b/frontend/src/pages/BookDetail.tsx
+index 0596606..e69b8f6 100644
+--- a/frontend/src/pages/BookDetail.tsx
++++ b/frontend/src/pages/BookDetail.tsx
+@@ -4,6 +4,13 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
+ import ReactMarkdown from 'react-markdown'
+ import axios from '../utils/axios'
+ import SidebarTree from '../components/SidebarTree'
++import { 
++  useStoryBoundaries, 
++  useStoryTitle, 
++  useStoryKeywords,
++  useNewStoryCreator,
++  calculateCharacterPosition 
++} from '../hooks/useStoryOperations'
+ 
+ // ... (interface Story remains unchanged)
+ 
+@@ -45,31 +52,69 @@ const BookDetail = () => {
+   // Story Review state
+   const [selectedStory, setSelectedStory] = useState<Story | null>(null)
+   
+-  // Boundary editing state
+-  const [editingBoundary, setEditingBoundary] = useState(false)
+-  const [editedStart, setEditedStart] = useState<number>(0)
+-  const [editedEnd, setEditedEnd] = useState<number>(0)
+-  const [selectingStart, setSelectingStart] = useState(true)
+-  const [savingBoundaries, setSavingBoundaries] = useState(false)
+-  
+-  // Edit title state
+-  const [editingTitle, setEditingTitle] = useState(false)
+-  const [newTitle, setNewTitle] = useState('')
+-  
+-  // Edit keywords state
+-  const [editingKeywords, setEditingKeywords] = useState(false)
+-  const [editedKeywords, setEditedKeywords] = useState('')
+-  const [savingKeywords, setSavingKeywords] = useState(false)
+-  
+-  // New story state
+-  const [newStoryMode, setNewStoryMode] = useState(false)
+-  const [newStoryStart, setNewStoryStart] = useState<number | null>(null)
+-  const [newStoryEnd, setNewStoryEnd] = useState<number | null>(null)
+-  const [newStorySelectingStart, setNewStorySelectingStart] = useState(true)
+-  const [newStoryTitle, setNewStoryTitle] = useState('')
+-  const [newStoryKeywords, setNewStoryKeywords] = useState('')
+-  const [newStoryPages, setNewStoryPages] = useState('')
+-  const [addingStory, setAddingStory] = useState(false)
++  // Use shared hooks for story operations
++  const boundaries = useStoryBoundaries({
++    onSuccess: (story, newStart, newEnd) => {
++      const updatedStories = stories.map(s => 
++        s.title === story.title ? { ...s, start_char: newStart, end_char: newEnd } : s
++      )
++      setStories(updatedStories)
++      setSelectedStory({ ...story, start_char: newStart, end_char: newEnd } as Story)
++      alert('Boundaries saved successfully!')
++    }
++  })
++
++  const titleEditor = useStoryTitle({
++    onSuccess: (oldTitle, newTitle) => {
++      const updatedStories = stories.map(s => 
++        s.title === oldTitle ? { ...s, title: newTitle } : s
++      )
++      setStories(updatedStories)
++      // ... update storyContents key
++      alert('Title updated successfully!')
++    }
++  })
++
++  const keywordsEditor = useStoryKeywords({
++    onSuccess: (story, keywords) => {
++      const updatedStories = stories.map(s => 
++        s.title === story.title ? { ...s, keywords } : s
++      )
++      setStories(updatedStories)
++      alert('Keywords updated successfully!')
++    }
++  })
++
++  const newStory = useNewStoryCreator({
++    onSuccess: (response) => {
++      const newStoryData: Story = {
++        title: newStory.title.trim(),
++        book_slug: slug || '',
++        pages: newStory.pages.trim(),
++        keywords: newStory.keywords.trim(),
++        start_char: newStory.start || 0,
++        end_char: newStory.end || 0
++      }
++      setStories(prev => [...prev, newStoryData])
++    }
++  })
+
+-  // Enter boundary editing mode
++  // Enter boundary editing mode - using shared hook
+   const handleStartBoundaryEdit = () => {
+     if (!selectedStory) return
+-    setEditingBoundary(true)
+-    setEditedStart(selectedStory.start_char)
+-    // ... 40 lines removed
++    boundaries.startEditing(selectedStory as any)
+   }
+
+-  // Handle click on text to set boundary position
++  // Handle click on text - using shared utility
+   const handleBoundaryClick = (e: React.MouseEvent<HTMLDivElement>) => {
+-    if (!editingBoundary || !fullText || !reviewContainerRef.current) return
+-    // ... 50 lines of character position calculation removed
++    if (!boundaries.editing || !fullText || !reviewContainerRef.current) return
++    const charPos = calculateCharacterPosition(e, reviewContainerRef, fullText)
++    if (charPos === null) return
++    
++    if (boundaries.selectingStart) {
++      boundaries.setStart(charPos)
++      boundaries.setSelectingStart(false)
++    } else {
++      boundaries.setEnd(Math.max(charPos, boundaries.editedStart))
++      boundaries.setSelectingStart(true)
++    }
+   }
+
+-  // Save boundary changes
++  // Save boundary changes - using shared hook
+   const handleSaveBoundaries = async () => {
+     if (!selectedStory || !slug) return
+-    // ... 40 lines of API call + error handling removed
++    await boundaries.save(selectedStory as any)
+   }
+
+   // Similar refactoring for title, keywords, and new story handlers...
+
+================================================================================
+## MODIFIED: frontend/src/pages/SearchCurate.tsx  
+================================================================================
+
+diff --git a/frontend/src/pages/SearchCurate.tsx b/frontend/src/pages/SearchCurate.tsx
+index 66b10fe..6caddba 100644
+--- a/frontend/src/pages/SearchCurate.tsx
++++ b/frontend/src/pages/SearchCurate.tsx
+@@ -4,6 +4,12 @@ import { useNavigate } from 'react-router-dom'
+ import { useStackApp } from '@stackframe/react'
+ import apiClient from '../utils/axios'
+ import SidebarTree from '../components/SidebarTree'
++import { 
++  useStoryBoundaries, 
++  useStoryKeywords,
++  useNewStoryCreator,
++  calculateCharacterPosition 
++} from '../hooks/useStoryOperations'
+
+@@ -44,26 +50,50 @@ const SearchCurate = () => {
+     return true
+   })
+   
+-  // Boundary editing state
+-  const [editMode, setEditMode] = useState(false)
+-  const [fullText, setFullText] = useState<string>('')
+-  const [editedStart, setEditedStart] = useState<number>(0)
+-  const [editedEnd, setEditedEnd] = useState<number>(0)
+-  const [selectingStart, setSelectingStart] = useState(true)
+   const textContainerRef = useRef<HTMLDivElement>(null)
+   
+-  // New story mode state - REMOVED (15 lines of useState)
+-  // Keywords editing state - REMOVED (3 lines of useState)
++  // Use shared hooks for story operations
++  const boundaries = useStoryBoundaries({
++    onSuccess: async (story, newStart, newEnd) => {
++      const updatedStory = { ...story, start_char: newStart, end_char: newEnd } as SearchResult
++      setSelectedStory(updatedStory)
++      // Reload story view with new boundaries
++      const res = await apiClient.post('/render-story', { ... })
++      setStoryContent(res.data.html)
++    }
++  })
+
++  const keywordsEditor = useStoryKeywords({
++    onSuccess: (story, newKeywords) => {
++      setSelectedStory({ ...story, keywords: newKeywords } as SearchResult)
++      setResults(prev => prev.map(r => 
++        r.title === story.title ? { ...r, keywords: newKeywords } : r
++      ))
++      alert('Keywords updated successfully!')
++    }
++  })
+
++  const newStory = useNewStoryCreator({ onSuccess: () => {} })
+
+   // Handle story selection
+   const handleSelectStory = async (story: SearchResult) => {
+     setSelectedStory(story)
+-    setEditMode(false)
+-    setNewStoryMode(false)
++    boundaries.cancel()
++    newStory.cancel()
+     // ... rest unchanged
+   }
+
+-  // Enter boundary editing mode
++  // Enter boundary editing mode - using shared hook
+   const handleAdjustBoundaries = async () => {
+     if (!selectedStory) return
+     setLoading(true)
+-    setEditMode(true)
+-    // ... 15 lines of full text loading removed
++    await boundaries.startEditing(selectedStory as any)
++    setLoading(false)
+   }
+
+-  // Handle click on text to set boundary
++  // Handle click - using shared utility
+   const handleTextClick = (e: React.MouseEvent<HTMLDivElement>) => {
+-    if (!editMode || !fullText || !textContainerRef.current) return
+-    // ... 50 lines of character position calculation removed
++    if (!boundaries.editing || !boundaries.fullText || !textContainerRef.current) return
++    const charPos = calculateCharacterPosition(e, textContainerRef, boundaries.fullText)
++    if (charPos === null) return
++    // ... position setting logic using boundaries hook
+   }
+
+-  // Keywords editing handlers - REMOVED (~45 lines)
++  // Keywords editing handlers - using shared hook
+   const handleStartEditKeywords = () => {
+     if (!selectedStory) return
+-    setEditingKeywords(true)
+-    setEditedKeywords(selectedStory.keywords || '')
++    keywordsEditor.startEditing(selectedStory.keywords || '')
+   }
+
+   const handleSaveKeywords = async () => {
+     if (!selectedStory) return
+-    // ... 30 lines of API call + state updates removed
++    await keywordsEditor.save(selectedStory as any)
+   }
+
+-  // Save boundary changes - REMOVED (~45 lines)
++  // Save boundary changes - using shared hook
+   const handleSaveBoundaries = async () => {
+     if (!selectedStory) return
+     setLoading(true)
+-    // ... API call, state updates, error handling removed
++    await boundaries.save(selectedStory as any)
++    setLoading(false)
+   }
+
+-  // New story handlers - REMOVED (~120 lines)
++  // New story handlers - using shared hook
+   const handleEnterNewStoryMode = async () => {
+     if (!selectedStory) return
+     setLoading(true)
+-    setNewStoryMode(true)
+-    setEditMode(false)
+-    // ... full text loading, state initialization removed
++    boundaries.cancel()
++    await newStory.startCreating(selectedStory.book_slug)
++    setLoading(false)
+   }
+
+   const handleAddNewStory = async () => {
+-    if (!selectedStory || newStoryStart === null || ...) return
+-    // ... 70 lines of API call, overlap handling, cleanup removed
++    await newStory.add()
+   }
+
+   // JSX updates: Replace old state variables with hook properties
+   // e.g., editMode -> boundaries.editing
+   //       newStoryMode -> newStory.active
+   //       editingKeywords -> keywordsEditor.editing
+   //       etc.
+
+================================================================================
+## DELETED FILES (moved to documentation/)
+================================================================================
+
+diff --git a/full_list.txt b/full_list.txt
+deleted file mode 100644
+
+diff --git a/future_goals.md b/future_goals.md
+deleted file mode 100644
+(moved to documentation/future_goals.md)
+
+diff --git a/output.txt b/output.txt
+deleted file mode 100644
+
+diff --git a/quick_check.py b/quick_check.py
+deleted file mode 100644
+
+diff --git a/suggestions/Response 1.txt b/suggestions/Response 1.txt
+deleted file mode 100644
+
+diff --git a/suggestions/Response 2.txt b/suggestions/Response 2.txt
+deleted file mode 100644
+
+diff --git a/suggestions/Response 3.txt b/suggestions/Response 3.txt
+deleted file mode 100644
+
+================================================================================
+## NEW FILES IN documentation/
+================================================================================
+
+diff --git a/documentation/AUDIT_REPORT_2025-11-26.md b/documentation/AUDIT_REPORT_2025-11-26.md
+new file mode 100644
+(Technical debt audit report - ~500 lines)
+
+diff --git a/documentation/PDF_Mapping_Project.md b/documentation/PDF_Mapping_Project.md
+new file mode 100644
+(PDF mapping project planning doc - ~65 lines)
+
+diff --git a/documentation/TECH_DEBT_BACKLOG.md b/documentation/TECH_DEBT_BACKLOG.md
+new file mode 100644
+(Technical debt backlog tracker - ~400 lines)
+
+diff --git a/documentation/future_goals.md b/documentation/future_goals.md
+new file mode 100644
+(Fine-tuning LLM plans - ~170 lines)
+
+================================================================================
+## SUMMARY OF CHANGES
+================================================================================
+
+Files Changed:
+- frontend/src/pages/BookDetail.tsx (~400 lines removed, refactored to use hooks)
+- frontend/src/pages/SearchCurate.tsx (~350 lines removed, refactored to use hooks)
+
+Files Added:
+- frontend/src/hooks/useStoryOperations.ts (~600 lines - shared hooks)
+- documentation/AUDIT_REPORT_2025-11-26.md
+- documentation/PDF_Mapping_Project.md  
+- documentation/TECH_DEBT_BACKLOG.md
+- documentation/future_goals.md
+
+Files Deleted:
+- full_list.txt
+- future_goals.md (moved)
+- output.txt
+- quick_check.py
+- suggestions/Response 1.txt
+- suggestions/Response 2.txt
+- suggestions/Response 3.txt
+
+Net Effect:
+- ~750 lines of duplicated code consolidated into shared hooks
+- Documentation organized into documentation/ folder
+- Temporary/scratch files cleaned up
