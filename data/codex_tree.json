@@ -65,11 +65,9 @@
                 "Bone Dislocation": {},
                 "Bruise": {},
                 "Bumps, Cysts, other Protrusions": {},
-                "Choking": {
-                    "_stories": [
-                        "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
-                    ]
-                },
+                "Choking": [
+                    "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+                ],
                 "Death": {},
                 "Distention of the Stomach": {},
                 "Foul Breath": {},
@@ -210,7 +208,8 @@
         "Divination": {},
         "Evil Eye": {},
         "Flying": [
-            "Demonic Vision Dismissed With Eucharist"
+            "Demonic Vision Dismissed With Eucharist",
+            "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
         ],
         "Hagriding": {},
         "Harm To Pets": {},
