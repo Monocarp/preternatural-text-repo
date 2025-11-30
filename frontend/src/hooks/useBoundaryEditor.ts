@@ -14,7 +14,7 @@ import { useState, useCallback, useRef } from 'react'
 import type { RefObject } from 'react'
 import { calculateCharPositionFromClick } from './useTextPositionClick'
 
-interface Story {
+export interface Story {
   title: string
   book_slug: string
   start_char: number
@@ -47,7 +47,7 @@ interface UseBoundaryEditorReturn {
   saving: boolean
   
   // Refs
-  textContainerRef: RefObject<HTMLDivElement>
+  textContainerRef: RefObject<HTMLDivElement | null>
   
   // Actions
   startEditing: (story: Story) => void

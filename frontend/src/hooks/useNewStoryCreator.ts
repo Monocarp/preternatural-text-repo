@@ -43,7 +43,7 @@ interface UseNewStoryCreatorReturn {
   loadingFullText: boolean
   
   // Refs
-  textContainerRef: RefObject<HTMLDivElement>
+  textContainerRef: RefObject<HTMLDivElement | null>
   
   // Computed
   canAdd: boolean

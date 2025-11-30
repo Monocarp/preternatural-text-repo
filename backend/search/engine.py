@@ -451,6 +451,12 @@ class SearchEngine:
         
         # Get all documents (optionally filtered by book)
         all_docs = self.fts_index.get_all_documents(book_filter)
+        logger.info(f"Exact search: found {len(all_docs)} documents to search through")
+        
+        # Debug: check if content is populated
+        if all_docs:
+            sample_content = all_docs[0][1][:100] if all_docs[0][1] else "EMPTY"
+            logger.debug(f"Sample content (first 100 chars): {sample_content}")
         
         results = []
         for doc_id, content, meta in all_docs:
