@@ -103,7 +103,11 @@
                 "Blocked Prayer": {},
                 "Chronic Insomnia": {},
                 "Difficulty in Receiving Sacraments": {},
-                "Falsified Emotions": {},
+                "Falsified Emotions": {
+                    "_stories": [
+                        "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+                    ]
+                },
                 "Illness around Holiness": {},
                 "Liturgical Calendar Suffering": {},
                 "Obscene Thoughts Around Holiness": {},
