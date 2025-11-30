@@ -92,7 +92,11 @@
                 "Other": {}
             },
             "Fasting": {},
-            "Gravitas": {},
+            "Gravitas": {
+                "_stories": [
+                    "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+                ]
+            },
             "Levitation": [
                 "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
             ],
@@ -221,11 +225,9 @@
         "Physical Harm": {},
         "Physical Harm To Children": {},
         "Ritual": {
-            "Black Sabbath": {
-                "_stories": [
-                    "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
-                ]
-            },
+            "Black Sabbath": [
+                "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+            ],
             "Contract with Another": {},
             "Contract with Demon": [
                 "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
