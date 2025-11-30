@@ -228,7 +228,8 @@
         "Physical Harm To Children": {},
         "Ritual": {
             "Black Sabbath": [
-                "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+                "The Jurist\u2019s Pact with Satan and Failed Return to Confession",
+                "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion"
             ],
             "Contract with Another": {},
             "Contract with Demon": [
@@ -265,11 +266,9 @@
             },
             "Sacrilegious Baptism": {}
         },
-        "Sacrificing Children": {
-            "_stories": [
-                "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion"
-            ]
-        },
+        "Sacrificing Children": [
+            "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion"
+        ],
         "Transportation": [
             "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
         ]
