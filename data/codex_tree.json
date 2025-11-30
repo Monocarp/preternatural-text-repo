@@ -100,14 +100,16 @@
                 "Affected Dreams": {},
                 "Aversion to Sacred Names": {},
                 "Aversion to Scripture": {},
-                "Blocked Prayer": {},
-                "Chronic Insomnia": {},
-                "Difficulty in Receiving Sacraments": {},
-                "Falsified Emotions": {
+                "Blocked Prayer": {
                     "_stories": [
                         "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
                     ]
                 },
+                "Chronic Insomnia": {},
+                "Difficulty in Receiving Sacraments": {},
+                "Falsified Emotions": [
+                    "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+                ],
                 "Illness around Holiness": {},
                 "Liturgical Calendar Suffering": {},
                 "Obscene Thoughts Around Holiness": {},
