@@ -45,7 +45,11 @@
                 "Depression": {},
                 "Dreams": {},
                 "Emotional/Relational Block": {},
-                "Severe Mental Disorder": {},
+                "Severe Mental Disorder": {
+                    "_stories": [
+                        "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+                    ]
+                },
                 "Visual Hallucinations": [
                     "Demonic Vision Dismissed With Eucharist",
                     "Heretic\u2019s Demonic Vision of a False Christ and Queen Dispelled by the Eucharist"
@@ -92,11 +96,9 @@
                 "Other": {}
             },
             "Fasting": {},
-            "Gravitas": {
-                "_stories": [
-                    "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
-                ]
-            },
+            "Gravitas": [
+                "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+            ],
             "Levitation": [
                 "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
             ],
