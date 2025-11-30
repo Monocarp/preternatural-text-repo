@@ -65,7 +65,11 @@
                 "Bone Dislocation": {},
                 "Bruise": {},
                 "Bumps, Cysts, other Protrusions": {},
-                "Choking": {},
+                "Choking": {
+                    "_stories": [
+                        "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+                    ]
+                },
                 "Death": {},
                 "Distention of the Stomach": {},
                 "Foul Breath": {},
@@ -104,11 +108,9 @@
                     "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
                 ],
                 "Chronic Insomnia": {},
-                "Difficulty in Receiving Sacraments": {
-                    "_stories": [
-                        "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
-                    ]
-                },
+                "Difficulty in Receiving Sacraments": [
+                    "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+                ],
                 "Falsified Emotions": [
                     "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
                 ],
