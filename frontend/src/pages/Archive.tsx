@@ -8,6 +8,7 @@ import SidebarTree from '../components/SidebarTree'
 import { SubcategoryFilter } from '../components/SubcategoryFilter'
 import { decodeRoutePath, encodePathSegmentsForRoute } from '../utils/path'
 import { useStackApp } from '@stackframe/react'
+import { useCategoryAssignment } from '../hooks'
 
 const Archive = () => {
   const location = useLocation()
@@ -54,6 +55,12 @@ const Archive = () => {
   const [editingKeywords, setEditingKeywords] = useState<string | null>(null) // story title being edited
   const [editedKeywords, setEditedKeywords] = useState('')
   const [savingKeywords, setSavingKeywords] = useState(false)
+
+  // Category assignment state - track which story panel is expanded for assignment
+  const [expandedStoryForCategory, setExpandedStoryForCategory] = useState<any>(null)
+  
+  // Use the category assignment hook
+  const categoryAssignment = useCategoryAssignment(expandedStoryForCategory)
 
   const decodedPath = useMemo(() => {
     // Use pathFromLocation instead of useParams path - React Router's :path* doesn't update reliably
@@ -1041,6 +1048,145 @@ const Archive = () => {
                         >
                           Delete Story
                         </button>
+                      </div>
+                      
+                      {/* Category Assignment Section */}
+                      <div className="mt-4 pt-4 border-t border-gray-700">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            if (expandedStoryForCategory?.title === story.title) {
+                              setExpandedStoryForCategory(null)
+                            } else {
+                              setExpandedStoryForCategory(story)
+                            }
+                          }}
+                          className="w-full flex items-center justify-between px-3 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm text-gray-200 transition-colors"
+                        >
+                          <span className="flex items-center gap-2">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                            </svg>
+                            Assign to Category
+                          </span>
+                          <span className="text-gray-400">
+                            {expandedStoryForCategory?.title === story.title ? '▲' : '▼'}
+                          </span>
+                        </button>
+                        
+                        {expandedStoryForCategory?.title === story.title && (
+                          <div className="mt-3 p-3 bg-gray-750 rounded border border-gray-600">
+                            {/* Current Assignments */}
+                            {categoryAssignment.currentAssignments.length > 0 && (
+                              <div className="mb-3">
+                                <p className="text-xs text-gray-400 mb-1">Currently assigned to:</p>
+                                <div className="flex flex-wrap gap-1">
+                                  {categoryAssignment.currentAssignments.map((pathArr, idx) => (
+                                    <span
+                                      key={idx}
+                                      className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-900/50 text-blue-300 rounded text-xs"
+                                    >
+                                      {pathArr.join(' > ')}
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation()
+                                          categoryAssignment.removeCategory(pathArr)
+                                        }}
+                                        className="ml-1 text-blue-400 hover:text-red-400"
+                                        title="Remove from this category"
+                                      >
+                                        ×
+                                      </button>
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                            
+                            {/* Category Selection Dropdowns */}
+                            <div className="space-y-2">
+                              <p className="text-xs text-gray-400">Select category path:</p>
+                              <div className="flex flex-wrap gap-2">
+                                {/* Level 0 - Root categories */}
+                                <select
+                                  value={categoryAssignment.selectedPath[0] || ''}
+                                  onChange={(e) => categoryAssignment.handlePathLevelChange(0, e.target.value)}
+                                  className="px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-sm"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <option value="">Select category...</option>
+                                  {categoryAssignment.getPathOptions([]).map((opt) => (
+                                    <option key={opt} value={opt}>{opt}</option>
+                                  ))}
+                                </select>
+                                
+                                {/* Level 1 */}
+                                {categoryAssignment.selectedPath[0] && categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 1)).length > 0 && (
+                                  <select
+                                    value={categoryAssignment.selectedPath[1] || ''}
+                                    onChange={(e) => categoryAssignment.handlePathLevelChange(1, e.target.value)}
+                                    className="px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-sm"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <option value="">Select subcategory...</option>
+                                    {categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 1)).map((opt) => (
+                                      <option key={opt} value={opt}>{opt}</option>
+                                    ))}
+                                  </select>
+                                )}
+                                
+                                {/* Level 2 */}
+                                {categoryAssignment.selectedPath[1] && categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 2)).length > 0 && (
+                                  <select
+                                    value={categoryAssignment.selectedPath[2] || ''}
+                                    onChange={(e) => categoryAssignment.handlePathLevelChange(2, e.target.value)}
+                                    className="px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-sm"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <option value="">Select...</option>
+                                    {categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 2)).map((opt) => (
+                                      <option key={opt} value={opt}>{opt}</option>
+                                    ))}
+                                  </select>
+                                )}
+                                
+                                {/* Level 3 */}
+                                {categoryAssignment.selectedPath[2] && categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 3)).length > 0 && (
+                                  <select
+                                    value={categoryAssignment.selectedPath[3] || ''}
+                                    onChange={(e) => categoryAssignment.handlePathLevelChange(3, e.target.value)}
+                                    className="px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-sm"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <option value="">Select...</option>
+                                    {categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 3)).map((opt) => (
+                                      <option key={opt} value={opt}>{opt}</option>
+                                    ))}
+                                  </select>
+                                )}
+                              </div>
+                              
+                              {/* Assign Button */}
+                              {categoryAssignment.selectedPath.length > 0 && (
+                                <div className="flex items-center gap-2 mt-2">
+                                  <span className="text-xs text-gray-400">
+                                    Path: {categoryAssignment.selectedPath.join(' > ')}
+                                  </span>
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation()
+                                      categoryAssignment.assignCategory()
+                                    }}
+                                    disabled={categoryAssignment.assigning}
+                                    className="px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700 disabled:opacity-50"
+                                  >
+                                    {categoryAssignment.assigning ? 'Assigning...' : 'Assign'}
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </DisclosurePanel>
