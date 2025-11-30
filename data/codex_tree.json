@@ -221,7 +221,11 @@
         "Harm To Pets": {},
         "Harm to Crops": {},
         "Harm to Livestock": {},
-        "Herbal/Natural": {},
+        "Herbal/Natural": {
+            "_stories": [
+                "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion"
+            ]
+        },
         "Indoctrinating Children": {},
         "Levitation": {},
         "Physical Harm": {},
