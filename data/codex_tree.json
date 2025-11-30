@@ -40,16 +40,18 @@
                 "Static People": {}
             },
             "Mental Health Vexations": {
-                "Anger": {},
-                "Auditory Hallucinations": {},
-                "Depression": {},
-                "Dreams": {},
-                "Emotional/Relational Block": {},
-                "Severe Mental Disorder": {
+                "Anger": {
                     "_stories": [
                         "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
                     ]
                 },
+                "Auditory Hallucinations": {},
+                "Depression": {},
+                "Dreams": {},
+                "Emotional/Relational Block": {},
+                "Severe Mental Disorder": [
+                    "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+                ],
                 "Visual Hallucinations": [
                     "Demonic Vision Dismissed With Eucharist",
                     "Heretic\u2019s Demonic Vision of a False Christ and Queen Dispelled by the Eucharist"
