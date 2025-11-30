@@ -155,6 +155,7 @@
                 "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
                 "Old Woman\u2019s Possession, Magical Amulet with Divine Names, and Exorcism by Burning",
                 "Stages of Demonic Possession in Magdalena and the Role of Asmodeus",
+                "Possession of a Jewish Woman in Ferrara and Exorcism of a Ruach by R. Chaim Vital",
                 "Woman Punished with Possession for Attempted Sorcery and Her Deliverance at St.\u00a0Gandolph"
             ]
         },
@@ -221,11 +222,9 @@
         "Harm To Pets": {},
         "Harm to Crops": {},
         "Harm to Livestock": {},
-        "Herbal/Natural": {
-            "_stories": [
-                "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion"
-            ]
-        },
+        "Herbal/Natural": [
+            "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion"
+        ],
         "Indoctrinating Children": {},
         "Levitation": {},
         "Physical Harm": {},
