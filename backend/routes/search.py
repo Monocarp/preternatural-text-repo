@@ -8,9 +8,10 @@ Endpoints:
 """
 
 import logging
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 
 from .dependencies import SearchQuery
+from .errors import AppError, ErrorCode
 from utils import search_stories, sources
 
 log = logging.getLogger(__name__)
@@ -45,7 +46,7 @@ def api_search(body: SearchQuery):
         return {"results": results}
     except Exception as e:
         log.error(f"Search failed: {str(e)}", exc_info=True)
-        raise HTTPException(500, f"Search failed: {str(e)}")
+        raise AppError(ErrorCode.OPERATION_SEARCH_FAILED, "Search failed", detail=str(e))
 
 
 @router.get("/sources")

@@ -20,6 +20,7 @@ from jwt import PyJWKClient
 import requests
 
 from models import SessionLocal, User
+from .errors import AppError, ErrorCode
 
 log = logging.getLogger(__name__)
 
@@ -107,10 +108,10 @@ async def get_current_user(
                     break
     
     if not token:
-        raise HTTPException(401, "Authentication required")
+        raise AppError(ErrorCode.AUTH_REQUIRED, "Authentication required")
     
     if not jwks_client:
-        raise HTTPException(500, "JWT verification not configured. Set STACK_PROJECT_ID in environment.")
+        raise AppError(ErrorCode.AUTH_NOT_CONFIGURED, "JWT verification not configured", detail="Set STACK_PROJECT_ID in environment")
     
     try:
         signing_key = jwks_client.get_signing_key_from_jwt(token)
@@ -131,10 +132,10 @@ async def get_current_user(
             )
         return payload
     except jwt.ExpiredSignatureError:
-        raise HTTPException(401, "Token has expired")
+        raise AppError(ErrorCode.AUTH_TOKEN_EXPIRED, "Token has expired")
     except Exception as e:
         log.error(f"JWT verification failed: {str(e)}")
-        raise HTTPException(401, f"Invalid token: {str(e)}")
+        raise AppError(ErrorCode.AUTH_TOKEN_INVALID, "Invalid token", detail=str(e))
 
 
 async def require_editor(user: Dict = Depends(get_current_user)) -> Dict[str, Any]:
@@ -170,7 +171,7 @@ async def require_editor(user: Dict = Depends(get_current_user)) -> Dict[str, An
             log.info(f"Auto-promoted {email} to 'editor' via EDITOR_EMAILS")
 
         if not db_user or db_user.role != "editor":
-            raise HTTPException(403, "Editor role required")
+            raise AppError(ErrorCode.FORBIDDEN_EDITOR_REQUIRED, "Editor role required")
         return user
     finally:
         session.close()

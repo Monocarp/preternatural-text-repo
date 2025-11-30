@@ -12,9 +12,10 @@ Endpoints:
 import logging
 from typing import Dict
 
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, Depends
 
 from .dependencies import ExportBody, require_editor
+from .errors import AppError, ErrorCode
 from utils import (
     export_stories, sync_disk_to_db, invalidate_cache,
     preload_book_metadata, clear_book_metadata_cache,
@@ -36,7 +37,7 @@ def export(body: ExportBody):
     """
     result = export_stories(body.stories, format=body.format, is_single=body.is_single)
     if not result:
-        raise HTTPException(500, "Export failed")
+        raise AppError(ErrorCode.OPERATION_EXPORT_FAILED, "Export failed")
     return result
 
 
@@ -74,7 +75,7 @@ def migrate_database(user: Dict = Depends(require_editor)):
         
     except Exception as e:
         log.error(f"Migration failed: {e}", exc_info=True)
-        raise HTTPException(500, f"Migration failed: {str(e)}")
+        raise AppError(ErrorCode.SERVER_MIGRATION_FAILED, "Database migration failed", detail=str(e))
 
 
 @router.post("/reload-stories")
@@ -104,7 +105,7 @@ def reload_stories(user: Dict = Depends(require_editor)):
         }
     except Exception as e:
         log.error(f"Reload failed: {e}", exc_info=True)
-        raise HTTPException(500, f"Reload failed: {str(e)}")
+        raise AppError(ErrorCode.OPERATION_FAILED, "Reload failed", detail=str(e))
 
 
 @router.post("/cleanup-search-index")
@@ -207,4 +208,4 @@ def cleanup_search_index():
         
     except Exception as e:
         log.error(f"Search index cleanup failed: {e}", exc_info=True)
-        raise HTTPException(500, f"Cleanup failed: {str(e)}")
+        raise AppError(ErrorCode.OPERATION_FAILED, "Search index cleanup failed", detail=str(e))

@@ -15,12 +15,13 @@ import os
 import logging
 from typing import Dict
 
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, Depends
 
 from .dependencies import (
     RenderQuery, UpdateBoundariesBody, UpdateTitleBody,
     UpdateKeywordsBody, AddStoryBody, require_editor, BOOKS_DIR
 )
+from .errors import AppError, ErrorCode
 from utils import (
     stories_dict, load_story_positions, story_positions, save_story_positions,
     update_story_boundaries, update_story_title, update_story_keywords,
@@ -80,12 +81,12 @@ def render_story(body: RenderQuery):
                                 "end_char": db_story.end_char or 0,
                             }
                         else:
-                            raise HTTPException(404, "Story not found")
+                            raise AppError(ErrorCode.NOT_FOUND_STORY, f"Story not found: {body.title}")
                 except Exception as e:
                     log.error(f"Error querying database for story '{body.title}': {e}")
-                    raise HTTPException(404, "Story not found")
+                    raise AppError(ErrorCode.NOT_FOUND_STORY, f"Story not found: {body.title}")
             else:
-                raise HTTPException(404, "Story not found")
+                raise AppError(ErrorCode.NOT_FOUND_STORY, f"Story not found: {body.title}")
     
     # Use provided boundaries if available
     start_char = body.start_char if body.start_char is not None else story["start_char"]
@@ -117,7 +118,7 @@ def update_boundaries(body: UpdateBoundariesBody, user=Depends(require_editor)):
     if success:
         return {"status": "updated", "message": f"Boundaries updated for {body.title}"}
     else:
-        raise HTTPException(400, "Failed to update boundaries")
+        raise AppError(ErrorCode.OPERATION_UPDATE_FAILED, f"Failed to update boundaries for {body.title}")
 
 
 @router.post("/update-title")
@@ -131,7 +132,7 @@ def update_title(body: UpdateTitleBody, user=Depends(require_editor)):
     if success:
         return {"status": "updated", "message": f"Title updated from '{body.old_title}' to '{body.new_title}'"}
     else:
-        raise HTTPException(400, "Failed to update title")
+        raise AppError(ErrorCode.OPERATION_UPDATE_FAILED, f"Failed to update title from '{body.old_title}' to '{body.new_title}'")
 
 
 @router.post("/update-keywords")
@@ -145,7 +146,7 @@ def update_keywords(body: UpdateKeywordsBody, user=Depends(require_editor)):
     if success:
         return {"status": "updated", "message": f"Keywords updated for '{body.title}'"}
     else:
-        raise HTTPException(400, "Failed to update keywords")
+        raise AppError(ErrorCode.OPERATION_UPDATE_FAILED, f"Failed to update keywords for '{body.title}'")
 
 
 @router.post("/add-story")
@@ -165,32 +166,32 @@ def add_story(body: AddStoryBody, user=Depends(require_editor)):
         # 1. Validate book exists
         book_path = os.path.join(BOOKS_DIR, body.book_slug)
         if not os.path.isdir(book_path):
-            raise HTTPException(404, f"Book not found: {body.book_slug}")
+            raise AppError(ErrorCode.NOT_FOUND_BOOK, f"Book not found: {body.book_slug}")
         
         # 2. Load full text
         full_md = load_full_md(body.book_slug)
         if not full_md:
-            raise HTTPException(404, f"Full_Text.md not found for {body.book_slug}")
+            raise AppError(ErrorCode.NOT_FOUND_FILE, f"Full_Text.md not found for {body.book_slug}")
         
         # 3. Validate positions
         if body.start_char < 0 or body.end_char > len(full_md):
-            raise HTTPException(400, f"Character positions out of bounds (0-{len(full_md)})")
+            raise AppError(ErrorCode.VALIDATION_OUT_OF_BOUNDS, f"Character positions out of bounds (0-{len(full_md)})")
         
         if body.end_char <= body.start_char:
-            raise HTTPException(400, "end_char must be greater than start_char")
+            raise AppError(ErrorCode.VALIDATION_INVALID_INPUT, "end_char must be greater than start_char")
         
         # 4. Extract and validate story text
         story_text = full_md[body.start_char:body.end_char].strip()
         if not story_text:
-            raise HTTPException(400, "Story text is empty")
+            raise AppError(ErrorCode.VALIDATION_INVALID_INPUT, "Story text is empty")
         
         if len(story_text) < 50:
-            raise HTTPException(400, f"Story too short ({len(story_text)} chars). Minimum 50 characters.")
+            raise AppError(ErrorCode.VALIDATION_CONTENT_TOO_SHORT, f"Story too short ({len(story_text)} chars). Minimum 50 characters.")
         
         # 5. Check for duplicate title
         positions = load_story_positions(body.book_slug)
         if body.title in positions:
-            raise HTTPException(400, f"Story title '{body.title}' already exists in {body.book_slug}")
+            raise AppError(ErrorCode.VALIDATION_DUPLICATE_TITLE, f"Story title '{body.title}' already exists in {body.book_slug}")
         
         # 6. Check for overlaps
         has_overlap, overlaps = check_story_overlap(body.book_slug, body.start_char, body.end_char)
@@ -215,7 +216,7 @@ def add_story(body: AddStoryBody, user=Depends(require_editor)):
         }
         story_positions[body.book_slug] = positions
         if not save_story_positions(body.book_slug):
-            raise HTTPException(500, "Failed to save story_positions.json")
+            raise AppError(ErrorCode.OPERATION_FAILED, "Failed to save story_positions.json")
         
         log.info(f"Saved story '{body.title}' to story_positions.json")
         
@@ -341,11 +342,11 @@ def add_story(body: AddStoryBody, user=Depends(require_editor)):
             "overlap_warnings": [f"{o['title']} ({o['overlap_percent']}% overlap)" for o in overlaps] if has_overlap else []
         }
         
-    except HTTPException:
+    except AppError:
         raise
     except Exception as e:
         log.error(f"Failed to add story: {e}", exc_info=True)
-        raise HTTPException(500, f"Failed to add story: {str(e)}")
+        raise AppError(ErrorCode.OPERATION_FAILED, "Failed to add story", detail=str(e))
 
 
 @router.delete("/delete-story/{title}")
@@ -369,7 +370,7 @@ def delete_story(title: str, user=Depends(require_editor)):
                 break
         
         if not book_slug:
-            raise HTTPException(404, f"Story '{title}' not found in any book")
+            raise AppError(ErrorCode.NOT_FOUND_STORY, f"Story '{title}' not found in any book")
         
         # 2. Remove from story_positions.json
         positions = load_story_positions(book_slug)
@@ -476,8 +477,8 @@ def delete_story(title: str, user=Depends(require_editor)):
             "book_slug": book_slug
         }
         
-    except HTTPException:
+    except AppError:
         raise
     except Exception as e:
         log.error(f"Failed to delete story: {e}", exc_info=True)
-        raise HTTPException(500, f"Failed to delete story: {str(e)}")
+        raise AppError(ErrorCode.OPERATION_DELETE_FAILED, f"Failed to delete story '{title}'", detail=str(e))

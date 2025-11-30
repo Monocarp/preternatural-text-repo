@@ -82,13 +82,24 @@ app.add_middleware(
 # ------------------------------------------------------------------ #
 # 4. Import and Register Routers
 # ------------------------------------------------------------------ #
+from fastapi import HTTPException
 from routes import (
     search_router,
     tree_router,
     stories_router,
     books_router,
     admin_router,
+    AppError,
+    app_error_handler,
+    http_exception_handler,
+    generic_exception_handler,
 )
+
+# Register exception handlers for consistent error responses
+app.add_exception_handler(AppError, app_error_handler)
+app.add_exception_handler(HTTPException, http_exception_handler)
+# Uncomment in production for catch-all error handling:
+# app.add_exception_handler(Exception, generic_exception_handler)
 
 app.include_router(search_router)
 app.include_router(tree_router)

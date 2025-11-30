@@ -11,9 +11,10 @@ Endpoints:
 import logging
 from typing import List
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 
 from .dependencies import BookResponse
+from .errors import AppError, ErrorCode
 from models import SessionLocal, Book
 from utils import load_full_md
 
@@ -41,7 +42,7 @@ def get_books():
             return result
     except Exception as e:
         log.error(f"Failed to fetch books: {e}")
-        raise HTTPException(500, f"Failed to fetch books: {str(e)}")
+        raise AppError(ErrorCode.SERVER_DATABASE_ERROR, "Failed to fetch books", detail=str(e))
 
 
 @router.get("/books/{slug}")
@@ -57,7 +58,7 @@ def get_book(slug: str, include_stories: bool = False):
         with SessionLocal() as db:
             book = db.query(Book).filter_by(slug=slug).first()
             if not book:
-                raise HTTPException(404, f"Book not found: {slug}")
+                raise AppError(ErrorCode.NOT_FOUND_BOOK, f"Book not found: {slug}")
             
             result = {
                 "id": book.id,
@@ -81,11 +82,11 @@ def get_book(slug: str, include_stories: bool = False):
                 ]
             
             return result
-    except HTTPException:
+    except AppError:
         raise
     except Exception as e:
         log.error(f"Failed to fetch book {slug}: {e}")
-        raise HTTPException(500, f"Failed to fetch book: {str(e)}")
+        raise AppError(ErrorCode.SERVER_DATABASE_ERROR, f"Failed to fetch book: {slug}", detail=str(e))
 
 
 @router.get("/full-text/{book_slug}")
@@ -100,4 +101,4 @@ def get_full_text(book_slug: str):
         return {"text": full_text, "length": len(full_text)}
     except Exception as e:
         log.error(f"Failed to load full text for {book_slug}: {e}")
-        raise HTTPException(404, f"Book not found: {book_slug}")
+        raise AppError(ErrorCode.NOT_FOUND_BOOK, f"Book not found or could not load text: {book_slug}")
