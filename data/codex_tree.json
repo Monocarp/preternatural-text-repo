@@ -40,11 +40,9 @@
                 "Static People": {}
             },
             "Mental Health Vexations": {
-                "Anger": {
-                    "_stories": [
-                        "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
-                    ]
-                },
+                "Anger": [
+                    "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+                ],
                 "Auditory Hallucinations": {},
                 "Depression": {},
                 "Dreams": {},
@@ -63,7 +61,10 @@
                 "Financial": {},
                 "Occupational": {},
                 "Pets": {},
-                "Reputational": {}
+                "Reputational": {},
+                "_stories": [
+                    "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion"
+                ]
             },
             "Physical Health Vexations": {
                 "Bite Marks": {},
