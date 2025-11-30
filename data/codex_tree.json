@@ -91,7 +91,9 @@
             },
             "Fasting": {},
             "Gravitas": {},
-            "Levitation": {},
+            "Levitation": [
+                "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+            ],
             "Morphing": {},
             "Occult Knowledge": {},
             "Secondary Signs": {
@@ -131,15 +133,15 @@
             "Superhuman Speed": {},
             "Sustained Unnatural Posture": {},
             "_stories": [
+                "Violent Possession and Exorcism of Peter Bernardi of Areia",
                 "Possession of a Girl from Citt\u00e0 di Castello and Demon\u2019s Accusation of a Sorcerer Priest",
+                "Other Graves and Holy Sites Where the Possessed Were Freed",
+                "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio",
                 "Saint Walbert\u2019s Cross and Arm Used to Test and Heal the Possessed at Valombrosa",
                 "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
                 "Old Woman\u2019s Possession, Magical Amulet with Divine Names, and Exorcism by Burning",
                 "Stages of Demonic Possession in Magdalena and the Role of Asmodeus",
-                "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio",
-                "Other Graves and Holy Sites Where the Possessed Were Freed",
-                "Woman Punished with Possession for Attempted Sorcery and Her Deliverance at St.\u00a0Gandolph",
-                "Violent Possession and Exorcism of Peter Bernardi of Areia"
+                "Woman Punished with Possession for Attempted Sorcery and Her Deliverance at St.\u00a0Gandolph"
             ]
         },
         "_stories": {}
@@ -180,10 +182,7 @@
             "Behavior": {},
             "Habitual Behavior": {},
             "Visual": {}
-        },
-        "_stories": [
-            "Dante\u2019s Devil Alichino and the Demonic Roots of Harlequins and Clowns"
-        ]
+        }
     },
     "Supernatural Phenomena": {
         "Time Loss": {},
@@ -200,11 +199,9 @@
         "Cursing": {},
         "Divination": {},
         "Evil Eye": {},
-        "Flying": {
-            "_stories": [
-                "Demonic Vision Dismissed With Eucharist"
-            ]
-        },
+        "Flying": [
+            "Demonic Vision Dismissed With Eucharist"
+        ],
         "Hagriding": {},
         "Harm To Pets": {},
         "Harm to Crops": {},
