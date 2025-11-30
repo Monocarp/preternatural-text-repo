@@ -406,3 +406,171 @@ def find_paths_for_title(
             paths.append(current_path[:])
     
     return paths
+
+
+def create_category(tree: dict, parent_path: list, name: str) -> dict:
+    """
+    Create a new category (node) in the tree.
+    
+    Args:
+        tree: The codex tree dict
+        parent_path: List of path segments to parent (empty list for root-level)
+        name: Name of the new category to create
+    
+    Returns:
+        The modified tree
+    
+    Raises:
+        ValueError: If parent path doesn't exist or category already exists
+    """
+    # Navigate to parent
+    if not parent_path:
+        # Creating at root level
+        if name in tree:
+            raise ValueError(f"Category '{name}' already exists at root level")
+        tree[name] = []  # Empty list = leaf node with no stories
+        logger.info(f"Created root-level category: {name}")
+        return tree
+    
+    current = tree
+    for i, level in enumerate(parent_path):
+        if level not in current:
+            raise ValueError(f"Parent path not found: {'/'.join(parent_path[:i+1])}")
+        
+        node = current[level]
+        if isinstance(node, list):
+            # Convert leaf to dict to allow children
+            current[level] = {'_stories': node}
+            node = current[level]
+        
+        if not isinstance(node, dict):
+            raise ValueError(f"Invalid tree structure at: {'/'.join(parent_path[:i+1])}")
+        
+        if i < len(parent_path) - 1:
+            current = node
+        else:
+            # At parent node
+            if name in node and name != '_stories':
+                raise ValueError(f"Category '{name}' already exists under '{'/'.join(parent_path)}'")
+            node[name] = []  # Empty list = leaf node with no stories
+            logger.info(f"Created category '{name}' under '{'/'.join(parent_path)}'")
+    
+    return tree
+
+
+def delete_category(tree: dict, path: list) -> tuple:
+    """
+    Delete a category (node) from the tree.
+    
+    Args:
+        tree: The codex tree dict
+        path: Full path to the category to delete
+    
+    Returns:
+        Tuple of (modified tree, list of affected story titles)
+    
+    Raises:
+        ValueError: If path doesn't exist
+    """
+    if not path:
+        raise ValueError("Cannot delete root of tree")
+    
+    affected_stories = []
+    
+    def collect_stories(node):
+        """Recursively collect all story titles from a node and its children."""
+        stories = []
+        if isinstance(node, list):
+            stories.extend(node)
+        elif isinstance(node, dict):
+            if '_stories' in node:
+                stories.extend(node['_stories'])
+            for key, value in node.items():
+                if key != '_stories':
+                    stories.extend(collect_stories(value))
+        return stories
+    
+    # Navigate to parent
+    if len(path) == 1:
+        # Deleting root-level category
+        if path[0] not in tree:
+            raise ValueError(f"Category not found: {path[0]}")
+        affected_stories = collect_stories(tree[path[0]])
+        del tree[path[0]]
+        logger.info(f"Deleted root-level category: {path[0]}")
+        return tree, affected_stories
+    
+    current = tree
+    for i, level in enumerate(path[:-1]):
+        if level not in current:
+            raise ValueError(f"Path not found: {'/'.join(path[:i+1])}")
+        
+        node = current[level]
+        if isinstance(node, list):
+            raise ValueError(f"Cannot navigate through leaf node at: {'/'.join(path[:i+1])}")
+        
+        if not isinstance(node, dict):
+            raise ValueError(f"Invalid tree structure at: {'/'.join(path[:i+1])}")
+        
+        current = node
+    
+    # Delete the target
+    target = path[-1]
+    if target not in current:
+        raise ValueError(f"Category not found: {'/'.join(path)}")
+    
+    affected_stories = collect_stories(current[target])
+    del current[target]
+    logger.info(f"Deleted category '{target}' from path '{'/'.join(path[:-1])}'")
+    
+    return tree, affected_stories
+
+
+def get_category_info(tree: dict, path: list) -> dict:
+    """
+    Get information about a category.
+    
+    Args:
+        tree: The codex tree dict
+        path: Full path to the category
+    
+    Returns:
+        Dict with keys: exists, has_children, has_stories, story_count, child_count
+    """
+    if not path:
+        # Root of tree
+        child_count = len([k for k in tree.keys() if k != '_stories'])
+        return {
+            'exists': True,
+            'has_children': child_count > 0,
+            'has_stories': False,
+            'story_count': 0,
+            'child_count': child_count
+        }
+    
+    current = tree
+    for level in path:
+        if level not in current:
+            return {'exists': False}
+        current = current[level]
+    
+    if isinstance(current, list):
+        return {
+            'exists': True,
+            'has_children': False,
+            'has_stories': len(current) > 0,
+            'story_count': len(current),
+            'child_count': 0
+        }
+    elif isinstance(current, dict):
+        story_count = len(current.get('_stories', []))
+        child_count = len([k for k in current.keys() if k != '_stories'])
+        return {
+            'exists': True,
+            'has_children': child_count > 0,
+            'has_stories': story_count > 0,
+            'story_count': story_count,
+            'child_count': child_count
+        }
+    
+    return {'exists': False}

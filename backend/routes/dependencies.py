@@ -252,6 +252,17 @@ class ExportBody(BaseModel):
     is_single: bool = True
 
 
+class CreateCategoryBody(BaseModel):
+    """Create new category request."""
+    parent_path: List[str]  # Path to parent category, empty list for root-level
+    name: str = Field(..., min_length=1, max_length=100)
+
+
+class DeleteCategoryBody(BaseModel):
+    """Delete category request."""
+    path: List[str]  # Full path to category to delete
+
+
 class BookResponse(BaseModel):
     """Book response model."""
     id: int

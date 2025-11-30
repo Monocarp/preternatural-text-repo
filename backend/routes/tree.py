@@ -8,6 +8,9 @@ Endpoints:
 - GET /api/get-unassigned - Get stories not assigned to any category
 - POST /api/assign-category - Assign story to category (editor only)
 - DELETE /api/remove-category - Remove story from category (editor only)
+- POST /api/create-category - Create new category/subcategory (editor only)
+- DELETE /api/delete-category - Delete category/subcategory (editor only)
+- GET /api/category-info/{path} - Get category metadata
 """
 
 import logging
@@ -17,13 +20,14 @@ from typing import Optional, Dict
 
 from fastapi import APIRouter, HTTPException, Depends
 
-from .dependencies import AssignBody, RemoveBody, require_editor
+from .dependencies import AssignBody, RemoveBody, CreateCategoryBody, DeleteCategoryBody, require_editor
 from utils import (
     get_cached_tree, get_stories_at_path, invalidate_cache,
     assign_to_path, remove_from_path, save_codex_tree_to_json,
     stories_dict, stories_dict_path, enrich_stories_with_book_metadata
 )
 from utils.cache import get_assigned_titles_set
+from tree.operations import create_category, delete_category, get_category_info
 
 log = logging.getLogger(__name__)
 
@@ -202,3 +206,176 @@ def remove_category(body: RemoveBody, user: Dict = Depends(require_editor)):
         log.debug(f"GitHub sync skipped: {e}")
     
     return {"status": "removed"}
+
+
+@router.post("/create-category")
+def create_category_endpoint(body: CreateCategoryBody, user: Dict = Depends(require_editor)):
+    """
+    Create a new category or subcategory.
+    
+    Creates the category in both database (if enabled) and JSON file.
+    
+    Args:
+        body.parent_path: Path to parent category (empty list for root-level)
+        body.name: Name of the new category
+    """
+    from utils import USE_DB, SessionLocal
+    from models import CodexNode
+    
+    tree = get_cached_tree()
+    
+    # Validate and create in tree
+    try:
+        updated_tree = create_category(tree, body.parent_path, body.name)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    
+    # Update database if enabled
+    if USE_DB and SessionLocal:
+        with SessionLocal() as db:
+            # Navigate to parent node
+            parent_id = None
+            if body.parent_path:
+                for level_name in body.parent_path:
+                    query = db.query(CodexNode).filter_by(name=level_name)
+                    if parent_id:
+                        query = query.filter_by(parent_id=parent_id)
+                    else:
+                        query = query.filter_by(parent_id=None)
+                    parent_node = query.first()
+                    
+                    if not parent_node:
+                        # Create missing parent nodes
+                        parent_node = CodexNode(name=level_name, parent_id=parent_id)
+                        db.add(parent_node)
+                        db.flush()
+                        log.info(f"Created missing parent node '{level_name}' in database")
+                    
+                    parent_id = parent_node.id
+            
+            # Check if category already exists in DB
+            existing = db.query(CodexNode).filter_by(name=body.name, parent_id=parent_id).first()
+            if existing:
+                log.warning(f"Category '{body.name}' already exists in database, skipping DB insert")
+            else:
+                new_node = CodexNode(name=body.name, parent_id=parent_id)
+                db.add(new_node)
+                db.commit()
+                log.info(f"Created category '{body.name}' in database")
+    
+    # Save to JSON
+    save_codex_tree_to_json(updated_tree)
+    invalidate_cache()
+    
+    # Auto-sync to GitHub
+    try:
+        from sync.github_sync import on_category_created
+        on_category_created(body.name, body.parent_path)
+    except Exception as e:
+        log.debug(f"GitHub sync skipped: {e}")
+    
+    return {
+        "status": "created",
+        "path": body.parent_path + [body.name]
+    }
+
+
+@router.delete("/delete-category")
+def delete_category_endpoint(body: DeleteCategoryBody, user: Dict = Depends(require_editor)):
+    """
+    Delete a category or subcategory.
+    
+    Removes the category from both database (if enabled) and JSON file.
+    Stories assigned to this category will be unassigned from it.
+    
+    Args:
+        body.path: Full path to the category to delete
+    """
+    from utils import USE_DB, SessionLocal
+    from models import CodexNode, NodeStory
+    
+    tree = get_cached_tree()
+    
+    # Get info before deletion
+    info = get_category_info(tree, body.path)
+    if not info.get('exists'):
+        raise HTTPException(status_code=404, detail=f"Category not found: {'/'.join(body.path)}")
+    
+    # Delete from tree
+    try:
+        updated_tree, affected_stories = delete_category(tree, body.path)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    
+    # Update database if enabled
+    if USE_DB and SessionLocal:
+        with SessionLocal() as db:
+            # Find the node to delete
+            parent_id = None
+            target_node = None
+            
+            for level_name in body.path:
+                query = db.query(CodexNode).filter_by(name=level_name)
+                if parent_id:
+                    query = query.filter_by(parent_id=parent_id)
+                else:
+                    query = query.filter_by(parent_id=None)
+                target_node = query.first()
+                
+                if not target_node:
+                    log.warning(f"Node '{level_name}' not found in database")
+                    break
+                
+                parent_id = target_node.id
+            
+            if target_node:
+                # Recursively delete node and children
+                def delete_node_recursive(node_id):
+                    # Delete all NodeStory associations for this node
+                    db.query(NodeStory).filter_by(node_id=node_id).delete()
+                    
+                    # Find and delete children
+                    children = db.query(CodexNode).filter_by(parent_id=node_id).all()
+                    for child in children:
+                        delete_node_recursive(child.id)
+                    
+                    # Delete the node itself
+                    db.query(CodexNode).filter_by(id=node_id).delete()
+                
+                delete_node_recursive(target_node.id)
+                db.commit()
+                log.info(f"Deleted category '{body.path[-1]}' and children from database")
+    
+    # Save to JSON
+    save_codex_tree_to_json(updated_tree)
+    invalidate_cache()
+    
+    # Auto-sync to GitHub
+    try:
+        from sync.github_sync import on_category_deleted
+        on_category_deleted(body.path[-1], body.path[:-1] if len(body.path) > 1 else [])
+    except Exception as e:
+        log.debug(f"GitHub sync skipped: {e}")
+    
+    return {
+        "status": "deleted",
+        "affected_stories": affected_stories,
+        "story_count": len(affected_stories),
+        "had_children": info.get('has_children', False)
+    }
+
+
+@router.get("/category-info/{path:path}")
+def get_category_info_endpoint(path: str):
+    """
+    Get information about a category.
+    
+    Args:
+        path: URL-encoded path like "Demonic%20Activity/Obsession"
+    
+    Returns dict with: exists, has_children, has_stories, story_count, child_count
+    """
+    parts = [urllib.parse.unquote(p.strip()) for p in path.split("/") if p.strip()]
+    tree = get_cached_tree()
+    
+    return get_category_info(tree, parts)

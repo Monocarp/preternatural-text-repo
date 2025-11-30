@@ -5,7 +5,7 @@ Tree module - Codex tree structure and operations.
 This module handles the category/taxonomy tree:
 - Loading from JSON or database
 - Saving to JSON and database  
-- Tree manipulation (assign, remove, find paths)
+- Tree manipulation (assign, remove, find paths, create, delete)
 - Default category structure (CATEGORIES)
 """
 
@@ -15,6 +15,9 @@ from .operations import (
     assign_to_path,
     remove_from_path,
     find_paths_for_title,
+    create_category,
+    delete_category,
+    get_category_info,
 )
 from .persistence import (
     load_codex_tree,
@@ -31,6 +34,9 @@ __all__ = [
     "assign_to_path",
     "remove_from_path",
     "find_paths_for_title",
+    "create_category",
+    "delete_category",
+    "get_category_info",
     # Persistence
     "load_codex_tree",
     "save_codex_tree",

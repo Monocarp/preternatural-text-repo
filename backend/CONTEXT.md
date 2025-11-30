@@ -113,6 +113,9 @@ state.py
 | `/api/get-unassigned` | GET | No | Get uncategorized stories |
 | `/api/assign-category` | POST | Editor | Add story to category |
 | `/api/remove-category` | DELETE | Editor | Remove story from category |
+| `/api/create-category` | POST | Editor | Create new category/subcategory |
+| `/api/delete-category` | DELETE | Editor | Delete category/subcategory |
+| `/api/category-info/{path}` | GET | No | Get category metadata |
 
 ### Story Routes (`routes/stories.py`)
 | Endpoint | Method | Auth | Purpose |

@@ -384,6 +384,32 @@ Dropdown checkbox filter for subcategories.
 
 ---
 
+### Component: `CategoryManager.tsx`
+
+Popup component for creating and deleting categories (editor only).
+
+| Function | Signature | Purpose |
+|----------|-----------|---------|
+| `loadCategoryInfo()` | `() => Promise<void>` | Fetches category metadata (story count, children) |
+| `handleCreate()` | `() => Promise<void>` | Creates new subcategory via `/api/create-category` |
+| `handleDelete()` | `() => Promise<void>` | Deletes category via `/api/delete-category` with confirmation |
+
+**Props:**
+- `currentPath: string[]` - Path to selected category (empty for root)
+- `categoryName: string | null` - Name of selected category
+- `isEditor: boolean` - Whether user has editor privileges
+- `onTreeChange: () => void` - Callback to refresh tree after changes
+- `position: { x, y }` - Screen position for popup
+- `onClose: () => void` - Close callback
+
+**Features:**
+- Create subcategories under any existing category
+- Delete categories (with confirmation by typing name)
+- Shows warnings for categories with stories or children
+- Right-click context menu or gear icon to access
+
+---
+
 ## Critical Architectural Decisions
 
 ### 1. Routes in main.tsx, Not App.tsx

@@ -309,3 +309,21 @@ def on_category_change(action: str, title: str, path: List[str]):
     """Call after assigning/removing a category."""
     path_str = " > ".join(path)
     sync_codex_tree(f"{action} '{title}' {'to' if action == 'Assign' else 'from'} {path_str}")
+
+
+def on_category_created(name: str, parent_path: List[str]):
+    """Call after creating a new category."""
+    if parent_path:
+        path_str = " > ".join(parent_path)
+        sync_codex_tree(f"Create category '{name}' under {path_str}")
+    else:
+        sync_codex_tree(f"Create root category '{name}'")
+
+
+def on_category_deleted(name: str, parent_path: List[str]):
+    """Call after deleting a category."""
+    if parent_path:
+        path_str = " > ".join(parent_path)
+        sync_codex_tree(f"Delete category '{name}' from {path_str}")
+    else:
+        sync_codex_tree(f"Delete root category '{name}'")

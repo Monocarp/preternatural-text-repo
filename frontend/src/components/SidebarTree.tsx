@@ -7,6 +7,7 @@ import 'rc-tree/assets/index.css'
 import './SidebarTree.css'
 import { useStore } from '../store'
 import { encodePathSegmentsForRoute } from '../utils/path'
+import CategoryManager from './CategoryManager'
 
 type TreeNode = {
   key: string
@@ -42,7 +43,13 @@ const SidebarTree = () => {
   const navigate = useNavigate()
   const app = useStackApp()
   const [currentUserEmail, setCurrentUserEmail] = useState<string | null>(null)
+  const [isEditor, setIsEditor] = useState(false)
   const [expandedKeys, setExpandedKeys] = useState<string[]>(['archive'])
+  // Category manager state
+  const [categoryManagerOpen, setCategoryManagerOpen] = useState(false)
+  const [categoryManagerPosition, setCategoryManagerPosition] = useState<{ x: number; y: number } | undefined>()
+  const [selectedCategoryPath, setSelectedCategoryPath] = useState<string[]>([])
+  const [selectedCategoryName, setSelectedCategoryName] = useState<string | null>(null)
   // Auto-collapse sidebar on smaller screens (< 1024px)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -75,6 +82,34 @@ const SidebarTree = () => {
     )
   }
 
+  // List of editor emails (should match backend EDITOR_EMAILS)
+  // If VITE_EDITOR_EMAILS is not set, allow any signed-in user to see the UI
+  // (backend will still enforce actual permissions)
+  const EDITOR_EMAILS = import.meta.env.VITE_EDITOR_EMAILS?.split(',').map((e: string) => e.trim().toLowerCase()) || []
+
+  const checkIsEditor = (email: string | null) => {
+    if (!email) return false
+    // If no editor emails configured, allow any signed-in user to see editor UI
+    // Backend will still enforce actual permissions
+    if (EDITOR_EMAILS.length === 0) return true
+    return EDITOR_EMAILS.includes(email.toLowerCase())
+  }
+
+  // Handle right-click to open category manager
+  const handleCategoryContextMenu = (e: React.MouseEvent, pathSegments: string[], categoryName: string | null) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setSelectedCategoryPath(pathSegments)
+    setSelectedCategoryName(categoryName)
+    setCategoryManagerPosition({ x: e.clientX, y: e.clientY })
+    setCategoryManagerOpen(true)
+  }
+
+  // Handle tree change (refresh after category create/delete)
+  const handleTreeChange = () => {
+    loadTree()
+  }
+
   useEffect(() => {
     loadTree()
     // Load current user (if any)
@@ -82,9 +117,13 @@ const SidebarTree = () => {
       try {
         const u = await app.getUser()
         const label = extractUserLabel(u as any)
+        console.log('[SidebarTree] User loaded:', label, 'isEditor:', checkIsEditor(label))
         setCurrentUserEmail(label)
+        setIsEditor(checkIsEditor(label))
       } catch (_e) {
+        console.log('[SidebarTree] No user logged in')
         setCurrentUserEmail(null)
+        setIsEditor(false)
       }
     })()
 
@@ -95,11 +134,14 @@ const SidebarTree = () => {
         const label = extractUserLabel(u as any)
         if (label) {
           setCurrentUserEmail(label)
+          setIsEditor(checkIsEditor(label))
         } else {
           setCurrentUserEmail(null)
+          setIsEditor(false)
         }
       } catch (_e) {
         setCurrentUserEmail(null)
+        setIsEditor(false)
       }
     }
     const onFocus = () => { refreshUser() }
@@ -161,9 +203,17 @@ const SidebarTree = () => {
     const hasChildren = nodeData.children && nodeData.children.length > 0
     const isExpanded = expandedKeys.includes(nodeData.key)
     const shouldTruncate = nodeData.title.length > 20
+    const pathSegments = (nodeData as TreeNode).pathSegments || []
     
     return (
-      <div className="flex items-center w-full group relative overflow-hidden">
+      <div 
+        className="flex items-center w-full group relative overflow-hidden"
+        onContextMenu={(e) => {
+          // Don't show context menu for special nodes
+          if (nodeData.key === 'archive' || nodeData.key === 'unassigned') return
+          handleCategoryContextMenu(e, pathSegments, nodeData.title)
+        }}
+      >
         <span 
           className={`cursor-pointer hover:text-blue-400 text-gray-200 pr-2 ${shouldTruncate ? 'truncate' : ''}`}
           style={shouldTruncate && hasChildren ? { maxWidth: 'calc(100% - 1.5rem)' } : undefined}
@@ -191,6 +241,19 @@ const SidebarTree = () => {
             {isExpanded ? '▼' : '▶'}
           </span>
         )}
+        {/* Show gear icon for editors on hover */}
+        {isEditor && nodeData.key !== 'archive' && nodeData.key !== 'unassigned' && (
+          <span
+            className="text-gray-500 text-xs cursor-pointer hover:text-blue-400 flex-shrink-0 ml-1 opacity-0 group-hover:opacity-100 transition-opacity"
+            onClick={(e) => {
+              e.stopPropagation()
+              handleCategoryContextMenu(e as any, pathSegments, nodeData.title)
+            }}
+            title="Manage category"
+          >
+            ⚙
+          </span>
+        )}
       </div>
     )
   }
@@ -215,9 +278,22 @@ const SidebarTree = () => {
   ]
 
   return (
-    <aside className={`h-full bg-gray-800 border-r border-gray-700 transition-all duration-300 ease-in-out flex flex-col relative flex-shrink-0 ${
-      sidebarCollapsed ? 'w-12' : 'w-[15vw] min-w-[200px] max-w-[280px]'
-    }`}>
+    <>
+      {/* Category Manager Popup */}
+      {categoryManagerOpen && (
+        <CategoryManager
+          currentPath={selectedCategoryPath}
+          categoryName={selectedCategoryName}
+          isEditor={isEditor}
+          onTreeChange={handleTreeChange}
+          position={categoryManagerPosition}
+          onClose={() => setCategoryManagerOpen(false)}
+        />
+      )}
+      
+      <aside className={`h-full bg-gray-800 border-r border-gray-700 transition-all duration-300 ease-in-out flex flex-col relative flex-shrink-0 ${
+        sidebarCollapsed ? 'w-12' : 'w-[15vw] min-w-[200px] max-w-[280px]'
+      }`}>
       {/* Header with Toggle Button */}
       <div className={`p-3 border-b border-gray-700 flex items-center ${sidebarCollapsed ? 'justify-center' : 'justify-between'} bg-gray-800`}>
         {!sidebarCollapsed && (
@@ -273,6 +349,25 @@ const SidebarTree = () => {
       {/* Tree Content */}
       {!sidebarCollapsed ? (
         <div className="flex-1 overflow-y-auto pl-4 pt-4 pb-4 pr-0">
+          {/* Add Root Category Button for Editors */}
+          {isEditor && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setSelectedCategoryPath([])
+                setSelectedCategoryName(null)
+                setCategoryManagerPosition({ x: e.clientX + 10, y: e.clientY })
+                setCategoryManagerOpen(true)
+              }}
+              className="mb-2 flex items-center gap-1 text-xs text-gray-400 hover:text-green-400 transition-colors"
+              title="Add a new top-level category"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              Add Category
+            </button>
+          )}
           <Tree
             treeData={treeData}
             expandedKeys={expandedKeys}
@@ -406,6 +501,7 @@ const SidebarTree = () => {
         )}
       </div>
     </aside>
+    </>
   )
 }
 
