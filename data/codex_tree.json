@@ -253,6 +253,10 @@
             "Sacrilegious Baptism": {}
         },
         "Sacrificing Children": {},
-        "Transportation": {}
+        "Transportation": {
+            "_stories": [
+                "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+            ]
+        }
     }
 }
