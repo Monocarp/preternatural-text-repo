@@ -4,12 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { useStackApp } from '@stackframe/react'
 import apiClient from '../utils/axios'
 import SidebarTree from '../components/SidebarTree'
-import {
-  useCategoryAssignment,
-  useKeywordsEditor,
-  useNewStoryCreator,
-  calculateCharPositionFromClick
-} from '../hooks'
 
 interface SearchResult {
   title: string
@@ -50,39 +44,36 @@ const SearchCurate = () => {
     return true
   })
   
-  // Boundary editing - kept as local state since hook needs fullText which is loaded async
-  // The hook's value proposition is limited here due to the async fullText loading pattern
+  // Boundary editing state
   const [editMode, setEditMode] = useState(false)
   const [fullText, setFullText] = useState<string>('')
   const [editedStart, setEditedStart] = useState<number>(0)
   const [editedEnd, setEditedEnd] = useState<number>(0)
-  const [selectingStart, setSelectingStart] = useState(true)
+  const [selectingStart, setSelectingStart] = useState(true) // true = selecting start, false = selecting end
   const textContainerRef = useRef<HTMLDivElement>(null)
   
-  // Category assignment - using custom hook
-  const categoryAssignment = useCategoryAssignment(selectedStory)
+  // Category assignment state
+  const [codexTree, setCodexTree] = useState<any>(null)
+  const [selectedPath, setSelectedPath] = useState<string[]>([])
+  const [currentAssignments, setCurrentAssignments] = useState<string[][]>([])
+  const [assigning, setAssigning] = useState(false)
 
-  // New story creation - using custom hook
-  const newStoryCreator = useNewStoryCreator()
+  // New story mode state
+  const [newStoryMode, setNewStoryMode] = useState(false)
+  const [newStoryStart, setNewStoryStart] = useState<number | null>(null)
+  const [newStoryEnd, setNewStoryEnd] = useState<number | null>(null)
+  const [newStorySelectingStart, setNewStorySelectingStart] = useState(true)
+  const [newStoryTitle, setNewStoryTitle] = useState('')
+  const [newStoryKeywords, setNewStoryKeywords] = useState('')
+  const [newStoryPages, setNewStoryPages] = useState('')
+  const [addingStory, setAddingStory] = useState(false)
 
-  // Keywords editing - using custom hook
-  const keywordsEditor = useKeywordsEditor({
-    onSaveSuccess: (_story, newKeywords) => {
-      // Update local selected story state
-      if (selectedStory) {
-        const updatedStory = { ...selectedStory, keywords: newKeywords }
-        setSelectedStory(updatedStory)
-        // Update in results list
-        setResults(prev => prev.map(r =>
-          r.title === selectedStory.title && r.book_slug === selectedStory.book_slug
-            ? { ...r, keywords: newKeywords }
-            : r
-        ))
-      }
-    }
-  })
+  // Keywords editing state
+  const [editingKeywords, setEditingKeywords] = useState(false)
+  const [editedKeywords, setEditedKeywords] = useState('')
+  const [savingKeywords, setSavingKeywords] = useState(false)
 
-  // Load available sources on mount
+  // Load available sources and codex tree on mount
   useEffect(() => {
     apiClient.get('/sources')
       .then(res => {
@@ -92,9 +83,53 @@ const SearchCurate = () => {
         console.error('Error loading sources:', err)
         setSources(['All Sources'])
       })
+    
+    apiClient.get('/get-tree')
+      .then(res => {
+        setCodexTree(res.data)
+      })
+      .catch(err => {
+        console.error('Error loading codex tree:', err)
+      })
   }, [])
   
-  // Current assignments now handled by categoryAssignment hook
+  // Load current assignments when story is selected
+  useEffect(() => {
+    if (!selectedStory || !codexTree) {
+      setCurrentAssignments([])
+      return
+    }
+    
+    // Find all paths where this story is assigned
+    const findAssignments = (node: any, path: string[] = []): string[][] => {
+      const assignments: string[][] = []
+      
+      if (typeof node === 'object' && node !== null) {
+        // Check if this node has stories
+        if (Array.isArray(node)) {
+          if (node.includes(selectedStory.title)) {
+            assignments.push([...path])
+          }
+        } else if (node._stories && Array.isArray(node._stories)) {
+          if (node._stories.includes(selectedStory.title)) {
+            assignments.push([...path])
+          }
+        }
+        
+        // Recursively check children
+        for (const [key, value] of Object.entries(node)) {
+          if (key !== '_stories') {
+            assignments.push(...findAssignments(value, [...path, key]))
+          }
+        }
+      }
+      
+      return assignments
+    }
+    
+    const assignments = findAssignments(codexTree)
+    setCurrentAssignments(assignments)
+  }, [selectedStory, codexTree])
 
   // Handle search
   const handleSearch = async () => {
@@ -128,7 +163,7 @@ const SearchCurate = () => {
   const handleSelectStory = async (story: SearchResult) => {
     setSelectedStory(story)
     setEditMode(false) // Exit edit mode when selecting new story
-    newStoryCreator.cancel() // Exit new story mode when selecting existing story
+    setNewStoryMode(false) // Exit new story mode when selecting existing story
     setLoading(true)
     try {
       const res = await apiClient.post('/render-story', {
@@ -206,20 +241,66 @@ const SearchCurate = () => {
 
   // Handle click on text to set boundary
   const handleTextClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!editMode || !fullText) return
+    if (!editMode || !fullText || !textContainerRef.current) return
     
-    const charPos = calculateCharPositionFromClick(e, textContainerRef, fullText.length, {
-      useIndexOfFallback: true
-    })
+    e.preventDefault()
+    const textContainer = textContainerRef.current
+    const clickX = e.clientX
+    const clickY = e.clientY
     
-    if (charPos === null) return
+    // Create a range at the click point
+    const range = document.caretRangeFromPoint?.(clickX, clickY)
+    if (!range) return
+    
+    // Calculate character position by walking through text nodes
+    let charPos = 0
+    const walker = document.createTreeWalker(
+      textContainer,
+      NodeFilter.SHOW_TEXT,
+      null
+    )
+    
+    let node: Node | null
+    while ((node = walker.nextNode())) {
+      const textNode = node as Text
+      if (range.startContainer === textNode) {
+        charPos += range.startOffset
+        break
+      } else if (range.startContainer.contains?.(textNode) || textNode.contains?.(range.startContainer)) {
+        // If the range is within this text node's parent, calculate offset
+        if (range.startContainer.nodeType === Node.TEXT_NODE) {
+          const rangeText = (range.startContainer as Text).textContent || ''
+          const beforeRange = textContainer.textContent?.indexOf(rangeText, charPos) || charPos
+          charPos = beforeRange + range.startOffset
+        } else {
+          charPos += textNode.textContent?.length || 0
+        }
+        break
+      } else {
+        charPos += textNode.textContent?.length || 0
+      }
+    }
+    
+    // Fallback: use textContent if walker didn't find it
+    if (charPos === 0 && range.startContainer.nodeType === Node.TEXT_NODE) {
+      const allText = textContainer.textContent || ''
+      const clickedText = (range.startContainer as Text).textContent || ''
+      const index = allText.indexOf(clickedText)
+      if (index !== -1) {
+        charPos = index + range.startOffset
+      }
+    }
+    
+    // Ensure valid range
+    charPos = Math.min(Math.max(0, charPos), fullText.length)
     
     if (selectingStart) {
       setEditedStart(charPos)
-      setSelectingStart(false)
+      setSelectingStart(false) // Switch to selecting end
     } else {
+      // Ensure end is after start
       setEditedEnd(Math.max(charPos, editedStart))
-      setSelectingStart(true)
+      setSelectingStart(true) // Switch back to selecting start for next click
     }
   }
 
@@ -254,7 +335,8 @@ const SearchCurate = () => {
         setStoryContent('')
         
         // Refresh tree
-        categoryAssignment.loadTree()
+        const treeRes = await apiClient.get('/get-tree')
+        setCodexTree(treeRes.data)
       }
     } catch (err: any) {
       console.error('Error deleting story:', err)
@@ -268,9 +350,165 @@ const SearchCurate = () => {
     }
   }
 
-  // Keywords editing now handled by keywordsEditor hook
+  // Keywords editing handlers
+  const handleStartEditKeywords = () => {
+    if (!selectedStory) return
+    setEditingKeywords(true)
+    setEditedKeywords(selectedStory.keywords || '')
+  }
 
-  // Category assignment now handled by categoryAssignment hook
+  const handleSaveKeywords = async () => {
+    if (!selectedStory) return
+    
+    setSavingKeywords(true)
+    try {
+      const user = await app.getUser()
+      if (!user) {
+        alert('You must be logged in to edit keywords.')
+        setSavingKeywords(false)
+        return
+      }
+
+      await apiClient.post('/update-keywords', {
+        title: selectedStory.title,
+        book_slug: selectedStory.book_slug,
+        keywords: editedKeywords.trim()
+      })
+
+      // Update local state
+      const updatedStory = { ...selectedStory, keywords: editedKeywords.trim() }
+      setSelectedStory(updatedStory)
+      
+      // Update in results list
+      setResults(prev => prev.map(r => 
+        r.title === selectedStory.title && r.book_slug === selectedStory.book_slug
+          ? { ...r, keywords: editedKeywords.trim() }
+          : r
+      ))
+
+      setEditingKeywords(false)
+      setEditedKeywords('')
+      alert('Keywords updated successfully!')
+    } catch (err: any) {
+      console.error('Error updating keywords:', err)
+      const status = err?.response?.status
+      if (status === 401 || status === 403) {
+        alert('You must be signed in as an editor to edit keywords.')
+      } else {
+        alert('Failed to update keywords. Please try again.')
+      }
+    } finally {
+      setSavingKeywords(false)
+    }
+  }
+
+  const handleCancelEditKeywords = () => {
+    setEditingKeywords(false)
+    setEditedKeywords('')
+  }
+
+  const handleAssignCategory = async () => {
+    if (!selectedStory || selectedPath.length === 0) return
+    
+    setAssigning(true)
+    try {
+      await apiClient.post('/assign-category', {
+        path: selectedPath,
+        story: {
+          title: selectedStory.title,
+          book_slug: selectedStory.book_slug,
+          pages: selectedStory.pages,
+          keywords: selectedStory.keywords,
+          start_char: selectedStory.start_char,
+          end_char: selectedStory.end_char
+        }
+      })
+      
+      // Reload tree to get updated assignments
+      const treeRes = await apiClient.get('/get-tree')
+      setCodexTree(treeRes.data)
+      
+      const assignedPath = selectedPath.join(' > ')
+      // Clear selected path
+      setSelectedPath([])
+      
+      // Force re-check of assignments by triggering useEffect
+      // The useEffect will run automatically when codexTree changes
+      
+      alert(`Story assigned to ${assignedPath}`)
+    } catch (err: any) {
+      console.error('Error assigning category:', err)
+      const status = err?.response?.status
+      if (status === 401 || status === 403) {
+        alert('You must be signed in as an editor to assign categories.')
+      } else {
+        alert('Failed to assign category. Please try again.')
+      }
+    } finally {
+      setAssigning(false)
+    }
+  }
+  
+  // Handle category removal
+  const handleRemoveCategory = async (path: string[]) => {
+    if (!selectedStory) return
+    
+    if (!confirm(`Remove "${selectedStory.title}" from ${path.join(' > ')}?`)) {
+      return
+    }
+    
+    setAssigning(true)
+    try {
+      await apiClient.delete('/remove-category', {
+        data: {
+          path: path,
+          title: selectedStory.title
+        }
+      })
+      
+      // Reload tree to get updated assignments
+      const treeRes = await apiClient.get('/get-tree')
+      setCodexTree(treeRes.data)
+      
+      alert(`Story removed from ${path.join(' > ')}`)
+    } catch (err: any) {
+      console.error('Error removing category:', err)
+      const status = err?.response?.status
+      if (status === 401 || status === 403) {
+        alert('You must be signed in as an editor to remove categories.')
+      } else {
+        alert('Failed to remove category. Please try again.')
+      }
+    } finally {
+      setAssigning(false)
+    }
+  }
+  
+  // Helper function to get nested options for path selection
+  const getPathOptions = (tree: any, currentPath: string[] = []): string[] => {
+    if (!tree || typeof tree !== 'object') return []
+    
+    let node = tree
+    for (const level of currentPath) {
+      if (node[level]) {
+        node = node[level]
+      } else {
+        return []
+      }
+    }
+    
+    // Get keys that are not _stories
+    return Object.keys(node).filter(key => key !== '_stories')
+  }
+  
+  // Handle path level selection
+  const handlePathLevelChange = (level: number, value: string) => {
+    const newPath = selectedPath.slice(0, level)
+    if (value) {
+      newPath.push(value)
+    }
+    setSelectedPath(newPath)
+  }
 
   // Save boundary changes (persist to backend)
   const handleSaveBoundaries = async () => {
@@ -368,13 +606,176 @@ const SearchCurate = () => {
   // Enter new story mode
   const handleEnterNewStoryMode = async () => {
     if (!selectedStory) return
+    
+    setLoading(true)
+    setNewStoryMode(true)
     setEditMode(false) // Exit edit mode if active
-    await newStoryCreator.startCreating(selectedStory.book_slug)
+    try {
+      // Load full text for the book
+      const res = await apiClient.get(`/full-text/${selectedStory.book_slug}`)
+      setFullText(res.data.text)
+      setNewStoryStart(null)
+      setNewStoryEnd(null)
+      setNewStorySelectingStart(true)
+      setNewStoryTitle('')
+      setNewStoryKeywords('')
+      setNewStoryPages('')
+    } catch (err) {
+      console.error('Error loading full text:', err)
+      setNewStoryMode(false)
+    } finally {
+      setLoading(false)
+    }
   }
 
-  // New story text click handled by newStoryCreator.handleTextClick
+  // Handle text click for new story selection
+  const handleNewStoryTextClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!newStoryMode || !fullText || !textContainerRef.current) return
+    
+    e.preventDefault()
+    const textContainer = textContainerRef.current
+    const clickX = e.clientX
+    const clickY = e.clientY
+    
+    // Create a range at the click point
+    const range = document.caretRangeFromPoint?.(clickX, clickY)
+    if (!range) return
+    
+    // Calculate character position by walking through text nodes
+    let charPos = 0
+    const walker = document.createTreeWalker(
+      textContainer,
+      NodeFilter.SHOW_TEXT,
+      null
+    )
+    
+    let node: Node | null
+    while ((node = walker.nextNode())) {
+      const textNode = node as Text
+      if (range.startContainer === textNode) {
+        charPos += range.startOffset
+        break
+      } else if (range.startContainer.contains?.(textNode) || textNode.contains?.(range.startContainer)) {
+        // If the range is within this text node's parent, calculate offset
+        if (range.startContainer.nodeType === Node.TEXT_NODE) {
+          const rangeText = (range.startContainer as Text).textContent || ''
+          const beforeRange = textContainer.textContent?.indexOf(rangeText, charPos) || charPos
+          charPos = beforeRange + range.startOffset
+        } else {
+          charPos += textNode.textContent?.length || 0
+        }
+        break
+      } else {
+        charPos += textNode.textContent?.length || 0
+      }
+    }
+    
+    // Fallback: use textContent if walker didn't find it
+    if (charPos === 0 && range.startContainer.nodeType === Node.TEXT_NODE) {
+      const allText = textContainer.textContent || ''
+      const clickedText = (range.startContainer as Text).textContent || ''
+      const index = allText.indexOf(clickedText)
+      if (index !== -1) {
+        charPos = index + range.startOffset
+      }
+    }
+    
+    // Ensure valid range
+    charPos = Math.min(Math.max(0, charPos), fullText.length)
+    
+    if (newStorySelectingStart) {
+      setNewStoryStart(charPos)
+      setNewStorySelectingStart(false) // Switch to selecting end
+    } else {
+      // Ensure end is after start
+      setNewStoryEnd(Math.max(charPos, newStoryStart || 0))
+      setNewStorySelectingStart(true) // Switch back to selecting start for next click
+    }
+  }
 
-  // Cancel and add new story handled by newStoryCreator.cancel() and newStoryCreator.addStory()
+  // Cancel new story mode
+  const handleCancelNewStory = () => {
+    setNewStoryMode(false)
+    setFullText('')
+    setNewStoryStart(null)
+    setNewStoryEnd(null)
+    setNewStoryTitle('')
+    setNewStoryKeywords('')
+    setNewStoryPages('')
+  }
+
+  // Add new story
+  const handleAddNewStory = async () => {
+    if (!selectedStory || newStoryStart === null || newStoryEnd === null || !newStoryTitle.trim()) return
+    
+    const bookName = selectedStory.book_slug ? selectedStory.book_slug.replace(/_/g, ' ') : 'Unknown Book'
+    if (!confirm(`Add new story "${newStoryTitle}" to ${bookName}?`)) {
+      return
+    }
+    
+    setAddingStory(true)
+    try {
+      const response = await apiClient.post('/add-story', {
+        book_slug: selectedStory.book_slug,
+        title: newStoryTitle.trim(),
+        keywords: newStoryKeywords.trim(),
+        pages: newStoryPages.trim(),
+        start_char: newStoryStart,
+        end_char: newStoryEnd
+      })
+      
+      console.log('Add story response:', response.data)
+      
+      // Check if overlap warning was returned
+      if (response.data?.status === 'overlap_warning') {
+        const overlaps = response.data.overlaps || []
+        const overlapMsg = overlaps.map((o: any) => `  • ${o.title} (${o.overlap_percent}% overlap)`).join('\n')
+        const confirmMsg = `Warning: This story overlaps with existing stories:\n\n${overlapMsg}\n\nAdd anyway?`
+        
+        if (!confirm(confirmMsg)) {
+          setAddingStory(false)
+          return
+        }
+        
+        // Retry with force_overlap flag
+        await apiClient.post('/add-story', {
+          book_slug: selectedStory.book_slug,
+          title: newStoryTitle.trim(),
+          keywords: newStoryKeywords.trim(),
+          pages: newStoryPages.trim(),
+          start_char: newStoryStart,
+          end_char: newStoryEnd,
+          force_overlap: true
+        })
+        
+        alert(`Story "${newStoryTitle}" added successfully and is now searchable!`)
+      } else {
+        // Success - no overlaps
+        alert(`Story "${newStoryTitle}" added successfully and is now searchable!`)
+      }
+      
+      // Exit new story mode
+      setNewStoryMode(false)
+      setFullText('')
+      setNewStoryStart(null)
+      setNewStoryEnd(null)
+      setNewStoryTitle('')
+      setNewStoryKeywords('')
+      setNewStoryPages('')
+    } catch (err: any) {
+      console.error('Error adding story:', err)
+      const status = err?.response?.status
+      if (status === 401 || status === 403) {
+        alert('You must be signed in as an editor to add stories.')
+      } else if (status === 409) {
+        alert('This story overlaps with an existing story. Please adjust the boundaries.')
+      } else {
+        alert('Failed to add story. Please try again.')
+      }
+    } finally {
+      setAddingStory(false)
+    }
+  }
 
   return (
     <div className="flex h-screen h-[100dvh] max-h-screen max-w-[100vw] overflow-hidden bg-gray-900 text-white">
@@ -531,7 +932,7 @@ const SearchCurate = () => {
       <div className="flex-1 flex flex-col bg-gray-900 min-w-0 overflow-hidden">
         <div className="p-4 border-b border-gray-700 flex-shrink-0">
           <h2 className="text-lg font-semibold">Story Viewer</h2>
-          {selectedStory && !editMode && !newStoryCreator.isActive && (
+          {selectedStory && !editMode && !newStoryMode && (
             <div className="mt-2 flex gap-2 flex-wrap">
               <button
                 onClick={() => handleToggleMode('static')}
@@ -601,10 +1002,10 @@ const SearchCurate = () => {
               </div>
             </div>
           )}
-          {newStoryCreator.isActive && (
+          {newStoryMode && (
             <div className="mt-2 space-y-3">
               <div className="text-sm text-gray-300">
-                {newStoryCreator.selectingStart ? (
+                {newStorySelectingStart ? (
                   <span>Click to set <strong className="text-green-400">START</strong> position for new story</span>
                 ) : (
                   <span>Click to set <strong className="text-yellow-400">END</strong> position for new story</span>
@@ -617,8 +1018,8 @@ const SearchCurate = () => {
                   <label className="block text-sm font-medium mb-1 text-gray-300">Story Title *</label>
                   <input
                     type="text"
-                    value={newStoryCreator.title}
-                    onChange={(e) => newStoryCreator.setTitle(e.target.value)}
+                    value={newStoryTitle}
+                    onChange={(e) => setNewStoryTitle(e.target.value)}
                     placeholder="Enter story title"
                     className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
@@ -627,8 +1028,8 @@ const SearchCurate = () => {
                   <label className="block text-sm font-medium mb-1 text-gray-300">Keywords</label>
                   <input
                     type="text"
-                    value={newStoryCreator.keywords}
-                    onChange={(e) => newStoryCreator.setKeywords(e.target.value)}
+                    value={newStoryKeywords}
+                    onChange={(e) => setNewStoryKeywords(e.target.value)}
                     placeholder="e.g., ghost, haunting, supernatural"
                     className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
@@ -637,8 +1038,8 @@ const SearchCurate = () => {
                   <label className="block text-sm font-medium mb-1 text-gray-300">Pages</label>
                   <input
                     type="text"
-                    value={newStoryCreator.pages}
-                    onChange={(e) => newStoryCreator.setPages(e.target.value)}
+                    value={newStoryPages}
+                    onChange={(e) => setNewStoryPages(e.target.value)}
                     placeholder="e.g., 45-52"
                     className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
@@ -647,23 +1048,23 @@ const SearchCurate = () => {
               
               <div className="flex gap-2">
                 <button
-                  onClick={() => newStoryCreator.addStory()}
-                  disabled={!newStoryCreator.canAdd || newStoryCreator.adding}
+                  onClick={handleAddNewStory}
+                  disabled={!newStoryTitle.trim() || newStoryStart === null || newStoryEnd === null || addingStory}
                   className="px-4 py-2 rounded text-sm bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
-                  {newStoryCreator.adding ? 'Adding...' : 'Add Story'}
+                  {addingStory ? 'Adding...' : 'Add Story'}
                 </button>
                 <button
-                  onClick={newStoryCreator.cancel}
+                  onClick={handleCancelNewStory}
                   className="px-4 py-2 rounded text-sm bg-gray-700 text-gray-200 hover:bg-gray-600 transition-colors"
                 >
                   Cancel
                 </button>
               </div>
               
-              {newStoryCreator.start !== null && newStoryCreator.end !== null && (
+              {newStoryStart !== null && newStoryEnd !== null && (
                 <div className="text-xs text-gray-400">
-                  Start: {newStoryCreator.start.toLocaleString()} | End: {newStoryCreator.end.toLocaleString()} | Length: {(newStoryCreator.end - newStoryCreator.start).toLocaleString()} chars
+                  Start: {newStoryStart.toLocaleString()} | End: {newStoryEnd.toLocaleString()} | Length: {(newStoryEnd - newStoryStart).toLocaleString()} chars
                 </div>
               )}
             </div>
@@ -671,7 +1072,7 @@ const SearchCurate = () => {
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">
-          {loading && !editMode && !newStoryCreator.isActive ? (
+          {loading && !editMode && !newStoryMode ? (
             <div className="flex items-center justify-center h-full text-gray-400">
               Loading story...
             </div>
@@ -703,46 +1104,46 @@ const SearchCurate = () => {
                 </span>
               </div>
             </div>
-          ) : newStoryCreator.isActive && newStoryCreator.fullText ? (
+          ) : newStoryMode && fullText ? (
             <div className="h-full">
-              {newStoryCreator.start !== null && newStoryCreator.end !== null && (
+              {newStoryStart !== null && newStoryEnd !== null && (
                 <div className="mb-4 p-3 bg-gray-800 rounded border border-gray-700">
                   <div className="text-sm text-gray-300 mb-2">
                     <span className="inline-block w-32">New Story Range:</span>
-                    <span className="text-green-400">{newStoryCreator.start.toLocaleString()}</span>
+                    <span className="text-green-400">{newStoryStart.toLocaleString()}</span>
                     <span className="mx-2">to</span>
-                    <span className="text-yellow-400">{newStoryCreator.end.toLocaleString()}</span>
+                    <span className="text-yellow-400">{newStoryEnd.toLocaleString()}</span>
                   </div>
                   <div className="text-xs text-gray-400">
-                    Preview: {newStoryCreator.fullText.substring(newStoryCreator.start, Math.min(newStoryCreator.start + 100, newStoryCreator.end))}...
+                    Preview: {fullText.substring(newStoryStart, Math.min(newStoryStart + 100, newStoryEnd))}...
                   </div>
                 </div>
               )}
               <div
-                ref={newStoryCreator.textContainerRef}
-                onClick={newStoryCreator.handleTextClick}
+                ref={textContainerRef}
+                onClick={handleNewStoryTextClick}
                 className="bg-gray-800 border border-gray-700 rounded p-4 cursor-text select-none font-mono text-sm leading-relaxed"
                 style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
               >
-                {newStoryCreator.start !== null && newStoryCreator.end !== null ? (
+                {newStoryStart !== null && newStoryEnd !== null ? (
                   <>
-                    {newStoryCreator.fullText.substring(0, newStoryCreator.start)}
+                    {fullText.substring(0, newStoryStart)}
                     <span className="bg-green-600 bg-opacity-50 text-green-200 px-1 rounded">
-                      {newStoryCreator.fullText.substring(newStoryCreator.start, newStoryCreator.end)}
+                      {fullText.substring(newStoryStart, newStoryEnd)}
                     </span>
                     <span className="bg-yellow-600 bg-opacity-30 text-yellow-200">
-                      {newStoryCreator.fullText.substring(newStoryCreator.end)}
+                      {fullText.substring(newStoryEnd)}
                     </span>
                   </>
-                ) : newStoryCreator.start !== null ? (
+                ) : newStoryStart !== null ? (
                   <>
-                    {newStoryCreator.fullText.substring(0, newStoryCreator.start)}
+                    {fullText.substring(0, newStoryStart)}
                     <span className="bg-green-600 bg-opacity-50 text-green-200 px-1 rounded">
-                      {newStoryCreator.fullText.substring(newStoryCreator.start)}
+                      {fullText.substring(newStoryStart)}
                     </span>
                   </>
                 ) : (
-                  newStoryCreator.fullText
+                  fullText
                 )}
               </div>
             </div>
@@ -774,25 +1175,25 @@ const SearchCurate = () => {
             {/* Keywords Section */}
             <div>
               <h3 className="text-xs font-medium mb-1.5 text-gray-300">Keywords</h3>
-              {keywordsEditor.isEditing ? (
+              {editingKeywords ? (
                 <div className="space-y-2">
                   <input
                     type="text"
-                    value={keywordsEditor.editedKeywords}
-                    onChange={(e) => keywordsEditor.setEditedKeywords(e.target.value)}
+                    value={editedKeywords}
+                    onChange={(e) => setEditedKeywords(e.target.value)}
                     placeholder="e.g., ghost, haunting, supernatural"
                     className="w-full px-2 py-1.5 bg-gray-700 border border-gray-600 rounded text-white text-xs placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
                   <div className="flex gap-1">
                     <button
-                      onClick={() => keywordsEditor.saveKeywords(selectedStory)}
-                      disabled={keywordsEditor.saving}
+                      onClick={handleSaveKeywords}
+                      disabled={savingKeywords}
                       className="flex-1 px-2 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
-                      {keywordsEditor.saving ? 'Saving...' : 'Save'}
+                      {savingKeywords ? 'Saving...' : 'Save'}
                     </button>
                     <button
-                      onClick={keywordsEditor.cancelEditing}
+                      onClick={handleCancelEditKeywords}
                       className="flex-1 px-2 py-1 text-xs bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors"
                     >
                       Cancel
@@ -805,7 +1206,7 @@ const SearchCurate = () => {
                     {selectedStory.keywords || <span className="italic">No keywords</span>}
                   </p>
                   <button
-                    onClick={() => keywordsEditor.startEditing(selectedStory)}
+                    onClick={handleStartEditKeywords}
                     className="px-2 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors flex-shrink-0"
                   >
                     Edit
@@ -817,19 +1218,19 @@ const SearchCurate = () => {
             {/* Current Assignments */}
             <div>
               <h3 className="text-xs font-medium mb-1.5 text-gray-300">Category Assignments</h3>
-              {categoryAssignment.currentAssignments.length === 0 ? (
+              {currentAssignments.length === 0 ? (
                 <div className="text-xs text-gray-500 italic">Not assigned</div>
               ) : (
                 <div className="space-y-1">
-                  {categoryAssignment.currentAssignments.map((path: string[], idx: number) => (
+                  {currentAssignments.map((path, idx) => (
                     <div
                       key={idx}
                       className="flex items-center justify-between p-1.5 bg-gray-700 rounded text-xs"
                     >
                       <span className="text-gray-200 truncate flex-1 mr-1">{path.join(' > ')}</span>
                       <button
-                        onClick={() => categoryAssignment.removeCategory(path)}
-                        disabled={categoryAssignment.assigning}
+                        onClick={() => handleRemoveCategory(path)}
+                        disabled={assigning}
                         className="px-1.5 py-0.5 text-xs bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex-shrink-0"
                       >
                         ×
@@ -846,16 +1247,16 @@ const SearchCurate = () => {
               
               {/* Path Selection Dropdowns */}
               <div className="space-y-1.5 mb-2">
-                {categoryAssignment.codexTree ? (
+                {codexTree ? (
                   <>
                     {/* Level 1 */}
                     <select
-                      value={categoryAssignment.selectedPath[0] || ''}
-                      onChange={(e) => categoryAssignment.handlePathLevelChange(0, e.target.value)}
+                      value={selectedPath[0] || ''}
+                      onChange={(e) => handlePathLevelChange(0, e.target.value)}
                       className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
                     >
                       <option value="">Select category...</option>
-                      {categoryAssignment.getPathOptions([]).map((option: string) => (
+                      {getPathOptions(codexTree, []).map((option) => (
                         <option key={option} value={option}>
                           {option}
                         </option>
@@ -863,14 +1264,14 @@ const SearchCurate = () => {
                     </select>
                     
                     {/* Level 2 */}
-                    {categoryAssignment.selectedPath.length >= 1 && categoryAssignment.getPathOptions([categoryAssignment.selectedPath[0]]).length > 0 && (
+                    {selectedPath.length >= 1 && getPathOptions(codexTree, [selectedPath[0]]).length > 0 && (
                       <select
-                        value={categoryAssignment.selectedPath[1] || ''}
-                        onChange={(e) => categoryAssignment.handlePathLevelChange(1, e.target.value)}
+                        value={selectedPath[1] || ''}
+                        onChange={(e) => handlePathLevelChange(1, e.target.value)}
                         className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
                       >
                         <option value="">Select subcategory...</option>
-                        {categoryAssignment.getPathOptions([categoryAssignment.selectedPath[0]]).map((option: string) => (
+                        {getPathOptions(codexTree, [selectedPath[0]]).map((option) => (
                           <option key={option} value={option}>
                             {option}
                           </option>
@@ -879,14 +1280,14 @@ const SearchCurate = () => {
                     )}
                     
                     {/* Level 3 */}
-                    {categoryAssignment.selectedPath.length >= 2 && categoryAssignment.getPathOptions([categoryAssignment.selectedPath[0], categoryAssignment.selectedPath[1]]).length > 0 && (
+                    {selectedPath.length >= 2 && getPathOptions(codexTree, [selectedPath[0], selectedPath[1]]).length > 0 && (
                       <select
-                        value={categoryAssignment.selectedPath[2] || ''}
-                        onChange={(e) => categoryAssignment.handlePathLevelChange(2, e.target.value)}
+                        value={selectedPath[2] || ''}
+                        onChange={(e) => handlePathLevelChange(2, e.target.value)}
                         className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
                       >
                         <option value="">Select subcategory...</option>
-                        {categoryAssignment.getPathOptions([categoryAssignment.selectedPath[0], categoryAssignment.selectedPath[1]]).map((option: string) => (
+                        {getPathOptions(codexTree, [selectedPath[0], selectedPath[1]]).map((option) => (
                           <option key={option} value={option}>
                             {option}
                           </option>
@@ -895,14 +1296,14 @@ const SearchCurate = () => {
                     )}
                     
                     {/* Level 4 */}
-                    {categoryAssignment.selectedPath.length >= 3 && categoryAssignment.getPathOptions([categoryAssignment.selectedPath[0], categoryAssignment.selectedPath[1], categoryAssignment.selectedPath[2]]).length > 0 && (
+                    {selectedPath.length >= 3 && getPathOptions(codexTree, [selectedPath[0], selectedPath[1], selectedPath[2]]).length > 0 && (
                       <select
-                        value={categoryAssignment.selectedPath[3] || ''}
-                        onChange={(e) => categoryAssignment.handlePathLevelChange(3, e.target.value)}
+                        value={selectedPath[3] || ''}
+                        onChange={(e) => handlePathLevelChange(3, e.target.value)}
                         className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
                       >
                         <option value="">Select subcategory...</option>
-                        {categoryAssignment.getPathOptions([categoryAssignment.selectedPath[0], categoryAssignment.selectedPath[1], categoryAssignment.selectedPath[2]]).map((option: string) => (
+                        {getPathOptions(codexTree, [selectedPath[0], selectedPath[1], selectedPath[2]]).map((option) => (
                           <option key={option} value={option}>
                             {option}
                           </option>
@@ -916,19 +1317,19 @@ const SearchCurate = () => {
               </div>
               
               {/* Selected Path Display */}
-              {categoryAssignment.selectedPath.length > 0 && (
+              {selectedPath.length > 0 && (
                 <div className="mb-2 p-1.5 bg-gray-700 rounded text-xs text-gray-300 truncate">
-                  <span className="font-medium">{categoryAssignment.selectedPath.join(' > ')}</span>
+                  <span className="font-medium">{selectedPath.join(' > ')}</span>
                 </div>
               )}
               
               {/* Assign Button */}
               <button
-                onClick={categoryAssignment.assignCategory}
-                disabled={categoryAssignment.selectedPath.length === 0 || categoryAssignment.assigning}
+                onClick={handleAssignCategory}
+                disabled={selectedPath.length === 0 || assigning}
                 className="w-full px-3 py-1.5 bg-green-600 text-white rounded text-sm hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                {categoryAssignment.assigning ? 'Assigning...' : 'Assign'}
+                {assigning ? 'Assigning...' : 'Assign'}
               </button>
             </div>
           </div>

@@ -1,10 +1,10 @@
 # Frontend Context
 
-**Last Updated:** 2025-11-29
+**Last Updated:** 2025-11-30
 
 ## Overview
 
-React 18 + TypeScript frontend with Tailwind CSS styling. Uses Zustand for state management.
+React 18 + TypeScript frontend with Tailwind CSS styling. Uses Zustand for state management and custom hooks for shared component logic.
 
 ## Architecture
 
@@ -16,8 +16,118 @@ frontend/src/
 ├── index.css          # Tailwind imports + global styles
 ├── pages/             # Route components
 ├── components/        # Reusable UI components
+├── hooks/             # Custom React hooks for shared logic
+│   ├── index.ts               # Hook exports
+│   ├── useTextPositionClick.ts # Text click position calculation
+│   ├── useBoundaryEditor.ts    # Story boundary editing
+│   ├── useCategoryAssignment.ts # Category tree management
+│   ├── useKeywordsEditor.ts    # Keywords inline editing
+│   └── useNewStoryCreator.ts   # New story creation flow
 └── utils/             # axios config, path helpers
 ```
+
+---
+
+## Custom Hooks (`hooks/`)
+
+Shared state logic extracted from large page components to reduce duplication and improve maintainability.
+
+### `useTextPositionClick.ts`
+
+Utility for calculating character position from click events on text containers.
+
+| Export | Signature | Purpose |
+|--------|-----------|---------|
+| `calculateCharPositionFromClick(e, ref, length, options)` | `(MouseEvent, RefObject, number, Options) => number \| null` | Calculate char position from click using caretRangeFromPoint + TreeWalker |
+| `useTextPositionClick(ref, fullText, onSelect, options)` | Hook | Returns click handler for text position selection |
+
+**Options:**
+- `stopPropagation`: Call e.stopPropagation() (needed in BookDetail nested elements)
+- `useIndexOfFallback`: Enable indexOf fallback for complex DOM structures
+
+---
+
+### `useKeywordsEditor.ts`
+
+Hook for inline keywords editing with save/cancel.
+
+| Function | Signature | Purpose |
+|----------|-----------|---------|
+| `useKeywordsEditor(options)` | `(Options) => Return` | Returns editing state and handlers |
+
+**Return:**
+- `isEditing`, `editedKeywords`, `saving` - State
+- `startEditing(story)`, `setEditedKeywords(kw)`, `saveKeywords(story)`, `cancelEditing()` - Actions
+
+**Options:**
+- `onSaveSuccess(story, newKeywords)` - Called after successful save
+- `onError(error)` - Called on error
+
+---
+
+### `useCategoryAssignment.ts`
+
+Hook for managing category assignment state and operations.
+
+| Function | Signature | Purpose |
+|----------|-----------|---------|
+| `useCategoryAssignment(selectedStory, options)` | `(Story \| null, Options) => Return` | Returns tree, path selection, and assign/remove handlers |
+
+**Return:**
+- `codexTree`, `selectedPath`, `currentAssignments`, `assigning`, `loading` - State
+- `loadTree()`, `setSelectedPath(path)`, `handlePathLevelChange(level, value)` - Path management
+- `assignCategory()`, `removeCategory(path)` - Assignment operations
+- `getPathOptions(currentPath)` - Get child categories for dropdowns
+
+**Options:**
+- `onAssignSuccess(path)`, `onRemoveSuccess(path)`, `onError(error, op)` - Callbacks
+
+---
+
+### `useBoundaryEditor.ts`
+
+Hook for story boundary editing state and click handling.
+
+| Function | Signature | Purpose |
+|----------|-----------|---------|
+| `useBoundaryEditor(fullText, currentStory, options)` | `(string, Story \| null, Options) => Return` | Returns editing state, click handler, and save/cancel actions |
+
+**Return:**
+- `isEditing`, `editedStart`, `editedEnd`, `selectingStart`, `saving` - State
+- `textContainerRef` - Ref for text container
+- `startEditing(story)`, `cancelEditing()`, `handleTextClick(e)`, `saveBoundaries()` - Actions
+- `setEditedStart(pos)`, `setEditedEnd(pos)` - Manual setters
+
+**Options:**
+- `onSave(story, start, end)` - Called to persist (should call API)
+- `onSaveSuccess(story, start, end)` - Called after successful save
+- `onCancel()` - Called on cancel
+- `smartStartSelection` - BookDetail behavior: click before start sets new start
+- `stopPropagation` - Call stopPropagation on clicks
+- `useIndexOfFallback` - Enable indexOf fallback
+
+---
+
+### `useNewStoryCreator.ts`
+
+Hook for creating new stories with text boundary selection.
+
+| Function | Signature | Purpose |
+|----------|-----------|---------|
+| `useNewStoryCreator(options)` | `(Options) => Return` | Returns full new story creation state and flow |
+
+**Return:**
+- `isActive`, `bookSlug`, `start`, `end`, `selectingStart` - Position state
+- `title`, `keywords`, `pages` - Form state
+- `adding`, `fullText`, `loadingFullText` - Loading state
+- `textContainerRef` - Ref for text container
+- `canAdd`, `previewText` - Computed values
+- `startCreating(bookSlug)`, `handleTextClick(e)`, `addStory(force?)`, `cancel()` - Actions
+- `setTitle(t)`, `setKeywords(kw)`, `setPages(p)`, `setStart(pos)`, `setEnd(pos)` - Setters
+
+**Options:**
+- `onSuccess(response)`, `onError(error)` - Callbacks
+- `stopPropagation`, `useIndexOfFallback` - Click options
 
 ---
 
@@ -128,10 +238,14 @@ Main category browser with story list and editing capabilities.
 
 ### Page: `SearchCurate.tsx`
 
-Three-panel search, view, and category assignment interface.
+Three-panel search, view, and category assignment interface. Uses custom hooks for shared logic.
 
-| Function | Signature | Purpose |
-|----------|-----------|---------|
+| Function/Hook | Signature | Purpose |
+|---------------|-----------|---------|
+| **Custom Hooks** | | |
+| `keywordsEditor` | `useKeywordsEditor()` | Keywords editing state and handlers |
+| `categoryAssignment` | `useCategoryAssignment(selectedStory)` | Category tree, assignments, assign/remove handlers |
+| `newStoryCreator` | `useNewStoryCreator()` | New story form state, text selection, add handler |
 | **Search** | | |
 | `handleSearch()` | `() => Promise<void>` | POSTs `/search` with query, filters; populates results |
 | **Story Selection** | | |
@@ -140,25 +254,15 @@ Three-panel search, view, and category assignment interface.
 | `handleToggleMode(mode)` | `('static' \| 'book') => Promise<void>` | Switches story view mode, auto-scrolls in book context |
 | **Boundary Editing** | | |
 | `handleAdjustBoundaries()` | `() => Promise<void>` | Enters edit mode, loads full text for selected story's book |
-| `handleTextClick(e)` | `(e: MouseEvent) => void` | Click handler to set start/end char positions |
+| `handleTextClick(e)` | `(e: MouseEvent) => void` | Uses `calculateCharPositionFromClick` utility to set start/end positions |
 | `handleSaveBoundaries()` | `() => Promise<void>` | Persists boundaries via `/update-boundaries`, re-renders |
 | `handleCancelEdit()` | `() => void` | Reverts to original boundaries, exits edit mode |
+| **New Story Creation** | | |
+| `handleEnterNewStoryMode()` | `() => Promise<void>` | Calls `newStoryCreator.startCreating(selectedStory.book_slug)` |
 | **Story Deletion** | | |
 | `handleDeleteStory()` | `() => Promise<void>` | DELETEs story with confirmation, removes from results |
-| **Keywords Editing** | | |
-| `handleStartEditKeywords()` | `() => void` | Enters keywords edit mode |
-| `handleSaveKeywords()` | `() => Promise<void>` | POSTs `/update-keywords`, updates local state |
-| `handleCancelEditKeywords()` | `() => void` | Exits keywords edit mode |
-| **New Story Creation** | | |
-| `handleEnterNewStoryMode()` | `() => Promise<void>` | Loads full text for selected story's book |
-| `handleNewStoryTextClick(e)` | `(e: MouseEvent) => void` | Click-to-set new story boundaries |
-| `handleAddNewStory()` | `() => Promise<void>` | POSTs `/add-story` with overlap handling |
-| `handleCancelNewStory()` | `() => void` | Exits new story mode |
-| **Category Assignment** | | |
-| `getPathOptions(tree, currentPath)` | `(tree, path) => string[]` | Gets available child categories for path selection dropdowns |
-| `handlePathLevelChange(level, value)` | `(level, value) => void` | Updates selected path at given depth |
-| `handleAssignCategory()` | `() => Promise<void>` | POSTs `/assign-category`, refreshes tree |
-| `handleRemoveCategory(path)` | `(path) => Promise<void>` | DELETEs `/remove-category`, refreshes tree |
+
+**Note:** SearchCurate was reduced from ~1300 lines to ~900 lines by extracting shared logic into hooks.
 
 ---
 
@@ -479,8 +583,9 @@ style={{
 
 ## Known Tech Debt
 
-- `SearchCurate.tsx` is ~1200 lines - should split into sub-components
-- `BookDetail.tsx` is ~1300 lines - Story Review could be extracted
+- ~~`SearchCurate.tsx` is ~1200 lines - should split into sub-components~~ **Reduced to ~900 lines via hooks**
+- `BookDetail.tsx` is ~1600 lines - Story Review could be extracted, could use shared hooks
+- `Archive.tsx` is ~1100 lines - could benefit from shared hooks
 - No TypeScript interfaces for API responses
 - Tree is re-fetched on every page mount (should cache in store)
 

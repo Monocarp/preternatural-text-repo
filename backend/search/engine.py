@@ -423,32 +423,54 @@ class SearchEngine:
         book_filter: Optional[str]
     ) -> List[Dict[str, Any]]:
         """
-        Exact text match search (counts occurrences).
+        Exact text match search using regex (counts occurrences).
         
-        Returns results sorted by occurrence count.
+        Returns results sorted by occurrence count, matching the legacy
+        Haystack behavior which iterates through all documents.
+        
+        Args:
+            query: Search query text
+            top_k: Maximum results to return
+            min_score: Minimum occurrence count (usually 0 for exact)
+            book_filter: Optional book_slug to filter by
+        
+        Returns:
+            List of result dicts sorted by occurrence count (descending)
         """
-        # This requires access to full content, which we don't store in FTS metadata
-        # For now, use FTS phrase search which is close
-        # TODO: Consider storing content in a separate table for exact match
+        query_text = query.strip()
+        if not query_text:
+            return []
         
-        # Wrap query in quotes for phrase search
-        phrase_query = f'"{query}"'
-        fts_results = self.fts_index.search(phrase_query, top_k, book_filter)
+        # Build regex pattern - same logic as legacy stories.py
+        if ' ' in query_text:
+            # Multi-word phrase: escape and match literally
+            pattern = re.escape(query_text)
+        else:
+            # Single word: match word boundaries
+            pattern = r'\b' + re.escape(query_text) + r'\b'
+        
+        # Get all documents (optionally filtered by book)
+        all_docs = self.fts_index.get_all_documents(book_filter)
         
         results = []
-        for doc_id, score, meta in fts_results:
-            results.append({
-                "title": meta.get("title", ""),
-                "book_slug": meta.get("book_slug", ""),
-                "pages": meta.get("pages", ""),
-                "keywords": meta.get("keywords", ""),
-                "start_char": meta.get("start_char", 0),
-                "end_char": meta.get("end_char", 0),
-                "score": float(score),  # Convert to native float for JSON serialization
-                "search_query": query,  # For highlighting in UI
-            })
+        for doc_id, content, meta in all_docs:
+            # Count occurrences (case-insensitive)
+            count = len(re.findall(pattern, content, re.IGNORECASE))
+            if count > 0:
+                results.append({
+                    "title": meta.get("title", ""),
+                    "book_slug": meta.get("book_slug", ""),
+                    "pages": meta.get("pages", ""),
+                    "keywords": meta.get("keywords", ""),
+                    "start_char": meta.get("start_char", 0),
+                    "end_char": meta.get("end_char", 0),
+                    "score": float(count),  # Use count as score
+                    "search_query": query,  # For highlighting in UI
+                })
         
-        return results
+        # Sort by score (count) descending and limit to top_k
+        results.sort(key=lambda x: x["score"], reverse=True)
+        return results[:top_k]
     
     def _rerank(
         self,

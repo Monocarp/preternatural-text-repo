@@ -625,15 +625,21 @@ const Archive = () => {
     }
     
     setAddingStory(true)
+    
+    // Debug: log the request payload
+    const payload = {
+      book_slug: newStoryBookSlug,
+      title: newStoryTitle.trim(),
+      keywords: newStoryKeywords.trim(),
+      pages: newStoryPages.trim(),
+      start_char: newStoryStart,
+      end_char: newStoryEnd,
+      force_overlap: false
+    }
+    console.log('Add story request payload:', payload)
+    
     try {
-      const response = await axios.post('/add-story', {
-        book_slug: newStoryBookSlug,
-        title: newStoryTitle.trim(),
-        keywords: newStoryKeywords.trim(),
-        pages: newStoryPages.trim(),
-        start_char: newStoryStart,
-        end_char: newStoryEnd
-      })
+      const response = await axios.post('/add-story', payload)
       
       console.log('Add story response:', response.data)
       
@@ -649,15 +655,9 @@ const Archive = () => {
         }
         
         // Retry with force_overlap flag
-        await axios.post('/add-story', {
-          book_slug: newStoryBookSlug,
-          title: newStoryTitle.trim(),
-          keywords: newStoryKeywords.trim(),
-          pages: newStoryPages.trim(),
-          start_char: newStoryStart,
-          end_char: newStoryEnd,
-          force_overlap: true
-        })
+        const forcePayload = { ...payload, force_overlap: true }
+        console.log('Retry with force_overlap:', forcePayload)
+        await axios.post('/add-story', forcePayload)
         
         alert(`Story "${newStoryTitle}" added successfully and is now searchable!`)
       } else {
@@ -687,13 +687,18 @@ const Archive = () => {
       }
     } catch (err: any) {
       console.error('Error adding story:', err)
+      console.error('Error response data:', err?.response?.data)
       const status = err?.response?.status
+      const errorDetail = err?.response?.data?.detail || err?.response?.data?.message || 'Unknown error'
+      
       if (status === 401 || status === 403) {
         alert('You must be signed in as an editor to add stories.')
       } else if (status === 409) {
         alert('This story overlaps with an existing story. Please adjust the boundaries.')
+      } else if (status === 400) {
+        alert(`Bad request: ${errorDetail}`)
       } else {
-        alert('Failed to add story. Please try again.')
+        alert(`Failed to add story: ${errorDetail}`)
       }
     } finally {
       setAddingStory(false)

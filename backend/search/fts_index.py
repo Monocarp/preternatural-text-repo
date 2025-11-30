@@ -502,6 +502,75 @@ class FTS5Index:
             cursor.execute("SELECT DISTINCT title FROM stories_fts WHERE title IS NOT NULL AND title != ''")
             return [row['title'] for row in cursor.fetchall()]
     
+    def get_all_documents(self, book_filter: Optional[str] = None) -> List[Tuple[str, str, Dict]]:
+        """
+        Get all documents with content and metadata for exact search.
+        
+        Args:
+            book_filter: Optional book_slug to filter by
+        
+        Returns:
+            List of (doc_id, content, metadata) tuples
+        """
+        import json
+        
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            
+            if book_filter:
+                cursor.execute("""
+                    SELECT 
+                        f.doc_id,
+                        f.content,
+                        f.title,
+                        m.book_slug,
+                        m.pages,
+                        m.keywords,
+                        m.start_char,
+                        m.end_char,
+                        m.metadata_json
+                    FROM stories_fts f
+                    JOIN stories_meta m ON f.doc_id = m.doc_id
+                    WHERE m.book_slug = ?
+                """, (book_filter,))
+            else:
+                cursor.execute("""
+                    SELECT 
+                        f.doc_id,
+                        f.content,
+                        f.title,
+                        m.book_slug,
+                        m.pages,
+                        m.keywords,
+                        m.start_char,
+                        m.end_char,
+                        m.metadata_json
+                    FROM stories_fts f
+                    JOIN stories_meta m ON f.doc_id = m.doc_id
+                """)
+            
+            results = []
+            for row in cursor.fetchall():
+                metadata = {
+                    'title': row['title'],
+                    'book_slug': row['book_slug'],
+                    'pages': row['pages'],
+                    'keywords': row['keywords'],
+                    'start_char': row['start_char'],
+                    'end_char': row['end_char'],
+                }
+                
+                if row['metadata_json']:
+                    try:
+                        extra = json.loads(row['metadata_json'])
+                        metadata.update(extra)
+                    except json.JSONDecodeError:
+                        pass
+                
+                results.append((row['doc_id'], row['content'], metadata))
+            
+            return results
+    
     def vacuum(self) -> None:
         """Optimize the database (reclaim space after deletions)."""
         with self._get_connection() as conn:

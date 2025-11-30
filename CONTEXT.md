@@ -60,6 +60,15 @@ A scalable system for extracting, indexing, searching, and curating stories of p
 
 4. **Full Text Typography:** Libre Baskerville font, markdown rendering
 
+5. **Frontend Hooks Refactoring:** Extracted shared logic from large components
+   - Custom hooks: `useKeywordsEditor`, `useCategoryAssignment`, `useNewStoryCreator`, `useBoundaryEditor`
+   - SearchCurate.tsx reduced from 1300 to 900 lines (30% reduction)
+   - See `frontend/CONTEXT.md` for hook documentation
+
+6. **Backend Error Handling:** Standardized exception patterns across all modules
+   - Custom exceptions in `backend/utils/exceptions.py`
+   - Consistent error responses with `error_response()` helper
+
 ---
 
 ## Key Entry Points

@@ -1,73 +1,61 @@
-# React + TypeScript + Vite
+# Preternatural Text Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite frontend for the Preternatural Text curation platform.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 18** with TypeScript
+- **Vite** for build tooling
+- **Tailwind CSS** for styling
+- **React Router** for navigation
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# Install dependencies
+npm install
 
-## Expanding the ESLint configuration
+# Start development server
+npm run dev
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Build for production
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/
+├── components/     # Reusable UI components (SearchBar, TreeView, etc.)
+├── hooks/          # Custom React hooks for shared logic
+├── pages/          # Page components (Archive, BookDetail, SearchCurate)
+├── types/          # TypeScript type definitions
+├── App.tsx         # Main app with routing
+└── index.css       # Tailwind imports
+```
+
+## Custom Hooks
+
+The codebase uses custom hooks to share logic across components:
+
+| Hook | Purpose |
+|------|---------|
+| `useKeywordsEditor` | Keywords editing state and persistence |
+| `useCategoryAssignment` | Category tree management and assignments |
+| `useNewStoryCreator` | New story form state and creation |
+| `useBoundaryEditor` | Story boundary editing (start/end positions) |
+| `useTextPositionClick` | Character position calculation from clicks |
+
+See `CONTEXT.md` for detailed function signatures and usage patterns.
+
+## Pages
+
+- **SearchCurate** (`/`) - Main interface for searching, viewing, and categorizing stories
+- **BookDetail** (`/books/:slug`) - Full book view with story navigation
+- **Archive** (`/archive`) - Browse codex tree and category assignments
+
+## Development
+
+The frontend connects to a FastAPI backend (default: `http://localhost:8000`).
+
+For detailed architecture and function documentation, see `CONTEXT.md`.
