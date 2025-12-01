@@ -45,6 +45,46 @@ def get_stories_for_subcats(tree: Dict, path_parts: List[str], subcat_names: Lis
     
     return sorted(list(result_stories))
 
+
+def find_story_assignments(tree: Dict, story_title: str) -> List[List[str]]:
+    """
+    Find all category paths where a story is assigned.
+    
+    Args:
+        tree: The full category tree dictionary
+        story_title: The title of the story to find
+    
+    Returns:
+        List of paths (each path is a list of category names)
+        e.g., [["Demonic Activity", "Possession"], ["Witchcraft", "Curses"]]
+    """
+    results = []
+    _find_story_recursive(tree, story_title, [], results)
+    return results
+
+
+def _find_story_recursive(node: Union[Dict, List], story_title: str, current_path: List[str], results: List[List[str]]):
+    """
+    Helper function to recursively search for a story in the tree.
+    """
+    if isinstance(node, list):
+        if story_title in node:
+            results.append(current_path.copy())
+        return
+    
+    if not isinstance(node, dict):
+        return
+    
+    # Check _stories at this level
+    if "_stories" in node and isinstance(node["_stories"], list):
+        if story_title in node["_stories"]:
+            results.append(current_path.copy())
+    
+    # Recurse into child categories
+    for key, child_node in node.items():
+        if key != "_stories":
+            _find_story_recursive(child_node, story_title, current_path + [key], results)
+
 def _collect_stories_recursive(node: Union[Dict, List], stories_set: set):
     """
     Helper function to recursively collect story titles from a node and its children.

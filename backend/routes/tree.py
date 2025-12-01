@@ -78,6 +78,25 @@ def get_unassigned():
     return enrich_stories_with_book_metadata(unassigned)
 
 
+@router.get("/story-assignments/{title:path}")
+def get_story_assignments(title: str):
+    """
+    Get all category paths where a story is assigned.
+    
+    Args:
+        title: URL-encoded story title
+    
+    Returns:
+        {"paths": [["Category", "Subcategory"], ...]}
+    """
+    from tree.queries import find_story_assignments
+    
+    decoded_title = urllib.parse.unquote(title)
+    tree = get_cached_tree()
+    paths = find_story_assignments(tree, decoded_title)
+    return {"title": decoded_title, "paths": paths}
+
+
 @router.post("/assign-category")
 def assign_category(body: AssignBody, user: Dict = Depends(require_editor)):
     """
