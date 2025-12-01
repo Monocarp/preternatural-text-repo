@@ -59,7 +59,7 @@ def save_codex_tree_to_json(tree: dict) -> None:
 
 def insert_recursive(tree_json: dict, db, parent_id: int = None) -> None:
     """
-    Recursively insert tree nodes into database.
+    Recursively insert tree nodes into database (get-or-create pattern).
     
     Args:
         tree_json: Tree structure to insert
@@ -67,15 +67,32 @@ def insert_recursive(tree_json: dict, db, parent_id: int = None) -> None:
         parent_id: Parent node ID (None for root nodes)
     """
     for name, value in tree_json.items():
-        node = CodexNode(name=name, parent_id=parent_id)
-        db.add(node)
-        db.flush()  # Get ID
+        if name == '_stories':
+            continue
+            
+        # Get or create node (prevent duplicates)
+        query = db.query(CodexNode).filter_by(name=name)
+        if parent_id:
+            query = query.filter_by(parent_id=parent_id)
+        else:
+            query = query.filter_by(parent_id=None)
+        node = query.first()
+        
+        if not node:
+            node = CodexNode(name=name, parent_id=parent_id)
+            db.add(node)
+            db.flush()  # Get ID
         
         if isinstance(value, list):
             for title in value:
                 story = db.query(Story).filter_by(title=title).first()
                 if story:
-                    db.add(NodeStory(node_id=node.id, story_id=story.id))
+                    # Check if relationship already exists
+                    existing = db.query(NodeStory).filter_by(
+                        node_id=node.id, story_id=story.id
+                    ).first()
+                    if not existing:
+                        db.add(NodeStory(node_id=node.id, story_id=story.id))
         elif isinstance(value, dict):
             insert_recursive(value, db, node.id)
 

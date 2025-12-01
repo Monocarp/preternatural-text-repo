@@ -58,19 +58,39 @@ with SessionLocal() as db:
     db.commit()
     print(f"Inserted {inserted} stories")
     
-    # Insert nodes and assignments (recurse tree)
+    # Insert nodes and assignments (recurse tree) - using get-or-create pattern
     def insert_recursive(current, parent_id=None):
         for name, value in current.items():
-            node = CodexNode(name=name, parent_id=parent_id)
-            db.add(node)
-            db.flush()  # Get ID
-            print(f"Inserted node: {name} (parent: {parent_id})")
+            if name == '_stories':
+                continue
+                
+            # Get or create node (prevent duplicates)
+            query = db.query(CodexNode).filter_by(name=name)
+            if parent_id:
+                query = query.filter_by(parent_id=parent_id)
+            else:
+                query = query.filter_by(parent_id=None)
+            node = query.first()
+            
+            if not node:
+                node = CodexNode(name=name, parent_id=parent_id)
+                db.add(node)
+                db.flush()  # Get ID
+                print(f"Inserted node: {name} (parent: {parent_id})")
+            else:
+                print(f"Node already exists: {name} (id: {node.id})")
+                
             if isinstance(value, list):
                 for title in value:
                     story = db.query(Story).filter_by(title=title).first()
                     if story:
-                        db.add(NodeStory(node_id=node.id, story_id=story.id))
-                        print(f"Associated story {title} to node {name}")
+                        # Check if relationship already exists
+                        existing = db.query(NodeStory).filter_by(
+                            node_id=node.id, story_id=story.id
+                        ).first()
+                        if not existing:
+                            db.add(NodeStory(node_id=node.id, story_id=story.id))
+                            print(f"Associated story {title} to node {name}")
             elif isinstance(value, dict):
                 insert_recursive(value, node.id)
     
