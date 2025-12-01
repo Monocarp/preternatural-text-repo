@@ -254,7 +254,9 @@
         ],
         "Indoctrinating Children": {},
         "Levitation": {},
-        "Physical Harm": {},
+        "Physical Harm": [
+            "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means"
+        ],
         "Physical Harm To Children": {},
         "Ritual": {
             "Black Sabbath": [
