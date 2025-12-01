@@ -78,11 +78,9 @@
                 "Choking": [
                     "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
                 ],
-                "Death": {
-                    "_stories": [
-                        "Necromantic Conjurations at the Crossroads and Demonic Manifestations"
-                    ]
-                },
+                "Death": [
+                    "Necromantic Conjurations at the Crossroads and Demonic Manifestations"
+                ],
                 "Distention of the Stomach": {},
                 "Foul Breath": {},
                 "Headaches": {},
@@ -300,7 +298,8 @@
             },
             "Sacrilegious Baptism": {},
             "_stories": [
-                "Necromantic Conjurations at the Crossroads and Demonic Manifestations"
+                "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
+                "Demonic Circles Across Cultures"
             ]
         },
         "Sacrificing Children": [
