@@ -424,7 +424,6 @@ const SidebarTree = () => {
             showIcon={false}
             switcherIcon={() => null}
             icon={null}
-            indent={12}
           />
         </div>
       ) : (
