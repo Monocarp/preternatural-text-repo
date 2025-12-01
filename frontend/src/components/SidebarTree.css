@@ -56,9 +56,13 @@
   margin-right: 0 !important;
 }
 
-/* Add custom indentation for nested items */
-.rc-tree-child-tree > .rc-tree-treenode {
-  padding-left: 1rem !important;
-  padding-right: 0 !important;
+/* Use the rc-tree indent element for proper nested indentation */
+/* Each level adds indent space via the .rc-tree-indent element */
+.rc-tree-indent {
+  display: inline-block !important;
 }
 
+.rc-tree-indent-unit {
+  display: inline-block;
+  width: 0.75rem !important;
+}

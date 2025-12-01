@@ -1164,6 +1164,66 @@ const Archive = () => {
                                     ))}
                                   </select>
                                 )}
+                                
+                                {/* Level 4 */}
+                                {categoryAssignment.selectedPath[3] && categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 4)).length > 0 && (
+                                  <select
+                                    value={categoryAssignment.selectedPath[4] || ''}
+                                    onChange={(e) => categoryAssignment.handlePathLevelChange(4, e.target.value)}
+                                    className="px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-sm"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <option value="">Select...</option>
+                                    {categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 4)).map((opt) => (
+                                      <option key={opt} value={opt}>{opt}</option>
+                                    ))}
+                                  </select>
+                                )}
+                                
+                                {/* Level 5 */}
+                                {categoryAssignment.selectedPath[4] && categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 5)).length > 0 && (
+                                  <select
+                                    value={categoryAssignment.selectedPath[5] || ''}
+                                    onChange={(e) => categoryAssignment.handlePathLevelChange(5, e.target.value)}
+                                    className="px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-sm"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <option value="">Select...</option>
+                                    {categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 5)).map((opt) => (
+                                      <option key={opt} value={opt}>{opt}</option>
+                                    ))}
+                                  </select>
+                                )}
+                                
+                                {/* Level 6 */}
+                                {categoryAssignment.selectedPath[5] && categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 6)).length > 0 && (
+                                  <select
+                                    value={categoryAssignment.selectedPath[6] || ''}
+                                    onChange={(e) => categoryAssignment.handlePathLevelChange(6, e.target.value)}
+                                    className="px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-sm"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <option value="">Select...</option>
+                                    {categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 6)).map((opt) => (
+                                      <option key={opt} value={opt}>{opt}</option>
+                                    ))}
+                                  </select>
+                                )}
+                                
+                                {/* Level 7 */}
+                                {categoryAssignment.selectedPath[6] && categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 7)).length > 0 && (
+                                  <select
+                                    value={categoryAssignment.selectedPath[7] || ''}
+                                    onChange={(e) => categoryAssignment.handlePathLevelChange(7, e.target.value)}
+                                    className="px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-sm"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <option value="">Select...</option>
+                                    {categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 7)).map((opt) => (
+                                      <option key={opt} value={opt}>{opt}</option>
+                                    ))}
+                                  </select>
+                                )}
                               </div>
                               
                               {/* Assign Button */}

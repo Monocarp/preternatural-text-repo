@@ -1,5 +1,5 @@
 // src/components/SidebarTree.tsx
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStackApp } from '@stackframe/react'
 import Tree from 'rc-tree'
@@ -57,6 +57,50 @@ const SidebarTree = () => {
     }
     return false
   })
+
+  // Calculate the maximum depth of currently visible nodes
+  // When a node is expanded, its children are visible at depth + 1
+  const maxVisibleDepth = useMemo(() => {
+    let maxDepth = 0
+    for (const key of expandedKeys) {
+      // Each key uses || as separator, so count separators + 1 = depth
+      // 'archive' is depth 0, 'Demonic Activity' is depth 1, etc.
+      if (key === 'archive' || key === 'unassigned') continue
+      const depth = key.split('||').length
+      // Add 1 because expanding a node makes its children visible at the next level
+      const visibleChildDepth = depth + 1
+      if (visibleChildDepth > maxDepth) maxDepth = visibleChildDepth
+    }
+    return maxDepth
+  }, [expandedKeys])
+
+  // Calculate dynamic sidebar width based on depth
+  // Base: 200px min, add 52px per level beyond 2
+  const dynamicSidebarStyle = useMemo(() => {
+    if (sidebarCollapsed) return { width: '3rem' } // 48px when collapsed
+    const baseMinWidth = 200
+    const baseMaxWidth = 280
+    const extraPerLevel = 52 // pixels per additional level
+    const thresholdDepth = 2 // start expanding after this depth
+    
+    if (maxVisibleDepth <= thresholdDepth) {
+      return { 
+        width: '15vw',
+        minWidth: `${baseMinWidth}px`,
+        maxWidth: `${baseMaxWidth}px`
+      }
+    }
+    
+    const extraLevels = maxVisibleDepth - thresholdDepth
+    const newMinWidth = baseMinWidth + (extraLevels * extraPerLevel)
+    const newMaxWidth = baseMaxWidth + (extraLevels * extraPerLevel)
+    
+    return {
+      width: `max(15vw, ${newMinWidth}px)`,
+      minWidth: `${newMinWidth}px`,
+      maxWidth: `${newMaxWidth}px`
+    }
+  }, [sidebarCollapsed, maxVisibleDepth])
 
   // Listen for window resize to auto-collapse/expand
   useEffect(() => {
@@ -291,9 +335,10 @@ const SidebarTree = () => {
         />
       )}
       
-      <aside className={`h-full bg-gray-800 border-r border-gray-700 transition-all duration-300 ease-in-out flex flex-col relative flex-shrink-0 ${
-        sidebarCollapsed ? 'w-12' : 'w-[15vw] min-w-[200px] max-w-[280px]'
-      }`}>
+      <aside 
+        className="h-full bg-gray-800 border-r border-gray-700 transition-all duration-300 ease-in-out flex flex-col relative flex-shrink-0"
+        style={dynamicSidebarStyle}
+      >
       {/* Header with Toggle Button */}
       <div className={`p-3 border-b border-gray-700 flex items-center ${sidebarCollapsed ? 'justify-center' : 'justify-between'} bg-gray-800`}>
         {!sidebarCollapsed && (
@@ -379,6 +424,7 @@ const SidebarTree = () => {
             showIcon={false}
             switcherIcon={() => null}
             icon={null}
+            indent={12}
           />
         </div>
       ) : (
