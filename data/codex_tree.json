@@ -234,11 +234,9 @@
         "Cursing": {},
         "Divination": {},
         "Evil Eye": {},
-        "False Wonders": {
-            "_stories": [
-                "Albigensian Heretics Walking On Water"
-            ]
-        },
+        "False Wonders": [
+            "Albigensian Heretics Walking On Water"
+        ],
         "Flying": [
             "Demonic Vision Dismissed With Eucharist",
             "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
@@ -295,7 +293,10 @@
                 },
                 "Sacrificing an Animal": {}
             },
-            "Sacrilegious Baptism": {}
+            "Sacrilegious Baptism": {},
+            "_stories": [
+                "Necromantic Conjurations at the Crossroads and Demonic Manifestations"
+            ]
         },
         "Sacrificing Children": [
             "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion"
