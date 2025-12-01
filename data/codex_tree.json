@@ -32,6 +32,10 @@
         },
         "Oppression": {
             "Haunting Vexations": {
+                "Explicitly Demonic Apparitions": [
+                    "Women\u2019s Pacts with Shedim and Nocturnal Meetings with Buck\u2011Shaped Spirits",
+                    "Saint Walbert\u2019s Cross and Arm Used to Test and Heal the Possessed at Valombrosa"
+                ],
                 "Flannel Man": {},
                 "Glimmer Man": {},
                 "Poltergeist": {},
@@ -51,8 +55,8 @@
                     "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
                 ],
                 "Visual Hallucinations": [
-                    "Demonic Vision Dismissed With Eucharist",
-                    "Heretic\u2019s Demonic Vision of a False Christ and Queen Dispelled by the Eucharist"
+                    "Heretic\u2019s Demonic Vision of a False Christ and Queen Dispelled by the Eucharist",
+                    "Demonic Vision Dismissed With Eucharist"
                 ],
                 "Weariness": {}
             },
@@ -69,6 +73,7 @@
                 "Bone Dislocation": {},
                 "Bruise": {},
                 "Bumps, Cysts, other Protrusions": {},
+                "Carried, Flight, etc": {},
                 "Choking": [
                     "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
                 ],
@@ -115,9 +120,18 @@
                 "Difficulty in Receiving Sacraments": [
                     "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
                 ],
-                "Falsified Emotions": [
-                    "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
-                ],
+                "Falsified Emotions": {
+                    "Hatred": {},
+                    "Joy": {},
+                    "Laughter": {},
+                    "Love": {},
+                    "Sorrow": {},
+                    "Wrath": {},
+                    "_stories": [
+                        "Old Woman\u2019s Possession, Magical Amulet with Divine Names, and Exorcism by Burning",
+                        "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+                    ]
+                },
                 "Illness around Holiness": {},
                 "Liturgical Calendar Suffering": {},
                 "Obscene Thoughts Around Holiness": {},
@@ -147,16 +161,16 @@
             "Superhuman Speed": {},
             "Sustained Unnatural Posture": {},
             "_stories": [
-                "Violent Possession and Exorcism of Peter Bernardi of Areia",
-                "Possession of a Girl from Citt\u00e0 di Castello and Demon\u2019s Accusation of a Sorcerer Priest",
-                "Other Graves and Holy Sites Where the Possessed Were Freed",
-                "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio",
-                "Saint Walbert\u2019s Cross and Arm Used to Test and Heal the Possessed at Valombrosa",
                 "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
-                "Old Woman\u2019s Possession, Magical Amulet with Divine Names, and Exorcism by Burning",
+                "Possession of a Girl from Citt\u00e0 di Castello and Demon\u2019s Accusation of a Sorcerer Priest",
                 "Stages of Demonic Possession in Magdalena and the Role of Asmodeus",
+                "Old Woman\u2019s Possession, Magical Amulet with Divine Names, and Exorcism by Burning",
+                "Other Graves and Holy Sites Where the Possessed Were Freed",
+                "Saint Walbert\u2019s Cross and Arm Used to Test and Heal the Possessed at Valombrosa",
+                "Woman Punished with Possession for Attempted Sorcery and Her Deliverance at St.\u00a0Gandolph",
                 "Possession of a Jewish Woman in Ferrara and Exorcism of a Ruach by R. Chaim Vital",
-                "Woman Punished with Possession for Attempted Sorcery and Her Deliverance at St.\u00a0Gandolph"
+                "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio",
+                "Violent Possession and Exorcism of Peter Bernardi of Areia"
             ]
         },
         "_stories": {}
@@ -226,7 +240,8 @@
         "Harm to Crops": {},
         "Harm to Livestock": {},
         "Herbal/Natural": [
-            "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion"
+            "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion",
+            "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means"
         ],
         "Indoctrinating Children": {},
         "Levitation": {},
@@ -240,7 +255,8 @@
             "Contract with Another": {},
             "Contract with Demon": [
                 "The Jurist\u2019s Pact with Satan and Failed Return to Confession",
-                "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion"
+                "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion",
+                "Ritual for Invoking Unclean Spirits via One\u2019s Shadow and the Appearance of Two Ruchin"
             ],
             "Rejection of Sacraments": {
                 "Rejection of Baptism": {},
@@ -275,6 +291,9 @@
         },
         "Sacrificing Children": [
             "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion"
+        ],
+        "Transformation": [
+            "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means"
         ],
         "Transportation": [
             "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
