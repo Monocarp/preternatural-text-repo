@@ -1570,6 +1570,70 @@ const BookDetail = () => {
                                 ))}
                               </select>
                             )}
+                            
+                            {/* Level 5 */}
+                            {selectedPath.length >= 4 && getPathOptions(codexTree, selectedPath.slice(0, 4)).length > 0 && (
+                              <select
+                                value={selectedPath[4] || ''}
+                                onChange={(e) => handlePathLevelChange(4, e.target.value)}
+                                className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                              >
+                                <option value="">Select subcategory...</option>
+                                {getPathOptions(codexTree, selectedPath.slice(0, 4)).map((option) => (
+                                  <option key={option} value={option}>
+                                    {option}
+                                  </option>
+                                ))}
+                              </select>
+                            )}
+                            
+                            {/* Level 6 */}
+                            {selectedPath.length >= 5 && getPathOptions(codexTree, selectedPath.slice(0, 5)).length > 0 && (
+                              <select
+                                value={selectedPath[5] || ''}
+                                onChange={(e) => handlePathLevelChange(5, e.target.value)}
+                                className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                              >
+                                <option value="">Select subcategory...</option>
+                                {getPathOptions(codexTree, selectedPath.slice(0, 5)).map((option) => (
+                                  <option key={option} value={option}>
+                                    {option}
+                                  </option>
+                                ))}
+                              </select>
+                            )}
+                            
+                            {/* Level 7 */}
+                            {selectedPath.length >= 6 && getPathOptions(codexTree, selectedPath.slice(0, 6)).length > 0 && (
+                              <select
+                                value={selectedPath[6] || ''}
+                                onChange={(e) => handlePathLevelChange(6, e.target.value)}
+                                className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                              >
+                                <option value="">Select subcategory...</option>
+                                {getPathOptions(codexTree, selectedPath.slice(0, 6)).map((option) => (
+                                  <option key={option} value={option}>
+                                    {option}
+                                  </option>
+                                ))}
+                              </select>
+                            )}
+                            
+                            {/* Level 8 */}
+                            {selectedPath.length >= 7 && getPathOptions(codexTree, selectedPath.slice(0, 7)).length > 0 && (
+                              <select
+                                value={selectedPath[7] || ''}
+                                onChange={(e) => handlePathLevelChange(7, e.target.value)}
+                                className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                              >
+                                <option value="">Select subcategory...</option>
+                                {getPathOptions(codexTree, selectedPath.slice(0, 7)).map((option) => (
+                                  <option key={option} value={option}>
+                                    {option}
+                                  </option>
+                                ))}
+                              </select>
+                            )}
                           </>
                         ) : (
                           <p className="text-xs text-gray-500">Loading categories...</p>

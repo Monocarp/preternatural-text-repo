@@ -8,7 +8,7 @@
  * Features:
  * - Loads and caches codex tree
  * - Finds current assignments for a story
- * - Multi-level path selection (up to 4 levels deep)
+ * - Multi-level path selection (up to 8 levels deep)
  * - Assign/remove operations with error handling
  */
 

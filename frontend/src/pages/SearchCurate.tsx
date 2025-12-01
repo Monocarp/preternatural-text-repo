@@ -909,6 +909,70 @@ const SearchCurate = () => {
                         ))}
                       </select>
                     )}
+                    
+                    {/* Level 5 */}
+                    {categoryAssignment.selectedPath.length >= 4 && categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 4)).length > 0 && (
+                      <select
+                        value={categoryAssignment.selectedPath[4] || ''}
+                        onChange={(e) => categoryAssignment.handlePathLevelChange(4, e.target.value)}
+                        className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      >
+                        <option value="">Select subcategory...</option>
+                        {categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 4)).map((option: string) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+                    
+                    {/* Level 6 */}
+                    {categoryAssignment.selectedPath.length >= 5 && categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 5)).length > 0 && (
+                      <select
+                        value={categoryAssignment.selectedPath[5] || ''}
+                        onChange={(e) => categoryAssignment.handlePathLevelChange(5, e.target.value)}
+                        className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      >
+                        <option value="">Select subcategory...</option>
+                        {categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 5)).map((option: string) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+                    
+                    {/* Level 7 */}
+                    {categoryAssignment.selectedPath.length >= 6 && categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 6)).length > 0 && (
+                      <select
+                        value={categoryAssignment.selectedPath[6] || ''}
+                        onChange={(e) => categoryAssignment.handlePathLevelChange(6, e.target.value)}
+                        className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      >
+                        <option value="">Select subcategory...</option>
+                        {categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 6)).map((option: string) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+                    
+                    {/* Level 8 */}
+                    {categoryAssignment.selectedPath.length >= 7 && categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 7)).length > 0 && (
+                      <select
+                        value={categoryAssignment.selectedPath[7] || ''}
+                        onChange={(e) => categoryAssignment.handlePathLevelChange(7, e.target.value)}
+                        className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      >
+                        <option value="">Select subcategory...</option>
+                        {categoryAssignment.getPathOptions(categoryAssignment.selectedPath.slice(0, 7)).map((option: string) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    )}
                   </>
                 ) : (
                   <div className="text-xs text-gray-500">Loading categories...</div>
