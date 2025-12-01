@@ -33,9 +33,9 @@
         "Oppression": {
             "Haunting Vexations": {
                 "Explicitly Demonic Apparitions": [
+                    "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
                     "Women\u2019s Pacts with Shedim and Nocturnal Meetings with Buck\u2011Shaped Spirits",
-                    "Saint Walbert\u2019s Cross and Arm Used to Test and Heal the Possessed at Valombrosa",
-                    "Necromantic Conjurations at the Crossroads and Demonic Manifestations"
+                    "Saint Walbert\u2019s Cross and Arm Used to Test and Heal the Possessed at Valombrosa"
                 ],
                 "Flannel Man": {},
                 "Glimmer Man": {},
@@ -78,7 +78,11 @@
                 "Choking": [
                     "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
                 ],
-                "Death": {},
+                "Death": {
+                    "_stories": [
+                        "Necromantic Conjurations at the Crossroads and Demonic Manifestations"
+                    ]
+                },
                 "Distention of the Stomach": {},
                 "Foul Breath": {},
                 "Headaches": {},
