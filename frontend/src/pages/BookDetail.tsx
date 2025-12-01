@@ -973,7 +973,7 @@ const BookDetail = () => {
     <div className="flex h-screen h-[100dvh] max-h-screen max-w-[100vw] overflow-hidden">
       <SidebarTree />
       <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0 max-w-full">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
+        <div className={`mx-auto px-4 sm:px-6 py-4 sm:py-6 ${view === 'review' ? 'max-w-full' : 'max-w-6xl'}`}>
           {/* Breadcrumb */}
           <nav className="text-sm text-gray-400 mb-4">
             <button
@@ -1166,14 +1166,14 @@ const BookDetail = () => {
 
       {/* Story Review View */}
       {view === 'review' && (
-        <div className="flex gap-4">
-          {/* Main text area */}
-          <div className="flex-1 bg-gray-800 border border-gray-700 rounded-lg p-4">
+        <div className="flex gap-3">
+          {/* Left column: Text viewer */}
+          <div className="flex-1 min-w-0 max-w-[55%] bg-gray-800 border border-gray-700 rounded-lg p-4">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold text-white">
-                {newStoryMode ? 'Add New Story' : editingBoundary ? 'Editing Boundaries' : 'Story Review'}
+              <h2 className="text-lg font-semibold text-white">
+                {newStoryMode ? 'Add New Story' : editingBoundary ? 'Editing Boundaries' : 'Text Viewer'}
               </h2>
-              <div className="text-sm text-gray-400">
+              <div className="text-xs text-gray-400">
                 {newStoryMode ? (
                   <span className={`font-medium ${newStorySelectingStart ? 'text-green-400' : 'text-yellow-400'}`}>
                     Click to set {newStorySelectingStart ? 'START' : 'END'} position
@@ -1183,7 +1183,7 @@ const BookDetail = () => {
                     Click to set {selectingStart ? 'START' : 'END'} position
                   </span>
                 ) : (
-                  <>{sortedStories.length} stories • Click highlighted text to select</>
+                  <>Click highlighted text to select</>
                 )}
               </div>
             </div>
@@ -1302,26 +1302,77 @@ const BookDetail = () => {
             )}
           </div>
           
-          {/* Story list sidebar */}
-          <div className="w-80 flex-shrink-0">
-            <div className="bg-gray-800 border border-gray-700 rounded-lg p-4 sticky top-4">
+          {/* Middle column: Story list */}
+          <div className="w-56 xl:w-64 2xl:w-80 flex-shrink-0">
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-3 sticky top-4">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg font-semibold text-white">Stories ({sortedStories.length})</h3>
+                <h3 className="text-sm font-semibold text-white">Stories ({sortedStories.length})</h3>
                 {!newStoryMode && !editingBoundary && (
                   <button
                     onClick={handleEnterNewStoryMode}
                     className="px-2 py-1 text-xs bg-purple-600 hover:bg-purple-700 text-white rounded transition-colors"
                   >
-                    + New Story
+                    + New
                   </button>
                 )}
               </div>
               
+              {/* Story list */}
+              <div className="max-h-[70vh] overflow-y-auto space-y-1">
+                {sortedStories.map((story) => {
+                  const color = STORY_COLORS[story.colorIndex]
+                  const isSelected = selectedStory?.title === story.title
+                  return (
+                    <button
+                      key={story.title}
+                      onClick={() => {
+                        handleStoryClick(story)
+                        scrollToStory(story)
+                      }}
+                      className={`
+                        w-full text-left px-2 py-1.5 rounded text-xs transition-colors
+                        ${isSelected ? `${color.bg} ${color.border} border` : 'hover:bg-gray-700'}
+                      `}
+                    >
+                      <div className={`font-medium truncate ${isSelected ? color.text : 'text-gray-200'}`}>
+                        {story.title}
+                      </div>
+                      <div className="text-xs text-gray-500 truncate">
+                        {story.pages && `p.${story.pages}`}
+                        {story.pages && ' • '}
+                        {(story.end_char - story.start_char).toLocaleString()} chars
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+              
+              {/* Color legend */}
+              <div className="mt-3 pt-3 border-t border-gray-700">
+                <p className="text-xs text-gray-500 mb-2">Color Legend</p>
+                <div className="flex flex-wrap gap-1">
+                  {STORY_COLORS.map((color, idx) => (
+                    <div
+                      key={idx}
+                      className={`w-3 h-3 rounded ${color.bg} ${color.border} border`}
+                      title={`Story color ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Right column: Story details/options */}
+          <div className="w-56 xl:w-64 2xl:w-80 flex-shrink-0">
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-3 sticky top-4 max-h-[85vh] overflow-y-auto">
+              <h3 className="text-sm font-semibold text-white mb-3">
+                {newStoryMode ? 'New Story' : editingBoundary ? 'Edit Boundaries' : 'Story Details'}
+              </h3>
+              
               {/* New story controls */}
               {newStoryMode && (
-                <div className="mb-4 p-3 bg-gray-700 rounded-lg border-2 border-purple-500">
-                  <h4 className="font-semibold text-purple-400 mb-3">New Story</h4>
-                  
+                <div className="p-3 bg-gray-700 rounded-lg border-2 border-purple-500">
                   <div className="space-y-2 mb-3">
                     <input
                       type="text"
@@ -1483,20 +1534,34 @@ const BookDetail = () => {
                       {currentAssignments.length === 0 ? (
                         <p className="text-xs text-gray-500 italic">Not assigned</p>
                       ) : (
-                        <div className="space-y-1">
+                        <div className="space-y-2">
                           {currentAssignments.map((path, idx) => (
                             <div
                               key={idx}
-                              className="flex items-center justify-between p-1.5 bg-gray-800 rounded text-xs"
+                              className="p-2 bg-gray-800 rounded text-xs group relative"
+                              title={path.join(' > ')}
                             >
-                              <span className="text-gray-200 truncate flex-1 mr-1">{path.join(' > ')}</span>
-                              <button
-                                onClick={() => handleRemoveCategory(path)}
-                                disabled={assigning}
-                                className="px-1.5 py-0.5 text-xs bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex-shrink-0"
-                              >
-                                ×
-                              </button>
+                              <div className="flex items-start justify-between gap-1">
+                                <div className="flex-1 min-w-0">
+                                  {path.map((level, levelIdx) => (
+                                    <div
+                                      key={levelIdx}
+                                      className="text-gray-200 truncate"
+                                      style={{ paddingLeft: `${levelIdx * 8}px` }}
+                                    >
+                                      {levelIdx > 0 && <span className="text-gray-500 mr-1">›</span>}
+                                      {level}
+                                    </div>
+                                  ))}
+                                </div>
+                                <button
+                                  onClick={() => handleRemoveCategory(path)}
+                                  disabled={assigning}
+                                  className="px-1.5 py-0.5 text-xs bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex-shrink-0"
+                                >
+                                  ×
+                                </button>
+                              </div>
                             </div>
                           ))}
                         </div>
@@ -1642,8 +1707,21 @@ const BookDetail = () => {
                       
                       {/* Selected Path Display */}
                       {selectedPath.length > 0 && (
-                        <div className="mb-2 p-1.5 bg-gray-800 rounded text-xs text-gray-300 truncate">
-                          <span className="font-medium">{selectedPath.join(' > ')}</span>
+                        <div 
+                          className="mb-2 p-2 bg-gray-800 rounded text-xs"
+                          title={selectedPath.join(' > ')}
+                        >
+                          <p className="text-gray-400 text-xs mb-1">Selected path:</p>
+                          {selectedPath.map((level, levelIdx) => (
+                            <div
+                              key={levelIdx}
+                              className="text-gray-200 truncate"
+                              style={{ paddingLeft: `${levelIdx * 8}px` }}
+                            >
+                              {levelIdx > 0 && <span className="text-gray-500 mr-1">›</span>}
+                              <span className="font-medium">{level}</span>
+                            </div>
+                          ))}
                         </div>
                       )}
                       
@@ -1662,8 +1740,8 @@ const BookDetail = () => {
               
               {/* Boundary editing controls */}
               {selectedStory && editingBoundary && (
-                <div className="mb-4 p-3 bg-gray-700 rounded-lg border-2 border-blue-500">
-                  <h4 className="font-semibold text-blue-400 mb-2">Editing: {selectedStory.title}</h4>
+                <div className="p-3 bg-gray-700 rounded-lg border-2 border-blue-500">
+                  <h4 className="font-semibold text-blue-400 mb-2 text-sm">Editing: {selectedStory.title}</h4>
                   
                   <div className="text-xs space-y-2 mb-3">
                     <div className={`p-2 rounded ${selectingStart ? 'bg-blue-900/50 border border-blue-500' : 'bg-gray-800'}`}>
@@ -1705,52 +1783,13 @@ const BookDetail = () => {
                 </div>
               )}
               
-              {/* Story list */}
-              <div className="max-h-[50vh] overflow-y-auto space-y-1">
-                {sortedStories.map((story) => {
-                  const color = STORY_COLORS[story.colorIndex]
-                  const isSelected = selectedStory?.title === story.title
-                  return (
-                    <button
-                      key={story.title}
-                      onClick={() => {
-                        handleStoryClick(story)
-                        scrollToStory(story)
-                      }}
-                      className={`
-                        w-full text-left px-3 py-2 rounded text-sm transition-colors
-                        ${isSelected ? `${color.bg} ${color.border} border` : 'hover:bg-gray-700'}
-                      `}
-                    >
-                      <div className={`font-medium truncate ${isSelected ? color.text : 'text-gray-200'}`}>
-                        {story.title}
-                      </div>
-                      <div className="text-xs text-gray-500 truncate">
-                        {story.pages && `p.${story.pages}`}
-                        {story.pages && ' • '}
-                        {(story.end_char - story.start_char).toLocaleString()} chars
-                      </div>
-                    </button>
-                  )
-                })}
-              </div>
-              
-              {/* Color legend */}
-              <div className="mt-4 pt-3 border-t border-gray-700">
-                <p className="text-xs text-gray-500 mb-2">Color Legend</p>
-                <div className="flex flex-wrap gap-1">
-                  {STORY_COLORS.map((color, idx) => (
-                    <div
-                      key={idx}
-                      className={`w-4 h-4 rounded ${color.bg} ${color.border} border`}
-                      title={`Story color ${idx + 1}`}
-                    />
-                  ))}
+              {/* No selection state */}
+              {!selectedStory && !newStoryMode && !editingBoundary && (
+                <div className="text-center py-8 text-gray-500">
+                  <p className="text-sm">Select a story from the list</p>
+                  <p className="text-xs mt-1">or click highlighted text in the viewer</p>
                 </div>
-                <p className="text-xs text-gray-500 mt-2">
-                  <span className="text-gray-600">■</span> Gray = Unassigned text (gaps)
-                </p>
-              </div>
+              )}
             </div>
           </div>
         </div>
