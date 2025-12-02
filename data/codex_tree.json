@@ -304,8 +304,8 @@
         ],
         "False Wonders": [
             "Albigensian Heretics Walking On Water",
-            "Mass Enthusiastic Suicide in Crete under a False Moses and Attribution to a Demon of Samael",
-            "Heretic\u2019s Demonic Vision of a False Christ and Queen Dispelled by the Eucharist"
+            "Heretic\u2019s Demonic Vision of a False Christ and Queen Dispelled by the Eucharist",
+            "Mass Enthusiastic Suicide in Crete under a False Moses and Attribution to a Demon of Samael"
         ],
         "Hagriding": {},
         "Harm": {
@@ -331,7 +331,11 @@
         ],
         "Ritual": {
             "Black Sabbath": {},
-            "Circles": {},
+            "Circles": {
+                "_stories": [
+                    "Necromantic Conjurations at the Crossroads and Demonic Manifestations"
+                ]
+            },
             "Contract": {
                 "With Another Person": {},
                 "With a Demon": [
