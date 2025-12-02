@@ -147,11 +147,9 @@
                     "Laughter": {},
                     "Love": {},
                     "Sorrow": {},
-                    "Wrath": {
-                        "_stories": [
-                            "Violent Possession and Exorcism of Peter Bernardi of Areia"
-                        ]
-                    },
+                    "Wrath": [
+                        "Violent Possession and Exorcism of Peter Bernardi of Areia"
+                    ],
                     "_stories": [
                         "Old Woman\u2019s Possession, Magical Amulet with Divine Names, and Exorcism by Burning",
                         "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
@@ -284,7 +282,11 @@
             "Non-Pet Animal": {},
             "Pet": {}
         },
-        "Cursing": {},
+        "Cursing": {
+            "_stories": [
+                "Violent Possession and Exorcism of Peter Bernardi of Areia"
+            ]
+        },
         "Divination": [
             "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself",
             "Prophetic Trances, Glossolalia, and Miracles Surrounding Sabbatai Zevi"
