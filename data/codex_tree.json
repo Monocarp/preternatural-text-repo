@@ -325,7 +325,11 @@
             "Ufonauts Gliding, Flying, and Walking Through Craft Walls",
             "Springfield Farmhands\u2019 Affidavit Of Airship Landing And Promise About Free Cuba"
         ],
-        "Livestock/Animal Interaction": [],
+        "Livestock/Animal Interaction": {
+            "_stories": [
+                "Alexander Hamilton\u2019s Affidavit Of Airship, Six Strange Beings, And Calf Abduction"
+            ]
+        },
         "Residual Effects": [
             "October 3, 1967 Melville Disk-Shaped Object with Blinking Rectangular Lights and Chemical Odor Trace",
             "Battle Creek Falling Aluminum Wheel From A Bright Humming Object",
