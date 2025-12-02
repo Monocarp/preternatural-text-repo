@@ -8,9 +8,8 @@ export default function ArchivePage() {
   const { tree, setTree, loading, setLoading } = useStore()
 
   useEffect(() => {
-    if (Object.keys(tree).length === 0) {
-      loadTree()
-    }
+    // Always refresh tree when visiting Archive
+    loadTree()
   }, [])
 
   const loadTree = async () => {
