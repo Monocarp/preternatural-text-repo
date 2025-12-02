@@ -270,7 +270,11 @@
     "UFO": {
         "Abduction": {},
         "Aerial Phenomenon": {
-            "Pilot Seen": [],
+            "Pilot Seen": {
+                "_stories": [
+                    "1790 Alen\u00e7on Globe Landing, Humanlike Occupant, And Silent Explosion"
+                ]
+            },
             "_stories": [
                 "March 8, 1967 Minnesota Repeated Nightly Hovering Light",
                 "March 8, 1967 Michigan Burning Orange Oval over Liggett School",
