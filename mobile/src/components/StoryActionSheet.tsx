@@ -29,6 +29,7 @@ export default function StoryActionSheet({ story, isOpen, onClose, onAssigned }:
   const { setSelectedStory } = useStore()
   const [showAssign, setShowAssign] = useState(false)
   const [assigning, setAssigning] = useState(false)
+  const [removing, setRemoving] = useState<number | null>(null)
   const [currentAssignments, setCurrentAssignments] = useState<string[][]>([])
   const [loadingAssignments, setLoadingAssignments] = useState(false)
 
@@ -40,6 +41,7 @@ export default function StoryActionSheet({ story, isOpen, onClose, onAssigned }:
       // Reset state when closed
       setShowAssign(false)
       setCurrentAssignments([])
+      setRemoving(null)
     }
   }, [isOpen, story.title])
 
@@ -53,6 +55,26 @@ export default function StoryActionSheet({ story, isOpen, onClose, onAssigned }:
       setCurrentAssignments([])
     } finally {
       setLoadingAssignments(false)
+    }
+  }
+
+  const handleRemove = async (path: string[], idx: number) => {
+    setRemoving(idx)
+    try {
+      await apiClient.delete('/remove-category', {
+        data: {
+          title: story.title,
+          path: path
+        }
+      })
+      // Refresh assignments
+      await loadCurrentAssignments()
+      onAssigned?.()
+    } catch (err) {
+      console.error('Error removing assignment:', err)
+      alert('Failed to remove. Make sure you are logged in as an editor.')
+    } finally {
+      setRemoving(null)
     }
   }
 
@@ -174,8 +196,15 @@ export default function StoryActionSheet({ story, isOpen, onClose, onAssigned }:
                     </p>
                     <div className="space-y-1 max-h-32 overflow-y-auto">
                       {currentAssignments.map((path, idx) => (
-                        <div key={idx} className="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded">
-                          {path.join(' → ')}
+                        <div key={idx} className="flex items-center justify-between text-xs bg-green-400/10 px-2 py-1 rounded">
+                          <span className="text-green-400 truncate flex-1">{path.join(' → ')}</span>
+                          <button
+                            onClick={() => handleRemove(path, idx)}
+                            disabled={removing === idx}
+                            className="ml-2 text-red-400 hover:text-red-300 disabled:opacity-50 flex-shrink-0"
+                          >
+                            {removing === idx ? '...' : '✕'}
+                          </button>
                         </div>
                       ))}
                     </div>
