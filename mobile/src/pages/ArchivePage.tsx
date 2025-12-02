@@ -54,8 +54,9 @@ export default function ArchivePage() {
           <div className="space-y-2">
             {categories.map((category) => {
               const node = tree[category]
-              const subcategoryCount = Object.keys(node || {}).filter(k => k !== '_stories').length
-              const storyCount = node?._stories?.length || 0
+              const isArray = Array.isArray(node)
+              const subcategoryCount = isArray ? 0 : Object.keys(node || {}).filter(k => k !== '_stories').length
+              const storyCount = isArray ? node.length : (node?._stories?.length || 0)
               
               return (
                 <button

@@ -172,8 +172,9 @@ export default function CategoryPage() {
               <div className="space-y-2 mb-4">
                 {subcategories.map((subcategory) => {
                   const node = currentNode?.[subcategory]
-                  const subCount = Object.keys(node || {}).filter(k => k !== '_stories').length
-                  const storyCount = node?._stories?.length || 0
+                  const isArray = Array.isArray(node)
+                  const subCount = isArray ? 0 : Object.keys(node || {}).filter(k => k !== '_stories').length
+                  const storyCount = isArray ? node.length : (node?._stories?.length || 0)
 
                   return (
                     <button
