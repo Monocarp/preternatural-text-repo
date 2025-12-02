@@ -6,3 +6,34 @@ __pycache__/
 *.pyc
 preternatural-text-ui/
 venv/
+
+# =============================================================================
+# PRODUCTION DATA FILES - DO NOT TRACK
+# =============================================================================
+# These files are mutable in production (story edits, category changes, etc.)
+# They should live on Render's persistent disk, not in git.
+# See documentation/PERSISTENT_DATA.md for setup instructions.
+#
+# Seed files (data/seeds/*) ARE tracked as initial data for fresh deploys.
+# =============================================================================
+
+# Mutable JSON state files
+data/codex_tree.json
+data/stories_dict.json
+data/pending_stories.json
+
+# FAISS search indexes (binary + map)
+data/stories.faiss
+data/stories.faiss.map.json
+
+# SQLite FTS index
+data/stories_fts.db
+
+# Haystack legacy files (if used)
+data/document_store.json
+data/documents.json
+data/faiss_index.bin
+
+# Book-specific mutable files
+books/*/story_positions.json
+books/*/stories_meta.json
