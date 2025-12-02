@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://preternatural-text-repo.onrender.com/:path*"
+      "destination": "https://preternatural-text-repo.onrender.com/api/:path*"
     },
     {
       "source": "/((?!assets|icon|favicon|manifest).*)",
