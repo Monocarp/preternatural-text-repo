@@ -283,7 +283,11 @@
             "Pet": {}
         },
         "Cursing": {
-            "Cursed Objects": [],
+            "Cursed Objects": {
+                "_stories": [
+                    "Violent Possession and Exorcism of Peter Bernardi of Areia"
+                ]
+            },
             "_stories": [
                 "Violent Possession and Exorcism of Peter Bernardi of Areia"
             ]
