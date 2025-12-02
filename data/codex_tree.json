@@ -283,14 +283,10 @@
             "Pet": {}
         },
         "Cursing": {
-            "Cursed Objects": {
-                "_stories": [
-                    "Violent Possession and Exorcism of Peter Bernardi of Areia"
-                ]
-            },
-            "_stories": [
+            "Cursed Objects": [
                 "Violent Possession and Exorcism of Peter Bernardi of Areia"
-            ]
+            ],
+            "_stories": []
         },
         "Divination": [
             "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself",
