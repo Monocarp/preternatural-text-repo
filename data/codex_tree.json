@@ -331,11 +331,10 @@
         ],
         "Ritual": {
             "Black Sabbath": {},
-            "Circles": {
-                "_stories": [
-                    "Necromantic Conjurations at the Crossroads and Demonic Manifestations"
-                ]
-            },
+            "Circles": [
+                "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
+                "Demonic Circles Across Cultures"
+            ],
             "Contract": {
                 "With Another Person": {},
                 "With a Demon": [
