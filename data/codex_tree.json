@@ -88,17 +88,16 @@
                 "Bone Dislocation": {},
                 "Bruise": {},
                 "Bumps, Cysts, other Protrusions": {},
-                "Carried, Flight, etc": {
-                    "_stories": [
-                        "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium"
-                    ]
-                },
+                "Carried, Flight, etc": [
+                    "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium"
+                ],
                 "Choking": [
                     "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
                 ],
                 "Death": [
                     "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
-                    "Mass Enthusiastic Suicide in Crete under a False Moses and Attribution to a Demon of Samael"
+                    "Mass Enthusiastic Suicide in Crete under a False Moses and Attribution to a Demon of Samael",
+                    "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium"
                 ],
                 "Distention of the Stomach": {},
                 "Foul Breath": {},
