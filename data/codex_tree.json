@@ -38,11 +38,9 @@
                     "Appearance as Animal": [
                         "Women\u2019s Pacts with Shedim and Nocturnal Meetings with Buck\u2011Shaped Spirits"
                     ],
-                    "Appearance as Shadow": {
-                        "_stories": [
-                            "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium"
-                        ]
-                    },
+                    "Appearance as Shadow": [
+                        "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium"
+                    ],
                     "Succubi & Incubi": [
                         "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
                     ],
@@ -201,9 +199,7 @@
                 "Saint Walbert\u2019s Cross and Arm Used to Test and Heal the Possessed at Valombrosa"
             ]
         },
-        "_stories": [
-            "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium"
-        ]
+        "_stories": []
     },
     "Fae": {
         "Elementals": {
