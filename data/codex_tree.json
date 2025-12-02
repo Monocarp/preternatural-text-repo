@@ -316,6 +316,7 @@
             "Contactee Milkman on Sydney Beach Addressed Telepathically by Space-Suited Men",
             "J. A. Heron\u2019s Claimed Repair Work And 24\u2011Hour Flight To Hawaii",
             "Holton\u2019s Electrically Lit Reveler\u2011Filled Airship And Abducted Truthful Citizen",
+            "John M. Barclay\u2019s Night Visit From \u201cSmith\u201d And Promise To Be In Greece",
             "William Megiveron\u2019s Night Visit, Airship Crew\u2019s Food Order, And Searchlight Over The Lake",
             "Barney and Betty Hill and Villa-Boas: Color-Changing UFOs and Abduction Claims",
             "Sumpter And McLemore\u2019s Sworn Encounter With Bearded Airship Captain",
@@ -325,11 +326,9 @@
             "Ufonauts Gliding, Flying, and Walking Through Craft Walls",
             "Springfield Farmhands\u2019 Affidavit Of Airship Landing And Promise About Free Cuba"
         ],
-        "Livestock/Animal Interaction": {
-            "_stories": [
-                "Alexander Hamilton\u2019s Affidavit Of Airship, Six Strange Beings, And Calf Abduction"
-            ]
-        },
+        "Livestock/Animal Interaction": [
+            "Alexander Hamilton\u2019s Affidavit Of Airship, Six Strange Beings, And Calf Abduction"
+        ],
         "Residual Effects": [
             "October 3, 1967 Melville Disk-Shaped Object with Blinking Rectangular Lights and Chemical Odor Trace",
             "Battle Creek Falling Aluminum Wheel From A Bright Humming Object",
