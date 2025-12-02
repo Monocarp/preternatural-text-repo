@@ -15,6 +15,7 @@ export default defineConfig(({ mode }) => {
         registerType: 'autoUpdate',
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png'],
         manifest: {
+          id: '/',
           name: 'Preternatural Text',
           short_name: 'Preternatural',
           description: 'Story Archive & Research Tool',
@@ -40,6 +41,14 @@ export default defineConfig(({ mode }) => {
               sizes: '512x512',
               type: 'image/png',
               purpose: 'maskable'
+            }
+          ],
+          screenshots: [
+            {
+              src: 'icon-512.png',
+              sizes: '512x512',
+              type: 'image/png',
+              form_factor: 'narrow'
             }
           ]
         },
