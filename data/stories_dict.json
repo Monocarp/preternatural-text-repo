@@ -543,14 +543,6 @@
         "start_char": 226640,
         "title": "All the Dancers Revealed as the Dead in Shrouds at a Fairy Gathering"
     },
-    "Alleged Ritual Murder of Boy Hugh of Lincoln and Miracles at His Body": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 153099,
-        "keywords": "alleged ritual murder of boy hugh of lincoln and miracles at his body",
-        "pages": "46",
-        "start_char": 151977,
-        "title": "Alleged Ritual Murder of Boy Hugh of Lincoln and Miracles at His Body"
-    },
     "Alleged Ritual Murder of Boy Simon of Trent and Miracles Spreading His Cult": {
         "book_slug": "christian_mysticism_vol_iv",
         "end_char": 162586,
@@ -566,14 +558,6 @@
         "pages": "49",
         "start_char": 162565,
         "title": "Alleged Ritual Murder of Sebastian Novello at Portubuffaleto and Subsequent Executions"
-    },
-    "Alleged Ritual Murder of Werner of Oberwesel and Earlier Pforzheim Case": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 153981,
-        "keywords": "alleged ritual murder of werner of oberwesel and earlier pforzheim case",
-        "pages": "46",
-        "start_char": 153113,
-        "title": "Alleged Ritual Murder of Werner of Oberwesel and Earlier Pforzheim Case"
     },
     "Allen Ginsberg\u2019s Ayahuasca Vision of Being Faced by Death": {
         "book_slug": "ecology_of_souls_volume_i",
@@ -2839,6 +2823,14 @@
         "start_char": 193932,
         "title": "Erikson Gorique\u2019s Apparent Prior Appearance in Oslo"
     },
+    "European Ritual Murders": {
+        "book_slug": "christian_mysticism_vol_iv",
+        "end_char": 153981,
+        "keywords": "Philip Augustus, Paris, Robert of Pontoise, coronation, expulsion of Jews, France, 1108, Brienne, crowning with thorns, beating, hanging, death by fire, Henry III, England, Lincoln, 1255, Hugh of Lincoln, Jopinus, starvation, scourging, needles, lance-wound, miracles, John of Lessinan, rabbi Jopinus, dragging behind horse, Dominicans, Richard, Oberwesel, 1287, Werner, Host theft attempt, torments, Rudolph, Archbishop of Mainz, Swabia, Pforzheim, 1271, seven-year-old girl, Frederick II, 1256, ritual murder, boy-murder, crucifixion mockery, well-body disposal, uprising against Jews",
+        "pages": "45-46",
+        "start_char": 151057,
+        "title": "European Ritual Murders"
+    },
     "Evans Wentz\u2019s Informants Equate Fairies with the Dead": {
         "book_slug": "ecology_of_souls_volume_i",
         "end_char": 215437,
@@ -4681,10 +4673,10 @@
     },
     "Late February\u2013March 8, 1967 Missouri Seventy-Five to One Hundred UFO Witnesses near Osage Beach and Linn Creek": {
         "book_slug": "operation_trojan_horse",
-        "end_char": 28341,
+        "end_char": 28274,
         "keywords": "late februarymarch 8 1967 missouri seventyfive to one hundred ufo witnesses near osage beach and linn creek",
         "pages": "9-11",
-        "start_char": 28061,
+        "start_char": 28065,
         "title": "Late February\u2013March 8, 1967 Missouri Seventy-Five to One Hundred UFO Witnesses near Osage Beach and Linn Creek"
     },
     "Latimer's 2008 Overdose NDE with Thoth, Osiris, and Aboriginal Warrior": {
