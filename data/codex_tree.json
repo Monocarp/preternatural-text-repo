@@ -149,11 +149,9 @@
                 "Falsified Emotions": {
                     "Hatred": {},
                     "Joy": {},
-                    "Laughter": {
-                        "_stories": [
-                            "Old Woman\u2019s Possession, Magical Amulet with Divine Names, and Exorcism by Burning"
-                        ]
-                    },
+                    "Laughter": [
+                        "Old Woman\u2019s Possession, Magical Amulet with Divine Names, and Exorcism by Burning"
+                    ],
                     "Love": {},
                     "Sorrow": {},
                     "Wrath": [
@@ -291,7 +289,8 @@
         },
         "Cursing": {
             "Cursed Objects": [
-                "Violent Possession and Exorcism of Peter Bernardi of Areia"
+                "Violent Possession and Exorcism of Peter Bernardi of Areia",
+                "Old Woman\u2019s Possession, Magical Amulet with Divine Names, and Exorcism by Burning"
             ]
         },
         "Divination": [
