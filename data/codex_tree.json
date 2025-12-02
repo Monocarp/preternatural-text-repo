@@ -28,17 +28,22 @@
             "Anger": {},
             "Emotional Guilt": {},
             "Fear/Anxiety": {},
-            "Reduction of Voluntariness": {}
+            "Reduction of Voluntariness": [
+                "Mass Enthusiastic Suicide in Crete under a False Moses and Attribution to a Demon of Samael"
+            ]
         },
         "Oppression": {
             "Haunting Vexations": {
                 "Explicitly Demonic Apparitions": {
-                    "Appearance as Animal": {},
+                    "Appearance as Animal": [
+                        "Women\u2019s Pacts with Shedim and Nocturnal Meetings with Buck\u2011Shaped Spirits"
+                    ],
                     "Appearance as Shadow": {},
-                    "Succubi & Incubi": [],
+                    "Succubi & Incubi": [
+                        "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
+                    ],
                     "_stories": [
                         "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
-                        "Women\u2019s Pacts with Shedim and Nocturnal Meetings with Buck\u2011Shaped Spirits",
                         "Saint Walbert\u2019s Cross and Arm Used to Test and Heal the Possessed at Valombrosa"
                     ]
                 },
@@ -55,7 +60,9 @@
                 ],
                 "Auditory Hallucinations": {},
                 "Depression": {},
-                "Dreams": {},
+                "Dreams": [
+                    "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
+                ],
                 "Emotional/Relational Block": {},
                 "Severe Mental Disorder": [
                     "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
@@ -84,7 +91,8 @@
                     "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
                 ],
                 "Death": [
-                    "Necromantic Conjurations at the Crossroads and Demonic Manifestations"
+                    "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
+                    "Mass Enthusiastic Suicide in Crete under a False Moses and Attribution to a Demon of Samael"
                 ],
                 "Distention of the Stomach": {},
                 "Foul Breath": {},
@@ -116,7 +124,9 @@
                 "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
             ],
             "Morphing": {},
-            "Occult Knowledge": {},
+            "Occult Knowledge": [
+                "Prophetic Trances, Glossolalia, and Miracles Surrounding Sabbatai Zevi"
+            ],
             "Secondary Signs": {
                 "Affected Dreams": {},
                 "Animalistic Behavior": [
@@ -167,26 +177,41 @@
                     "animus delendi (destruction)": {}
                 }
             },
-            "Speaking a Foreign Language": {},
+            "Speaking a Foreign Language": [
+                "Prophetic Trances, Glossolalia, and Miracles Surrounding Sabbatai Zevi"
+            ],
             "Strength": {},
             "Superhuman Agility": {},
             "Superhuman Speed": {},
             "Sustained Unnatural Posture": {},
             "_stories": [
-                "Stages of Demonic Possession in Magdalena and the Role of Asmodeus",
-                "Other Graves and Holy Sites Where the Possessed Were Freed",
-                "Woman Punished with Possession for Attempted Sorcery and Her Deliverance at St.\u00a0Gandolph",
-                "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio",
-                "Possession of a Jewish Woman in Ferrara and Exorcism of a Ruach by R. Chaim Vital",
                 "Possession of a Girl from Citt\u00e0 di Castello and Demon\u2019s Accusation of a Sorcerer Priest",
-                "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
+                "Woman Punished with Possession for Attempted Sorcery and Her Deliverance at St.\u00a0Gandolph",
                 "Old Woman\u2019s Possession, Magical Amulet with Divine Names, and Exorcism by Burning",
+                "Possession of a Jewish Woman in Ferrara and Exorcism of a Ruach by R. Chaim Vital",
+                "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
+                "Other Graves and Holy Sites Where the Possessed Were Freed",
+                "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio",
                 "Saint Walbert\u2019s Cross and Arm Used to Test and Heal the Possessed at Valombrosa"
             ]
         },
         "_stories": {}
     },
     "Fae": {
+        "Elementals": {
+            "Air": [
+                "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
+            ],
+            "Earth": [
+                "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
+            ],
+            "Fire": [
+                "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
+            ],
+            "Water": [
+                "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
+            ]
+        },
         "Fairy": {},
         "Gnome": {},
         "Nymph": {},
@@ -225,71 +250,87 @@
             "_stories": [
                 "Possession of a Jewish Woman in Ferrara and Exorcism of a Ruach by R. Chaim Vital"
             ]
-        }
+        },
+        "Tulpas": {}
     },
     "Supernatural Phenomena": {
         "Time Loss": {},
         "Time Slip": {}
     },
+    "UFO": [
+        "Possession of a Girl from Citt\u00e0 di Castello and Demon\u2019s Accusation of a Sorcerer Priest",
+        "Bedroom Abduction by a Small Glowing Figure",
+        "March 8, 1967 Minnesota Repeated Nightly Hovering Light",
+        "March 8, 1967 Michigan Burning Orange Oval over Liggett School",
+        "March 8, 1967 Oklahoma Twirling Object with Colored Lights and Spits of Fire",
+        "March 8, 1967 Arkansas Reddish Orange Object Turning Silver-White Before Takeoff",
+        "March 8, 1967 Maryland Circular Object with Shiny Gold Bottom and Red-Glowing Top",
+        "March 8, 1967 Montana Circular Object Dropping Three Balls of Fire"
+    ],
     "Witchcraft": {
         "Abduction": {
             "Adult": {},
-            "Child": {},
+            "Child": [
+                "Alleged Ritual Murder of Boy Simon of Trent and Miracles Spreading His Cult"
+            ],
             "Non-Pet Animal": {},
             "Pet": {}
         },
-        "Black Sabbath": {},
         "Cursing": {},
-        "Divination": {},
-        "Evil Eye": {},
-        "False Wonders": [
-            "Albigensian Heretics Walking On Water"
+        "Divination": [
+            "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself",
+            "Prophetic Trances, Glossolalia, and Miracles Surrounding Sabbatai Zevi"
         ],
-        "Flying": [
-            "Demonic Vision Dismissed With Eucharist",
-            "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+        "Evil Eye": [
+            "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
+        ],
+        "False Wonders": [
+            "Albigensian Heretics Walking On Water",
+            "Mass Enthusiastic Suicide in Crete under a False Moses and Attribution to a Demon of Samael"
         ],
         "Hagriding": {},
-        "Harm To Pets": {},
-        "Harm to Crops": {},
-        "Harm to Livestock": {},
+        "Harm": {
+            "Harm To Crops": {},
+            "Harm To Livestock": {},
+            "Harm to People": [
+                "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself",
+                "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means"
+            ],
+            "Harm to Pets": {}
+        },
         "Herbal/Natural": [
             "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion",
-            "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means"
+            "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means",
+            "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
         ],
-        "Indoctrinating Children": {},
+        "Indoctrinating Children": [
+            "Prophetic Trances, Glossolalia, and Miracles Surrounding Sabbatai Zevi"
+        ],
         "Levitation": {},
-        "Physical Harm": [
-            "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means"
+        "Mating with Demons": [
+            "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
         ],
-        "Physical Harm To Children": {},
         "Ritual": {
-            "Black Sabbath": [
-                "The Jurist\u2019s Pact with Satan and Failed Return to Confession",
-                "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion"
-            ],
-            "Contract with Another": {},
-            "Contract with Demon": [
-                "The Jurist\u2019s Pact with Satan and Failed Return to Confession",
-                "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion",
-                "Ritual for Invoking Unclean Spirits via One\u2019s Shadow and the Appearance of Two Ruchin"
-            ],
+            "Black Sabbath": {},
+            "Circles": {},
+            "Contract": {
+                "With Another Person": {},
+                "With a Demon": {}
+            },
             "Rejection of Sacraments": {
                 "Rejection of Baptism": {},
                 "Rejection of Confession": {},
                 "Rejection of Confirmation": {},
                 "Rejection of Eucharist": {},
                 "Rejection of Holy Orders": {},
-                "Rejection of Marriage": {},
-                "_stories": [
-                    "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
-                ]
+                "Rejection of Marriage": {}
             },
             "Sacrifice": {
-                "Sacrificing a Family Member": {},
                 "Sacrificing a Person": {
                     "Sacrificing a Family Member": {
-                        "Sacrificing a Child": {},
+                        "Sacrificing a Child": [
+                            "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion"
+                        ],
                         "Sacrificing a Grandparent": {},
                         "Sacrificing a Parent": {},
                         "Sacrificing a Sibling": {},
@@ -297,9 +338,16 @@
                         "Sacrificing a niece/nephew": {},
                         "Sacrificing an Aunt/Uncle": {}
                     },
-                    "Sacrificing a Friend": {},
-                    "Sacrificing a known associate": {},
-                    "Sacrificing a stranger": {}
+                    "Sacrificing a Friend": {
+                        "Adult": {},
+                        "Child": {}
+                    },
+                    "Sacrificing a stranger": {
+                        "Adult": {},
+                        "Child": [
+                            "Alleged Ritual Murder of Boy Simon of Trent and Miracles Spreading His Cult"
+                        ]
+                    }
                 },
                 "Sacrificing an Animal": {}
             },
@@ -309,15 +357,22 @@
                 "Demonic Circles Across Cultures"
             ]
         },
-        "Sacrificing Children": [
-            "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion"
-        ],
         "Transformation": [
             "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means"
         ],
-        "Transportation": [
-            "The Jurist\u2019s Pact with Satan and Failed Return to Confession",
-            "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means"
+        "Unnatural Travel": {
+            "Flight": [
+                "Demonic Vision Dismissed With Eucharist",
+                "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+            ],
+            "Transportation": [
+                "The Jurist\u2019s Pact with Satan and Failed Return to Confession",
+                "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means"
+            ]
+        },
+        "_stories": [
+            "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself",
+            "Women\u2019s Pacts with Shedim and Nocturnal Meetings with Buck\u2011Shaped Spirits"
         ]
     }
 }
