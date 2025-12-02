@@ -5655,14 +5655,6 @@
         "start_char": 740735,
         "title": "Mike Stevens\u2019s Ghost-Train \u201cDream\u201d of Dead Aliens on Operating Tables"
     },
-    "Miracles at the Relics of Alleged Child\u2011Martyrs as Confirmation of Ritual Murder Legends": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 151055,
-        "keywords": "miracles at the relics of alleged childmartyrs as confirmation of ritual murder legends",
-        "pages": "45",
-        "start_char": 150561,
-        "title": "Miracles at the Relics of Alleged Child\u2011Martyrs as Confirmation of Ritual Murder Legends"
-    },
     "Miraculous Eucharistic Phenomena with Elisabeth Blanchard before Gaston, Duke of Orl\u00e9ans": {
         "book_slug": "christian_mysticism_vol_iv",
         "end_char": 1323372,
@@ -6503,6 +6495,14 @@
         "start_char": 280655,
         "title": "Oval UFO and Seven Helicopters Over Rosecroft Racetrack"
     },
+    "Overview of THB misbehavior": {
+        "book_slug": "christian_mysticism_vol_iv",
+        "end_char": 149856,
+        "keywords": "Jews, poisoning wells, running waters, sacrament-theft, host desecration, child-seizing, blood libel, ritual murder, vengeance, secret reaction, persecution",
+        "pages": "45",
+        "start_char": 149046,
+        "title": "Overview of THB misbehavior"
+    },
     "Owls as Soul-Snatching and Death-Bringing Birds in China, Hungary, and European Folklore": {
         "book_slug": "ecology_of_souls_volume_i",
         "end_char": 106351,
@@ -7025,7 +7025,7 @@
     },
     "Prophetic Trances, Glossolalia, and Miracles Surrounding Sabbatai Zevi": {
         "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 142693,
+        "end_char": 142704,
         "keywords": "Sabbatai Zevi, seventeenth century, Nathan of Gaza, clairvoyance, visions, prophecy, prophetic spirit, convulsions, Hebrew, Aramaic, Samaria, Adrianople, Thessalonica, Constantinople, Pechina, Moses Servil, Messiah, possession-like trance, reading sins from brow, conversion to Islam",
         "pages": "42-43",
         "start_char": 140915,
