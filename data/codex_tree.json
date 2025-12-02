@@ -153,11 +153,9 @@
                         "Old Woman\u2019s Possession, Magical Amulet with Divine Names, and Exorcism by Burning"
                     ],
                     "Love": {},
-                    "Sorrow": {
-                        "_stories": [
-                            "Possession of a Girl from Citt\u00e0 di Castello and Demon\u2019s Accusation of a Sorcerer Priest"
-                        ]
-                    },
+                    "Sorrow": [
+                        "Possession of a Girl from Citt\u00e0 di Castello and Demon\u2019s Accusation of a Sorcerer Priest"
+                    ],
                     "Wrath": [
                         "Violent Possession and Exorcism of Peter Bernardi of Areia"
                     ],
@@ -335,7 +333,11 @@
             "Circles": {},
             "Contract": {
                 "With Another Person": {},
-                "With a Demon": {}
+                "With a Demon": {
+                    "_stories": [
+                        "Possession of a Girl from Citt\u00e0 di Castello and Demon\u2019s Accusation of a Sorcerer Priest"
+                    ]
+                }
             },
             "Rejection of Sacraments": {
                 "Rejection of Baptism": {},
