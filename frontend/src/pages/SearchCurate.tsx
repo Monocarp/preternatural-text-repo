@@ -34,7 +34,11 @@ const SearchCurate = () => {
   const [searchMode, setSearchMode] = useState('Both')
   const [minScore, setMinScore] = useState(0.1)
   const [assignmentFilter, setAssignmentFilter] = useState('all')
+  const [categoryFilter, setCategoryFilter] = useState('')
+  const [subcategoryFilter, setSubcategoryFilter] = useState('')
   const [sources, setSources] = useState<string[]>(['All Sources'])
+  const [categories, setCategories] = useState<string[]>([])
+  const [subcategories, setSubcategories] = useState<Record<string, string[]>>({})
   const [results, setResults] = useState<SearchResult[]>([])
   const [selectedStory, setSelectedStory] = useState<SearchResult | null>(null)
   const [storyContent, setStoryContent] = useState<string>('')
@@ -93,6 +97,20 @@ const SearchCurate = () => {
         setSources(['All Sources'])
       })
   }, [])
+
+  // Load available categories on mount
+  useEffect(() => {
+    apiClient.get('/categories')
+      .then(res => {
+        setCategories(res.data.categories || [])
+        setSubcategories(res.data.subcategories || {})
+      })
+      .catch(err => {
+        console.error('Error loading categories:', err)
+        setCategories([])
+        setSubcategories({})
+      })
+  }, [])
   
   // Current assignments now handled by categoryAssignment hook
 
@@ -109,7 +127,9 @@ const SearchCurate = () => {
         search_mode: searchMode,
         top_k: 1000,
         min_score: minScore,
-        assignment_filter: assignmentFilter
+        assignment_filter: assignmentFilter,
+        category_filter: categoryFilter || null,
+        subcategory_filter: subcategoryFilter || null
       })
       setResults(res.data.results || [])
       if (res.data.results && res.data.results.length > 0) {
@@ -473,6 +493,44 @@ const SearchCurate = () => {
                     <option value="all">All</option>
                     <option value="assigned">Assigned</option>
                     <option value="unassigned">Unassigned</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="block text-xs font-medium mb-1 text-gray-400">Category</label>
+                  <select
+                    value={categoryFilter}
+                    onChange={(e) => {
+                      setCategoryFilter(e.target.value)
+                      setSubcategoryFilter('') // Reset subcategory when category changes
+                    }}
+                    className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-sm text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  >
+                    <option value="">All Categories</option>
+                    {categories.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium mb-1 text-gray-400">Subcategory</label>
+                  <select
+                    value={subcategoryFilter}
+                    onChange={(e) => setSubcategoryFilter(e.target.value)}
+                    disabled={!categoryFilter}
+                    className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-sm text-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <option value="">All Subcategories</option>
+                    {categoryFilter && subcategories[categoryFilter]?.map((subcat) => (
+                      <option key={subcat} value={subcat}>
+                        {subcat}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>

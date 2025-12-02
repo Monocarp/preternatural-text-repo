@@ -40,7 +40,9 @@ def search_stories(
     search_mode: str = "Both",
     top_k: int = 1000,
     min_score: float = 0.2,
-    assignment_filter: str = "all"
+    assignment_filter: str = "all",
+    category_filter: str = None,
+    subcategory_filter: str = None
 ) -> List[Dict[str, Any]]:
     """
     Search for stories using Direct FAISS + SQLite engine.
@@ -53,13 +55,16 @@ def search_stories(
         top_k: Maximum number of results
         min_score: Minimum relevance score threshold (auto-adjusted per mode)
         assignment_filter: "all", "assigned", or "unassigned"
+        category_filter: Top-level category name to filter by (or None for all)
+        subcategory_filter: Subcategory name to filter by (or None for all)
     
     Returns:
         List of story result dictionaries with title, book_slug, score, etc.
     """
     logger.info(
         f"Searching for query: {query}, source: {source_filter}, "
-        f"mode: {search_mode}, min_score: {min_score}"
+        f"mode: {search_mode}, min_score: {min_score}, "
+        f"category: {category_filter}, subcategory: {subcategory_filter}"
     )
     
     # Get search engine
@@ -148,6 +153,45 @@ def search_stories(
             enriched_results = [s for s in enriched_results if s['title'] not in assigned_titles]
         
         logger.info(f"Filtered to {len(enriched_results)} {assignment_filter} stories")
+    
+    # Apply category/subcategory filter
+    if category_filter:
+        from utils.cache import get_cached_tree
+        from tree.queries import get_stories_for_subcats, _collect_stories_recursive
+        
+        tree = get_cached_tree()
+        
+        if category_filter in tree and isinstance(tree[category_filter], dict):
+            category_node = tree[category_filter]
+            
+            if subcategory_filter:
+                # Filter by specific subcategory within the category
+                if subcategory_filter in category_node:
+                    subcategory_titles = set()
+                    subcat_value = category_node[subcategory_filter]
+                    
+                    if isinstance(subcat_value, list):
+                        subcategory_titles.update(subcat_value)
+                    elif isinstance(subcat_value, dict):
+                        _collect_stories_recursive(subcat_value, subcategory_titles)
+                    
+                    enriched_results = [s for s in enriched_results if s['title'] in subcategory_titles]
+                    logger.info(f"Filtered to {len(enriched_results)} stories in {category_filter}/{subcategory_filter}")
+                else:
+                    # Subcategory doesn't exist - return empty
+                    enriched_results = []
+                    logger.warning(f"Subcategory '{subcategory_filter}' not found in category '{category_filter}'")
+            else:
+                # Filter by entire category (all subcategories)
+                category_titles = set()
+                _collect_stories_recursive(category_node, category_titles)
+                
+                enriched_results = [s for s in enriched_results if s['title'] in category_titles]
+                logger.info(f"Filtered to {len(enriched_results)} stories in category {category_filter}")
+        else:
+            # Category doesn't exist - return empty
+            enriched_results = []
+            logger.warning(f"Category '{category_filter}' not found in tree")
     
     logger.info(f"Search returned {len(enriched_results)} story results for query: '{query}'")
     if enriched_results:

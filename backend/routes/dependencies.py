@@ -189,6 +189,8 @@ class SearchQuery(BaseModel):
     top_k: int = Field(1000, ge=1, le=5000)
     min_score: float = Field(0.1, ge=0.0, le=1.0)
     assignment_filter: Optional[str] = "all"
+    category_filter: Optional[str] = None  # Top-level category name or None for all
+    subcategory_filter: Optional[str] = None  # Subcategory name or None for all
 
 
 class AssignBody(BaseModel):
