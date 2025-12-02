@@ -88,7 +88,11 @@
                 "Bone Dislocation": {},
                 "Bruise": {},
                 "Bumps, Cysts, other Protrusions": {},
-                "Carried, Flight, etc": {},
+                "Carried, Flight, etc": {
+                    "_stories": [
+                        "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium"
+                    ]
+                },
                 "Choking": [
                     "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
                 ],
@@ -199,7 +203,7 @@
                 "Saint Walbert\u2019s Cross and Arm Used to Test and Heal the Possessed at Valombrosa"
             ]
         },
-        "_stories": []
+        "_stories": {}
     },
     "Fae": {
         "Elementals": {
