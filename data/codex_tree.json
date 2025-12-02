@@ -207,7 +207,11 @@
         },
         "_stories": {}
     },
-    "Disappearance": [],
+    "Disappearance": {
+        "_stories": [
+            "Lieutenant Wanberg and Three Rescuers Vanish in Ghost-Flier Country"
+        ]
+    },
     "Fae": {
         "Elementals": {
             "Air": [
