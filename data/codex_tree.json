@@ -333,11 +333,9 @@
             "Circles": {},
             "Contract": {
                 "With Another Person": {},
-                "With a Demon": {
-                    "_stories": [
-                        "Possession of a Girl from Citt\u00e0 di Castello and Demon\u2019s Accusation of a Sorcerer Priest"
-                    ]
-                }
+                "With a Demon": [
+                    "Possession of a Girl from Citt\u00e0 di Castello and Demon\u2019s Accusation of a Sorcerer Priest"
+                ]
             },
             "Rejection of Sacraments": {
                 "Rejection of Baptism": {},
@@ -394,7 +392,8 @@
         },
         "_stories": [
             "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself",
-            "Women\u2019s Pacts with Shedim and Nocturnal Meetings with Buck\u2011Shaped Spirits"
+            "Women\u2019s Pacts with Shedim and Nocturnal Meetings with Buck\u2011Shaped Spirits",
+            "Woman Punished with Possession for Attempted Sorcery and Her Deliverance at St.\u00a0Gandolph"
         ]
     }
 }
