@@ -511,11 +511,9 @@
             "Harm to Pets": {}
         },
         "Herbal/Natural": {
-            "Poisons": {
-                "_stories": [
-                    "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself"
-                ]
-            },
+            "Poisons": [
+                "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself"
+            ],
             "_stories": [
                 "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion",
                 "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means",
@@ -601,8 +599,7 @@
         },
         "_stories": [
             "Woman Punished with Possession for Attempted Sorcery and Her Deliverance at St.\u00a0Gandolph",
-            "Women\u2019s Pacts with Shedim and Nocturnal Meetings with Buck\u2011Shaped Spirits",
-            "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself"
+            "Women\u2019s Pacts with Shedim and Nocturnal Meetings with Buck\u2011Shaped Spirits"
         ]
     }
 }
