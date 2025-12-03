@@ -9,11 +9,9 @@
             "Thunderbird": {}
         },
         "Bipedal": {
-            "Humanoid": {
-                "_stories": [
-                    "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians"
-                ]
-            },
+            "Humanoid": [
+                "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians"
+            ],
             "Other": {},
             "Sasquatch": [
                 "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians"
@@ -236,7 +234,8 @@
             "Air": [
                 "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring",
                 "Sky-Dwelling Nimble Men and Other Fairy Races",
-                "Ancient and Global Folklore of Pleiades 'Sky People'"
+                "Ancient and Global Folklore of Pleiades 'Sky People'",
+                "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians"
             ],
             "Earth": [
                 "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
