@@ -268,8 +268,8 @@
         "Nymph": {},
         "Other": {},
         "Trickster": [
-            "Trickster Devils and Mystery Men in World Folklore and History",
-            "Artist\u2019s Thirty Years with an Androgynous Shape-Shifting Entity"
+            "Artist\u2019s Thirty Years with an Androgynous Shape-Shifting Entity",
+            "Trickster Devils and Mystery Men in World Folklore and History"
         ]
     },
     "For Review": {
@@ -620,7 +620,11 @@
                 "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
                 "Demonic Circles Across Cultures"
             ],
-            "Conjuring Entities": {},
+            "Conjuring Entities": {
+                "_stories": [
+                    "Elementals Conjured by Magical Rites and Haunting Walks"
+                ]
+            },
             "Contract": {
                 "With Another Person": {},
                 "With a Demon": [
