@@ -350,7 +350,11 @@
             "Visual": {}
         },
         "Poltergeist Activity": {
-            "Apports": {},
+            "Apports": {
+                "_stories": [
+                    "Aura Rhanes Makes a Flashlight Vanish from Truman Bethurum\u2019s Hand"
+                ]
+            },
             "Audible": [
                 "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary",
                 "The Bell Witch Poltergeist at the John Bell Home in Tennessee",
