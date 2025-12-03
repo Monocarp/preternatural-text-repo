@@ -343,11 +343,9 @@
             "Physical": [
                 "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary"
             ],
-            "Visual": {
-                "_stories": [
-                    "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary"
-                ]
-            }
+            "Visual": [
+                "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary"
+            ]
         },
         "Stranger": {
             "Auditory": {},
@@ -676,7 +674,8 @@
                     "Possession of a Girl from Citt\u00e0 di Castello and Demon\u2019s Accusation of a Sorcerer Priest",
                     "Ritual for Invoking Unclean Spirits via One\u2019s Shadow and the Appearance of Two Ruchin",
                     "Women\u2019s Pacts with Shedim and Nocturnal Meetings with Buck\u2011Shaped Spirits",
-                    "Night-Women of Diana"
+                    "Night-Women of Diana",
+                    "Witchcraft in the Valley of Mesolcina: Sorceries Causing Deaths of People and Herds"
                 ]
             },
             "Rejection of Sacraments": {
