@@ -256,7 +256,9 @@
         "Nymph": {},
         "Other": {}
     },
-    "For Review": [],
+    "For Review": {
+        "Broken": []
+    },
     "Forteana": {},
     "Ghostly Activity": {
         "Family Member/Loved One": {
