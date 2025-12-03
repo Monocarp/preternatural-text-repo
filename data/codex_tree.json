@@ -109,8 +109,8 @@
                 "Death": [
                     "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
                     "Mass Enthusiastic Suicide in Crete under a False Moses and Attribution to a Demon of Samael",
-                    "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium",
-                    "Vision of a Bodily Sabbath at Mandrisio and the Death of the Spectators"
+                    "Vision of a Bodily Sabbath at Mandrisio and the Death of the Spectators",
+                    "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium"
                 ],
                 "Distention of the Stomach": {},
                 "Foul Breath": {},
@@ -553,11 +553,14 @@
                 "Old Woman\u2019s Possession, Magical Amulet with Divine Names, and Exorcism by Burning"
             ]
         },
-        "Divination": [
-            "Prophetic Trances, Glossolalia, and Miracles Surrounding Sabbatai Zevi",
-            "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself",
-            "Kabbala, Elementals, and Other False Wonders in the 13th Century"
-        ],
+        "Divination": {
+            "Channeled Books/Writings": [],
+            "_stories": [
+                "Prophetic Trances, Glossolalia, and Miracles Surrounding Sabbatai Zevi",
+                "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself",
+                "Kabbala, Elementals, and Other False Wonders in the 13th Century"
+            ]
+        },
         "Evil Eye": [
             "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
         ],
