@@ -334,14 +334,13 @@
             "Visual": {}
         },
         "Poltergeist Activity": {
-            "Audible": {
-                "_stories": [
-                    "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary"
-                ]
-            },
+            "Audible": [
+                "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary"
+            ],
             "Lights IN Or Around Home": [
                 "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary"
             ],
+            "Physical": [],
             "Visual": {}
         },
         "Stranger": {
