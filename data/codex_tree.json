@@ -274,7 +274,11 @@
         "Time Slip": {}
     },
     "UFO": {
-        "Abduction": {},
+        "Abduction": {
+            "_stories": [
+                "Parallels Between Professor Guimaraes and Barney Hill\u2019s Saucer Examinations"
+            ]
+        },
         "Aerial Phenomenon": {
             "Pilot Seen": [
                 "1790 Alen\u00e7on Globe Landing, Humanlike Occupant, And Silent Explosion",
