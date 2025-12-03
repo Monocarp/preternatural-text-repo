@@ -262,7 +262,8 @@
         ],
         "Little People": {},
         "Nymph": {},
-        "Other": {}
+        "Other": {},
+        "Trickster": []
     },
     "For Review": {
         "Broken": [
@@ -671,8 +672,8 @@
                 "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means"
             ],
             "_stories": [
-                "The Gellones of Greece",
-                "Vision of a Bodily Sabbath at Mandrisio and the Death of the Spectators"
+                "Vision of a Bodily Sabbath at Mandrisio and the Death of the Spectators",
+                "The Gellones of Greece"
             ]
         },
         "_stories": [
