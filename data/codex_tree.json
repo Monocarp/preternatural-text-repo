@@ -328,7 +328,11 @@
             "Appearance": {},
             "Behavior": {},
             "Habitual Behavior": {},
-            "Voice": {}
+            "Voice": {
+                "_stories": [
+                    "Mr. Blank\u2019s Hidden Gold Watch Revealed through a Trance Medium"
+                ]
+            }
         },
         "Family Pet": {
             "Auditory": {},
