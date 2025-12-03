@@ -417,7 +417,11 @@
         "Albert K. Bender\u2019s Three Glowing\u2011Eyed Men in Black and Demonomania Symptoms"
     ],
     "Supernatural Phenomena": {
-        "Spontaneous Human Combustion": [],
+        "Spontaneous Human Combustion": {
+            "_stories": [
+                "Human Bodies Found Cremated While Surroundings Barely Burned"
+            ]
+        },
         "Time Loss": {},
         "Time Slip": {}
     },
