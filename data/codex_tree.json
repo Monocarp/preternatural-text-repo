@@ -255,7 +255,7 @@
         "Nymph": {},
         "Other": {}
     },
-    "Forteana": [],
+    "Forteana": {},
     "Ghostly Activity": {
         "Family Member/Loved One": {
             "Appearance": {},
@@ -580,6 +580,7 @@
                 "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
                 "Demonic Circles Across Cultures"
             ],
+            "Conjuring Entities": [],
             "Contract": {
                 "With Another Person": {},
                 "With a Demon": [
