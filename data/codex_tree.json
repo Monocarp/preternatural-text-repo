@@ -139,7 +139,11 @@
                 "Sexual Assault": {},
                 "Suffocation": {},
                 "Unexplained Physical Pain": {},
-                "Unidentified Illness": {}
+                "Unidentified Illness": {
+                    "_stories": [
+                        "Haunting and Demonic Torment of the K\u00f8ge Household (1609\u20131614)"
+                    ]
+                }
             }
         },
         "Possession": {
