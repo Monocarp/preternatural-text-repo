@@ -3,7 +3,11 @@
         "Aquatic": {},
         "Avian": {
             "Mothman": {},
-            "Other": {},
+            "Other": {
+                "_stories": [
+                    "1843 Warwick Remarkable Cloud And Three Human\u2011Shaped Figures In The Sky"
+                ]
+            },
             "Thunderbird": {}
         },
         "Bipedal": {
@@ -56,11 +60,9 @@
                 },
                 "Flannel Man": {},
                 "Glimmer Man": {},
-                "Poltergeist": {
-                    "_stories": [
-                        "1846 Rains Of Blood And Spring\u2011Heeled Jacks In Silver Uniforms"
-                    ]
-                },
+                "Poltergeist": [
+                    "1846 Rains Of Blood And Spring\u2011Heeled Jacks In Silver Uniforms"
+                ],
                 "Shadow People": {},
                 "Sleep Paralysis": {},
                 "Static People": {}
