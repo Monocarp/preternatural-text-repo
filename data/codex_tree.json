@@ -265,7 +265,11 @@
         "Kobolds": [
             "Saint Taurinus Binds the Night-Goddess Demon Diana into the Gobelin Spirit"
         ],
-        "Little People": {},
+        "Little People": {
+            "_stories": [
+                "Little Three-Foot Beings of the Northern Rockies"
+            ]
+        },
         "Nymph": {},
         "Other": {},
         "Trickster": [
