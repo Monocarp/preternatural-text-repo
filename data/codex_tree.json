@@ -229,11 +229,9 @@
             "Strength": {},
             "Superhuman Agility": {},
             "Superhuman Speed": {},
-            "Sustained Unnatural Posture": {
-                "_stories": [
-                    "Haunting and Demonic Torment of the K\u00f8ge Household (1609\u20131614)"
-                ]
-            },
+            "Sustained Unnatural Posture": [
+                "Haunting and Demonic Torment of the K\u00f8ge Household (1609\u20131614)"
+            ],
             "_stories": [
                 "Saint Walbert\u2019s Cross and Arm Used to Test and Heal the Possessed at Valombrosa",
                 "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
@@ -351,6 +349,7 @@
             "Visual": {}
         },
         "Poltergeist Activity": {
+            "Apports": [],
             "Audible": [
                 "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary",
                 "The Bell Witch Poltergeist at the John Bell Home in Tennessee",
