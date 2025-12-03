@@ -3127,5 +3127,11 @@
             "la croce d'el Pastiecio",
             "Possession"
         ]
+    },
+    "Wiite Wywen of Frisia": {
+        "start_char": 225265,
+        "end_char": 226164,
+        "pages": "66",
+        "keywords": []
     }
 }
