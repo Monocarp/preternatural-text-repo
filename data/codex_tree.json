@@ -232,7 +232,9 @@
                 "Kabbala, Elementals, and Other False Wonders in the 13th Century"
             ]
         },
-        "Fairy": {},
+        "Fairy": [
+            "Irish Fairy Tree (Skeog) and Fatality after Cutting One Down"
+        ],
         "Gnome": {},
         "Nymph": {},
         "Other": {}
