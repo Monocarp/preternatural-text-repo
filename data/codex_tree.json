@@ -242,11 +242,9 @@
         "Goblins": [
             "Saint Taurinus Binds the Night-Goddess Demon Diana into the Gobelin Spirit"
         ],
-        "Kobolds": {
-            "_stories": [
-                "Saint Taurinus Binds the Night-Goddess Demon Diana into the Gobelin Spirit"
-            ]
-        },
+        "Kobolds": [
+            "Saint Taurinus Binds the Night-Goddess Demon Diana into the Gobelin Spirit"
+        ],
         "Nymph": {},
         "Other": {}
     },
@@ -284,7 +282,10 @@
                 "Possession of a Jewish Woman in Ferrara and Exorcism of a Ruach by R. Chaim Vital"
             ]
         },
-        "Tulpas": {}
+        "Tulpas": {},
+        "_stories": [
+            "Saint Taurinus Binds the Night-Goddess Demon Diana into the Gobelin Spirit"
+        ]
     },
     "Men In Black": [
         "Strange Voices on CB Radio and Visit from Peculiar 'Major Richard French'",
