@@ -509,11 +509,9 @@
                 "Night-Women of Diana",
                 "Witte Wywen of Frisia"
             ],
-            "Non-Pet Animal": {
-                "_stories": [
-                    "Witte Wywen of Frisia"
-                ]
-            },
+            "Non-Pet Animal": [
+                "Witte Wywen of Frisia"
+            ],
             "Pet": {}
         },
         "Cursing": {
@@ -616,7 +614,8 @@
                             "Reports of Crucified Christian Slave in Pontus and Crucified Lambs in Crete",
                             "William of Norwich",
                             "European Ritual Murders",
-                            "Night-Women of Diana"
+                            "Night-Women of Diana",
+                            "Witte Wywen of Frisia"
                         ]
                     }
                 },
