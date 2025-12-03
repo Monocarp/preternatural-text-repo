@@ -598,6 +598,9 @@
             "Cursed Objects": [
                 "Violent Possession and Exorcism of Peter Bernardi of Areia",
                 "Old Woman\u2019s Possession, Magical Amulet with Divine Names, and Exorcism by Burning"
+            ],
+            "_stories": [
+                "Witchcraft in the Valley of Mesolcina: Sorceries Causing Deaths of People and Herds"
             ]
         },
         "Divination": {
@@ -630,11 +633,9 @@
             "Harm To Crops": [
                 "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself"
             ],
-            "Harm To Livestock": {
-                "_stories": [
-                    "Witchcraft in the Valley of Mesolcina: Sorceries Causing Deaths of People and Herds"
-                ]
-            },
+            "Harm To Livestock": [
+                "Witchcraft in the Valley of Mesolcina: Sorceries Causing Deaths of People and Herds"
+            ],
             "Harm to People": [
                 "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means",
                 "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself",
