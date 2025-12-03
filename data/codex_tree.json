@@ -46,12 +46,12 @@
                     ],
                     "_stories": [
                         "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
+                        "Wonderful Visions, Voices, and Psalms Heard During Scottish Field Preachings",
                         "Saint Walbert\u2019s Cross and Arm Used to Test and Heal the Possessed at Valombrosa",
                         "Sedechias and Elementary Spirits",
                         "Phantom Armies",
                         "Kabbala, Elementals, and Other False Wonders in the 13th Century",
-                        "Night-Women of Diana",
-                        "Wonderful Visions, Voices, and Psalms Heard During Scottish Field Preachings"
+                        "Night-Women of Diana"
                     ]
                 },
                 "Flannel Man": {},
@@ -263,7 +263,11 @@
             "Baptism in the River Thames Accompanied by a Heavenly Light"
         ]
     },
-    "Forteana": {},
+    "Forteana": {
+        "_stories": [
+            "1846 Rains Of Blood And Spring\u2011Heeled Jacks In Silver Uniforms"
+        ]
+    },
     "Ghostly Activity": {
         "Family Member/Loved One": {
             "Appearance": {},
