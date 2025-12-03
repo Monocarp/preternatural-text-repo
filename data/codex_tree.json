@@ -327,11 +327,9 @@
         "Family Member/Loved One": {
             "Appearance": {},
             "Behavior": {},
-            "Habitual Behavior": {
-                "_stories": [
-                    "Mr. Blank\u2019s Hidden Gold Watch Revealed through a Trance Medium"
-                ]
-            },
+            "Habitual Behavior": [
+                "Mr. Blank\u2019s Hidden Gold Watch Revealed through a Trance Medium"
+            ],
             "Voice": [
                 "Mr. Blank\u2019s Hidden Gold Watch Revealed through a Trance Medium"
             ]
@@ -720,7 +718,8 @@
             "Channeling": [
                 "Multilingual Trance Mediums Correcting Sitters\u2019 Grammar",
                 "Visions and Transforming Angels in the Book of Hermas",
-                "Mr. Blank\u2019s Hidden Gold Watch Revealed through a Trance Medium"
+                "Mr. Blank\u2019s Hidden Gold Watch Revealed through a Trance Medium",
+                "False Shades and Malevolent Spirits in Mediumistic Communications"
             ],
             "Circles": [
                 "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
