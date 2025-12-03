@@ -395,7 +395,11 @@
             "Alexander Hamilton\u2019s Affidavit Of Airship, Six Strange Beings, And Calf Abduction"
         ],
         "Residual Effects": {
-            "Poltergeist Activity": [],
+            "Poltergeist Activity": {
+                "_stories": [
+                    "Poltergeist Phenomena and Invisible Hand at the Butlers' Home"
+                ]
+            },
             "_stories": [
                 "October 3, 1967 Melville Disk-Shaped Object with Blinking Rectangular Lights and Chemical Odor Trace",
                 "Transparent Purplish-Red Sphere with Two Men Inside Over Medulla, Florida",
