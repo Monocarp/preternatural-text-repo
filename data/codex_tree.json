@@ -309,12 +309,14 @@
             "Visual": {}
         },
         "Individual Connected To Place/Person": {
-            "Auditory": {},
-            "Behavior": {
+            "Auditory": {
                 "_stories": [
                     "Hydesville Ghost, Cold Invisible Hand, and the Fox Sisters\u2019 Rapping Spirit"
                 ]
             },
+            "Behavior": [
+                "Hydesville Ghost, Cold Invisible Hand, and the Fox Sisters\u2019 Rapping Spirit"
+            ],
             "Habitual Behavior": {},
             "Visual": [
                 "Farm Boy\u2019s Employer and the Roman Entity Lucretius"
