@@ -4,8 +4,8 @@
         "Avian": {
             "Mothman": {},
             "Other": [
-                "Brazilian \u201cBat People\u201d with Telepathic Powers",
-                "1843 Warwick Remarkable Cloud And Three Human\u2011Shaped Figures In The Sky"
+                "1843 Warwick Remarkable Cloud And Three Human\u2011Shaped Figures In The Sky",
+                "Brazilian \u201cBat People\u201d with Telepathic Powers"
             ],
             "Thunderbird": {}
         },
@@ -46,31 +46,35 @@
                         "Women\u2019s Pacts with Shedim and Nocturnal Meetings with Buck\u2011Shaped Spirits"
                     ],
                     "Appearance as Shadow": [
-                        "Gustav Davidson\u2019s Nightmarish Shape in a Field",
-                        "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium"
+                        "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium",
+                        "Gustav Davidson\u2019s Nightmarish Shape in a Field"
                     ],
                     "Succubi & Incubi": [
                         "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
                     ],
                     "_stories": [
-                        "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
-                        "Wonderful Visions, Voices, and Psalms Heard During Scottish Field Preachings",
-                        "Vision of a Bodily Sabbath at Mandrisio and the Death of the Spectators",
                         "Saint Walbert\u2019s Cross and Arm Used to Test and Heal the Possessed at Valombrosa",
+                        "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
                         "Sedechias and Elementary Spirits",
                         "Phantom Armies",
                         "Kabbala, Elementals, and Other False Wonders in the 13th Century",
-                        "Night-Women of Diana"
+                        "Night-Women of Diana",
+                        "Wonderful Visions, Voices, and Psalms Heard During Scottish Field Preachings",
+                        "Vision of a Bodily Sabbath at Mandrisio and the Death of the Spectators"
                     ]
                 },
                 "Flannel Man": {},
                 "Glimmer Man": {},
                 "Poltergeist": [
-                    "Artist\u2019s Thirty Years with an Androgynous Shape-Shifting Entity",
                     "1846 Rains Of Blood And Spring\u2011Heeled Jacks In Silver Uniforms",
+                    "Artist\u2019s Thirty Years with an Androgynous Shape-Shifting Entity",
                     "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary"
                 ],
-                "Shadow People": {},
+                "Shadow People": {
+                    "_stories": [
+                        "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary"
+                    ]
+                },
                 "Sleep Paralysis": {},
                 "Static People": {}
             },
@@ -89,9 +93,9 @@
                     "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
                 ],
                 "Visual Hallucinations": [
+                    "Demonic Vision Dismissed With Eucharist",
                     "Heretic\u2019s Demonic Vision of a False Christ and Queen Dispelled by the Eucharist",
-                    "Wonderful Visions, Voices, and Psalms Heard During Scottish Field Preachings",
-                    "Demonic Vision Dismissed With Eucharist"
+                    "Wonderful Visions, Voices, and Psalms Heard During Scottish Field Preachings"
                 ],
                 "Weariness": {}
             },
@@ -117,8 +121,8 @@
                 "Death": [
                     "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
                     "Mass Enthusiastic Suicide in Crete under a False Moses and Attribution to a Demon of Samael",
-                    "Vision of a Bodily Sabbath at Mandrisio and the Death of the Spectators",
-                    "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium"
+                    "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium",
+                    "Vision of a Bodily Sabbath at Mandrisio and the Death of the Spectators"
                 ],
                 "Distention of the Stomach": {},
                 "Foul Breath": {},
@@ -181,8 +185,8 @@
                         "Violent Possession and Exorcism of Peter Bernardi of Areia"
                     ],
                     "_stories": [
-                        "Old Woman\u2019s Possession, Magical Amulet with Divine Names, and Exorcism by Burning",
-                        "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
+                        "The Jurist\u2019s Pact with Satan and Failed Return to Confession",
+                        "Old Woman\u2019s Possession, Magical Amulet with Divine Names, and Exorcism by Burning"
                     ]
                 },
                 "Illness around Holiness": {},
@@ -216,13 +220,13 @@
             "Superhuman Speed": {},
             "Sustained Unnatural Posture": {},
             "_stories": [
-                "Possession of a Girl from Citt\u00e0 di Castello and Demon\u2019s Accusation of a Sorcerer Priest",
-                "Woman Punished with Possession for Attempted Sorcery and Her Deliverance at St.\u00a0Gandolph",
-                "Possession of a Jewish Woman in Ferrara and Exorcism of a Ruach by R. Chaim Vital",
                 "Saint Walbert\u2019s Cross and Arm Used to Test and Heal the Possessed at Valombrosa",
                 "Deliverance of the Possessed at the Tomb of Saint Cajetanus in Naples",
                 "Continuous Healings of the Possessed at the Relics of St. Ubaldus in Gubbio",
                 "Other Graves and Holy Sites Where the Possessed Were Freed",
+                "Possession of a Girl from Citt\u00e0 di Castello and Demon\u2019s Accusation of a Sorcerer Priest",
+                "Woman Punished with Possession for Attempted Sorcery and Her Deliverance at St.\u00a0Gandolph",
+                "Possession of a Jewish Woman in Ferrara and Exorcism of a Ruach by R. Chaim Vital",
                 "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium"
             ]
         },
@@ -236,8 +240,8 @@
             "Air": [
                 "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring",
                 "Sky-Dwelling Nimble Men and Other Fairy Races",
-                "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians",
-                "Ancient and Global Folklore of Pleiades 'Sky People'"
+                "Ancient and Global Folklore of Pleiades 'Sky People'",
+                "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians"
             ],
             "Earth": [
                 "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
@@ -249,12 +253,12 @@
                 "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
             ],
             "_stories": [
-                "Elementals Conjured by Magical Rites and Haunting Walks",
-                "Plant-Linked Elementals and Lie-Detector Responses to Plant and Human Pain",
-                "S\u00e9ance Materializations of Humanlike Elementals",
-                "Forgotten Books of Eden: Satan\u2019s Lights, Fire, Water, and Disguises Against Adam",
                 "Sedechias and Elementary Spirits",
-                "Kabbala, Elementals, and Other False Wonders in the 13th Century"
+                "Kabbala, Elementals, and Other False Wonders in the 13th Century",
+                "Plant-Linked Elementals and Lie-Detector Responses to Plant and Human Pain",
+                "Forgotten Books of Eden: Satan\u2019s Lights, Fire, Water, and Disguises Against Adam",
+                "Elementals Conjured by Magical Rites and Haunting Walks",
+                "S\u00e9ance Materializations of Humanlike Elementals"
             ]
         },
         "Elves": [
@@ -281,21 +285,21 @@
         "Nymph": {},
         "Other": {},
         "Trickster": [
-            "Artist\u2019s Thirty Years with an Androgynous Shape-Shifting Entity",
-            "Trickster Devils and Mystery Men in World Folklore and History"
+            "Trickster Devils and Mystery Men in World Folklore and History",
+            "Artist\u2019s Thirty Years with an Androgynous Shape-Shifting Entity"
         ]
     },
     "For Review": {
         "Broken": [
             "Baptism in the River Thames Accompanied by a Heavenly Light",
-            "Ghost Rockets Over Scandinavia and Europe in 1946",
-            "Brilliant Lights and Mysterious Flying Machine over New England, December 1909"
+            "Brilliant Lights and Mysterious Flying Machine over New England, December 1909",
+            "Ghost Rockets Over Scandinavia and Europe in 1946"
         ]
     },
     "Forteana": [
+        "1846 Rains Of Blood And Spring\u2011Heeled Jacks In Silver Uniforms",
         "Materializing Rocks, Pebbles, and Other Debris in Rooms",
-        "Metal Objects Falling from the Sky near Orenburg, Russia",
-        "1846 Rains Of Blood And Spring\u2011Heeled Jacks In Silver Uniforms"
+        "Metal Objects Falling from the Sky near Orenburg, Russia"
     ],
     "Ghostly Activity": {
         "Family Member/Loved One": {
@@ -368,30 +372,30 @@
         ],
         "Aerial Phenomenon": {
             "Pilot Seen": [
+                "1790 Alen\u00e7on Globe Landing, Humanlike Occupant, And Silent Explosion",
                 "Linn Grove Airship Landing, Bearded Occupants, And Thrown Boulders",
+                "Cigar-Shaped Object with Powerful Headlight over South Africa, 1914",
+                "Ghost Flier Repeatedly Passes Over L\u00e5ngtr\u00e4sk Parsonage",
+                "Ghost Flier Floods Norwegian Freighter\u2019s Deck With Blinding Light",
                 "Merkel, Texas Airship Anchor and Small Man in Blue Sailor Suit",
                 "Cloera Church Sky-Ship and Falling Anchor",
                 "Bristol Church Anchor from the Sky and Suffocation of the \u201cSailor\u201d",
                 "Temple, Oklahoma Highway 70 Fish-Shaped Craft and Human-Looking Pilot",
                 "Seattle Miniature Tripod Craft and Tiny Repairmen",
-                "Malvan Stevens Stopped on Highway by Egg\u2011Shaped Craft and Three Small Beings",
-                "Ghost Flier Repeatedly Passes Over L\u00e5ngtr\u00e4sk Parsonage",
-                "Ghost Flier Floods Norwegian Freighter\u2019s Deck With Blinding Light",
                 "Everett Clark\u2019s Dawn Encounter with Four German\u2011Speaking Figures and a Glowing Object",
-                "Cigar-Shaped Object with Powerful Headlight over South Africa, 1914",
-                "1790 Alen\u00e7on Globe Landing, Humanlike Occupant, And Silent Explosion"
+                "Malvan Stevens Stopped on Highway by Egg\u2011Shaped Craft and Three Small Beings"
             ],
             "_stories": [
-                "March 8, 1967 Minnesota Repeated Nightly Hovering Light",
+                "Late February\u2013March 8, 1967 Missouri Seventy-Five to One Hundred UFO Witnesses near Osage Beach and Linn Creek",
+                "March 8, 1967 Montana Circular Object Dropping Three Balls of Fire",
                 "March 8, 1967 Michigan Burning Orange Oval over Liggett School",
+                "March 8, 1967 Missouri Oblong Globe with Multicolored Lights Observed for Twenty Minutes",
+                "March 8, 1967 Missouri Multicolored Hovering Object over Bunceton",
                 "March 8, 1967 Oklahoma Twirling Object with Colored Lights and Spits of Fire",
+                "March 8, 1967 Minnesota Repeated Nightly Hovering Light",
                 "March 8, 1967 Arkansas Reddish Orange Object Turning Silver-White Before Takeoff",
                 "March 8, 1967 Maryland Circular Object with Shiny Gold Bottom and Red-Glowing Top",
-                "March 8, 1967 Montana Circular Object Dropping Three Balls of Fire",
                 "March 8, 1967 Montana Hovering Red and Green Lights that Disappear into Thin Air",
-                "March 8, 1967 Missouri Oblong Globe with Multicolored Lights Observed for Twenty Minutes",
-                "Late February\u2013March 8, 1967 Missouri Seventy-Five to One Hundred UFO Witnesses near Osage Beach and Linn Creek",
-                "March 8, 1967 Missouri Multicolored Hovering Object over Bunceton",
                 "Illinois Daytime Beam of Light and Brilliant Circle-Shaped Object near Route 30; Repeated Nightly Light near Aurora",
                 "March 8, 1967 Illinois Multicolored Light over Pontiac Seen by More Than a Dozen People",
                 "March 8, 1967 Illinois Pulsating Upside-Down Bowl over Knox County and Earlier Object Crossing Deputy\u2019s Car",
@@ -405,16 +409,49 @@
                 "March 8, 1967 Kansas Revolving Red, White, and Blue Lights over Towanda Tracked by Marshal and Motorcade",
                 "March 8, 1967 Kansas Hovering Spherical Object with Three Colored Lights near Goodland and Separate Oval Domed Object over City",
                 "August 3, 1966 Erie Policemen\u2019s Two-Hour Observation of Color-Changing Silvery Object over Lake Erie",
+                "October 4, 1967 Long Island Expressway Brilliant White Sphere with Red Light Companion",
+                "August 12, 1883 Bonilla\u2019s Photographs of 143 Cigar- and Spindle-Shaped Objects Crossing the Sun",
+                "January 24, 1878 Texas Farmer John Martin\u2019s Fast-Moving Circular \u201cSaucer\u201d",
+                "April 1897 Airship Wave with Thousands of Witnesses, Conversations with Pilots, and McCann\u2019s Photographs",
+                "Radar-Only UFOs and Objects That Instantly Appear and Disappear",
+                "Seattle 1947 Purple and Light-Blue Spots of Light in the Sky",
+                "Author\u2019s 1967 West Virginia Experience with Responsive Purple Spots of Light",
                 "1561 Nuremberg And 1566 Basel Aerial Battles Of Plates, Crosses, And Tubes",
+                "1871 Trouvelot\u2019s Formation Of Objects And Falling\u2011Leaf Motion Disk",
+                "1896 California Luminous Airships, Egg\u2011Shaped Vessel, And Mayors As Witnesses",
+                "Mrs. Wyngate\u2019s Brilliant Light And Human Voices From Above",
+                "Bid Osborne\u2019s 800\u2011Foot\u2011Long Airship And Voices From Above",
                 "Presque Isle Landing with Rod-Like Beams of Light",
                 "California Airship with Flapping Wings and Titanic White Bird",
                 "Blue Mountains Cigar-Shaped Object and Night Lights",
+                "Reval and Swedish Airship-Like Machines",
+                "Illuminated Balloon over Gothenburg and Falling Rocket",
+                "Little Rock Airship Light of December 12, 1909",
+                "Cylindrical Shaft of Light over Little Rock",
+                "Bright Light over Boston Harbor",
+                "Pawtucket Twin Red Lights and Flying Machine Outline",
+                "Marlboro\u2013Worcester Searchlight Airship and New England Flap",
                 "Three Huge Lights over Huntington, West Virginia",
+                "Unusual Flying Machine over Chattanooga and Huntsville, January 1910",
+                "Mystery Biplane Circling Madison Square, New York City, August 1910",
+                "Unidentified Delta-Wing Aircraft over San Carlos de Bariloche, Argentina",
+                "Multiple Groups of Glowing Aircraft, Project Blue Book Case, April 1952",
+                "Silent Glowing Delta-Wing over Long Island, 1957",
+                "Mysterious Flying Boxcars in UFO Flap Areas",
                 "Mystery Airplane Circles New York City in Fierce Snowstorm",
                 "Sunday and Wednesday Ghost-Flier Patterns and Reported Landings",
+                "Olof Hedlund\u2019s Pre\u2011Dawn Sighting of a Large Gray Airplane",
+                "Brilliant Object and Low\u2011Flying Plane Bathing Forest in Light",
+                "Two Ghost Fliers Land on Water Near Gjeslingen and Kvaloj",
+                "Mass Sightings of Fast\u2011Moving Half\u2011Moon\u2011Sized Light Over J\u00e4mtland",
+                "Major General Reutersward\u2019s Statement on Illegal Ghost\u2011Flier Overflights",
+                "Brilliant Object Over Wanaque Reservoir and Formation of Mystery Helicopters",
                 "Mystery Lights Over Ben Hai River and Reported Shoot\u2011Down of Nonexistent Helicopter",
                 "Oval UFO and Seven Helicopters Over Rosecroft Racetrack",
+                "1966 Brilliant Object Over Northeastern United States and Associated Anomalies",
                 "Historical and Modern Reports of Anomalous \u201cMeteors\u201d and Fireballs",
+                "1965 Pennsylvania \u201cMeteor\u201d Crash and Military Retrieval Operation",
+                "Octagon-Shaped Object Near Norfolk, Nebraska, July 5, 1966",
                 "Blazing Object Over Nebraska and Kansas, July 13, 1966",
                 "Green Object Over Muskegon, Michigan, July 6, 1966",
                 "Round Blue Object Over Lake Erie, July 11, 1966",
@@ -431,50 +468,29 @@
                 "Mechanical Beeping and Aerial Light in Northern New Jersey",
                 "January 1969 UFO Sightings Listed by Location and Time",
                 "Robert Hibbard Dragged by Airship Grapnel",
-                "Radar-Only UFOs and Objects That Instantly Appear and Disappear",
-                "Little Rock Airship Light of December 12, 1909",
-                "April 1897 Airship Wave with Thousands of Witnesses, Conversations with Pilots, and McCann\u2019s Photographs",
-                "Author\u2019s 1967 West Virginia Experience with Responsive Purple Spots of Light",
-                "Forgotten Books of Eden: Satan\u2019s Lights, Fire, Water, and Disguises Against Adam",
-                "1965 Pennsylvania \u201cMeteor\u201d Crash and Military Retrieval Operation",
-                "Reval and Swedish Airship-Like Machines",
-                "Unusual Flying Machine over Chattanooga and Huntsville, January 1910",
-                "Cylindrical Shaft of Light over Little Rock",
-                "Olof Hedlund\u2019s Pre\u2011Dawn Sighting of a Large Gray Airplane",
-                "1966 Brilliant Object Over Northeastern United States and Associated Anomalies",
-                "Mysterious Flying Boxcars in UFO Flap Areas",
-                "Brilliant Object and Low\u2011Flying Plane Bathing Forest in Light",
-                "Mrs. Wyngate\u2019s Brilliant Light And Human Voices From Above",
-                "1896 California Luminous Airships, Egg\u2011Shaped Vessel, And Mayors As Witnesses",
-                "1871 Trouvelot\u2019s Formation Of Objects And Falling\u2011Leaf Motion Disk",
-                "Silent Glowing Delta-Wing over Long Island, 1957",
-                "Seattle 1947 Purple and Light-Blue Spots of Light in the Sky",
-                "Two Ghost Fliers Land on Water Near Gjeslingen and Kvaloj",
-                "January 24, 1878 Texas Farmer John Martin\u2019s Fast-Moving Circular \u201cSaucer\u201d",
-                "Unidentified Delta-Wing Aircraft over San Carlos de Bariloche, Argentina",
-                "Illuminated Balloon over Gothenburg and Falling Rocket",
-                "Octagon-Shaped Object Near Norfolk, Nebraska, July 5, 1966",
-                "October 4, 1967 Long Island Expressway Brilliant White Sphere with Red Light Companion",
-                "Bright Light over Boston Harbor",
-                "Mystery Biplane Circling Madison Square, New York City, August 1910",
-                "Multiple Groups of Glowing Aircraft, Project Blue Book Case, April 1952",
-                "Major General Reutersward\u2019s Statement on Illegal Ghost\u2011Flier Overflights",
-                "Mass Sightings of Fast\u2011Moving Half\u2011Moon\u2011Sized Light Over J\u00e4mtland",
-                "Marlboro\u2013Worcester Searchlight Airship and New England Flap",
-                "Bid Osborne\u2019s 800\u2011Foot\u2011Long Airship And Voices From Above",
-                "Pawtucket Twin Red Lights and Flying Machine Outline",
-                "August 12, 1883 Bonilla\u2019s Photographs of 143 Cigar- and Spindle-Shaped Objects Crossing the Sun",
-                "Brilliant Object Over Wanaque Reservoir and Formation of Mystery Helicopters"
+                "Forgotten Books of Eden: Satan\u2019s Lights, Fire, Water, and Disguises Against Adam"
             ]
         },
         "Contactees": [
             "Contactee Milkman on Sydney Beach Addressed Telepathically by Space-Suited Men",
+            "Barney and Betty Hill and Villa-Boas: Color-Changing UFOs and Abduction Claims",
+            "Ufonauts Gliding, Flying, and Walking Through Craft Walls",
+            "Mrs. Rita Malley\u2019s 1967 Car-Seizure, Voices, and Prophetic Accident Message",
             "J. A. Heron\u2019s Claimed Repair Work And 24\u2011Hour Flight To Hawaii",
+            "William Bull Meek\u2019s Conversation With Bearded Pilot From The Montezuma Mountains",
+            "Judge Byrne\u2019s Tour Of An Airship Manned By Three Foreign\u2011Speaking Men",
+            "Springfield Farmhands\u2019 Affidavit Of Airship Landing And Promise About Free Cuba",
+            "Sumpter And McLemore\u2019s Sworn Encounter With Bearded Airship Captain",
+            "William Megiveron\u2019s Night Visit, Airship Crew\u2019s Food Order, And Searchlight Over The Lake",
             "Holton\u2019s Electrically Lit Reveler\u2011Filled Airship And Abducted Truthful Citizen",
             "John M. Barclay\u2019s Night Visit From \u201cSmith\u201d And Promise To Be In Greece",
+            "Ex\u2011Senator Harris\u2019s Talkative Bearded Visitor And Antigravity Airship",
             "Captain James Hooton\u2019s Detailed Observation Of A Condensed\u2011Air Airship",
             "Joe Simonton\u2019s Eagle River Landing and \u201cOuter-Space Pancakes\u201d",
             "Trance Voice From UFO Asking About Earth's Time Cycle",
+            "Albert K. Bender's Underground UFO Entities and Deadly Space Clouds",
+            "Arthur Bryant's Claim of Poltergeists as Forces from Epsilon Orionis",
+            "Argentine Air Force Guard Hears Speaking UFO Warning of Atomic Dangers",
             "Actor Stuart Whitman\u2019s Blackout Vision and Voice Warning of Universal Imbalance",
             "Brazilian Statistician Helio Aguiar Photographs UFO and Receives Telepathic Atomic Warning",
             "James Cook\u2019s Alleged Abduction by Zomdic Giants and Warning About Earth\u2019s Balance",
@@ -483,27 +499,15 @@
             "Howard Menger\u2019s Lifelong Contacts with Space People and Phantom Car Incident",
             "Howard Menger\u2019s Saturnian Origin and Marriage to Space Woman \u201cMaria\u201d",
             "Reinhold Schmidt\u2019s Contact with Gliding Occupants of a Silver \u201cBlimp\u201d",
-            "Visions and Transforming Angels in the Book of Hermas",
+            "John Trasco\u2019s Confrontation with a Small Being Seeking His Dog",
+            "Playa del Rey Motorists Questioned by Yellowish\u2011Green Men from an Egg\u2011Shaped Machine",
+            "Warnings from South American and European Contactees about Upsetting the Universe",
+            "Ufonauts\u2019 False Claims of Origin from Various Planets and Worlds",
             "Sidney Padrick\u2019s Encounter with Zeeno on Manresa Beach",
             "Arthur Bryant\u2019s Devon Landing, Greek Parchment, and Ufonaut Yamski",
             "Arthur Shuttlewood\u2019s Aenstrian Visitors Caellsan, Selorik, and Traellison",
             "Ashtar / Ashtaroth as Long-Standing Ultraterrestrial Communicator",
-            "Playa del Rey Motorists Questioned by Yellowish\u2011Green Men from an Egg\u2011Shaped Machine",
-            "Arthur Bryant's Claim of Poltergeists as Forces from Epsilon Orionis",
-            "William Megiveron\u2019s Night Visit, Airship Crew\u2019s Food Order, And Searchlight Over The Lake",
-            "John Trasco\u2019s Confrontation with a Small Being Seeking His Dog",
-            "Barney and Betty Hill and Villa-Boas: Color-Changing UFOs and Abduction Claims",
-            "Ufonauts\u2019 False Claims of Origin from Various Planets and Worlds",
-            "Sumpter And McLemore\u2019s Sworn Encounter With Bearded Airship Captain",
-            "Albert K. Bender's Underground UFO Entities and Deadly Space Clouds",
-            "Judge Byrne\u2019s Tour Of An Airship Manned By Three Foreign\u2011Speaking Men",
-            "William Bull Meek\u2019s Conversation With Bearded Pilot From The Montezuma Mountains",
-            "Ex\u2011Senator Harris\u2019s Talkative Bearded Visitor And Antigravity Airship",
-            "Mrs. Rita Malley\u2019s 1967 Car-Seizure, Voices, and Prophetic Accident Message",
-            "Ufonauts Gliding, Flying, and Walking Through Craft Walls",
-            "Springfield Farmhands\u2019 Affidavit Of Airship Landing And Promise About Free Cuba",
-            "Warnings from South American and European Contactees about Upsetting the Universe",
-            "Argentine Air Force Guard Hears Speaking UFO Warning of Atomic Dangers"
+            "Visions and Transforming Angels in the Book of Hermas"
         ],
         "Livestock/Animal Interaction": [
             "Alexander Hamilton\u2019s Affidavit Of Airship, Six Strange Beings, And Calf Abduction"
@@ -515,24 +519,24 @@
             ],
             "_stories": [
                 "October 3, 1967 Melville Disk-Shaped Object with Blinking Rectangular Lights and Chemical Odor Trace",
+                "Transparent Purplish-Red Sphere with Two Men Inside Over Medulla, Florida",
                 "Battle Creek Falling Aluminum Wheel From A Bright Humming Object",
+                "Sinclairville Farm Landing and Eye Injury",
                 "1962 Radar\u2011Tracked Object, Nevada Tremors, and Power Station Landing",
                 "Orange Fireball, Power Failure, and \u201cBalls of Fire\u201d in Wisconsin",
                 "Nauseating Fog Over Houston Followed by Blinding Fireball Across Arizona and Mexico",
-                "Maury Island Slag and Other UFO-Associated Falls of Material",
-                "Transparent Purplish-Red Sphere with Two Men Inside Over Medulla, Florida",
-                "Sinclairville Farm Landing and Eye Injury"
+                "Maury Island Slag and Other UFO-Associated Falls of Material"
             ]
         },
         "Theories Related TO THE UFO Phenomenon": [
-            "Post-1966 Pattern of Nighttime Landings and Objects Disappearing into Thin Air",
             "World War II Military and Ship Crews\u2019 Unidentified Flying Object Reports",
-            "Wilbert B. Smith\u2019s Verified Scientific Information from UFO \u201cEntities\u201d",
+            "RAF Air Marshal Lord Dowding Describes Paraphysical UFO Occupants",
             "Sir Victor Goddard on Paraphysical UFOs, Astral Spirits, and \u201cDevil of It\u201d Deceptions",
+            "Post-1966 Pattern of Nighttime Landings and Objects Disappearing into Thin Air",
+            "Wilbert B. Smith\u2019s Verified Scientific Information from UFO \u201cEntities\u201d",
             "Lynn E. Catoe on UFOs, Invisible Entities, Poltergeists, and Demoniac Possession",
             "Keel's Superspectrum Theory",
-            "Energy Sources for Materialization and Possible Use of Animal and Human Blood",
-            "RAF Air Marshal Lord Dowding Describes Paraphysical UFO Occupants"
+            "Energy Sources for Materialization and Possible Use of Animal and Human Blood"
         ],
         "Time Lapse": [
             "Boyup Brook Motor Stoppage, Light Beam, and Missing Time"
@@ -550,19 +554,19 @@
             "March 8, 1967 Missouri Multicolored Hovering Object over Bunceton",
             "Post-1966 Pattern of Nighttime Landings and Objects Disappearing into Thin Air",
             "World War II Military and Ship Crews\u2019 Unidentified Flying Object Reports",
-            "Wilbert B. Smith\u2019s Verified Scientific Information from UFO \u201cEntities\u201d",
             "Sir Victor Goddard on Paraphysical UFOs, Astral Spirits, and \u201cDevil of It\u201d Deceptions",
+            "Wilbert B. Smith\u2019s Verified Scientific Information from UFO \u201cEntities\u201d",
+            "RAF Air Marshal Lord Dowding Describes Paraphysical UFO Occupants",
             "Magonia\u2019s Cloud Ships And The Stoning Of Three Men And A Woman From A Fallen Sky Ship",
             "Small Delta-Wing Craft with Waffle-Like Exterior near Calgary, 1965",
-            "Enigmatic Radio Messages Apparently Linked to Ghost Fliers",
-            "RAF Air Marshal Lord Dowding Describes Paraphysical UFO Occupants"
+            "Enigmatic Radio Messages Apparently Linked to Ghost Fliers"
         ]
     },
     "USO": [
-        "Black Circular Object Submerges in Cornwallis River, Nova Scotia, September 15, 1968",
-        "Low-Flying Objects and Fireballs Over Ohio and Lake Erie",
         "1890s Ocean\u2011Bound Disks And Wheels Rising From The Sea",
-        "Fishing Boat Approaches Large Airplane That Vanishes in Smoke"
+        "Fishing Boat Approaches Large Airplane That Vanishes in Smoke",
+        "Black Circular Object Submerges in Cornwallis River, Nova Scotia, September 15, 1968",
+        "Low-Flying Objects and Fireballs Over Ohio and Lake Erie"
     ],
     "Witchcraft": {
         "Abduction": {
@@ -571,10 +575,10 @@
             ],
             "Child": [
                 "Alleged Ritual Murder of Boy Simon of Trent and Miracles Spreading His Cult",
-                "Alleged Ritual Murder of Sebastian Novello at Portubuffaleto and Subsequent Executions",
-                "Reports of Crucified Christian Slave in Pontus and Crucified Lambs in Crete",
                 "Overview of THB misbehavior",
                 "William of Norwich",
+                "Alleged Ritual Murder of Sebastian Novello at Portubuffaleto and Subsequent Executions",
+                "Reports of Crucified Christian Slave in Pontus and Crucified Lambs in Crete",
                 "Night-Women of Diana",
                 "Witte Wywen of Frisia"
             ],
@@ -606,13 +610,13 @@
             "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
         ],
         "False Wonders": [
-            "Heretic\u2019s Demonic Vision of a False Christ and Queen Dispelled by the Eucharist",
-            "Mass Enthusiastic Suicide in Crete under a False Moses and Attribution to a Demon of Samael",
-            "Wonderful Visions, Voices, and Psalms Heard During Scottish Field Preachings",
             "Albigensian Heretics Walking On Water",
+            "Mass Enthusiastic Suicide in Crete under a False Moses and Attribution to a Demon of Samael",
+            "Heretic\u2019s Demonic Vision of a False Christ and Queen Dispelled by the Eucharist",
             "Sedechias and Elementary Spirits",
             "Phantom Armies",
-            "Kabbala, Elementals, and Other False Wonders in the 13th Century"
+            "Kabbala, Elementals, and Other False Wonders in the 13th Century",
+            "Wonderful Visions, Voices, and Psalms Heard During Scottish Field Preachings"
         ],
         "Hagriding": {},
         "Harm": {
@@ -695,13 +699,13 @@
                         "Adult": {},
                         "Child": [
                             "Alleged Ritual Murder of Boy Simon of Trent and Miracles Spreading His Cult",
-                            "Child-Eating Witches Burned in Burbia After Inquisitorial Process",
-                            "Alleged Ritual Murder of Sebastian Novello at Portubuffaleto and Subsequent Executions",
-                            "Reports of Crucified Christian Slave in Pontus and Crucified Lambs in Crete",
                             "William of Norwich",
                             "European Ritual Murders",
+                            "Alleged Ritual Murder of Sebastian Novello at Portubuffaleto and Subsequent Executions",
+                            "Reports of Crucified Christian Slave in Pontus and Crucified Lambs in Crete",
                             "Night-Women of Diana",
-                            "Witte Wywen of Frisia"
+                            "Witte Wywen of Frisia",
+                            "Child-Eating Witches Burned in Burbia After Inquisitorial Process"
                         ]
                     }
                 },
@@ -726,13 +730,13 @@
                 "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means"
             ],
             "_stories": [
-                "Vision of a Bodily Sabbath at Mandrisio and the Death of the Spectators",
-                "The Gellones of Greece"
+                "The Gellones of Greece",
+                "Vision of a Bodily Sabbath at Mandrisio and the Death of the Spectators"
             ]
         },
         "_stories": [
-            "Woman Punished with Possession for Attempted Sorcery and Her Deliverance at St.\u00a0Gandolph",
             "Women\u2019s Pacts with Shedim and Nocturnal Meetings with Buck\u2011Shaped Spirits",
+            "Woman Punished with Possession for Attempted Sorcery and Her Deliverance at St.\u00a0Gandolph",
             "Camonica Sorcerers and Their Mountain Magic-Cry Punished by the Inquisition"
         ]
     }
