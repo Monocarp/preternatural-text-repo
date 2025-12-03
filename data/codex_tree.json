@@ -61,7 +61,8 @@
                 "Flannel Man": {},
                 "Glimmer Man": {},
                 "Poltergeist": [
-                    "1846 Rains Of Blood And Spring\u2011Heeled Jacks In Silver Uniforms"
+                    "1846 Rains Of Blood And Spring\u2011Heeled Jacks In Silver Uniforms",
+                    "Artist\u2019s Thirty Years with an Androgynous Shape-Shifting Entity"
                 ],
                 "Shadow People": {},
                 "Sleep Paralysis": {},
@@ -298,11 +299,9 @@
             "Auditory": {},
             "Behavior": {},
             "Habitual Behavior": {},
-            "Visual": {
-                "_stories": [
-                    "Farm Boy\u2019s Employer and the Roman Entity Lucretius"
-                ]
-            }
+            "Visual": [
+                "Farm Boy\u2019s Employer and the Roman Entity Lucretius"
+            ]
         },
         "Other Animal": {
             "Auditory": {},
