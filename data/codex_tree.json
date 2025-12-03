@@ -257,11 +257,9 @@
         "Other": {}
     },
     "For Review": {
-        "Broken": {
-            "_stories": [
-                "Baptism in the River Thames Accompanied by a Heavenly Light"
-            ]
-        }
+        "Broken": [
+            "Baptism in the River Thames Accompanied by a Heavenly Light"
+        ]
     },
     "Forteana": {},
     "Ghostly Activity": {
@@ -550,7 +548,8 @@
             "Albigensian Heretics Walking On Water",
             "Sedechias and Elementary Spirits",
             "Phantom Armies",
-            "Kabbala, Elementals, and Other False Wonders in the 13th Century"
+            "Kabbala, Elementals, and Other False Wonders in the 13th Century",
+            "Wonderful Visions, Voices, and Psalms Heard During Scottish Field Preachings"
         ],
         "Hagriding": {},
         "Harm": {
