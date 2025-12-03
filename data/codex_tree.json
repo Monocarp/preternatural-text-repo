@@ -41,8 +41,8 @@
                         "Women\u2019s Pacts with Shedim and Nocturnal Meetings with Buck\u2011Shaped Spirits"
                     ],
                     "Appearance as Shadow": [
-                        "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium",
-                        "Gustav Davidson\u2019s Nightmarish Shape in a Field"
+                        "Gustav Davidson\u2019s Nightmarish Shape in a Field",
+                        "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium"
                     ],
                     "Succubi & Incubi": [
                         "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
@@ -298,7 +298,11 @@
             "Auditory": {},
             "Behavior": {},
             "Habitual Behavior": {},
-            "Visual": {}
+            "Visual": {
+                "_stories": [
+                    "Farm Boy\u2019s Employer and the Roman Entity Lucretius"
+                ]
+            }
         },
         "Other Animal": {
             "Auditory": {},
