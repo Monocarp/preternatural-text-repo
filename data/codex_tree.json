@@ -398,6 +398,7 @@
             "William Megiveron\u2019s Night Visit, Airship Crew\u2019s Food Order, And Searchlight Over The Lake",
             "John Trasco\u2019s Confrontation with a Small Being Seeking His Dog",
             "Barney and Betty Hill and Villa-Boas: Color-Changing UFOs and Abduction Claims",
+            "Ufonauts\u2019 False Claims of Origin from Various Planets and Worlds",
             "Sumpter And McLemore\u2019s Sworn Encounter With Bearded Airship Captain",
             "Albert K. Bender's Underground UFO Entities and Deadly Space Clouds",
             "Judge Byrne\u2019s Tour Of An Airship Manned By Three Foreign\u2011Speaking Men",
@@ -407,8 +408,7 @@
             "Ufonauts Gliding, Flying, and Walking Through Craft Walls",
             "Springfield Farmhands\u2019 Affidavit Of Airship Landing And Promise About Free Cuba",
             "Warnings from South American and European Contactees about Upsetting the Universe",
-            "Argentine Air Force Guard Hears Speaking UFO Warning of Atomic Dangers",
-            "Ufonauts\u2019 False Claims of Origin from Various Planets and Worlds"
+            "Argentine Air Force Guard Hears Speaking UFO Warning of Atomic Dangers"
         ],
         "Livestock/Animal Interaction": [
             "Alexander Hamilton\u2019s Affidavit Of Airship, Six Strange Beings, And Calf Abduction"
@@ -510,11 +510,14 @@
             ],
             "Harm to Pets": {}
         },
-        "Herbal/Natural": [
-            "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion",
-            "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means",
-            "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
-        ],
+        "Herbal/Natural": {
+            "Poisons": [],
+            "_stories": [
+                "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion",
+                "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means",
+                "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
+            ]
+        },
         "Indoctrinating Children": [
             "Prophetic Trances, Glossolalia, and Miracles Surrounding Sabbatai Zevi"
         ],
