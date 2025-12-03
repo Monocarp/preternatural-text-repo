@@ -266,7 +266,11 @@
         },
         "Tulpas": {}
     },
-    "Men In Black": [],
+    "Men In Black": {
+        "_stories": [
+            "Strange Voices on CB Radio and Visit from Peculiar 'Major Richard French'"
+        ]
+    },
     "Supernatural Phenomena": {
         "Time Loss": {},
         "Time Slip": {}
