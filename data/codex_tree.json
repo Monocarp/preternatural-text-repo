@@ -139,11 +139,9 @@
                 "Sexual Assault": {},
                 "Suffocation": {},
                 "Unexplained Physical Pain": {},
-                "Unidentified Illness": {
-                    "_stories": [
-                        "Haunting and Demonic Torment of the K\u00f8ge Household (1609\u20131614)"
-                    ]
-                }
+                "Unidentified Illness": [
+                    "Haunting and Demonic Torment of the K\u00f8ge Household (1609\u20131614)"
+                ]
             }
         },
         "Possession": {
@@ -344,7 +342,8 @@
         },
         "Poltergeist Activity": {
             "Audible": [
-                "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary"
+                "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary",
+                "The Bell Witch Poltergeist at the John Bell Home in Tennessee"
             ],
             "Lights IN Or Around Home": [
                 "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary",
