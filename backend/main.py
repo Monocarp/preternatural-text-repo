@@ -89,6 +89,7 @@ from routes import (
     stories_router,
     books_router,
     admin_router,
+    ai_router,
     AppError,
     app_error_handler,
     http_exception_handler,
@@ -106,6 +107,7 @@ app.include_router(tree_router)
 app.include_router(stories_router)
 app.include_router(books_router)
 app.include_router(admin_router)
+app.include_router(ai_router)
 
 # ------------------------------------------------------------------ #
 # 5. Import Utils (after paths defined, before startup)

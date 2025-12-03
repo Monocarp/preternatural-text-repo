@@ -76,6 +76,18 @@ const BookDetail = () => {
   const [selectedPath, setSelectedPath] = useState<string[]>([])
   const [currentAssignments, setCurrentAssignments] = useState<string[][]>([])
   const [assigning, setAssigning] = useState(false)
+  
+  // AI suggestion state
+  interface AISuggestion {
+    path: string[]
+    confidence: number
+    reason?: string
+    confirmed: boolean
+  }
+  const [aiSuggestions, setAiSuggestions] = useState<AISuggestion[]>([])
+  const [loadingAiSuggestions, setLoadingAiSuggestions] = useState(false)
+  const [aiError, setAiError] = useState<string | null>(null)
+  const [committingAll, setCommittingAll] = useState(false)
 
   useEffect(() => {
     if (slug) {
@@ -250,6 +262,102 @@ const BookDetail = () => {
       setAssigning(false)
     }
   }
+
+  // AI Category Suggestion handlers
+  const handleAutoSuggest = async () => {
+    if (!selectedStory || !fullText) return
+    
+    setLoadingAiSuggestions(true)
+    setAiError(null)
+    setAiSuggestions([])
+    
+    try {
+      // Extract story text from full text using boundaries
+      const storyText = fullText.substring(selectedStory.start_char, selectedStory.end_char)
+      
+      const res = await axios.post('/ai/suggest-categories', {
+        story_title: selectedStory.title,
+        story_text: storyText
+      })
+      
+      // Pre-confirm suggestions with confidence >= 0.7
+      const suggestions = res.data.suggestions.map((s: any) => ({
+        ...s,
+        confirmed: s.confidence >= 0.7
+      }))
+      
+      setAiSuggestions(suggestions)
+    } catch (err: any) {
+      console.error('Error getting AI suggestions:', err)
+      const detail = err?.response?.data?.detail
+      setAiError(detail || 'Failed to get AI suggestions')
+    } finally {
+      setLoadingAiSuggestions(false)
+    }
+  }
+  
+  const handleToggleSuggestion = (index: number) => {
+    setAiSuggestions(prev => prev.map((s, i) => 
+      i === index ? { ...s, confirmed: !s.confirmed } : s
+    ))
+  }
+  
+  const handleCommitConfirmed = async () => {
+    if (!selectedStory) return
+    
+    const confirmedSuggestions = aiSuggestions.filter(s => s.confirmed)
+    if (confirmedSuggestions.length === 0) {
+      alert('No suggestions are confirmed. Check the ones you want to assign.')
+      return
+    }
+    
+    setCommittingAll(true)
+    let successCount = 0
+    let errorCount = 0
+    
+    for (const suggestion of confirmedSuggestions) {
+      try {
+        await axios.post('/assign-category', {
+          path: suggestion.path,
+          story: {
+            title: selectedStory.title,
+            book_slug: selectedStory.book_slug,
+            pages: selectedStory.pages,
+            keywords: selectedStory.keywords,
+            start_char: selectedStory.start_char,
+            end_char: selectedStory.end_char
+          }
+        })
+        successCount++
+      } catch (err) {
+        console.error(`Error assigning ${suggestion.path.join(' > ')}:`, err)
+        errorCount++
+      }
+    }
+    
+    // Reload tree to get updated assignments
+    try {
+      const treeRes = await axios.get('/get-tree')
+      setCodexTree(treeRes.data)
+    } catch (err) {
+      console.error('Error reloading tree:', err)
+    }
+    
+    setCommittingAll(false)
+    setAiSuggestions([]) // Clear suggestions after commit
+    
+    if (errorCount === 0) {
+      alert(`Successfully assigned ${successCount} categories!`)
+    } else {
+      alert(`Assigned ${successCount} categories. ${errorCount} failed.`)
+    }
+  }
+  
+  // Clear AI suggestions when story changes
+  useEffect(() => {
+    setAiSuggestions([])
+    setAiError(null)
+  }, [selectedStory?.title])
 
   const loadBook = async () => {
     try {
@@ -1302,9 +1410,9 @@ const BookDetail = () => {
             )}
           </div>
           
-          {/* Middle column: Story list */}
-          <div className="w-56 xl:w-64 2xl:w-80 flex-shrink-0">
-            <div className="bg-gray-800 border border-gray-700 rounded-lg p-3 sticky top-4">
+          {/* Middle column: Stories + Details */}
+          <div className="w-72 xl:w-80 2xl:w-96 flex-shrink-0">
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-3 sticky top-4 max-h-[85vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-sm font-semibold text-white">Stories ({sortedStories.length})</h3>
                 {!newStoryMode && !editingBoundary && (
@@ -1317,8 +1425,8 @@ const BookDetail = () => {
                 )}
               </div>
               
-              {/* Story list */}
-              <div className="max-h-[70vh] overflow-y-auto space-y-1">
+              {/* Story list - compact when story selected */}
+              <div className={`overflow-y-auto space-y-1 ${selectedStory ? 'max-h-32' : 'max-h-[50vh]'}`}>
                 {sortedStories.map((story) => {
                   const color = STORY_COLORS[story.colorIndex]
                   const isSelected = selectedStory?.title === story.title
@@ -1347,32 +1455,10 @@ const BookDetail = () => {
                 })}
               </div>
               
-              {/* Color legend */}
-              <div className="mt-3 pt-3 border-t border-gray-700">
-                <p className="text-xs text-gray-500 mb-2">Color Legend</p>
-                <div className="flex flex-wrap gap-1">
-                  {STORY_COLORS.map((color, idx) => (
-                    <div
-                      key={idx}
-                      className={`w-3 h-3 rounded ${color.bg} ${color.border} border`}
-                      title={`Story color ${idx + 1}`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Right column: Story details/options */}
-          <div className="w-56 xl:w-64 2xl:w-80 flex-shrink-0">
-            <div className="bg-gray-800 border border-gray-700 rounded-lg p-3 sticky top-4 max-h-[85vh] overflow-y-auto">
-              <h3 className="text-sm font-semibold text-white mb-3">
-                {newStoryMode ? 'New Story' : editingBoundary ? 'Edit Boundaries' : 'Story Details'}
-              </h3>
-              
               {/* New story controls */}
               {newStoryMode && (
-                <div className="p-3 bg-gray-700 rounded-lg border-2 border-purple-500">
+                <div className="mt-3 p-3 bg-gray-700 rounded-lg border-2 border-purple-500">
+                  <h4 className="font-semibold text-purple-400 mb-2 text-sm">New Story</h4>
                   <div className="space-y-2 mb-3">
                     <input
                       type="text"
@@ -1429,319 +1515,11 @@ const BookDetail = () => {
                 </div>
               )}
               
-              {/* Selected story details */}
-              {selectedStory && !editingBoundary && !newStoryMode && (
-                <div className="mb-4 p-3 bg-gray-700 rounded-lg border border-green-600">
-                  {editingTitle ? (
-                    <div className="mb-2">
-                      <input
-                        type="text"
-                        value={newTitle}
-                        onChange={(e) => setNewTitle(e.target.value)}
-                        className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-sm text-white"
-                        autoFocus
-                      />
-                      <div className="flex gap-2 mt-2">
-                        <button
-                          onClick={handleSaveTitle}
-                          className="flex-1 px-2 py-1 bg-green-600 hover:bg-green-700 text-white text-xs rounded"
-                        >
-                          Save
-                        </button>
-                        <button
-                          onClick={handleCancelEditTitle}
-                          className="flex-1 px-2 py-1 bg-gray-600 hover:bg-gray-500 text-white text-xs rounded"
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <h4 className="font-semibold text-green-400 mb-2">{selectedStory.title}</h4>
-                  )}
-                  <div className="text-xs text-gray-300 space-y-1">
-                    {selectedStory.pages && <p>Pages: {selectedStory.pages}</p>}
-                    {editingKeywords ? (
-                      <div className="space-y-1">
-                        <p className="text-gray-400">Keywords:</p>
-                        <input
-                          type="text"
-                          value={editedKeywords}
-                          onChange={(e) => setEditedKeywords(e.target.value)}
-                          placeholder="ghost, haunting, supernatural"
-                          className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs"
-                        />
-                        <div className="flex gap-1">
-                          <button
-                            onClick={handleSaveKeywords}
-                            disabled={savingKeywords}
-                            className="flex-1 px-2 py-1 bg-green-600 hover:bg-green-700 text-white text-xs rounded disabled:opacity-50"
-                          >
-                            {savingKeywords ? '...' : 'Save'}
-                          </button>
-                          <button
-                            onClick={handleCancelEditKeywords}
-                            className="flex-1 px-2 py-1 bg-gray-600 hover:bg-gray-500 text-white text-xs rounded"
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-1">
-                        <p className="flex-1">Keywords: {selectedStory.keywords || <span className="italic text-gray-500">none</span>}</p>
-                        <button
-                          onClick={handleStartEditKeywords}
-                          className="px-1.5 py-0.5 bg-gray-600 text-white rounded hover:bg-gray-500 text-xs"
-                        >
-                          ✎
-                        </button>
-                      </div>
-                    )}
-                    <p>Characters: {selectedStory.start_char.toLocaleString()} – {selectedStory.end_char.toLocaleString()}</p>
-                    <p>Length: {(selectedStory.end_char - selectedStory.start_char).toLocaleString()} chars</p>
-                  </div>
-                  <div className="mt-3 space-y-2">
-                    <button
-                      onClick={handleStartBoundaryEdit}
-                      className="w-full px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded transition-colors"
-                    >
-                      Edit Boundaries
-                    </button>
-                    {!editingTitle && (
-                      <button
-                        onClick={handleStartEditTitle}
-                        className="w-full px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded transition-colors"
-                      >
-                        Edit Title
-                      </button>
-                    )}
-                    <button
-                      onClick={handleDeleteStory}
-                      className="w-full px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded transition-colors"
-                    >
-                      Delete Story
-                    </button>
-                  </div>
-                  
-                  {/* Category Assignment Section */}
-                  <div className="mt-4 pt-3 border-t border-gray-600">
-                    <h5 className="text-xs font-medium mb-2 text-gray-300">Category Assignment</h5>
-                    
-                    {/* Current Assignments */}
-                    <div className="mb-3">
-                      <p className="text-xs text-gray-400 mb-1">Current Assignments:</p>
-                      {currentAssignments.length === 0 ? (
-                        <p className="text-xs text-gray-500 italic">Not assigned</p>
-                      ) : (
-                        <div className="space-y-2">
-                          {currentAssignments.map((path, idx) => (
-                            <div
-                              key={idx}
-                              className="p-2 bg-gray-800 rounded text-xs group relative"
-                              title={path.join(' > ')}
-                            >
-                              <div className="flex items-start justify-between gap-1">
-                                <div className="flex-1 min-w-0">
-                                  {path.map((level, levelIdx) => (
-                                    <div
-                                      key={levelIdx}
-                                      className="text-gray-200 truncate"
-                                      style={{ paddingLeft: `${levelIdx * 8}px` }}
-                                    >
-                                      {levelIdx > 0 && <span className="text-gray-500 mr-1">›</span>}
-                                      {level}
-                                    </div>
-                                  ))}
-                                </div>
-                                <button
-                                  onClick={() => handleRemoveCategory(path)}
-                                  disabled={assigning}
-                                  className="px-1.5 py-0.5 text-xs bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex-shrink-0"
-                                >
-                                  ×
-                                </button>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                    
-                    {/* Assign to Category */}
-                    <div>
-                      <p className="text-xs text-gray-400 mb-1">Assign to:</p>
-                      <div className="space-y-1.5 mb-2">
-                        {codexTree ? (
-                          <>
-                            {/* Level 1 */}
-                            <select
-                              value={selectedPath[0] || ''}
-                              onChange={(e) => handlePathLevelChange(0, e.target.value)}
-                              className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
-                            >
-                              <option value="">Select category...</option>
-                              {getPathOptions(codexTree, []).map((option) => (
-                                <option key={option} value={option}>
-                                  {option}
-                                </option>
-                              ))}
-                            </select>
-                            
-                            {/* Level 2 */}
-                            {selectedPath.length >= 1 && getPathOptions(codexTree, [selectedPath[0]]).length > 0 && (
-                              <select
-                                value={selectedPath[1] || ''}
-                                onChange={(e) => handlePathLevelChange(1, e.target.value)}
-                                className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
-                              >
-                                <option value="">Select subcategory...</option>
-                                {getPathOptions(codexTree, [selectedPath[0]]).map((option) => (
-                                  <option key={option} value={option}>
-                                    {option}
-                                  </option>
-                                ))}
-                              </select>
-                            )}
-                            
-                            {/* Level 3 */}
-                            {selectedPath.length >= 2 && getPathOptions(codexTree, [selectedPath[0], selectedPath[1]]).length > 0 && (
-                              <select
-                                value={selectedPath[2] || ''}
-                                onChange={(e) => handlePathLevelChange(2, e.target.value)}
-                                className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
-                              >
-                                <option value="">Select subcategory...</option>
-                                {getPathOptions(codexTree, [selectedPath[0], selectedPath[1]]).map((option) => (
-                                  <option key={option} value={option}>
-                                    {option}
-                                  </option>
-                                ))}
-                              </select>
-                            )}
-                            
-                            {/* Level 4 */}
-                            {selectedPath.length >= 3 && getPathOptions(codexTree, [selectedPath[0], selectedPath[1], selectedPath[2]]).length > 0 && (
-                              <select
-                                value={selectedPath[3] || ''}
-                                onChange={(e) => handlePathLevelChange(3, e.target.value)}
-                                className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
-                              >
-                                <option value="">Select subcategory...</option>
-                                {getPathOptions(codexTree, [selectedPath[0], selectedPath[1], selectedPath[2]]).map((option) => (
-                                  <option key={option} value={option}>
-                                    {option}
-                                  </option>
-                                ))}
-                              </select>
-                            )}
-                            
-                            {/* Level 5 */}
-                            {selectedPath.length >= 4 && getPathOptions(codexTree, selectedPath.slice(0, 4)).length > 0 && (
-                              <select
-                                value={selectedPath[4] || ''}
-                                onChange={(e) => handlePathLevelChange(4, e.target.value)}
-                                className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
-                              >
-                                <option value="">Select subcategory...</option>
-                                {getPathOptions(codexTree, selectedPath.slice(0, 4)).map((option) => (
-                                  <option key={option} value={option}>
-                                    {option}
-                                  </option>
-                                ))}
-                              </select>
-                            )}
-                            
-                            {/* Level 6 */}
-                            {selectedPath.length >= 5 && getPathOptions(codexTree, selectedPath.slice(0, 5)).length > 0 && (
-                              <select
-                                value={selectedPath[5] || ''}
-                                onChange={(e) => handlePathLevelChange(5, e.target.value)}
-                                className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
-                              >
-                                <option value="">Select subcategory...</option>
-                                {getPathOptions(codexTree, selectedPath.slice(0, 5)).map((option) => (
-                                  <option key={option} value={option}>
-                                    {option}
-                                  </option>
-                                ))}
-                              </select>
-                            )}
-                            
-                            {/* Level 7 */}
-                            {selectedPath.length >= 6 && getPathOptions(codexTree, selectedPath.slice(0, 6)).length > 0 && (
-                              <select
-                                value={selectedPath[6] || ''}
-                                onChange={(e) => handlePathLevelChange(6, e.target.value)}
-                                className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
-                              >
-                                <option value="">Select subcategory...</option>
-                                {getPathOptions(codexTree, selectedPath.slice(0, 6)).map((option) => (
-                                  <option key={option} value={option}>
-                                    {option}
-                                  </option>
-                                ))}
-                              </select>
-                            )}
-                            
-                            {/* Level 8 */}
-                            {selectedPath.length >= 7 && getPathOptions(codexTree, selectedPath.slice(0, 7)).length > 0 && (
-                              <select
-                                value={selectedPath[7] || ''}
-                                onChange={(e) => handlePathLevelChange(7, e.target.value)}
-                                className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
-                              >
-                                <option value="">Select subcategory...</option>
-                                {getPathOptions(codexTree, selectedPath.slice(0, 7)).map((option) => (
-                                  <option key={option} value={option}>
-                                    {option}
-                                  </option>
-                                ))}
-                              </select>
-                            )}
-                          </>
-                        ) : (
-                          <p className="text-xs text-gray-500">Loading categories...</p>
-                        )}
-                      </div>
-                      
-                      {/* Selected Path Display */}
-                      {selectedPath.length > 0 && (
-                        <div 
-                          className="mb-2 p-2 bg-gray-800 rounded text-xs"
-                          title={selectedPath.join(' > ')}
-                        >
-                          <p className="text-gray-400 text-xs mb-1">Selected path:</p>
-                          {selectedPath.map((level, levelIdx) => (
-                            <div
-                              key={levelIdx}
-                              className="text-gray-200 truncate"
-                              style={{ paddingLeft: `${levelIdx * 8}px` }}
-                            >
-                              {levelIdx > 0 && <span className="text-gray-500 mr-1">›</span>}
-                              <span className="font-medium">{level}</span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      
-                      {/* Assign Button */}
-                      <button
-                        onClick={handleAssignCategory}
-                        disabled={selectedPath.length === 0 || assigning}
-                        className="w-full px-3 py-1.5 bg-green-600 text-white rounded text-sm hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                      >
-                        {assigning ? 'Assigning...' : 'Assign'}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-              
               {/* Boundary editing controls */}
               {selectedStory && editingBoundary && (
-                <div className="p-3 bg-gray-700 rounded-lg border-2 border-blue-500">
-                  <h4 className="font-semibold text-blue-400 mb-2 text-sm">Editing: {selectedStory.title}</h4>
+                <div className="mt-3 p-3 bg-gray-700 rounded-lg border-2 border-blue-500">
+                  <h4 className="font-semibold text-blue-400 mb-2 text-sm">Editing Boundaries</h4>
+                  <p className="text-xs text-gray-300 mb-2 truncate" title={selectedStory.title}>{selectedStory.title}</p>
                   
                   <div className="text-xs space-y-2 mb-3">
                     <div className={`p-2 rounded ${selectingStart ? 'bg-blue-900/50 border border-blue-500' : 'bg-gray-800'}`}>
@@ -1783,12 +1561,396 @@ const BookDetail = () => {
                 </div>
               )}
               
-              {/* No selection state */}
-              {!selectedStory && !newStoryMode && !editingBoundary && (
-                <div className="text-center py-8 text-gray-500">
-                  <p className="text-sm">Select a story from the list</p>
-                  <p className="text-xs mt-1">or click highlighted text in the viewer</p>
+              {/* Selected story details */}
+              {selectedStory && !editingBoundary && !newStoryMode && (
+                <div className="mt-3 p-3 bg-gray-700 rounded-lg border border-green-600">
+                  <h4 className="text-xs font-medium text-gray-400 mb-1">Selected Story</h4>
+                  {editingTitle ? (
+                    <div className="mb-2">
+                      <input
+                        type="text"
+                        value={newTitle}
+                        onChange={(e) => setNewTitle(e.target.value)}
+                        className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-sm text-white"
+                        autoFocus
+                      />
+                      <div className="flex gap-2 mt-2">
+                        <button
+                          onClick={handleSaveTitle}
+                          className="flex-1 px-2 py-1 bg-green-600 hover:bg-green-700 text-white text-xs rounded"
+                        >
+                          Save
+                        </button>
+                        <button
+                          onClick={handleCancelEditTitle}
+                          className="flex-1 px-2 py-1 bg-gray-600 hover:bg-gray-500 text-white text-xs rounded"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <h4 className="font-semibold text-green-400 mb-2 text-sm">{selectedStory.title}</h4>
+                  )}
+                  <div className="text-xs text-gray-300 space-y-1">
+                    {selectedStory.pages && <p>Pages: {selectedStory.pages}</p>}
+                    {editingKeywords ? (
+                      <div className="space-y-1">
+                        <p className="text-gray-400">Keywords:</p>
+                        <input
+                          type="text"
+                          value={editedKeywords}
+                          onChange={(e) => setEditedKeywords(e.target.value)}
+                          placeholder="ghost, haunting, supernatural"
+                          className="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs"
+                        />
+                        <div className="flex gap-1">
+                          <button
+                            onClick={handleSaveKeywords}
+                            disabled={savingKeywords}
+                            className="flex-1 px-2 py-1 bg-green-600 hover:bg-green-700 text-white text-xs rounded disabled:opacity-50"
+                          >
+                            {savingKeywords ? '...' : 'Save'}
+                          </button>
+                          <button
+                            onClick={handleCancelEditKeywords}
+                            className="flex-1 px-2 py-1 bg-gray-600 hover:bg-gray-500 text-white text-xs rounded"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-1">
+                        <p className="flex-1 truncate">Keywords: {selectedStory.keywords || <span className="italic text-gray-500">none</span>}</p>
+                        <button
+                          onClick={handleStartEditKeywords}
+                          className="px-1.5 py-0.5 bg-gray-600 text-white rounded hover:bg-gray-500 text-xs flex-shrink-0"
+                        >
+                          ✎
+                        </button>
+                      </div>
+                    )}
+                    <p>Chars: {selectedStory.start_char.toLocaleString()} – {selectedStory.end_char.toLocaleString()}</p>
+                    <p>Length: {(selectedStory.end_char - selectedStory.start_char).toLocaleString()}</p>
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <button
+                      onClick={handleStartBoundaryEdit}
+                      className="flex-1 px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded transition-colors"
+                    >
+                      Edit Bounds
+                    </button>
+                    {!editingTitle && (
+                      <button
+                        onClick={handleStartEditTitle}
+                        className="flex-1 px-2 py-1 bg-amber-600 hover:bg-amber-700 text-white text-xs font-medium rounded transition-colors"
+                      >
+                        Edit Title
+                      </button>
+                    )}
+                    <button
+                      onClick={handleDeleteStory}
+                      className="px-2 py-1 bg-red-600 hover:bg-red-700 text-white text-xs font-medium rounded transition-colors"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
+              )}
+              
+              {/* Color legend */}
+              <div className="mt-3 pt-3 border-t border-gray-700">
+                <p className="text-xs text-gray-500 mb-2">Color Legend</p>
+                <div className="flex flex-wrap gap-1">
+                  {STORY_COLORS.map((color, idx) => (
+                    <div
+                      key={idx}
+                      className={`w-3 h-3 rounded ${color.bg} ${color.border} border`}
+                      title={`Story color ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Right column: Category Assignment */}
+          <div className="w-72 xl:w-80 2xl:w-96 flex-shrink-0">
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-3 sticky top-4 max-h-[85vh] overflow-y-auto">
+              <h3 className="text-sm font-semibold text-white mb-3">Category Assignment</h3>
+              
+              {!selectedStory ? (
+                <div className="text-center py-8 text-gray-500">
+                  <p className="text-sm">Select a story to assign categories</p>
+                </div>
+              ) : (
+                <>
+                  {/* Current Assignments */}
+                  <div className="mb-4">
+                    <p className="text-xs text-gray-400 mb-2">Current Assignments:</p>
+                    {currentAssignments.length === 0 ? (
+                      <p className="text-xs text-gray-500 italic">Not assigned to any category</p>
+                    ) : (
+                      <div className="space-y-2">
+                        {currentAssignments.map((path, idx) => (
+                          <div
+                            key={idx}
+                            className="p-2 bg-gray-700 rounded text-xs"
+                            title={path.join(' > ')}
+                          >
+                            <div className="flex items-start justify-between gap-1">
+                              <div className="flex-1 min-w-0 text-gray-200">
+                                {path.join(' › ')}
+                              </div>
+                              <button
+                                onClick={() => handleRemoveCategory(path)}
+                                disabled={assigning}
+                                className="px-1.5 py-0.5 text-xs bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex-shrink-0"
+                              >
+                                ×
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* AI Suggestions Section */}
+                  <div className="mb-4 p-3 bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-lg border border-purple-500/50">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-lg">🤖</span>
+                      <h4 className="text-sm font-medium text-purple-300">AI Category Suggestions</h4>
+                    </div>
+                    
+                    <button
+                      onClick={handleAutoSuggest}
+                      disabled={loadingAiSuggestions || !fullText}
+                      className="w-full px-3 py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-sm font-medium rounded transition-colors mb-3"
+                    >
+                      {loadingAiSuggestions ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <span className="animate-spin">⏳</span> Analyzing story...
+                        </span>
+                      ) : (
+                        '✨ Auto-Suggest Categories'
+                      )}
+                    </button>
+                    
+                    {aiError && (
+                      <div className="p-2 bg-red-900/50 border border-red-500 rounded text-xs text-red-200 mb-3">
+                        {aiError}
+                      </div>
+                    )}
+                    
+                    {aiSuggestions.length > 0 && (
+                      <div className="space-y-2">
+                        {aiSuggestions.map((suggestion, idx) => (
+                          <label
+                            key={idx}
+                            className={`flex items-start gap-2 p-2 rounded cursor-pointer transition-colors ${
+                              suggestion.confirmed 
+                                ? 'bg-green-900/40 border border-green-500' 
+                                : 'bg-gray-800 border border-gray-600 hover:border-gray-500'
+                            }`}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={suggestion.confirmed}
+                              onChange={() => handleToggleSuggestion(idx)}
+                              className="mt-0.5 rounded border-gray-500 text-green-500 focus:ring-green-500"
+                            />
+                            <div className="flex-1 min-w-0">
+                              <div className="text-xs text-gray-200 mb-1">
+                                {suggestion.path.join(' › ')}
+                              </div>
+                              <div className="flex items-center gap-2 text-xs">
+                                <span className={`px-1.5 py-0.5 rounded ${
+                                  suggestion.confidence >= 0.8 ? 'bg-green-600 text-white' :
+                                  suggestion.confidence >= 0.5 ? 'bg-yellow-600 text-white' :
+                                  'bg-gray-600 text-gray-200'
+                                }`}>
+                                  {Math.round(suggestion.confidence * 100)}%
+                                </span>
+                                {suggestion.reason && (
+                                  <span className="text-gray-400 truncate" title={suggestion.reason}>
+                                    {suggestion.reason}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          </label>
+                        ))}
+                        
+                        <button
+                          onClick={handleCommitConfirmed}
+                          disabled={committingAll || aiSuggestions.filter(s => s.confirmed).length === 0}
+                          className="w-full mt-3 px-3 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-sm font-medium rounded transition-colors"
+                        >
+                          {committingAll ? (
+                            <span className="flex items-center justify-center gap-2">
+                              <span className="animate-spin">⏳</span> Committing...
+                            </span>
+                          ) : (
+                            `✓ Commit ${aiSuggestions.filter(s => s.confirmed).length} Confirmed`
+                          )}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Manual Assignment */}
+                  <div className="border-t border-gray-700 pt-3">
+                    <p className="text-xs text-gray-400 mb-2">Manual Assignment:</p>
+                    <div className="space-y-1.5 mb-2">
+                      {codexTree ? (
+                        <>
+                          {/* Level 1 */}
+                          <select
+                            value={selectedPath[0] || ''}
+                            onChange={(e) => handlePathLevelChange(0, e.target.value)}
+                            className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                          >
+                            <option value="">Select category...</option>
+                            {getPathOptions(codexTree, []).map((option) => (
+                              <option key={option} value={option}>
+                                {option}
+                              </option>
+                            ))}
+                          </select>
+                          
+                          {/* Level 2 */}
+                          {selectedPath.length >= 1 && getPathOptions(codexTree, [selectedPath[0]]).length > 0 && (
+                            <select
+                              value={selectedPath[1] || ''}
+                              onChange={(e) => handlePathLevelChange(1, e.target.value)}
+                              className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            >
+                              <option value="">Select subcategory...</option>
+                              {getPathOptions(codexTree, [selectedPath[0]]).map((option) => (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
+                          )}
+                          
+                          {/* Level 3 */}
+                          {selectedPath.length >= 2 && getPathOptions(codexTree, [selectedPath[0], selectedPath[1]]).length > 0 && (
+                            <select
+                              value={selectedPath[2] || ''}
+                              onChange={(e) => handlePathLevelChange(2, e.target.value)}
+                              className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            >
+                              <option value="">Select subcategory...</option>
+                              {getPathOptions(codexTree, [selectedPath[0], selectedPath[1]]).map((option) => (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
+                          )}
+                          
+                          {/* Level 4 */}
+                          {selectedPath.length >= 3 && getPathOptions(codexTree, [selectedPath[0], selectedPath[1], selectedPath[2]]).length > 0 && (
+                            <select
+                              value={selectedPath[3] || ''}
+                              onChange={(e) => handlePathLevelChange(3, e.target.value)}
+                              className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            >
+                              <option value="">Select subcategory...</option>
+                              {getPathOptions(codexTree, [selectedPath[0], selectedPath[1], selectedPath[2]]).map((option) => (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
+                          )}
+                          
+                          {/* Level 5+ */}
+                          {selectedPath.length >= 4 && getPathOptions(codexTree, selectedPath.slice(0, 4)).length > 0 && (
+                            <select
+                              value={selectedPath[4] || ''}
+                              onChange={(e) => handlePathLevelChange(4, e.target.value)}
+                              className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            >
+                              <option value="">Select subcategory...</option>
+                              {getPathOptions(codexTree, selectedPath.slice(0, 4)).map((option) => (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
+                          )}
+                          
+                          {selectedPath.length >= 5 && getPathOptions(codexTree, selectedPath.slice(0, 5)).length > 0 && (
+                            <select
+                              value={selectedPath[5] || ''}
+                              onChange={(e) => handlePathLevelChange(5, e.target.value)}
+                              className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            >
+                              <option value="">Select subcategory...</option>
+                              {getPathOptions(codexTree, selectedPath.slice(0, 5)).map((option) => (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
+                          )}
+                          
+                          {selectedPath.length >= 6 && getPathOptions(codexTree, selectedPath.slice(0, 6)).length > 0 && (
+                            <select
+                              value={selectedPath[6] || ''}
+                              onChange={(e) => handlePathLevelChange(6, e.target.value)}
+                              className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            >
+                              <option value="">Select subcategory...</option>
+                              {getPathOptions(codexTree, selectedPath.slice(0, 6)).map((option) => (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
+                          )}
+                          
+                          {selectedPath.length >= 7 && getPathOptions(codexTree, selectedPath.slice(0, 7)).length > 0 && (
+                            <select
+                              value={selectedPath[7] || ''}
+                              onChange={(e) => handlePathLevelChange(7, e.target.value)}
+                              className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            >
+                              <option value="">Select subcategory...</option>
+                              {getPathOptions(codexTree, selectedPath.slice(0, 7)).map((option) => (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
+                          )}
+                        </>
+                      ) : (
+                        <p className="text-xs text-gray-500">Loading categories...</p>
+                      )}
+                    </div>
+                    
+                    {/* Selected Path Display */}
+                    {selectedPath.length > 0 && (
+                      <div className="mb-2 p-2 bg-gray-700 rounded text-xs text-gray-200">
+                        {selectedPath.join(' › ')}
+                      </div>
+                    )}
+                    
+                    {/* Assign Button */}
+                    <button
+                      onClick={handleAssignCategory}
+                      disabled={selectedPath.length === 0 || assigning}
+                      className="w-full px-3 py-1.5 bg-green-600 text-white rounded text-sm hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      {assigning ? 'Assigning...' : 'Assign Manually'}
+                    </button>
+                  </div>
+                </>
               )}
             </div>
           </div>

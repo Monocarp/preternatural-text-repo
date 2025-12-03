@@ -16,6 +16,7 @@ from .tree import router as tree_router
 from .stories import router as stories_router
 from .books import router as books_router
 from .admin import router as admin_router
+from .ai import router as ai_router
 from .errors import (
     AppError,
     ErrorCode,
@@ -30,6 +31,7 @@ __all__ = [
     "stories_router",
     "books_router",
     "admin_router",
+    "ai_router",
     "AppError",
     "ErrorCode",
     "app_error_handler",
