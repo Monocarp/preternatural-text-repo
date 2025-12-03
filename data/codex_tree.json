@@ -340,7 +340,11 @@
             "Lights IN Or Around Home": [
                 "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary"
             ],
-            "Physical": [],
+            "Physical": {
+                "_stories": [
+                    "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary"
+                ]
+            },
             "Visual": {}
         },
         "Stranger": {
