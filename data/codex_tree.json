@@ -49,12 +49,12 @@
                     "_stories": [
                         "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
                         "Wonderful Visions, Voices, and Psalms Heard During Scottish Field Preachings",
+                        "Vision of a Bodily Sabbath at Mandrisio and the Death of the Spectators",
                         "Saint Walbert\u2019s Cross and Arm Used to Test and Heal the Possessed at Valombrosa",
                         "Sedechias and Elementary Spirits",
                         "Phantom Armies",
                         "Kabbala, Elementals, and Other False Wonders in the 13th Century",
-                        "Night-Women of Diana",
-                        "Vision of a Bodily Sabbath at Mandrisio and the Death of the Spectators"
+                        "Night-Women of Diana"
                     ]
                 },
                 "Flannel Man": {},
@@ -264,7 +264,11 @@
         "Little People": {},
         "Nymph": {},
         "Other": {},
-        "Trickster": {}
+        "Trickster": {
+            "_stories": [
+                "Trickster Devils and Mystery Men in World Folklore and History"
+            ]
+        }
     },
     "For Review": {
         "Broken": [
