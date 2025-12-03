@@ -266,11 +266,9 @@
         },
         "Tulpas": {}
     },
-    "Men In Black": {
-        "_stories": [
-            "Strange Voices on CB Radio and Visit from Peculiar 'Major Richard French'"
-        ]
-    },
+    "Men In Black": [
+        "Strange Voices on CB Radio and Visit from Peculiar 'Major Richard French'"
+    ],
     "Supernatural Phenomena": {
         "Time Loss": {},
         "Time Slip": {}
@@ -396,16 +394,19 @@
         "Livestock/Animal Interaction": [
             "Alexander Hamilton\u2019s Affidavit Of Airship, Six Strange Beings, And Calf Abduction"
         ],
-        "Residual Effects": [
-            "October 3, 1967 Melville Disk-Shaped Object with Blinking Rectangular Lights and Chemical Odor Trace",
-            "Transparent Purplish-Red Sphere with Two Men Inside Over Medulla, Florida",
-            "Battle Creek Falling Aluminum Wheel From A Bright Humming Object",
-            "Sinclairville Farm Landing and Eye Injury",
-            "1962 Radar\u2011Tracked Object, Nevada Tremors, and Power Station Landing",
-            "Orange Fireball, Power Failure, and \u201cBalls of Fire\u201d in Wisconsin",
-            "Nauseating Fog Over Houston Followed by Blinding Fireball Across Arizona and Mexico",
-            "Maury Island Slag and Other UFO-Associated Falls of Material"
-        ],
+        "Residual Effects": {
+            "Poltergeist Activity": [],
+            "_stories": [
+                "October 3, 1967 Melville Disk-Shaped Object with Blinking Rectangular Lights and Chemical Odor Trace",
+                "Transparent Purplish-Red Sphere with Two Men Inside Over Medulla, Florida",
+                "Battle Creek Falling Aluminum Wheel From A Bright Humming Object",
+                "Sinclairville Farm Landing and Eye Injury",
+                "1962 Radar\u2011Tracked Object, Nevada Tremors, and Power Station Landing",
+                "Orange Fireball, Power Failure, and \u201cBalls of Fire\u201d in Wisconsin",
+                "Nauseating Fog Over Houston Followed by Blinding Fireball Across Arizona and Mexico",
+                "Maury Island Slag and Other UFO-Associated Falls of Material"
+            ]
+        },
         "Theories Related TO THE UFO Phenomenon": [
             "World War II Military and Ship Crews\u2019 Unidentified Flying Object Reports",
             "RAF Air Marshal Lord Dowding Describes Paraphysical UFO Occupants",
