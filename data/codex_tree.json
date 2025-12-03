@@ -316,9 +316,7 @@
             "Brilliant Lights and Mysterious Flying Machine over New England, December 1909",
             "Ghost Rockets Over Scandinavia and Europe in 1946"
         ],
-        "_stories": [
-            "Human Bodies Found Cremated While Surroundings Barely Burned"
-        ]
+        "_stories": []
     },
     "Forteana": [
         "1846 Rains Of Blood And Spring\u2011Heeled Jacks In Silver Uniforms",
@@ -417,11 +415,9 @@
         "Albert K. Bender\u2019s Three Glowing\u2011Eyed Men in Black and Demonomania Symptoms"
     ],
     "Supernatural Phenomena": {
-        "Spontaneous Human Combustion": {
-            "_stories": [
-                "Human Bodies Found Cremated While Surroundings Barely Burned"
-            ]
-        },
+        "Spontaneous Human Combustion": [
+            "Human Bodies Found Cremated While Surroundings Barely Burned"
+        ],
         "Time Loss": {},
         "Time Slip": {}
     },
