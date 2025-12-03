@@ -11,7 +11,11 @@
         "Bipedal": {
             "Humanoid": {},
             "Other": {},
-            "Sasquatch": {}
+            "Sasquatch": {
+                "_stories": [
+                    "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians"
+                ]
+            }
         },
         "Canine": {
             "Chupacabra": {},
