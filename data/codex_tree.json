@@ -509,7 +509,11 @@
                 "Night-Women of Diana",
                 "Witte Wywen of Frisia"
             ],
-            "Non-Pet Animal": {},
+            "Non-Pet Animal": {
+                "_stories": [
+                    "Witte Wywen of Frisia"
+                ]
+            },
             "Pet": {}
         },
         "Cursing": {
