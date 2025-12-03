@@ -235,11 +235,9 @@
                 "Kabbala, Elementals, and Other False Wonders in the 13th Century"
             ]
         },
-        "Elves": {
-            "_stories": [
-                "Witte Wywen of Frisia"
-            ]
-        },
+        "Elves": [
+            "Witte Wywen of Frisia"
+        ],
         "Fairy": [
             "Irish Fairy Tree (Skeog) and Fatality after Cutting One Down",
             "Irish Fairy Mound (Sidhe) and the Death of Robert Kirk",
@@ -440,7 +438,8 @@
             "Ufonauts Gliding, Flying, and Walking Through Craft Walls",
             "Springfield Farmhands\u2019 Affidavit Of Airship Landing And Promise About Free Cuba",
             "Warnings from South American and European Contactees about Upsetting the Universe",
-            "Argentine Air Force Guard Hears Speaking UFO Warning of Atomic Dangers"
+            "Argentine Air Force Guard Hears Speaking UFO Warning of Atomic Dangers",
+            "Arthur Bryant\u2019s Devon Landing, Greek Parchment, and Ufonaut Yamski"
         ],
         "Livestock/Animal Interaction": [
             "Alexander Hamilton\u2019s Affidavit Of Airship, Six Strange Beings, And Calf Abduction"
