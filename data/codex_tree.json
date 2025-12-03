@@ -109,7 +109,8 @@
                 "Death": [
                     "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
                     "Mass Enthusiastic Suicide in Crete under a False Moses and Attribution to a Demon of Samael",
-                    "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium"
+                    "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium",
+                    "Vision of a Bodily Sabbath at Mandrisio and the Death of the Spectators"
                 ],
                 "Distention of the Stomach": {},
                 "Foul Breath": {},
@@ -264,11 +265,9 @@
         "Little People": {},
         "Nymph": {},
         "Other": {},
-        "Trickster": {
-            "_stories": [
-                "Trickster Devils and Mystery Men in World Folklore and History"
-            ]
-        }
+        "Trickster": [
+            "Trickster Devils and Mystery Men in World Folklore and History"
+        ]
     },
     "For Review": {
         "Broken": [
