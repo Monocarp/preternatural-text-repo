@@ -223,6 +223,9 @@
             ],
             "Water": [
                 "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
+            ],
+            "_stories": [
+                "Sedechias and Elementary Spirits"
             ]
         },
         "Fairy": {},
@@ -501,11 +504,9 @@
         ],
         "Hagriding": {},
         "Harm": {
-            "Harm To Crops": {
-                "_stories": [
-                    "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself"
-                ]
-            },
+            "Harm To Crops": [
+                "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself"
+            ],
             "Harm To Livestock": {},
             "Harm to People": [
                 "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means",
