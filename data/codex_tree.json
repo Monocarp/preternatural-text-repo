@@ -245,7 +245,8 @@
                 "Plant-Linked Elementals and Lie-Detector Responses to Plant and Human Pain",
                 "Forgotten Books of Eden: Satan\u2019s Lights, Fire, Water, and Disguises Against Adam",
                 "Sedechias and Elementary Spirits",
-                "Kabbala, Elementals, and Other False Wonders in the 13th Century"
+                "Kabbala, Elementals, and Other False Wonders in the 13th Century",
+                "Elementals Conjured by Magical Rites and Haunting Walks"
             ]
         },
         "Elves": [
@@ -620,11 +621,9 @@
                 "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
                 "Demonic Circles Across Cultures"
             ],
-            "Conjuring Entities": {
-                "_stories": [
-                    "Elementals Conjured by Magical Rites and Haunting Walks"
-                ]
-            },
+            "Conjuring Entities": [
+                "Elementals Conjured by Magical Rites and Haunting Walks"
+            ],
             "Contract": {
                 "With Another Person": {},
                 "With a Demon": [
