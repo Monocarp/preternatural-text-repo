@@ -257,7 +257,11 @@
         "Other": {}
     },
     "For Review": {
-        "Broken": []
+        "Broken": {
+            "_stories": [
+                "Baptism in the River Thames Accompanied by a Heavenly Light"
+            ]
+        }
     },
     "Forteana": {},
     "Ghostly Activity": {
