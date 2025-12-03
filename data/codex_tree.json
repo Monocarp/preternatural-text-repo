@@ -56,7 +56,11 @@
                 },
                 "Flannel Man": {},
                 "Glimmer Man": {},
-                "Poltergeist": {},
+                "Poltergeist": {
+                    "_stories": [
+                        "1846 Rains Of Blood And Spring\u2011Heeled Jacks In Silver Uniforms"
+                    ]
+                },
                 "Shadow People": {},
                 "Sleep Paralysis": {},
                 "Static People": {}
@@ -263,11 +267,9 @@
             "Baptism in the River Thames Accompanied by a Heavenly Light"
         ]
     },
-    "Forteana": {
-        "_stories": [
-            "1846 Rains Of Blood And Spring\u2011Heeled Jacks In Silver Uniforms"
-        ]
-    },
+    "Forteana": [
+        "1846 Rains Of Blood And Spring\u2011Heeled Jacks In Silver Uniforms"
+    ],
     "Ghostly Activity": {
         "Family Member/Loved One": {
             "Appearance": {},
