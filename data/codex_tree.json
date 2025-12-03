@@ -239,8 +239,12 @@
             "Taboo on Fairy Names and Power through Naming"
         ],
         "Gnome": {},
-        "Goblins": {},
-        "Kobolds": [],
+        "Goblins": {
+            "_stories": [
+                "Saint Taurinus Binds the Night-Goddess Demon Diana into the Gobelin Spirit"
+            ]
+        },
+        "Kobolds": {},
         "Nymph": {},
         "Other": {}
     },
