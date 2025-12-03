@@ -309,11 +309,9 @@
             "Visual": {}
         },
         "Individual Connected To Place/Person": {
-            "Auditory": {
-                "_stories": [
-                    "Hydesville Ghost, Cold Invisible Hand, and the Fox Sisters\u2019 Rapping Spirit"
-                ]
-            },
+            "Auditory": [
+                "Hydesville Ghost, Cold Invisible Hand, and the Fox Sisters\u2019 Rapping Spirit"
+            ],
             "Behavior": [
                 "Hydesville Ghost, Cold Invisible Hand, and the Fox Sisters\u2019 Rapping Spirit"
             ],
@@ -646,7 +644,8 @@
                 "Elementals Conjured by Magical Rites and Haunting Walks",
                 "S\u00e9ance Materializations of Humanlike Elementals",
                 "Archbishop Colley\u2019s Giant Egyptian Materialization from Dr. Monck",
-                "Energy Sources for Materialization and Possible Use of Animal and Human Blood"
+                "Energy Sources for Materialization and Possible Use of Animal and Human Blood",
+                "Hydesville Ghost, Cold Invisible Hand, and the Fox Sisters\u2019 Rapping Spirit"
             ],
             "Contract": {
                 "With Another Person": {},
