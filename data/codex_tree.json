@@ -327,12 +327,14 @@
         "Family Member/Loved One": {
             "Appearance": {},
             "Behavior": {},
-            "Habitual Behavior": {},
-            "Voice": {
+            "Habitual Behavior": {
                 "_stories": [
                     "Mr. Blank\u2019s Hidden Gold Watch Revealed through a Trance Medium"
                 ]
-            }
+            },
+            "Voice": [
+                "Mr. Blank\u2019s Hidden Gold Watch Revealed through a Trance Medium"
+            ]
         },
         "Family Pet": {
             "Auditory": {},
