@@ -710,7 +710,11 @@
         ],
         "Ritual": {
             "Black Sabbath": {},
-            "Channeling": [],
+            "Channeling": {
+                "_stories": [
+                    "Multilingual Trance Mediums Correcting Sitters\u2019 Grammar"
+                ]
+            },
             "Circles": [
                 "Necromantic Conjurations at the Crossroads and Demonic Manifestations",
                 "Demonic Circles Across Cultures"
