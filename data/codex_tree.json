@@ -9,13 +9,15 @@
             "Thunderbird": {}
         },
         "Bipedal": {
-            "Humanoid": {},
-            "Other": {},
-            "Sasquatch": {
+            "Humanoid": {
                 "_stories": [
                     "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians"
                 ]
-            }
+            },
+            "Other": {},
+            "Sasquatch": [
+                "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians"
+            ]
         },
         "Canine": {
             "Chupacabra": {},
