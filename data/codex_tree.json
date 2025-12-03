@@ -501,7 +501,11 @@
         ],
         "Hagriding": {},
         "Harm": {
-            "Harm To Crops": {},
+            "Harm To Crops": {
+                "_stories": [
+                    "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself"
+                ]
+            },
             "Harm To Livestock": {},
             "Harm to People": [
                 "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means",
