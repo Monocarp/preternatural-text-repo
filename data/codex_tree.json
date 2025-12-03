@@ -511,7 +511,11 @@
             "Harm to Pets": {}
         },
         "Herbal/Natural": {
-            "Poisons": [],
+            "Poisons": {
+                "_stories": [
+                    "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself"
+                ]
+            },
             "_stories": [
                 "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion",
                 "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means",
