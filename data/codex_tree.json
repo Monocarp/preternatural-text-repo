@@ -558,7 +558,11 @@
             "Channeled Books/Writings": [
                 "Visions and Transforming Angels in the Book of Hermas"
             ],
-            "Prophecy": [],
+            "Prophecy": {
+                "_stories": [
+                    "Visions and Transforming Angels in the Book of Hermas"
+                ]
+            },
             "_stories": [
                 "Prophetic Trances, Glossolalia, and Miracles Surrounding Sabbatai Zevi",
                 "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself",
