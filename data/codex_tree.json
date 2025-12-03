@@ -330,7 +330,9 @@
             "Habitual Behavior": {},
             "Visual": {}
         },
-        "Poltergeist Activity": [],
+        "Poltergeist Activity": {
+            "Lights IN Or Around Home": []
+        },
         "Stranger": {
             "Auditory": {},
             "Behavior": {},
