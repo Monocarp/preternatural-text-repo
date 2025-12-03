@@ -2972,5 +2972,41 @@
             "explicitly demonic appearance - human form",
             "phantom army"
         ]
+    },
+    "Phantom Armies": {
+        "start_char": 169195,
+        "end_char": 170787,
+        "pages": "51",
+        "keywords": [
+            "Walker",
+            "1686",
+            "June",
+            "July",
+            "Croftfoord ferry",
+            "Lanark",
+            "Clyde",
+            "second sight",
+            "spectral army",
+            "armed men",
+            "troops marching",
+            "passing through one another",
+            "vanishing apparitions",
+            "caps",
+            "hats",
+            "swords",
+            "weapons",
+            "trees covered with caps",
+            "ground covered weapons",
+            "pieces of ordnance",
+            "sword-hilts",
+            "Highland tanged blades",
+            "black caps",
+            "blue caps",
+            "seers",
+            "terror of seers",
+            "devil rides them",
+            "collective vision",
+            "spectral battle"
+        ]
     }
 }
