@@ -15,7 +15,7 @@ from .dependencies import DATA_DIR
 
 log = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/ai", tags=["ai"])
+router = APIRouter(prefix="/api/ai", tags=["ai"])
 
 # Load config from environment
 GROK_API_KEY = os.environ.get("GROK_API_KEY")
