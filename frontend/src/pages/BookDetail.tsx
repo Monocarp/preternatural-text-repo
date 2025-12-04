@@ -1412,7 +1412,7 @@ const BookDetail = () => {
           
           {/* Middle column: Stories + Details */}
           <div className="w-72 xl:w-80 2xl:w-96 flex-shrink-0">
-            <div className="bg-gray-800 border border-gray-700 rounded-lg p-3 sticky top-4 max-h-[85vh] overflow-y-auto">
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-3 sticky top-4 max-h-[92vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-sm font-semibold text-white">Stories ({sortedStories.length})</h3>
                 {!newStoryMode && !editingBoundary && (
@@ -1677,7 +1677,7 @@ const BookDetail = () => {
           
           {/* Right column: Category Assignment */}
           <div className="w-72 xl:w-80 2xl:w-96 flex-shrink-0">
-            <div className="bg-gray-800 border border-gray-700 rounded-lg p-3 sticky top-4 max-h-[85vh] overflow-y-auto">
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-3 sticky top-4 max-h-[92vh] overflow-y-auto">
               <h3 className="text-sm font-semibold text-white mb-3">Category Assignment</h3>
               
               {!selectedStory ? (
