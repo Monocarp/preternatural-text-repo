@@ -172,7 +172,7 @@ export default function BookDetailPage() {
     setShowAiPanel(true)
     
     try {
-      const res = await apiClient.post('/api/ai/suggest-categories', {
+      const res = await apiClient.post('/ai/suggest-categories', {
         story_title: selectedStory.title,
         story_text: storyText.slice(0, 15000) // Limit to ~15k chars
       })
