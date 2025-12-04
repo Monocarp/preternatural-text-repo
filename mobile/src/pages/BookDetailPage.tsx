@@ -183,9 +183,10 @@ export default function BookDetailPage() {
       }))
       
       setAiSuggestions(suggestions)
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error getting AI suggestions:', err)
-      setAiError('Failed to get AI suggestions. Please try again.')
+      const detail = err.response?.data?.detail || err.message || 'Unknown error'
+      setAiError(`Failed: ${detail}`)
     } finally {
       setLoadingAi(false)
     }

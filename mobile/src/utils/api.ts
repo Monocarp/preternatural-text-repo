@@ -41,7 +41,7 @@ const getAccessToken = async (): Promise<string | null> => {
 // Create axios instance
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
-  timeout: 30000,
+  timeout: 90000, // 90 seconds for AI calls
   headers: {
     'Content-Type': 'application/json',
   },
