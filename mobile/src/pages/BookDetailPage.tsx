@@ -32,6 +32,13 @@ interface UnassignedStory {
   end_char: number
 }
 
+interface AiSuggestion {
+  path: string[]
+  confidence: number
+  reason?: string
+  confirmed: boolean
+}
+
 type TabType = 'stories' | 'fulltext' | 'review'
 
 export default function BookDetailPage() {
@@ -49,6 +56,13 @@ export default function BookDetailPage() {
   const [loadingUnassigned, setLoadingUnassigned] = useState(false)
   const [selectedStory, setSelectedStory] = useState<UnassignedStory | null>(null)
   const [assigning, setAssigning] = useState(false)
+  
+  // AI suggestion state
+  const [aiSuggestions, setAiSuggestions] = useState<AiSuggestion[]>([])
+  const [loadingAi, setLoadingAi] = useState(false)
+  const [aiError, setAiError] = useState<string | null>(null)
+  const [committingAll, setCommittingAll] = useState(false)
+  const [showAiPanel, setShowAiPanel] = useState(false)
 
   const swipeHandlers = useSwipeable({
     onSwipedRight: () => {
@@ -119,6 +133,104 @@ export default function BookDetailPage() {
     }
     if (tab === 'review') {
       loadUnassigned()
+    }
+  }
+
+  // Reset AI state when story changes
+  useEffect(() => {
+    setAiSuggestions([])
+    setAiError(null)
+    setShowAiPanel(false)
+  }, [selectedStory?.title])
+
+  const handleAutoSuggest = async () => {
+    if (!selectedStory || !fullText) {
+      // Load full text first if not loaded
+      if (!fullText && slug) {
+        setLoadingFullText(true)
+        try {
+          const res = await apiClient.get(`/full-text/${slug}`)
+          setFullText(res.data.text)
+        } catch (err) {
+          console.error('Error loading full text:', err)
+          setAiError('Failed to load story text')
+          return
+        } finally {
+          setLoadingFullText(false)
+        }
+      }
+    }
+    
+    const text = fullText
+    if (!text || !selectedStory) return
+    
+    // Extract story text using character boundaries
+    const storyText = text.slice(selectedStory.start_char, selectedStory.end_char)
+    
+    setLoadingAi(true)
+    setAiError(null)
+    setShowAiPanel(true)
+    
+    try {
+      const res = await apiClient.post('/api/ai/suggest-categories', {
+        story_title: selectedStory.title,
+        story_text: storyText.slice(0, 15000) // Limit to ~15k chars
+      })
+      
+      const suggestions = (res.data.suggestions || []).map((s: { path: string[]; confidence: number; reason?: string }) => ({
+        ...s,
+        confirmed: s.confidence >= 0.7 // Auto-confirm high confidence
+      }))
+      
+      setAiSuggestions(suggestions)
+    } catch (err) {
+      console.error('Error getting AI suggestions:', err)
+      setAiError('Failed to get AI suggestions. Please try again.')
+    } finally {
+      setLoadingAi(false)
+    }
+  }
+
+  const handleToggleSuggestion = (idx: number) => {
+    setAiSuggestions(prev => prev.map((s, i) => 
+      i === idx ? { ...s, confirmed: !s.confirmed } : s
+    ))
+  }
+
+  const handleCommitConfirmed = async () => {
+    if (!selectedStory) return
+    
+    const confirmed = aiSuggestions.filter(s => s.confirmed)
+    if (confirmed.length === 0) return
+    
+    setCommittingAll(true)
+    
+    try {
+      // Commit each confirmed suggestion
+      for (const suggestion of confirmed) {
+        await apiClient.post('/assign-category', {
+          story: {
+            title: selectedStory.title,
+            book_slug: selectedStory.book_slug,
+            start_char: selectedStory.start_char,
+            end_char: selectedStory.end_char,
+            pages: selectedStory.pages,
+            keywords: selectedStory.keywords,
+          },
+          path: suggestion.path
+        })
+      }
+      
+      // Remove from unassigned list and clear selection
+      setUnassignedStories(prev => prev.filter(s => s.title !== selectedStory.title))
+      setSelectedStory(null)
+      setAiSuggestions([])
+      setShowAiPanel(false)
+    } catch (err) {
+      console.error('Error committing categories:', err)
+      setAiError('Failed to save categories. Make sure you are logged in as an editor.')
+    } finally {
+      setCommittingAll(false)
     }
   }
 
@@ -252,6 +364,108 @@ export default function BookDetailPage() {
               >
                 📖 Read Story First
               </button>
+            </div>
+
+            {/* AI Suggestions Panel */}
+            <div className="bg-gradient-to-br from-purple-900/40 to-blue-900/40 rounded-xl p-4 border border-purple-500/50">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xl">🤖</span>
+                <h4 className="text-white font-medium">AI Category Suggestions</h4>
+              </div>
+              
+              <button
+                onClick={handleAutoSuggest}
+                disabled={loadingAi}
+                className="w-full py-3 bg-purple-600 hover:bg-purple-500 active:bg-purple-700 disabled:bg-gray-600 text-white rounded-lg font-medium transition-colors mb-3"
+              >
+                {loadingAi ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <span className="animate-spin">⏳</span> Analyzing story...
+                  </span>
+                ) : (
+                  '✨ Auto-Suggest Categories'
+                )}
+              </button>
+              
+              {aiError && (
+                <div className="p-3 bg-red-900/50 border border-red-500 rounded-lg text-sm text-red-200 mb-3">
+                  {aiError}
+                </div>
+              )}
+              
+              {aiSuggestions.length > 0 && (
+                <div className="space-y-2">
+                  {aiSuggestions.map((suggestion, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => handleToggleSuggestion(idx)}
+                      className={`w-full text-left p-3 rounded-lg transition-colors ${
+                        suggestion.confirmed 
+                          ? 'bg-green-900/50 border-2 border-green-500' 
+                          : 'bg-gray-800 border border-gray-600'
+                      }`}
+                    >
+                      <div className="flex items-start gap-2">
+                        <div className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                          suggestion.confirmed 
+                            ? 'bg-green-500 border-green-500' 
+                            : 'border-gray-500'
+                        }`}>
+                          {suggestion.confirmed && (
+                            <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                            </svg>
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm text-white mb-1">
+                            {suggestion.path.join(' → ')}
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className={`px-2 py-0.5 text-xs rounded ${
+                              suggestion.confidence >= 0.8 ? 'bg-green-600 text-white' :
+                              suggestion.confidence >= 0.5 ? 'bg-yellow-600 text-white' :
+                              'bg-gray-600 text-gray-200'
+                            }`}>
+                              {Math.round(suggestion.confidence * 100)}%
+                            </span>
+                            {suggestion.reason && (
+                              <span className="text-xs text-gray-400 truncate">{suggestion.reason}</span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                  
+                  <button
+                    onClick={handleCommitConfirmed}
+                    disabled={committingAll || aiSuggestions.filter(s => s.confirmed).length === 0}
+                    className="w-full mt-3 py-3 bg-green-600 hover:bg-green-500 active:bg-green-700 disabled:bg-gray-600 text-white rounded-lg font-medium transition-colors"
+                  >
+                    {committingAll ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <span className="animate-spin">⏳</span> Saving...
+                      </span>
+                    ) : (
+                      `✓ Commit ${aiSuggestions.filter(s => s.confirmed).length} Selected`
+                    )}
+                  </button>
+                </div>
+              )}
+              
+              {!showAiPanel && aiSuggestions.length === 0 && !loadingAi && (
+                <p className="text-sm text-gray-400 text-center">
+                  Tap above to get AI-powered category suggestions
+                </p>
+              )}
+            </div>
+
+            {/* Divider */}
+            <div className="flex items-center gap-3 text-gray-500 text-sm">
+              <div className="flex-1 h-px bg-gray-700"></div>
+              <span>or browse manually</span>
+              <div className="flex-1 h-px bg-gray-700"></div>
             </div>
 
             {/* Category Picker */}
