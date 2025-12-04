@@ -1425,8 +1425,8 @@ const BookDetail = () => {
                 )}
               </div>
               
-              {/* Story list - compact when story selected */}
-              <div className={`overflow-y-auto space-y-1 ${selectedStory ? 'max-h-32' : 'max-h-[50vh]'}`}>
+              {/* Story list - stays tall even when story selected */}
+              <div className={`overflow-y-auto space-y-1 ${selectedStory ? 'max-h-[35vh]' : 'max-h-[60vh]'}`}>
                 {sortedStories.map((story) => {
                   const color = STORY_COLORS[story.colorIndex]
                   const isSelected = selectedStory?.title === story.title
