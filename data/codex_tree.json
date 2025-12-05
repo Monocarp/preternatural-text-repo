@@ -527,7 +527,11 @@
         ]
     },
     "Theories": {
-        "Hauntings": []
+        "Hauntings": {
+            "_stories": [
+                "General Description of Ghosts, Hauntings, and Their Manifestations"
+            ]
+        }
     },
     "UFO": {
         "Abduction": [
