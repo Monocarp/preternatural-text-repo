@@ -796,7 +796,8 @@
             "_stories": [
                 "Psellus\u2019 Account of Manichaean Demon-Worship, Child Sacrifice, and Demonic Communion",
                 "Transformation of Sorcerers into Animals and Rapid Traversal by Magical Means",
-                "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
+                "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring",
+                "Benedictine Jerome of Piacenza\u2019s Flight to the Sabbath at the Walnut Tree of Benevento"
             ]
         },
         "Indoctrinating Children": [
@@ -809,11 +810,9 @@
             "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
         ],
         "Ritual": {
-            "Black Sabbath": {
-                "_stories": [
-                    "Benedictine Jerome of Piacenza\u2019s Flight to the Sabbath at the Walnut Tree of Benevento"
-                ]
-            },
+            "Black Sabbath": [
+                "Benedictine Jerome of Piacenza\u2019s Flight to the Sabbath at the Walnut Tree of Benevento"
+            ],
             "Channeling": [
                 "Multilingual Trance Mediums Correcting Sitters\u2019 Grammar",
                 "Visions and Transforming Angels in the Book of Hermas",
