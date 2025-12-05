@@ -241,7 +241,9 @@
                     "Magdalena del Cruz\u2019s Demonic Pact, Possession, False Miracles, and Exorcisms",
                     "Possession, Diabolical Pacts, and Sacrilegious Acts of Johanna Fery"
                 ],
-                "Aversion to Scripture": {},
+                "Aversion to Scripture": [
+                    "Possession, Diabolical Pacts, and Sacrilegious Acts of Johanna Fery"
+                ],
                 "Blocked Prayer": [
                     "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
                 ],
