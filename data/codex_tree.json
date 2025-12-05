@@ -270,7 +270,9 @@
                 "Illness around Holiness": {},
                 "Liturgical Calendar Suffering": {},
                 "Obscene Thoughts Around Holiness": {},
-                "Pain From Holy Items": {},
+                "Pain From Holy Items": [
+                    "Possession, Diabolical Pacts, and Sacrilegious Acts of Johanna Fery"
+                ],
                 "Possession-Specific Physical Vexation": {
                     "Diabolical Incandescence": {},
                     "Drastic Eating Changes": {},
