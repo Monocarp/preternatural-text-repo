@@ -206,7 +206,9 @@
                 "Cloth": {},
                 "Glass": {},
                 "Nails": {},
-                "Other": {}
+                "Other": [
+                    "Possession, Diabolical Pacts, and Sacrilegious Acts of Johanna Fery"
+                ]
             },
             "Aversion to Scripture": [
                 "Magdalena Bavent\u2019s Early Life in the Louviers Convent and Ritual Abuses"
