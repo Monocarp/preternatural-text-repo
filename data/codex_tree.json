@@ -255,7 +255,11 @@
                     "Contempt for little things (spiritual)": {},
                     "Fruitless Self-Satisfaction": {},
                     "Nonconformity with scripture and tradition": {},
-                    "Self-Aggrandizing Behavior": {},
+                    "Self-Aggrandizing Behavior": {
+                        "_stories": [
+                            "Aladino Felix (Dino Kraspedon) as Prophet and Terrorist Leader"
+                        ]
+                    },
                     "Spiritual Security": {},
                     "animus delendi (destruction)": {}
                 }
