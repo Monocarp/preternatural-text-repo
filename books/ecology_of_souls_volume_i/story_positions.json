@@ -5781,5 +5781,13 @@
         "keywords": [
             "NDE Time"
         ]
+    },
+    "Presences NDE": {
+        "start_char": 58118,
+        "end_char": 58584,
+        "pages": "",
+        "keywords": [
+            "NDE"
+        ]
     }
 }
