@@ -387,7 +387,11 @@
                 "The Bell Witch Poltergeist at the John Bell Home in Tennessee",
                 "Automatic Writing of Oahspe by Dr. John Newbrough under Pillars of Light"
             ],
-            "Lithobolia": {},
+            "Lithobolia": {
+                "_stories": [
+                    "Slag, Blood, Frogs, and Poltergeists in 1846"
+                ]
+            },
             "Physical": [
                 "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary",
                 "The Bell Witch Poltergeist at the John Bell Home in Tennessee",
