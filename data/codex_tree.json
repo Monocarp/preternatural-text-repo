@@ -532,15 +532,17 @@
         ]
     },
     "Theories": {
-        "Co-Creation": {},
-        "Hauntings": [
-            "General Description of Ghosts, Hauntings, and Their Manifestations"
-        ],
-        "NDEs": {
+        "Co-Creation": {
             "_stories": [
                 "Perception-Dependent Beings of Light in the Afterlife and NDE Entities"
             ]
         },
+        "Hauntings": [
+            "General Description of Ghosts, Hauntings, and Their Manifestations"
+        ],
+        "NDEs": [
+            "Perception-Dependent Beings of Light in the Afterlife and NDE Entities"
+        ],
         "Shamans": [
             "Symbol-Saturated Shamanic Journeys in the Afterlife Realm"
         ]
