@@ -988,7 +988,9 @@
                 "Rejection of Baptism": {},
                 "Rejection of Confession": {},
                 "Rejection of Confirmation": {},
-                "Rejection of Eucharist": {},
+                "Rejection of Eucharist": [
+                    "Theological Interpretation of Bavent\u2019s Seduction as Demonic \u201cLuciferization\u201d and Sabbath Initiation"
+                ],
                 "Rejection of Holy Orders": {},
                 "Rejection of Marriage": {}
             },
