@@ -484,7 +484,11 @@
             ]
         },
         "Stranger": {
-            "Auditory": {},
+            "Auditory": {
+                "_stories": [
+                    "Tom Dawson\u2019s Encounter with Hairless Humanoids and the Voice of \u201cJimmy Hoffa\u201d"
+                ]
+            },
             "Behavior": {},
             "Habitual Behavior": {},
             "Visual": [
