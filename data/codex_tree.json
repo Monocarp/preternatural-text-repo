@@ -427,7 +427,10 @@
             "Auditory": {},
             "Behavior": {},
             "Habitual Behavior": {},
-            "Visual": {}
+            "Visual": {},
+            "_stories": [
+                "Presences NDE"
+            ]
         },
         "Individual Connected To Place/Person": {
             "Auditory": [
