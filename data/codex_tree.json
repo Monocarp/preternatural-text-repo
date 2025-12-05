@@ -158,7 +158,9 @@
                 "Serious Physical Injury": {},
                 "Sexual Assault": {},
                 "Suffocation": {},
-                "Unexplained Physical Pain": {},
+                "Unexplained Physical Pain": [
+                    "Haunting and Demonic Torment of the K\u00f8ge Household (1609\u20131614)"
+                ],
                 "Unidentified Illness": [
                     "Haunting and Demonic Torment of the K\u00f8ge Household (1609\u20131614)"
                 ]
@@ -179,11 +181,9 @@
                 "The Jurist\u2019s Pact with Satan and Failed Return to Confession",
                 "Haunting and Demonic Torment of the K\u00f8ge Household (1609\u20131614)"
             ],
-            "Morphing": {
-                "_stories": [
-                    "Haunting and Demonic Torment of the K\u00f8ge Household (1609\u20131614)"
-                ]
-            },
+            "Morphing": [
+                "Haunting and Demonic Torment of the K\u00f8ge Household (1609\u20131614)"
+            ],
             "Occult Knowledge": [
                 "Prophetic Trances, Glossolalia, and Miracles Surrounding Sabbatai Zevi"
             ],
