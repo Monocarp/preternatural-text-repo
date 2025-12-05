@@ -809,7 +809,11 @@
             "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
         ],
         "Ritual": {
-            "Black Sabbath": {},
+            "Black Sabbath": {
+                "_stories": [
+                    "Benedictine Jerome of Piacenza\u2019s Flight to the Sabbath at the Walnut Tree of Benevento"
+                ]
+            },
             "Channeling": [
                 "Multilingual Trance Mediums Correcting Sitters\u2019 Grammar",
                 "Visions and Transforming Angels in the Book of Hermas",
