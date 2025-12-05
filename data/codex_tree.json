@@ -279,7 +279,9 @@
                     "Fluctuation in Body Temperature": {},
                     "Foul Odor": {}
                 },
-                "Repugnance towards Holiness": {},
+                "Repugnance towards Holiness": [
+                    "Possession, Diabolical Pacts, and Sacrilegious Acts of Johanna Fery"
+                ],
                 "Speaking in Tongues": {},
                 "Suffering Spirituality": {
                     "Anguish over sins": {},
