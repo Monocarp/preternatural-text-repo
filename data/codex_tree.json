@@ -242,11 +242,9 @@
                     ]
                 },
                 "Illness around Holiness": {},
-                "Liturgical Calendar Suffering": {
-                    "_stories": [
-                        "David\u2019s Death, the Blasphemous \u201cSabbath\u201d Paper, and Transfer to Picard"
-                    ]
-                },
+                "Liturgical Calendar Suffering": [
+                    "David\u2019s Death, the Blasphemous \u201cSabbath\u201d Paper, and Transfer to Picard"
+                ],
                 "Obscene Thoughts Around Holiness": {},
                 "Pain From Holy Items": {},
                 "Possession-Specific Physical Vexation": {
