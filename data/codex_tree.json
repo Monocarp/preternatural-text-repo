@@ -2,7 +2,11 @@
     "Cryptid": {
         "Aquatic": {},
         "Avian": {
-            "Mothman": {},
+            "Mothman": {
+                "_stories": [
+                    "Winged and Headless Beings Associated with UFOs"
+                ]
+            },
             "Other": [
                 "1843 Warwick Remarkable Cloud And Three Human\u2011Shaped Figures In The Sky",
                 "Brazilian \u201cBat People\u201d with Telepathic Powers"
