@@ -396,11 +396,9 @@
     ],
     "Ghostly Activity": {
         "Family Member/Loved One": {
-            "Appearance": {
-                "_stories": [
-                    "Teenaged Boy Sees His Deceased Father Emerge from a UFO"
-                ]
-            },
+            "Appearance": [
+                "Teenaged Boy Sees His Deceased Father Emerge from a UFO"
+            ],
             "Behavior": {},
             "Habitual Behavior": [
                 "Mr. Blank\u2019s Hidden Gold Watch Revealed through a Trance Medium"
@@ -546,7 +544,8 @@
                 "Everett Clark\u2019s Dawn Encounter with Four German\u2011Speaking Figures and a Glowing Object",
                 "Malvan Stevens Stopped on Highway by Egg\u2011Shaped Craft and Three Small Beings",
                 "Winged and Headless Beings Associated with UFOs",
-                "Aladino Felix\u2019s Contact with a Saucer Captain and Subsequent Visits"
+                "Aladino Felix\u2019s Contact with a Saucer Captain and Subsequent Visits",
+                "Teenaged Boy Sees His Deceased Father Emerge from a UFO"
             ],
             "_stories": [
                 "Late February\u2013March 8, 1967 Missouri Seventy-Five to One Hundred UFO Witnesses near Osage Beach and Linn Creek",
