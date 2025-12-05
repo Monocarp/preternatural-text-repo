@@ -534,7 +534,11 @@
         "Hauntings": [
             "General Description of Ghosts, Hauntings, and Their Manifestations"
         ],
-        "Shamans": []
+        "Shamans": {
+            "_stories": [
+                "Symbol-Saturated Shamanic Journeys in the Afterlife Realm"
+            ]
+        }
     },
     "UFO": {
         "Abduction": [
