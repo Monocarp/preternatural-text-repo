@@ -416,7 +416,11 @@
             "Auditory": {},
             "Behavior": {},
             "Habitual Behavior": {},
-            "Visual": {},
+            "Visual": {
+                "_stories": [
+                    "Cabeco, Portugal: White Headless Figure"
+                ]
+            },
             "_stories": [
                 "Possession of a Jewish Woman in Ferrara and Exorcism of a Ruach by R. Chaim Vital"
             ]
