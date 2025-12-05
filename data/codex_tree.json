@@ -255,11 +255,9 @@
                     "Contempt for little things (spiritual)": {},
                     "Fruitless Self-Satisfaction": {},
                     "Nonconformity with scripture and tradition": {},
-                    "Self-Aggrandizing Behavior": {
-                        "_stories": [
-                            "Aladino Felix (Dino Kraspedon) as Prophet and Terrorist Leader"
-                        ]
-                    },
+                    "Self-Aggrandizing Behavior": [
+                        "Aladino Felix (Dino Kraspedon) as Prophet and Terrorist Leader"
+                    ],
                     "Spiritual Security": {},
                     "animus delendi (destruction)": {}
                 }
@@ -770,7 +768,8 @@
                 "Accurate Predictions of Plane Crashes and Other Events in 1967",
                 "Predicted Disappearance of Australian Prime Minister and Moscow Explosions",
                 "Ashtar\u2019s 1954 Prophecy of World Destruction and Failed Rescue by Spaceships",
-                "Aladino Felix (Dino Kraspedon) as Prophet and Terrorist Leader"
+                "Aladino Felix (Dino Kraspedon) as Prophet and Terrorist Leader",
+                "Global Doomsday Prophecies for December 24, 1967 and the Danish Bomb Shelter"
             ],
             "_stories": [
                 "Prophetic Trances, Glossolalia, and Miracles Surrounding Sabbatai Zevi",
