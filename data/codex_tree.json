@@ -175,7 +175,9 @@
                 ],
                 "Foul Breath": {},
                 "Headaches": {},
-                "Insomnia": {},
+                "Insomnia": [
+                    "Possession, Diabolical Pacts, and Sacrilegious Acts of Johanna Fery"
+                ],
                 "Minor Morphing": {},
                 "Miscarriages": {},
                 "Nausea": {},
