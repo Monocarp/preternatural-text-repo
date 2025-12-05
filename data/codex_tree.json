@@ -359,7 +359,11 @@
             "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians",
             "Long Island Father and Daughter See Three Tiny Silver-Suited Figures"
         ],
-        "Nymph": {},
+        "Nymph": {
+            "_stories": [
+                "Feverish Five-Year-Old Surrounded by Four White-Clad Elves or Nymphs Speaking in Song"
+            ]
+        },
         "Other": {},
         "Trickster": [
             "Trickster Devils and Mystery Men in World Folklore and History",
