@@ -102,8 +102,15 @@ const SearchCurate = () => {
   useEffect(() => {
     apiClient.get('/categories')
       .then(res => {
-        setCategories(res.data.categories || [])
-        setSubcategories(res.data.subcategories || {})
+        // Sort categories alphabetically
+        const sortedCategories = (res.data.categories || []).sort((a: string, b: string) => a.localeCompare(b))
+        // Sort subcategories alphabetically for each category
+        const sortedSubcategories: Record<string, string[]> = {}
+        for (const [cat, subs] of Object.entries(res.data.subcategories || {})) {
+          sortedSubcategories[cat] = (subs as string[]).sort((a, b) => a.localeCompare(b))
+        }
+        setCategories(sortedCategories)
+        setSubcategories(sortedSubcategories)
       })
       .catch(err => {
         console.error('Error loading categories:', err)

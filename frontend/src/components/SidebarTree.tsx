@@ -21,6 +21,7 @@ const buildTreeData = (current: any, pathSegments: string[] = []): TreeNode[] =>
 
   return Object.entries(current)
     .filter(([key]) => key !== '_stories')
+    .sort(([a], [b]) => a.localeCompare(b))
     .map(([key, value]) => {
       const nodePath = [...pathSegments, key]
       const hasChildCategories =

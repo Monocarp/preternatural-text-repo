@@ -99,7 +99,7 @@ function getOptionsAtPath(tree: any, path: string[]): string[] {
     }
   }
   
-  return Object.keys(node).filter(key => key !== '_stories')
+  return Object.keys(node).filter(key => key !== '_stories').sort((a, b) => a.localeCompare(b))
 }
 
 /**
