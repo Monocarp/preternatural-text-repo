@@ -948,9 +948,10 @@
             ],
             "Pet": {}
         },
-        "Aversion to Holy Items": [],
+        "Aversion to Holy Items": {},
         "Aversion to Holy Items/Names": [
-            "Bertranda of Forbach and the Sleeping Husband"
+            "Bertranda of Forbach and the Sleeping Husband",
+            "The Sabine Peasant Anointed and Led to the Walnut Tree of Benevento"
         ],
         "Cursing": {
             "Cursed Objects": [
