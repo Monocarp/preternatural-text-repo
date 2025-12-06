@@ -88,6 +88,11 @@ const BookDetail = () => {
   const [loadingAiSuggestions, setLoadingAiSuggestions] = useState(false)
   const [aiError, setAiError] = useState<string | null>(null)
   const [committingAll, setCommittingAll] = useState(false)
+  
+  // Manual paste AI suggestions state
+  const [showPasteInput, setShowPasteInput] = useState(false)
+  const [pastedJson, setPastedJson] = useState('')
+  const [pasteError, setPasteError] = useState<string | null>(null)
 
   useEffect(() => {
     if (slug) {
@@ -353,10 +358,78 @@ const BookDetail = () => {
     }
   }
   
+  // Handle parsing pasted JSON suggestions
+  const handleParsePastedSuggestions = () => {
+    setPasteError(null)
+    
+    if (!pastedJson.trim()) {
+      setPasteError('Please paste JSON suggestions first')
+      return
+    }
+    
+    try {
+      // Clean up the input - handle markdown code blocks
+      let content = pastedJson.trim()
+      if (content.startsWith('```json')) {
+        content = content.slice(7)
+      }
+      if (content.startsWith('```')) {
+        content = content.slice(3)
+      }
+      if (content.endsWith('```')) {
+        content = content.slice(0, -3)
+      }
+      content = content.trim()
+      
+      const parsed = JSON.parse(content)
+      
+      if (!Array.isArray(parsed)) {
+        setPasteError('Expected a JSON array of suggestions')
+        return
+      }
+      
+      // Validate and convert to AISuggestion format
+      const suggestions: AISuggestion[] = []
+      for (let i = 0; i < parsed.length; i++) {
+        const s = parsed[i]
+        if (!s.path || !Array.isArray(s.path) || s.path.length === 0) {
+          setPasteError(`Suggestion ${i + 1}: missing or invalid "path" array`)
+          return
+        }
+        suggestions.push({
+          path: s.path,
+          confidence: typeof s.confidence === 'number' ? s.confidence : 0.5,
+          reason: s.reason || undefined,
+          confirmed: (typeof s.confidence === 'number' ? s.confidence : 0.5) >= 0.7
+        })
+      }
+      
+      if (suggestions.length === 0) {
+        setPasteError('No valid suggestions found in the JSON')
+        return
+      }
+      
+      // Sort by confidence descending
+      suggestions.sort((a, b) => b.confidence - a.confidence)
+      
+      // Load into aiSuggestions state (same as API response)
+      setAiSuggestions(suggestions)
+      setAiError(null)
+      setPastedJson('')
+      setShowPasteInput(false)
+      
+    } catch (err: any) {
+      setPasteError(`Invalid JSON: ${err.message}`)
+    }
+  }
+  
   // Clear AI suggestions when story changes
   useEffect(() => {
     setAiSuggestions([])
     setAiError(null)
+    setPastedJson('')
+    setPasteError(null)
+    setShowPasteInput(false)
   }, [selectedStory?.title])
 
   const loadBook = async () => {
@@ -1737,6 +1810,42 @@ const BookDetail = () => {
                         '✨ Auto-Suggest Categories'
                       )}
                     </button>
+                    
+                    {/* Manual Paste Option */}
+                    <div className="mt-2">
+                      <button
+                        onClick={() => setShowPasteInput(!showPasteInput)}
+                        className="text-xs text-purple-400 hover:text-purple-300 underline"
+                      >
+                        {showPasteInput ? '▼ Hide paste input' : '▶ Or paste Grok response manually...'}
+                      </button>
+                      
+                      {showPasteInput && (
+                        <div className="mt-2 p-2 bg-gray-800/50 rounded border border-gray-600">
+                          <p className="text-xs text-gray-400 mb-2">
+                            Paste JSON from Grok (format: <code className="text-purple-300">[{{"path": [...], "confidence": 0.9}}]</code>)
+                          </p>
+                          <textarea
+                            value={pastedJson}
+                            onChange={(e) => setPastedJson(e.target.value)}
+                            placeholder='[{"path": ["Category", "Subcategory"], "confidence": 0.9, "reason": "..."}]'
+                            className="w-full h-24 px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-xs font-mono focus:outline-none focus:ring-1 focus:ring-purple-500 resize-none"
+                          />
+                          {pasteError && (
+                            <div className="mt-1 p-1.5 bg-red-900/50 border border-red-500 rounded text-xs text-red-200">
+                              {pasteError}
+                            </div>
+                          )}
+                          <button
+                            onClick={handleParsePastedSuggestions}
+                            disabled={!pastedJson.trim()}
+                            className="mt-2 w-full px-2 py-1.5 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-xs font-medium rounded transition-colors"
+                          >
+                            📋 Parse & Load Suggestions
+                          </button>
+                        </div>
+                      )}
+                    </div>
                     
                     {aiError && (
                       <div className="p-2 bg-red-900/50 border border-red-500 rounded text-xs text-red-200 mb-3">
