@@ -223,7 +223,11 @@
             "Difficulty in Receiving Sacraments": [
                 "Magdalena Bavent\u2019s Early Life in the Louviers Convent and Ritual Abuses"
             ],
-            "Fasting": {},
+            "Fasting": {
+                "_stories": [
+                    "The Attempted Abduction of Fana Haquart"
+                ]
+            },
             "Gravitas": [
                 "The Jurist\u2019s Pact with Satan and Failed Return to Confession"
             ],
