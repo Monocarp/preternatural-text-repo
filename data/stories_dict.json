@@ -8503,6 +8503,14 @@
         "start_char": 288032,
         "title": "Torment of the Three Brothers of Rheinbischofsheim by Evil Spirits (1830s)"
     },
+    "Torquemada's Story of Sabbath Dismissed by The Lord's Name": {
+        "book_slug": "christian_mysticism_vol_iv",
+        "end_char": 515137,
+        "keywords": "Torquemada, sorcerer, flight, sabbath, 3 years",
+        "pages": "154",
+        "start_char": 514684,
+        "title": "Torquemada's Story of Sabbath Dismissed by The Lord's Name"
+    },
     "Train of Multicolored Lights Over British Isles and Northwestern Europe, November 20, 1968": {
         "book_slug": "operation_trojan_horse",
         "end_char": 324367,
@@ -9050,9 +9058,9 @@
     "William of Newburgh\u2019s Hill-Feast and the Supernatural Cup": {
         "book_slug": "christian_mysticism_vol_iv",
         "end_char": 517126,
-        "keywords": "william of newburghs hillfeast and the supernatural cup",
+        "keywords": "William of Newburgh, Deir, river Vispe, underground, ritual gathering, Henry, King of England",
         "pages": "155-156",
-        "start_char": 515138,
+        "start_char": 515254,
         "title": "William of Newburgh\u2019s Hill-Feast and the Supernatural Cup"
     },
     "William of Norwich": {
