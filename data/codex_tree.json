@@ -948,7 +948,11 @@
             ],
             "Pet": {}
         },
-        "Aversion to Holy Items": [],
+        "Aversion to Holy Items": {
+            "_stories": [
+                "Bertranda of Forbach and the Sleeping Husband"
+            ]
+        },
         "Cursing": {
             "Cursed Objects": [
                 "Violent Possession and Exorcism of Peter Bernardi of Areia",
