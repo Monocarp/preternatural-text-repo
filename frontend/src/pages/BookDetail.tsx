@@ -1823,7 +1823,7 @@ const BookDetail = () => {
                       {showPasteInput && (
                         <div className="mt-2 p-2 bg-gray-800/50 rounded border border-gray-600">
                           <p className="text-xs text-gray-400 mb-2">
-                            Paste JSON from Grok (format: <code className="text-purple-300">[{{"path": [...], "confidence": 0.9}}]</code>)
+                            Paste JSON from Grok (format: <code className="text-purple-300">[&#123;"path": [...], "confidence": 0.9&#125;]</code>)
                           </p>
                           <textarea
                             value={pastedJson}
