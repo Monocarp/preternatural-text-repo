@@ -1263,14 +1263,6 @@
         "start_char": 618651,
         "title": "Black Dogs and Cats at Menhirs, Cairns, and Forts"
     },
-    "Black Mass at the Closed Sabbath and Blasphemous Canon": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 618001,
-        "keywords": "biarritz woman's tears over sabbath and lou peccat",
-        "pages": "186-187",
-        "start_char": 616108,
-        "title": "Black Mass at the Closed Sabbath and Blasphemous Canon"
-    },
     "Blasphemous Eucharist of Satan and Profanation of the Host": {
         "book_slug": "christian_mysticism_vol_iv",
         "end_char": 600657,
@@ -3607,14 +3599,6 @@
         "start_char": 567403,
         "title": "Horses as Funerary Psychopomps and Shamanic Ecstatic Mounts"
     },
-    "Host Profanation and Sexual Maleficia at the Closed Sabbath": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 621225,
-        "keywords": "high magnate status at witches' sabbath, witch trials",
-        "pages": "187-188",
-        "start_char": 619368,
-        "title": "Host Profanation and Sexual Maleficia at the Closed Sabbath"
-    },
     "Household Spirits and Pixies Riding and Braiding Horses": {
         "book_slug": "ecology_of_souls_volume_i",
         "end_char": 368906,
@@ -3830,14 +3814,6 @@
         "pages": "180-181",
         "start_char": 693973,
         "title": "Indo-European Death Roads as Haunted Paths of the Dead"
-    },
-    "Infant Crucifixion, Human Flesh Coena, and Demonic Oath at the Sabbath": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 624808,
-        "keywords": "human flesh banquet at sabbath",
-        "pages": "189",
-        "start_char": 622456,
-        "title": "Infant Crucifixion, Human Flesh Coena, and Demonic Oath at the Sabbath"
     },
     "Infernal Hunts and Mobile Purgatories: Historical Wild Hunt Encounters": {
         "book_slug": "ecology_of_souls_volume_i",
@@ -4735,14 +4711,6 @@
         "start_char": 343145,
         "title": "Magdalena Bavent\u2019s Early Life in the Louviers Convent and Ritual Abuses"
     },
-    "Magdalena Bavent\u2019s Nocturnal Abductions to the Closed Sabbath": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 616106,
-        "keywords": "- months more abductions told",
-        "pages": "185-186",
-        "start_char": 611269,
-        "title": "Magdalena Bavent\u2019s Nocturnal Abductions to the Closed Sabbath"
-    },
     "Magdalena Bavent\u2019s Testimony: Picard\u2019s Register and Demonic Marriage at the Sabbath": {
         "book_slug": "christian_mysticism_vol_iv",
         "end_char": 646801,
@@ -5383,14 +5351,6 @@
         "start_char": 658351,
         "title": "Miraculous Healing of Sister Margaretha by the Blessed Sacrament and a Relic"
     },
-    "Miraculous Punishments of Priests and Manifestations of Christ at the Sabbath": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 622454,
-        "keywords": "dismemberment and distribution of corpses at sabbath",
-        "pages": "188-189",
-        "start_char": 621227,
-        "title": "Miraculous Punishments of Priests and Manifestations of Christ at the Sabbath"
-    },
     "Missionary Tells Australian Aborigines of His \u201cLittle Body\u201d and Finds They Share the Belief": {
         "book_slug": "ecology_of_souls_volume_i",
         "end_char": 153188,
@@ -5790,14 +5750,6 @@
         "pages": "",
         "start_char": 47352,
         "title": "NDEs and Entities"
-    },
-    "Named Clergy and Nuns Seen by Bavent at the Sabbath": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 619366,
-        "keywords": "amusements at witches' sabbath, witch trials",
-        "pages": "187",
-        "start_char": 618003,
-        "title": "Named Clergy and Nuns Seen by Bavent at the Sabbath"
     },
     "Named Dead Individuals Encountered in Fairyland in Scottish Witch Trials": {
         "book_slug": "ecology_of_souls_volume_i",
@@ -8214,6 +8166,14 @@
         "pages": "50",
         "start_char": 166305,
         "title": "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself"
+    },
+    "The Secret Sabbath of the Nuns: Magdalena Bavent\u2019s Testamentary Memoirs (1647)": {
+        "book_slug": "christian_mysticism_vol_iv",
+        "end_char": 624808,
+        "keywords": "",
+        "pages": "185-189",
+        "start_char": 611269,
+        "title": "The Secret Sabbath of the Nuns: Magdalena Bavent\u2019s Testamentary Memoirs (1647)"
     },
     "The Sluagh: Flying Faerie Host or Unforgiven Dead Abducting Victims": {
         "book_slug": "ecology_of_souls_volume_i",
