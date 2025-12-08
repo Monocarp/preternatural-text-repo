@@ -199,7 +199,9 @@
             "Physical Health Vexations": {
                 "Bite Marks": {},
                 "Blocked Conception": {},
-                "Bone Dislocation": {},
+                "Bone Dislocation": [
+                    "The Oostbruck Servant with Dislocated Feet"
+                ],
                 "Bruise": [
                     "Magdalena Bavent\u2019s Early Life in the Louviers Convent and Ritual Abuses",
                     "Homage to the Goat-Shaped Master: Kissing the Infernal Face and Irrevocable Bond"
