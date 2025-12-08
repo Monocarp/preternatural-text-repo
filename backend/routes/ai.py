@@ -106,7 +106,13 @@ async def suggest_categories(request: SuggestCategoriesRequest):
     """
     Use Grok AI to suggest categories for a story.
     """
+    log.info(f"AI suggest-categories called for story: {request.story_title[:50]}...")
+    log.info(f"GROK_API_KEY configured: {bool(GROK_API_KEY)}")
+    log.info(f"XAI_MODEL: {XAI_MODEL}")
+    log.info(f"DATA_DIR: {DATA_DIR}")
+    
     if not GROK_API_KEY:
+        log.error("GROK_API_KEY is not set!")
         raise HTTPException(
             status_code=500,
             detail="GROK_API_KEY environment variable is not set"
@@ -114,12 +120,16 @@ async def suggest_categories(request: SuggestCategoriesRequest):
     
     # Load the codex tree
     tree_path = os.path.join(DATA_DIR, "codex_tree.json")
+    log.info(f"Loading codex tree from: {tree_path}")
+    log.info(f"File exists: {os.path.exists(tree_path)}")
+    
     try:
         with open(tree_path, "r", encoding="utf-8") as f:
             codex_tree = json.load(f)
+        log.info(f"Loaded codex tree with {len(codex_tree)} top-level categories")
     except Exception as e:
-        log.error(f"Failed to load codex tree: {e}")
-        raise HTTPException(status_code=500, detail="Failed to load category tree")
+        log.error(f"Failed to load codex tree from {tree_path}: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to load category tree: {str(e)}")
     
     # Build the prompt
     system_prompt = build_system_prompt(codex_tree)
@@ -143,9 +153,12 @@ async def suggest_categories(request: SuggestCategoriesRequest):
     
     try:
         async with httpx.AsyncClient(timeout=60.0) as client:
+            log.info(f"Calling Grok API at {XAI_API_URL}...")
             response = await client.post(XAI_API_URL, headers=headers, json=payload)
+            log.info(f"Grok API response status: {response.status_code}")
             response.raise_for_status()
             result = response.json()
+            log.info("Grok API call successful")
     except httpx.TimeoutException:
         log.error("Grok API request timed out")
         raise HTTPException(status_code=504, detail="AI request timed out")
@@ -153,8 +166,8 @@ async def suggest_categories(request: SuggestCategoriesRequest):
         log.error(f"Grok API error: {e.response.status_code} - {e.response.text}")
         raise HTTPException(status_code=502, detail=f"AI service error: {e.response.status_code}")
     except Exception as e:
-        log.error(f"Grok API request failed: {e}")
-        raise HTTPException(status_code=502, detail="Failed to connect to AI service")
+        log.error(f"Grok API request failed: {type(e).__name__}: {e}")
+        raise HTTPException(status_code=502, detail=f"Failed to connect to AI service: {type(e).__name__}")
     
     # Parse the response
     try:
