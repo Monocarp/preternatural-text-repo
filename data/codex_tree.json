@@ -764,7 +764,9 @@
         "John Keel\u2019s 1971 \u201cDeath Dream\u201d UFO Case with Men in Black and Frogmen"
     ],
     "NDE": {
-        "Entity Encountered": [],
+        "Entity Encountered": {
+            "Alleged Human Entity": []
+        },
         "_stories": [
             "Derrick Scull\u2019s Two Near-Death Out-of-Body Experiences During Heart Attacks",
             "Maria\u2019s 1984 NDE and Verification of a Tennis Shoe Seen Out-of-Body",
