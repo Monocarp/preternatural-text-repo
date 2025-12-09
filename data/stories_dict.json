@@ -4543,14 +4543,6 @@
         "start_char": 474223,
         "title": "Little Three-Foot Beings of the Northern Rockies"
     },
-    "Living Lamas as Psychopomps Guiding the Recently Deceased by Ritual Recitation": {
-        "book_slug": "ecology_of_souls_volume_i",
-        "end_char": 87563,
-        "keywords": "living lamas as psychopomps guiding the recently deceased by ritual recitation",
-        "pages": "24",
-        "start_char": 87120,
-        "title": "Living Lamas as Psychopomps Guiding the Recently Deceased by Ritual Recitation"
-    },
     "Living Souls Riding with the Wild Hunt": {
         "book_slug": "ecology_of_souls_volume_i",
         "end_char": 744178,
@@ -6607,6 +6599,14 @@
         "start_char": 463258,
         "title": "Psychonauts\u2019 Reports of Time Expansion to Minutes as Tens of Minutes or Centuries"
     },
+    "Psychopomps and NDEs": {
+        "book_slug": "ecology_of_souls_volume_i",
+        "end_char": 89107,
+        "keywords": "",
+        "pages": "",
+        "start_char": 88082,
+        "title": "Psychopomps and NDEs"
+    },
     "Pudding Pye Hill Faerie Conversations and Burial Discovery": {
         "book_slug": "ecology_of_souls_volume_i",
         "end_char": 606590,
@@ -7926,14 +7926,6 @@
         "pages": "150-151",
         "start_char": 499242,
         "title": "The Attempted Abduction of Fana Haquart"
-    },
-    "The Bardo Th\u00f6dol as a Guide Through the Afterlife with Clear Light, Peaceful and Wrathful Beings": {
-        "book_slug": "ecology_of_souls_volume_i",
-        "end_char": 86557,
-        "keywords": "the bardo th\u00f6dol as a guide through the afterlife with clear light peaceful and wrathful beings",
-        "pages": "24",
-        "start_char": 85954,
-        "title": "The Bardo Th\u00f6dol as a Guide Through the Afterlife with Clear Light, Peaceful and Wrathful Beings"
     },
     "The Bell Witch Poltergeist at the John Bell Home in Tennessee": {
         "book_slug": "operation_trojan_horse",
