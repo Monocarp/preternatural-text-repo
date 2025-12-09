@@ -525,7 +525,11 @@
         "Predicted Disappearance of Australian Prime Minister and Moscow Explosions"
     ],
     "Fae": {
-        "Banshee": {},
+        "Banshee": {
+            "_stories": [
+                "Breton Ankou's Death Cart and Devil-Driven Cart of Souls"
+            ]
+        },
         "Elementals": {
             "Air": [
                 "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring",
