@@ -800,7 +800,11 @@
         "Electromagnetic Response To NDE"
     ],
     "Psychic Phenomena": {
-        "Electromagnetic Phenomena": {},
+        "Electromagnetic Phenomena": {
+            "_stories": [
+                "Electromagnetic Response To NDE"
+            ]
+        },
         "_stories": [
             "Russell Targ and Dean Radin on Evidence for Telepathy, Precognition, and Psi",
             "Hermit Dominicus\u2019s Daily Visions of Dragons and Demons Filling Air and Cave",
