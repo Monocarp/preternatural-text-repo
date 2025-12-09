@@ -625,7 +625,11 @@
             "Okinawan Woman Attacked by Her Doppelg\u00e4nger",
             "A German Theology Professor\u2019s Doppelg\u00e4nger Saves Him from a Ceiling Collapse"
         ],
-        "Gnome": {},
+        "Gnome": {
+            "_stories": [
+                "Scandinavian Fae"
+            ]
+        },
         "Goblins": [
             "Saint Taurinus Binds the Night-Goddess Demon Diana into the Gobelin Spirit"
         ],
