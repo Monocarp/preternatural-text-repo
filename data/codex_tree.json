@@ -810,11 +810,9 @@
     ],
     "OBEs": {
         "Entity Encountered": {
-            "Allegedly Human": {
-                "_stories": [
-                    "Robert Monroe as Psychopomp Comforting a Dying Boy and Meeting Him Again After Death"
-                ]
-            },
+            "Allegedly Human": [
+                "Robert Monroe as Psychopomp Comforting a Dying Boy and Meeting Him Again After Death"
+            ],
             "Allegedly Nonhuman": [
                 "Astral Projections with Encounters with Non-Human Beings and Monsters",
                 "Robert Monroe\u2019s Out-of-Body Encounter with a Shape-Shifting Flying Saucer and a W.C. Fields Entity"
@@ -890,6 +888,7 @@
             "Self-Induced Astral Travel and Verified Out-of-Body Journeys to the Otherworld",
             "Astral Projections with Encounters with Non-Human Beings and Monsters"
         ],
+        "Psychopomps": [],
         "Shamans": [
             "Symbol-Saturated Shamanic Journeys in the Afterlife Realm",
             "Medieval Ecstatic Out-of-Body Experiences with the Soul Carried Away by Supernatural Beings",
