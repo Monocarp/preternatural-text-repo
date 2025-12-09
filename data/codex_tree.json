@@ -568,7 +568,11 @@
             "Lucy Bruce\u2019s Colony of Elves in Her Garden"
         ],
         "Fairy": {
-            "Fairy Lights": [],
+            "Fairy Lights": {
+                "_stories": [
+                    "All the Dancers Revealed as the Dead in Shrouds at a Fairy Gathering"
+                ]
+            },
             "_stories": [
                 "Irish Fairy Tree (Skeog) and Fatality after Cutting One Down",
                 "Irish Fairy Mound (Sidhe) and the Death of Robert Kirk",
