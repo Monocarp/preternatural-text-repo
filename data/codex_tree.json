@@ -765,12 +765,14 @@
     ],
     "NDE": {
         "Entity Encountered": {
-            "Alleged Human Entity": {
+            "Alleged Human Entity": [
+                "Eva\u2019s Near-Death Experience with Jesus, Her Deceased Grandmother, and Two Deer"
+            ],
+            "Alleged Nonhuman Entity": {
                 "_stories": [
                     "Eva\u2019s Near-Death Experience with Jesus, Her Deceased Grandmother, and Two Deer"
                 ]
-            },
-            "Alleged Nonhuman Entity": {}
+            }
         },
         "_stories": [
             "Derrick Scull\u2019s Two Near-Death Out-of-Body Experiences During Heart Attacks",
