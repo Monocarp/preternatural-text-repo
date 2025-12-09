@@ -288,11 +288,9 @@
         },
         "Possession": {
             "Appearance of Fortunae": {
-                "Cloth": {
-                    "_stories": [
-                        "Auxonne Convent Possessions Investigated by Bishops and Sorbonne Doctors"
-                    ]
-                },
+                "Cloth": [
+                    "Auxonne Convent Possessions Investigated by Bishops and Sorbonne Doctors"
+                ],
                 "Glass": {},
                 "Nails": {},
                 "Other": [
@@ -422,7 +420,8 @@
                     "Foul Odor": {}
                 },
                 "Repugnance towards Holiness": [
-                    "Possession, Diabolical Pacts, and Sacrilegious Acts of Johanna Fery"
+                    "Possession, Diabolical Pacts, and Sacrilegious Acts of Johanna Fery",
+                    "Auxonne Convent Possessions Investigated by Bishops and Sorbonne Doctors"
                 ],
                 "Speaking in Tongues": [
                     "Possession, Diabolical Pacts, and Sacrilegious Acts of Johanna Fery",
