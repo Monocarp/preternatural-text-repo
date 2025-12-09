@@ -772,11 +772,9 @@
     "NDE": {
         "Entity Encountered": {
             "Alleged Human Entity": {
-                "Family Member/Loved one": {
-                    "_stories": [
-                        "Jeffrey's 1989 Overdose NDE with Blue Fairy, Dog, and Jackal-Headed Beings"
-                    ]
-                },
+                "Family Member/Loved one": [
+                    "Jeffrey's 1989 Overdose NDE with Blue Fairy, Dog, and Jackal-Headed Beings"
+                ],
                 "_stories": [
                     "Eva\u2019s Near-Death Experience with Jesus, Her Deceased Grandmother, and Two Deer",
                     "Near-Death Vision of a Grandfather in Heaven on Horseback Offering a White Horse",
@@ -793,7 +791,8 @@
                 "Abigail\u2019s Near-Death Journey Guided by Dogs Through Gates and Later Matched to a Dog Killed in an Accident",
                 "Near-Death Vision of a Grandfather in Heaven on Horseback Offering a White Horse",
                 "Car Crash Near-Death Experience with a Protective Gray-Blue Translucent Raven",
-                "Jeffrey's 1989 Overdose NDE with Blue Fairy, Dog, and Jackal-Headed Beings"
+                "Jeffrey's 1989 Overdose NDE with Blue Fairy, Dog, and Jackal-Headed Beings",
+                "Latimer's 2008 Overdose NDE with Thoth, Osiris, and Aboriginal Warrior"
             ],
             "_stories": [
                 "Shawn's 2002 Suicide Attempt NDE with Red River Ferryman"
