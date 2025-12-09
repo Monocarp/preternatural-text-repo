@@ -811,11 +811,9 @@
     "OBEs": {
         "Entity Encountered": {
             "Allegedly Human": {},
-            "Allegedly Nonhuman": {
-                "_stories": [
-                    "Astral Projections with Encounters with Non-Human Beings and Monsters"
-                ]
-            }
+            "Allegedly Nonhuman": [
+                "Astral Projections with Encounters with Non-Human Beings and Monsters"
+            ]
         },
         "_stories": [
             "OBEs After NDEs",
@@ -882,7 +880,8 @@
         "OBEs": [
             "OBEs After NDEs",
             "Medieval Ecstatic Out-of-Body Experiences with the Soul Carried Away by Supernatural Beings",
-            "Self-Induced Astral Travel and Verified Out-of-Body Journeys to the Otherworld"
+            "Self-Induced Astral Travel and Verified Out-of-Body Journeys to the Otherworld",
+            "Astral Projections with Encounters with Non-Human Beings and Monsters"
         ],
         "Shamans": [
             "Symbol-Saturated Shamanic Journeys in the Afterlife Realm",
