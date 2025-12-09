@@ -772,7 +772,11 @@
     "NDE": {
         "Entity Encountered": {
             "Alleged Human Entity": {
-                "Family Member/Loved one": [],
+                "Family Member/Loved one": {
+                    "_stories": [
+                        "Jeffrey's 1989 Overdose NDE with Blue Fairy, Dog, and Jackal-Headed Beings"
+                    ]
+                },
                 "_stories": [
                     "Eva\u2019s Near-Death Experience with Jesus, Her Deceased Grandmother, and Two Deer",
                     "Near-Death Vision of a Grandfather in Heaven on Horseback Offering a White Horse",
