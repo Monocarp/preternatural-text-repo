@@ -625,11 +625,9 @@
             "Okinawan Woman Attacked by Her Doppelg\u00e4nger",
             "A German Theology Professor\u2019s Doppelg\u00e4nger Saves Him from a Ceiling Collapse"
         ],
-        "Gnome": {
-            "_stories": [
-                "Scandinavian Fae"
-            ]
-        },
+        "Gnome": [
+            "Scandinavian Fae"
+        ],
         "Goblins": [
             "Saint Taurinus Binds the Night-Goddess Demon Diana into the Gobelin Spirit"
         ],
@@ -856,7 +854,8 @@
             "Saint Taurinus Binds the Night-Goddess Demon Diana into the Gobelin Spirit",
             "Tiny Ghosts and Souls",
             "Cherokee Little People Instruct a Journey to the Ghost Country to Retrieve Sun\u2019s Daughter",
-            "John Graham on the Souls and Evil Spirits Thick on Earth Among the \u201cGood People\u201d"
+            "John Graham on the Souls and Evil Spirits Thick on Earth Among the \u201cGood People\u201d",
+            "Scandinavian Fae"
         ]
     },
     "Men In Black": [
