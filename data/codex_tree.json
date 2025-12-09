@@ -809,7 +809,9 @@
         "Cherylee Black\u2019s Post-NDE Recurrent Spontaneous Psychokinesis and \u201cMs. Black Effect\u201d"
     ],
     "OBEs": {
-        "Entity Encountered": [],
+        "Entity Encountered": {
+            "Allegedly Human": []
+        },
         "_stories": [
             "OBEs After NDEs"
         ]
