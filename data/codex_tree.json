@@ -581,11 +581,10 @@
             "Australian Witness Sees Pink Butterfly Fold into a Tangible Pixie That Flies Away",
             "Jean Hingley\u2019s 1979 Encounter with Three Winged, Corpse-Faced Humanoids and Their Scorpion-Tailed Craft"
         ],
-        "Fetch/Double": {
-            "_stories": [
-                "Autoscopy, Wraiths, Fetches, and Fylgjur as Death Omens"
-            ]
-        },
+        "Fetch/Double": [
+            "Autoscopy, Wraiths, Fetches, and Fylgjur as Death Omens",
+            "Seneca Legend of the Man\u2019s Sky Spirit Taking a Different Path and Nearly Leading His Wife to Death"
+        ],
         "Gnome": {},
         "Goblins": [
             "Saint Taurinus Binds the Night-Goddess Demon Diana into the Gobelin Spirit"
