@@ -568,11 +568,9 @@
             "Lucy Bruce\u2019s Colony of Elves in Her Garden"
         ],
         "Fairy": {
-            "Fairy Lights": {
-                "_stories": [
-                    "All the Dancers Revealed as the Dead in Shrouds at a Fairy Gathering"
-                ]
-            },
+            "Fairy Lights": [
+                "All the Dancers Revealed as the Dead in Shrouds at a Fairy Gathering"
+            ],
             "_stories": [
                 "Irish Fairy Tree (Skeog) and Fatality after Cutting One Down",
                 "Irish Fairy Mound (Sidhe) and the Death of Robert Kirk",
@@ -728,7 +726,8 @@
                 "Ta\u00edno and Zoroastrian Distinction Between Ghosts of the Dead and Wandering Ghosts of the Living",
                 "Eleanor Dorcey Rescued from a Fairy Attack by Her Dead Mother",
                 "A Dead Bride Among the Fairies Attempts to Rejoin Her Husband",
-                "John McCann\u2019s Drowned Relatives Seen Among the \u201cGentry\u201d"
+                "John McCann\u2019s Drowned Relatives Seen Among the \u201cGentry\u201d",
+                "All the Dancers Revealed as the Dead in Shrouds at a Fairy Gathering"
             ]
         },
         "Family Pet": {
