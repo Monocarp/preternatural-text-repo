@@ -595,11 +595,9 @@
             "The Innkeeper\u2019s Murdered Husband Appears Among Small Men and Fatally Strikes Her",
             "Tiny Ghosts and Souls"
         ],
-        "Mermaids": {
-            "_stories": [
-                "John Mack\u2019s Abductee Feels Compelled to Sing Hymns to Seals, One Follows Him Along the Shore"
-            ]
-        },
+        "Mermaids": [
+            "John Mack\u2019s Abductee Feels Compelled to Sing Hymns to Seals, One Follows Him Along the Shore"
+        ],
         "Nymph": [
             "Feverish Five-Year-Old Surrounded by Four White-Clad Elves or Nymphs Speaking in Song"
         ],
@@ -1013,7 +1011,8 @@
             "Parallels Between Professor Guimaraes and Barney Hill\u2019s Saucer Examinations",
             "Edmund Lenthal Swifte\u2019s Cylindrical Apparition in the Tower of London",
             "Dave\u2019s Lifetime of Alien Encounters, Past-Life as a Susquehannock, and Rebirth in Virginia",
-            "Abductees Report Shrinking Sensations During UFO Encounters"
+            "Abductees Report Shrinking Sensations During UFO Encounters",
+            "John Mack\u2019s Abductee Feels Compelled to Sing Hymns to Seals, One Follows Him Along the Shore"
         ],
         "Aerial Phenomenon": {
             "Pilot Seen": [
