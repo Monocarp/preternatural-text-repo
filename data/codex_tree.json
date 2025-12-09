@@ -808,11 +808,9 @@
         "Lynn\u2019s Post-NDE Ability to See and Converse with Dead People in the Hospital",
         "Cherylee Black\u2019s Post-NDE Recurrent Spontaneous Psychokinesis and \u201cMs. Black Effect\u201d"
     ],
-    "OBEs": {
-        "_stories": [
-            "OBEs After NDEs"
-        ]
-    },
+    "OBEs": [
+        "OBEs After NDEs"
+    ],
     "Psychic Phenomena": {
         "Electromagnetic Phenomena": [
             "Electromagnetic Response To NDE"
@@ -871,7 +869,8 @@
             "OBEs After NDEs"
         ],
         "OBEs": [
-            "OBEs After NDEs"
+            "OBEs After NDEs",
+            "Medieval Ecstatic Out-of-Body Experiences with the Soul Carried Away by Supernatural Beings"
         ],
         "Shamans": [
             "Symbol-Saturated Shamanic Journeys in the Afterlife Realm"
