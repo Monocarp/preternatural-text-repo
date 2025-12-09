@@ -811,7 +811,11 @@
     "OBEs": {
         "Entity Encountered": {
             "Allegedly Human": {},
-            "Allegedly Nonhuman": {}
+            "Allegedly Nonhuman": {
+                "_stories": [
+                    "Astral Projections with Encounters with Non-Human Beings and Monsters"
+                ]
+            }
         },
         "_stories": [
             "OBEs After NDEs",
