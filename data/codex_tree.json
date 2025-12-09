@@ -288,7 +288,11 @@
         },
         "Possession": {
             "Appearance of Fortunae": {
-                "Cloth": {},
+                "Cloth": {
+                    "_stories": [
+                        "Auxonne Convent Possessions Investigated by Bishops and Sorbonne Doctors"
+                    ]
+                },
                 "Glass": {},
                 "Nails": {},
                 "Other": [
