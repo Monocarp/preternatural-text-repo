@@ -810,7 +810,8 @@
     ],
     "OBEs": {
         "Entity Encountered": {
-            "Allegedly Human": []
+            "Allegedly Human": {},
+            "Allegedly Nonhuman": []
         },
         "_stories": [
             "OBEs After NDEs"
