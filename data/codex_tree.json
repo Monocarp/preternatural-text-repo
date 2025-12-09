@@ -866,7 +866,11 @@
             "Lynn\u2019s Post-NDE Ability to See and Converse with Dead People in the Hospital",
             "OBEs After NDEs"
         ],
-        "OBEs": {},
+        "OBEs": {
+            "_stories": [
+                "OBEs After NDEs"
+            ]
+        },
         "Shamans": [
             "Symbol-Saturated Shamanic Journeys in the Afterlife Realm"
         ],
