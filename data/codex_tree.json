@@ -595,7 +595,11 @@
             "The Innkeeper\u2019s Murdered Husband Appears Among Small Men and Fatally Strikes Her",
             "Tiny Ghosts and Souls"
         ],
-        "Mermaids": [],
+        "Mermaids": {
+            "_stories": [
+                "John Mack\u2019s Abductee Feels Compelled to Sing Hymns to Seals, One Follows Him Along the Shore"
+            ]
+        },
         "Nymph": [
             "Feverish Five-Year-Old Surrounded by Four White-Clad Elves or Nymphs Speaking in Song"
         ],
