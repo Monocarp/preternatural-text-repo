@@ -798,12 +798,15 @@
         "Anita\u2019s Stage 4 Hodgkin\u2019s Lymphoma Vanishing After an NDE",
         "Geralyn\u2019s Burkitt Lymphoma Disappearing After Dying in Surgery and Meeting Three Angels"
     ],
-    "Psychic Phenomena": [
-        "Russell Targ and Dean Radin on Evidence for Telepathy, Precognition, and Psi",
-        "Hermit Dominicus\u2019s Daily Visions of Dragons and Demons Filling Air and Cave",
-        "NDErs\u2019 Post-Experience Precognition of Deaths and Accidents Verified by Others",
-        "Geralyn\u2019s Burkitt Lymphoma Disappearing After Dying in Surgery and Meeting Three Angels"
-    ],
+    "Psychic Phenomena": {
+        "Electromagnetic Phenomena": [],
+        "_stories": [
+            "Russell Targ and Dean Radin on Evidence for Telepathy, Precognition, and Psi",
+            "Hermit Dominicus\u2019s Daily Visions of Dragons and Demons Filling Air and Cave",
+            "NDErs\u2019 Post-Experience Precognition of Deaths and Accidents Verified by Others",
+            "Geralyn\u2019s Burkitt Lymphoma Disappearing After Dying in Surgery and Meeting Three Angels"
+        ]
+    },
     "Supernatural Phenomena": {
         "Spontaneous Human Combustion": [
             "Human Bodies Found Cremated While Surroundings Barely Burned"
