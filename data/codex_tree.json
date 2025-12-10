@@ -724,11 +724,9 @@
             "Drowned Dead, Faeries, and Aquatic Spirit Abductions",
             "Faeries Hoarding Treasure in Mounds and Heroes Capturing Death"
         ],
-        "Pixie Lead": {
-            "_stories": [
-                "Pixie-Led Victims and a County Mayo Man Led Astray by Apparitions"
-            ]
-        },
+        "Pixie Lead": [
+            "Pixie-Led Victims and a County Mayo Man Led Astray by Apparitions"
+        ],
         "Trickster": [
             "Trickster Devils and Mystery Men in World Folklore and History",
             "Artist\u2019s Thirty Years with an Androgynous Shape-Shifting Entity",
@@ -827,7 +825,8 @@
         "Ghost Lights/Will-o-Wisps": [
             "Ghost Lights and Death in Native Folklore",
             "Welsh Corpse Candles and Tylwyth Teg Lights Following Funeral Routes",
-            "Ghost Light Theories and Connections"
+            "Ghost Light Theories and Connections",
+            "Oni and a Len\u00e2p\u00e9 Herbalist Warned Not to Follow a Ghost"
         ],
         "Individual Connected To Place/Person": {
             "Auditory": [
