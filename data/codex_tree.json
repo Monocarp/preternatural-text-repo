@@ -711,7 +711,8 @@
             "Fairies in Western Culture",
             "Indigenous Fae",
             "Faeries Haunting Sepulchral Monuments and Burial Sites",
-            "Welsh Youth Sees Brown Dwarf And Dies Within A Year"
+            "Welsh Youth Sees Brown Dwarf And Dies Within A Year",
+            "Passamaquoddy Little People Mirroring Tribal Life Events"
         ],
         "Mermaids": [
             "John Mack\u2019s Abductee Feels Compelled to Sing Hymns to Seals, One Follows Him Along the Shore",
@@ -1124,11 +1125,9 @@
         ],
         "Fae": {
             "Fairies": {
-                "Tommyknockers and Co": {
-                    "_stories": [
-                        "Knockers, Tommyknockers, And Coblynau Foretell Miners\u2019 Doom"
-                    ]
-                },
+                "Tommyknockers and Co": [
+                    "Knockers, Tommyknockers, And Coblynau Foretell Miners\u2019 Doom"
+                ],
                 "_stories": [
                     "Breton Maiden\u2019s Wand-Opened Portal to Fairyland as World of the Dead",
                     "Ancestors Punishing Neglect with Calamities in Indonesia",
