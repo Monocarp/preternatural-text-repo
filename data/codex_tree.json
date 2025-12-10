@@ -792,7 +792,10 @@
             "Auditory": {},
             "Behavior": {},
             "Habitual Behavior": {},
-            "Visual": {}
+            "Visual": {},
+            "_stories": [
+                "Fairy Lights"
+            ]
         },
         "Poltergeist Activity": {
             "Apports": [
