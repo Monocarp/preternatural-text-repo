@@ -1037,7 +1037,11 @@
             "Staffordshire Woman Sees Multiple Winged Faeries Perched and Hovering in a Tree"
         ],
         "Fae": {
-            "Fairies": []
+            "Fairies": {
+                "_stories": [
+                    "Breton Maiden\u2019s Wand-Opened Portal to Fairyland as World of the Dead"
+                ]
+            }
         },
         "Hauntings": [
             "General Description of Ghosts, Hauntings, and Their Manifestations",
