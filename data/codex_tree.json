@@ -724,7 +724,11 @@
             "Drowned Dead, Faeries, and Aquatic Spirit Abductions",
             "Faeries Hoarding Treasure in Mounds and Heroes Capturing Death"
         ],
-        "Pixie Lead": [],
+        "Pixie Lead": {
+            "_stories": [
+                "Pixie-Led Victims and a County Mayo Man Led Astray by Apparitions"
+            ]
+        },
         "Trickster": [
             "Trickster Devils and Mystery Men in World Folklore and History",
             "Artist\u2019s Thirty Years with an Androgynous Shape-Shifting Entity",
