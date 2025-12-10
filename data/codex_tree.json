@@ -234,7 +234,9 @@
             },
             "Physical Health Vexations": {
                 "Bite Marks": {},
-                "Blocked Conception": {},
+                "Blocked Conception": [
+                    "Demonic Contagion: The Transmission of Bewitched Maladies in Early 17th-Century Labourd"
+                ],
                 "Bone Dislocation": [
                     "The Oostbruck Servant with Dislocated Feet"
                 ],
