@@ -573,7 +573,11 @@
             "Scandinavian Fae"
         ],
         "Fairy": {
-            "Changeling": [],
+            "Changeling": {
+                "_stories": [
+                    "Wrinkled, Corpse\u2011Like Faeries and a Norwegian Nisse Sighting"
+                ]
+            },
             "Fairy Lights": [
                 "All the Dancers Revealed as the Dead in Shrouds at a Fairy Gathering",
                 "Fairy Lights",
