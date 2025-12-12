@@ -451,7 +451,11 @@
                 ],
                 "Possession-Specific Physical Vexation": {
                     "Diabolical Incandescence": {},
-                    "Drastic Eating Changes": {},
+                    "Drastic Eating Changes": {
+                        "_stories": [
+                            "2013 Deathbed Vision of a Golden-Haired Child Feeding a Dying Woman Fairy Food"
+                        ]
+                    },
                     "Fluctuation in Body Temperature": {},
                     "Foul Odor": {}
                 },
