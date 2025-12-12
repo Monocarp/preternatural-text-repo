@@ -3437,15 +3437,6 @@
         ],
         "verbatim": "\"I've even read a trip account by a person who claimed to have made love with a plant!\" researcher Jeremy Knight wrote."
     },
-    "Ayahuasca Shamans’ Icaros as Songs of the Spirits": {
-        "start_char": 465719,
-        "end_char": 466064,
-        "pages": "121",
-        "keywords": [
-            "ayahuasca shamans icaros as songs of the spirits"
-        ],
-        "verbatim": "Music. Ayahuasca shamans guide drinkers with icaros, \"songs of the spirits that have become the allies of that particular healer.\" Strassman's study included \"calliope music,\" film scores, and other \"beautiful music.\""
-    },
     "DMT–Mugwort User’s Life Review of Family, Friends, and Possessions": {
         "start_char": 466066,
         "end_char": 466241,
@@ -5920,5 +5911,14 @@
         "end_char": 458495,
         "pages": "",
         "keywords": []
+    },
+    "Ayahuasca Shamans’ Icaros as Songs of the Spirits and Life Review": {
+        "start_char": 465719,
+        "end_char": 466064,
+        "pages": "121",
+        "keywords": [
+            "ayahuasca shamans icaros as songs of the spirits"
+        ],
+        "verbatim": "Music. Ayahuasca shamans guide drinkers with icaros, \"songs of the spirits that have become the allies of that particular healer.\" Strassman's study included \"calliope music,\" film scores, and other \"beautiful music.\""
     }
 }
