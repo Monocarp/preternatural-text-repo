@@ -1195,11 +1195,9 @@
         ]
     },
     "Theories": {
-        "ASC": {
-            "_stories": [
-                "Friederike Hauffe\u2019s Six-And-A-Half-Year Sleep And Later Total Recall"
-            ]
-        },
+        "ASC": [
+            "Friederike Hauffe\u2019s Six-And-A-Half-Year Sleep And Later Total Recall"
+        ],
         "Co-Creation": [
             "Perception-Dependent Beings of Light in the Afterlife and NDE Entities",
             "Stigmata and Dream Injuries: Non-Physical Stimuli Causing Physical Wounds",
