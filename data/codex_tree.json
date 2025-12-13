@@ -356,7 +356,11 @@
                     "Demonic Contagion: The Transmission of Bewitched Maladies in Early 17th-Century Labourd"
                 ],
                 "Sexual Assault": {},
-                "Suffocation": {},
+                "Suffocation": {
+                    "_stories": [
+                        "Renata S\u00e4nger\u2019s Early Initiation into Sorcery and Pact at the Sabbath"
+                    ]
+                },
                 "Unexplained Physical Pain": [
                     "Haunting and Demonic Torment of the K\u00f8ge Household (1609\u20131614)",
                     "Torment of the Three Brothers of Rheinbischofsheim by Evil Spirits (1830s)",
