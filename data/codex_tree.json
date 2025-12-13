@@ -373,7 +373,10 @@
                     "The Spirit Who Repeatedly Abducted the Child Conrad",
                     "Miraculous Healing of Sister Margaretha by the Blessed Sacrament and a Relic"
                 ]
-            }
+            },
+            "_stories": [
+                "Renata S\u00e4nger\u2019s Early Initiation into Sorcery and Pact at the Sabbath"
+            ]
         },
         "Possession": {
             "Appearance of Fortunae": {
@@ -2307,11 +2310,9 @@
             ]
         },
         "Voodoo": {
-            "Voodoo Doll": {
-                "_stories": [
-                    "Renata S\u00e4nger\u2019s Early Initiation into Sorcery and Pact at the Sabbath"
-                ]
-            }
+            "Voodoo Doll": [
+                "Renata S\u00e4nger\u2019s Early Initiation into Sorcery and Pact at the Sabbath"
+            ]
         },
         "_stories": [
             "Women\u2019s Pacts with Shedim and Nocturnal Meetings with Buck\u2011Shaped Spirits",
