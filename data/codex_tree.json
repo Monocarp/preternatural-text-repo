@@ -1220,12 +1220,15 @@
     },
     "OBEs": {
         "Entity Encountered": {
-            "Allegedly Human": [
-                "Robert Monroe as Psychopomp Comforting a Dying Boy and Meeting Him Again After Death",
-                "Lobsang Rampa\u2019s Astral Journey and the Tall Soul Who Describes Size-Varied People",
-                "Vusamazulu Credo Mutwa\u2019s Encounters with Mantindane (Grey-like Spirits) and Dissociative Stabbing OBE",
-                "The Manchu Shaman Ni\u0161an Descends to the World of the Dead and Revives a Boy"
-            ],
+            "Allegedly Human": {
+                "Known Person": [],
+                "_stories": [
+                    "Robert Monroe as Psychopomp Comforting a Dying Boy and Meeting Him Again After Death",
+                    "Lobsang Rampa\u2019s Astral Journey and the Tall Soul Who Describes Size-Varied People",
+                    "Vusamazulu Credo Mutwa\u2019s Encounters with Mantindane (Grey-like Spirits) and Dissociative Stabbing OBE",
+                    "The Manchu Shaman Ni\u0161an Descends to the World of the Dead and Revives a Boy"
+                ]
+            },
             "Allegedly Nonhuman": [
                 "Astral Projections with Encounters with Non-Human Beings and Monsters",
                 "Robert Monroe\u2019s Out-of-Body Encounter with a Shape-Shifting Flying Saucer and a W.C. Fields Entity",
@@ -1980,11 +1983,9 @@
             "Picard, Goffredy, and the Lineage of Midnight Vicars: A Genealogy of Demonic Priesthood",
             "Progressive Apparitions and Physical Disturbances among the Nuns of Louviers"
         ],
-        "Hagriding": {
-            "_stories": [
-                "Renata S\u00e4nger\u2019s Early Initiation into Sorcery and Pact at the Sabbath"
-            ]
-        },
+        "Hagriding": [
+            "Renata S\u00e4nger\u2019s Early Initiation into Sorcery and Pact at the Sabbath"
+        ],
         "Harm": {
             "Harm To Crops": [
                 "The Schem\u2011Hamphora\u017fch: A Name that Commands Angels, Demons, and Creation Itself",
