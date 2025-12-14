@@ -1169,10 +1169,10 @@
     },
     "Bewitched Child at Utrecht Vomits Needles, Glass, and Other Objects During Exorcisms": {
         "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 846007,
+        "end_char": 845554,
         "keywords": "laughter instead of torment during exorcism",
         "pages": "262-263",
-        "start_char": 842516,
+        "start_char": 842715,
         "title": "Bewitched Child at Utrecht Vomits Needles, Glass, and Other Objects During Exorcisms"
     },
     "Bewitched Woman at Lyon Vomits Needles and Wooden Pegs Until Healed by Saint Peter Tarantusius": {
@@ -4991,14 +4991,6 @@
         "start_char": 1190433,
         "title": "Maria of Agreda\u2019s Doubts About Possible Deception in Her Mystical Visions"
     },
-    "Maria von M\u00f6rk of Caltern Vomits Pins, Nails, Glass, and Other Objects Amid Apparitions of Dark Men": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 859398,
-        "keywords": "maria von m\u00f6rk of caltern vomits pins nails glass and other objects amid apparitions of dark men",
-        "pages": "263-267",
-        "start_char": 846022,
-        "title": "Maria von M\u00f6rk of Caltern Vomits Pins, Nails, Glass, and Other Objects Amid Apparitions of Dark Men"
-    },
     "Maria von Sains Describes the Inverted Liturgy and Sacraments of the Sabbath": {
         "book_slug": "christian_mysticism_vol_iv",
         "end_char": 629247,
@@ -8142,6 +8134,14 @@
         "pages": "147-148",
         "start_char": 491807,
         "title": "The Stench of Demoniacs and the \u201cFoetentes\u201d"
+    },
+    "The Temptations and Torments of Maria von M\u00f6rk": {
+        "book_slug": "christian_mysticism_vol_iv",
+        "end_char": 859350,
+        "keywords": "",
+        "pages": "263-267",
+        "start_char": 845832,
+        "title": "The Temptations and Torments of Maria von M\u00f6rk"
     },
     "The Welsh Corpse Bird (Deryn Corph) as a Screeching Death Omen at the Window of the Sick": {
         "book_slug": "ecology_of_souls_volume_i",
