@@ -401,10 +401,10 @@
     },
     "Accusation of the Cook Elsa of Camen and Demonic Torments in the Monastery of Werte": {
         "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 793470,
+        "end_char": 795075,
         "keywords": "Elsa of Camen, Soothsayer, Werte, Horn, Lent, Easter, Possession, Sorcery, Witchcraft, Demonic Manifestation, Poison, Curses, White Pellets, Black Substance, Sighing, Voices, Dragged Out of Bed, Tickled, Excessive Laughter, Pieces of Flesh Torn Out, Twisted Backward, Vomiting, Lifted Up, Thrown Down, Thrown Senseless, Twisted Arms and Legs, Deep Sleep, Walked on Leg Bones, Imprisoned, Confessed, Dying, Denied, Physical Injury, Nuns, Monastery",
         "pages": "245-246",
-        "start_char": 790804,
+        "start_char": 791295,
         "title": "Accusation of the Cook Elsa of Camen and Demonic Torments in the Monastery of Werte"
     },
     "Accusations of Apostasy, Sorcery, and Demonic Worship in the Trial of the Templars": {
@@ -2601,7 +2601,7 @@
     },
     "Epidemic Possession in the Convent of Kentorp and Spread to Hamm": {
         "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 790802,
+        "end_char": 791294,
         "keywords": "Kentorp, Hamm, Nonnery, Anna Lemgon, Wier, Saint Cornelius, Possession, Demonic Manifestation, Convulsions, Biting, Epilepsy, Exorcism, Howling, Flederwisch, Flatfoot, Rosenbaum, Hornuar, 16th Century, County of Mark, Convent of Kentorp, Convent of Nonnery, Skull of Saint Cornelius, Relics, Healings, Deliverance, Soothsayer, Cook, Maleficium, Sorcery, Physical Phenomena, Animalistic Behavior, Speaking in Voices, Occult Knowledge, Demonic Behaviors, Jesting Names, Black Buck, Transportation, Contagion of Possession",
         "pages": "244-245",
         "start_char": 786425,
@@ -3017,10 +3017,10 @@
     },
     "Further Wonders at Werte and Death of an Accused Witch": {
         "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 796983,
+        "end_char": 798336,
         "keywords": "Margaretha, Countess of Bur, Fanten, Marienbaum, Possession, Demonic Manifestation, Sorcery, Witchcraft, Healing, Exorcism, Black cat, Basket, Piece of flesh torn, Climbed trees like cats, Crept down without body movement, Cried out in pain, Wound suppurated, Black wound, Laughing, Cheerful, Black cat jumped away, Maleficium, Dungeon, Torture, No confession, Death of the woman, Seized garment, Breathed out life, Kobolds, Jumping about, Roaring, Frightful noise, Driven out of seats, Veils torn off, Throats closed, No food, Frenzy, Contagion, Jailer begot two children, Released, Suspicion of maleficium, Demon in form of youth, Brigittines, Convent",
         "pages": "246-247",
-        "start_char": 793472,
+        "start_char": 795076,
         "title": "Further Wonders at Werte and Death of an Accused Witch"
     },
     "Garabandal, Spain: Angel and Lady Apparitions": {
@@ -6367,14 +6367,6 @@
         "start_char": 859413,
         "title": "Possessed Maid Gertrud Fischer of Frankfurt an der Oder Magically Grasps and Swallows Money and Needles"
     },
-    "Possessed Orphans of Amsterdam and Their Accusations against Bametie": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 801811,
-        "keywords": "possessed orphans of amsterdam and their accusations against bametie",
-        "pages": "248-249",
-        "start_char": 799763,
-        "title": "Possessed Orphans of Amsterdam and Their Accusations against Bametie"
-    },
     "Possessed Woman from Calcia, Necromantic Formula, and Death of the Heretical Monk at Perusium": {
         "book_slug": "christian_mysticism_vol_iv",
         "end_char": 42290,
@@ -6790,14 +6782,6 @@
         "pages": "49",
         "start_char": 163675,
         "title": "Reports of Crucified Christian Slave in Pontus and Crucified Lambs in Crete"
-    },
-    "Resolution of the Demonic Plague among the Brigittines and Wier\u2019s Counsel": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 799761,
-        "keywords": "Wier, Hollander Hoofft, Amsterdam, 1566, 16th Century, Fanten, Possession, Demonic Manifestation, Exorcism, Healing, Climbed like cats, Walls and roofs, Distorted faces, Hideously gruesome, Ran toward water, Drown themselves, God, Foreign languages, Playing tongues, Occult knowledge, Town hall, Beaten with rods, Wasted away, Sang in dying, Eternal salvation, Gloria Patri, Miserere, Orphans, Seventy children, Evil spirits, Convent",
-        "pages": "247-248",
-        "start_char": 796985,
-        "title": "Resolution of the Demonic Plague among the Brigittines and Wier\u2019s Counsel"
     },
     "Resuscitation of Drowned Priest Patrick Noan and His Spirit at a Faerie Hurling Match": {
         "book_slug": "ecology_of_souls_volume_i",
@@ -8190,6 +8174,14 @@
         "pages": "182-183",
         "start_char": 703650,
         "title": "The Wild or Infernal Hunt as a Nocturnal Host of the Damned"
+    },
+    "The Witch Bametie and the Bewitched Children": {
+        "book_slug": "christian_mysticism_vol_iv",
+        "end_char": 802834,
+        "keywords": "",
+        "pages": "247-248",
+        "start_char": 798338,
+        "title": "The Witch Bametie and the Bewitched Children"
     },
     "The Witch of Pamplona Who Flies from a Tower": {
         "book_slug": "christian_mysticism_vol_iv",
