@@ -88,7 +88,11 @@
         "Epileptic Seizures Interpreted as Meetings with Gods and Possession by Demons or Djinn"
     ],
     "Cryptid": {
-        "Aquatic": {},
+        "Aquatic": {
+            "_stories": [
+                "Rendlesham Forest Hauntings and Nearby Sutton Hoo Burial Mounds"
+            ]
+        },
         "Avian": {
             "Mothman": [
                 "Winged and Headless Beings Associated with UFOs",
