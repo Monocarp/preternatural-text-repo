@@ -87,11 +87,9 @@
         "Raoul Adamson\u2019s Ayahuasca Surgeries and Devouring by a Serpentine Dragon",
         "Epileptic Seizures Interpreted as Meetings with Gods and Possession by Demons or Djinn"
     ],
-    "Crop Circles": {
-        "_stories": [
-            "Crop Circles And Phone Battery Anomalies At Or Near Serpent Mound And Adena Territory"
-        ]
-    },
+    "Crop Circles": [
+        "Crop Circles And Phone Battery Anomalies At Or Near Serpent Mound And Adena Territory"
+    ],
     "Cryptid": {
         "Aquatic": [
             "Rendlesham Forest Hauntings and Nearby Sutton Hoo Burial Mounds"
@@ -99,7 +97,8 @@
         "Avian": {
             "Mothman": [
                 "Winged and Headless Beings Associated with UFOs",
-                "John Keels Window Areas"
+                "John Keels Window Areas",
+                "Crop Circles And Phone Battery Anomalies At Or Near Serpent Mound And Adena Territory"
             ],
             "Other": [
                 "1843 Warwick Remarkable Cloud And Three Human\u2011Shaped Figures In The Sky",
