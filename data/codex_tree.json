@@ -87,6 +87,7 @@
         "Raoul Adamson\u2019s Ayahuasca Surgeries and Devouring by a Serpentine Dragon",
         "Epileptic Seizures Interpreted as Meetings with Gods and Possession by Demons or Djinn"
     ],
+    "Crop Circles": [],
     "Cryptid": {
         "Aquatic": [
             "Rendlesham Forest Hauntings and Nearby Sutton Hoo Burial Mounds"
@@ -119,11 +120,9 @@
         },
         "Canine": {
             "Chupacabra": {},
-            "Dogman": {
-                "_stories": [
-                    "Horned Hairy Biped Near Tennessee Burial Sites And Half-Man Half-Dog Demanding Reburial Of Artifacts"
-                ]
-            },
+            "Dogman": [
+                "Horned Hairy Biped Near Tennessee Burial Sites And Half-Man Half-Dog Demanding Reburial Of Artifacts"
+            ],
             "Other": {},
             "Werewolf": {}
         },
