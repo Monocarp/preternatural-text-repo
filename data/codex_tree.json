@@ -87,7 +87,11 @@
         "Raoul Adamson\u2019s Ayahuasca Surgeries and Devouring by a Serpentine Dragon",
         "Epileptic Seizures Interpreted as Meetings with Gods and Possession by Demons or Djinn"
     ],
-    "Crop Circles": [],
+    "Crop Circles": {
+        "_stories": [
+            "Crop Circles And Phone Battery Anomalies At Or Near Serpent Mound And Adena Territory"
+        ]
+    },
     "Cryptid": {
         "Aquatic": [
             "Rendlesham Forest Hauntings and Nearby Sutton Hoo Burial Mounds"
