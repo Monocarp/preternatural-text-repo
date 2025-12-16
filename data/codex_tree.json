@@ -120,7 +120,11 @@
         "Canine": {
             "Chupacabra": {},
             "Dogman": {},
-            "Other": {},
+            "Other": {
+                "_stories": [
+                    "Horned Hairy Biped Near Tennessee Burial Sites And Half-Man Half-Dog Demanding Reburial Of Artifacts"
+                ]
+            },
             "Werewolf": {}
         },
         "Cervidae": {
