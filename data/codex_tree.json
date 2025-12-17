@@ -1463,11 +1463,9 @@
             "Missing Time and Gear Malfunctions"
         ]
     },
-    "The Wild Hunt": {
-        "_stories": [
-            "Barbara Fisher\u2019s Phantom Horsemen in Athens, Ohio"
-        ]
-    },
+    "The Wild Hunt": [
+        "Barbara Fisher\u2019s Phantom Horsemen in Athens, Ohio"
+    ],
     "Theories": {
         "ASC": [
             "Friederike Hauffe\u2019s Six-And-A-Half-Year Sleep And Later Total Recall",
@@ -1803,7 +1801,11 @@
             "Alien Abductions as Shamanic Apprenticeship and Training in Healing",
             "Japanese Burial Mounds Haunted by Yokai"
         ],
-        "The Wild Hunt": {},
+        "The Wild Hunt": {
+            "_stories": [
+                "The Wild or Infernal Hunt as a Nocturnal Host of the Damned"
+            ]
+        },
         "_stories": [
             "Descriptions of Lesser Demons Serving at the Sabbath and as Familiar Spirits",
             "Missionary Tells Australian Aborigines of His \u201cLittle Body\u201d and Finds They Share the Belief",
