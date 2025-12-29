@@ -6239,14 +6239,6 @@
         "start_char": 312584,
         "title": "Pixie-Led Victims and a County Mayo Man Led Astray by Apparitions"
     },
-    "Placeholder": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 921879,
-        "keywords": "Barnett, Young Man of Somersetshire, Old Woman of Somersetshire, Somersetshire, 18th Century, Incubi/Succubi, Demonic Manifestation, Physical Phenomena, Strangulation, Transportation, Physical Attack, Transformation, Hair, Supernatural Force, Flash of Lightning, Healing/Deliverance, Alp",
-        "pages": "285-286",
-        "start_char": 919260,
-        "title": "Placeholder"
-    },
     "Plant-Linked Elementals and Lie-Detector Responses to Plant and Human Pain": {
         "book_slug": "operation_trojan_horse",
         "end_char": 478194,
@@ -8118,6 +8110,14 @@
         "pages": "263-267",
         "start_char": 845832,
         "title": "The Temptations and Torments of Maria von M\u00f6rk"
+    },
+    "The Vanishing Hag of Somersetshire": {
+        "book_slug": "christian_mysticism_vol_iv",
+        "end_char": 921879,
+        "keywords": "Barnett, Young Man of Somersetshire, Old Woman of Somersetshire, Somersetshire, 18th Century, Incubi/Succubi, Demonic Manifestation, Physical Phenomena, Strangulation, Transportation, Physical Attack, Transformation, Hair, Supernatural Force, Flash of Lightning, Healing/Deliverance, Alp",
+        "pages": "285-286",
+        "start_char": 919260,
+        "title": "The Vanishing Hag of Somersetshire"
     },
     "The Welsh Corpse Bird (Deryn Corph) as a Screeching Death Omen at the Window of the Sick": {
         "book_slug": "ecology_of_souls_volume_i",
