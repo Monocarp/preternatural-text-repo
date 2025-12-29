@@ -1807,6 +1807,14 @@
         "start_char": 1136860,
         "title": "Confessions of Flying to the Sabbath, Mocking Sacraments, and Suckling Toads"
     },
+    "Consent to Succubus": {
+        "book_slug": "christian_mysticism_vol_iv",
+        "end_char": 913013,
+        "keywords": "1650, 17th Century, Succubus, Brognoli, demon as a beautiful girl",
+        "pages": "283",
+        "start_char": 912004,
+        "title": "Consent to Succubus"
+    },
     "Contactee Milkman on Sydney Beach Addressed Telepathically by Space-Suited Men": {
         "book_slug": "operation_trojan_horse",
         "end_char": 106160,
@@ -1966,14 +1974,6 @@
         "pages": "122",
         "start_char": 466066,
         "title": "DMT\u2013Mugwort User\u2019s Life Review of Family, Friends, and Possessions"
-    },
-    "Daily Incubus Visits and a Woman Led to Sorcerers": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 916327,
-        "keywords": "daily incubus visits and a woman led to sorcerers",
-        "pages": "284",
-        "start_char": 913027,
-        "title": "Daily Incubus Visits and a Woman Led to Sorcerers"
     },
     "Daimler on the Fetch as Essential Spiritual Guide Tied to the Otherworld": {
         "book_slug": "ecology_of_souls_volume_i",
@@ -3750,6 +3750,14 @@
         "pages": "41",
         "start_char": 137246,
         "title": "Incubi and Succubi: Ruchin Visiting Dreamers and Begetting Offspring"
+    },
+    "Incubus and Sorcerers in 1694": {
+        "book_slug": "christian_mysticism_vol_iv",
+        "end_char": 913409,
+        "keywords": "Exorcist, 1694, 17th century, Incubus, blasphemies, sorcerers",
+        "pages": "284",
+        "start_char": 913027,
+        "title": "Incubus and Sorcerers in 1694"
     },
     "Incubus at Nazareth and Bavent\u2019s Menstrual-Host Burial": {
         "book_slug": "christian_mysticism_vol_iv",
