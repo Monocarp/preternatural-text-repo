@@ -5323,5 +5323,33 @@
             "Healing/Deliverance",
             "Alp"
         ]
+    },
+    "Placeholder": {
+        "start_char": 924427,
+        "end_char": 927931,
+        "pages": "287-288",
+        "keywords": [
+            "Illness",
+            "possession",
+            "death",
+            "1645",
+            "17th Century",
+            "Bergamo",
+            "25 years old",
+            "maleficium",
+            "fasting",
+            "Brognoli",
+            "confession",
+            "communion",
+            "exorcism",
+            "Inquisition",
+            "monastery",
+            "fourth hour of the night",
+            "hagriding",
+            "death",
+            "strangulation",
+            "ninth hour of the day",
+            "cursed food"
+        ]
     }
 }
