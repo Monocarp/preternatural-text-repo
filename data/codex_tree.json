@@ -2690,7 +2690,9 @@
                 "Gilles de Rais\u2019s Pact with Demons and Child Sacrifices"
             ],
             "Contract": {
-                "With Another Person": {},
+                "With Another Person": [
+                    "Androgina\u2019s Death-Ointment on Door Handles"
+                ],
                 "With a Demon": [
                     "Possession of a Girl from Citt\u00e0 di Castello and Demon\u2019s Accusation of a Sorcerer Priest",
                     "Ritual for Invoking Unclean Spirits via One\u2019s Shadow and the Appearance of Two Ruchin",
