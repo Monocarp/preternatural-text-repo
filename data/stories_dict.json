@@ -6167,14 +6167,6 @@
         "start_char": 312584,
         "title": "Pixie-Led Victims and a County Mayo Man Led Astray by Apparitions"
     },
-    "Placeholder": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 1147690,
-        "keywords": "Giles Cory, Indian Woman, Parris, Mather, New England, Indian Pawwaws, Sorcerers, Red Book, Spectral, Sabbath, Witch Marks, Left Eye, Cheek, Left Shoulder, Left Elbow, Left Side, Goat's Foot, Left Thigh, Left Knee, Shinbone, Left Foot, Right Eye, Arm, Knee, Thigh, Foot, Lower Lip, Heart, Buhler Protocols, 1628, 17th Century, Salem, Massachusetts, Witchcraft, Possession, Obsession, Demonic Manifestation, Clairvoyance, Paroxysms, Convulsions, Teeth-gnashing, Spectral Shape, Biting, Pinching, Strangulation, Physical Phenomena, Sensory Phenomena, Demonic Behaviors, Incubus, Succubus, Pact with Demon, Signing the Book, Black Sabbath, Initiation, Execution by Hanging, Blood-guilt, Animals Complicity, Dogs, Tormentors, Afflicted, Confessing, Judges, Inquisition-like Proceedings",
-        "pages": "355-357",
-        "start_char": 1142321,
-        "title": "Placeholder"
-    },
     "Plant-Linked Elementals and Lie-Detector Responses to Plant and Human Pain": {
         "book_slug": "operation_trojan_horse",
         "end_char": 478194,
@@ -7791,14 +7783,6 @@
         "start_char": 962223,
         "title": "The Bewitched Merchant's Daughter of Venice: A Case of Magical Love Maleficium"
     },
-    "The Cold-Water Ordeal on the Seine and Self-Accusation Inspired by the Demon": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 1155031,
-        "keywords": "the coldwater ordeal on the seine and selfaccusation inspired by the demon",
-        "pages": "358-359",
-        "start_char": 1152507,
-        "title": "The Cold-Water Ordeal on the Seine and Self-Accusation Inspired by the Demon"
-    },
     "The Confessions of Pierre Bourgot and Michel Verdung, Poligny Werewolf Trial, 1521": {
         "book_slug": "christian_mysticism_vol_iv",
         "end_char": 1006537,
@@ -8366,6 +8350,14 @@
         "pages": "151",
         "start_char": 503230,
         "title": "Two Peasants Found Hanging in Trees After a Storm"
+    },
+    "Two Rows of the Damned: Afflicted and Tormentors in the Salem Delusion": {
+        "book_slug": "christian_mysticism_vol_iv",
+        "end_char": 1147690,
+        "keywords": "Giles Cory, Indian Woman, Parris, Mather, New England, Indian Pawwaws, Sorcerers, Red Book, Spectral, Sabbath, Witch Marks, Left Eye, Cheek, Left Shoulder, Left Elbow, Left Side, Goat's Foot, Left Thigh, Left Knee, Shinbone, Left Foot, Right Eye, Arm, Knee, Thigh, Foot, Lower Lip, Heart, Buhler Protocols, 1628, 17th Century, Salem, Massachusetts, Witchcraft, Possession, Obsession, Demonic Manifestation, Clairvoyance, Paroxysms, Convulsions, Teeth-gnashing, Spectral Shape, Biting, Pinching, Strangulation, Physical Phenomena, Sensory Phenomena, Demonic Behaviors, Incubus, Succubus, Pact with Demon, Signing the Book, Black Sabbath, Initiation, Execution by Hanging, Blood-guilt, Animals Complicity, Dogs, Tormentors, Afflicted, Confessing, Judges, Inquisition-like Proceedings",
+        "pages": "355-357",
+        "start_char": 1142321,
+        "title": "Two Rows of the Damned: Afflicted and Tormentors in the Salem Delusion"
     },
     "UFO Blinding and Loss of Voice of Sergeant Benjamin Thompson": {
         "book_slug": "operation_trojan_horse",
