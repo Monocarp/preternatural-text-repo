@@ -4975,14 +4975,6 @@
         "start_char": 164577,
         "title": "Mary Wollstonecraft\u2019s Soul Taking Flight with Fairy Wing"
     },
-    "Mass Accusations, Demonic Disease, and Animals Drawn into Complicity": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 1146620,
-        "keywords": "psellus account of demonic promises and phantasms, possession, demonic possession",
-        "pages": "355-357",
-        "start_char": 1139257,
-        "title": "Mass Accusations, Demonic Disease, and Animals Drawn into Complicity"
-    },
     "Mass Burnings for Witchcraft in the Bishopric of W\u00fcrzburg": {
         "book_slug": "christian_mysticism_vol_iv",
         "end_char": 1366643,
@@ -6175,6 +6167,14 @@
         "start_char": 312584,
         "title": "Pixie-Led Victims and a County Mayo Man Led Astray by Apparitions"
     },
+    "Placeholder": {
+        "book_slug": "christian_mysticism_vol_iv",
+        "end_char": 1147690,
+        "keywords": "Giles Cory, Indian Woman, Parris, Mather, New England, Indian Pawwaws, Sorcerers, Red Book, Spectral, Sabbath, Witch Marks, Left Eye, Cheek, Left Shoulder, Left Elbow, Left Side, Goat's Foot, Left Thigh, Left Knee, Shinbone, Left Foot, Right Eye, Arm, Knee, Thigh, Foot, Lower Lip, Heart, Buhler Protocols, 1628, 17th Century, Salem, Massachusetts, Witchcraft, Possession, Obsession, Demonic Manifestation, Clairvoyance, Paroxysms, Convulsions, Teeth-gnashing, Spectral Shape, Biting, Pinching, Strangulation, Physical Phenomena, Sensory Phenomena, Demonic Behaviors, Incubus, Succubus, Pact with Demon, Signing the Book, Black Sabbath, Initiation, Execution by Hanging, Blood-guilt, Animals Complicity, Dogs, Tormentors, Afflicted, Confessing, Judges, Inquisition-like Proceedings",
+        "pages": "355-357",
+        "start_char": 1142321,
+        "title": "Placeholder"
+    },
     "Plant-Linked Elementals and Lie-Detector Responses to Plant and Human Pain": {
         "book_slug": "operation_trojan_horse",
         "end_char": 478194,
@@ -6926,14 +6926,6 @@
         "pages": "17",
         "start_char": 63192,
         "title": "Sara\u2019s 1983 Car-Crash NDE Meeting Jesus as Shepherd and the Virgin Mary"
-    },
-    "Satan Appearing in the Forms of the Innocent and the End of the Salem Executions": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 1139242,
-        "keywords": "satan appearing in the forms of the innocent and the end of the salem executions",
-        "pages": "354-355",
-        "start_char": 1138232,
-        "title": "Satan Appearing in the Forms of the Innocent and the End of the Salem Executions"
     },
     "Scaf, Hoppo, and Stadelein: Weather-Making, Shape-Shifting, and Other Sorceries in German Switzerland": {
         "book_slug": "christian_mysticism_vol_iv",
@@ -8806,14 +8798,6 @@
         "pages": "148",
         "start_char": 570240,
         "title": "Witch Killings and the Preservation of Psychic Ability in the Russian Gene Pool"
-    },
-    "Witch Marks, Demonic Affection, and the Toad\u2019s Foot on the Eye": {
-        "book_slug": "christian_mysticism_vol_iv",
-        "end_char": 1152492,
-        "keywords": "witch marks demonic affection and the toads foot on the eye",
-        "pages": "357-358",
-        "start_char": 1146648,
-        "title": "Witch Marks, Demonic Affection, and the Toad\u2019s Foot on the Eye"
     },
     "Witch Persecutions in the Electorate of Trier and Mass Burnings": {
         "book_slug": "christian_mysticism_vol_iv",
