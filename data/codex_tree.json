@@ -401,7 +401,9 @@
                 "Reputational": {}
             },
             "Physical Health Vexations": {
-                "Bite Marks": {},
+                "Bite Marks": [
+                    "Spectral Tormentors, the Devil\u2019s Red Book, and Early Salem Accusations"
+                ],
                 "Blocked Conception": [
                     "Demonic Contagion: The Transmission of Bewitched Maladies in Early 17th-Century Labourd",
                     "Bodin\u2019s Fifty Kinds of Love-Knot Magic and Judicial Unbinding"
