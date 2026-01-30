@@ -10,7 +10,6 @@
  * - Finds current assignments for a story
  * - Multi-level path selection (up to 8 levels deep)
  * - Assign/remove operations with error handling
- * - AI-suggested categories based on keywords matching category names
  */
 
 import { useState, useCallback, useEffect, useMemo } from 'react'
@@ -39,7 +38,6 @@ interface UseCategoryAssignmentReturn {
   codexTree: any
   selectedPath: string[]
   currentAssignments: string[][]
-  suggestedCategories: string[][]
   assigning: boolean
   loading: boolean
   
@@ -105,66 +103,6 @@ function getOptionsAtPath(tree: any, path: string[]): string[] {
   return Object.keys(node).filter(key => key !== '_stories').sort((a, b) => a.localeCompare(b))
 }
 
-/**
- * Generate category suggestions based on keywords matching category names.
- * Uses a scoring system similar to the mobile app.
- */
-function generateSuggestions(tree: any, keywords: string | undefined): string[][] {
-  if (!keywords || !tree || Object.keys(tree).length === 0) return []
-
-  const keywordList = keywords.toLowerCase().split(',').map(k => k.trim()).filter(Boolean)
-  if (keywordList.length === 0) return []
-  
-  const matches: Array<{ path: string[]; score: number }> = []
-
-  // Recursive function to find all paths and score them
-  const findPaths = (node: any, path: string[]) => {
-    for (const key of Object.keys(node)) {
-      if (key === '_stories') continue
-      
-      const currentPath = [...path, key]
-      const keyLower = key.toLowerCase()
-      
-      // Score based on keyword matches
-      let score = 0
-      for (const kw of keywordList) {
-        // Exact or contains match
-        if (keyLower.includes(kw) || kw.includes(keyLower)) {
-          score += 2
-        }
-        // Partial word match
-        const kwWords = kw.split(/\s+/)
-        const keyWords = keyLower.split(/\s+/)
-        for (const kWord of keyWords) {
-          for (const kwWord of kwWords) {
-            if (kWord.includes(kwWord) || kwWord.includes(kWord)) {
-              score += 1
-            }
-          }
-        }
-      }
-
-      if (score > 0) {
-        matches.push({ path: currentPath, score })
-      }
-
-      // Recurse into children
-      const child = node[key]
-      if (child && typeof child === 'object' && !Array.isArray(child)) {
-        findPaths(child, currentPath)
-      }
-    }
-  }
-
-  findPaths(tree, [])
-
-  // Sort by score and take top 5
-  return matches
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 5)
-    .map(m => m.path)
-}
-
 export function useCategoryAssignment(
   selectedStory: Story | null,
   options: UseCategoryAssignmentOptions = {}
@@ -201,12 +139,6 @@ export function useCategoryAssignment(
   const currentAssignments = useMemo(() => {
     if (!selectedStory || !codexTree) return []
     return findAssignmentsInTree(codexTree, selectedStory.title)
-  }, [selectedStory, codexTree])
-  
-  // Generate suggested categories based on keywords
-  const suggestedCategories = useMemo(() => {
-    if (!selectedStory || !codexTree) return []
-    return generateSuggestions(codexTree, selectedStory.keywords)
   }, [selectedStory, codexTree])
   
   // Handle path level selection (cascading dropdowns)
@@ -345,7 +277,6 @@ export function useCategoryAssignment(
     codexTree,
     selectedPath,
     currentAssignments,
-    suggestedCategories,
     assigning,
     loading,
     loadTree,
