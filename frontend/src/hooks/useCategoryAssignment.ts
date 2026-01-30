@@ -99,6 +99,9 @@ function getOptionsAtPath(tree: any, path: string[]): string[] {
     }
   }
   
+  // If node is an array (legacy leaf format), it has no children
+  if (Array.isArray(node)) return []
+  
   return Object.keys(node).filter(key => key !== '_stories').sort((a, b) => a.localeCompare(b))
 }
 

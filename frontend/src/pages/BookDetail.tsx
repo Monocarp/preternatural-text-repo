@@ -180,6 +180,9 @@ const BookDetail = () => {
       }
     }
     
+    // If node is an array (legacy leaf format), it has no children
+    if (Array.isArray(node)) return []
+    
     // Get keys that are not _stories, sorted alphabetically
     return Object.keys(node).filter(key => key !== '_stories').sort((a, b) => a.localeCompare(b))
   }

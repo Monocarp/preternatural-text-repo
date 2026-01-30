@@ -96,6 +96,8 @@ const Archive = () => {
     
     // Get child keys excluding '_stories'
     if (!node || typeof node !== 'object') return []
+    // If node is an array (legacy leaf format), it has no children
+    if (Array.isArray(node)) return []
     return Object.keys(node).filter(k => k !== '_stories').sort()
   }, [tree, decodedPath])
 
