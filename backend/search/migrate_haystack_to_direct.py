@@ -141,6 +141,7 @@ def create_fts_index(docs: List[StoryDocument], output_path: str) -> FTS5Index:
             'keywords': doc.meta.get("keywords", ""),
             'start_char': doc.meta.get("start_char", 0),
             'end_char': doc.meta.get("end_char", 0),
+            'extra_metadata': doc.meta  # Store full metadata including people, locations, etc.
         })
     
     fts_index.add_documents_batch(batch_docs)

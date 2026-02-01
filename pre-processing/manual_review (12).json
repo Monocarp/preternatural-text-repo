@@ -1,0 +1,451 @@
+{
+  "book_slug": "christian_mysticism_vol_iv",
+  "generated_at": "2026-01-31T19:34:07.869552Z",
+  "confidence_threshold": 0.75,
+  "total_flagged": 3,
+  "instructions": "\nMANUAL REVIEW INSTRUCTIONS:\n1. Review each flagged story below\n2. Check warnings and verify extracted metadata\n3. Edit story_positions.json directly to fix issues:\n   - Add missing years/centuries to temporal\n   - Add missing cities/countries to locations  \n   - Add missing topics\n4. After fixing, change status from \"NEEDS_REVIEW\" to \"REVIEWED\"\n5. Re-run indexing to update search\n        ",
+  "stories": [
+    {
+      "title": "Violent Possession and Exorcism of Peter Bernardi of Areia, with Discovery and Burning of a Magical Charm",
+      "confidence": 0.66,
+      "warnings": [
+        "No temporal data extracted"
+      ],
+      "extracted": {
+        "temporal": {
+          "years": [],
+          "centuries": [],
+          "decades": []
+        },
+        "locations": {
+          "cities": [
+            "Vallombrosa",
+            "Florence",
+            "Areia"
+          ],
+          "regions": [],
+          "countries": [
+            "Italy",
+            "Portugal"
+          ],
+          "raw_mentions": [
+            "Valombrosa",
+            "Areia",
+            "Florence"
+          ],
+          "normalized": [
+            {
+              "original": "Valombrosa",
+              "name": "Vallombrosa",
+              "type": "city",
+              "region": "Tuscany",
+              "country": "Italy",
+              "confidence": 1.0
+            },
+            {
+              "original": "Areia",
+              "name": "Areia",
+              "type": "city",
+              "country": "Portugal",
+              "confidence": 0.9
+            },
+            {
+              "original": "Florence",
+              "name": "Florence",
+              "type": "city",
+              "region": "Tuscany",
+              "country": "Italy",
+              "confidence": 1.0
+            }
+          ]
+        },
+        "topics": {
+          "primary": [
+            "violent possession",
+            "howling",
+            "biting noses and ears",
+            "demonic speech",
+            "exorcism",
+            "furious rage",
+            "wild burning eyes",
+            "crying out",
+            "convulsions",
+            "torment",
+            "clamor",
+            "tumult",
+            "trembling",
+            "demonic departure",
+            "valombrosa monastery",
+            "sanctuary",
+            "church",
+            "florence",
+            "threshold",
+            "hills and mountains",
+            "binding",
+            "curse",
+            "exorcism",
+            "healing",
+            "testing/diagnosis",
+            "destruction"
+          ],
+          "secondary": [
+            "demon",
+            "monks",
+            "charm",
+            "bundled silk-thread-bound cloth",
+            "bone of dead child",
+            "woman’s hair",
+            "donkey’s hide skin",
+            "signs and characters",
+            "cross",
+            "peter bernardi of areia",
+            "hieronymus",
+            "camaldolese"
+          ],
+          "raw_analysis": {
+            "phenomena": [
+              "Violent Possession",
+              "Howling",
+              "Biting noses and ears",
+              "Demonic speech",
+              "Exorcism",
+              "Furious rage",
+              "Wild burning eyes",
+              "Crying out",
+              "Convulsions",
+              "Torment",
+              "Clamor",
+              "Tumult",
+              "Trembling",
+              "Demonic departure"
+            ],
+            "entities": [
+              "Demon",
+              "Monks"
+            ],
+            "implements": [
+              "Charm",
+              "Bundled silk-thread-bound cloth",
+              "Bone of dead child",
+              "Woman’s hair",
+              "Donkey’s hide skin",
+              "Signs and characters",
+              "Cross"
+            ],
+            "context": [
+              "Valombrosa monastery",
+              "Sanctuary",
+              "Church",
+              "Florence",
+              "Threshold",
+              "Hills and mountains"
+            ],
+            "people": [
+              "Peter Bernardi of Areia",
+              "Hieronymus"
+            ],
+            "functional_purpose": [
+              "Binding",
+              "Curse",
+              "Exorcism",
+              "Healing",
+              "Testing/Diagnosis",
+              "Destruction"
+            ],
+            "historical_groups": [
+              "Camaldolese"
+            ]
+          }
+        }
+      },
+      "current_keywords": [
+        "peter bernardi of areia",
+        "hieronymus",
+        "vallombrosa",
+        "florence",
+        "areia",
+        "italy",
+        "portugal",
+        "binding",
+        "curse",
+        "exorcism",
+        "healing",
+        "testing/diagnosis",
+        "destruction",
+        "violent possession",
+        "howling",
+        "biting noses and ears",
+        "demonic speech",
+        "furious rage",
+        "wild burning eyes",
+        "crying out",
+        "convulsions",
+        "torment",
+        "clamor",
+        "tumult",
+        "trembling",
+        "demonic departure",
+        "valombrosa monastery",
+        "sanctuary",
+        "church",
+        "threshold",
+        "hills and mountains",
+        "demon",
+        "monks",
+        "charm",
+        "bundled silk-thread-bound cloth",
+        "bone of dead child",
+        "woman’s hair",
+        "donkey’s hide skin",
+        "signs and characters",
+        "cross",
+        "camaldolese"
+      ]
+    },
+    {
+      "title": "Possessed Old Woman at Valombrosa, Demonic Confession of an Amulet, and its Destruction",
+      "confidence": 0.66,
+      "warnings": [
+        "No temporal data extracted"
+      ],
+      "extracted": {
+        "temporal": {
+          "years": [],
+          "centuries": [],
+          "decades": []
+        },
+        "locations": {
+          "cities": [
+            "Vallombrosa"
+          ],
+          "regions": [],
+          "countries": [
+            "Italy"
+          ],
+          "raw_mentions": [
+            "Valombrosa",
+            "Valombrosa"
+          ],
+          "normalized": [
+            {
+              "original": "Valombrosa",
+              "name": "Vallombrosa",
+              "type": "city",
+              "region": "Tuscany",
+              "country": "Italy",
+              "confidence": 1.0
+            },
+            {
+              "original": "Valombrosa",
+              "name": "Vallombrosa",
+              "type": "city",
+              "region": "Tuscany",
+              "country": "Italy",
+              "confidence": 1.0
+            }
+          ]
+        },
+        "topics": {
+          "primary": [
+            "demonic possession",
+            "exorcism",
+            "severe torment",
+            "jesting and laughter",
+            "recitation of creed and chants",
+            "demon crying out",
+            "noisy demon expulsion",
+            "monastery",
+            "valombrosa",
+            "binding (via belief and intention)",
+            "spell anchor",
+            "diagnosis (demon reveals object)",
+            "curse",
+            "exorcism (by removal and burning)"
+          ],
+          "secondary": [
+            "demon",
+            "possessed old woman",
+            "monks",
+            "amulet",
+            "wax charm",
+            "ribbon-bound object",
+            "magical signs and letters"
+          ],
+          "raw_analysis": {
+            "phenomena": [
+              "Demonic Possession",
+              "Exorcism",
+              "Severe Torment",
+              "Jesting and Laughter",
+              "Recitation of Creed and Chants",
+              "Demon Crying Out",
+              "Noisy Demon Expulsion"
+            ],
+            "entities": [
+              "Demon",
+              "Possessed Old Woman",
+              "Monks"
+            ],
+            "implements": [
+              "Amulet",
+              "Wax Charm",
+              "Ribbon-bound Object",
+              "Magical Signs and Letters"
+            ],
+            "context": [
+              "Monastery",
+              "Valombrosa"
+            ],
+            "people": [],
+            "functional_purpose": [
+              "Binding (via belief and intention)",
+              "Spell Anchor",
+              "Diagnosis (demon reveals object)",
+              "Curse",
+              "Exorcism (by removal and burning)"
+            ],
+            "historical_groups": []
+          }
+        }
+      },
+      "current_keywords": [
+        "vallombrosa",
+        "italy",
+        "binding (via belief and intention)",
+        "spell anchor",
+        "diagnosis (demon reveals object)",
+        "curse",
+        "exorcism (by removal and burning)",
+        "demonic possession",
+        "exorcism",
+        "severe torment",
+        "jesting and laughter",
+        "recitation of creed and chants",
+        "demon crying out",
+        "noisy demon expulsion",
+        "monastery",
+        "valombrosa",
+        "demon",
+        "possessed old woman",
+        "monks",
+        "amulet",
+        "wax charm",
+        "ribbon-bound object",
+        "magical signs and letters"
+      ]
+    },
+    {
+      "title": "Possession of a Girl from Città di Castello and the Demon’s Accusation of a Sorcerous Priest",
+      "confidence": 0.66,
+      "warnings": [
+        "No temporal data extracted"
+      ],
+      "extracted": {
+        "temporal": {
+          "years": [],
+          "centuries": [],
+          "decades": []
+        },
+        "locations": {
+          "cities": [
+            "Città di Castello"
+          ],
+          "regions": [],
+          "countries": [
+            "Italy"
+          ],
+          "raw_mentions": [
+            "Città di Castello",
+            "Città di Castello"
+          ],
+          "normalized": [
+            {
+              "original": "Città di Castello",
+              "name": "Città di Castello",
+              "type": "city",
+              "region": "Umbria",
+              "country": "Italy",
+              "confidence": 1.0
+            },
+            {
+              "original": "Città di Castello",
+              "name": "Città di Castello",
+              "type": "city",
+              "region": "Umbria",
+              "country": "Italy",
+              "confidence": 1.0
+            }
+          ]
+        },
+        "topics": {
+          "primary": [
+            "possession",
+            "violent possession",
+            "suicidal impulses",
+            "violent attacks",
+            "biting",
+            "scratching",
+            "demonic confession",
+            "città di castello",
+            "church",
+            "conjuration",
+            "binding",
+            "curse",
+            "release"
+          ],
+          "secondary": [
+            "demon",
+            "sword"
+          ],
+          "raw_analysis": {
+            "phenomena": [
+              "Possession",
+              "Violent Possession",
+              "Suicidal Impulses",
+              "Violent Attacks",
+              "Biting",
+              "Scratching",
+              "Demonic Confession"
+            ],
+            "entities": [
+              "Demon"
+            ],
+            "implements": [
+              "Sword"
+            ],
+            "context": [
+              "Città di Castello",
+              "Church"
+            ],
+            "people": [],
+            "functional_purpose": [
+              "Conjuration",
+              "Binding",
+              "Curse",
+              "Release"
+            ],
+            "historical_groups": []
+          }
+        }
+      },
+      "current_keywords": [
+        "città di castello",
+        "italy",
+        "conjuration",
+        "binding",
+        "curse",
+        "release",
+        "possession",
+        "violent possession",
+        "suicidal impulses",
+        "violent attacks",
+        "biting",
+        "scratching",
+        "demonic confession",
+        "church",
+        "demon",
+        "sword"
+      ]
+    }
+  ]
+}

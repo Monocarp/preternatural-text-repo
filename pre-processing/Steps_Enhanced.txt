@@ -1,0 +1,1415 @@
+# ==================================================================================
+# PRETERNATURAL TEXT PREPROCESSING PIPELINE - ENHANCED WITH STRUCTURED METADATA
+# ==================================================================================
+# 
+# This file contains the complete preprocessing pipeline split into Colab code blocks.
+# Copy each section into a separate Colab cell and run in order.
+#
+# BLOCK 1: Dependencies & Setup
+# BLOCK 2: Story Extraction (GPT)
+# BLOCK 3: Metadata Extraction Functions
+# BLOCK 4: Story Position Location & Metadata Enhancement
+# BLOCK 5: Chunking & Embedding
+# BLOCK 6: Main Batch Processor
+#
+# ==================================================================================
+
+
+# ==================================================================================
+# BLOCK 1: DEPENDENCIES & SETUP
+# ==================================================================================
+
+!pip install -q spacy openai anthropic
+!pip install -q haystack-ai==2.5.1 sentence-transformers==3.1.1 numpy==1.26.4
+!pip install -q faiss-cpu==1.8.0 --no-deps
+!python -m spacy download en_core_web_trf
+
+import os
+import json
+import re
+import difflib
+import numpy as np
+import faiss
+import spacy
+import requests
+from collections import Counter
+from datetime import datetime
+from typing import Dict, List, Tuple, Optional, Any
+from haystack import Document
+from haystack.components.embedders import SentenceTransformersDocumentEmbedder
+from haystack.document_stores.in_memory import InMemoryDocumentStore
+from google.colab import files, userdata
+
+# ========================== API KEYS ==========================
+# OpenAI (for story extraction)
+openai_api_key = None
+try:
+    openai_api_key = userdata.get('OPENAI_API_KEY')
+    if openai_api_key and not isinstance(openai_api_key, str):
+        openai_api_key = None  # userdata returned non-string
+except Exception:
+    openai_api_key = None
+
+if not openai_api_key:
+    print("OpenAI API key not found in Colab secrets.")
+    print("Please enter it manually or add it to Colab Secrets.")
+    openai_api_key = input("Enter your OpenAI API key: ")
+    if isinstance(openai_api_key, str):
+        openai_api_key = openai_api_key.strip()
+    else:
+        openai_api_key = str(openai_api_key).strip()
+
+if not openai_api_key:
+    raise ValueError("OpenAI API key is required!")
+
+from openai import OpenAI
+openai_client = OpenAI(api_key=openai_api_key)
+OPENAI_MODEL = "gpt-5.1-2025-11-13"  # your original model
+
+# Anthropic (for location normalization)
+anthropic_api_key = None
+try:
+    anthropic_api_key = userdata.get('ANTHROPIC_API_KEY')
+    if anthropic_api_key and not isinstance(anthropic_api_key, str):
+        anthropic_api_key = None  # userdata returned non-string
+except Exception:
+    anthropic_api_key = None
+
+if not anthropic_api_key:
+    print("Anthropic API key not found in Colab secrets.")
+    print("Please enter it manually or add it to Colab Secrets.")
+    anthropic_api_key = input("Enter your Anthropic API key: ")
+    if isinstance(anthropic_api_key, str):
+        anthropic_api_key = anthropic_api_key.strip()
+    else:
+        anthropic_api_key = str(anthropic_api_key).strip()
+
+if not anthropic_api_key:
+    raise ValueError("Anthropic API key is required!")
+
+import anthropic
+claude_client = anthropic.Anthropic(api_key=anthropic_api_key)
+CLAUDE_MODEL = "claude-sonnet-4-20250514"
+
+# Load spaCy model
+print("Loading spaCy model...")
+nlp = spacy.load("en_core_web_trf")
+print("spaCy model loaded!")
+
+# ========================== DIRECTORY SETUP ==========================
+books_dir = "/content/books/"
+data_dir = "/content/data/"
+cache_dir = "/content/cache/"
+os.makedirs(books_dir, exist_ok=True)
+os.makedirs(data_dir, exist_ok=True)
+os.makedirs(cache_dir, exist_ok=True)
+
+# Location cache (persists across books)
+LOCATION_CACHE_PATH = os.path.join(cache_dir, "location_cache.json")
+
+def load_location_cache() -> Dict:
+    if os.path.exists(LOCATION_CACHE_PATH):
+        with open(LOCATION_CACHE_PATH, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+def save_location_cache(cache: Dict):
+    with open(LOCATION_CACHE_PATH, 'w', encoding='utf-8') as f:
+        json.dump(cache, f, indent=2, ensure_ascii=False)
+
+print("Setup complete!")
+
+
+# ==================================================================================
+# BLOCK 2: STORY EXTRACTION (GPT)
+# ==================================================================================
+
+def make_slug(text: str) -> str:
+    return re.sub(r'[^\w\s-]', '', text).strip().lower().replace(' ', '-')
+
+SYSTEM_PROMPT = """
+You are the world's most exhaustive and precise verbatim extractor of supernatural, paranormal, miraculous, magical, or otherwise odd occurrences from historical, medieval, and scholarly texts.
+
+FUNDAMENTAL RULE (APPLY ALWAYS)
+• COMPLETENESS IS PARAMOUNT. Extract EVERY single incident that fits the definition, no matter how short, passing, or minor. When in doubt, extract it. Missing stories is worse than including borderline cases.
+
+WHAT COUNTS AS AN EXTRACTABLE STORY
+✓ EXTRACT these types of content (including one-sentence mentions and testimonies):
+- "X was possessed by a demon"
+- "Miracles occurred at [location]"
+- "According to testimony, Y saw the devil"
+- "Legend says Z could fly"
+- "The trial records show A confessed to witchcraft"
+- "The author mentions that B was bewitched"
+- "As an example of possession, consider C who..."
+- Any named individuals + supernatural events in ANY combination
+• Critical: Historical analysis, theological discussion, legal commentary, philosophical argument — if they mention or give examples of specific incidents, extract the incidents verbatim.
+
+✗ DO NOT EXTRACT:
+- Pure theory or abstract doctrine (e.g., "Demons are fallen angels")
+- Purely general statements without specifics (e.g., "Witches meet at sabbaths", "Many were possessed")
+
+VERBATIM RULES — NO ALTERATION
+• VERBATIM ONLY — NEVER TRUNCATE OR SUMMARIZE. Copy the exact original text word-for-word, preserving all original wording, casing, punctuation, and formatting within the excerpt.
+• NEVER change capitalization, punctuation, spelling, or wording.
+• If the same story appears multiple times with slight differences, include the longest version and append any unique verbatim sentences from the shorter versions at the end, separated by " --- ".
+
+STORY BOUNDARIES & SENTENCE RULES
+• Every individual story extraction MUST begin at the start of a sentence and MUST end at the end of a sentence. NEVER start or end mid-sentence.
+• If the sentence boundary requirement would create ambiguous pronouns, expand the excerpt (backward and/or forward) to include antecedent context so the excerpt is self-contained.
+• If extending to the sentence boundary would include unrelated material, prefer including that extra material rather than cutting mid-sentence.
+
+NO AMBIGUOUS PRONOUNS
+• ALWAYS include antecedent context. If a pronoun appears whose antecedent is not inside the extraction, expand the extraction using original sentences until the antecedent is explicit. Do not guess or insert names — include only original text.
+
+UNIQUENESS, MERGING, AND THE " --- " RULE
+• A story is unique if it has a distinct event, actors, location, or outcome.
+• Combine only identical or near-identical retellings. When combining, append unique sentences from shorter or variant retellings separated by " --- ".
+• For scattered mentions of the same event across the text, you may assemble them into a single extraction using " --- " between verbatim segments, but only when doing so preserves chronological/coherent sense and does not conflate distinct events.
+• Do NOT merge stories that differ in any significant detail.
+
+FORMAT (EXACT)
+• Each extraction must use this exact header format (replace placeholders as specified):
+  <div align="center"><b>[Concise Descriptive Title Based Solely on Content]</b></div>
+  <div align="center">"{book_title}" Pages X-Y</div>
+
+• Use the exact book title provided in the {book_title} placeholder — do NOT infer or use any title from the source text.
+• Page ranges may be non-consecutive (e.g., Pages 45-47, 192, 305-307).
+• After the two header lines, place the full verbatim story text here, including all original formatting and quotes.
+• Separate multiple story extractions with exactly ONE blank line.
+• If no stories are found, output only the single line:
+  No supernatural stories extracted.
+
+ADDITIONAL PRACTICAL RULES
+• Start/end extracts at sentence boundaries even if this requires including full paragraphs or additional sentences for context.
+• Include context for unclear pronouns or references so each extraction is self-contained.
+• Extract liberally — better to include borderline/extra items than to miss a true incident.
+• You have unlimited output length — be exhaustive.
+
+MINDSET
+• You are mining for supernatural events hidden in any type of text: scholarly articles, legal records, theological works, chronicles, folklore, trial transcripts, etc. Treat passing mentions, testimonies, legends, trial references, and examples as extractable stories.
+"""
+
+def extract_supernatural_stories(text: str, book_title: str) -> str:
+    """Extract supernatural stories from text using GPT."""
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT.format(book_title=book_title)},
+        {"role": "user", "content": text}
+    ]
+    response = openai_client.chat.completions.create(
+        model=OPENAI_MODEL,
+        messages=messages,
+        temperature=0.0,
+    )
+    usage = response.usage
+    print(f"Tokens → Prompt: {usage.prompt_tokens:,} | Completion: {usage.completion_tokens:,} | Total: {usage.total_tokens:,}")
+    return response.choices[0].message.content.strip()
+
+def run_story_extraction():
+    """Main workflow for story extraction."""
+    print("SUPERNATURAL STORY EXTRACTOR\n")
+
+    # 1. Human enters the correct metadata
+    book_title = input("Exact book title: ").strip()
+    book_author = input("Author (optional): ").strip() or "Unknown"
+    book_year_str = input("Publication year (optional): ").strip()
+    book_year = book_year_str if book_year_str.isdigit() else None
+
+    book_slug = make_slug(book_title)
+
+    print(f"\nBook slug generated: {book_slug}")
+    print(f"Title: {book_title}")
+    print(f"Author: {book_author}")
+    print(f"Year: {book_year or 'N/A'}\n")
+
+    input("Looks good? Press Enter to continue, or Ctrl+C to cancel...")
+
+    # 2. Upload Markdown parts
+    print("\nUpload your cleaned Markdown files (part1.md, part2.md, etc.)")
+    uploaded = files.upload()
+    sorted_files = sorted(uploaded.keys(), key=lambda f: (
+        999 if not re.search(r'part[ _-]?(\d+)', f, re.I) else
+        int(re.search(r'part[ _-]?(\d+)', f, re.I).group(1))
+    ))
+
+    all_stories = []
+    for filename in sorted_files:
+        if not filename.lower().endswith('.md'):
+            print(f"Skipping non-md: {filename}")
+            continue
+
+        print(f"\nProcessing → {filename}")
+        text = open(filename, 'rb').read().decode('utf-8', errors='ignore')
+        stories = extract_supernatural_stories(text, book_title)
+
+        if stories and "No supernatural stories extracted" not in stories:
+            all_stories.append(stories)
+
+    final_stories = "\n\n".join(all_stories) if all_stories else "No supernatural stories extracted."
+
+    # 3. Save the extracted stories + metadata
+    safe_name = re.sub(r'[^\w\s-]', '', book_title).strip()[:50]
+    base_filename = f"extracted_stories_{book_slug}"
+
+    stories_file = f"{base_filename}.md"
+    with open(stories_file, "w", encoding="utf-8") as f:
+        f.write(final_stories)
+    print(f"\nSaved → {stories_file}")
+
+    metadata = {
+        "book_slug": book_slug,
+        "book_title": book_title,
+        "book_author": book_author,
+        "book_year": book_year,
+        "extracted_at": datetime.utcnow().isoformat() + "Z",
+        "source_files": list(uploaded.keys())
+    }
+
+    metadata_file = f"{base_filename}_meta.json"
+    with open(metadata_file, "w", encoding="utf-8") as f:
+        json.dump(metadata, f, indent=2)
+
+    print(f"Metadata saved → {metadata_file}")
+    
+    files.download(stories_file)
+    files.download(metadata_file)
+    
+    return book_slug, book_title
+
+# Uncomment to run story extraction:
+# run_story_extraction()
+
+
+# ==================================================================================
+# BLOCK 3: METADATA EXTRACTION FUNCTIONS
+# ==================================================================================
+
+# ========================== TEMPORAL EXTRACTION ==========================
+
+CENTURY_WORDS = {
+    "first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5,
+    "sixth": 6, "seventh": 7, "eighth": 8, "ninth": 9, "tenth": 10,
+    "eleventh": 11, "twelfth": 12, "thirteenth": 13, "fourteenth": 14,
+    "fifteenth": 15, "sixteenth": 16, "seventeenth": 17, "eighteenth": 18,
+    "nineteenth": 19, "twentieth": 20, "twenty-first": 21
+}
+
+# Historical periods removed - not useful for this domain
+
+def extract_temporal(content: str) -> Dict:
+    """Extract temporal metadata from story content."""
+    temporal = {
+        "years": [],
+        "centuries": [],
+        "decades": []
+    }
+    
+    content_lower = content.lower()
+    
+    # 1. Explicit years: "in 1632", "year 1645", "A.D. 1500"
+    year_patterns = [
+        r'\b(1[0-9]{3})\b',  # 1000-1999
+        r'\b(20[0-2][0-9])\b',  # 2000-2029
+        r'A\.?D\.?\s*(\d{3,4})',  # A.D. years
+        r'(\d{3,4})\s*A\.?D\.?',  # Years A.D.
+    ]
+    years_found = set()
+    for pattern in year_patterns:
+        matches = re.findall(pattern, content, re.I)
+        for m in matches:
+            try:
+                year = int(m)
+                if 500 <= year <= 2030:  # Reasonable range
+                    years_found.add(year)
+            except:
+                pass
+    
+    # 2. Date ranges: "1632-1634", "from 1640 to 1645"
+    range_patterns = [
+        r'(\d{4})\s*[-–—]\s*(\d{4})',
+        r'from\s+(\d{4})\s+to\s+(\d{4})',
+        r'between\s+(\d{4})\s+and\s+(\d{4})',
+    ]
+    for pattern in range_patterns:
+        matches = re.findall(pattern, content, re.I)
+        for start, end in matches:
+            try:
+                start_year, end_year = int(start), int(end)
+                if 500 <= start_year <= 2030 and 500 <= end_year <= 2030:
+                    for y in range(start_year, min(end_year + 1, start_year + 20)):  # Cap at 20 years
+                        years_found.add(y)
+            except:
+                pass
+    
+    # 3. Century mentions: "17th century", "seventeenth century"
+    centuries_found = set()
+    
+    # Numeric: "17th century", "12th-century"
+    century_num = re.findall(r'(\d{1,2})(?:st|nd|rd|th)[\s-]+century', content, re.I)
+    for c in century_num:
+        try:
+            centuries_found.add(int(c))
+        except:
+            pass
+    
+    # Word form: "seventeenth century"
+    for word, num in CENTURY_WORDS.items():
+        if re.search(rf'\b{word}\s+century\b', content_lower):
+            centuries_found.add(num)
+    
+    # 4. Decades: "1630s", "the thirties"
+    decade_matches = re.findall(r'(\d{3})0s', content)
+    decades = [f"{d}0s" for d in decade_matches]
+    
+    # Infer centuries from years
+    for year in years_found:
+        century = (year - 1) // 100 + 1
+        centuries_found.add(century)
+    
+    temporal["years"] = sorted(list(years_found))
+    temporal["centuries"] = sorted(list(centuries_found))
+    temporal["decades"] = decades
+    
+    return temporal
+
+
+# ========================== LOCATION EXTRACTION ==========================
+
+def extract_raw_locations(content: str) -> List[str]:
+    """Extract raw location mentions using spaCy NER."""
+    doc = nlp(content[:10000])  # Limit to prevent memory issues
+    
+    locations = set()
+    for ent in doc.ents:
+        if ent.label_ in ["GPE", "LOC", "FAC"]:
+            # Clean up the entity text
+            loc = ent.text.strip()
+            # Skip very short or obviously wrong extractions
+            if len(loc) > 2 and not loc.isdigit():
+                locations.add(loc)
+    
+    return list(locations)
+
+
+def lookup_wikidata(location_name: str) -> Optional[Dict]:
+    """
+    Query WikiData for location hierarchy.
+    Returns normalized location data or None if not found.
+    """
+    try:
+        # Search for the entity
+        search_url = "https://www.wikidata.org/w/api.php"
+        search_params = {
+            "action": "wbsearchentities",
+            "search": location_name,
+            "language": "en",
+            "type": "item",
+            "format": "json",
+            "limit": 3
+        }
+        
+        response = requests.get(search_url, params=search_params, timeout=5)
+        if response.status_code != 200:
+            return None
+        
+        data = response.json()
+        if not data.get("search"):
+            return None
+        
+        # Check if any result is a geographic entity
+        for result in data["search"]:
+            desc = result.get("description", "").lower()
+            # Look for geographic indicators
+            geo_keywords = ["city", "town", "village", "country", "region", "province", 
+                          "state", "county", "municipality", "commune", "district",
+                          "kingdom", "empire", "republic", "territory"]
+            
+            if any(kw in desc for kw in geo_keywords):
+                # Determine type and extract info
+                loc_type = "unknown"
+                if any(kw in desc for kw in ["city", "town", "village", "commune", "municipality"]):
+                    loc_type = "city"
+                elif any(kw in desc for kw in ["country", "kingdom", "empire", "republic"]):
+                    loc_type = "country"
+                elif any(kw in desc for kw in ["region", "province", "state", "county", "district", "territory"]):
+                    loc_type = "region"
+                
+                return {
+                    "name": result.get("label", location_name),
+                    "type": loc_type,
+                    "description": desc,
+                    "wikidata_id": result.get("id"),
+                    "confidence": 0.7
+                }
+        
+        return None
+        
+    except Exception as e:
+        print(f"WikiData lookup failed for '{location_name}': {e}")
+        return None
+
+
+def normalize_with_claude(locations: List[str], story_title: str) -> List[Dict]:
+    """
+    Use Claude to normalize locations that WikiData couldn't resolve.
+    Batches locations for efficiency.
+    """
+    if not locations:
+        return []
+    
+    prompt = f"""I have these location names extracted from a historical supernatural/religious text titled "{story_title}". 
+For each location, provide:
+1. The modern/canonical name
+2. Type: "city", "region", or "country"
+3. The country it's in (if city or region)
+4. Any historical context if the name is archaic
+
+Locations to normalize:
+{json.dumps(locations, indent=2)}
+
+Return ONLY a JSON array with objects like:
+[
+  {{"original": "Loudun", "name": "Loudun", "type": "city", "region": "Nouvelle-Aquitaine", "country": "France", "confidence": 0.95}},
+  {{"original": "the Rhineland", "name": "Rhineland", "type": "region", "country": "Germany", "confidence": 0.9}},
+  {{"original": "the monastery", "name": null, "type": null, "country": null, "confidence": 0.0, "note": "Too vague to identify"}}
+]
+
+If a location cannot be identified, set confidence to 0 and name to null.
+Return ONLY the JSON array, no other text."""
+
+    try:
+        response = claude_client.messages.create(
+            model=CLAUDE_MODEL,
+            max_tokens=2000,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        
+        result_text = response.content[0].text.strip()
+        
+        # Try to parse JSON
+        # Handle case where Claude wraps in markdown
+        if "```json" in result_text:
+            result_text = re.search(r'```json\s*(.*?)\s*```', result_text, re.DOTALL)
+            if result_text:
+                result_text = result_text.group(1)
+        elif "```" in result_text:
+            result_text = re.search(r'```\s*(.*?)\s*```', result_text, re.DOTALL)
+            if result_text:
+                result_text = result_text.group(1)
+        
+        normalized = json.loads(result_text)
+        return normalized
+        
+    except Exception as e:
+        print(f"Claude normalization failed: {e}")
+        return []
+
+
+def extract_and_normalize_locations(content: str, story_title: str, cache: Dict) -> Dict:
+    """
+    Full location extraction pipeline:
+    1. spaCy NER for raw mentions
+    2. Check cache for known locations
+    3. WikiData for unknown locations
+    4. Claude fallback for remaining
+    """
+    raw_locations = extract_raw_locations(content)
+    
+    if not raw_locations:
+        return {
+            "cities": [],
+            "regions": [],
+            "countries": [],
+            "raw_mentions": [],
+            "normalized": []
+        }
+    
+    normalized = []
+    unknown = []
+    
+    # Check cache first
+    for loc in raw_locations:
+        loc_key = loc.lower().strip()
+        if loc_key in cache:
+            normalized.append(cache[loc_key])
+        else:
+            # Try WikiData
+            wiki_result = lookup_wikidata(loc)
+            if wiki_result and wiki_result.get("confidence", 0) >= 0.5:
+                wiki_result["original"] = loc
+                cache[loc_key] = wiki_result
+                normalized.append(wiki_result)
+            else:
+                unknown.append(loc)
+    
+    # Claude fallback for remaining unknowns
+    if unknown:
+        claude_results = normalize_with_claude(unknown, story_title)
+        for result in claude_results:
+            if result.get("confidence", 0) >= 0.5:
+                original = result.get("original", "").lower().strip()
+                cache[original] = result
+                normalized.append(result)
+    
+    # Build structured output
+    cities = []
+    regions = []
+    countries = set()
+    
+    for loc in normalized:
+        if loc.get("type") == "city":
+            cities.append(loc.get("name"))
+            if loc.get("country"):
+                countries.add(loc.get("country"))
+        elif loc.get("type") == "region":
+            regions.append(loc.get("name"))
+            if loc.get("country"):
+                countries.add(loc.get("country"))
+        elif loc.get("type") == "country":
+            countries.add(loc.get("name"))
+    
+    return {
+        "cities": list(set(cities)),
+        "regions": list(set(regions)),
+        "countries": sorted(list(countries)),
+        "raw_mentions": raw_locations,
+        "normalized": normalized
+    }
+
+
+# ========================== TOPIC EXTRACTION ==========================
+# Based on existing codex_tree.json taxonomy
+
+DOMAIN_PATTERNS = {
+    "phenomena": {
+        # Possession-related
+        "possession": ["possessed", "possession", "demon entered", "spirit entered", "taken over by", "obsession", "oppression"],
+        "exorcism": ["exorcism", "exorcised", "cast out", "commanded the demon", "expelled the spirit", "delivered", "deliverance"],
+        
+        # Physical manifestations
+        "levitation": ["levitated", "levitation", "rose into the air", "floated above", "suspended"],
+        "poltergeist": ["poltergeist", "objects moved", "thrown about", "levitated objects", "mysterious torrents"],
+        "apparition": ["apparition", "appeared before", "vision of", "saw the figure of", "spectral", "phantom"],
+        "haunting": ["haunted", "haunting", "ghost appeared", "specter", "phantom", "haunt"],
+        
+        # Bodily phenomena
+        "stigmata": ["stigmata", "wounds of christ", "bleeding hands", "marks appeared"],
+        "bilocation": ["bilocation", "appeared in two places", "seen simultaneously"],
+        "incorruptibility": ["incorrupt", "uncorrupted", "body did not decay"],
+        "inedia": ["inedia", "fasting", "ate nothing", "survived without food"],
+        
+        # Witchcraft & magic
+        "witchcraft": ["witchcraft", "witch", "sorcery", "spell", "enchantment", "bewitched", "maleficium", "hexed"],
+        "sabbath": ["sabbath", "witch gathering", "nocturnal assembly", "devils' mass"],
+        "familiar_spirit": ["familiar", "familiar spirit", "demon servant", "imp"],
+        "shapeshifting": ["shapeshifting", "transformed into", "werewolf", "lycanthropy", "metamorphosis"],
+        
+        # Mystical phenomena
+        "mystical_union": ["mystical union", "ecstasy", "rapture", "divine union", "transported", "ravishment"],
+        "prophecy": ["prophecy", "prophesied", "foretold", "predicted", "vision of the future", "precognition"],
+        "miracle": ["miracle", "miraculous", "supernatural healing", "divine intervention", "wonder"],
+        "visions": ["vision", "visionary", "saw", "beheld", "revelation"],
+        
+        # Death-related
+        "nde": ["near-death", "nde", "died and returned", "clinical death", "life review"],
+        "obe": ["out of body", "obe", "astral projection", "left my body"],
+        "deathbed_vision": ["deathbed vision", "deathbed visitation", "dying saw"],
+        
+        # Psychic
+        "telepathy": ["telepathy", "telepathic", "mind reading", "thought transmission"],
+        "precognition": ["precognition", "precognitive", "saw the future", "predicted"],
+        "psychokinesis": ["psychokinesis", "telekinesis", "moved by mind", "pk"],
+    },
+    "entities": {
+        # Demonic
+        "demonic": ["demon", "devil", "satan", "lucifer", "infernal", "diabolical", "evil spirit", "daemon"],
+        "incubus_succubus": ["incubus", "succubus", "night demon", "sexual demon"],
+        
+        # Divine/holy
+        "angelic": ["angel", "archangel", "heavenly being", "divine messenger", "seraph", "cherubim"],
+        "mary": ["virgin mary", "our lady", "blessed mother", "madonna", "mary appeared", "marian"],
+        "jesus": ["jesus", "christ", "lord", "savior", "risen lord"],
+        "saints": ["saint", "holy man", "holy woman", "blessed", "venerable"],
+        
+        # Spirits & ghosts
+        "spirit": ["spirit", "ghost", "shade", "soul of the dead", "departed soul"],
+        "poltergeist_entity": ["poltergeist", "noisy ghost", "knocking spirit"],
+        
+        # Fae & cryptids
+        "fairy": ["fairy", "fae", "faerie", "sidhe", "good folk", "little people", "elf"],
+        "banshee": ["banshee", "bean sidhe", "wailing woman", "death messenger"],
+        "cryptid": ["bigfoot", "sasquatch", "yeti", "creature", "beast", "monster"],
+        "mothman": ["mothman", "winged humanoid", "red-eyed"],
+        
+        # UFO-related
+        "alien": ["alien", "extraterrestrial", "et", "grey", "nordic", "reptilian"],
+        "men_in_black": ["men in black", "mib", "mysterious men"],
+    },
+    "context": {
+        # Religious settings
+        "monastery": ["monastery", "convent", "abbey", "priory", "religious house", "cloister"],
+        "church": ["church", "cathedral", "chapel", "sanctuary", "altar", "basilica"],
+        
+        # Legal/judicial
+        "witch_trial": ["witch trial", "tried for witchcraft", "accused of sorcery", "witch hunt"],
+        "inquisition": ["inquisition", "tribunal", "ecclesiastical court", "heresy trial", "holy office"],
+        "execution": ["executed", "burned", "hanged", "beheaded", "put to death", "martyred"],
+        
+        # Paranormal investigation
+        "investigation": ["investigated", "examined", "inquiry", "study", "research"],
+        "seance": ["seance", "séance", "sitting", "mediumship", "spiritualism"],
+        
+        # Other contexts
+        "burial_mound": ["burial mound", "barrow", "tumulus", "ancient site", "sacred site"],
+        "ufo_encounter": ["ufo", "flying saucer", "unidentified", "craft", "abduction"],
+    }
+}
+
+def extract_domain_topics(content: str) -> Dict:
+    """Extract domain-specific topics using pattern matching."""
+    content_lower = content.lower()
+    
+    topics = {
+        "primary": [],
+        "phenomena": [],
+        "entities": [],
+        "context": [],
+        "all_matches": []
+    }
+    
+    match_counts = {}
+    
+    for category, patterns in DOMAIN_PATTERNS.items():
+        for topic, keywords in patterns.items():
+            count = 0
+            for keyword in keywords:
+                if keyword in content_lower:
+                    count += content_lower.count(keyword)
+            if count > 0:
+                match_counts[topic] = count
+                topics[category].append(topic)
+                topics["all_matches"].append((topic, count))
+    
+    # Sort by frequency and pick top topics as primary
+    sorted_topics = sorted(match_counts.items(), key=lambda x: x[1], reverse=True)
+    topics["primary"] = [t[0] for t in sorted_topics[:3]]
+    
+    return topics
+
+
+# ========================== KEYWORD SYNTHESIS ==========================
+
+def synthesize_keywords(title: str, temporal: Dict, locations: Dict, 
+                       topics: Dict, existing_keywords: List[str]) -> List[str]:
+    """
+    Synthesize rich keywords from all extracted metadata.
+    Combines: title words, locations, temporal, topics, existing keywords.
+    """
+    keywords = set()
+    
+    # 1. Existing keywords (preserve manual curation)
+    for kw in existing_keywords:
+        if kw and len(kw) > 2:
+            keywords.add(kw.lower())
+    
+    # 2. Title words (skip common words)
+    stopwords = {"the", "a", "an", "of", "in", "at", "by", "to", "for", "and", "or", "on", "with"}
+    title_words = [w.lower() for w in re.findall(r'\b\w+\b', title) if w.lower() not in stopwords and len(w) > 2]
+    keywords.update(title_words[:5])
+    
+    # 3. Locations
+    for city in locations.get("cities", [])[:3]:
+        if city:
+            keywords.add(city.lower())
+    for country in locations.get("countries", [])[:2]:
+        if country:
+            keywords.add(country.lower())
+    
+    # 4. Temporal
+    for century in temporal.get("centuries", [])[:2]:
+        keywords.add(f"{century}th century")
+    for decade in temporal.get("decades", [])[:2]:
+        keywords.add(decade)
+    
+    # 5. Topics
+    for topic in topics.get("primary", [])[:3]:
+        keywords.add(topic.replace("_", " "))
+    
+    # Limit to 15 keywords max
+    return sorted(list(keywords))[:15]
+
+
+# ========================== CONFIDENCE & VALIDATION ==========================
+
+def calculate_confidence(temporal: Dict, locations: Dict, topics: Dict) -> float:
+    """
+    Calculate confidence score (0-1) based on extraction quality.
+    Equal weighting: 33% temporal, 33% locations, 33% topics.
+    """
+    score = 0.0
+    
+    # Temporal (33%)
+    has_temporal = bool(temporal.get("years") or temporal.get("centuries"))
+    if has_temporal:
+        score += 0.33
+    
+    # Locations (33%)
+    has_locations = bool(locations.get("cities") or locations.get("countries"))
+    if has_locations:
+        score += 0.33
+    
+    # Topics (33%)
+    has_topics = bool(topics.get("primary"))
+    if has_topics:
+        score += 0.33
+    
+    # Small bonus for having rich data
+    if len(temporal.get("years", [])) >= 2:
+        score += 0.01
+    if len(locations.get("countries", [])) >= 1:
+        score += 0.01
+    
+    return min(score, 1.0)
+
+
+def generate_warnings(temporal: Dict, locations: Dict, topics: Dict) -> List[str]:
+    """Generate human-readable warnings for review."""
+    warnings = []
+    
+    if not temporal.get("years") and not temporal.get("centuries"):
+        warnings.append("No temporal data found - check if story contains dates or century references")
+    
+    if not locations.get("cities") and not locations.get("countries"):
+        raw = locations.get("raw_mentions", [])
+        if raw:
+            warnings.append(f"Locations not normalized - raw mentions: {raw[:5]}")
+        else:
+            warnings.append("No locations found in text")
+    
+    if not topics.get("primary"):
+        warnings.append("No primary topics extracted - story may lack supernatural keywords")
+    
+    return warnings
+
+
+# ==================================================================================
+# BLOCK 4: STORY POSITION LOCATION & METADATA ENHANCEMENT
+# ==================================================================================
+
+def normalize(text):
+    """Normalize text for comparison."""
+    text = re.sub(r"<.*?>", "", text)
+    text = re.sub(r"\"[^\"]+\" Pages? \d+(-\d+)?", "", text)
+    text = re.sub(r"[,:;.!?–—]", "", text)
+    return re.sub(r"\s+", " ", text.strip().lower())
+
+
+def parse_index_md(path, titles, slug):
+    """Parse index markdown for additional metadata."""
+    if not os.path.exists(path):
+        return {t: {"pages": "Unknown", "keywords": []} for t in titles}
+    with open(path, encoding="utf-8") as f:
+        txt = f.read()
+    data = {}
+    for line in txt.splitlines():
+        m = re.match(r"^(.*?) - (\d+)(?:-(\d+))?$", line.strip())
+        if m:
+            desc = m.group(1).strip()
+            pages = m.group(2) if not m.group(3) else f"{m.group(2)}-{m.group(3)}"
+            keywords = [desc.lower()]
+            if "demon" in desc.lower():
+                keywords.extend(["possession", "demonic possession"])
+            elif "witch" in desc.lower():
+                keywords.append("witch trials")
+            data[desc] = {"pages": pages, "keywords": keywords}
+    result = {}
+    for t in titles:
+        best, ratio = None, 0
+        nt = re.sub(r"[^\w\s]", "", t.lower())
+        for k in data:
+            nk = re.sub(r"[^\w\s]", "", k.lower())
+            r = difflib.SequenceMatcher(None, nt, nk).ratio()
+            if r > ratio and r > 0.5:
+                ratio, best = r, k
+        result[t] = data.get(best, {"pages": "Unknown", "keywords": [re.sub(r"[^\w\s]", "", t.lower())]}) if best else {"pages": "Unknown", "keywords": [re.sub(r"[^\w\s]", "", t.lower())]}
+    return result
+
+
+def locate_story_positions(full_md_path, stories_md_path, index_md_path, book_slug, book_path):
+    """Locate story positions in full text and extract basic metadata."""
+    with open(full_md_path, encoding="utf-8") as f:
+        full_md = f.read()
+    with open(stories_md_path, encoding="utf-8") as f:
+        stories_md = f.read()
+
+    # Extract individual stories from Stories.md
+    blocks = re.finditer(
+        r'<div align="center"><b>(.*?)</b></div>\s*'
+        r'(?:<div align="center">"[^"]+" Pages? ([^<]+?)</div>\s*)?'
+        r'(.*?)(?=<div align="center"><b>|$)',
+        stories_md, flags=re.IGNORECASE | re.DOTALL
+    )
+    stories = []
+    for m in blocks:
+        title = m.group(1).strip()
+        pages = m.group(2).strip() if m.group(2) else "Unknown"
+        content = m.group(3).strip()
+        stories.append({"title": title, "pages": pages, "content": content})
+        print(f"Parsed: {title} ({len(content)} chars)")
+
+    index_data = parse_index_md(index_md_path, [s["title"] for s in stories], book_slug)
+    positions = {}
+
+    for s in stories:
+        title = s["title"]
+        content = s["content"].strip()
+
+        # 1. Try exact match first
+        start = full_md.find(content)
+        if start != -1:
+            end = start + len(content)
+            verbatim = content
+        else:
+            # 2. Fallback: fuzzy alignment with sliding window
+            start_guess = full_md.find(content[:200])
+            if start_guess == -1:
+                start = end = -1
+                verbatim = ""
+            else:
+                best_s = best_e = start_guess
+                best_r = 0
+                norm_c = normalize(content)
+                for ds in range(-500, 501, 50):
+                    for de in range(-500, 1001, 100):
+                        ts = start_guess + ds
+                        te = start_guess + len(content) + de
+                        if ts < 0 or te > len(full_md) or te <= ts:
+                            continue
+                        r = difflib.SequenceMatcher(None, normalize(full_md[ts:te]), norm_c).ratio()
+                        if r > best_r:
+                            best_r, best_s, best_e = r, ts, te
+                start, end, verbatim = best_s, best_e, full_md[best_s:best_e]
+
+        story_meta = index_data.get(title, {"pages": "Unknown", "keywords": []})
+        final_pages = s["pages"] if s["pages"] != "Unknown" else story_meta.get("pages", "Unknown")
+        final_keywords = story_meta.get("keywords", [])
+        if not final_keywords:
+            final_keywords = [re.sub(r"[^\w\s]", "", title.lower())]
+
+        positions[title] = {
+            "start_char": int(start) if start != -1 else -1,
+            "end_char": int(end) if end != -1 else -1,
+            "pages": final_pages,
+            "keywords": final_keywords,
+            "verbatim": verbatim
+        }
+
+    return positions, full_md
+
+
+def extract_structured_metadata(positions: Dict, full_md: str, book_slug: str, book_path: str) -> Tuple[Dict, List]:
+    """
+    Extract structured metadata (temporal, locations, topics) for each story.
+    Returns enhanced positions dict and review queue.
+    """
+    print(f"\n{'='*60}")
+    print("EXTRACTING STRUCTURED METADATA")
+    print(f"{'='*60}")
+    
+    # Load location cache
+    location_cache = load_location_cache()
+    initial_cache_size = len(location_cache)
+    
+    enhanced_positions = {}
+    review_queue = []
+    
+    total = len([p for p in positions.values() if p.get("start_char", -1) != -1])
+    processed = 0
+    
+    for title, pos in positions.items():
+        if pos.get("start_char", -1) == -1:
+            enhanced_positions[title] = pos
+            continue
+        
+        processed += 1
+        print(f"\n[{processed}/{total}] {title[:50]}...")
+        
+        content = full_md[pos["start_char"]:pos["end_char"]]
+        
+        # 1. Temporal extraction
+        temporal = extract_temporal(content)
+        print(f"  Temporal: {len(temporal.get('years', []))} years, {len(temporal.get('centuries', []))} centuries")
+        
+        # 2. Location extraction + normalization
+        locations = extract_and_normalize_locations(content, title, location_cache)
+        print(f"  Locations: {len(locations.get('cities', []))} cities, {len(locations.get('countries', []))} countries")
+        
+        # 3. Topic extraction
+        topics = extract_domain_topics(content)
+        print(f"  Topics: {topics.get('primary', [])}")
+        
+        # 4. Synthesize keywords
+        keywords = synthesize_keywords(title, temporal, locations, topics, pos.get("keywords", []))
+        
+        # 5. Calculate confidence
+        confidence = calculate_confidence(temporal, locations, topics)
+        status = "AUTO_APPROVED" if confidence >= 0.75 else "NEEDS_REVIEW"
+        print(f"  Confidence: {confidence:.2f} → {status}")
+        
+        # 6. Build enhanced entry
+        enhanced = {
+            **pos,
+            "temporal": temporal,
+            "locations": {
+                "cities": locations.get("cities", []),
+                "regions": locations.get("regions", []),
+                "countries": locations.get("countries", [])
+            },
+            "topics": topics,
+            "keywords": keywords,
+            "confidence": round(confidence, 2),
+            "status": status
+        }
+        
+        # 7. Generate warnings and add to review queue if needed
+        if confidence < 0.75:
+            warnings = generate_warnings(temporal, locations, topics)
+            review_queue.append({
+                "title": title,
+                "confidence": round(confidence, 2),
+                "warnings": warnings,
+                "extracted": {
+                    "temporal": temporal,
+                    "locations": locations,
+                    "topics": topics
+                },
+                "current_keywords": keywords
+            })
+        
+        enhanced_positions[title] = enhanced
+    
+    # Save updated location cache
+    if len(location_cache) > initial_cache_size:
+        save_location_cache(location_cache)
+        print(f"\nLocation cache updated: {initial_cache_size} → {len(location_cache)} entries")
+    
+    print(f"\n{'='*60}")
+    print(f"METADATA EXTRACTION COMPLETE")
+    print(f"  Processed: {processed} stories")
+    print(f"  Auto-approved: {processed - len(review_queue)}")
+    print(f"  Needs review: {len(review_queue)}")
+    print(f"{'='*60}")
+    
+    return enhanced_positions, review_queue
+
+
+def save_review_queue(review_queue: List, book_path: str, book_slug: str):
+    """Save review queue to file for manual review."""
+    if not review_queue:
+        print("No stories need manual review!")
+        return
+    
+    review_file = os.path.join(book_path, "manual_review.json")
+    
+    review_data = {
+        "book_slug": book_slug,
+        "generated_at": datetime.utcnow().isoformat() + "Z",
+        "confidence_threshold": 0.75,
+        "total_flagged": len(review_queue),
+        "instructions": """
+MANUAL REVIEW INSTRUCTIONS:
+1. Review each flagged story below
+2. Check warnings and verify extracted metadata
+3. Edit story_positions.json directly to fix issues:
+   - Add missing years/centuries to temporal
+   - Add missing cities/countries to locations  
+   - Add missing topics
+4. After fixing, change status from "NEEDS_REVIEW" to "REVIEWED"
+5. Re-run indexing to update search
+        """,
+        "stories": review_queue
+    }
+    
+    with open(review_file, "w", encoding="utf-8") as f:
+        json.dump(review_data, f, indent=2, ensure_ascii=False)
+    
+    print(f"\n📋 Review file saved: {review_file}")
+    files.download(review_file)
+
+
+# ==================================================================================
+# BLOCK 5: CHUNKING & EMBEDDING  
+# ==================================================================================
+
+def chunk_full_md(full_md_path, positions, book_slug):
+    """Chunk full text with enhanced metadata."""
+    with open(full_md_path, encoding="utf-8") as f:
+        txt = f.read()
+
+    chunks = []
+    pos = 0
+    cid = 0
+
+    # Extract page markers for page tracking
+    page_splits = re.split(r"\s*\[?\s*Page\s*[:\s]*(\d+)\s*\]?\s*", txt, flags=re.IGNORECASE)
+    page_map = {}
+    char_offset = 0
+    for i in range(1, len(page_splits), 2):
+        page_num = int(page_splits[i])
+        page_content = page_splits[i+1] if i+1 < len(page_splits) else ""
+        page_map[char_offset] = page_num
+        char_offset += len(page_content)
+
+    def get_page_for_char(char_pos):
+        pages = sorted(page_map.items())
+        for i, (offset, page_num) in enumerate(pages):
+            if i + 1 < len(pages):
+                if offset <= char_pos < pages[i+1][0]:
+                    return page_num
+            else:
+                if offset <= char_pos:
+                    return page_num
+        return 1
+
+    while pos < len(txt):
+        end = txt.find("\n\n", pos + 1800)
+        if end == -1:
+            end = len(txt)
+        chunk = txt[pos:end]
+
+        # Find which stories overlap with this chunk
+        stories_in_chunk = []
+        for t, p in positions.items():
+            if p.get("start_char", -1) != -1 and p["start_char"] < end and p["end_char"] > pos:
+                stories_in_chunk.append({
+                    "title": t,
+                    "start_char": max(pos, p["start_char"]),
+                    "end_char": min(end, p["end_char"]),
+                    "pages": p.get("pages", "Unknown"),
+                    "keywords": p.get("keywords", []),
+                    # Enhanced metadata
+                    "temporal": p.get("temporal", {}),
+                    "locations": p.get("locations", {}),
+                    "topics": p.get("topics", {})
+                })
+
+        # Extract keywords from chunk content
+        heading_matches = re.findall(r"# (.*?)\n", chunk)
+        non_story_keywords = [h.lower() for h in heading_matches]
+
+        if not non_story_keywords:
+            word_counts = Counter(re.findall(r'\w+', chunk.lower()))
+            non_story_keywords = [word for word, count in word_counts.most_common(5)]
+
+        # Combine keywords from stories and chunk
+        all_keywords = set(non_story_keywords)
+        for story in stories_in_chunk:
+            all_keywords.update(story.get("keywords", [])[:5])
+
+        keywords_str = ", ".join(list(all_keywords)[:10]) if all_keywords else ""
+
+        # Determine page range
+        start_page = get_page_for_char(pos)
+        end_page = get_page_for_char(end)
+        pages_str = str(start_page) if start_page == end_page else f"{start_page}-{end_page}"
+
+        # Aggregate temporal/location/topic data from stories in chunk
+        chunk_centuries = set()
+        chunk_countries = set()
+        chunk_topics = set()
+        for story in stories_in_chunk:
+            chunk_centuries.update(story.get("temporal", {}).get("centuries", []))
+            chunk_countries.update(story.get("locations", {}).get("countries", []))
+            chunk_topics.update(story.get("topics", {}).get("primary", []))
+
+        meta = {
+            "book": book_slug,
+            "source": book_slug.replace('_', ' '),
+            "chunk_id": f"{book_slug}_{cid}",
+            "type": "chunk",
+            "has_story": bool(stories_in_chunk),
+            "pages": pages_str,
+            "keywords": keywords_str,
+            # Enhanced metadata
+            "centuries": list(chunk_centuries),
+            "countries": list(chunk_countries),
+            "topics": list(chunk_topics)
+        }
+
+        if stories_in_chunk:
+            meta["stories"] = stories_in_chunk
+
+        if keywords_str:
+            chunk = chunk.strip() + "\n\nKeywords: " + keywords_str
+
+        chunks.append(Document(content=chunk, meta=meta))
+        pos = end
+        cid += 1
+
+    return chunks
+
+
+# ==================================================================================
+# BLOCK 6: MAIN BATCH PROCESSOR
+# ==================================================================================
+
+def serialize_value(val):
+    """Helper to serialize values safely (handles numpy types)."""
+    if isinstance(val, np.ndarray):
+        return val.tolist()
+    elif isinstance(val, (np.integer, np.int64, np.int32)):
+        return int(val)
+    elif isinstance(val, (np.floating, np.float64, np.float32)):
+        return float(val)
+    elif isinstance(val, dict):
+        return {serialize_value(k): serialize_value(v) for k, v in val.items()}
+    elif isinstance(val, list):
+        return [serialize_value(x) for x in val]
+    else:
+        return val
+
+
+def serialize_doc(doc):
+    """Helper to serialize entire doc."""
+    item = {
+        "id": str(doc.id) if doc.id is not None else None,
+        "content": doc.content,
+        "meta": serialize_value(doc.meta)
+    }
+    if hasattr(doc, 'embedding') and doc.embedding is not None:
+        emb = doc.embedding
+        item["embedding"] = serialize_value(emb)
+    return item
+
+
+def ensure_numpy_embedding(docs):
+    """Helper to convert embedding to NumPy float32."""
+    for doc in docs:
+        if hasattr(doc, 'embedding') and doc.embedding is not None:
+            if hasattr(doc.embedding, 'cpu'):
+                doc.embedding = doc.embedding.cpu().numpy().astype(np.float32)
+            elif not isinstance(doc.embedding, np.ndarray):
+                doc.embedding = np.array(doc.embedding, dtype=np.float32)
+    return docs
+
+
+def batch_preprocess():
+    """Main batch processor with enhanced metadata extraction."""
+    force = []  # Add book slugs here to force reprocess
+    
+    embedder = SentenceTransformersDocumentEmbedder(
+        model="BAAI/bge-large-en-v1.5",
+        normalize_embeddings=True
+    )
+    embedder.warm_up()
+
+    # Paths
+    docs_path = os.path.join(data_dir, "documents.json")
+    faiss_path = os.path.join(data_dir, "faiss_index.bin")
+    store_path = os.path.join(data_dir, "document_store.json")
+
+    # Load existing documents
+    existing_docs = []
+    if os.path.exists(docs_path):
+        print("Loading existing documents.json...")
+        with open(docs_path, "r", encoding="utf-8") as f:
+            raw = json.load(f)
+
+        for item in raw:
+            doc = Document(
+                content=item["content"],
+                meta=item.get("meta", {}),
+                id=item.get("id")
+            )
+            if "embedding" in item and item["embedding"] is not None:
+                doc.embedding = np.array(item["embedding"], dtype=np.float32)
+            existing_docs.append(doc)
+        print(f"Loaded {len(existing_docs)} existing documents")
+
+    all_docs = existing_docs.copy()
+    indexed_books = {doc.meta.get("book") for doc in existing_docs if doc.meta.get("book")}
+    newly_added_docs = []
+    new_docs_count = 0
+
+    # Process books
+    for d in os.listdir(books_dir):
+        path = os.path.join(books_dir, d)
+        if not os.path.isdir(path):
+            continue
+        slug = d.lower().replace(" ", "_")
+
+        if slug in indexed_books and slug not in force:
+            print(f"Skipping {slug} (already indexed)")
+            continue
+
+        if slug in force and slug in indexed_books:
+            old_count = len(all_docs)
+            all_docs = [doc for doc in all_docs if doc.meta.get("book") != slug]
+            print(f"Force-reprocessing {slug}: removed {old_count - len(all_docs)} old docs")
+
+        full_md = os.path.join(path, "Full_Text.md")
+        stories_md = os.path.join(path, "Stories.md")
+        index_md = os.path.join(path, "grouped_index.md")
+
+        if not all(os.path.exists(p) for p in [full_md, stories_md]):
+            print(f"Missing files in {slug}, skipping...")
+            continue
+
+        print(f"\n{'='*60}")
+        print(f"PROCESSING: {slug}")
+        print(f"{'='*60}")
+
+        # Step 1: Locate story positions
+        positions, full_text = locate_story_positions(full_md, stories_md, index_md, slug, path)
+        
+        # Step 2: Extract structured metadata (NEW)
+        positions, review_queue = extract_structured_metadata(positions, full_text, slug, path)
+        
+        # Step 3: Save enhanced story_positions.json
+        positions_path = os.path.join(path, "story_positions.json")
+        with open(positions_path, "w", encoding="utf-8") as f:
+            json.dump(positions, f, indent=2, ensure_ascii=False)
+        print(f"story_positions.json saved with enhanced metadata")
+        files.download(positions_path)
+        
+        # Step 4: Save review queue if any
+        save_review_queue(review_queue, path, slug)
+        
+        # Step 5: Chunk with enhanced metadata
+        chunks = chunk_full_md(full_md, positions, slug)
+        print(f"→ {len(chunks)} chunks")
+
+        # Step 6: Story-level docs with enhanced metadata
+        story_docs = []
+        for title, pos in positions.items():
+            if pos.get("start_char", -1) == -1:
+                continue
+            text = full_text[pos["start_char"]:pos["end_char"]].strip()
+            if not text:
+                continue
+            
+            story_docs.append(Document(
+                content=text,
+                meta={
+                    "type": "story",
+                    "title": title,
+                    "book": slug,
+                    "source": slug.replace('_', ' '),
+                    "pages": pos.get("pages", "Unknown"),
+                    "keywords": ", ".join(pos.get("keywords", [])),
+                    "start_char": pos["start_char"],
+                    "end_char": pos["end_char"],
+                    # Enhanced metadata
+                    "centuries": pos.get("temporal", {}).get("centuries", []),
+                    "years": pos.get("temporal", {}).get("years", []),
+                    "countries": pos.get("locations", {}).get("countries", []),
+                    "cities": pos.get("locations", {}).get("cities", []),
+                    "topics": pos.get("topics", {}).get("primary", []),
+                    "confidence": pos.get("confidence", 0),
+                    "status": pos.get("status", "UNKNOWN")
+                }
+            ))
+        print(f"→ {len(story_docs)} full stories")
+
+        # Step 7: Embed
+        all_new_docs = chunks + story_docs
+        result = embedder.run(all_new_docs)
+        new_embedded = result["documents"]
+        new_embedded = ensure_numpy_embedding(new_embedded)
+
+        all_docs.extend(new_embedded)
+        newly_added_docs.extend(new_embedded)
+        new_docs_count += len(new_embedded)
+        print(f"→ Added {len(new_embedded)} new embedded documents")
+
+    # Save everything
+    if not all_docs:
+        print("No documents to save.")
+        return
+
+    emb_count = sum(1 for d in all_docs if getattr(d, 'embedding', None) is not None)
+    print(f"\nPre-save check: {emb_count}/{len(all_docs)} docs have embeddings")
+
+    # documents.json
+    docs_data = [serialize_doc(d) for d in all_docs]
+    with open(docs_path, "w", encoding="utf-8") as f:
+        json.dump(docs_data, f, indent=2, ensure_ascii=False)
+    files.download(docs_path)
+    print(f"documents.json saved → {len(all_docs)} total docs")
+
+    # FAISS Index
+    if os.path.exists(faiss_path):
+        print("Loading existing FAISS index...")
+        faiss_index = faiss.read_index(faiss_path)
+        print(f"Loaded FAISS index with {faiss_index.ntotal} vectors")
+    else:
+        dimension = 1024
+        faiss_index = faiss.IndexFlatL2(dimension)
+        print("No existing FAISS; starting fresh index")
+
+    new_embeddings = []
+    for doc in newly_added_docs:
+        if hasattr(doc, 'embedding') and doc.embedding is not None:
+            emb = doc.embedding
+            if isinstance(emb, list):
+                emb = np.array(emb, dtype=np.float32)
+            elif hasattr(emb, 'cpu'):
+                emb = emb.cpu().numpy().astype(np.float32)
+            else:
+                emb = np.asarray(emb).astype(np.float32)
+            new_embeddings.append(emb)
+
+    if new_embeddings:
+        new_embeddings = np.vstack(new_embeddings)
+        faiss_index.add(new_embeddings)
+        print(f"Appended {len(new_embeddings)} new vectors to FAISS")
+
+    faiss.write_index(faiss_index, faiss_path)
+    files.download(faiss_path)
+    print(f"faiss_index.bin updated → {faiss_index.ntotal} total vectors")
+
+    # Document Store
+    store_docs = []
+    for doc in all_docs:
+        emb_list = None
+        if hasattr(doc, 'embedding') and doc.embedding is not None:
+            emb = doc.embedding
+            if isinstance(emb, np.ndarray):
+                emb_list = emb.tolist()
+            elif isinstance(emb, list):
+                emb_list = emb[:]
+            else:
+                emb_list = np.array(emb).tolist()
+
+        store_doc = Document(
+            content=doc.content,
+            meta=doc.meta,
+            embedding=emb_list,
+            id=doc.id
+        )
+        store_docs.append(store_doc)
+
+    store = InMemoryDocumentStore()
+    store.write_documents(store_docs)
+    store.save_to_disk(store_path)
+    files.download(store_path)
+    print("document_store.json saved")
+
+    # Summary
+    stories = sum(1 for d in all_docs if d.meta.get("type") == "story")
+    chunks = len(all_docs) - stories
+    print(f"\n{'='*60}")
+    print(f"SUCCESS! Total: {len(all_docs)} docs ({stories} stories + {chunks} chunks)")
+    print(f"Growth this run: +{new_docs_count}")
+    print(f"{'='*60}")
+
+
+# ==================================================================================
+# RUN CELLS
+# ==================================================================================
+
+# CELL A: Run story extraction (from uploaded markdown parts)
+# run_story_extraction()
+
+# CELL B: Run batch preprocessing (from books directory)
+# batch_preprocess()

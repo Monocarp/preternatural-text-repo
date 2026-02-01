@@ -1,0 +1,822 @@
+Pre Processing Steps:
+
+# Final minimal preprocessing - leveraging your clean input format
+# Assumes:
+# - Page markers are standardized as [Page XXX]
+# - Footnotes are already stripped
+# - You manually chunk by 10-15 pages
+!pip install -q spacy
+!python -m spacy download en_core_web_trf
+
+import spacy
+import re
+
+# Load the best model for sentence detection
+nlp = spacy.load("en_core_web_trf")
+
+def prepare_chunk_for_extraction(markdown_chunk: str, book_title: str, start_page: int) -> str:
+    """
+    Minimal preprocessing with your standardized format
+    """
+
+    # Since footnotes are stripped and pages standardized, we only need
+    # to protect common abbreviations from sentence splitting
+    protected_text = markdown_chunk
+
+    # Common abbreviations in historical/religious texts
+    abbrevs = ["Fr", "Dr", "Mr", "Mrs", "St", "Rev", "pp", "p", "ch", "vol",
+               "etc", "viz", "i.e", "e.g", "cf", "Mt", "Mk", "Lk", "Jn"]
+
+    for abbrev in abbrevs:
+        # Protect the dot after abbreviations
+        protected_text = re.sub(f'\\b{abbrev}\\.', f'{abbrev}<!DOT!>', protected_text, flags=re.I)
+
+    # Process with spaCy
+    doc = nlp(protected_text)
+
+    sentences = []
+    current_page = start_page
+
+    for sent_idx, sent in enumerate(doc.sents):
+        sent_text = sent.text.strip()
+        if not sent_text:
+            continue
+
+        # Restore dots
+        sent_text = sent_text.replace("<!DOT!>", ".")
+
+        # Extract page from your standardized markers
+        page_match = re.search(r'\[Page (\d+)\]', sent_text)
+        if page_match:
+            current_page = int(page_match.group(1))
+            # Since you manually chunk, we can trust these page markers completely
+
+        # Simple, clean markers
+        marked = f"[S{sent_idx}][P{current_page}] {sent_text}"
+        sentences.append(marked)
+
+    marked_text = "\n".join(sentences)
+
+    # Focused prompt
+    prompt = f"""BOOK: {book_title}
+
+EXTRACT ALL supernatural/paranormal/miraculous/magical incidents from the text below.
+
+CRITICAL RULES:
+1. Extract EVERYTHING - even single sentences like "she was possessed"
+2. Start and end at [S#] markers (sentence boundaries)
+3. If starting with he/she/it/they, expand backwards until the person is identified
+
+FORMAT each story as:
+<div align="center"><b>[Descriptive Title]</b></div>
+<div align="center">"{book_title}" Pages X-Y</div>
+
+[Verbatim text]
+
+Use [P#] markers for page ranges. Missing a story is worse than including a borderline case.
+
+TEXT:
+{marked_text}"""
+
+    return prompt
+
+
+def clean_extracted_output(extracted_text: str) -> str:
+    """Remove markers from final output"""
+    # Remove sentence/page markers
+    cleaned = re.sub(r'\[S\d+\]\[P\d+\]\s*', '', extracted_text)
+    return cleaned
+
+
+# Even simpler version if you want to remove ALL complexity
+def ultra_minimal_prep(chunk: str, book_title: str) -> str:
+    """
+    Ultra-minimal version - just mark sentences, trust spaCy completely
+    """
+    doc = nlp(chunk)
+
+    sentences = []
+    current_page = 1
+
+    for i, sent in enumerate(doc.sents):
+        text = sent.text.strip()
+        if not text:
+            continue
+
+        # Update page if found
+        if page := re.search(r'\[Page (\d+)\]', text):
+            current_page = int(page.group(1))
+
+        sentences.append(f"[{i}|{current_page}] {text}")
+
+    return f"""Extract ALL supernatural stories from "{book_title}":
+
+RULES:
+- Include everything supernatural (even 1 sentence)
+- Use [#|#] markers for clean boundaries
+- Expand backwards if pronouns unclear
+
+{chr(10).join(sentences)}"""
+
+
+# Test it
+if __name__ == "__main__":
+    test_chunk = """[Page 45]
+Fr. Bernard witnessed a possession most terrible. The woman spoke in tongues.
+She levitated above her bed.
+
+[Page 46]
+This same woman vomited nails. The Bishop performed exorcism. Seven demons
+revealed themselves."""
+
+    result = prepare_chunk_for_extraction(test_chunk, "Test Book", 45)
+    print("PREPARED PROMPT:")
+    print(result)
+    print("\n" + "="*50 + "\n")
+
+    # Show ultra-minimal version too
+    result2 = ultra_minimal_prep(test_chunk, "Test Book")
+    print("ULTRA-MINIMAL VERSION:")
+    print(result2)
+
+
+# ========================== INSTALL & IMPORTS ==========================
+!pip install -q openai
+
+from openai import OpenAI
+from google.colab import userdata   # ← this is the Colab-native way (best)
+import os
+import re
+import json
+from datetime import datetime
+from google.colab import files
+
+# ========================== OPENAI API KEY – FIXED & BULLETPROOF ==========================
+# Option 1 (recommended): Add your key once in Colab → Sidebar → "Secrets" → name it OPENAI_API_KEY
+# Option 2 (fallback): it will just ask you interactively if the secret is missing
+
+try:
+    api_key = userdata.get('OPENAI_API_KEY')       # ← Colab Secrets (silent, no prompt)
+except Exception:
+    api_key = None                                 # Secret not found → fall back to input
+
+if not api_key:
+    api_key = input("Enter your OpenAI API key: ").strip()
+
+if not api_key:
+    raise ValueError("OpenAI API key is required!")
+
+# Now this line will NEVER fail
+client = OpenAI(api_key=api_key)
+
+MODEL = "gpt-5.1-2025-11-13"   # or whatever model you actually use
+print("OpenAI client ready!")
+
+# ========================== HELPER: SLUG ==========================
+def make_slug(text: str) -> str:
+    return re.sub(r'[^\w\s-]', '', text).strip().lower().replace(' ', '-')
+
+# ========================== SYSTEM PROMPT (your full one) ==========================
+SYSTEM_PROMPT = """
+You are the world's most exhaustive and precise verbatim extractor of supernatural, paranormal, miraculous, magical, or otherwise odd occurrences from historical, medieval, and scholarly texts.
+
+FUNDAMENTAL RULE (APPLY ALWAYS)
+• COMPLETENESS IS PARAMOUNT. Extract EVERY single incident that fits the definition, no matter how short, passing, or minor. When in doubt, extract it. Missing stories is worse than including borderline cases.
+
+WHAT COUNTS AS AN EXTRACTABLE STORY
+✓ EXTRACT these types of content (including one-sentence mentions and testimonies):
+- "X was possessed by a demon"
+- "Miracles occurred at [location]"
+- "According to testimony, Y saw the devil"
+- "Legend says Z could fly"
+- "The trial records show A confessed to witchcraft"
+- "The author mentions that B was bewitched"
+- "As an example of possession, consider C who..."
+- Any named individuals + supernatural events in ANY combination
+• Critical: Historical analysis, theological discussion, legal commentary, philosophical argument — if they mention or give examples of specific incidents, extract the incidents verbatim.
+
+✗ DO NOT EXTRACT:
+- Pure theory or abstract doctrine (e.g., "Demons are fallen angels")
+- Purely general statements without specifics (e.g., "Witches meet at sabbaths", "Many were possessed")
+
+
+VERBATIM RULES — NO ALTERATION
+• VERBATIM ONLY — NEVER TRUNCATE OR SUMMARIZE. Copy the exact original text word-for-word, preserving all original wording, casing, punctuation, and formatting within the excerpt.
+• NEVER change capitalization, punctuation, spelling, or wording.
+• If the same story appears multiple times with slight differences, include the longest version and append any unique verbatim sentences from the shorter versions at the end, separated by " --- ".
+
+STORY BOUNDARIES & SENTENCE RULES
+• Every individual story extraction MUST begin at the start of a sentence and MUST end at the end of a sentence. NEVER start or end mid-sentence.
+• If the sentence boundary requirement would create ambiguous pronouns, expand the excerpt (backward and/or forward) to include antecedent context so the excerpt is self-contained.
+• If extending to the sentence boundary would include unrelated material, prefer including that extra material rather than cutting mid-sentence.
+
+NO AMBIGUOUS PRONOUNS
+• ALWAYS include antecedent context. If a pronoun appears whose antecedent is not inside the extraction, expand the extraction using original sentences until the antecedent is explicit. Do not guess or insert names — include only original text.
+
+UNIQUENESS, MERGING, AND THE " --- " RULE
+• A story is unique if it has a distinct event, actors, location, or outcome.
+• Combine only identical or near-identical retellings. When combining, append unique sentences from shorter or variant retellings separated by " --- ".
+• For scattered mentions of the same event across the text, you may assemble them into a single extraction using " --- " between verbatim segments, but only when doing so preserves chronological/coherent sense and does not conflate distinct events.
+• Do NOT merge stories that differ in any significant detail.
+
+FORMAT (EXACT)
+• Each extraction must use this exact header format (replace placeholders as specified):
+  <div align="center"><b>[Concise Descriptive Title Based Solely on Content]</b></div>
+  <div align="center">"{book_title}" Pages X-Y</div>
+
+• Use the exact book title provided in the {book_title} placeholder — do NOT infer or use any title from the source text.
+• Page ranges may be non-consecutive (e.g., Pages 45-47, 192, 305-307).
+• After the two header lines, place the full verbatim story text here, including all original formatting and quotes.
+• Separate multiple story extractions with exactly ONE blank line.
+• If no stories are found, output only the single line:
+  No supernatural stories extracted.
+
+ADDITIONAL PRACTICAL RULES
+• Start/end extracts at sentence boundaries even if this requires including full paragraphs or additional sentences for context.
+• Include context for unclear pronouns or references so each extraction is self-contained.
+• Extract liberally — better to include borderline/extra items than to miss a true incident.
+• You have unlimited output length — be exhaustive.
+
+MINDSET
+• You are mining for supernatural events hidden in any type of text: scholarly articles, legal records, theological works, chronicles, folklore, trial transcripts, etc. Treat passing mentions, testimonies, legends, trial references, and examples as extractable stories.
+
+EXAMPLES (for annotator-style guidance)
+• Extract: "Johanna was possessed at Loudun." (one sentence; must be extracted verbatim)
+• Extract: "The trial records show A confessed to witchcraft." (include verbatim and page range)
+• Do NOT extract: "Demons are fallen angels." (pure theory)
+"""
+
+# ========================== EXTRACTION FUNCTION ==========================
+def extract_supernatural_stories(text: str, book_title: str):
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT.format(book_title=book_title)},
+        {"role": "user", "content": text}
+    ]
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=messages,
+        temperature=0.0,
+    )
+    usage = response.usage
+    print(f"Tokens → Prompt: {usage.prompt_tokens:,} | Completion: {usage.completion_tokens:,} | Total: {usage.total_tokens:,}")
+    return response.choices[0].message.content.strip()
+
+# ========================== MAIN WORKFLOW ==========================
+print("SUPERNATURAL STORY EXTRACTOR\n")
+
+# 1. Human enters the correct metadata (this is the source of truth!)
+book_title = input("Exact book title: ").strip()
+book_author = input("Author (optional): ").strip() or "Unknown"
+book_year_str = input("Publication year (optional): ").strip()
+book_year = book_year_str if book_year_str.isdigit() else None
+
+book_slug = make_slug(book_title)
+
+print(f"\nBook slug generated: {book_slug}")
+print(f"Title: {book_title}")
+print(f"Author: {book_author}")
+print(f"Year: {book_year or 'N/A'}\n")
+
+# Confirm before proceeding
+input("Looks good? Press Enter to continue, or Ctrl+C to cancel...")
+
+# 2. Upload Markdown parts
+print("\nUpload your cleaned Markdown files (part1.md, part2.md, etc.)")
+uploaded = files.upload()
+sorted_files = sorted(uploaded.keys(), key=lambda f: (
+    999 if not re.search(r'part[ _-]?(\d+)', f, re.I) else
+    int(re.search(r'part[ _-]?(\d+)', f, re.I).group(1))
+))
+
+all_stories = []
+for filename in sorted_files:
+    if not filename.lower().endswith('.md'):
+        print(f"Skipping non-md: {filename}")
+        continue
+
+    print(f"\nProcessing → {filename}")
+    text = open(filename, 'rb').read().decode('utf-8', errors='ignore')
+    stories = extract_supernatural_stories(text, book_title)
+
+    if stories and "No supernatural stories extracted" not in stories:
+        all_stories.append(stories)
+
+final_stories = "\n\n".join(all_stories) if all_stories else "No supernatural stories extracted."
+
+# 3. Save the extracted stories + a tiny metadata sidecar
+safe_name = re.sub(r'[^\w\s-]', '', book_title).strip()[:50]
+base_filename = f"extracted_stories_{book_slug}"
+
+# Main stories file
+stories_file = f"{base_filename}.md"
+with open(stories_file, "w", encoding="utf-8") as f:
+    f.write(final_stories)
+print(f"\nSaved → {stories_file}")
+
+# Tiny metadata JSON (this is what your real ingestion script will love)
+metadata = {
+    "book_slug": book_slug,
+    "book_title": book_title,
+    "book_author": book_author,
+    "book_year": book_year,
+    "extracted_at": datetime.utcnow().isoformat() + "Z",
+    "source_files": list(uploaded.keys())
+}
+
+metadata_file = f"{base_filename}_meta.json"
+with open(metadata_file, "w", encoding="utf-8") as f:
+    json.dump(metadata, f, indent=2)
+
+print(f"Metadata saved → {metadata_file}")
+print("\nBoth files are ready! Download them and feed to your ingestion script.")
+
+# 4. Auto-download both files
+files.download(stories_file)
+files.download(metadata_file)
+
+!pip install -q haystack-ai==2.5.1 sentence-transformers==3.1.1 numpy==1.26.4
+!pip install -q faiss-cpu==1.8.0 --no-deps
+
+import os
+import json
+import re
+import difflib
+import numpy as np
+import faiss
+from collections import Counter
+from haystack import Document
+from haystack.components.embedders import SentenceTransformersDocumentEmbedder
+from haystack.document_stores.in_memory import InMemoryDocumentStore
+from google.colab import files
+
+# ========================== Directory Setup ==========================
+books_dir = "/content/books/"
+data_dir = "/content/data/"
+os.makedirs(books_dir, exist_ok=True)
+os.makedirs(data_dir, exist_ok=True)
+
+# ========================== Helpers ==========================
+def normalize(text):
+    text = re.sub(r"<.*?>", "", text) # Remove HTML tags
+    text = re.sub(r"\"[^\"]+\" Pages? \d+(-\d+)?", "", text) # Remove page quotes
+    text = re.sub(r"[,:;.!?–—]", "", text) # Remove punctuation
+    return re.sub(r"\s+", " ", text.strip().lower())
+
+# ========================== Parse Index ==========================
+def parse_index_md(path, titles, slug):
+    if not os.path.exists(path):
+        return {t: {"pages": "Unknown", "keywords": []} for t in titles}
+    with open(path, encoding="utf-8") as f:
+        txt = f.read()
+    data = {}
+    for line in txt.splitlines():
+        m = re.match(r"^(.*?) - (\d+)(?:-(\d+))?$", line.strip())
+        if m:
+            desc = m.group(1).strip()
+            pages = m.group(2) if not m.group(3) else f"{m.group(2)}-{m.group(3)}"
+            keywords = [desc.lower()]
+            # Add domain-specific keywords
+            if "demon" in desc.lower():
+                keywords.extend(["possession", "demonic possession"])
+            elif "witch" in desc.lower():
+                keywords.append("witch trials")
+            data[desc] = {"pages": pages, "keywords": keywords}
+    result = {}
+    for t in titles:
+        best, ratio = None, 0
+        nt = re.sub(r"[^\w\s]", "", t.lower())
+        for k in data:
+            nk = re.sub(r"[^\w\s]", "", k.lower())
+            r = difflib.SequenceMatcher(None, nt, nk).ratio()
+            if r > ratio and r > 0.5:
+                ratio, best = r, k
+        result[t] = data.get(best, {"pages": "Unknown", "keywords": [re.sub(r"[^\w\s]", "", t.lower())]}) if best else {"pages": "Unknown", "keywords": [re.sub(r"[^\w\s]", "", t.lower())]}
+    return result
+
+# ========================== Locate Story Positions (Robust) ==========================
+def locate_story_positions(full_md_path, stories_md_path, index_md_path, book_slug, book_path):
+    with open(full_md_path, encoding="utf-8") as f:
+        full_md = f.read()
+    with open(stories_md_path, encoding="utf-8") as f:
+        stories_md = f.read()
+
+    # Extract individual stories from Stories.md
+    blocks = re.finditer(
+        r'<div align="center"><b>(.*?)</b></div>\s*'
+        r'(?:<div align="center">"[^"]+" Pages? ([^<]+?)</div>\s*)?'
+        r'(.*?)(?=<div align="center"><b>|$)',
+        stories_md, flags=re.IGNORECASE | re.DOTALL
+    )
+    stories = []
+    for m in blocks:
+        title = m.group(1).strip()
+        pages = m.group(2).strip() if m.group(2) else "Unknown"
+        content = m.group(3).strip()
+        stories.append({"title": title, "pages": pages, "content": content})
+        print(f"Parsed: {title} ({len(content)} chars)")
+
+    index_data = parse_index_md(index_md_path, [s["title"] for s in stories], book_slug)
+    positions = {}
+
+    for s in stories:
+        title = s["title"]
+        content = s["content"].strip()
+
+        # 1. Try exact match first (works ~99% of cases)
+        start = full_md.find(content)
+        if start != -1:
+            end = start + len(content)
+            verbatim = content
+        else:
+            # 2. Fallback: fuzzy alignment with sliding window
+            start_guess = full_md.find(content[:200])
+            if start_guess == -1:
+                start = end = -1
+                verbatim = ""
+            else:
+                best_s = best_e = start_guess
+                best_r = 0
+                norm_c = normalize(content)
+                for ds in range(-500, 501, 50):
+                    for de in range(-500, 1001, 100):
+                        ts = start_guess + ds
+                        te = start_guess + len(content) + de
+                        if ts < 0 or te > len(full_md) or te <= ts:
+                            continue
+                        r = difflib.SequenceMatcher(None, normalize(full_md[ts:te]), norm_c).ratio()
+                        if r > best_r:
+                            best_r, best_s, best_e = r, ts, te
+                start, end, verbatim = best_s, best_e, full_md[best_s:best_e]
+
+        # Get pages and keywords from index_data
+        story_meta = index_data.get(title, {"pages": "Unknown", "keywords": []})
+        final_pages = s["pages"] if s["pages"] != "Unknown" else story_meta.get("pages", "Unknown")
+        final_keywords = story_meta.get("keywords", [])
+        if not final_keywords:
+            final_keywords = [re.sub(r"[^\w\s]", "", title.lower())]
+
+        positions[title] = {
+            "start_char": int(start) if start != -1 else -1,
+            "end_char": int(end) if end != -1 else -1,
+            "pages": final_pages,
+            "keywords": final_keywords,
+            "verbatim": verbatim
+        }
+
+    # Save and force download
+    out_path = os.path.join(book_path, "story_positions.json")
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(positions, f, indent=2, ensure_ascii=False)
+    print(f"story_positions.json written for {book_slug}")
+    files.download(out_path)
+    return positions
+
+# ========================== Chunking (Enhanced with Search Metadata) ==========================
+def chunk_full_md(full_md_path, positions, book_slug):
+    with open(full_md_path, encoding="utf-8") as f:
+        txt = f.read()
+
+    chunks = []
+    pos = 0
+    cid = 0
+
+    # Extract page markers for page tracking
+    page_splits = re.split(r"\s*\[?\s*Page\s*[:\s]*(\d+)\s*\]?\s*", txt, flags=re.IGNORECASE)
+    page_map = {}
+    char_offset = 0
+    for i in range(1, len(page_splits), 2):
+        page_num = int(page_splits[i])
+        page_content = page_splits[i+1]
+        page_map[char_offset] = page_num
+        char_offset += len(page_content)
+
+    def get_page_for_char(char_pos):
+        """Find which page a character position belongs to"""
+        pages = sorted(page_map.items())
+        for i, (offset, page_num) in enumerate(pages):
+            if i + 1 < len(pages):
+                if offset <= char_pos < pages[i+1][0]:
+                    return page_num
+            else:
+                if offset <= char_pos:
+                    return page_num
+        return 1  # Default to page 1
+
+    while pos < len(txt):
+        end = txt.find("\n\n", pos + 1800)
+        if end == -1:
+            end = len(txt)
+        chunk = txt[pos:end]
+
+        # Find which stories overlap with this chunk
+        stories_in_chunk = []
+        for t, p in positions.items():
+            if p["start_char"] != -1 and p["start_char"] < end and p["end_char"] > pos:
+                stories_in_chunk.append({
+                    "title": t,
+                    "start_char": max(pos, p["start_char"]),
+                    "end_char": min(end, p["end_char"]),
+                    "pages": p["pages"],
+                    "keywords": p["keywords"]
+                })
+
+        # Extract keywords from chunk content
+        heading_matches = re.findall(r"# (.*?)\n", chunk)
+        non_story_keywords = [h.lower() for h in heading_matches]
+
+        # If no headings, use most common words
+        if not non_story_keywords:
+            word_counts = Counter(re.findall(r'\w+', chunk.lower()))
+            non_story_keywords = [word for word, count in word_counts.most_common(5)]
+
+        # Combine keywords from stories and chunk
+        all_keywords = set(non_story_keywords)
+        for story in stories_in_chunk:
+            all_keywords.update(story["keywords"][:5])
+
+        keywords_str = ", ".join(list(all_keywords)[:5]) if all_keywords else ""
+
+        # Determine page range for this chunk
+        start_page = get_page_for_char(pos)
+        end_page = get_page_for_char(end)
+        if start_page == end_page:
+            pages_str = str(start_page)
+        else:
+            pages_str = f"{start_page}-{end_page}"
+
+        # Build metadata (FIXED: Now uses "chunk" type consistently)
+        meta = {
+            "book": book_slug,
+            "source": book_slug.replace('_', ' '),
+            "chunk_id": f"{book_slug}_{cid}",
+            "type": "chunk",  # ← FIXED: Always "chunk" for chunked documents
+            "has_story": bool(stories_in_chunk),  # ← NEW: Track if it contains story content
+            "pages": pages_str,
+            "keywords": keywords_str
+        }
+
+        if stories_in_chunk:
+            meta["stories"] = stories_in_chunk
+
+        # Add keywords to chunk content for better searchability
+        if keywords_str:
+            chunk = chunk.strip() + "\n\nKeywords: " + keywords_str
+
+        chunks.append(Document(content=chunk, meta=meta))
+        pos = end
+        cid += 1
+
+    return chunks
+
+# ========================== Main Batch Processor ==========================
+def batch_preprocess():
+    force = ["christian_mysticism_vol_iv"]  # Force reprocess these
+    embedder = SentenceTransformersDocumentEmbedder(
+        model="BAAI/bge-large-en-v1.5",
+        normalize_embeddings=True
+    )
+    embedder.warm_up()
+
+    # Paths
+    docs_path = os.path.join(data_dir, "documents.json")
+    faiss_path = os.path.join(data_dir, "faiss_index.bin")
+    store_path = os.path.join(data_dir, "document_store.json")
+
+    # Helper to serialize values safely (handles numpy types)
+    def serialize_value(val):
+        if isinstance(val, np.ndarray):
+            return val.tolist()
+        elif isinstance(val, (np.integer, np.int64, np.int32)):
+            return int(val)
+        elif isinstance(val, (np.floating, np.float64, np.float32)):
+            return float(val)
+        elif isinstance(val, dict):
+            return {serialize_value(k): serialize_value(v) for k, v in val.items()}
+        elif isinstance(val, list):
+            return [serialize_value(x) for x in val]
+        else:
+            return val
+
+    # Helper to serialize entire doc
+    def serialize_doc(doc):
+        item = {
+            "id": str(doc.id) if doc.id is not None else None,
+            "content": doc.content,
+            "meta": serialize_value(doc.meta)
+        }
+        # FIXED: Explicitly handle None embedding (don't add key if None)
+        if hasattr(doc, 'embedding') and doc.embedding is not None:
+            emb = doc.embedding
+            item["embedding"] = serialize_value(emb)
+        return item
+
+    # Helper to convert embedding to NumPy float32 (consistent across new/re-embedded)
+    def ensure_numpy_embedding(docs):
+        for doc in docs:
+            if hasattr(doc, 'embedding') and doc.embedding is not None:
+                if hasattr(doc.embedding, 'cpu'):
+                    doc.embedding = doc.embedding.cpu().numpy().astype(np.float32)
+                elif not isinstance(doc.embedding, np.ndarray):
+                    doc.embedding = np.array(doc.embedding, dtype=np.float32)
+        return docs
+
+    # === 1. LOAD EXISTING DOCUMENTS SAFELY ===
+    existing_docs = []
+    if os.path.exists(docs_path):
+        print("Loading existing documents.json...")
+        with open(docs_path, "r", encoding="utf-8") as f:
+            raw = json.load(f)
+
+        for item in raw:
+            doc = Document(
+                content=item["content"],
+                meta=item.get("meta", {}),
+                id=item.get("id")
+            )
+            # Restore embedding if present
+            if "embedding" in item and item["embedding"] is not None:
+                doc.embedding = np.array(item["embedding"], dtype=np.float32)
+            existing_docs.append(doc)
+        print(f"Loaded {len(existing_docs)} existing documents")
+
+        # OPTIONAL: One-time re-embed if ALL existing docs lack embeddings (transition from old code)
+        # Uncomment the block below if you want to force-populate embeddings in documents.json
+        # if existing_docs and all(getattr(d, 'embedding', None) is None for d in existing_docs):
+        #     print("Detected all existing docs lack embeddings (old code transition). Re-embedding them now...")
+        #     result = embedder.run(existing_docs)
+        #     existing_docs = result["documents"]
+        #     existing_docs = ensure_numpy_embedding(existing_docs)
+        #     print(f"Re-embedded {len(existing_docs)} existing documents.")
+
+    all_docs = existing_docs.copy()
+    indexed_books = {doc.meta.get("book") for doc in existing_docs if doc.meta.get("book")}
+
+    # Track newly added docs for FAISS append
+    newly_added_docs = []
+
+    # === 2. PROCESS NEW OR FORCED BOOKS ===
+    new_docs_count = 0
+    for d in os.listdir(books_dir):
+        path = os.path.join(books_dir, d)
+        if not os.path.isdir(path):
+            continue
+        slug = d.lower().replace(" ", "_")
+
+        if slug in indexed_books and slug not in force:
+            print(f"Skipping {slug} (already indexed)")
+            continue
+
+        # Remove old version if forcing reprocess
+        if slug in force and slug in indexed_books:
+            old_count = len(all_docs)
+            all_docs = [doc for doc in all_docs if doc.meta.get("book") != slug]
+            print(f"Force-reprocessing {slug}: removed {old_count - len(all_docs)} old docs")
+
+        full_md = os.path.join(path, "Full_Text.md")
+        stories_md = os.path.join(path, "Stories.md")
+        index_md = os.path.join(path, "grouped_index.md")
+
+        if not all(os.path.exists(p) for p in [full_md, stories_md]):
+            print(f"Missing files in {slug}, skipping...")
+            continue
+
+        print(f"\n=== Processing {slug} ===")
+        with open(full_md, encoding="utf-8") as f:
+            full_text = f.read()
+
+        positions = locate_story_positions(full_md, stories_md, index_md, slug, path)
+        chunks = chunk_full_md(full_md, positions, slug)
+        print(f"→ {len(chunks)} chunks")
+
+        # Story-level docs
+        story_docs = []
+        for title, pos in positions.items():
+            if pos.get("start_char", -1) == -1:
+                continue
+            text = full_text[pos["start_char"]:pos["end_char"]].strip()
+            if not text:
+                continue
+            story_docs.append(Document(
+                content=text,
+                meta={
+                    "type": "story",
+                    "title": title,
+                    "book": slug,
+                    "source": slug.replace('_', ' '),
+                    "pages": pos.get("pages", "Unknown"),
+                    "keywords": ", ".join(pos.get("keywords", [])),
+                    "start_char": pos["start_char"],
+                    "end_char": pos["end_char"]
+                }
+            ))
+        print(f"→ {len(story_docs)} full stories")
+
+        # Embed all new docs
+        all_new_docs = chunks + story_docs
+        result = embedder.run(all_new_docs)
+        new_embedded = result["documents"]
+        new_embedded = ensure_numpy_embedding(new_embedded)  # FIXED: Consistent NumPy conversion
+
+        all_docs.extend(new_embedded)
+        newly_added_docs.extend(new_embedded)  # Track for FAISS append
+        new_docs_count += len(new_embedded)
+        print(f"→ Added {len(new_embedded)} new embedded documents")
+
+    # === 3. SAVE EVERYTHING (NOW FULLY SAFE & INCREMENTAL) ===
+    if not all_docs:
+        print("No documents to save.")
+        return
+
+    # Debug: Count embeddings
+    emb_count = sum(1 for d in all_docs if getattr(d, 'embedding', None) is not None)
+    print(f"Pre-save check: {emb_count}/{len(all_docs)} docs have embeddings")
+
+    # documents.json — use safe serialization (full rewrite with all docs)
+    docs_data = [serialize_doc(d) for d in all_docs]
+
+    with open(docs_path, "w", encoding="utf-8") as f:
+        json.dump(docs_data, f, indent=2, ensure_ascii=False)
+    files.download(docs_path)
+    print(f"documents.json saved → {len(all_docs)} total docs")
+
+    # FAISS Index — FIXED: Load existing & append only new (matches old code)
+    if os.path.exists(faiss_path):
+        print("Loading existing FAISS index...")
+        faiss_index = faiss.read_index(faiss_path)
+        print(f"Loaded FAISS index with {faiss_index.ntotal} vectors")
+    else:
+        dimension = 1024  # BAAI/bge-large-en-v1.5
+        faiss_index = faiss.IndexFlatL2(dimension)
+        print("No existing FAISS; starting fresh index")
+
+    # Collect only new embeddings to append (from newly_added_docs + any old without emb as safeguard)
+    new_embeddings = []
+    for doc in newly_added_docs + [d for d in all_docs if getattr(d, 'embedding', None) is None]:
+        if hasattr(doc, 'embedding') and doc.embedding is not None:
+            emb = doc.embedding
+            if isinstance(emb, list):
+                emb = np.array(emb, dtype=np.float32)
+            elif hasattr(emb, 'cpu'):
+                emb = emb.cpu().numpy().astype(np.float32)
+            else:
+                emb = np.asarray(emb).astype(np.float32)
+            new_embeddings.append(emb)
+
+    if new_embeddings:
+        new_embeddings = np.vstack(new_embeddings)
+        faiss_index.add(new_embeddings)
+        print(f"Appended {len(new_embeddings)} new vectors to FAISS")
+
+    faiss.write_index(faiss_index, faiss_path)
+    files.download(faiss_path)
+    print(f"faiss_index.bin updated → {faiss_index.ntotal} total vectors")
+
+    # Document Store — FIXED: Pass embedding *at init* as list for proper serialization
+    # (Mimics old code: Haystack serializes lists/NumPy correctly when set in __init__)
+    store_docs = []
+    null_emb_count = 0
+    for i, doc in enumerate(all_docs):
+        emb_list = None
+        if hasattr(doc, 'embedding') and doc.embedding is not None:
+            emb = doc.embedding
+            if isinstance(emb, np.ndarray):
+                emb_list = emb.tolist()
+            elif isinstance(emb, list):
+                emb_list = emb[:]
+            else:
+                # Fallback (e.g., torch)
+                emb_list = np.array(emb).tolist()
+        else:
+            null_emb_count += 1
+
+        store_doc = Document(
+            content=doc.content,
+            meta=doc.meta,  # FIXED: Use directly (already JSON-safe; no serialize_value needed here)
+            embedding=emb_list,  # FIXED: Pass at __init__ for serialization
+            id=doc.id
+        )
+        store_docs.append(store_doc)
+
+        # Debug print (remove after verifying)
+        if i < 3:  # First 3 docs
+            emb_preview = f"[{emb_list[0]:.6f}, ...]" if emb_list else "None"
+            print(f"Store doc {doc.id[:8]}... embedding preview: {emb_preview} (len: {len(emb_list) if emb_list else 0})")
+
+    print(f"Store prep: {null_emb_count} docs will have null embeddings (expected if any non-embedded)")
+
+    store = InMemoryDocumentStore()
+    store.write_documents(store_docs)
+    store.save_to_disk(store_path)
+    files.download(store_path)
+    print("document_store.json saved")
+
+    # Summary
+    stories = sum(1 for d in all_docs if d.meta.get("type") == "story")
+    chunks = len(all_docs) - stories
+    print(f"\n{'='*60}")
+    print(f"SUCCESS! Total: {len(all_docs)} docs ({stories} stories + {chunks} chunks)")
+    print(f"Growth this run: +{new_docs_count}")
+    print(f"{'='*60}")
+
+# ========================== RUN ==========================
+batch_preprocess()

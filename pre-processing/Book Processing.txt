@@ -1,0 +1,157 @@
+# Convert DOCX to Markdown with Character-Based Pagination in Colab
+
+# Objective: Convert a DOCX file to Markdown with consistent character-based pagination.
+# Pages are sized by character count (~3500 chars) for uniform visual length.
+# Paragraphs are never split - they remain atomic units.
+
+# Step 1: Install dependencies
+!pip install python-docx==1.1.2
+
+from docx import Document
+import os
+from google.colab import files
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# Step 2: Upload DOCX file
+print("Upload your DOCX file (e.g., Investigations into Magic Volume 2.docx)")
+uploaded = files.upload()
+if not uploaded:
+    logging.error("No file uploaded. Aborting.")
+    raise ValueError("No file uploaded.")
+docx_file = next(iter(uploaded))
+logging.info(f"Uploaded file: {docx_file}")
+
+if not docx_file.endswith('.docx'):
+    logging.error("Uploaded file is not a .docx file.")
+    raise ValueError("Uploaded file must be a .docx file.")
+
+# Verify DOCX file exists
+if not os.path.exists(docx_file):
+    logging.error(f"DOCX file {docx_file} does not exist.")
+    raise FileNotFoundError(f"DOCX file {docx_file} does not exist.")
+logging.info(f"DOCX file size: {os.path.getsize(docx_file)} bytes")
+
+# Step 3: Convert DOCX to Markdown with character-based pagination
+def convert_docx_to_markdown(docx_path, output_dir="processed", chars_per_page=3500):
+    """
+    Convert DOCX to Markdown with consistent character-based pagination.
+    
+    Args:
+        docx_path: Path to the DOCX file
+        output_dir: Directory to save output files
+        chars_per_page: Target characters per page (~650 words at 5.5 chars/word)
+    
+    Returns:
+        Path to the generated Markdown file
+    
+    Notes:
+        - Paragraphs are never split; they remain atomic units
+        - Pages will be approximately chars_per_page, ± one paragraph
+        - Headings are preserved with Markdown formatting
+    """
+    try:
+        logging.info(f"Starting conversion for {docx_path}")
+        logging.info(f"Target: {chars_per_page} characters per page")
+        
+        # Create output directory
+        os.makedirs(output_dir, exist_ok=True)
+        
+        # Load DOCX file
+        doc = Document(docx_path)
+        logging.info(f"DOCX loaded. Total paragraphs: {len(doc.paragraphs)}")
+
+        pages = []
+        current_page = []
+        current_chars = 0
+        page_num = 1
+        page_char_counts = []  # Track for stats
+
+        for para in doc.paragraphs:
+            text = para.text.strip()
+            if not text:
+                continue
+
+            # Detect and convert Word heading styles to Markdown headings
+            if para.style.name.startswith('Heading') or 'heading' in para.style.name.lower():
+                level = para.style.name.split()[-1]
+                try:
+                    level = int(level)
+                    text = f"{'#' * level} {text}"
+                except ValueError:
+                    pass  # Not a numbered heading style, keep text as-is
+
+            para_chars = len(text)
+
+            # Would adding this paragraph exceed page limit?
+            if current_chars + para_chars > chars_per_page and current_page:
+                # Save current page and start new one
+                pages.append(f"[Page {page_num}]\n\n" + "\n\n".join(current_page))
+                page_char_counts.append(current_chars)
+                logging.debug(f"Page {page_num}: {current_chars} chars, {len(current_page)} paragraphs")
+                current_page = [text]
+                current_chars = para_chars
+                page_num += 1
+            else:
+                current_page.append(text)
+                current_chars += para_chars
+
+        # Add final page
+        if current_page:
+            pages.append(f"[Page {page_num}]\n\n" + "\n\n".join(current_page))
+            page_char_counts.append(current_chars)
+            logging.debug(f"Page {page_num} (final): {current_chars} chars")
+
+        # Save Markdown output
+        docx_name = os.path.splitext(os.path.basename(docx_path))[0]
+        md_output_path = os.path.join(output_dir, f"{docx_name}.md")
+        
+        with open(md_output_path, "w", encoding="utf-8") as f:
+            f.write("\n\n".join(pages))
+        
+        # Calculate and display stats
+        total_chars = sum(page_char_counts)
+        avg_chars = total_chars // len(page_char_counts) if page_char_counts else 0
+        min_chars = min(page_char_counts) if page_char_counts else 0
+        max_chars = max(page_char_counts) if page_char_counts else 0
+        
+        print("\n" + "=" * 50)
+        print("📊 PAGINATION STATISTICS")
+        print("=" * 50)
+        print(f"   Total pages:        {page_num}")
+        print(f"   Total characters:   {total_chars:,}")
+        print(f"   Target chars/page:  {chars_per_page}")
+        print(f"   Actual avg/page:    {avg_chars}")
+        print(f"   Range:              {min_chars} - {max_chars} chars")
+        print(f"   Consistency:        ±{max(max_chars - avg_chars, avg_chars - min_chars)} from average")
+        print("=" * 50)
+        print(f"✅ Saved to: {md_output_path}")
+        print("=" * 50 + "\n")
+        
+        # Preview first page
+        print("📖 PREVIEW (first 500 chars):\n")
+        with open(md_output_path, "r", encoding="utf-8") as f:
+            print(f.read(500) + "...\n")
+        
+        return md_output_path
+
+    except Exception as e:
+        logging.error(f"Conversion failed: {str(e)}")
+        raise
+
+# Main execution
+if __name__ == "__main__":
+    try:
+        # You can adjust chars_per_page here if needed
+        # Default 3500 ≈ 650 words ≈ typical book page
+        md_file = convert_docx_to_markdown(
+            docx_path=docx_file,
+            chars_per_page=3500  # Adjust if pages feel too long/short
+        )
+        logging.info(f"Downloading Markdown file: {md_file}")
+        files.download(md_file)
+    except Exception as e:
+        logging.error(f"Main execution failed: {str(e)}")
+        print(f"Main execution failed: {str(e)}")

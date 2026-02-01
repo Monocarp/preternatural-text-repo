@@ -1,0 +1,635 @@
+# ==================================================================================
+# BLOCK 3: METADATA EXTRACTION FUNCTIONS
+# ==================================================================================
+# This block defines functions for extracting structured metadata:
+# - Temporal (years, centuries, periods)
+# - Locations (cities, regions, countries) with WikiData + Claude normalization
+# - Topics (phenomena, entities, context)
+# - Keyword synthesis
+# - Confidence calculation
+
+# ========================== TEMPORAL EXTRACTION ==========================
+
+CENTURY_WORDS = {
+    "first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5,
+    "sixth": 6, "seventh": 7, "eighth": 8, "ninth": 9, "tenth": 10,
+    "eleventh": 11, "twelfth": 12, "thirteenth": 13, "fourteenth": 14,
+    "fifteenth": 15, "sixteenth": 16, "seventeenth": 17, "eighteenth": 18,
+    "nineteenth": 19, "twentieth": 20, "twenty-first": 21
+}
+
+# Historical periods removed - not useful for this domain
+
+def extract_temporal(content: str) -> Dict:
+    """Extract temporal metadata from story content."""
+    temporal = {
+        "years": [],
+        "centuries": [],
+        "decades": []
+    }
+    
+    content_lower = content.lower()
+    
+    # 1. Explicit years: "in 1632", "year 1645", "A.D. 1500", "died in 772"
+    year_patterns = [
+        r'\b(1[0-9]{3})\b',  # 1000-1999
+        r'\b(20[0-2][0-9])\b',  # 2000-2029
+        r'A\.?D\.?\s*(\d{3,4})',  # A.D. years
+        r'(\d{3,4})\s*A\.?D\.?',  # Years A.D.
+    ]
+    years_found = set()
+    for pattern in year_patterns:
+        matches = re.findall(pattern, content, re.I)
+        for m in matches:
+            try:
+                year = int(m)
+                if 500 <= year <= 2030:  # Reasonable range
+                    years_found.add(year)
+            except:
+                pass
+    
+    # 2. Early medieval years (500-999) with context keywords
+    early_year_pattern = r'(?:died in|born in|year|in the year|circa|c\.)\s*(\d{3})'
+    early_matches = re.findall(early_year_pattern, content, re.I)
+    for m in early_matches:
+        try:
+            year = int(m)
+            if 500 <= year <= 999:  # Early medieval period
+                years_found.add(year)
+        except:
+            pass
+    
+    # 2. Date ranges: "1632-1634", "from 1640 to 1645"
+    range_patterns = [
+        r'(\d{4})\s*[-–—]\s*(\d{4})',
+        r'from\s+(\d{4})\s+to\s+(\d{4})',
+        r'between\s+(\d{4})\s+and\s+(\d{4})',
+    ]
+    for pattern in range_patterns:
+        matches = re.findall(pattern, content, re.I)
+        for start, end in matches:
+            try:
+                start_year, end_year = int(start), int(end)
+                if 500 <= start_year <= 2030 and 500 <= end_year <= 2030:
+                    for y in range(start_year, min(end_year + 1, start_year + 20)):  # Cap at 20 years
+                        years_found.add(y)
+            except:
+                pass
+    
+    # 3. Century mentions: "17th century", "seventeenth century"
+    centuries_found = set()
+    
+    # Numeric: "17th century", "12th-century"
+    century_num = re.findall(r'(\d{1,2})(?:st|nd|rd|th)[\s-]+century', content, re.I)
+    for c in century_num:
+        try:
+            centuries_found.add(int(c))
+        except:
+            pass
+    
+    # Word form: "seventeenth century"
+    for word, num in CENTURY_WORDS.items():
+        if re.search(rf'\b{word}\s+century\b', content_lower):
+            centuries_found.add(num)
+    
+    # 4. Decades: "1630s", "the thirties"
+    decade_matches = re.findall(r'(\d{3})0s', content)
+    decades = [f"{d}0s" for d in decade_matches]
+    
+    # Infer centuries from years
+    for year in years_found:
+        century = (year - 1) // 100 + 1
+        centuries_found.add(century)
+    
+    temporal["years"] = sorted(list(years_found))
+    temporal["centuries"] = sorted(list(centuries_found))
+    temporal["decades"] = decades
+    
+    return temporal
+
+
+# ========================== LOCATION EXTRACTION ==========================
+
+def extract_raw_locations(content: str) -> List[str]:
+    """Extract raw location mentions using spaCy NER."""
+    doc = nlp(content[:10000])  # Limit to prevent memory issues
+    
+    locations = set()
+    for ent in doc.ents:
+        if ent.label_ in ["GPE", "LOC", "FAC"]:
+            # Clean up the entity text
+            loc = ent.text.strip()
+            # Skip very short or obviously wrong extractions
+            if len(loc) > 2 and not loc.isdigit():
+                locations.add(loc)
+    
+    return list(locations)
+
+
+def lookup_wikidata(location_name: str) -> Optional[Dict]:
+    """
+    Query WikiData for location hierarchy.
+    Returns normalized location data or None if not found.
+    """
+    try:
+        # Search for the entity
+        search_url = "https://www.wikidata.org/w/api.php"
+        search_params = {
+            "action": "wbsearchentities",
+            "search": location_name,
+            "language": "en",
+            "type": "item",
+            "format": "json",
+            "limit": 3
+        }
+        
+        response = requests.get(search_url, params=search_params, timeout=5)
+        if response.status_code != 200:
+            return None
+        
+        data = response.json()
+        if not data.get("search"):
+            return None
+        
+        # Check if any result is a geographic entity
+        for result in data["search"]:
+            desc = result.get("description", "").lower()
+            # Look for geographic indicators
+            geo_keywords = ["city", "town", "village", "country", "region", "province", 
+                          "state", "county", "municipality", "commune", "district",
+                          "kingdom", "empire", "republic", "territory"]
+            
+            if any(kw in desc for kw in geo_keywords):
+                # Determine type and extract info
+                loc_type = "unknown"
+                if any(kw in desc for kw in ["city", "town", "village", "commune", "municipality"]):
+                    loc_type = "city"
+                elif any(kw in desc for kw in ["country", "kingdom", "empire", "republic"]):
+                    loc_type = "country"
+                elif any(kw in desc for kw in ["region", "province", "state", "county", "district", "territory"]):
+                    loc_type = "region"
+                
+                return {
+                    "name": result.get("label", location_name),
+                    "type": loc_type,
+                    "description": desc,
+                    "wikidata_id": result.get("id"),
+                    "confidence": 0.7
+                }
+        
+        return None
+        
+    except Exception as e:
+        print(f"WikiData lookup failed for '{location_name}': {e}")
+        return None
+
+
+def extract_locations_with_grok(content: str, story_title: str) -> List[Dict]:
+    """
+    Use Grok to directly extract and normalize locations from text.
+    Called when spaCy NER finds insufficient locations.
+    """
+    # Access grok_client from globals
+    try:
+        client = globals().get('grok_client')
+        model = globals().get('GROK_MODEL', 'grok-4-1-fast-reasoning')
+        if not client:
+            return []
+    except Exception:
+        return []
+    
+    prompt = f"""Extract all location references from this historical text titled "{story_title}".
+
+Text:
+{content[:1500]}  
+
+For each location found, return:
+1. The exact name as it appears
+2. Type: "city", "region", "country", or "landmark"
+3. Modern name if different
+4. Country it's in
+5. Confidence (0-1)
+
+Return ONLY a JSON array:
+[
+  {{"original": "Mur", "name": "Mur", "type": "city", "country": "Austria", "confidence": 0.8}},
+  {{"original": "the Eichsfeld", "name": "Eichsfeld", "type": "region", "country": "Germany", "confidence": 0.95}}
+]
+
+Include historical/religious place names (monasteries, shrines, mountains). Return empty array [] if no locations found."""
+    
+    try:
+        response = client.chat.completions.create(
+            model=model,
+            max_tokens=1500,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.2
+        )
+        
+        result_text = response.choices[0].message.content.strip()
+        
+        # Parse JSON
+        if "```json" in result_text:
+            result_text = re.search(r'```json\s*(.*?)\s*```', result_text, re.DOTALL)
+            if result_text:
+                result_text = result_text.group(1)
+        elif "```" in result_text:
+            result_text = re.search(r'```\s*(.*?)\s*```', result_text, re.DOTALL)
+            if result_text:
+                result_text = result_text.group(1)
+        
+        locations = json.loads(result_text)
+        return locations if isinstance(locations, list) else []
+        
+    except Exception as e:
+        print(f"Grok location extraction failed: {e}")
+        return []
+
+
+def normalize_with_grok(locations: List[str], story_title: str) -> List[Dict]:
+    """
+    Use Grok to normalize locations that WikiData couldn't resolve.
+    Batches locations for efficiency.
+    """
+    if not locations:
+        return []
+    
+    # Access grok_client from globals (defined in block_1)
+    try:
+        client = globals().get('grok_client')
+        model = globals().get('GROK_MODEL', 'grok-4-1-fast-reasoning')
+        if not client:
+            print("Grok client not initialized, skipping normalization")
+            return []
+    except Exception as e:
+        print(f"Grok client not available: {e}")
+        return []
+    
+    prompt = f"""I have these location names extracted from a historical supernatural/religious text titled "{story_title}". 
+For each location, provide:
+1. The modern/canonical name
+2. Type: "city", "region", or "country"
+3. The country it's in (if city or region)
+4. Any historical context if the name is archaic
+
+Locations to normalize:
+{json.dumps(locations, indent=2)}
+
+Return ONLY a JSON array with objects like:
+[
+  {{"original": "Loudun", "name": "Loudun", "type": "city", "region": "Nouvelle-Aquitaine", "country": "France", "confidence": 0.95}},
+  {{"original": "the Rhineland", "name": "Rhineland", "type": "region", "country": "Germany", "confidence": 0.9}},
+  {{"original": "the monastery", "name": null, "type": null, "country": null, "confidence": 0.0, "note": "Too vague to identify"}}
+]
+
+If a location cannot be identified, set confidence to 0 and name to null.
+Return ONLY the JSON array, no other text."""
+
+    try:
+        response = client.chat.completions.create(
+            model=model,
+            max_tokens=2000,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3
+        )
+        
+        result_text = response.choices[0].message.content.strip()
+        
+        # Try to parse JSON
+        # Handle case where LLM wraps in markdown
+        if "```json" in result_text:
+            result_text = re.search(r'```json\s*(.*?)\s*```', result_text, re.DOTALL)
+            if result_text:
+                result_text = result_text.group(1)
+        elif "```" in result_text:
+            result_text = re.search(r'```\s*(.*?)\s*```', result_text, re.DOTALL)
+            if result_text:
+                result_text = result_text.group(1)
+        
+        normalized = json.loads(result_text)
+        return normalized
+        
+    except Exception as e:
+        print(f"Grok normalization failed: {e}")
+        return []
+
+
+def extract_and_normalize_locations(content: str, story_title: str, cache: Dict) -> Dict:
+    """
+    Full location extraction pipeline:
+    1. spaCy NER for raw mentions
+    2. Check cache for known locations
+    3. WikiData for unknown locations
+    4. Grok fallback for remaining
+    """
+    raw_locations = extract_raw_locations(content)
+    
+    # If spaCy found very few locations, use Grok to extract directly
+    if len(raw_locations) < 2:
+        print("  Low spaCy coverage, using Grok for location extraction...")
+        grok_locs = extract_locations_with_grok(content, story_title)
+        if grok_locs:
+            # Merge with raw_locations
+            for loc in grok_locs:
+                if loc.get('confidence', 0) >= 0.6:
+                    raw_locations.append(loc.get('original', loc.get('name', '')))
+    
+    if not raw_locations:
+        return {
+            "cities": [],
+            "regions": [],
+            "countries": [],
+            "raw_mentions": [],
+            "normalized": []
+        }
+    
+    normalized = []
+    unknown = []
+    
+    # Check cache first
+    for loc in raw_locations:
+        loc_key = loc.lower().strip()
+        if loc_key in cache:
+            normalized.append(cache[loc_key])
+        else:
+            # Try WikiData
+            wiki_result = lookup_wikidata(loc)
+            if wiki_result and wiki_result.get("confidence", 0) >= 0.5:
+                wiki_result["original"] = loc
+                cache[loc_key] = wiki_result
+                normalized.append(wiki_result)
+            else:
+                unknown.append(loc)
+    
+    # Grok fallback for remaining unknowns
+    if unknown:
+        grok_results = normalize_with_grok(unknown, story_title)
+        for result in grok_results:
+            if result.get("confidence", 0) >= 0.5:
+                original = result.get("original", "").lower().strip()
+                cache[original] = result
+                normalized.append(result)
+    
+    # Build structured output
+    cities = []
+    regions = []
+    countries = set()
+    
+    for loc in normalized:
+        if loc.get("type") == "city":
+            cities.append(loc.get("name"))
+            if loc.get("country"):
+                countries.add(loc.get("country"))
+        elif loc.get("type") == "region":
+            regions.append(loc.get("name"))
+            if loc.get("country"):
+                countries.add(loc.get("country"))
+        elif loc.get("type") == "country":
+            countries.add(loc.get("name"))
+    
+    return {
+        "cities": list(set(cities)),
+        "regions": list(set(regions)),
+        "countries": sorted(list(countries)),
+        "raw_mentions": raw_locations,
+        "normalized": normalized
+    }
+
+
+# ========================== TOPIC EXTRACTION ==========================
+# Based on existing codex_tree.json taxonomy
+
+DOMAIN_PATTERNS = {
+    "phenomena": {
+        # Possession-related
+        "possession": ["possessed", "possession", "demon entered", "spirit entered", "taken over by", "obsession", "oppression"],
+        "exorcism": ["exorcism", "exorcised", "cast out", "commanded the demon", "expelled the spirit", "delivered", "deliverance"],
+        
+        # Physical manifestations
+        "levitation": ["levitated", "levitation", "rose into the air", "floated above", "suspended"],
+        "poltergeist": ["poltergeist", "objects moved", "thrown about", "levitated objects", "mysterious torrents"],
+        "apparition": ["apparition", "appeared before", "vision of", "saw the figure of", "spectral", "phantom"],
+        "haunting": ["haunted", "haunting", "ghost appeared", "specter", "phantom", "haunt"],
+        
+        # Bodily phenomena
+        "stigmata": ["stigmata", "wounds of christ", "bleeding hands", "marks appeared"],
+        "bilocation": ["bilocation", "appeared in two places", "seen simultaneously"],
+        "incorruptibility": ["incorrupt", "uncorrupted", "body did not decay"],
+        "inedia": ["inedia", "fasting", "ate nothing", "survived without food"],
+        
+        # Witchcraft & magic
+        "witchcraft": ["witchcraft", "witch", "sorcery", "spell", "enchantment", "bewitched", "maleficium", "hexed"],
+        "sabbath": ["sabbath", "witch gathering", "nocturnal assembly", "devils' mass"],
+        "familiar_spirit": ["familiar", "familiar spirit", "demon servant", "imp"],
+        "shapeshifting": ["shapeshifting", "transformed into", "werewolf", "lycanthropy", "metamorphosis"],
+        
+        # Mystical phenomena
+        "mystical_union": ["mystical union", "ecstasy", "rapture", "divine union", "transported", "ravishment"],
+        "prophecy": ["prophecy", "prophesied", "foretold", "predicted", "vision of the future", "precognition"],
+        "miracle": ["miracle", "miraculous", "supernatural healing", "divine intervention", "wonder"],
+        "visions": ["vision", "visionary", "saw", "beheld", "revelation"],
+        
+        # Healing & relics
+        "healing": ["healing", "healed", "cured", "freed", "delivered from", "restored", "recovery"],
+        "relics": ["relic", "relics", "holy remains", "bones of", "body of", "grave of", "tomb of"],
+        "shrine": ["shrine", "holy place", "pilgrimage", "sacred site", "venerated"],
+        
+        # Death-related
+        "nde": ["near-death", "nde", "died and returned", "clinical death", "life review"],
+        "obe": ["out of body", "obe", "astral projection", "left my body"],
+        "deathbed_vision": ["deathbed vision", "deathbed visitation", "dying saw"],
+        
+        # Psychic
+        "telepathy": ["telepathy", "telepathic", "mind reading", "thought transmission"],
+        "precognition": ["precognition", "precognitive", "saw the future", "predicted"],
+        "psychokinesis": ["psychokinesis", "telekinesis", "moved by mind", "pk"],
+    },
+    "entities": {
+        # Demonic
+        "demonic": ["demon", "devil", "satan", "lucifer", "infernal", "diabolical", "evil spirit", "daemon"],
+        "incubus_succubus": ["incubus", "succubus", "night demon", "sexual demon"],
+        
+        # Divine/holy
+        "angelic": ["angel", "archangel", "heavenly being", "divine messenger", "seraph", "cherubim"],
+        "mary": ["virgin mary", "our lady", "blessed mother", "madonna", "mary appeared", "marian"],
+        "jesus": ["jesus", "christ", "lord", "savior", "risen lord"],
+        "saints": ["saint", "holy man", "holy woman", "blessed", "venerable"],
+        
+        # Spirits & ghosts
+        "spirit": ["spirit", "ghost", "shade", "soul of the dead", "departed soul"],
+        "poltergeist_entity": ["poltergeist", "noisy ghost", "knocking spirit"],
+        
+        # Fae & cryptids
+        "fairy": ["fairy", "faerie", "faeries", "sidhe", "good folk", "little people", "elf", "elves"],
+        "banshee": ["banshee", "bean sidhe", "wailing woman", "death messenger"],
+        "cryptid": ["bigfoot", "sasquatch", "yeti", "creature", "beast", "monster"],
+        "mothman": ["mothman", "winged humanoid", "red-eyed"],
+        
+        # UFO-related
+        "alien": ["alien", "extraterrestrial", "et", "grey", "nordic", "reptilian"],
+        "men_in_black": ["men in black", "mib", "mysterious men"],
+    },
+    "context": {
+        # Religious settings
+        "monastery": ["monastery", "convent", "abbey", "priory", "religious house", "cloister"],
+        "church": ["church", "cathedral", "chapel", "sanctuary", "altar", "basilica"],
+        "idolatry": ["idol", "idolatry", "pagan", "paganism", "heathen", "false god", "overthrew the image"],
+        "cross": ["cross", "crucifix", "holy cross", "raised up the cross", "relic of the cross"],
+        
+        # Legal/judicial
+        "witch_trial": ["witch trial", "tried for witchcraft", "accused of sorcery", "witch hunt"],
+        "inquisition": ["inquisition", "tribunal", "ecclesiastical court", "heresy trial", "holy office"],
+        "execution": ["executed", "burned", "hanged", "beheaded", "put to death", "martyred"],
+        
+        # Paranormal investigation
+        "investigation": ["investigated", "examined", "inquiry", "study", "research"],
+        "seance": ["seance", "séance", "sitting", "mediumship", "spiritualism"],
+        
+        # Other contexts
+        "burial_mound": ["burial mound", "barrow", "tumulus", "ancient site", "sacred site"],
+        "ufo_encounter": ["ufo", "flying saucer", "unidentified", "craft", "abduction"],
+    }
+}
+
+def extract_domain_topics(content: str) -> Dict:
+    """Extract domain-specific topics using pattern matching."""
+    content_lower = content.lower()
+    
+    topics = {
+        "primary": [],
+        "phenomena": [],
+        "entities": [],
+        "context": [],
+        "all_matches": []
+    }
+    
+    match_counts = {}
+    
+    for category, patterns in DOMAIN_PATTERNS.items():
+        for topic, keywords in patterns.items():
+            count = 0
+            for keyword in keywords:
+                if keyword in content_lower:
+                    count += content_lower.count(keyword)
+            if count > 0:
+                match_counts[topic] = count
+                topics[category].append(topic)
+                topics["all_matches"].append((topic, count))
+    
+    # Sort by frequency and pick top topics as primary
+    sorted_topics = sorted(match_counts.items(), key=lambda x: x[1], reverse=True)
+    topics["primary"] = [t[0] for t in sorted_topics[:3]]
+    
+    return topics
+
+
+# ========================== KEYWORD SYNTHESIS ==========================
+
+def synthesize_keywords(title: str, temporal: Dict, locations: Dict, 
+                       topics: Dict, existing_keywords: List[str]) -> List[str]:
+    """
+    Synthesize rich keywords from all extracted metadata.
+    Combines: locations, temporal, topics (excludes title to avoid redundancy).
+    """
+    keywords = set()
+    
+    # 1. Topics (most important - domain-specific)
+    for topic in topics.get("primary", [])[:4]:
+        keywords.add(topic.replace("_", " "))
+    for topic in topics.get("secondary", [])[:2]:
+        keywords.add(topic.replace("_", " "))
+    
+    # 2. Locations (specific places)
+    for city in locations.get("cities", [])[:3]:
+        if city:
+            keywords.add(city.lower())
+    for country in locations.get("countries", [])[:2]:
+        if country:
+            keywords.add(country.lower())
+    for region in locations.get("regions", [])[:1]:
+        if region:
+            keywords.add(region.lower())
+    
+    # 3. Temporal (up to 2 most relevant)
+    centuries = temporal.get("centuries", [])
+    if len(centuries) == 1:
+        keywords.add(f"{centuries[0]}th century")
+    elif len(centuries) > 1:
+        # Add only first and last if range
+        keywords.add(f"{centuries[0]}th century")
+        if centuries[-1] != centuries[0]:
+            keywords.add(f"{centuries[-1]}th century")
+    
+    # 4. Years (only if highly specific - single year or very narrow range)
+    years = temporal.get("years", [])
+    if len(years) == 1:
+        keywords.add(str(years[0]))
+    elif 2 <= len(years) <= 3:
+        keywords.add(f"{years[0]}-{years[-1]}")
+    
+    # 5. Existing keywords ONLY if they're substantive (not generic words)
+    # Skip if they appear to be noise from title or common words
+    generic_noise = {"used", "made", "found", "seen", "took", "came", "went", "said", "told", 
+                     "arm", "hand", "cross", "book", "man", "woman", "time", "day", "night"}
+    for kw in existing_keywords:
+        if kw and len(kw) > 2:
+            kw_lower = kw.lower()
+            # Only keep if not a generic word and not already in title
+            if kw_lower not in generic_noise and kw_lower not in title.lower():
+                keywords.add(kw_lower)
+    
+    # Return sorted, limited to top 12 most relevant
+    return sorted(list(keywords))[:12]
+
+
+# ========================== CONFIDENCE & VALIDATION ==========================
+
+def calculate_confidence(temporal: Dict, locations: Dict, topics: Dict) -> float:
+    """
+    Calculate confidence score (0-1) based on extraction quality.
+    Equal weighting: 33% temporal, 33% locations, 33% topics.
+    """
+    score = 0.0
+    
+    # Temporal (33%)
+    has_temporal = bool(temporal.get("years") or temporal.get("centuries"))
+    if has_temporal:
+        score += 0.33
+    
+    # Locations (33%)
+    has_locations = bool(locations.get("cities") or locations.get("countries"))
+    if has_locations:
+        score += 0.33
+    
+    # Topics (33%)
+    has_topics = bool(topics.get("primary"))
+    if has_topics:
+        score += 0.33
+    
+    # Small bonus for having rich data
+    if len(temporal.get("years", [])) >= 2:
+        score += 0.01
+    if len(locations.get("countries", [])) >= 1:
+        score += 0.01
+    
+    return min(score, 1.0)
+
+
+def generate_warnings(temporal: Dict, locations: Dict, topics: Dict) -> List[str]:
+    """Generate human-readable warnings for review."""
+    warnings = []
+    
+    if not temporal.get("years") and not temporal.get("centuries"):
+        warnings.append("No temporal data found - check if story contains dates or century references")
+    
+    if not locations.get("cities") and not locations.get("countries"):
+        raw = locations.get("raw_mentions", [])
+        if raw:
+            warnings.append(f"Locations not normalized - raw mentions: {raw[:5]}")
+        else:
+            warnings.append("No locations found in text")
+    
+    if not topics.get("primary"):
+        warnings.append("No primary topics extracted - story may lack supernatural keywords")
+    
+    return warnings
