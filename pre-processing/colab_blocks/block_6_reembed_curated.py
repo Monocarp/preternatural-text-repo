@@ -54,7 +54,7 @@ def batch_reembed_curated_books():
     Re-embed existing curated books with enriched headers.
     Preserves all boundaries and metadata - ONLY creates new embeddings.
     """
-    force = ['operation_trojan_horse']  # Books to re-embed
+    force = ['christian_mysticism_vol_iv', 'ecology_of_souls_volume_i']  # Books to re-embed
     
     # Check if GPU is available
     import torch
@@ -248,18 +248,13 @@ def batch_reembed_curated_books():
     files.download(docs_path)
     print(f"documents.json saved → {len(all_docs)} total docs")
 
-    # FAISS Index
-    if os.path.exists(faiss_path):
-        print("Loading existing FAISS index...")
-        faiss_index = faiss.read_index(faiss_path)
-        print(f"Loaded FAISS index with {faiss_index.ntotal} vectors")
-    else:
-        dimension = 1024
-        faiss_index = faiss.IndexFlatL2(dimension)
-        print("No existing FAISS; starting fresh index")
+    # FAISS Index - Rebuild from scratch to avoid duplicates
+    print("Building FAISS index from scratch...")
+    dimension = 1024
+    faiss_index = faiss.IndexFlatL2(dimension)
 
-    new_embeddings = []
-    for doc in newly_added_docs:
+    all_embeddings = []
+    for doc in all_docs:
         if hasattr(doc, 'embedding') and doc.embedding is not None:
             emb = doc.embedding
             if isinstance(emb, list):
@@ -268,12 +263,12 @@ def batch_reembed_curated_books():
                 emb = emb.cpu().numpy().astype(np.float32)
             else:
                 emb = np.asarray(emb).astype(np.float32)
-            new_embeddings.append(emb)
+            all_embeddings.append(emb)
 
-    if new_embeddings:
-        new_embeddings = np.vstack(new_embeddings)
-        faiss_index.add(new_embeddings)
-        print(f"Appended {len(new_embeddings)} new vectors to FAISS")
+    if all_embeddings:
+        all_embeddings = np.vstack(all_embeddings)
+        faiss_index.add(all_embeddings)
+        print(f"Added {len(all_embeddings)} vectors to FAISS index")
 
     faiss.write_index(faiss_index, faiss_path)
     files.download(faiss_path)
