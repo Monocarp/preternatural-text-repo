@@ -42,7 +42,6 @@ const SearchCurate = () => {
   // New: Topic filter and sort
   const [topicFilter, setTopicFilter] = useState('')
   const [sortBy, setSortBy] = useState('relevance')
-  const [availableTopics, setAvailableTopics] = useState<string[]>([])
   // New: Bulk selection
   const [selectedResults, setSelectedResults] = useState<Set<string>>(new Set())
   const [bulkMode, setBulkMode] = useState(false)
@@ -129,18 +128,6 @@ const SearchCurate = () => {
       })
   }, [])
 
-  // Load available topics on mount
-  useEffect(() => {
-    apiClient.get('/topics')
-      .then(res => {
-        setAvailableTopics(res.data.topics || [])
-      })
-      .catch(err => {
-        console.error('Error loading topics:', err)
-        setAvailableTopics([])
-      })
-  }, [])
-  
   // Current assignments now handled by categoryAssignment hook
 
   // Handle search
@@ -698,7 +685,7 @@ const SearchCurate = () => {
             {bulkMode && selectedResults.size > 0 && ` • ${selectedResults.size} selected`}
           </div>
           <div className="space-y-1">
-            {results.map((result, idx) => {
+            {results.map((result) => {
               const resultKey = `${result.book_slug}-${result.title}`
               const isSelected = selectedStory?.title === result.title && selectedStory?.book_slug === result.book_slug
               return (
