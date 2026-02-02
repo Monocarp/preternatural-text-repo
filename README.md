@@ -14,7 +14,8 @@ short_description: Search and curate paranormal stories from historical texts
 A scalable system for extracting, indexing, searching, and curating stories of preternatural phenomena from historical texts. Currently includes several example texts with plans to expand to 100+ volumes.
 
 ### Key Features
-- **Hybrid semantic search** — combines keyword (BM25) and embedding-based search using Haystack AI
+- **Hybrid semantic search** — combines keyword (BM25) and embedding-based search using FAISS + SQLite FTS5
+- **Find Similar** — discover related stories using hybrid query (title + keywords + content)
 - **Multi-book support** — process and search across multiple historical texts
 - **Hierarchical categorization** — organize stories into a "Codex Tree" taxonomy (Demonic Activity, Ghostly Activity, Cryptids, etc.)
 - **Story Review** — visual editor showing all stories highlighted in book text with inline boundary editing
@@ -26,7 +27,7 @@ A scalable system for extracting, indexing, searching, and curating stories of p
 ### Tech Stack
 | Layer | Technology |
 |-------|----------|
-| Search Engine | Haystack AI 2.x, Sentence Transformers (bge-large-en-v1.5), FAISS |
+| Search Engine | Direct FAISS + SQLite FTS5, Sentence Transformers (bge-large-en-v1.5) |
 | Backend API | FastAPI, SQLAlchemy, PostgreSQL |
 | Frontend UI | React 19, TypeScript, Vite, Tailwind CSS, Zustand |
 | Auth | Stack Auth (JWT-based) |

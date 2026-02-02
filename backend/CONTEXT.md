@@ -140,8 +140,7 @@ state.py
 | `/api/export` | POST | No | Export stories to markdown/PDF/Word |
 | `/api/migrate-db` | POST | Editor | Recreate DB tables from disk |
 | `/api/reload-stories` | POST | Editor | Force reload from disk |
-| `/api/cleanup-search-index` | POST | No | Remove orphaned search entries |
-| `/api/full-text/{slug}` | GET | No | Get full book text |
+| `/api/cleanup-search-index` | POST | No | Remove orphaned search entries || `/api/rebuild-search-index` | POST | Editor | Rebuild FAISS + FTS5 from stories_dict.json || `/api/full-text/{slug}` | GET | No | Get full book text |
 
 ## Database Schema (models.py)
 

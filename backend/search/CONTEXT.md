@@ -122,9 +122,25 @@ results = search_stories(
 
 | File | Purpose | Regenerate With |
 |------|---------|-----------------|
-| `data/stories.faiss` | Vector index | `engine.reindex_all()` |
-| `data/stories_fts.db` | FTS5 database | `engine.reindex_all()` |
-| `data/stories_metadata.json` | Metadata backup | `engine.save()` |
+| `data/stories.faiss` | Vector index | `engine.reindex_all()` or `/api/rebuild-search-index` |
+| `data/stories_fts.db` | FTS5 database | `engine.reindex_all()` or `/api/rebuild-search-index` |
+| `data/stories.faiss.map.json` | FAISS metadata map | `engine.save()` |
+
+## Find Similar Feature
+
+The "Find Similar" feature finds related stories using a hybrid query constructed from:
+- Story title
+- Story keywords
+- Story content chunk (extracted from book Full_Text.md using story_positions.json)
+
+**Implementation:** `backend/routes/search.py` - `/api/find-similar/{title}`
+
+**Query Format:**
+```python
+query = f"Title: {title}. Keywords: {keywords}. Content: {text_chunk}"
+```
+
+This produces better semantic similarity than using just the title or content alone.
 
 ## Extending the Search Engine
 

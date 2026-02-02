@@ -1,10 +1,18 @@
 # Frontend Context
 
-**Last Updated:** 2025-11-30
+**Last Updated:** 2026-02-02
 
 ## Overview
 
 React 18 + TypeScript frontend with Tailwind CSS styling. Uses Zustand for state management and custom hooks for shared component logic.
+
+## Recent UI Improvements (Feb 2026)
+
+### Search/Curate Page Enhancements
+- **Story Titles:** Displayed prominently above story content in search results
+- **Find Similar:** Button for each story to discover related content
+- **Keywords Display:** All stories now show proper keywords (no longer "title as keywords")
+- **TypeScript Cleanup:** Removed unused variables to fix build warnings
 
 ## Architecture
 

@@ -1,6 +1,6 @@
 # Preternatural Text Repository — Development Context
 
-**Last Updated:** 2025-11-29  
+**Last Updated:** 2026-02-02  
 **Purpose:** Quick reference for AI-assisted development.
 
 ---
@@ -44,28 +44,42 @@ A scalable system for extracting, indexing, searching, and curating stories of p
 
 ---
 
-## Recent Major Changes (Nov 2025)
+## Recent Major Changes (Nov 2025 - Feb 2026)
 
 1. **Search Engine Migration:** Haystack → Direct FAISS + SQLite FTS5
    - 10x faster startup (11.5s → 0.7s)
    - 3x faster search (0.5s → 0.14s)
    - Feature flag: `USE_DIRECT_SEARCH=true`
 
-2. **Story Review Tab:** Visual editor in BookDetail showing all stories highlighted
+2. **Find Similar Feature:** Discover related stories using hybrid query
+   - Uses `Title: {title}. Keywords: {keywords}. Content: {chunk}` as query
+   - Loads text from `story_positions.json` for accurate extraction
+   - Returns semantically similar stories across all books
+
+3. **Improved Search UI:** Story titles prominently displayed in Search/Curate
+   - Title shown above story content for better context
+   - Keywords displayed for all stories (no longer showing bad "title as keywords" data)
+
+4. **Search Index Maintenance:** New admin endpoint `/api/rebuild-search-index`
+   - Rebuilds FAISS + FTS5 indices from current `stories_dict.json`
+   - Fixes stale keyword metadata in search results
+   - Editor-only endpoint with automatic backup
+
+5. **Story Review Tab:** Visual editor in BookDetail showing all stories highlighted
    - Click-to-select stories in full text
    - Inline boundary editing with auto-scroll
    - Edit title, delete story, add new story
 
-3. **Responsive UI:** Auto-collapsing sidebar, mobile-friendly layouts
+6. **Responsive UI:** Auto-collapsing sidebar, mobile-friendly layouts
 
-4. **Full Text Typography:** Libre Baskerville font, markdown rendering
+7. **Full Text Typography:** Libre Baskerville font, markdown rendering
 
-5. **Frontend Hooks Refactoring:** Extracted shared logic from large components
+8. **Frontend Hooks Refactoring:** Extracted shared logic from large components
    - Custom hooks: `useKeywordsEditor`, `useCategoryAssignment`, `useNewStoryCreator`, `useBoundaryEditor`
    - SearchCurate.tsx reduced from 1300 to 900 lines (30% reduction)
    - See `frontend/CONTEXT.md` for hook documentation
 
-6. **Backend Error Handling:** Standardized exception patterns across all modules
+9. **Backend Error Handling:** Standardized exception patterns across all modules
    - Custom exceptions in `backend/utils/exceptions.py`
    - Consistent error responses with `error_response()` helper
 
