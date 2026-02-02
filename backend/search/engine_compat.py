@@ -362,6 +362,23 @@ def rebuild_search_index() -> int:
     # Get the search engine
     engine = get_search_engine()
     
+    # Check if FTS table has keywords column, recreate if not
+    import sqlite3
+    with engine.fts_index._get_connection() as conn:
+        cursor = conn.cursor()
+        # Check FTS table schema
+        cursor.execute("PRAGMA table_info(stories_fts)")
+        columns = [row[1] for row in cursor.fetchall()]
+        
+        if 'keywords' not in columns:
+            logger.warning("FTS table missing 'keywords' column, recreating table...")
+            # Drop old tables
+            cursor.execute("DROP TABLE IF EXISTS stories_fts")
+            cursor.execute("DROP TABLE IF EXISTS stories_meta")
+            conn.commit()
+            # Recreate with new schema
+            engine.fts_index._ensure_tables()
+    
     # Clear existing indices
     engine.faiss_index.create_index()  # Recreate empty FAISS index
     engine.fts_index.clear()  # Clear FTS5 database
