@@ -209,3 +209,102 @@ def cleanup_search_index():
     except Exception as e:
         log.error(f"Search index cleanup failed: {e}", exc_info=True)
         raise AppError(ErrorCode.OPERATION_FAILED, "Search index cleanup failed", detail=str(e))
+
+
+@router.post("/upload-stories-dict")
+def upload_stories_dict(data: Dict, user: Dict = Depends(require_editor)):
+    """
+    Upload a new stories_dict.json file to update story metadata.
+    
+    Use this to sync keyword improvements from local to production.
+    After upload, search indices will be automatically rebuilt.
+    """
+    import json
+    from state import app_state
+    
+    try:
+        # Validate the data structure
+        if not isinstance(data, dict):
+            raise AppError(ErrorCode.OPERATION_FAILED, "Invalid data format - must be a dictionary")
+        
+        # Check that stories have required fields
+        for title, story in list(data.items())[:5]:  # Sample check
+            if not all(k in story for k in ['title', 'book_slug', 'keywords', 'pages']):
+                raise AppError(ErrorCode.OPERATION_FAILED, f"Story missing required fields: {title}")
+        
+        # Backup current file
+        backup_path = app_state.stories_dict_path.with_suffix('.json.backup')
+        if app_state.stories_dict_path.exists():
+            import shutil
+            shutil.copy2(app_state.stories_dict_path, backup_path)
+            log.info(f"Backed up existing file to {backup_path}")
+        
+        # Write new file
+        with open(app_state.stories_dict_path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
+        
+        log.info(f"Wrote {len(data)} stories to {app_state.stories_dict_path}")
+        
+        # Reload into memory
+        app_state.stories_dict = data
+        
+        # Rebuild search indices with new keywords
+        from search import USE_DIRECT_SEARCH
+        if USE_DIRECT_SEARCH:
+            from search.engine_compat import rebuild_search_index
+            rebuild_search_index()
+            log.info("Rebuilt Direct search indices")
+        
+        invalidate_cache()
+        
+        return {
+            "status": "success",
+            "message": f"Uploaded and indexed {len(data)} stories",
+            "backup_created": str(backup_path)
+        }
+        
+    except Exception as e:
+        log.error(f"Upload failed: {e}", exc_info=True)
+        raise AppError(ErrorCode.OPERATION_FAILED, "Upload stories_dict failed", detail=str(e))
+
+
+@router.post("/rebuild-search-index")
+def rebuild_search_index_endpoint(user: Dict = Depends(require_editor)):
+    """
+    Rebuild the search index from current stories_dict.json.
+    
+    Use this when:
+    - Keywords have been updated but search shows old ones
+    - Search index is out of sync with story data
+    - After manual edits to stories_dict.json
+    
+    This re-reads stories_dict.json and rebuilds FAISS + FTS indices.
+    """
+    from search import USE_DIRECT_SEARCH
+    
+    try:
+        if USE_DIRECT_SEARCH:
+            from search.engine_compat import rebuild_search_index
+            rebuild_search_index()
+            log.info("Rebuilt Direct search indices from stories_dict.json")
+            
+            # Get count for response
+            from search.engine import get_search_engine
+            engine = get_search_engine()
+            doc_count = len(engine.faiss_index.id_map)
+            
+            return {
+                "status": "success",
+                "message": f"Rebuilt search index with {doc_count} documents",
+                "engine": "direct"
+            }
+        else:
+            return {
+                "status": "skipped",
+                "message": "Legacy Haystack engine - use /api/reload-stories instead",
+                "engine": "haystack"
+            }
+            
+    except Exception as e:
+        log.error(f"Search index rebuild failed: {e}", exc_info=True)
+        raise AppError(ErrorCode.OPERATION_FAILED, "Search index rebuild failed", detail=str(e))
