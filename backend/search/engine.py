@@ -423,46 +423,53 @@ class SearchEngine:
         book_filter: Optional[str]
     ) -> List[Dict[str, Any]]:
         """
-        Exact text match search using regex (counts occurrences).
+        Exact text match search (ALL words must appear).
         
-        Returns results sorted by occurrence count, matching the legacy
-        Haystack behavior which iterates through all documents.
+        Formerly a strict phrase search, this now enforces that ALL query terms
+        must be present in the document (AND logic), but order doesn't matter.
+        This makes "Exact" mode more useful for finding specific combinations.
         
         Args:
             query: Search query text
             top_k: Maximum results to return
-            min_score: Minimum occurrence count (usually 0 for exact)
+            min_score: Minimum occurrence count
             book_filter: Optional book_slug to filter by
         
         Returns:
-            List of result dicts sorted by occurrence count (descending)
+            List of result dicts sorted by total term matches
         """
         query_text = query.strip()
         if not query_text:
             return []
         
-        # Build regex pattern - same logic as legacy stories.py
-        if ' ' in query_text:
-            # Multi-word phrase: escape and match literally
-            pattern = re.escape(query_text)
-        else:
-            # Single word: match word boundaries
-            pattern = r'\b' + re.escape(query_text) + r'\b'
+        # Split into distinct words for "AND" matching
+        # Filter out empty strings
+        terms = [t for t in query_text.split() if t.strip()]
+        if not terms:
+            return []
+            
+        # Compile regex for each term for case-insensitive matching
+        term_patterns = [re.compile(re.escape(term), re.IGNORECASE) for term in terms]
         
         # Get all documents (optionally filtered by book)
         all_docs = self.fts_index.get_all_documents(book_filter)
-        logger.info(f"Exact search: found {len(all_docs)} documents to search through")
-        
-        # Debug: check if content is populated
-        if all_docs:
-            sample_content = all_docs[0][1][:100] if all_docs[0][1] else "EMPTY"
-            logger.debug(f"Sample content (first 100 chars): {sample_content}")
+        logger.info(f"Exact search: scanning {len(all_docs)} documents for terms: {terms}")
         
         results = []
         for doc_id, content, meta in all_docs:
-            # Count occurrences (case-insensitive)
-            count = len(re.findall(pattern, content, re.IGNORECASE))
-            if count > 0:
+            term_matches = 0
+            has_all_terms = True
+            
+            # Check for each term
+            for pattern in term_patterns:
+                matches = len(pattern.findall(content))
+                if matches == 0:
+                    has_all_terms = False
+                    break
+                term_matches += matches
+            
+            # Keep document only if ALL terms are present
+            if has_all_terms:
                 results.append({
                     "title": meta.get("title", ""),
                     "book_slug": meta.get("book_slug", ""),
@@ -470,11 +477,11 @@ class SearchEngine:
                     "keywords": meta.get("keywords", ""),
                     "start_char": meta.get("start_char", 0),
                     "end_char": meta.get("end_char", 0),
-                    "score": float(count),  # Use count as score
-                    "search_query": query,  # For highlighting in UI
+                    "score": float(term_matches),  # Score = total occurrences of all terms
+                    "search_query": query,
                 })
         
-        # Sort by score (count) descending and limit to top_k
+        # Sort by score (total matches) descending and limit to top_k
         results.sort(key=lambda x: x["score"], reverse=True)
         return results[:top_k]
     

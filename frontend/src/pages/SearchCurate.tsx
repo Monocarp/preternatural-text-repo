@@ -32,10 +32,20 @@ const SearchCurate = () => {
   const [sourceFilter, setSourceFilter] = useState('All Sources')
   const [typeFilter, setTypeFilter] = useState('Both')
   const [searchMode, setSearchMode] = useState('Both')
-  const [minScore, setMinScore] = useState(0.1)
   const [assignmentFilter, setAssignmentFilter] = useState('all')
   const [categoryFilter, setCategoryFilter] = useState('')
   const [subcategoryFilter, setSubcategoryFilter] = useState('')
+  // New: Temporal and location filters
+  const [yearMin, setYearMin] = useState('')
+  const [yearMax, setYearMax] = useState('')
+  const [locationFilter, setLocationFilter] = useState('')
+  // New: Topic filter and sort
+  const [topicFilter, setTopicFilter] = useState('')
+  const [sortBy, setSortBy] = useState('relevance')
+  const [availableTopics, setAvailableTopics] = useState<string[]>([])
+  // New: Bulk selection
+  const [selectedResults, setSelectedResults] = useState<Set<string>>(new Set())
+  const [bulkMode, setBulkMode] = useState(false)
   const [sources, setSources] = useState<string[]>(['All Sources'])
   const [categories, setCategories] = useState<string[]>([])
   const [subcategories, setSubcategories] = useState<Record<string, string[]>>({})
@@ -118,6 +128,18 @@ const SearchCurate = () => {
         setSubcategories({})
       })
   }, [])
+
+  // Load available topics on mount
+  useEffect(() => {
+    apiClient.get('/topics')
+      .then(res => {
+        setAvailableTopics(res.data.topics || [])
+      })
+      .catch(err => {
+        console.error('Error loading topics:', err)
+        setAvailableTopics([])
+      })
+  }, [])
   
   // Current assignments now handled by categoryAssignment hook
 
@@ -126,6 +148,7 @@ const SearchCurate = () => {
     if (!query.trim()) return
     
     setSearching(true)
+    setSelectedResults(new Set()) // Clear selection on new search
     try {
       const res = await apiClient.post('/search', {
         query: query.trim(),
@@ -133,10 +156,14 @@ const SearchCurate = () => {
         type_filter: typeFilter,
         search_mode: searchMode,
         top_k: 1000,
-        min_score: minScore,
         assignment_filter: assignmentFilter,
         category_filter: categoryFilter || null,
-        subcategory_filter: subcategoryFilter || null
+        subcategory_filter: subcategoryFilter || null,
+        year_min: yearMin ? parseInt(yearMin) : null,
+        year_max: yearMax ? parseInt(yearMax) : null,
+        location_filter: locationFilter || null,
+        topic_filter: topicFilter || null,
+        sort_by: sortBy
       })
       setResults(res.data.results || [])
       if (res.data.results && res.data.results.length > 0) {
@@ -399,6 +426,28 @@ const SearchCurate = () => {
     await newStoryCreator.startCreating(selectedStory.book_slug)
   }
 
+  // Find Similar Stories
+  const handleFindSimilar = async () => {
+    if (!selectedStory) return
+    
+    setSearching(true)
+    try {
+      const res = await apiClient.post('/find-similar', {
+        title: selectedStory.title,
+        book_slug: selectedStory.book_slug,
+        top_k: 20
+      })
+      setResults(res.data.results)
+      setQuery(`Similar to: ${selectedStory.title}`)
+      // Don't clear selection so user can still see the source story
+    } catch (err) {
+      console.error('Find similar failed:', err)
+      alert('Failed to find similar stories')
+    } finally {
+      setSearching(false)
+    }
+  }
+
   // New story text click handled by newStoryCreator.handleTextClick
 
   // Cancel and add new story handled by newStoryCreator.cancel() and newStoryCreator.addStory()
@@ -542,17 +591,101 @@ const SearchCurate = () => {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-medium mb-1 text-gray-400">Min Score: {minScore.toFixed(2)}</label>
+              {/* Min Score removed - backend auto-adjusts thresholds per search mode */}
+
+              {/* New: Temporal Filters */}
+              <div className="pt-2 border-t border-gray-700">
+                <label className="block text-xs font-medium mb-2 text-gray-300">📅 Temporal Filter</label>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-xs font-medium mb-1 text-gray-400">Year Min</label>
+                    <input
+                      type="number"
+                      placeholder="e.g., 1600"
+                      value={yearMin}
+                      onChange={(e) => setYearMin(e.target.value)}
+                      className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-sm text-white focus:outline-none focus:ring-1 focus:ring-blue-500 placeholder-gray-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium mb-1 text-gray-400">Year Max</label>
+                    <input
+                      type="number"
+                      placeholder="e.g., 1699"
+                      value={yearMax}
+                      onChange={(e) => setYearMax(e.target.value)}
+                      className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-sm text-white focus:outline-none focus:ring-1 focus:ring-blue-500 placeholder-gray-500"
+                    />
+                  </div>
+                </div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {yearMin && yearMax && `${parseInt(yearMax) - parseInt(yearMin) + 1} year range`}
+                  {yearMin && !yearMax && `From ${yearMin} onwards`}
+                  {!yearMin && yearMax && `Up to ${yearMax}`}
+                </div>
+              </div>
+
+              {/* New: Location Filter */}
+              <div className="pt-2 border-t border-gray-700">
+                <label className="block text-xs font-medium mb-1 text-gray-300">🌍 Location Filter</label>
                 <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.05"
-                  value={minScore}
-                  onChange={(e) => setMinScore(parseFloat(e.target.value))}
-                  className="w-full h-1"
+                  type="text"
+                  placeholder="e.g., italy, france, england"
+                  value={locationFilter}
+                  onChange={(e) => setLocationFilter(e.target.value)}
+                  className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-sm text-white focus:outline-none focus:ring-1 focus:ring-blue-500 placeholder-gray-500"
                 />
+                <div className="text-xs text-gray-500 mt-1">
+                  Comma-separated locations (searches keywords)
+                </div>
+              </div>
+
+              {/* New: Topic Filter */}
+              <div className="pt-2 border-t border-gray-700">
+                <label className="block text-xs font-medium mb-1 text-gray-300">🏷️ Topic Filter</label>
+                <input
+                  type="text"
+                  placeholder="e.g., possession, ufo, witch"
+                  value={topicFilter}
+                  onChange={(e) => setTopicFilter(e.target.value)}
+                  className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-sm text-white focus:outline-none focus:ring-1 focus:ring-blue-500 placeholder-gray-500"
+                />
+                <div className="text-xs text-gray-500 mt-1">
+                  Comma-separated topics from keywords
+                </div>
+              </div>
+
+              {/* New: Sort Options */}
+              <div className="pt-2 border-t border-gray-700">
+                <label className="block text-xs font-medium mb-1 text-gray-400">Sort By</label>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-sm text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+                >
+                  <option value="relevance">Relevance</option>
+                  <option value="chronological">Chronological (Earliest)</option>
+                  <option value="alphabetical">Alphabetical</option>
+                  <option value="by_book">By Book</option>
+                  <option value="by_pages">By Pages</option>
+                </select>
+              </div>
+
+              {/* New: Bulk Mode Toggle */}
+              <div className="pt-2 border-t border-gray-700">
+                <button
+                  onClick={() => {
+                    setBulkMode(!bulkMode)
+                    if (bulkMode) setSelectedResults(new Set()) // Clear on disable
+                  }}
+                  className={`w-full px-2 py-1.5 rounded text-sm font-medium transition-colors ${
+                    bulkMode
+                      ? 'bg-purple-600 hover:bg-purple-700 text-white'
+                      : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
+                  }`}
+                >
+                  {bulkMode ? '✓ Bulk Mode Active' : 'Enable Bulk Selection'}
+                </button>
               </div>
             </div>
           )}
@@ -562,27 +695,50 @@ const SearchCurate = () => {
         <div className="flex-1 overflow-y-auto p-2">
           <div className="mb-1 text-xs text-gray-400 px-1">
             {results.length} {results.length === 1 ? 'story' : 'stories'} found
+            {bulkMode && selectedResults.size > 0 && ` • ${selectedResults.size} selected`}
           </div>
           <div className="space-y-1">
-            {results.map((result, idx) => (
-              <button
-                key={`${result.book_slug}-${result.title}-${idx}`}
-                onClick={() => handleSelectStory(result)}
-                className={`w-full text-left p-2 rounded border transition-colors ${
-                  selectedStory?.title === result.title && selectedStory?.book_slug === result.book_slug
-                    ? 'bg-blue-600 border-blue-500 text-white'
-                    : 'bg-gray-700 border-gray-600 text-gray-200 hover:bg-gray-600'
-                }`}
-              >
-                <div className="font-medium text-sm leading-tight">{result.title}</div>
-                <div className="text-xs text-gray-400 mt-0.5 truncate">
-                  {result.book_title || (result.book_slug ? result.book_slug.replace(/_/g, ' ') : 'Unknown Book')}
+            {results.map((result, idx) => {
+              const resultKey = `${result.book_slug}-${result.title}`
+              const isSelected = selectedStory?.title === result.title && selectedStory?.book_slug === result.book_slug
+              return (
+                <div key={resultKey} className="flex items-start gap-2">
+                  {bulkMode && (
+                    <input
+                      type="checkbox"
+                      checked={selectedResults.has(resultKey)}
+                      onChange={(e) => {
+                        const newSet = new Set(selectedResults)
+                        if (e.target.checked) {
+                          newSet.add(resultKey)
+                        } else {
+                          newSet.delete(resultKey)
+                        }
+                        setSelectedResults(newSet)
+                      }}
+                      onClick={(e) => e.stopPropagation()}
+                      className="mt-3 flex-shrink-0"
+                    />
+                  )}
+                  <button
+                    onClick={() => handleSelectStory(result)}
+                    className={`flex-1 text-left p-2 rounded border transition-colors ${
+                      isSelected
+                        ? 'bg-blue-600 border-blue-500 text-white'
+                        : 'bg-gray-700 border-gray-600 text-gray-200 hover:bg-gray-600'
+                    }`}
+                  >
+                    <div className="font-medium text-sm leading-tight">{result.title}</div>
+                    <div className="text-xs text-gray-400 mt-0.5 truncate">
+                      {result.book_title || (result.book_slug ? result.book_slug.replace(/_/g, ' ') : 'Unknown Book')}
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      p.{result.pages} • {result.score.toFixed(2)}
+                    </div>
+                  </button>
                 </div>
-                <div className="text-xs text-gray-500">
-                  p.{result.pages} • {result.score.toFixed(2)}
-                </div>
-              </button>
-            ))}
+              )
+            })}
           </div>
           {results.length === 0 && !searching && (
             <div className="text-center text-gray-500 text-sm mt-4 px-2">
@@ -590,12 +746,52 @@ const SearchCurate = () => {
             </div>
           )}
         </div>
+
+        {/* Bulk Action Bar */}
+        {bulkMode && selectedResults.size > 0 && (
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 border border-gray-600 rounded-lg shadow-xl px-4 py-3 flex items-center gap-3 z-10">
+            <span className="text-sm text-gray-300 font-medium">
+              {selectedResults.size} selected
+            </span>
+            <button 
+              onClick={() => {
+                // TODO: Implement bulk assign
+                alert('Bulk assign feature - select category first')
+              }}
+              className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 rounded text-sm text-white transition-colors"
+            >
+              Assign All
+            </button>
+            <button 
+              onClick={() => {
+                // TODO: Implement bulk export
+                alert('Bulk export feature - not yet implemented')
+              }}
+              className="px-3 py-1.5 bg-green-600 hover:bg-green-700 rounded text-sm text-white transition-colors"
+            >
+              Export
+            </button>
+            <button 
+              onClick={() => setSelectedResults(new Set())}
+              className="px-3 py-1.5 bg-gray-600 hover:bg-gray-700 rounded text-sm text-white transition-colors"
+            >
+              Clear
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Middle Panel - Story Viewer */}
       <div className="flex-1 flex flex-col bg-gray-900 min-w-0 overflow-hidden">
         <div className="p-4 border-b border-gray-700 flex-shrink-0">
-          <h2 className="text-lg font-semibold">Story Viewer</h2>
+          <div className="mb-3">
+            <h2 className="text-sm font-medium text-gray-400 mb-1">Story Viewer</h2>
+            {selectedStory && (
+              <h1 className="text-2xl font-bold text-white leading-tight">
+                {selectedStory.title}
+              </h1>
+            )}
+          </div>
           {selectedStory && !editMode && !newStoryCreator.isActive && (
             <div className="mt-2 flex gap-2 flex-wrap">
               <button
@@ -617,6 +813,12 @@ const SearchCurate = () => {
                 }`}
               >
                 Book Context
+              </button>
+              <button
+                onClick={handleFindSimilar}
+                className="px-4 py-2 rounded text-sm bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
+              >
+                🔍 Find Similar
               </button>
               <button
                 onClick={handleAdjustBoundaries}

@@ -63,11 +63,13 @@ class FTS5Index:
             
             # FTS5 virtual table for full-text search
             # tokenize='porter unicode61' provides stemming + unicode support
+            # Added keywords to FTS table for rich metadata search
             cursor.execute("""
                 CREATE VIRTUAL TABLE IF NOT EXISTS stories_fts USING fts5(
                     doc_id,
                     title,
                     content,
+                    keywords,
                     tokenize='porter unicode61'
                 )
             """)
@@ -119,9 +121,9 @@ class FTS5Index:
             
             # Insert or replace in FTS table
             cursor.execute("""
-                INSERT OR REPLACE INTO stories_fts(doc_id, title, content)
-                VALUES (?, ?, ?)
-            """, (doc_id, title, content))
+                INSERT OR REPLACE INTO stories_fts(doc_id, title, content, keywords)
+                VALUES (?, ?, ?, ?)
+            """, (doc_id, title, content, keywords))
             
             # Insert or replace in metadata table
             metadata_json = json.dumps(extra_metadata) if extra_metadata else None
@@ -150,10 +152,16 @@ class FTS5Index:
             cursor = conn.cursor()
             
             for doc in documents:
+                # Include keywords in FTS insert
                 cursor.execute("""
-                    INSERT OR REPLACE INTO stories_fts(doc_id, title, content)
-                    VALUES (?, ?, ?)
-                """, (doc['doc_id'], doc.get('title', ''), doc.get('content', '')))
+                    INSERT OR REPLACE INTO stories_fts(doc_id, title, content, keywords)
+                    VALUES (?, ?, ?, ?)
+                """, (
+                    doc['doc_id'], 
+                    doc.get('title', ''), 
+                    doc.get('content', ''),
+                    doc.get('keywords', '')
+                ))
                 
                 extra_meta = doc.get('extra_metadata')
                 metadata_json = json.dumps(extra_meta) if extra_meta else None
@@ -196,16 +204,19 @@ class FTS5Index:
         
         if not safe_query.strip():
             return []
-        
+
         with self._get_connection() as conn:
             cursor = conn.cursor()
-            
+
             # BM25 scoring with metadata join
+            # bm25(stories_fts, w_docid, w_title, w_content, w_keywords)
+            # Weights: Title (2.0), Content (1.0), Keywords (1.5)
+            # Note: doc_id weight is usually ignored or 0
             if book_filter:
                 cursor.execute("""
                     SELECT 
                         f.doc_id,
-                        bm25(stories_fts) as score,
+                        bm25(stories_fts, 0.0, 2.0, 1.0, 1.5) as score,
                         m.book_slug,
                         m.pages,
                         m.keywords,
@@ -224,7 +235,7 @@ class FTS5Index:
                 cursor.execute("""
                     SELECT 
                         f.doc_id,
-                        bm25(stories_fts) as score,
+                        bm25(stories_fts, 0.0, 2.0, 1.0, 1.5) as score,
                         m.book_slug,
                         m.pages,
                         m.keywords,

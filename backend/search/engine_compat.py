@@ -270,8 +270,8 @@ def initialize_search_engine():
     local_model = backend_dir / "models" / "bge-large-en-v1.5"
     model_path = str(local_model) if local_model.exists() else "BAAI/bge-large-en-v1.5"
     
-    # Check if reranking is enabled
-    enable_reranker = os.environ.get("ENABLE_RERANKER", "false").lower() == "true"
+    # Check if reranking is enabled (now defaults to TRUE for better precision)
+    enable_reranker = os.environ.get("ENABLE_RERANKER", "true").lower() == "true"
     reranker_model = os.environ.get("RERANKER_MODEL", "cross-encoder/ms-marco-MiniLM-L-6-v2")
     
     if enable_reranker:

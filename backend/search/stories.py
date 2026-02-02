@@ -31,10 +31,21 @@ def search_stories(
     search_mode: str = "Both",
     top_k: int = 1000,
     min_score: float = 0.2,
-    assignment_filter: str = "all"
+    assignment_filter: str = "all",
+    category_filter: str = None,
+    subcategory_filter: str = None,
+    year_min: int = None,
+    year_max: int = None,
+    location_filter: str = None,
+    topic_filter: str = None,
+    sort_by: str = "relevance"
 ) -> list[dict]:
     """
     Search for stories using story-level embeddings.
+    
+    NOTE: This is the legacy Haystack implementation. The new parameters
+    (year_min, year_max, location_filter, topic_filter, sort_by) are
+    accepted but ignored. Use USE_DIRECT_SEARCH=true for full feature support.
     
     Args:
         query: Search query text

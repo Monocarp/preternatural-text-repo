@@ -188,9 +188,18 @@ class SearchQuery(BaseModel):
     search_mode: Optional[str] = "Both"
     top_k: int = Field(1000, ge=1, le=5000)
     min_score: float = Field(0.1, ge=0.0, le=1.0)
+    # New: Temporal filters
+    year_min: Optional[int] = Field(None, ge=1, le=3000)
+    year_max: Optional[int] = Field(None, ge=1, le=3000)
+    # New: Location filter (comma-separated)
+    location_filter: Optional[str] = None
+    # New: Topic filter (comma-separated)
+    topic_filter: Optional[str] = None
     assignment_filter: Optional[str] = "all"
     category_filter: Optional[str] = None  # Top-level category name or None for all
     subcategory_filter: Optional[str] = None  # Subcategory name or None for all
+    # New: Sort options
+    sort_by: Optional[str] = "relevance"  # relevance, chronological, alphabetical, by_book, by_pages
 
 
 class AssignBody(BaseModel):

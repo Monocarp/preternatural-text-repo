@@ -42,7 +42,12 @@ def search_stories(
     min_score: float = 0.2,
     assignment_filter: str = "all",
     category_filter: str = None,
-    subcategory_filter: str = None
+    subcategory_filter: str = None,
+    year_min: int = None,
+    year_max: int = None,
+    location_filter: str = None,
+    topic_filter: str = None,
+    sort_by: str = "relevance"
 ) -> List[Dict[str, Any]]:
     """
     Search for stories using Direct FAISS + SQLite engine.
@@ -94,8 +99,8 @@ def search_stories(
     # Run search
     try:
         # Determine if reranking should be applied
-        # Reranking improves precision for hybrid/semantic but adds latency
-        should_rerank = engine.enable_reranker and engine_mode in ("hybrid", "semantic")
+        # Reranking improves precision for hybrid/semantic/keyword but adds latency
+        should_rerank = engine.enable_reranker and engine_mode in ("hybrid", "semantic", "keyword")
         
         results = engine.search(
             query=query,
@@ -141,6 +146,73 @@ def search_stories(
         except Exception as e:
             logger.error(f"Error enriching result: {e}", exc_info=True)
             continue
+    
+    # Apply temporal filters with scoring boost
+    if year_min is not None or year_max is not None:
+        filtered_results = []
+        for result in enriched_results:
+            keywords = result.get("keywords", "")
+            # Extract years from keywords (format: "1577", "16th century", etc.)
+            years = re.findall(r'\b(\d{3,4})\b', keywords)
+            
+            # Check if any year falls within range
+            matches_filter = False
+            for year_str in years:
+                year = int(year_str)
+                if year_min and year < year_min:
+                    continue
+                if year_max and year > year_max:
+                    continue
+                matches_filter = True
+                break
+            
+            if matches_filter:
+                # Track filter match count for sorting
+                result['_filter_matches'] = result.get('_filter_matches', 0) + 1
+                filtered_results.append(result)
+            elif not years:
+                # Include stories without explicit years
+                result['_filter_matches'] = result.get('_filter_matches', 0)
+                filtered_results.append(result)
+        
+        enriched_results = filtered_results
+        logger.debug(f"Temporal filter applied: {len(enriched_results)} results remain")
+    
+    # Apply location filter with scoring boost
+    if location_filter:
+        locations = [loc.strip().lower() for loc in location_filter.split(",")]
+        filtered_results = []
+        for result in enriched_results:
+            keywords = result.get("keywords", "").lower()
+            # Check if any location appears in keywords
+            if any(loc in keywords for loc in locations):
+                # Track filter match count for sorting
+                result['_filter_matches'] = result.get('_filter_matches', 0) + 1
+                filtered_results.append(result)
+        
+        enriched_results = filtered_results
+        logger.debug(f"Location filter applied: {len(enriched_results)} results remain")
+    
+    # Sort by filter match count (descending), then by score (descending)
+    # This ensures stories matching more filters rank higher
+    if (year_min is not None or year_max is not None or location_filter):
+        enriched_results.sort(key=lambda x: (x.get('_filter_matches', 0), x['score']), reverse=True)
+        # Clean up internal tracking field
+        for result in enriched_results:
+            result.pop('_filter_matches', None)
+    
+    # Apply topic filter
+    if topic_filter:
+        topics = [t.strip().lower() for t in topic_filter.split(",")]
+        filtered_results = []
+        for result in enriched_results:
+            keywords = result.get("keywords", "").lower()
+            # Check if any topic appears in keywords
+            if any(topic in keywords for topic in topics):
+                filtered_results.append(result)
+        
+        enriched_results = filtered_results
+        logger.debug(f"Topic filter applied: {len(enriched_results)} results remain")
     
     # Apply assignment filter
     if assignment_filter and assignment_filter != "all":
@@ -192,6 +264,33 @@ def search_stories(
             # Category doesn't exist - return empty
             enriched_results = []
             logger.warning(f"Category '{category_filter}' not found in tree")
+    
+    # Apply sorting
+    if sort_by and sort_by != "relevance":
+        if sort_by == "chronological":
+            # Sort by earliest year in keywords
+            def get_earliest_year(result):
+                keywords = result.get("keywords", "")
+                years = re.findall(r'\b(\d{3,4})\b', keywords)
+                return int(years[0]) if years else 9999  # Stories without years go last
+            enriched_results.sort(key=get_earliest_year)
+        
+        elif sort_by == "alphabetical":
+            enriched_results.sort(key=lambda x: x['title'].lower())
+        
+        elif sort_by == "by_book":
+            enriched_results.sort(key=lambda x: (x.get('book_title', x['book_slug']), x['title']))
+        
+        elif sort_by == "by_pages":
+            # Sort by book, then by page number
+            def get_page_sort_key(result):
+                book = result.get('book_title', result['book_slug'])
+                pages = result.get('pages', '')
+                # Extract first page number
+                page_match = re.search(r'(\d+)', pages)
+                page_num = int(page_match.group(1)) if page_match else 99999
+                return (book, page_num)
+            enriched_results.sort(key=get_page_sort_key)
     
     logger.info(f"Search returned {len(enriched_results)} story results for query: '{query}'")
     if enriched_results:
