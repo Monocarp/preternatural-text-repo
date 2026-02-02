@@ -345,3 +345,79 @@ def get_model_path() -> str:
     if not _initialized:
         initialize_search_engine()
     return app_state.MODEL_PATH
+
+
+def rebuild_search_index() -> int:
+    """
+    Rebuild the entire search index from stories_dict.json.
+    
+    This reloads all stories from stories_dict.json and rebuilds
+    both FAISS and FTS5 indices from scratch.
+    
+    Returns:
+        Number of documents indexed
+    """
+    logger.info("Rebuilding search index from stories_dict.json...")
+    
+    # Get the search engine
+    engine = get_search_engine()
+    
+    # Clear existing indices
+    engine.faiss_index.create_index()  # Recreate empty FAISS index
+    engine.fts_index.clear()  # Clear FTS5 database
+    
+    # Load stories from stories_dict.json
+    from state import app_state
+    import uuid
+    
+    stories_dict = app_state.stories_dict
+    if not stories_dict:
+        logger.warning("stories_dict is empty, loading from file...")
+        import json
+        with open(app_state.stories_dict_path, 'r', encoding='utf-8') as f:
+            stories_dict = json.load(f)
+    
+    # Convert to StoryDocument objects
+    from .models import StoryDocument
+    docs = []
+    for title, story_data in stories_dict.items():
+        # Create unique document ID
+        doc_id = f"{story_data['book_slug']}_{title}"
+        
+        # Build content string (title + keywords + placeholder)
+        content_parts = [title]
+        keywords = story_data.get("keywords", "")
+        if keywords:
+            content_parts.append(keywords)
+        content = " | ".join(content_parts)
+        
+        # Create metadata
+        meta = {
+            "title": title,
+            "book": story_data["book_slug"],
+            "pages": story_data.get("pages", ""),
+            "keywords": keywords,
+            "start_char": story_data.get("start_char", 0),
+            "end_char": story_data.get("end_char", 0),
+            "type": "story"
+        }
+        
+        doc = StoryDocument(
+            id=doc_id,
+            content=content,
+            meta=meta,
+            embedding=None,  # Will be generated during add_documents
+            score=0.0
+        )
+        docs.append(doc)
+    
+    logger.info(f"Prepared {len(docs)} documents for indexing")
+    
+    # Add to indices (this will generate embeddings)
+    count = engine.add_documents(docs)
+    
+    # Save indices
+    engine.save()
+    
+    logger.info(f"Search index rebuilt with {count} documents")
+    return count
