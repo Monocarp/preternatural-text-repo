@@ -359,6 +359,10 @@ def rebuild_search_index() -> int:
     """
     logger.info("Rebuilding search index from stories_dict.json...")
     
+    # Initialize the search engine if not already initialized
+    if not _initialized:
+        initialize_search_engine()
+    
     # Get the search engine
     engine = get_search_engine()
     
