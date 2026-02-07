@@ -10,6 +10,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import axios from '../utils/axios'
+import { encodePathSegmentsForApi } from '../utils/path'
 
 interface CategoryManagerProps {
   /** Current path segments of the selected category (empty for root) */
@@ -86,7 +87,7 @@ export default function CategoryManager({
 
   const loadCategoryInfo = async () => {
     try {
-      const encodedPath = currentPath.map(p => encodeURIComponent(p)).join('/')
+      const encodedPath = encodePathSegmentsForApi(currentPath)
       const res = await axios.get(`/category-info/${encodedPath}`)
       setCategoryInfo(res.data)
     } catch (err) {

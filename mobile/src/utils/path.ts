@@ -1,5 +1,8 @@
 export const encodePathSegmentsForApi = (segments: string[]): string => {
-  return segments.map((segment) => encodeURIComponent(segment)).join('/');
+  // Double-encode each segment so that after the server's automatic URL decoding,
+  // special characters like slashes in category names are still encoded (%2F)
+  // and won't be confused with the / path separator.
+  return segments.map((segment) => encodeURIComponent(encodeURIComponent(segment))).join('/');
 };
 
 export const encodePathSegmentsForRoute = (segments: string[]): string => {
