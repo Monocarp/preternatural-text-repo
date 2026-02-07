@@ -1,5 +1,5 @@
 # ==================================================================================
-# BLOCK 5: CHUNKING & EMBEDDING  
+# BLOCK 5: CHUNKING & EMBEDDING
 # ==================================================================================
 # This block chunks the full text with enhanced metadata for vector search
 

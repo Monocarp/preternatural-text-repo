@@ -122,47 +122,47 @@ def extract_structured_metadata(positions: Dict, full_md: str, book_slug: str, b
     print(f"\n{'='*60}")
     print("EXTRACTING STRUCTURED METADATA")
     print(f"{'='*60}")
-    
+
     # Load location cache
     location_cache = load_location_cache()
     initial_cache_size = len(location_cache)
-    
+
     enhanced_positions = {}
     review_queue = []
-    
+
     total = len([p for p in positions.values() if p.get("start_char", -1) != -1])
     processed = 0
-    
+
     for title, pos in positions.items():
         if pos.get("start_char", -1) == -1:
             enhanced_positions[title] = pos
             continue
-        
+
         processed += 1
         print(f"\n[{processed}/{total}] {title[:50]}...")
-        
+
         content = full_md[pos["start_char"]:pos["end_char"]]
-        
+
         # 1. Temporal extraction
         temporal = extract_temporal(content)
         print(f"  Temporal: {len(temporal.get('years', []))} years, {len(temporal.get('centuries', []))} centuries")
-        
+
         # 2. Location extraction + normalization
         locations = extract_and_normalize_locations(content, title, location_cache)
         print(f"  Locations: {len(locations.get('cities', []))} cities, {len(locations.get('countries', []))} countries")
-        
+
         # 3. Topic extraction
         topics = extract_domain_topics(content)
         print(f"  Topics: {topics.get('primary', [])}")
-        
+
         # 4. Synthesize keywords
         keywords = synthesize_keywords(title, temporal, locations, topics, pos.get("keywords", []))
-        
+
         # 5. Calculate confidence
         confidence = calculate_confidence(temporal, locations, topics)
         status = "AUTO_APPROVED" if confidence >= 0.75 else "NEEDS_REVIEW"
         print(f"  Confidence: {confidence:.2f} → {status}")
-        
+
         # 6. Build enhanced entry
         enhanced = {
             **pos,
@@ -177,7 +177,7 @@ def extract_structured_metadata(positions: Dict, full_md: str, book_slug: str, b
             "confidence": round(confidence, 2),
             "status": status
         }
-        
+
         # 7. Generate warnings and add to review queue if needed
         if confidence < 0.75:
             warnings = generate_warnings(temporal, locations, topics)
@@ -192,21 +192,21 @@ def extract_structured_metadata(positions: Dict, full_md: str, book_slug: str, b
                 },
                 "current_keywords": keywords
             })
-        
+
         enhanced_positions[title] = enhanced
-    
+
     # Save updated location cache
     if len(location_cache) > initial_cache_size:
         save_location_cache(location_cache)
         print(f"\nLocation cache updated: {initial_cache_size} → {len(location_cache)} entries")
-    
+
     print(f"\n{'='*60}")
     print(f"METADATA EXTRACTION COMPLETE")
     print(f"  Processed: {processed} stories")
     print(f"  Auto-approved: {processed - len(review_queue)}")
     print(f"  Needs review: {len(review_queue)}")
     print(f"{'='*60}")
-    
+
     return enhanced_positions, review_queue
 
 
@@ -215,9 +215,9 @@ def save_review_queue(review_queue: List, book_path: str, book_slug: str):
     if not review_queue:
         print("No stories need manual review!")
         return
-    
+
     review_file = os.path.join(book_path, "manual_review.json")
-    
+
     review_data = {
         "book_slug": book_slug,
         "generated_at": datetime.utcnow().isoformat() + "Z",
@@ -229,16 +229,16 @@ MANUAL REVIEW INSTRUCTIONS:
 2. Check warnings and verify extracted metadata
 3. Edit story_positions.json directly to fix issues:
    - Add missing years/centuries to temporal
-   - Add missing cities/countries to locations  
+   - Add missing cities/countries to locations
    - Add missing topics
 4. After fixing, change status from "NEEDS_REVIEW" to "REVIEWED"
 5. Re-run indexing to update search
         """,
         "stories": review_queue
     }
-    
+
     with open(review_file, "w", encoding="utf-8") as f:
         json.dump(review_data, f, indent=2, ensure_ascii=False)
-    
+
     print(f"\n📋 Review file saved: {review_file}")
     files.download(review_file)

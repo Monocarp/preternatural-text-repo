@@ -46,18 +46,18 @@ def ensure_numpy_embedding(docs):
 def batch_preprocess():
     """Main batch processor with enhanced metadata extraction."""
     force = []  # Add book slugs here to force reprocess
-    
+
     # Check if GPU is available
     import torch
     from haystack.utils import ComponentDevice
-    
+
     if torch.cuda.is_available():
         device = ComponentDevice.from_str("cuda:0")
         print(f"🔧 Using GPU for embeddings")
     else:
         device = ComponentDevice.from_str("cpu")
         print(f"🔧 Using CPU for embeddings")
-    
+
     embedder = SentenceTransformersDocumentEmbedder(
         model="BAAI/bge-large-en-v1.5",
         normalize_embeddings=True,
@@ -124,26 +124,26 @@ def batch_preprocess():
 
         # Step 1: Locate story positions
         positions, full_text = locate_story_positions(full_md, stories_md, index_md, slug, path)
-        
-        # TESTING: Limit to first 5 stories
-        print(f"⚠️  TESTING MODE: Processing only first 5 stories")
-        story_titles = list(positions.keys())
-        if len(story_titles) > 5:
-            positions = {title: positions[title] for title in story_titles[:5]}
-        
+
+#        # TESTING: Limit to first 5 stories
+#        print(f"⚠️  TESTING MODE: Processing only first 5 stories")
+#        story_titles = list(positions.keys())
+#        if len(story_titles) > 5:
+#            positions = {title: positions[title] for title in story_titles[:5]}
+
         # Step 2: Extract structured metadata (NEW)
         positions, review_queue = extract_structured_metadata(positions, full_text, slug, path)
-        
+
         # Step 3: Save enhanced story_positions.json
         positions_path = os.path.join(path, "story_positions.json")
         with open(positions_path, "w", encoding="utf-8") as f:
             json.dump(positions, f, indent=2, ensure_ascii=False)
         print(f"story_positions.json saved with enhanced metadata")
         files.download(positions_path)
-        
+
         # Step 4: Save review queue if any
         save_review_queue(review_queue, path, slug)
-        
+
         # Step 5: Chunk with enhanced metadata
         chunks = chunk_full_md(full_md, positions, slug)
         print(f"→ {len(chunks)} chunks")
@@ -156,15 +156,15 @@ def batch_preprocess():
             text = full_text[pos["start_char"]:pos["end_char"]].strip()
             if not text:
                 continue
-            
+
             # Build semantic enrichment header
             enrichment_parts = [f"Title: {title}"]
-            
+
             # Add keywords if present
             keywords = pos.get("keywords", [])
             if keywords:
                 enrichment_parts.append(f"Keywords: {', '.join(keywords[:15])}")
-            
+
             # Add locations if present
             locations = pos.get("locations", {})
             loc_parts = []
@@ -176,7 +176,7 @@ def batch_preprocess():
                 loc_parts.extend(locations["countries"][:2])
             if loc_parts:
                 enrichment_parts.append(f"Locations: {', '.join(loc_parts)}")
-            
+
             # Add temporal if present
             temporal = pos.get("temporal", {})
             if temporal.get("years"):
@@ -185,11 +185,11 @@ def batch_preprocess():
             elif temporal.get("centuries"):
                 cent_str = ', '.join(f"{c}th century" for c in temporal["centuries"][:2])
                 enrichment_parts.append(f"Period: {cent_str}")
-            
+
             # Construct enriched content
             enrichment_header = " | ".join(enrichment_parts)
             enriched_content = f"{enrichment_header}\n\n{text}"
-            
+
             story_docs.append(Document(
                 content=enriched_content,
                 meta={
@@ -309,4 +309,4 @@ def batch_preprocess():
 # ==================================================================================
 # UNCOMMENT TO RUN:
 # ==================================================================================
-# batch_preprocess()
+batch_preprocess()

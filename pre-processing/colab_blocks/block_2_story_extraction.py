@@ -150,13 +150,13 @@ def run_story_extraction():
         json.dump(metadata, f, indent=2)
 
     print(f"Metadata saved → {metadata_file}")
-    
+
     files.download(stories_file)
     files.download(metadata_file)
-    
+
     return book_slug, book_title
 
 # ==================================================================================
 # UNCOMMENT TO RUN:
 # ==================================================================================
-# run_story_extraction()
+run_story_extraction()

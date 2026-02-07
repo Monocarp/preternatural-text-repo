@@ -21,7 +21,7 @@ def extract_metadata_combined(story_text: str, title: str) -> Tuple[Dict, Dict]:
             return {}, {}
     except Exception:
         return {}, {}
-    
+
     prompt = f"""Analyze this supernatural/historical story titled "{title}" and extract metadata.
 
 Text (first 1200 chars):
@@ -67,9 +67,9 @@ Return ONLY the JSON, no other text."""
             messages=[{"role": "user", "content": prompt}],
             temperature=0.2
         )
-        
+
         result_text = response.choices[0].message.content.strip()
-        
+
         # Extract JSON
         if "```json" in result_text:
             import re
@@ -81,21 +81,21 @@ Return ONLY the JSON, no other text."""
             result_text = re.search(r'```\s*(.*?)\s*```', result_text, re.DOTALL)
             if result_text:
                 result_text = result_text.group(1)
-        
+
         import json
         data = json.loads(result_text)
-        
+
         # Process locations
         locations_list = data.get("locations", [])
         cities = []
         regions = []
         countries = set()
-        
+
         for loc in locations_list:
             if loc.get("confidence", 0) >= 0.5:
                 loc_type = loc.get("type", "").lower()
                 name = loc.get("name")
-                
+
                 if loc_type == "city":
                     cities.append(name)
                     if loc.get("country"):
@@ -106,7 +106,7 @@ Return ONLY the JSON, no other text."""
                         countries.add(loc["country"])
                 elif loc_type == "country":
                     countries.add(name)
-        
+
         locations = {
             "cities": list(set(cities)),
             "regions": list(set(regions)),
@@ -114,25 +114,25 @@ Return ONLY the JSON, no other text."""
             "raw_mentions": [loc.get("name") for loc in locations_list],
             "normalized": locations_list
         }
-        
+
         # Process topics
         topics_data = data.get("topics", {})
-        primary = (topics_data.get("phenomena", []) + 
-                  topics_data.get("context", []) + 
+        primary = (topics_data.get("phenomena", []) +
+                  topics_data.get("context", []) +
                   topics_data.get("functional_purpose", []))
-        secondary = (topics_data.get("entities", []) + 
-                    topics_data.get("implements", []) + 
-                    topics_data.get("people", []) + 
+        secondary = (topics_data.get("entities", []) +
+                    topics_data.get("implements", []) +
+                    topics_data.get("people", []) +
                     topics_data.get("historical_groups", []))
-        
+
         topics = {
             "primary": [x.lower() for x in primary if x],
             "secondary": [x.lower() for x in secondary if x],
             "raw_analysis": topics_data
         }
-        
+
         return locations, topics
-        
+
     except Exception as e:
         print(f"  ✗ Combined extraction failed: {e}")
         return {}, {}
@@ -143,41 +143,41 @@ def process_single_story(title: str, pos: Dict, full_text: str, idx: int, total:
     Process a single story. Returns (title, updated_pos, success).
     """
     import json
-    
+
     # Validate boundaries
     start = pos.get("start_char", -1)
     end = pos.get("end_char", -1)
-    
+
     if start == -1 or end == -1 or start >= end:
         return (title, pos, False)
-    
+
     # Check if already has metadata
     if "temporal" in pos and "locations" in pos and "topics" in pos:
         return (title, pos, False)
-    
+
     # Extract story text
     story_text = full_text[start:end].strip()
     if not story_text:
         return (title, pos, False)
-    
+
     try:
         # Extract temporal (fast, mostly regex)
         temporal = extract_temporal(story_text)
-        
+
         # Extract locations + topics in ONE call
         locations, topics = extract_metadata_combined(story_text, title)
-        
+
         if not locations or not topics:
             return (title, pos, False)
-        
+
         # Synthesize keywords
         existing_keywords = pos.get("keywords", [])
         keywords = synthesize_keywords(title, temporal, locations, topics, existing_keywords)
-        
+
         # Calculate confidence
         confidence = calculate_confidence(temporal, locations, topics)
         warnings = generate_warnings(temporal, locations, topics)
-        
+
         # Update position dict (preserve existing fields)
         pos["temporal"] = temporal
         pos["locations"] = locations
@@ -185,12 +185,12 @@ def process_single_story(title: str, pos: Dict, full_text: str, idx: int, total:
         pos["keywords"] = keywords
         pos["confidence"] = confidence
         pos["status"] = "OK" if confidence > 0.5 else "REVIEW"
-        
+
         if warnings:
             pos["warnings"] = warnings
-        
+
         return (title, pos, True)
-        
+
     except Exception as e:
         print(f"  [{idx}/{total}] {title}: ✗ {str(e)[:50]}")
         return (title, pos, False)
@@ -199,7 +199,7 @@ def process_single_story(title: str, pos: Dict, full_text: str, idx: int, total:
 def retrofit_existing_book_fast(book_slug: str, dry_run: bool = False, max_workers: int = 5):
     """
     Optimized retrofit with parallel processing and combined API calls.
-    
+
     Args:
         book_slug: Book directory name
         dry_run: If True, don't save changes
@@ -208,102 +208,102 @@ def retrofit_existing_book_fast(book_slug: str, dry_run: bool = False, max_worke
     import json
     import shutil
     from pathlib import Path
-    
+
     book_path = Path(books_dir) / book_slug
-    
+
     if not book_path.exists():
         print(f"✗ Book directory not found: {book_path}")
         return False
-    
+
     print(f"\n{'='*60}")
     print(f"RETROFITTING (OPTIMIZED): {book_slug}")
     print(f"{'='*60}")
-    
+
     # Load data
     print("\n1. Loading existing data...")
     full_text_path = book_path / "Full_Text.md"
     positions_path = book_path / "story_positions.json"
-    
+
     if not full_text_path.exists() or not positions_path.exists():
         print(f"✗ Missing required files")
         return False
-    
+
     with open(full_text_path, 'r', encoding='utf-8') as f:
         full_text = f.read()
-    
+
     with open(positions_path, 'r', encoding='utf-8') as f:
         positions = json.load(f)
-    
+
     print(f"  ✓ Loaded {len(positions)} stories")
     print(f"  ✓ Full text: {len(full_text):,} characters")
-    
+
     # Process stories in parallel
     print(f"\n2. Extracting metadata (parallel processing with {max_workers} workers)...")
-    
+
     updated_count = 0
     skipped_count = 0
-    
+
     stories_to_process = list(positions.items())
-    
+
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
         # Submit all stories
         futures = {
             executor.submit(process_single_story, title, pos, full_text, idx, len(stories_to_process)): title
             for idx, (title, pos) in enumerate(stories_to_process, 1)
         }
-        
+
         # Process results as they complete
         for future in concurrent.futures.as_completed(futures):
             title, updated_pos, success = future.result()
-            
+
             if success:
                 positions[title] = updated_pos
                 updated_count += 1
-                
+
                 # Print summary
                 conf = updated_pos.get("confidence", 0)
                 years = updated_pos.get("temporal", {}).get("years", [])
                 cities = updated_pos.get("locations", {}).get("cities", [])
                 topics = updated_pos.get("topics", {}).get("primary", [])
-                
+
                 print(f"  ✓ {title[:50]}... | Conf: {conf:.2f} | Years: {years[:2]} | Cities: {cities[:2]}")
             else:
                 skipped_count += 1
-    
+
     # Save results
     print(f"\n3. Saving results...")
     print(f"  Updated: {updated_count}")
     print(f"  Skipped: {skipped_count}")
-    
+
     if updated_count == 0:
         print("  No changes to save.")
         return True
-    
+
     if dry_run:
         print(f"\n[DRY RUN] Would save to: {positions_path}")
         return True
-    
+
     # Create backup
     backup_path = book_path / "story_positions.json.backup"
     shutil.copy2(positions_path, backup_path)
     print(f"✓ Backup created: {backup_path.name}")
-    
+
     # Save
     with open(positions_path, 'w', encoding='utf-8') as f:
         json.dump(positions, f, indent=2, ensure_ascii=False)
     print(f"✓ Saved updated positions")
-    
+
     # Download
     try:
         files.download(str(positions_path))
         print(f"✓ Downloaded: {positions_path.name}")
     except:
         print(f"⚠️  Could not auto-download")
-    
+
     print(f"\n{'='*60}")
     print(f"✓ RETROFIT COMPLETE: {book_slug}")
     print(f"{'='*60}\n")
-    
+
     return True
 
 
@@ -315,7 +315,8 @@ def retrofit_existing_book_fast(book_slug: str, dry_run: bool = False, max_worke
 # retrofit_existing_book_fast("operation_trojan_horse", dry_run=True, max_workers=1)
 
 # Full run with 5 parallel workers:
-# retrofit_existing_book_fast("operation_trojan_horse", max_workers=5)
+retrofit_existing_book_fast("christian_mysticism_vol_iv", max_workers=5)
+retrofit_existing_book_fast("ecology_of_souls_volume_i", max_workers=5)
 
 # Conservative (3 workers if you hit rate limits):
 # retrofit_existing_book_fast("operation_trojan_horse", max_workers=3)

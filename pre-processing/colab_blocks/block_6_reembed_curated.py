@@ -55,18 +55,18 @@ def batch_reembed_curated_books():
     Preserves all boundaries and metadata - ONLY creates new embeddings.
     """
     force = ['christian_mysticism_vol_iv', 'ecology_of_souls_volume_i']  # Books to re-embed
-    
+
     # Check if GPU is available
     import torch
     from haystack.utils import ComponentDevice
-    
+
     if torch.cuda.is_available():
         device = ComponentDevice.from_str("cuda:0")
         print(f"🔧 Using GPU for embeddings")
     else:
         device = ComponentDevice.from_str("cpu")
         print(f"🔧 Using CPU for embeddings")
-    
+
     embedder = SentenceTransformersDocumentEmbedder(
         model="BAAI/bge-large-en-v1.5",
         normalize_embeddings=True,
@@ -125,7 +125,7 @@ def batch_reembed_curated_books():
         if not os.path.exists(full_md):
             print(f"Missing Full_Text.md in {slug}, skipping...")
             continue
-            
+
         if not os.path.exists(positions_path):
             print(f"Missing story_positions.json in {slug}, skipping...")
             continue
@@ -137,40 +137,40 @@ def batch_reembed_curated_books():
         # Load existing positions (with metadata from retrofit)
         with open(positions_path, "r", encoding="utf-8") as f:
             positions = json.load(f)
-        
+
         print(f"✓ Loaded {len(positions)} stories from existing story_positions.json")
-        
+
         # Load full text
         with open(full_md, 'r', encoding='utf-8') as f:
             full_text = f.read()
-        
+
         print(f"✓ Loaded full text: {len(full_text):,} characters")
 
         # Story-level docs with enriched embeddings
         story_docs = []
         skipped = 0
-        
+
         for title, pos in positions.items():
             start = pos.get("start_char", -1)
             end = pos.get("end_char", -1)
-            
+
             if start == -1 or end == -1:
                 skipped += 1
                 continue
-                
+
             text = full_text[start:end].strip()
             if not text:
                 skipped += 1
                 continue
-            
+
             # Build semantic enrichment header
             enrichment_parts = [f"Title: {title}"]
-            
+
             # Add keywords if present
             keywords = pos.get("keywords", [])
             if keywords:
                 enrichment_parts.append(f"Keywords: {', '.join(keywords[:15])}")
-            
+
             # Add locations if present
             locations = pos.get("locations", {})
             loc_parts = []
@@ -182,7 +182,7 @@ def batch_reembed_curated_books():
                 loc_parts.extend(locations["countries"][:2])
             if loc_parts:
                 enrichment_parts.append(f"Locations: {', '.join(loc_parts)}")
-            
+
             # Add temporal if present
             temporal = pos.get("temporal", {})
             if temporal.get("years"):
@@ -191,11 +191,11 @@ def batch_reembed_curated_books():
             elif temporal.get("centuries"):
                 cent_str = ', '.join(f"{c}th century" for c in temporal["centuries"][:2])
                 enrichment_parts.append(f"Period: {cent_str}")
-            
+
             # Construct enriched content
             enrichment_header = " | ".join(enrichment_parts)
             enriched_content = f"{enrichment_header}\n\n{text}"
-            
+
             story_docs.append(Document(
                 content=enriched_content,
                 meta={
@@ -217,7 +217,7 @@ def batch_reembed_curated_books():
                     "status": pos.get("status", "UNKNOWN")
                 }
             ))
-        
+
         print(f"→ {len(story_docs)} full stories (with enriched embeddings)")
         if skipped > 0:
             print(f"⚠️  Skipped {skipped} stories with invalid boundaries")

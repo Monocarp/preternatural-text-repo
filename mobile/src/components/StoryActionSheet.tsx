@@ -197,7 +197,7 @@ export default function StoryActionSheet({ story, isOpen, onClose, onAssigned }:
                     <div className="space-y-1 max-h-32 overflow-y-auto">
                       {currentAssignments.map((path, idx) => (
                         <div key={idx} className="flex items-center justify-between text-xs bg-green-400/10 px-2 py-1 rounded">
-                          <span className="text-green-400 truncate flex-1">{path.join(' → ')}</span>
+                          <span className="text-green-400 flex-1">{path.join(' → ')}</span>
                           <button
                             onClick={() => handleRemove(path, idx)}
                             disabled={removing === idx}

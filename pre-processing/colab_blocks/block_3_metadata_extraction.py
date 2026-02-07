@@ -48,9 +48,9 @@ def extract_temporal(content: str) -> Dict:
         "centuries": [],
         "decades": []
     }
-    
+
     content_lower = content.lower()
-    
+
     # 1. Years: 4-digit years
     year_patterns = [
         r'\b(1[0-9]{3})\b',  # 1000-1999
@@ -68,7 +68,7 @@ def extract_temporal(content: str) -> Dict:
                     years_found.add(year)
             except:
                 pass
-    
+
     # 2. Early medieval years (500-999) with context
     early_year_pattern = r'(?:died in|born in|year|in the year|circa|c\.)\s*(\d{3})'
     early_matches = re.findall(early_year_pattern, content, re.I)
@@ -79,7 +79,7 @@ def extract_temporal(content: str) -> Dict:
                 years_found.add(year)
         except:
             pass
-    
+
     # 3. Date ranges
     range_patterns = [
         r'(\d{4})\s*[-–—]\s*(\d{4})',
@@ -96,7 +96,7 @@ def extract_temporal(content: str) -> Dict:
                         years_found.add(y)
             except:
                 pass
-    
+
     # 4. Centuries
     centuries_found = set()
     century_num = re.findall(r'(\d{1,2})(?:st|nd|rd|th)[\s-]+century', content, re.I)
@@ -105,11 +105,11 @@ def extract_temporal(content: str) -> Dict:
             centuries_found.add(int(c))
         except:
             pass
-    
+
     for word, num in CENTURY_WORDS.items():
         if re.search(rf'\b{word}\s+century\b', content_lower):
             centuries_found.add(num)
-    
+
     # 4a. Early/Mid/Late century patterns (e.g., "mid-18th century", "late sixteenth century")
     early_mid_late_patterns = [
         r'(?:early|mid|late)[\s-]+(\d{1,2})(?:st|nd|rd|th)[\s-]+century',
@@ -121,12 +121,12 @@ def extract_temporal(content: str) -> Dict:
                 centuries_found.add(int(c))
             except:
                 pass
-    
+
     # Match "early/mid/late" with spelled-out centuries
     for word, num in CENTURY_WORDS.items():
         if re.search(rf'\b(?:early|mid|late)[\s-]+{word}\s+century\b', content_lower):
             centuries_found.add(num)
-    
+
     # 4b. Historical period names
     for period_name, (start_century, end_century) in HISTORICAL_PERIODS.items():
         pattern = rf'\b{re.escape(period_name)}(?:\s+(?:period|era|age))?\b'
@@ -134,21 +134,21 @@ def extract_temporal(content: str) -> Dict:
             # Add all centuries in the range
             for c in range(start_century, end_century + 1):
                 centuries_found.add(c)
-    
+
     # Infer centuries from years
     for year in years_found:
         century = (year - 1) // 100 + 1
         centuries_found.add(century)
-    
+
     # 5. Use Grok to infer dates from historical figures if no explicit dates found
     if not years_found and not centuries_found:
         inferred_temporal = infer_temporal_from_figures(content)
         years_found.update(inferred_temporal.get("years", []))
         centuries_found.update(inferred_temporal.get("centuries", []))
-    
+
     temporal["years"] = sorted(list(years_found))
     temporal["centuries"] = sorted(list(centuries_found))
-    
+
     return temporal
 
 
@@ -161,7 +161,7 @@ def infer_temporal_from_figures(content: str) -> Dict:
             return {"years": [], "centuries": []}
     except Exception:
         return {"years": [], "centuries": []}
-    
+
     prompt = f"""Analyze this historical text and identify any named historical figures (saints, popes, monarchs, etc.).
 For each figure, provide their approximate time period.
 
@@ -177,7 +177,7 @@ Return ONLY a JSON object:
 }}
 
 If no identifiable historical figures are found, return: {{"figures": []}}"""
-    
+
     try:
         response = client.chat.completions.create(
             model=model,
@@ -185,9 +185,9 @@ If no identifiable historical figures are found, return: {{"figures": []}}"""
             messages=[{"role": "user", "content": prompt}],
             temperature=0.2
         )
-        
+
         result_text = response.choices[0].message.content.strip()
-        
+
         if "```json" in result_text:
             result_text = re.search(r'```json\s*(.*?)\s*```', result_text, re.DOTALL)
             if result_text:
@@ -196,10 +196,10 @@ If no identifiable historical figures are found, return: {{"figures": []}}"""
             result_text = re.search(r'```\s*(.*?)\s*```', result_text, re.DOTALL)
             if result_text:
                 result_text = result_text.group(1)
-        
+
         data = json.loads(result_text)
         figures = data.get("figures", [])
-        
+
         years = set()
         centuries = set()
         for fig in figures:
@@ -208,9 +208,9 @@ If no identifiable historical figures are found, return: {{"figures": []}}"""
                     years.add(fig["estimated_year"])
                 if fig.get("century"):
                     centuries.add(fig["century"])
-        
+
         return {"years": list(years), "centuries": list(centuries)}
-        
+
     except Exception as e:
         print(f"Grok temporal inference failed: {e}")
         return {"years": [], "centuries": []}
@@ -221,14 +221,14 @@ If no identifiable historical figures are found, return: {{"figures": []}}"""
 def extract_raw_locations(content: str) -> List[str]:
     """Extract raw location mentions using spaCy NER."""
     doc = nlp(content[:10000])
-    
+
     locations = set()
     for ent in doc.ents:
         if ent.label_ in ["GPE", "LOC", "FAC"]:
             clean_text = ent.text.strip()
             if len(clean_text) > 2 and not clean_text.isdigit():
                 locations.add(clean_text)
-    
+
     return list(locations)
 
 
@@ -245,7 +245,7 @@ def lookup_wikidata(location: str) -> Dict:
         }
         response = requests.get(url, params=params, timeout=5)
         data = response.json()
-        
+
         if data.get("search"):
             result = data["search"][0]
             return {
@@ -267,11 +267,11 @@ def extract_locations_with_grok(content: str, story_title: str) -> List[Dict]:
             return []
     except Exception:
         return []
-    
+
     prompt = f"""Extract all location references from this historical text titled "{story_title}".
 
 Text:
-{content[:1500]}  
+{content[:1500]}
 
 For each location found, return:
 1. The exact name as it appears
@@ -293,7 +293,7 @@ Return ONLY a JSON array:
 ]
 
 Return empty array [] if no locations found."""
-    
+
     try:
         response = client.chat.completions.create(
             model=model,
@@ -301,9 +301,9 @@ Return empty array [] if no locations found."""
             messages=[{"role": "user", "content": prompt}],
             temperature=0.2
         )
-        
+
         result_text = response.choices[0].message.content.strip()
-        
+
         if "```json" in result_text:
             result_text = re.search(r'```json\s*(.*?)\s*```', result_text, re.DOTALL)
             if result_text:
@@ -312,10 +312,10 @@ Return empty array [] if no locations found."""
             result_text = re.search(r'```\s*(.*?)\s*```', result_text, re.DOTALL)
             if result_text:
                 result_text = result_text.group(1)
-        
+
         locations = json.loads(result_text)
         return locations if isinstance(locations, list) else []
-        
+
     except Exception as e:
         print(f"Grok location extraction failed: {e}")
         return []
@@ -325,7 +325,7 @@ def normalize_with_grok(locations: List[str], story_title: str) -> List[Dict]:
     """Use Grok to normalize unknown locations."""
     if not locations:
         return []
-    
+
     try:
         client = globals().get('grok_client')
         model = globals().get('GROK_MODEL', 'grok-4-1-fast-reasoning')
@@ -335,8 +335,8 @@ def normalize_with_grok(locations: List[str], story_title: str) -> List[Dict]:
     except Exception as e:
         print(f"Grok client not available: {e}")
         return []
-    
-    prompt = f"""I have these location names extracted from a historical supernatural/religious text titled "{story_title}". 
+
+    prompt = f"""I have these location names extracted from a historical supernatural/religious text titled "{story_title}".
 For each location, provide:
 1. The modern/canonical name
 2. Type: "city", "region", or "country"
@@ -363,9 +363,9 @@ Return ONLY the JSON array, no other text."""
             messages=[{"role": "user", "content": prompt}],
             temperature=0.3
         )
-        
+
         result_text = response.choices[0].message.content.strip()
-        
+
         if "```json" in result_text:
             result_text = re.search(r'```json\s*(.*?)\s*```', result_text, re.DOTALL)
             if result_text:
@@ -374,10 +374,10 @@ Return ONLY the JSON array, no other text."""
             result_text = re.search(r'```\s*(.*?)\s*```', result_text, re.DOTALL)
             if result_text:
                 result_text = result_text.group(1)
-        
+
         normalized = json.loads(result_text)
         return normalized
-        
+
     except Exception as e:
         print(f"Grok normalization failed: {e}")
         return []
@@ -409,7 +409,7 @@ def extract_and_normalize_locations(content: str, story_title: str, cache: Dict)
     4. Grok fallback for remaining
     """
     raw_locations = extract_raw_locations(content)
-    
+
     # If spaCy found very few locations, use Grok to extract directly
     if len(raw_locations) < 3:
         print("  Low spaCy coverage, using Grok for location extraction...")
@@ -418,7 +418,7 @@ def extract_and_normalize_locations(content: str, story_title: str, cache: Dict)
             for loc in grok_locs:
                 if loc.get('confidence', 0) >= 0.6:
                     raw_locations.append(loc.get('original', loc.get('name', '')))
-    
+
     if not raw_locations:
         return {
             "cities": [],
@@ -427,10 +427,10 @@ def extract_and_normalize_locations(content: str, story_title: str, cache: Dict)
             "raw_mentions": [],
             "normalized": []
         }
-    
+
     normalized = []
     unknown = []
-    
+
     # Check cache first
     for loc in raw_locations:
         loc_key = loc.lower().strip()
@@ -445,7 +445,7 @@ def extract_and_normalize_locations(content: str, story_title: str, cache: Dict)
                 normalized.append(wiki_result)
             else:
                 unknown.append(loc)
-    
+
     # Grok fallback for remaining unknowns
     if unknown:
         grok_results = normalize_with_grok(unknown, story_title)
@@ -454,12 +454,12 @@ def extract_and_normalize_locations(content: str, story_title: str, cache: Dict)
                 original = result.get("original", "").lower().strip()
                 cache[original] = result
                 normalized.append(result)
-    
+
     # Build structured output
     cities = []
     regions = []
     countries = set()
-    
+
     for loc in normalized:
         if loc.get("type") == "city":
             cities.append(loc.get("name"))
@@ -471,7 +471,7 @@ def extract_and_normalize_locations(content: str, story_title: str, cache: Dict)
                 countries.add(loc.get("country"))
         elif loc.get("type") == "country":
             countries.add(loc.get("name"))
-    
+
     return {
         "cities": list(set(cities)),
         "regions": list(set(regions)),
@@ -498,7 +498,7 @@ def extract_topics_with_grok(content: str) -> Dict[str, List[str]]:
         return {"primary": [], "secondary": []}
 
     prompt = f"""Analyze this supernatural/historical story and extract relevant tags.
-    
+
 Story Content:
 {content[:2500]}
 
@@ -541,9 +541,9 @@ Return ONLY a JSON object:
             messages=[{"role": "user", "content": prompt}],
             temperature=0.2
         )
-        
+
         result_text = response.choices[0].message.content.strip()
-        
+
         # Clean markdown
         if "```json" in result_text:
             result_text = re.search(r'```json\s*(.*?)\s*```', result_text, re.DOTALL)
@@ -553,20 +553,20 @@ Return ONLY a JSON object:
             result_text = re.search(r'```\s*(.*?)\s*```', result_text, re.DOTALL)
             if result_text:
                 result_text = result_text.group(1)
-        
+
         data = json.loads(result_text)
-        
+
         # Flatten for downstream
         primary = data.get("phenomena", []) + data.get("context", []) + data.get("functional_purpose", [])
-        secondary = (data.get("entities", []) + data.get("implements", []) + 
+        secondary = (data.get("entities", []) + data.get("implements", []) +
                     data.get("people", []) + data.get("historical_groups", []))
-        
+
         return {
             "primary": [x.lower() for x in primary if x],
             "secondary": [x.lower() for x in secondary if x],
             "raw_analysis": data
         }
-        
+
     except Exception as e:
         print(f"Grok topic extraction failed: {e}")
         return {"primary": [], "secondary": []}
@@ -579,7 +579,7 @@ def extract_domain_topics(content: str) -> Dict:
 
 # ========================== KEYWORD SYNTHESIS ==========================
 
-def synthesize_keywords(title: str, temporal: Dict, locations: Dict, 
+def synthesize_keywords(title: str, temporal: Dict, locations: Dict,
                        topics: Dict, existing_keywords: List[str]) -> List[str]:
     """
     Synthesize rich keywords from all extracted metadata.
@@ -588,20 +588,20 @@ def synthesize_keywords(title: str, temporal: Dict, locations: Dict,
     # Use lists to preserve priority order instead of sets
     keywords = []
     seen = set()
-    
+
     def add_unique(term):
         """Helper to add term only if not seen."""
         term_lower = term.lower().strip()
         if term_lower and term_lower not in seen and len(term_lower) > 1:
             keywords.append(term_lower)
             seen.add(term_lower)
-    
+
     raw_topics = topics.get("raw_analysis", {})
-    
+
     # PRIORITY 1: Named People (highest value)
     for person in raw_topics.get("people", []):
         add_unique(person)
-    
+
     # PRIORITY 2: All Locations (cities, regions, countries)
     for city in locations.get("cities", []):
         add_unique(city)
@@ -609,29 +609,29 @@ def synthesize_keywords(title: str, temporal: Dict, locations: Dict,
         add_unique(region)
     for country in locations.get("countries", []):
         add_unique(country)
-    
+
     # PRIORITY 3: Functional Purposes
     for purpose in raw_topics.get("functional_purpose", []):
         add_unique(purpose.replace("_", " "))
-    
+
     # PRIORITY 4: Primary Topics (phenomena + context)
     for topic in topics.get("primary", [])[:12]:  # Increased from 8
         add_unique(topic.replace("_", " "))
-    
+
     # PRIORITY 5: Secondary Topics (entities + implements)
     for topic in topics.get("secondary", [])[:10]:  # Increased from 6
         add_unique(topic.replace("_", " "))
-    
+
     # PRIORITY 6: Temporal - ALL Centuries (important for historical search)
     for century in temporal.get("centuries", []):
         add_unique(f"{century}th century")
-    
+
     # PRIORITY 7: ALL Years (important for precise dating)
     for year in temporal.get("years", []):
         add_unique(str(year))
-    
+
     # Return in priority order, cap at 50 keywords (user increased from 30)
-    return keywords[:50]
+    return keywords[:65]
 
 
 # ========================== CONFIDENCE & VALIDATION ==========================
@@ -642,44 +642,44 @@ def calculate_confidence(temporal: Dict, locations: Dict, topics: Dict) -> float
     Equal weighting: 33% temporal, 33% locations, 33% topics.
     """
     score = 0.0
-    
+
     # Temporal (33%)
     has_temporal = bool(temporal.get("years") or temporal.get("centuries"))
     if has_temporal:
         score += 0.33
-    
+
     # Locations (33%)
     has_locations = bool(locations.get("cities") or locations.get("countries"))
     if has_locations:
         score += 0.33
-    
+
     # Topics (33%)
     has_topics = bool(topics.get("primary"))
     if has_topics:
         score += 0.33
-    
+
     # Small bonus for having rich data
     if len(temporal.get("years", [])) > 0 and len(locations.get("cities", [])) > 0 and len(topics.get("primary", [])) > 1:
         score += 0.1
-    
+
     return min(score, 1.0)
 
 
 def generate_warnings(temporal: Dict, locations: Dict, topics: Dict) -> List[str]:
     """Generate human-readable warnings for low-confidence extractions."""
     warnings = []
-    
+
     if not temporal.get("years") and not temporal.get("centuries"):
         warnings.append("No temporal data extracted")
-    
+
     if not locations.get("cities") and not locations.get("countries"):
         warnings.append("No specific locations identified")
-    
+
     if not topics.get("primary"):
         warnings.append("No primary topics detected")
     elif len(topics.get("primary", [])) < 2:
         warnings.append("Very few topics identified - may need manual review")
-    
+
     return warnings
 
 
