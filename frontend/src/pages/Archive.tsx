@@ -6,7 +6,7 @@ import axios from '../utils/axios'
 import { useStore } from '../store'
 import SidebarTree from '../components/SidebarTree'
 import { SubcategoryFilter } from '../components/SubcategoryFilter'
-import { decodeRoutePath, encodePathSegmentsForRoute } from '../utils/path'
+import { decodeRoutePath, encodePathSegmentsForRoute, encodePathSegmentsForApi } from '../utils/path'
 import { useStackApp } from '@stackframe/react'
 import { useCategoryAssignment } from '../hooks'
 
@@ -120,7 +120,7 @@ const Archive = () => {
         .catch(err => console.error('Error loading unassigned:', err))
     } else if (decodedPath.length > 0) {
       // Load stories for the category path (with optional subcategory filter)
-      const pathStr = decodedPath.map(p => encodeURIComponent(p)).join('/')
+      const pathStr = encodePathSegmentsForApi(decodedPath)
       const subcatsParam = selectedSubcats.length > 0 ? `?subcats=${selectedSubcats.join(',')}` : ''
       const url = `/get-stories/${pathStr}${subcatsParam}`
       

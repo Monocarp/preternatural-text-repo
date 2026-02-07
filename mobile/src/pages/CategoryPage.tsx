@@ -4,6 +4,7 @@ import { useSwipeable } from 'react-swipeable'
 import { useStore } from '../store'
 import apiClient from '../utils/api'
 import StoryCard from '../components/StoryCard'
+import { encodePathSegmentsForApi, encodePathSegmentsForRoute, decodeRoutePath } from '../utils/path'
 
 export default function CategoryPage() {
   const location = useLocation()
@@ -15,7 +16,7 @@ export default function CategoryPage() {
   const pathSegments = useMemo(() => {
     const path = location.pathname.replace('/archive/', '')
     if (!path) return []
-    return path.split('/').map(s => decodeURIComponent(s)).filter(Boolean)
+    return decodeRoutePath(path)
   }, [location.pathname])
 
   const isUnassigned = pathSegments.length === 1 && pathSegments[0].toLowerCase() === 'unassigned'
@@ -25,7 +26,7 @@ export default function CategoryPage() {
   const swipeHandlers = useSwipeable({
     onSwipedRight: () => {
       if (pathSegments.length > 1) {
-        const parentPath = pathSegments.slice(0, -1).map(s => encodeURIComponent(s)).join('/')
+        const parentPath = encodePathSegmentsForRoute(pathSegments.slice(0, -1))
         navigate(`/archive/${parentPath}`)
       } else {
         navigate('/archive')
@@ -65,7 +66,7 @@ export default function CategoryPage() {
         const res = await apiClient.get('/get-unassigned')
         setStories(res.data)
       } else {
-        const pathStr = pathSegments.map(s => encodeURIComponent(s)).join('/')
+        const pathStr = encodePathSegmentsForApi(pathSegments)
         const res = await apiClient.get(`/get-stories/${pathStr}`)
         setStories(res.data)
       }
@@ -98,13 +99,13 @@ export default function CategoryPage() {
   }, [currentNode])
 
   const handleSubcategoryTap = (subcategory: string) => {
-    const newPath = [...pathSegments, subcategory].map(s => encodeURIComponent(s)).join('/')
+    const newPath = encodePathSegmentsForRoute([...pathSegments, subcategory])
     navigate(`/archive/${newPath}`)
   }
 
   const handleBack = () => {
     if (pathSegments.length > 1) {
-      const parentPath = pathSegments.slice(0, -1).map(s => encodeURIComponent(s)).join('/')
+      const parentPath = encodePathSegmentsForRoute(pathSegments.slice(0, -1))
       navigate(`/archive/${parentPath}`)
     } else {
       navigate('/archive')

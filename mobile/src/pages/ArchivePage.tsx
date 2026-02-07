@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '../store'
 import apiClient from '../utils/api'
+import { encodePathSegmentsForRoute } from '../utils/path'
 
 export default function ArchivePage() {
   const navigate = useNavigate()
@@ -29,7 +30,7 @@ export default function ArchivePage() {
 
   const handleCategoryTap = (category: string) => {
     // Navigate to category page
-    navigate(`/archive/${encodeURIComponent(category)}`)
+    navigate(`/archive/${encodePathSegmentsForRoute([category])}`)
   }
 
   return (
