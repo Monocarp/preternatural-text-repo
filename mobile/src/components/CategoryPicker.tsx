@@ -103,7 +103,7 @@ export default function CategoryPicker({ keywords, onSelect, onCancel, assigning
   }
 
   const currentNode = getCurrentNode()
-  const categories = Object.keys(currentNode).filter(k => k !== '_stories')
+  const categories = Object.keys(currentNode).filter(k => k !== '_stories').sort()
 
   const navigateInto = (name: string) => {
     setCurrentPath(prev => [...prev, name])

@@ -25,7 +25,7 @@ export default function ArchivePage() {
   }
 
   // Get top-level categories
-  const categories = Object.keys(tree).filter(key => key !== '_stories')
+  const categories = Object.keys(tree).filter(key => key !== '_stories').sort()
 
   const handleCategoryTap = (category: string) => {
     // Navigate to category page

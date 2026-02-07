@@ -94,7 +94,7 @@ export default function CategoryPage() {
   // Get subcategories at current level
   const subcategories = useMemo(() => {
     if (!currentNode || typeof currentNode !== 'object' || Array.isArray(currentNode)) return []
-    return Object.keys(currentNode).filter(key => key !== '_stories')
+    return Object.keys(currentNode).filter(key => key !== '_stories').sort()
   }, [currentNode])
 
   const handleSubcategoryTap = (subcategory: string) => {
