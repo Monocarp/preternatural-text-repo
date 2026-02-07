@@ -177,12 +177,13 @@
         },
         "Oppression": {
             "Haunting Vexations": {
-                "Audible": [],
+                "Audible": {},
                 "Auditory Hallucinations": [
                     "Love Philtre, Demonic Voice, and Magical Emissions in Genoa"
                 ],
                 "Auditory Phenomena": [
-                    "Accusation of the Cook Elsa of Camen and Demonic Torments in the Monastery of Werte"
+                    "Accusation of the Cook Elsa of Camen and Demonic Torments in the Monastery of Werte",
+                    "Love Philtre, Demonic Voice, and Magical Emissions in Genoa"
                 ],
                 "Explicitly Demonic Apparitions": {
                     "Appearance as Animal": [
