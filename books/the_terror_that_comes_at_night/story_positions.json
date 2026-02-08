@@ -2977,7 +2977,13 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
-    "Placeholder": {
+    "A Structural Analysis of Sleep Paralysis": {
+        "start_char": 78314,
+        "end_char": 83215,
+        "pages": "29-31",
+        "keywords": []
+    },
+    "Case #5": {
         "start_char": 76035,
         "end_char": 78313,
         "pages": "28-29",
@@ -2987,11 +2993,5 @@
             "enclosed",
             "choking"
         ]
-    },
-    "A Structural Analysis of Sleep Paralysis": {
-        "start_char": 78314,
-        "end_char": 83215,
-        "pages": "29-31",
-        "keywords": []
     }
 }
