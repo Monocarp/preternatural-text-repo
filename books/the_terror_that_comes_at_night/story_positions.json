@@ -2971,5 +2971,11 @@
         },
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
+    },
+    "Placeholder": {
+        "start_char": 76035,
+        "end_char": 78313,
+        "pages": "28-29",
+        "keywords": []
     }
 }
