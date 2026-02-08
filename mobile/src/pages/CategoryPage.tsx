@@ -4,6 +4,7 @@ import { useSwipeable } from 'react-swipeable'
 import { useStore } from '../store'
 import apiClient from '../utils/api'
 import StoryCard from '../components/StoryCard'
+import { BookFilter } from '../components/BookFilter'
 import { encodePathSegmentsForApi, encodePathSegmentsForRoute, decodeRoutePath } from '../utils/path'
 
 export default function CategoryPage() {
@@ -11,6 +12,8 @@ export default function CategoryPage() {
   const navigate = useNavigate()
   const { tree, setTree, stories, setStories, loading, setLoading } = useStore()
   const [showStories, setShowStories] = useState(false)
+  const [books, setBooks] = useState<any[]>([])
+  const [selectedBookSlug, setSelectedBookSlug] = useState<string | null>(null)
 
   // Parse path segments from URL
   const pathSegments = useMemo(() => {
@@ -44,11 +47,22 @@ export default function CategoryPage() {
   }, [])
 
   useEffect(() => {
+    // Load books when viewing unassigned stories
+    if (isUnassigned) {
+      apiClient.get('/books')
+        .then(res => {
+          setBooks(res.data)
+        })
+        .catch(err => console.error('Error loading books:', err))
+    }
+  }, [isUnassigned])
+
+  useEffect(() => {
     // Load stories for current path
     if (pathSegments.length > 0) {
       loadStories()
     }
-  }, [pathSegments.join('/')])
+  }, [pathSegments.join('/'), selectedBookSlug])
 
   const loadTree = async () => {
     try {
@@ -63,7 +77,8 @@ export default function CategoryPage() {
     setLoading(true)
     try {
       if (isUnassigned) {
-        const res = await apiClient.get('/get-unassigned')
+        const bookParam = selectedBookSlug ? `?book_slug=${selectedBookSlug}` : ''
+        const res = await apiClient.get(`/get-unassigned${bookParam}`)
         setStories(res.data)
       } else {
         const pathStr = encodePathSegmentsForApi(pathSegments)
@@ -162,6 +177,15 @@ export default function CategoryPage() {
 
       {/* Content */}
       <div className="px-4 pt-4">
+        {/* Book Filter for Unassigned Stories */}
+        {isUnassigned && (
+          <BookFilter
+            books={books}
+            selectedBookSlug={selectedBookSlug}
+            onFilterChange={setSelectedBookSlug}
+          />
+        )}
+
         {loading ? (
           <div className="flex items-center justify-center py-12">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400"></div>

@@ -71,10 +71,20 @@ def get_stories(path: str, subcats: Optional[str] = None):
 
 
 @router.get("/get-unassigned")
-def get_unassigned():
-    """Get all stories not assigned to any category."""
+def get_unassigned(book_slug: str = None):
+    """
+    Get all stories not assigned to any category.
+    
+    Args:
+        book_slug: Optional book slug to filter unassigned stories by book
+    """
     assigned = get_assigned_titles_set()
     unassigned = [s for t, s in stories_dict.items() if t not in assigned]
+    
+    # Filter by book if specified
+    if book_slug:
+        unassigned = [s for s in unassigned if s.get('book_slug') == book_slug]
+    
     return enrich_stories_with_book_metadata(unassigned)
 
 

@@ -6,6 +6,7 @@ import axios from '../utils/axios'
 import { useStore } from '../store'
 import SidebarTree from '../components/SidebarTree'
 import { SubcategoryFilter } from '../components/SubcategoryFilter'
+import { BookFilter } from '../components/BookFilter'
 import { decodeRoutePath, encodePathSegmentsForRoute, encodePathSegmentsForApi } from '../utils/path'
 import { useStackApp } from '@stackframe/react'
 import { useCategoryAssignment } from '../hooks'
@@ -59,6 +60,10 @@ const Archive = () => {
   // Category assignment state - track which story panel is expanded for assignment
   const [expandedStoryForCategory, setExpandedStoryForCategory] = useState<any>(null)
   
+  // Book filter state for unassigned stories
+  const [books, setBooks] = useState<any[]>([])
+  const [selectedBookSlug, setSelectedBookSlug] = useState<string | null>(null)
+  
   // Use the category assignment hook
   const categoryAssignment = useCategoryAssignment(expandedStoryForCategory)
 
@@ -108,11 +113,23 @@ const Archive = () => {
     }
   }, [tree, loadTree])
 
-  // Load stories based on URL path (with optional subcategory filter)
+  // Load books when viewing unassigned stories
   useEffect(() => {
     if (isUnassigned) {
-      // Load unassigned stories
-      axios.get('/get-unassigned')
+      axios.get('/books')
+        .then(res => {
+          setBooks(res.data)
+        })
+        .catch(err => console.error('Error loading books:', err))
+    }
+  }, [isUnassigned])
+
+  // Load stories based on URL path (with optional subcategory filter or book filter)
+  useEffect(() => {
+    if (isUnassigned) {
+      // Load unassigned stories with optional book filter
+      const bookParam = selectedBookSlug ? `?book_slug=${selectedBookSlug}` : ''
+      axios.get(`/get-unassigned${bookParam}`)
         .then(res => {
           useStore.getState().setStories(res.data)
           useStore.getState().selectedPath = ['unassigned']
@@ -135,7 +152,7 @@ const Archive = () => {
       useStore.getState().setStories([])
       useStore.getState().selectedPath = []
     }
-  }, [decodedPath, isUnassigned, selectedSubcats, location.pathname])
+  }, [decodedPath, isUnassigned, selectedSubcats, selectedBookSlug, location.pathname])
 
   // Handle title editing
   const handleEditTitle = (story: any) => {
@@ -785,6 +802,15 @@ const Archive = () => {
                 }
                 setSearchParams(searchParams)
               }}
+            />
+          )}
+
+          {/* Book Filter for Unassigned Stories */}
+          {isUnassigned && (
+            <BookFilter
+              books={books}
+              selectedBookSlug={selectedBookSlug}
+              onFilterChange={setSelectedBookSlug}
             />
           )}
 
