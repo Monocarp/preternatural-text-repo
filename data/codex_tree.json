@@ -2049,11 +2049,9 @@
             "Japanese Burial Mounds Haunted by Yokai",
             "Shamanic Soul Flight and Soul Retrieval as Inversion of the Wild Hunt"
         ],
-        "Sleep Paralysis": {
-            "_stories": [
-                "A Structural Analysis of Sleep Paralysis"
-            ]
-        },
+        "Sleep Paralysis": [
+            "A Structural Analysis of Sleep Paralysis"
+        ],
         "The Wild Hunt": [
             "The Wild or Infernal Hunt as a Nocturnal Host of the Damned",
             "Infernal Hunts and Mobile Purgatories: Historical Wild Hunt Encounters",
@@ -2613,6 +2611,7 @@
         "Hagriding": [
             "Robert Is Hagged Nightly By Jealous Rival John, Saved By Board And Knife Ritual",
             "Young Fisherman Hags Girl By Saying Lord\u2019s Prayer Backwards; Her Father Breaks Attack By Calling Her Name Backwards",
+            "Student\u2019s Repeated Old Hag Attacks, Sensed Evil Presence, Use of Rosary, and Apparition of Grandfather",
             "Renata Sanger: The Sorceress of Unterzell",
             "The Vanishing Hag of Somersetshire",
             "The Strangling Witch of Bergamo"
