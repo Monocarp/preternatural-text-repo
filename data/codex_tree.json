@@ -347,7 +347,11 @@
                     "Shadow Figure In Mound, Minnesota And Men-In-Black After Serpent Mound UFO"
                 ],
                 "Sleep Paralysis": {
-                    "Entity Encountered": {},
+                    "Entity Encountered": {
+                        "_stories": [
+                            "Sharon's Hospital Sleep Paralysis"
+                        ]
+                    },
                     "_stories": [
                         "Haunting and Demonic Torment of the K\u00f8ge Household (1609\u20131614)",
                         "Robert Is Hagged Nightly By Jealous Rival John, Saved By Board And Knife Ritual",
