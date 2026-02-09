@@ -3025,5 +3025,11 @@
             "autonomic arousal",
             "dread"
         ]
+    },
+    "Sharon's Hospital Sleep Paralysis": {
+        "start_char": 208047,
+        "end_char": 211578,
+        "pages": "71 - 72",
+        "keywords": []
     }
 }
