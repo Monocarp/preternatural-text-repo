@@ -346,21 +346,24 @@
                     "Ron\u2019s Afternoon Attack by a Murky, Enveloping Presence",
                     "Shadow Figure In Mound, Minnesota And Men-In-Black After Serpent Mound UFO"
                 ],
-                "Sleep Paralysis": [
-                    "Haunting and Demonic Torment of the K\u00f8ge Household (1609\u20131614)",
-                    "Robert Is Hagged Nightly By Jealous Rival John, Saved By Board And Knife Ritual",
-                    "Madge\u2019s Full Out-Of-Body Flight, Third-Floor Window Figure Beckoning Her To Leave Reality, And Struggle To Re-Enter Body",
-                    "Miraculous Healing of Sister Margaretha by the Blessed Sacrament and a Relic",
-                    "Student\u2019s Repeated Old Hag Attacks, Sensed Evil Presence, Use of Rosary, and Apparition of Grandfather",
-                    "Case #5",
-                    "The Elephant in the Bedroom",
-                    "Renata Sanger: The Sorceress of Unterzell",
-                    "Caroline\u2019s Old Hag Assault with Masked Humanoid Figure, Bodily Pressure, Odor, and Subsequent Recurrence",
-                    "Ron\u2019s Afternoon Attack by a Murky, Enveloping Presence",
-                    "The Vanishing Hag of Somersetshire",
-                    "The 1564 Possession Outbreak at Nazareth Convent: From Secret Liaisons to Miasmatic Spread",
-                    "Sharon's Hospital Sleep Paralysis"
-                ],
+                "Sleep Paralysis": {
+                    "Entity Encountered": [],
+                    "_stories": [
+                        "Haunting and Demonic Torment of the K\u00f8ge Household (1609\u20131614)",
+                        "Robert Is Hagged Nightly By Jealous Rival John, Saved By Board And Knife Ritual",
+                        "Madge\u2019s Full Out-Of-Body Flight, Third-Floor Window Figure Beckoning Her To Leave Reality, And Struggle To Re-Enter Body",
+                        "Miraculous Healing of Sister Margaretha by the Blessed Sacrament and a Relic",
+                        "Student\u2019s Repeated Old Hag Attacks, Sensed Evil Presence, Use of Rosary, and Apparition of Grandfather",
+                        "Case #5",
+                        "The Elephant in the Bedroom",
+                        "Renata Sanger: The Sorceress of Unterzell",
+                        "Caroline\u2019s Old Hag Assault with Masked Humanoid Figure, Bodily Pressure, Odor, and Subsequent Recurrence",
+                        "Ron\u2019s Afternoon Attack by a Murky, Enveloping Presence",
+                        "The Vanishing Hag of Somersetshire",
+                        "The 1564 Possession Outbreak at Nazareth Convent: From Secret Liaisons to Miasmatic Spread",
+                        "Sharon's Hospital Sleep Paralysis"
+                    ]
+                },
                 "Static People": {},
                 "_stories": [
                     "Haunting and Demonic Torment of the K\u00f8ge Household (1609\u20131614)",
