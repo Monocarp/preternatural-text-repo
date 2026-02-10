@@ -2,13 +2,13 @@ import { useState, useRef, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const VIDEO_FILES = [
-  '/Best.mp4',
-  '/Branches Light.mp4',
-  '/Growth.mp4',
-  '/Intro.mp4',
-  '/Lots of leaves.mp4',
-  '/MYstical.mp4',
-  '/No fire.mp4',
+  'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/Best.mp4',
+  'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/Branches%20Light.mp4',
+  'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/Growth.mp4',
+  'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/Intro.mp4',
+  'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/Lots%20of%20leaves.mp4',
+  'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/MYstical.mp4',
+  'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/No%20fire.mp4',
 ]
 
 export default function Home() {

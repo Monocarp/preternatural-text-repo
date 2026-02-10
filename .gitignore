@@ -37,3 +37,5 @@ data/faiss_index.bin
 # Book-specific mutable files
 books/*/story_positions.json
 books/*/stories_meta.json
+# Video files hosted on Vercel Blob
+frontend/public/*.mp4
