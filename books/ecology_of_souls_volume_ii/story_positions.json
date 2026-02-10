@@ -1504,66 +1504,6 @@
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
     },
-    "Dogon Claim of Amphibious Deities, the Nommo, from a World Circling Sirius": {
-        "start_char": 38941,
-        "end_char": 39328,
-        "pages": "13",
-        "keywords": [
-            "africa",
-            "miracles",
-            "dogon cosmology",
-            "dogon religion",
-            "nommo",
-            "amphibious deities",
-            "dogon people"
-        ],
-        "verbatim": "One notable exception appears to be Africa’s Dogon people, who long ago incorporated “the movements and certain characteristics of virtually invisible stars” into their religion, all in the apparent absence of advanced instrumentation or Western contamination. From a world circling the “Dog Star” Sirius, the Dogon claim, hailed the Nommo, amphibious deities central to their cosmology.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [
-                "Africa"
-            ],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "miracles",
-                "dogon cosmology",
-                "dogon religion"
-            ],
-            "secondary": [
-                "nommo",
-                "amphibious deities",
-                "dogon people"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Miracles"
-                ],
-                "entities": [
-                    "Nommo",
-                    "Amphibious Deities"
-                ],
-                "implements": [],
-                "context": [
-                    "Dogon Cosmology",
-                    "Dogon Religion"
-                ],
-                "people": [],
-                "functional_purpose": [],
-                "historical_groups": [
-                    "Dogon people"
-                ]
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Plato, Hindu Texts, Aztec Belief, and Others on the Dead Becoming Stars or Beings of Light": {
         "start_char": 39831,
         "end_char": 40462,
