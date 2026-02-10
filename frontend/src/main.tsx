@@ -6,6 +6,7 @@ import { StackProvider, StackClientApp, StackHandler, StackTheme } from '@stackf
 import { TooltipProvider } from '@radix-ui/react-tooltip' // New import for TooltipProvider
 import { useLocation } from 'react-router-dom'
 import { setStackApp } from './utils/axios'
+import Home from './pages/Home'
 import Archive from './pages/Archive'
 import SearchCurate from './pages/SearchCurate'
 import BookArchive from './pages/BookArchive'
@@ -53,7 +54,7 @@ createRoot(document.getElementById('root')!).render(
               <Route path="/handler/*" element={<HandlerRoutes />} />
               
               {/* App routes */}
-            <Route path="/" element={<Archive />} />
+            <Route path="/" element={<Home />} />
             <Route path="/archive" element={<Archive />} />
               <Route path="/archive/:path/*" element={<Archive />} />
             <Route path="/search-curate" element={<SearchCurate />} />

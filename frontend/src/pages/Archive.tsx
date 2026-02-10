@@ -758,8 +758,8 @@ const Archive = () => {
       <SidebarTree />
       <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0 max-w-full">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
-          <div className="mb-6">
-            <nav className="text-sm text-gray-400 mb-2 text-center">
+          <div className="mb-8 text-center">
+            <nav className="text-sm text-gray-400 mb-3">
               {getBreadcrumb().map((part, idx) => (
                 <span key={idx}>
                   {idx > 0 && ' > '}
@@ -785,7 +785,14 @@ const Archive = () => {
                 </span>
               ))}
             </nav>
-            <h1 className="text-3xl font-bold text-white text-center">{getPageTitle()}</h1>
+            {decodedPath.length === 0 ? (
+              <>
+                <h1 className="text-4xl sm:text-5xl font-bold text-white mb-2">Fae & Forgotten</h1>
+                <p className="text-lg text-gray-400 font-medium">Story Archive</p>
+              </>
+            ) : (
+              <h1 className="text-3xl font-bold text-white">{getPageTitle()}</h1>
+            )}
           </div>
 
           {/* Subcategory Filter */}

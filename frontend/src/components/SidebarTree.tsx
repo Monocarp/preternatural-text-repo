@@ -343,7 +343,10 @@ const SidebarTree = () => {
       {/* Header with Toggle Button */}
       <div className={`p-3 border-b border-gray-700 flex items-center ${sidebarCollapsed ? 'justify-center' : 'justify-between'} bg-gray-800`}>
         {!sidebarCollapsed && (
-          <h2 className="text-lg font-semibold text-white">Navigation</h2>
+          <div className="flex flex-col">
+            <h2 className="text-lg font-semibold text-white">Fae & Forgotten</h2>
+            <p className="text-xs text-gray-400">Navigation</p>
+          </div>
         )}
         <button
           onClick={(e) => {

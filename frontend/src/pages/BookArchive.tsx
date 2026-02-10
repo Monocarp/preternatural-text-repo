@@ -45,12 +45,13 @@ const BookArchive = () => {
       <SidebarTree />
       <main className="flex-1 overflow-y-auto bg-gray-900 min-w-0 max-w-full">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
-          <div className="mb-6">
-        <h1 className="text-3xl font-bold text-white text-center">Book Archive</h1>
-        <p className="text-gray-300 mt-2 text-center">
-          Browse books and their stories
-        </p>
-      </div>
+          <div className="mb-8 text-center">
+            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-2">Fae & Forgotten</h1>
+            <p className="text-lg text-gray-400 font-medium">Book Archive</p>
+            <p className="text-gray-300 mt-3 text-sm">
+              Browse books and their stories
+            </p>
+          </div>
 
       {loading && (
         <div className="text-center py-8">

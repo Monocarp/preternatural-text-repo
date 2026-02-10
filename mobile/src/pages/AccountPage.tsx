@@ -90,7 +90,7 @@ export default function AccountPage() {
         {/* App info */}
         <div className="mt-8 pt-6 border-t border-gray-800">
           <div className="text-center text-gray-500 text-sm">
-            <p>Preternatural Text</p>
+            <p>Fae & Forgotten</p>
             <p className="mt-1">Mobile v0.1.0</p>
           </div>
         </div>

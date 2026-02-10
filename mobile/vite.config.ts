@@ -16,8 +16,8 @@ export default defineConfig(({ mode }) => {
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png'],
         manifest: {
           id: '/',
-          name: 'Preternatural Text',
-          short_name: 'Preternatural',
+          name: 'Fae & Forgotten',
+          short_name: 'Fae & Forgotten',
           description: 'Story Archive & Research Tool',
           theme_color: '#1f2937',
           background_color: '#111827',

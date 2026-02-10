@@ -43,6 +43,7 @@ export default function BooksPage() {
       {/* Header */}
       <header className="sticky top-0 z-10 bg-gray-800 border-b border-gray-700 px-4 py-3 safe-area-top">
         <h1 className="text-xl font-bold text-white text-center">Book Archive</h1>
+        <p className="text-xs text-gray-400 text-center mt-0.5">Fae & Forgotten</p>
       </header>
 
       {/* Content */}
