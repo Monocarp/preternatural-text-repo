@@ -2873,5 +2873,11 @@
             "Hysterical",
             "Pain in Back"
         ]
+    },
+    "Case 24": {
+        "start_char": 460576,
+        "end_char": 468208,
+        "pages": "154-156",
+        "keywords": []
     }
 }
