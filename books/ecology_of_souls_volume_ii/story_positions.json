@@ -9069,68 +9069,6 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
-    "Experiencers’ Hyper-Vivid, More-Real-Than-Real States": {
-        "start_char": 129790,
-        "end_char": 130165,
-        "pages": "40",
-        "keywords": [
-            "mike clelland",
-            "striebers",
-            "distinguishing from dreams",
-            "hyper-vividness",
-            "heightened clarity",
-            "eerie silence",
-            "hyper-real experience",
-            "dream that wasn’t a dream"
-        ],
-        "verbatim": "“Another thing that gets repeated is that the experience was more real than real,” wrote Mike Clelland. “[Experiencers] perceive reality with a heightened clarity, a hyper-vividness and an eerie silence.” This quality distinguishes some of Clelland’s own experiences from dreams, echoing a refrain from the letters the Striebers received: “I had a dream that wasn’t a dream.”",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "hyper-vividness",
-                "heightened clarity",
-                "eerie silence",
-                "hyper-real experience",
-                "dream that wasn’t a dream",
-                "distinguishing from dreams"
-            ],
-            "secondary": [
-                "mike clelland",
-                "striebers"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Hyper-vividness",
-                    "Heightened clarity",
-                    "Eerie silence",
-                    "Hyper-real experience",
-                    "Dream that wasn’t a dream"
-                ],
-                "entities": [],
-                "implements": [],
-                "context": [],
-                "people": [
-                    "Mike Clelland",
-                    "Striebers"
-                ],
-                "functional_purpose": [
-                    "Distinguishing from dreams"
-                ],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Young Girl’s Soul and Mind Taken to a Damp Planet by Wet Beings": {
         "start_char": 130835,
         "end_char": 131241,
