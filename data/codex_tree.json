@@ -1392,7 +1392,11 @@
             "Auditory": {},
             "Behavior": {},
             "Habitual Behavior": {},
-            "Visual": {},
+            "Visual": {
+                "_stories": [
+                    "Oldham\u2019s Abduction Vision of His Dead Dog Sam"
+                ]
+            },
             "_stories": [
                 "Presences NDE"
             ]
@@ -2293,13 +2297,13 @@
             "Tunnel and Tube Motifs in Abductions and NDEs",
             "Betty Andreasson\u2019s Door to the World of Light and Strieber\u2019s Catalogue of Paranormal Abduction Lights",
             "Sharon Delarose\u2019s Golden Landscape Encounters",
+            "Oldham\u2019s Abduction Vision of His Dead Dog Sam",
             "Sandra Larson\u2019s 1975 UFO Abduction, Skull Separation, and Brain Removal and Replacement",
             "Lemur-like Living Dead in the Green Realm Seen by UFO Abductee Betty Andreasson",
             "1961 Pinhal Disc Landing, Beings, and Missing Time",
             "Herbert Schirmer\u2019s Extraterrestrial Kidnappers and Their Cryptic Message",
             "Travis Walton\u2019s UFO Abduction Paralleling the Buchmann Wild Hunt Kidnapping",
-            "Barbara Street Warned That Further Talk Would Lead to Alien Retaliation or Her Son\u2019s Abduction",
-            "Oldham\u2019s Abduction Vision of His Dead Dog Sam"
+            "Barbara Street Warned That Further Talk Would Lead to Alien Retaliation or Her Son\u2019s Abduction"
         ],
         "Aerial Phenomenon": {
             "Pilot Seen": [
