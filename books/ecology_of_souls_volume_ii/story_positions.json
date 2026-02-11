@@ -2407,65 +2407,6 @@
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
     },
-    "John Jacob Astor IV’s Saturn as an Abode of Departed Spirits": {
-        "start_char": 58283,
-        "end_char": 58493,
-        "pages": "18",
-        "keywords": [
-            "smith",
-            "john jacob astor iv",
-            "science fiction",
-            "saturn",
-            "departed spirits",
-            "19th century",
-            "1894"
-        ],
-        "verbatim": "These notions also took root in the nascent genre of science fiction. The same year as Smith’s Martian journey, John Jacob Astor IV’s A Journey in Other Worlds depicted Saturn as “an abode of departed spirits.”",
-        "temporal": {
-            "years": [
-                1894
-            ],
-            "centuries": [
-                19
-            ],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "science fiction",
-                "saturn"
-            ],
-            "secondary": [
-                "departed spirits",
-                "smith",
-                "john jacob astor iv"
-            ],
-            "raw_analysis": {
-                "phenomena": [],
-                "entities": [
-                    "Departed Spirits"
-                ],
-                "implements": [],
-                "context": [
-                    "Science Fiction",
-                    "Saturn"
-                ],
-                "people": [
-                    "Smith",
-                    "John Jacob Astor IV"
-                ],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.66,
-        "status": "NEEDS_REVIEW"
-    },
     "Mark Probert’s Channeled Message That Skycraft Come from Etheric Waiting Halls of Death, Especially Venus": {
         "start_char": 58495,
         "end_char": 59435,
