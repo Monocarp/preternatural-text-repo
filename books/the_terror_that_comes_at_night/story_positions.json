@@ -2818,5 +2818,11 @@
             "hard to breathe",
             "something sitting on chest"
         ]
+    },
+    "Case 27": {
+        "start_char": 476524,
+        "end_char": 477940,
+        "pages": "159",
+        "keywords": []
     }
 }
