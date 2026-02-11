@@ -3,13 +3,13 @@ import fs from 'fs';
 import path from 'path';
 
 const videoFiles = [
-  'Best.mp4',
-  'Branches Light.mp4',
-  'Growth.mp4',
-  'Intro.mp4',
-  'Lots of leaves.mp4',
-  'MYstical.mp4',
-  'No fire.mp4',
+  'Lamp.mp4',
+  'Library.mp4',
+  'Quick.mp4',
+  'Stream.mp4',
+  'Two Figures.mp4',
+  'Webs.mp4',
+  'Which Way.mp4',
 ];
 
 async function uploadVideos() {

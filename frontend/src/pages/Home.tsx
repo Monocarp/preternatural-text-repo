@@ -9,6 +9,13 @@ const VIDEO_FILES = [
   'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/Lots%20of%20leaves.mp4',
   'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/MYstical.mp4',
   'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/No%20fire.mp4',
+  'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/Lamp.mp4',
+  'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/Library.mp4',
+  'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/Quick.mp4',
+  'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/Stream.mp4',
+  'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/Two%20Figures.mp4',
+  'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/Webs.mp4',
+  'https://ctwsdrkedvfq95no.public.blob.vercel-storage.com/Which%20Way.mp4',
 ]
 
 export default function Home() {
@@ -23,6 +30,10 @@ export default function Home() {
   }, [])
 
   const handleVideoEnd = () => {
+    setVideoEnded(true)
+  }
+
+  const skipVideo = () => {
     setVideoEnded(true)
   }
 
@@ -94,6 +105,19 @@ export default function Home() {
           </svg>
         )}
       </button>
+
+      {/* Skip button - only visible while video is playing */}
+      {!videoEnded && (
+        <button
+          onClick={skipVideo}
+          className="absolute top-8 right-8 py-2 px-4 rounded-md text-sm font-medium transition-all duration-200
+            bg-gray-800/80 border border-gray-600/60 text-gray-200 backdrop-blur-sm
+            hover:bg-gray-700 hover:border-gray-500 hover:text-white
+            active:scale-[0.98]"
+        >
+          Skip Intro
+        </button>
+      )}
     </div>
   )
 }
