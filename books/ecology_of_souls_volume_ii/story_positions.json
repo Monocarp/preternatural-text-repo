@@ -70178,5 +70178,11 @@
         },
         "confidence": 1.0,
         "status": "AUTO_APPROVED"
+    },
+    "George Van Tassel": {
+        "start_char": 62318,
+        "end_char": 62776,
+        "pages": "",
+        "keywords": []
     }
 }
