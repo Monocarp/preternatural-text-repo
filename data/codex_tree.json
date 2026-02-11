@@ -1330,7 +1330,11 @@
         "Observation Post Rock: Cursed Mound, Vanishing Tanks, and Hauntings"
     ],
     "Ghostly Activity": {
-        "Double": [],
+        "Double": {
+            "_stories": [
+                "Linda\u2019s Paralyzing Beam of Light, Abduction Recall, and Ongoing Communication with the Dead"
+            ]
+        },
         "Family Member/Loved One": {
             "Appearance": [
                 "Fiery Ball of Light, Little Blue Men, and Message from the Dead Brother Charlie",
