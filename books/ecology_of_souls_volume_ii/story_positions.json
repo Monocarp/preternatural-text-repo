@@ -2203,56 +2203,6 @@
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
     },
-    "The Adventures of Bulukiya: Traversing Cosmic Realms in an Islam-Influenced Proto–Science Fiction Tale": {
-        "start_char": 54564,
-        "end_char": 54905,
-        "pages": "17",
-        "keywords": [
-            "bulukiya",
-            "visions",
-            "cosmic realms",
-            "one thousand and one nights"
-        ],
-        "verbatim": "Finally, The Adventures of Bulukiya from One Thousand and One Nights, collected in English in the early 1700s but told much earlier, sees the protagonist traversing various cosmic realms. Scholars contend this represents a precursor to modern science fiction; being heavily influenced by Islam, the text is replete with spiritual references.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "visions",
-                "cosmic realms",
-                "one thousand and one nights"
-            ],
-            "secondary": [
-                "bulukiya"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Visions"
-                ],
-                "entities": [],
-                "implements": [],
-                "context": [
-                    "Cosmic Realms",
-                    "One Thousand and One Nights"
-                ],
-                "people": [
-                    "Bulukiya"
-                ],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Christian Gnosticism as a Flying Saucer Cult of Stellar Souls and a Savior from the Stars": {
         "start_char": 55071,
         "end_char": 55663,
