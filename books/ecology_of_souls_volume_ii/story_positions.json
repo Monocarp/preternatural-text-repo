@@ -1504,69 +1504,6 @@
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
     },
-    "Secular Folklore of Human Lives Linked to the Appearance and Fading of Corresponding Stars": {
-        "start_char": 40464,
-        "end_char": 40820,
-        "pages": "13",
-        "keywords": [
-            "christ",
-            "divine guidance",
-            "highest attainment",
-            "star appearance at birth",
-            "stars waning at death",
-            "star of bethlehem",
-            "secular folklore"
-        ],
-        "verbatim": "Secular folklore inverted these notions, adding the belief that new births on Earth are accompanied by the appearance of corresponding stars, which wane with their owners’ passing (perhaps reflecting how the Star of Bethlehem appeared in conjunction with Christ’s birth). Most cultures treated stars as symbols of “divine guidance” or “highest attainment.”",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "star appearance at birth",
-                "stars waning at death",
-                "star of bethlehem",
-                "secular folklore",
-                "divine guidance",
-                "highest attainment"
-            ],
-            "secondary": [
-                "star of bethlehem",
-                "christ"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Star Appearance at Birth",
-                    "Stars Waning at Death",
-                    "Star of Bethlehem"
-                ],
-                "entities": [],
-                "implements": [
-                    "Star of Bethlehem"
-                ],
-                "context": [
-                    "Secular Folklore"
-                ],
-                "people": [
-                    "Christ"
-                ],
-                "functional_purpose": [
-                    "Divine Guidance",
-                    "Highest Attainment"
-                ],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Eiríkur Laxdal and Other Overworld Traditions of the Dead Living in the Stars or Ascending Layered Heavens": {
         "start_char": 40822,
         "end_char": 41439,
