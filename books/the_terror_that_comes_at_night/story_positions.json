@@ -2737,5 +2737,11 @@
             "Jan Brunvand",
             "female student"
         ]
+    },
+    "Case 34": {
+        "start_char": 494536,
+        "end_char": 497223,
+        "pages": "164-165",
+        "keywords": []
     }
 }
