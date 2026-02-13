@@ -13608,56 +13608,6 @@
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
     },
-    "NDEr Seeing Birthdate Numbers as Possible Synchronicity": {
-        "start_char": 178775,
-        "end_char": 179161,
-        "pages": "55",
-        "keywords": [
-            "synchronicities",
-            "dreams",
-            "recurring patterns",
-            "near-death experiences",
-            "observational bias"
-        ],
-        "verbatim": "You are forgiven if such coincidences seem underwhelming. As with dreams, the details experiencers find profound within synchronicities can seem mundane, even boring, to others. Among these are recurring patterns which may represent genuine synchronicities—“I see the numbers of my birth date 8 [and] 24 everywhere,” one NDEr remarked—but seem as likely a product of observational bias.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "synchronicities",
-                "dreams",
-                "recurring patterns",
-                "near-death experiences",
-                "observational bias"
-            ],
-            "secondary": [],
-            "raw_analysis": {
-                "phenomena": [
-                    "Synchronicities",
-                    "Dreams",
-                    "Recurring Patterns",
-                    "Near-Death Experiences",
-                    "Observational Bias"
-                ],
-                "entities": [],
-                "implements": [],
-                "context": [],
-                "people": [],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Jeff Ritzmann’s Home Lights, Voices, Beings, and Disturbed Guests": {
         "start_char": 179606,
         "end_char": 180229,
