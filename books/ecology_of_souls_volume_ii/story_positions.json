@@ -13684,68 +13684,6 @@
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
     },
-    "Vallee and FREE Statistics on Poltergeist-Type Effects After UFO Sightings": {
-        "start_char": 180543,
-        "end_char": 181049,
-        "pages": "55",
-        "keywords": [
-            "vallee",
-            "light phenomena",
-            "poltergeist activity",
-            "apports",
-            "objects moving suddenly",
-            "objects falling suddenly",
-            "alien abduction",
-            "ufo sightings"
-        ],
-        "verbatim": "Light phenomena represents but one facet in a suite of poltergeist activity alien abductees might experience. Such reports are so common that Vallee wrote, “It is the rule, rather than the exception, to find significant UFO sightings preceded or followed by other anomalies, notably of the poltergeist variety.” FREE stats support this assertion, with 25% of experiencers reporting apports, and a whopping 61% claiming objects fell or moved suddenly in their presence “without any reasonable explanations.”",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "light phenomena",
-                "poltergeist activity",
-                "apports",
-                "objects moving suddenly",
-                "objects falling suddenly",
-                "alien abduction",
-                "ufo sightings"
-            ],
-            "secondary": [
-                "vallee"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Light Phenomena",
-                    "Poltergeist Activity",
-                    "Apports",
-                    "Objects Moving Suddenly",
-                    "Objects Falling Suddenly"
-                ],
-                "entities": [],
-                "implements": [],
-                "context": [
-                    "Alien Abduction",
-                    "UFO Sightings"
-                ],
-                "people": [
-                    "Vallee"
-                ],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Oldham’s Vanishing Silverware and Brazilian Case of Levitation of Saucepans": {
         "start_char": 181062,
         "end_char": 181730,
