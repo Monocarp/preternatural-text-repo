@@ -13532,65 +13532,6 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
-    "Drunk Driver’s Two Identical Crashes and Death Marked by Broken Clock": {
-        "start_char": 176355,
-        "end_char": 176748,
-        "pages": "54",
-        "keywords": [
-            "synchronicity",
-            "car crash",
-            "road accident",
-            "bar",
-            "broken car clock",
-            "20th century",
-            "1970"
-        ],
-        "verbatim": "Death seems to draw synchronicities into its wake. In one tragic example, a drunk driver lost control of his car and hit a tree at 2:02 a.m. on April 13, 1970. Despite extensive injuries, broken bones, and being placed on a respirator, he fully recovered and raised a son until, returning from the same bar, he crashed and died—two years later to the minute, according to his broken car clock.",
-        "temporal": {
-            "years": [
-                1970
-            ],
-            "centuries": [
-                20
-            ],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "synchronicity",
-                "car crash",
-                "road accident",
-                "bar"
-            ],
-            "secondary": [
-                "broken car clock"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Synchronicity"
-                ],
-                "entities": [],
-                "implements": [
-                    "Broken Car Clock"
-                ],
-                "context": [
-                    "Car Crash",
-                    "Road Accident",
-                    "Bar"
-                ],
-                "people": [],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.66,
-        "status": "NEEDS_REVIEW"
-    },
     "MacGregors on the Dead Communicating Through Synchronicities": {
         "start_char": 176750,
         "end_char": 177157,
