@@ -9547,68 +9547,6 @@
         "confidence": 0.99,
         "status": "AUTO_APPROVED"
     },
-    "Betty and Bob Luca on Alien Time Being Beyond Understanding": {
-        "start_char": 134337,
-        "end_char": 134769,
-        "pages": "42",
-        "keywords": [
-            "betty luca",
-            "betty andreasson",
-            "bob",
-            "temporal unmooring",
-            "altered time perception",
-            "timelessness",
-            "longevity",
-            "aliens"
-        ],
-        "verbatim": "Yet aliens themselves seem to experience time differently as well: “Time to them is not like our time, but they know about our time,” said Betty Luca (née Andreasson). Her husband Bob reiterated this: “There’s no time up there… nothing changes. They said [it is] beyond my understanding.” (This temporal unmooring, coupled with persistent claims that aliens live long “lives,” speaks to the possibility they might actually be dead.)",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "temporal unmooring",
-                "altered time perception",
-                "timelessness",
-                "longevity"
-            ],
-            "secondary": [
-                "aliens",
-                "betty luca",
-                "betty andreasson",
-                "bob"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Temporal Unmooring",
-                    "Altered Time Perception",
-                    "Timelessness",
-                    "Longevity"
-                ],
-                "entities": [
-                    "Aliens"
-                ],
-                "implements": [],
-                "context": [],
-                "people": [
-                    "Betty Luca",
-                    "Betty Andreasson",
-                    "Bob"
-                ],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "1989 Ukrainian Underground Portal and Time Dilation Warning": {
         "start_char": 134771,
         "end_char": 135132,
