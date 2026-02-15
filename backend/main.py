@@ -117,9 +117,45 @@ from utils import (
     preload_book_metadata, rebuild_assigned_titles_cache,
     story_positions
 )
+from state import app_state
 
 # ------------------------------------------------------------------ #
-# 6. Startup Event
+# 6. Category Renames (idempotent DB migration)
+# ------------------------------------------------------------------ #
+_CATEGORY_RENAMES = [
+    ("UFO", "Extraterrestrial", None),  # top-level rename
+    ("Theories Related TO THE UFO Phenomenon", "Theories Related to the Extraterrestrial Phenomenon", "Extraterrestrial"),
+]
+
+def _apply_category_renames():
+    """Rename categories in the codex_nodes table. Skips if already renamed."""
+    if not app_state.USE_DB or app_state.SessionLocal is None:
+        return
+    from models import CodexNode
+    try:
+        with app_state.SessionLocal() as db:
+            changed = False
+            for old_name, new_name, parent_name in _CATEGORY_RENAMES:
+                query = db.query(CodexNode).filter_by(name=old_name)
+                if parent_name:
+                    parent = db.query(CodexNode).filter_by(name=parent_name).first()
+                    if parent:
+                        query = query.filter_by(parent_id=parent.id)
+                    else:
+                        continue
+                node = query.first()
+                if node:
+                    log.info(f"Renaming category '{old_name}' → '{new_name}'")
+                    node.name = new_name
+                    changed = True
+            if changed:
+                db.commit()
+                log.info("Category renames applied successfully")
+    except Exception as e:
+        log.error(f"Category rename migration failed: {e}", exc_info=True)
+
+# ------------------------------------------------------------------ #
+# 7. Startup Event
 # ------------------------------------------------------------------ #
 @app.on_event("startup")
 async def startup():
@@ -140,6 +176,9 @@ async def startup():
     # 1. Sync disk → DB
     log.info("Performing initial disk → DB sync...")
     sync_disk_to_db()
+    
+    # 1b. Apply category renames (idempotent)
+    _apply_category_renames()
     
     # 2. Preload book metadata
     log.info("Preloading book metadata...")
