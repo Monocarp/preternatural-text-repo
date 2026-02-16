@@ -1315,11 +1315,9 @@
         },
         "Contactees": {
             "Message Received": {
-                "Future Events": {
-                    "_stories": [
-                        "Rita Malley Receives UFO-Borne Message of Imminent Death"
-                    ]
-                },
+                "Future Events": [
+                    "Rita Malley Receives UFO-Borne Message of Imminent Death"
+                ],
                 "Occult Knowledge": [
                     "Reinerio Hernandez\u2019s 2013 Visionary Mandate and Time Gain in Traffic"
                 ]
@@ -1539,6 +1537,7 @@
             "Possible Mind Control Leading to a Near-Fatal Car\u2013Train Collision near Ithaca",
             "R. D. Smallridge\u2019s Eight-Minute Sixty-Mile Journey and Blue-Light Transport to a Room of Entities with Prophecies of 1968"
         ],
+        "Trance": [],
         "_stories": [
             "March 8, 1967 Minnesota Repeated Nightly Hovering Light",
             "March 8, 1967 Michigan Burning Orange Oval over Liggett School",
