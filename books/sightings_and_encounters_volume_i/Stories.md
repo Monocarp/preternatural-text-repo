@@ -1,0 +1,1773 @@
+<div align="center"><b>The Michigan Upper Peninsula Bigfoot Attack on Camp and Truck</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 4-8</div>
+
+We set up camp and dug a fire pit, which really didn’t take us much time at all. Once we were done, Artie said that there was still plenty of time left in the day for us to head down to the river and catch some trout, so we grabbed the fly rods. Artie took Harry, and I grabbed my shotgun before we started walking… and walking… and walking. Just so you understand, at this stage of my life, a long walk for me was going in and out of the mall, with a two-mile bike-ride sprinkled in from time to time. My legs were shot, but Artie told me that were getting close to our destination. He knew this because the forest started to tighten up. There were a lot of smaller trees and bushes as we got closer to the water source, and there was no longer anything resembling a trail.
+
+We were looking for breaks in the growth and fighting our way through the bramble when we suddenly broke free of it all and spotted the river. Now, we are not talking about the Colorado here. You could easily walk across this river. In fact, as I looked up and down as far as I could, I could see many of the trees branches flanking the river’s edge were not more than 8 or 10 feet from touching the branches on the other side.
+
+Additionally, this river was strewn with wood and rocks. It was relatively calm flowing water, and as I began to focus on the surface, I could see that there were plenty of trout to be had. We began to fish. The two of us were using terrestrials, which are flies that are tied to look like a variety of insects. Because of the tightly spaced trees, you really couldn’t cast much from anywhere in here. We were more or less flipping and mending the flies into position.
+
+We must have been fishing quietly for several hours, enjoying the company of ourselves and the fish. It was really beautiful, and I was more relaxed here and now than I had been in a very long time. I had almost zoned out of existence when I started to hear a loud rock clacking noise. To me, it sounded as though it had to be very close.
+
+I turned my head to look at Artie and we made eye contact. He shrugged. We kept fishing, and the sound kept happening. It sounded like two rocks cracking together against something being smashed. There was a distinct crunch. It reminded me more of the breaking of a mussel shell than a clam shell, since a mussel’s shell is much softer and thinner and makes a more crunching sound when broken.
+
+As the sound continued, the two of us began to slowly walk towards each other. I was trying to look in the sound’s direction, but because of the tightness of the river with the overhanging branches and the rivers curvy nature, it was impossible to see very far. The source of the noise could have been 40 feet away, and we would still be unable to see it.
+
+When we got close to each other, we whispered so quietly that we might as well have been lip-synching. Artie thought it may have been moose antlers clacking together, and that the noise may well have been much further away than it sounded.
+
+Somewhat reassured, I slowly moved back to the pool I had been fishing in, but this time, I made a point to position myself a little closer to the bank and my 12 gauge.
+
+After a little while, the noise stopped, but now I could hear something moving about in the brush, and it started to freak me out. I could see Artie craning his neck as well, fighting to see movement in the trees. We came together again, deciding to wait it out a little bit longer and then split, hoping that whatever was moving around would head on out of here while we waited. As we began fighting through this brush on the way out, I was really on edge. I expected something to get the jump on us at any moment, and between holding the gear and shoving trees around, there wouldn’t be much time to mount and shoot if needed.
+
+I started to think of my old friend Dave. I had met Dave – or Fat Dave, as I called him – in a parking lot by a lake. I used to go there to study in my car, and I would see Dave and some other guys who were always there. They fished with light tackle and worms, catching bluegills and sunfish. While getting out of the car to stretch my legs and talk to them, I found out that he was from Florida, and I could see a large scar circumventing almost his entire shoulder. I happened to be studying for the medical field, so I asked him what type of surgery he had had. He told me that while on tour in Vietnam, he was on sentry duty, walking back and forth on the camps perimeter.
+
+He and another G.I. would walk in a half circle and meet again in the middle, going back and forth over and over again. As he was walking, he heard a twig snap and as quickly as he turned, some gook already had a bayonet buried in his shoulder. As he tried to move, the Vietcong kept forcing the blade around in him. He had been falling to the ground when, instinctively, he mustered up his M16 with his one good arm and emptied the entire clip into this creep, killing him. Anyway, I felt the same way right now. All the way back to the camp I couldn’t shake an eerie feeling out of my spine, and the forest was deathly quiet. You could barely here us walking, let alone anything else.
+
+Finally, we reached the camp and I began to make a fire while Artie stepped behind some trees to take care of business. A few moments later, I heard a startled shout. “What the hell is that?” I walked over to see. He stood looking at a large snake on the ground, which had knots tied on both ends of its body. It looked like a snake dumbbell, but it was still alive. There was absolutely no way these two knots were tied by the snake writhing around on its own. They were as tight as a rope knot. Taking into account the shortening of the knots, the snake must have been six feet long.
+
+We couldn’t help but wonder who or what might have been in our camp while we were gone. The entire thing was mind-boggling. Artie took the snake and flung it into the woods, saying that it would make a good meal for something. Now, maybe it’s because I am somewhat a city boy, but I couldn’t see how Artie could be so stone-cold and unmoving about all of this.
+
+After spending a night around the campfire, bullshitting about everything and anything under the sun, we stoked the fire one last time and crawled into the tent. I had my semi laying by my side and Artie had Harry next to his head. Artie was snoring, but I couldn’t sleep a wink. I was too busy thinking about what had happened during the day. Sometime during the night, I started to hear some grunting or grumbling sounds outside the tent. It was hard to tell if they were near or far until a large shadow was cast between our tent and the fire. After a few moments, the shadow had completely darkened our tent’s interior, followed by a large, deep growl. With this noise, the top of the tent started to move downward. Artie stopped snoring. With my eyes fixed on the shadow, I grabbed my gun and before I could even think about shooting it, Artie sat up and squeezed of three successive rounds right through the tent. The flash and concussion were unbelievable, and the smell of gunpowder and smoke filled the confines of the tent. Whatever this was let out a scream which I can only descried as being that of a T. Rex. It was so loud that it shook me. The side of the tent was burning, and the shadow had vanished. Whatever this was sounded like it was running away, screaming and bellowing as it did so.
+
+I unzipped the tent and burst out with my gun. There was no way I was going to die without a fight. Artie leaped out behind me and the two of us stood there, heads moving left and right, looking and listening. This beast was still screaming off in the distance. I was sure that Artie had nailed this sucker with three 44 caliber bullets at point blank range. If it was a black bear it would have dropped where it stood, but it didn’t. It ran away.
+
+I asked Artie what the hell could limp let alone run away with three 44 slugs in it. His answer was that bears can be tough mothers to take down. Now, I had been thinking of doing exactly what he did. I was going to shoot, too, but at that moment, I had thought about it being some loser dude in the woods playing a really bad and possibly deadly prank. Flashlights in hand, we started looking around for blood, but we found nothing, and the ground was so hard that we couldn’t see any prints, not even those of our own boots. Beyond the glow of the fire, our surroundings were as black as black could be. It was extremely unnerving to say the least.
+
+We got the fire going hot and heavy and stayed up the rest of the night. At this point, I was ready to call it quits, but I didn’t want Artie to think that I didn’t have any balls. I was the city slicker. We were supposed to have nuts of steel, right? According to our game plan, we had three days left, so in the morning, Artie – seemingly having brushed off everything that happened during the night – suggested that we head over by the lake today. So we grabbed our spinning rods and our guns and headed off to the closest side of the lake.
+
+This time, his direction took us through a marginally more open tract of woods until we got nearer to the lake, then the undergrowth thickened up like it had by the river. At any rate, we positioned ourselves along the lake’s edge and started to throw some poppers and spinners, getting into some fairly decent action quickly. The sun was out on the lake, and it was nice to be out from under the canopy of the pines. While we were fishing, I noticed something large and dark in color peering in and out of the bushes along the far side of the lake, first in one place and then in another.
+
+Every time it appeared, I pointed in its direction, asking Artie to look. Despite all of my prompting, he saw nothing, but I definitely saw something that was alive and moving, and I couldn’t get my mind off the campsite incident last night.
+
+We must have been fishing for about 6 hours or so, taking a few food and drink breaks in between, when Artie said that we should head back and maybe do a little varmint hunting before sunset. It sounded like a good idea to me, so we began the long walk back.
+
+By the time we had gotten back to the vicinity of the camp, we had been gone about 8 or 9 hours. As the camp came into view ahead of us, I couldn’t believe what I was looking at. The entire campsite, including the truck, had been ransacked. There were things thrown up in the trees, and our cooler was completely flattened on the ground. It looked as though a steam roller ran over it. Cosmetically speaking, the truck was in ruins. The cap looked like a tree had fallen on it, and both of the side windows were blown out. The cab had been smashed down so severely that we could not open the driver’s side door, and there was no evidence of a log or anything that would have or could have been used to do that degree of damage. The tailgate was partially torn from its hinges and bent under the rear bumper. The front winch was torn completely away from the truck; 9/16 bolts and washers ripped cleanly out of the steel, and the other winch had all of the cable pulled out of it, and was completely detached from the housing. Both of the aluminum steps were torn off and we were only able to find one of them. Even then, it was in a mangled state. Thank God the cab had not been opened.
+
+The front of the hood from the grill inward looked as though it was hit with three or four blows from a 12-inch-wide tree trunk. I say this because I have no other way to describe what we were looking at, and having said as much, there was not a single indicator such as bark, chips or even any marks on the vehicle, which would have shown that part of a tree had actually been used to wreak the destruction. There were no small dents in the truck, just large, long and wide blows to the metal work.
+
+What bothered me most of all was the type of power that would be needed to flatten a large Igloo cooler, and the fact that large bolts had been torn away from the truck, leaving a reverse dimple where they had been in the steel. It was insane. Whatever did this was not an individual or a group of individuals. No man could have done this. We said nothing to each other. There was nothing to say. We simply stood there, aghast.
+
+I jumped up into the bed of the truck and tried to push up on the broken cap in an effort to open things back up a bit. I was forcing my back against the broken roof of the cap, and as I worked my way into position, I noticed something very odd. Caught in the very end of one of the cracks in the fiberglass were several very long, dark-colored hairs. It looked as though something with hair had lost a few while their body slid or dragged off of the roof. I showed them to Artie, and he said to me that it couldn’t have been black bear fur. These strands were like 8 or 10 inches in length, which was way too long.
+
+We gathered up all of the stuff we could and shoved it up under the remnants of the cap into the bed. We grabbed the tailgate and flexed it back and forth until we could twist it up and into the bed. When we came into camp, everything in the truck had been neatly organized, and as we were about to leave, it looked like an open trash can. Artie climbed up into the cab from the passenger’s side, which was not an easy task without the step, and started brushing the shattered glass off the seat and everywhere else. The truck started right up and he let it run.
+
+I guess about an hour had gone by since we came back to the camp and it was time to get the heck out of here. It was a long ride in, and it would be a longer ride out. As we left, I couldn’t help feeling really bad for Artie in a number of ways. After all, I came on his invitation, and now his truck was in ruins and we were leaving with our tails between our legs. What would his family think? What would anyone think?
+
+When we finally got clear of the woods, we started heading down the road. At some point, we saw a cop coming the other way and Artie waved him down. As he stopped, I couldn’t see him because of the truck’s height and the fact that he was on Artie’s side. I heard him ask what had happened to us. Artie shut the truck down as I jumped out, and he followed.
+
+We spent about 45 minutes walking around the truck and telling the officer our tale. He wrote up an incident report and gave us a copy, saying that there is shit in these woods that we know nothing about.
+
+Later on, as we entered Artie’s property, everyone came out to see the truck and talk to us about our ordeal. It was at dinner that evening that his father began telling us about what his father had said to him. He told us that the loggers and miners had spun many a yarn about giant, hairy creatures that they had seen in the timber. He said his father told him that they would mess with and damage their equipment after the workers had left for the day. They would come back the next morning and find machinery bent and broken. He said that this was a regular happening for the workers, and that the men would speak of things being thrown into the camp without being able to see who or what threw them.
+
+At any rate, that’s my story. Artie and I still speak to this day, and he actually rebuilt Little Foot. Artie’s father took the hairs that we retrieved and framed them in the den for family posterity. I haven’t been back to visit Artie since.
+
+<div align="center"><b>Bigfoot Kills a Black Bear Near Corbin Cabin in Shenandoah National Park</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 9-12</div>
+
+I guess as I begin, I should tell you how I came to be where I was when I saw the beast in Shenandoah Park. My wife had divorced me some time before, and rather than sitting around and moping about the whole grisly affair. I took up exercising, some weight-lifting and bike-riding, to be more precise, as well as a lot of walking. After about a year or so, I was clocking about 5 or 6 miles a day in walking distance alone, and I was quite fast, if I do say so myself. The speed developed out of necessity, since I had limited time to take my walks due to my work schedule and everything else that was going on in my life at that time. I increased my speed to ensure that the same amount of miles would be attained every time out. Over a period of about 3 years, I became fitter than I had ever been in my entire life. At least something good had come out of that hideous divorce.
+
+My next phase was to begin pushing the limits of what I could do, and I decided that when I could get time off, I would take little 4 or 5 day vacations going to areas where I could actually hike and see something. Up to this point in time, the only thing I was seeing was the surrounding homes in my community.
+
+My trip to Shenandoah was actually one of many hiking destinations I had travelled to. It began as most did, by contacting the park and sending for a brochure. After that, I scoped out the available accommodations, preferring to camp in or near the location of the hike, and then I would plan my trip accordingly.
+
+Having gone through my punch list, my plan for Shenandoah was to set up camp at a place called Big Meadows, and from there, I would walk the area between Big Meadows and Thornton Gap. I would be walking on a section of the Alleghany Trail where there was fairly good elevation, up to about 4000 feet, according to the map. The route that I had chosen had many overlooks, as well as some interesting things to see along the hike, and to me, it looked perfect. It was just enough of a challenge for where I was physically at the time.
+
+It was late summer, and my hope was that there wouldn’t be too many people up there while I was. In my heart, I had always envisioned myself living the life of the guy in High Plains Drifter – confident, alone, and able to handle whatever came my way. Well, this was as close to that as I would get. I was the High Trails Drifter, one day at a time.
+
+For first day’s hike in Shenandoah, my goal was to make it to a place called Corbin Cabin, after which I would trek back to camp. The scenery on the way to the cabin was breathtaking. To get there, you had to cross a street and a small creek breaking of from the Alleghany Trail. The cabin itself was located near the base of Pinnacle Peak, in a place called Nicolson’s Hollow. When I had finally arrived at the cabin, I was amazed at how much guts it must have taken for someone to not only come here, but to build this miniature homestead by hand so many years ago. It was a small cabin built on a stone foundation, having one main room with a small side addition. There was a fireplace and a porch, and each one of the cabins timbers was hand hewn. I could only imagine the amount of labor involved in constructing it. The brochure said it had been inhabited by an old mountaineer, who must have been even more like the High Plains Drifter.
+
+Having met the halfway point to my goal, I turned around and started to head back. It had been a great day, and by the time I made it back to the campsite, I was bushed.
+
+The next day, I packed up and drove north a short distance to the Thornton Gap entrance station. This time, I was going to hike from the other direction, heading from the north down towards Corbin Cabin and back. In this way, I would be able to cover a fairly nice section of the trail by way of two day hikes. So once again, I took off for the day’s journey. There was a considerable amount of wildlife visible along the route and I had brought my Nikon 20 x 50 binoculars with me. They are a bit bulky, but well worth the effort and extra weight. I was encountering many deer off the side of the trail here and there, and for the most part, the birds here were very different from those where I live, which can be expected when one travels to different regions of the states. I was so glad that I came here, and I had just passed the area where I had cut off for Corbin Cabin yesterday, pushing on a little further until I reached a spot called Stony Man, and I sat down for a rest.
+
+The vistas from here were incredible, full of rolling hills and woods as far as the eyes could see. The sun was bright, and I felt more alive than I had ever been. I was eating some granola bars and drinking water when I decided to break out the Nikons and have a look around. At one point, I had put them down and was just looking with my eyes when I noticed two black objects in a clearing way off in the distance below. It took me a minute to realize they were both moving. I picked up the binoculars and focused in on the objects in question. I would have to say they were about a 1000 yards away from me, and I watched them for quite a while.
+
+With the binoculars, I was able to tell that these objects were actually a large black bear and a cub, and they were feasting on what appeared to be a deer carcass. I hadn’t seen the bear take the deer down, and I was wondering if the deer had died recently and they sniffed it out for a meal.
+
+I must have been watching them for 15 or 20 minutes before it happened. Now, I must warn you that the next series of events went down so quickly that it was actually quite difficult to figure out just what happened.
+
+Within the binoculars’ field of view, a large and darkly colored figure came running into the frame. I don’t know how much ground it actually covered, but it looked like perhaps 75 yards in 2 or 3 seconds. Not only was this thing booking, but it was running upright on two legs.
+
+At the same time that I caught sight of the figure, I saw the larger bear lurch and jump to the side of the carcass and the little one bolted away. This all happened in matter of seconds. The creature closed the gap between itself and the bear quickly and ended the sprint, making head on contact with the bear and knocking it to the ground. I could see its arms flailing as it remained atop the bear, and it was a short-lived fight.
+
+Everything stopped. There may have been sound, but from my distance, I couldn’t hear anything at all as the thing was now sitting still on top of the bear, straddling its body. A minute later, the cub reappeared at a distance. I saw the creature wave its arms, and moments later, the cub scurried into the brush and was out of sight for good.
+
+I continued to watch the scene for about 30 minutes. The strange creature tossed the bear’s head back and forth in its two hands. Now, I don’t know how tall a bear is from the ground to the top of its back, but I would have to say that, judging by the brief period when I had seen it running, the creature was at least 3 times as tall as the bear was high. So if the bear was 3 feet tall this creature was 9 or 10 feet tall. It was immense. Its arm almost looked to be as long as the bear’s total body length.
+
+I had to be looking at a Bigfoot, and this Bigfoot had just charged and killed a black bear. I watched the creature for about another 15 minutes, but time was not on my side. As awesome as this was, I had to complete my return hike back before it got dark, and I was already wondering if I could make it back in time.
+
+Before I left, I snapped a few photos with my Canon camera, but I must admit that I didn’t have any great hopes for the development of the pictures, given the distance. Never the less, I took a few and hoped for the best. Eventually I got up and left, knowing that I would really have to step up the pace on the return leg to make it back by dark. Thankfully, I was up to the task.
+
+When I made it back to Thornton Gap, I stopped by the ranger station. I had stopped in there to say hello before I began my hike and had told them my plans for the day. You always want to let others know where you are and what you plan to do, just in case something should happen along the way. I told the rangers what had transpired, and they were dumfounded. One of them told me that he had seen something a few years ago, but he stopped talking before elaborating on just what exactly that something was.
+
+At this time, I asked Rob to elaborate as much as possible. On any details about the Bigfoot he could recollect. And here is what he said:
+
+As I mentioned before, this thing covered a large amount of real estate rapidly. Now, I know I am just throwing numbers at you, and I have no way of actually knowing or calculating them properly. The creature looked like it was running 40 mph across this tract of land. It also looked like the bear was taken completely by surprise, which also indicated a very fast run.
+
+All that the bear had time to do was shift off of the carcass and turn, and then it was hit and hit hard. The impact reminded me of Ronny Lott plugging a run on the football field. I mean, it was WHAMO! And lights out. Just think about it for a moment; the thought of any man being there and performing such an act is utterly ludicrous. This creature did not hesitate for one split second. He didn’t run up to the bear and stop to size up his attack. It was a brutally effective, running kill.
+
+I could clearly distinguish between the bear and the Bigfoot the entire scuffle. The Bigfoot was a reddish, dark brown and the bear was black, so there was no difficulty at all in telling the positions of the two beasts. In other words, who was moving and who was not. I wish I could have stayed to see whether the Bigfoot would drag off the bear’s carcass or the deer’s, but I was out of time.
+
+When I had arrived back home, I developed the film, and had a couple of the prints enlarged. As I suspected, it was a wasted effort. Even when enlarged, you could only see a small dark spot where the two creatures were. But for me, that was good enough to preserve the memory, since I knew what the small dark spot represented.
+
+What an awesome sighting, my readers. I might add also proof positive of what I stated in the beginning. He saw what he saw because he took the time to stop and look. If he had kept hiking and watched only the path with the surrounding trees, deer and birds, he would have missed this event entirely.
+
+
+<div align="center"><b>Bigfoot (“Hairy Man”) Seen Near Lake and Later Announced by Terrifying Howl in Fitzpatrick Wilderness</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 12-16</div>
+
+The following is the account of events which was given to me by Allister and Marjorie Macnab. Allister was a transplant from Scotland that was hired by a firm in New Hampshire for his scientific abilities. During his employment, he met and married Marjorie Tennyson, who also has a smidgeon of Scottish in her ancestry. However, it is actually Allister’s passion for fly fishing that brings us to our story about an area known as the Fitzpatrick Wilderness, which is adjacent with the Shoshone National Forest:
+
+This was to be our fourth fishing adventure in Wyoming. The region contains some of the best fly fishing and wilderness hiking in the world, and it is breathtaking country. After our first trip, we had quickly learned that it is well worth your time and money to work with a good outfitter or guide service when you are planning to go into such areas. In most if not all situations, you will need some type of permits and or licenses, and the area knowledge of local men or women is a valuable asset which cannot be measured in dollars and cents. This is not the time or place to be cheap. For the price of a Hawaiian vacation for two, you can be readily supplied with everything and anything that you will need, including a guide. In doing so you are not only helping yourselves, but you are supporting an industry and a people in the region, which will help ensure that these resources will be in place for a very long time into the future.
+
+We met up with our guide Joseph at a predetermined location. He was a slightly-built, rugged-looking man who was of pure Arapaho heritage, and his family had been in this region for many generations.
+
+We were to hike into and fish in two different areas. The first site that we would fish was named Big Meadows, and the second along the route would be Downs Fork Meadows. There is a creek running right through this area which changes its name periodically as you trek. The only name I can ever remember is Dinwoody Creek, simply because of the name and its European roots. The area consists of a rocky mountainous surround with pine forests, grassy meadows and water. That’s Wyoming and that’s why we love it. Each time we come to this state, we prospect a new area, so this particular location was brand new for the two of us.
+
+We each were given a holstered pistol, and Joseph had a rifle and a pistol as well. This is grizzly country, and there are plenty of visible herd animals and trout as well, which the bears are itching to sink their claws into. So it was eyes wide open from here on out.
+
+The entire area that we planned to pass through is similar throughout, full of thick, grassy meadows and marshy areas surrounded by extremely rugged timber. Rocky mountainous terrain rises up behind the tree line, with the land’s appearance being the same in every direction that you looked.
+
+This trip was in no way particularly difficult and the actual mileage covered was not very far. It was more a casual hike, with most of our time spent focused on catching trout. We hiked in and set up camp on the edge of Big Meadows. From where we were in the timberline, we had a good firm patch of ground on which to pitch a tent, with our camp being within a reasonable walking distance across the meadow for us to reach the creek. Right behind the stretch of forest where we had set up our camp, was a small mountain jutting up from the earth, and across from the creek was a lake.
+
+During the first two days, we spotted a grizzly coming down across the meadow. It posed no threat to us, and was fairly far away each time that we saw it. We also saw a moose grazing on the thick green grass, and I had told Allister on more than one occasion, that having a guide brought a certain sense of stability to us whenever we saw something. Joseph was not by any means flustered by a predator that might have otherwise frightened us to death. He had a mutual respect for the surroundings and its inhabitants, which is not to say that Joseph was foolhardy or lax in any way, he simply was not visibly moved by them.
+
+On one afternoon, we were lined up side-by-side, fishing from the bank of the creek. We all faced in the direction of a small lake which lay to the northwest. Next to the lake, there was an outcropping of rock which butted up against it, which appeared like a rugged hill or mound. At most, it was 200 feet tall, which was much smaller than the surrounding mountainous landscape.
+
+Marjorie and I were standing with our eyes focused on the creek, when Joseph suddenly said, “Look over there! Right by the edge of that hill. Do you see it?” We both turned our heads and looked, trying to follow the direction of Joseph’s point. He spoke again. “Do you see it? It’s a Hairy man.”
+
+Now, Marjorie and I were not ignorant of what he was talking about or pointing at. Although neither of us had seen one, we knew he had to be talking about a Bigfoot. As we focused in on the base of the mound, there it was, loping along the edge of the hill adjacent to the marsh. Once we laid eyes on it, it was very easy to observe since it was completely out in the open. It must have come out of the woods that lay a short distance north of our camp.
+
+It had to have walked right across the meadow while we were fishing. We hadn’t seen it, and yet there it was. I would say that it was five or six hundred yards away, and the creature’s iconic silhouette was unmistakable.
+
+The marsh or meadow area consisted of bright green grass that was about 2 feet tall, and the grass was especially green along the water’s edge where it abutted the rocky outcropping. There were no trees to obscure our view, and the Bigfoot’s profile was very dark against the rocky background, since the rocks were beige in color. Its arms swung like a clock’s pendulum as it took long and deliberate strides, and it walked with a somewhat forward-leaning posture which was quite evident to the eye.
+
+Within two minutes, it disappeared beyond the bend and was gone from our view and we had just become members of the believer’s club.
+
+Pardon the pun, but this was a really BIG deal for me and my wife, so the rest of the day was spent with the three of us talking about Bigfoot. Around the campfire that night, Joseph started telling us of the Indian folklore that pertained to these Hairy Men. He had actually personally seen the creatures many times, but he was as surprised as we were to catch sight of one on that particular day. However, it was still more routine for him than it was for us. During the night, Joseph added that we should keep our eyes out for the Hairy Man while we were here. He said that throughout history, the Indian people had experienced and spoke of some really bad things regarding these creatures. Their tribal records mention many encounters, including attacks on people, livestock, and even unexplained disappearances.
+
+Because of the tone of his voice, we became certain that he was unhappy that this sighting occurred. That evening, I also took note of the fact that he spent a fair amount of time cleaning and prepping the guns. The next day, we packed up and walked to the back of the lake where the Bigfoot had disappeared from view. Joseph said that area was where we could pick up on Glacier Trail. Without the trail, we would have to trek entirely through the woods to get to the next location. From there, we would make our way north to an area called Downs Fork Meadows. I wouldn’t have known the path was there without a professional like Joseph to guide us.
+
+Now, I would be a liar if I didn’t say to you that when we started down this route, things became a whole lot creepier, not just because of what we had seen, but because this trail area became quite a bit tighter. Everything had closed in around us. Large stands of timber flanked us on both sides, and some rock walls cropped up here and there, forming what felt like a prison cell around us. As I remember, it was a curvy trail, and at any given point, it was difficult to see very far ahead of us. I kept thinking of old westerns where the Indians would set up an ambush on some unsuspecting cowboys, positioning themselves behind some boulders up on a cliff. No offense to Joseph.
+
+To get to Dinwoody Creek, we went straight through dark stand of trees, after which we found ourselves winding around some more ambush points or high rocks. As we came out of the trees, we found ourselves near a fork in two creeks. The Downs Fork Creek and the south end of Honeymoon Creek. This was quite a cool little area. There were several meadows with a number of creeks or streams meandering around within them. They were like small tributaries off the main creeks, and the meadows had several stands of trees spotted within them. I know I speak for all of us when I say that this place really struck us in the most amazing way. We felt like Alice going down the rabbit hole and popping out in a wonderland.
+
+Now, just so you understand, Joseph’s job was not to fish. In fact, we had asked him numerous times to join us with a rod, and he politely declined every time. He would spot for us or get in the creek and help with landing a fish, and he also paid strict attention to other things, like setting up our flies and leaders. In Downs Fork, however, he was seemingly preoccupied with his field glasses. When I asked him about this, he said that this was grizzly territory, and that it would be best for all of us if he kept watch. We didn’t argue with him. He was our guide, so he knew best.
+
+During the latter part of the afternoon, something let out the loudest, most prolonged, howling roar that is humanly imaginable, sounding like a fire department siren. The howl was as intense as you could possibly imagine, and it sounded really close. I looked around in all directions, but I could see nothing except for thick forest. Truth be told, the sound seemed like it was emanating from all around us, rather than in any particular place.
+
+It was the loudest, most enveloping blast of noise that I had ever heard in my life, and it brought us to a complete standstill. We stood there, completely aghast. Our jaws were hanging open, and Joseph had already brought his rifle to bear. Following his example, we dropped our rods and grabbed our pistols. The sound stopped, and then we heard nothing.
+
+We held our ground, turning in every direction while not saying a word. It seemed like 15 minutes had passed before Joseph finally broke the silence. He turned towards us and whispered, “The Hairy Man is here.”
+
+I remember thinking to myself that even when holding a gun, one can sometimes feel defenseless, and I’ve never felt more vulnerable. As far as I was concerned, whatever had made that noise could eat bullets and spit them back out again.
+
+We had a momentary discussion about the best course of action, and then we started back out the way we came in, working our way through the trees, ambush points and everything else. This time, we were like jungle fighters, looking around corners with our guns first. We high-tailed it all the way back to camp and nobody said anything thing about needing to drink or eat. It was all about moving and moving fast.
+
+We must have been about 2 miles south of Big Meadows when we broke out into an area that felt less secluded. We could see in virtually every direction and had decent visibility. We knew that, like it or not, we would have to spend the night, and this was the place to set camp.
+
+When I tell you we had an uneasy night that is an understatement. Nobody could sleep, and regardless of what my wife and I did, Joseph felt it was his duty to be awake and standing guard. The minutes seemed like hours and I kept waiting for a Banzai attack, but nothing happened. In the morning, we finally took the time to eat. We were all hungry, and we’d need all of our energy in order to finish the final stretch of the journey back.
+
+To this very day, we still send Joseph a Christmas card to let him know we are thinking about him. As for my wife and I, we have not been back to Wyoming in over 15 years, and we don’t plan to go back anytime soon.
+
+At the end of my interview, the Macnabs told me that they will only fish in more open and less rural locations from now on, sticking within the confines of a town or a spot near a highway. I asked them what aspect stood out the most about this encounter, and here was Marjorie’s response:
+
+Nothing could prepare you for the screaming, which seemed like it was coming down from the sky above us. It was so loud that I felt it could hurt me, like some sort of sonic weapon. I know this doesn’t make any sense to you, but if a child had been there, I think they would have just curled up in a ball on the ground and started crying. It was absolutely terrifying, and certainly something that we will never ever forget. The two of us talk regularly about how brave Joseph must be go back into these areas again and again to earn a living.
+
+
+<div align="center"><b>Two Sasquatch Confront Rock Hounds on the Clackamas River Near Estacada, Oregon</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 16-20</div>
+
+Many of you may already be asking yourselves, “What on earth is a rock hound?” Well, a a rock hound is an individual who enjoys hunting and scavenging for rocks, gems, fossils, and semi-precious stones around the globe.
+
+This story is about the Saladinos – Anthony and Debbie, to be more precise. I actually drove to their home in order to do this interview, and I must say that they had amassed quite the collection of the aforementioned keepsakes in their travels around the states. From here on out, here is their story as it was told to me by the couple:
+
+Over 20 years ago, we had planned to head down to Aurora, North Carolina for a Megalodon shark tooth dig that was taking place in May. In case you are unfamiliar with the name, the Megalodon was the largest pre-historic shark on record. With sizes ranging up to 60 feet in length, nice-quality, unbroken fossilized teeth from this behemoth are an enthusiast’s prize possession. In this day and age, you can purchase them directly from those who have already done the hunting, but as is generally the case in all things collectable, the fun is in the hunting. So we packed the truck and headed down to the event. We were going to spend two weekdays there and then head back home. We chose during the week because the weekends are usually jammed with people.
+
+Now, the event’s not much of a hunt, per say, but you still have to do a lot of work. There is a place there called the PCS phosphate mine. They bring out tons of fossil laden dirt and let people sift through the spoils in the hope of finding an intact Megalodon tooth. People find teeth fairly regularly at this event; however, most of them are broken into pieces, with the whole ones being between ½ to 4 inches in length. Overall, it’s kind of a neat community affair where you can meet and talk to a lot of likeminded hounds from all over the world.
+
+While we were there, my husband and I had gotten to know a couple from Oregon by the name of Tyler. They asked us if we had ever been to their home state, and we told them that we had not, though we had heard there are some very good pickings there. They confirmed that fact, so we exchanged numbers and addresses with them, and they told us that if we ever find ourselves up in their neck of the woods, we should call them and ask for some solid leads.
+
+Our collection consists of about 70 or 80 pieces. About 40 or so were our own finds and the rest were pieces which we have purchased throughout the years. The Tyler’s’ collection, on the other hand, holds over a thousand pieces, most of which were found in Oregon. I didn’t have to ask my husband if we would place Oregon on our destinations list; we just looked at each other and knew that we had to.
+
+Two years later, we contacted the Tyler’s and planned to head out there for a week.
+
+Now, here are the rules for safe and effectual rock hounding that we’ve been following for many years. They came from a wonderfully written guide for rock hunters.
+
+Firstly, it is advisable to select several sites within a fairly small area. This will help you to avoid wasting valuable time travelling from place to place. Additionally, it’s always wise to become as informed as possible on what exactly can potentially be found in each location that you choose during the research process.
+
+Secondly, you should not hesitate to befriend and consult other local collectors or clubs in the area. They can be a useful resource of information for your personal hunt, and most are more than willing to share what they know with fellow hounds.
+
+Thirdly, you must bring proper tools and or equipment, including boots and tough clothing for field work. Depending on what type of material you are seeking, you may need a rock hammer, shovel, pry bar, sledge hammer, chisel, or even a light pick mattock. If you plan to pan for gold, panning supplies will be necessary as well. We also like to have a small sieve with us on any hunt, which is nothing more than some screening stretched over a 2x4 frame.
+
+Lastly, you must make preparations for both seasonable and unseasonable weather conditions. Canteens, caps, and sunglasses are necessary for hotter and more arid areas. Warm clothes and rain gear is a must for mountainous and colder climates. Also, be sure to research the ownership of the site you plan to visit, since you may have to get permission from local landowners to be there. Take care in and around abandoned mines. Don’t throw any rocks or debris from cliffs or hillsides, and take only what you will use and leave the rest behind for others. These are the rules we abide by, and if you do the same, you can also be safe and successful.
+
+My husband and I had set our sights on an area surrounding the Clackamas River near Estacada Oregon. The river is frequented by whitewater kayakers and hikers alike, but according to the Tyler’s, this area also contains a wealth of cinnabar, petrified wood, and jaspers.
+
+We made our way into the surrounding area with our camper, having an older Dodge with a half camper in the bed. We have a Coleman gas stove and a porta potty stashed inside, as well as a small propane heater that keeps it quite toasty in cold weather. It’s not self-contained, but it’s a decent place to crash after a day of rock hunting.
+
+Generally, we look for places where we can park without much of a hassle, but that tends to be fairly easy in rural areas. On this trip we really got lucky. We nestled in at a campground called Indian Henry, which is just past Pup Fall. From there, we could easily access the Riverside Trail, which is about 6 miles in and out. It’s a bit shorter of a hike than our previously planned location, which would have been about 10 miles. The Riverside Trail twists and turns alongside the Clackamas River and at times, it even crosses the water.
+
+On the first day, we decided to do an exploratory hike so that we could see if there were any noticeable hot spots. Doing a preliminary hike helps us determine the best areas to search so that we can focus our time and energy wisely once we being the hunt.
+
+This place was beautiful. At times, you could hear road traffic, but as the trail meandered through the forest, the sounds of the cars would fade away. As it turns out we were not alone on the trail that day. It was hardly a mob scene, but we ran into a few dozen people during the day’s hike.
+
+There were areas high above the river where you could hear water rushing below you, and areas of old growth forest where you couldn’t see too far in any direction, since your vision was so obscured by the large pines and dense undergrowth. The way the path wound through the forest like a serpent, you spent most of your time going up a little grade and then coming back down. Once we reached day’s end, we had located several prime areas for exploration, and scoped out some viable river bars which we felt would be accessible with hip waders.
+
+In most places, the forest was hard up against the river’s edge, and there were only a few exceptions where rounded rocks and small boulders had collected, forming small river banks. These areas are prime locations for our hunt, since they act as catch points for anything and everything coming down river. If you dig a little deeper, you can find treasures that were buried by the current years ago.
+
+My husband and I referred to this entire are as The Land of the Lost, naming it after the old Hollywood movie. If you let your imagination run wild, you could picture a Stegosaurus or a Sabre Tooth Tiger sneaking around in the undergrowth. There were massively wide trees everywhere, and clusters of broad leaf ferns filled the space between them, with decaying fallen trees and limbs laying strewn about the forest floor in every direction. It was a neat little piece of paradise.
+
+The next day, we headed down to an area by the river that had looked promising the day before, but we couldn’t seem to shake an eerie feeling that hadn’t been present the previous day. Do you know the feeling you get when you feel like someone is watching you? We feel this all the time when we are hounding. Generally, when we look up there are a couple of people somewhere watching us at work. Everyone one wants to watch us doing what we do and people always want to know what we are looking for. It makes the hunt wonderfully social. However, on this day, we felt that feeling all the time, regardless of whether or not there was a person in sight.
+
+As it got later, we hadn’t found anything worth keeping. Unfortunately, this is generally the case when you’re a rock hound. It’s not as though there are valuable pieces just waiting for you to put them in your bag everywhere you go, lurking under every stone that you flip over. If that was the case, we would be multimillionaires, not rock hounds. However, perseverance does occasionally pay off, and when the day drew to a close, my wife found a magnificent piece of dark green bloodstone, which is a stone that is generally associated with the common opal. It was a fantastic find, and may well be the best piece in our collection to date.
+
+After this find, we left the river for the day and hiked back to our camper. It was a great end to a great day, and if our trip had ended right here and now we would have been more than happy, but it didn’t. The next day, we were to stumble upon our greatest discovery ever, but it wasn’t a rock or a fossil.
+
+We awoke to a dreary and drizzly rain. Now, we are not easily deterred form our hunts, so we donned our raingear and headed out. This day felt very different as we headed down the trail. There was not a soul in sight and we had the entire place to ourselves. It was awesome, but at the same time, it was a little bit eerie to be in there alone. Who knew what mysterious things were lurking within the confines of these woods?
+
+We had been digging about for some three hours or so at the day’s site when we heard an air horn blast. Someone else must also be wandering around the area, and had seen a bear or something that they wanted to scare off with a loud blast. A small boat horn is a basic part of hiking equipment. One loud blast will generally send anything in earshot scurrying for cover. To us, it signaled that we weren’t alone, and that there may be a bear around.
+
+We both stood up and turned at the same time, after hearing what sounded like a deep groan accompanied by a splash. Standing in the river’s edge about 75 feet away from us was a Sasquatch. Almost immediately, it turned to look at us. The Sasquatch seemed to be as shocked to see us as we were to see it.
+
+My husband and I were frozen in fear, and the creature also didn’t move. It stared at us and we stared back. Black eyes the size of golf balls sat deeply inset in its skull, giving the beast’s face a mean and intimidating cast. It could attack us, if it wanted to.
+
+After a long, tense moment, it started slowly swaying from the waist up. It made a couple of deep, guttural sounds, and my husband crept over to my side. We didn’t know what to do. This thing was well over 10 feet tall and I closed my eyes once or twice. It was the only movement I was capable of, and I kept hoping I would find myself in the comfort of the truck when I opened them again. Surely this couldn’t be real, but there was no waking up from this.
+
+The shear immensity of this beast was staggering, like standing alongside of a Clydesdale horse. I mean the bulk of the creature lay at the extremes of human cognizance. It had to have been nearly 5 feet wide at the shoulders, and it only tapered off slightly at the waist with its weight being somewhere upwards of 1500 pounds. Its arms alone were 6 feet long, and the hands on this thing were as large as a hockey goalie’s glove. Its large head was set deeply into heavily muscled shoulders, leaving no visible neck, which made it seem even less human, if such a thing is even possible. The patches of visible skin were somewhat gray, and mostly covered with longer darker brown to black splotches of hair.
+
+This was and is the real deal. We were up close and personal with a Sasquatch. After what seemed like an eternity, a second creature partially emerged from the brush. We could only see its upper body and arms and it did not step into the river, like the other. Instead, it stayed where it was, watching us. From what we could see, this one was about one to two feet smaller than the one in the river, but also every bit as massive in its own right. When this second one appeared, it brought with it a strong stench of feces in the air which had not accompanied the first.
+
+Suddenly, the one in the river kind of flexed its upper body like a strong man’s pose while letting out a large deep huff and a grunt, while both arms moved forward with its fists clenched. My heart leapt into my throat. We were surely done for.
+
+Instead of rushing at us, the beast turned and took one step into the brush. They both disappeared as suddenly as they had appeared and we heard nothing more, not even a whisper. They had vanished like two ghosts. We remained where we were for about another half hour, wondering where they were and if they were possibly in the forest alongside us, watching our every move. Maybe whoever had blown the horn had seen them passing through the woods and thought they were seeing a bear. We slowly gathered together our gear and made our way out of the forest.
+
+This was a large and old forest. I told you it felt like a dinosaur could be roaming around, but outside of the confines of the park and the trail, there were some roads and many fairly open tracts of property. This was hardly a desolate location, with a fair amount of people, dwellings and some business related structures scattered about the countryside. Nevertheless, here in their very midst, these two monsters roamed around. The very idea was inconceivable, even though we had seen them ourselves.
+
+Having had both the greatest find for our collection and the greatest encounter imaginable to mankind, we left. We will never forget it.
+
+Before we left the state, we stopped by the Tyler’s’ place to talk over the events that we had witnessed. They told us over coffee and cake that such things were heard of in Oregon, but they had never given any real credence to the idea of Sasquatch.
+
+There you have it, my dear reader. Once again, we have a case people who saw something because they are looking for something. I think the biblical narrative says seek and you shall find. Sometimes, it seems like you may find something other than what you were seeking. Or, as happened in this case, they found both!
+
+<div align="center"><b>Logging Boss Vanishes After Fuel Drums Are Crushed and Hurled Downhill</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 21-24</div>
+
+I thought that this next story was worthy of inclusion within this book. It’s an evidentiary story which was passed down from uncle to nephew. From here on out you will be reading Reggie LeCarres testimony:
+
+I was born and raised in the Vancouver area. In college, I had achieved a degree in electrical engineering and found myself working for a startup company in Spokane, Washington. While there, I made friends with a coworker, Clifford Wells from Pennsylvania. He, too, was an engineer. During one of our many dinners together and after indulging in a brew or two, we overheard some characters at the bar shouting and laughing with each other about Bigfoot. At some point, I asked Cliffy what he thought about the beasts. After Cliffy tried to make some lofty and skeptical comments, I reached into my wallet and pulled out a picture. It was the famous Patty picture and I passed it to Cliff.
+
+He commented that he had seen it before, and he knew that it was still from a cowboy’s film clip, which had supposedly been taken in the woods back in the fifties. I told him that my uncle had given this to me when I was young, and that it had come with a warning. The warning was to always carry more gun than you think you need when you go in the woods, and I carry the picture as a reminder of that warning. I began to share my uncle’s story with Cliff, that he and his logging crew were actually run off a job by these things many years ago up in the Canadian woods. Cliff interrupted to ask me if my uncle was still alive, and then asked if it was possible to visit him? Stating that he would really like to talk to him about the experience, and hear the story firsthand. During a little summer vacation around the 4th of July, he and I went to visit my Uncle Frank. We found ourselves sitting in his modest home, chatting about what I had said to Cliff and the picture I had shown him. At some point, Uncle Frank made a once in a lifetime offer. “Hey listen, fellas. If you’d like, we can go up to the old logging site where I can show you some really weird stuff.” Who doesn’t like to see weird stuff? We certainly wouldn’t turn down the opportunity, so, we took off in his truck the next day. It’s actually quite funny, because my uncle never invited me to see anything before. Having a friend with me must have been my golden ticket.
+
+We drove for about 90 minutes until we reached a break in the woods where Uncle Frank turned off the road and onto a low mountainside, where I thought the suspension was going to fall out from under us. Eventually, the trail was so rutted it became impassable, but thankfully, we weren’t too far from the final destination, so we got out and walked. Now, Uncle Frank was 76 years old, but he was still in good enough shape that he could challenge a bear to an arm-wrestling match and probably win. The mile-long hike up the rest of the mountain was nothing for him.
+
+Eventually, we reached a flat-topped area that he called either a stage or landing, though I really don’t remember which it was. He told us that many jobs had involved clearing out hillsides where severe wind storms had downed a lot of trees. These locations were what they called windfall. First, they would create a flat work area above where the trees were that needed to be taken. From there, they would place a type of machine with a big boom on it, from which a thick cable would be run down to the base of the hillside by the crew. The cable would be secured to the top of a large tree at the bottom of the hill, creating somewhat of a cable tightrope from the bottom to the top of the work area.
+
+The men would work down the hill, trimming up the trees that were knocked down and cutting down the trees which still remained standing. Once downed, they would wrap a cable around the trees in bunches, with this cable being attached to a hoist or trolley, which was suspended from the overhead cable. The overhead trolley would then pull the trees back up the hill to the staging area. As we looked the area over, the place was a mess. It looked like a large bomb had gone off, leveling everything. Though there was quite a bit of new growth that had crept up over the years, the evidence of the work that these men had performed was still more than evident.
+
+After a moment, my uncle said, “If you can navigate your way down over in that direction, you will come across some old oil and fuel drums. Take a good look at them, and when you come back, we will have a talk about what you have seen. Go slow and watch your step so that you don’t sprain an ankle, or worse.” When they “cleared” an area, they really didn’t clear it at all. They took the money lumber and then left everything else behind in a junk heap. Walking through that heap was like walking through and over a plate of spaghetti. Only the spaghetti was made of tree branches, brush and debris.
+
+Finally we reached the drums. They were old, rusty and crushed, but they all seemed to still be sealed and relatively full, with the exception of a couple instances where the welds on the drums had rusted out. Most of the other drums were still fully intact, but the tops and bottoms of each and every drum were bulging outward, as though some sort of pressure from within had forced them out, but that wasn’t the weirdest thing.
+
+Each of the drums were cinched or squeezed in around the middle, forming them into enormous hourglasses. Upon closer inspection there was no indication to our eyes of a chain or rope having been wrapped around them and cinched tight to force the shape. There were no visible scratches or grooves in the metal, and many of them had a good amount of paint still on them. These were industrial, 50 gallon steel drums, and you could still smell diesel, gasoline, and oil in the area all around them. If he hadn’t told us where to go, I don’t believe that anyone else could have found them. Many were wedged in piles of branches and debris.
+
+We climbed back up to this landing area, and what a freaking ordeal that was. Coming down was one thing, but getting back up was quite another, and the crew had to deal with that mess every single day. These men must have been animals.
+
+When we had reached the top, completely winded from the climb, Uncle Frank laughed at us. “The two of us you guys are wimps. So, tell me what you saw down there? I want to hear all about it.” We described the drums to him, just like we described them to you, and then he told us to take seat. He told us that he and his crew of seven men had come to this site in the usual way. They had everything set to begin work, and had begun to go about their business. The 50 gallon drums were kept on the staging area. They contained lubricant, grease, diesel, and gasoline – everything that the machinery needed to operate. It was a large tract of timber, and they knew would be there for a quite a while to clear it all out.
+
+When they arrived back to the job site on the morning of the second day, they saw that there had been some damage done to the equipment overnight. Odd things were broken, smashed or twisted, similar to the destruction that would’ve been left by vandals. They could not even begin work until many of the things were fixed, and they had to go back into town to get the tools and parts required for the repairs. It had only been one day, but they were already losing money.
+
+After the second day, on the third day the same thing happened. They came back to the site in the morning only to find that much of the equipment had been damaged again. In fact, some of the things they had just fixed were broken in the same way as before. The owner, who was also a worker, was furious. He was cursing wildly and accusing an industry rival of sabotaging the jobsite. If the other guy had been there, be he guilty or not, there would have been bloodshed for sure.
+
+Knowing that they might be dealing with vandals, the boss decided to put an armed guard at the site. He approached two characters from a local gin mill, offering them 50 bucks a night to stay at the site with their rifles until morning. This went on for about a week and every night, they built a big fire and sat there until the morning.
+
+After the guards were posted, nothing happened. We had worked with no interruption for that entire week, so the boss got tired of shelling out 50 bucks a day and told them they wouldn’t be needed anymore. He figured that whoever had been doing the damage would not waste their time coming to the site anymore, knowing that there were guards waiting there.
+
+The very next day, no fire had been made overnight and there were no armed guards watching the site. When we arrived in the morning, all of the supply drums were gone. In a rage, the boss left the site and returned with four more drums, and that night he decided to stay there himself. This time he was not going to light a fire. He was going to sit quietly in the cab of the crane with his shotgun, and whoever showed up was going to get a belly full of lead. Well, the next morning when the crew arrived, the boss was nowhere to be found. The door was opened on the cab, and the door handle had been torn off.
+
+We searched for him for hours and hours, shouting his name throughout the woods. Working our way up and down the hill, scouring every square inch as best as we could. The only thing that we found was his 12 gauge which was about a 100 feet from the cab and it was bent in half, like something from a Superman episode.
+
+Worried, one of the guys went back to town to get the police. The next two days were spent assisting in a massive search, but they never found his body. Only his hat and the four drums that had been brought to the jobsite that day were located. The search team found them in the same area as the five from the previous day’s disappearance, right where they lie today – squeezed around the middle and thrown clear down the hill. Something had picked up these several hundred pound drums, crushed them around the middle, and hurled them 80 feet away. No human being or beings could have done such a thing.
+
+To this very day, the boss is still listed as a missing person. Something was not happy about a lumber crew invading their neighborhood, that’s for damn sure!
+
+
+<div align="center"><b>Great Divide Trail Giant Howling Creature Encounter</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 24-27</div>
+
+The Great Divide Trail Encounter
+
+Dave Sorenson and Mike Ruddick were heading off to Jasper National Park in the summer of 1987. The two men were both Ironman competitors and had travelled to the park from the Pittsburg area. Since they were competitive swimmers, runners and bikers, their friendship evolved into taking hiking trips together annually. This was one of those trips. Dave and Mike were both present for my interview and so from here on out, it will be the two of them telling their story:
+
+Mike and I like to pick unusual, rural places for our annual hikes. We’re not necessarily looking for the greatest physical challenge, but we don’t shy away from that either. For this trip, we picked the largest national park in the Canadian Rockies and no matter how you slice it, this place is wild country. Within its borders, the park has some of the most beautiful rivers and snowcapped mountains that you will ever set eyes upon, as well as of the most gorgeous lakes that you will ever see, surrounded by alpine meadow areas which I thought only existed in Switzerland. Additionally, the park is home to an abundance of wildlife, including bears, moose and elk.
+
+One of the things that attracted us to this area was that you can actually stay in the town of Jasper. Form Jasper, you can drive into many access areas of the park, with there being over 600 miles of trails within the park’s boundaries, and I was told that most of them had started off as game trails.
+
+For our trip, we flew into Calgary International Airport and rented a car, with the transition being sweet and easy. There are a number of lodging accommodations located within the vicinity of the park, as well as horse outfitters and guide services for those who are interested in such things. It’s quite a nice and well thought-out operation, but that does not diminish the wildness of the country. Once you get deep into the park, the human footprint is scarcely present.
+
+On our first day in town, we wasted no time. We had seen a tram going up a mountainside and decided to check it out. This Jasper Tramway, as it’s called, takes you up the side of Whistler Mountain, up to an elevation of about 7500 feet. It’s about a 10 minute ride, which is incredible to say the least, and at the top, there are boardwalks and trails to walk on and have a look around. A tour guide told us that we were seeing 6 other mountain ranges, as well as the Athabasca River and some glacial lakes. It was an out of this world experience, and I highly recommend it.
+
+For our first day’s hike, we selected the Great Divide Trail. It was categorized as hard, which is fine for us. That day, there were some low-level, wispy clouds which were floating over the valley with snow-covered mountain peaks visible in every direction that you turned. It would be very difficult to get lost in here, because the mountains are always in view and alongside of you, serving as a landmark. The lake itself is about 14 or 15 miles long, and there are trails that follow its entire length on both sides.
+
+We decided to begin on a trail that hugged the side of the lake before meandering out into a heavily forested area. We were going to head southeast from our starting point, and then stop to eat before turning around and making our way back out. As I said earlier, this is wild country, so the trail was little more than animal footpaths, and at times, the terrain can be very rough and rocky, making the hike extremely arduous. We like to familiarize ourselves with the terrain before we hike, which is exactly why many novice hikers get into trouble. They, by not surveying the trail first, end up biting off more than they can chew, when it comes to selecting a day’s hike.
+
+Our first day’s hike lasted about 6 or 7 hours and believe me, it was quite a workout to complete. After spending a relaxing night in town, conversing with some of the locals and chowing down, we made our plans for the next day. We decided to begin in the same area, but this time, we would take a slightly more westerly approach. It looked like deeply timbered and rocky terrain lay in that direction, which would push our limits physically.
+
+We set out early the next day, making sure to carry two compasses, like we always do. It gave us a back-up in case something happened. We also always try to keep track of landmarks and the surroundings as we hike. This can be extremely difficult in heavily-forested areas, which is how people get lost in the woods. On this particular day, we were passing through large stands of spruce and fir trees, so it was relatively easy to keep our bearings as we moved along.
+
+We were about 2 hours into the hike when we entered yet another stand of trees. This stand was fairly dense, since all the trees grew relatively close together. You couldn’t see clearly for any great distance, but at times, there were clear lanes for a couple of hundred feet. As we were approaching one such area, I waved to my partner, asking him to stop and be quiet. I had seen something large and reddish-brown moving amidst the trees, and my first thought was that it had to be a grizzly bear.
+
+As we stood there, I pulled my field glasses up to my eyes, moving slowly so as not to provoke whatever it was, and it wasn’t a grizzly bear at all. The beast that I was seeing stood straddling a large, felled tree. Bears don’t do that. Just as I was coming to grips with the reality of what I was seeing, Mike shouted “Go Bear! Go Bear!”
+
+What a mistake that was. Of course, he couldn’t see what I was looking at through the binoculars, and in one fluid movement, the beast that was straddling the log jumped up and turned towards us. It took about two quick steps. Flexing its body, it lifted its head into the air like a wolf and unleashed an earth-shattering scream.
+
+For a moment, it paused and stood looking directly at us, grunting. After several long seconds, it reached down, grabbed a piece of tree limb, and hurled it towards us, which was followed by yet another blood curdling howl. The sound was so powerful that it sent reverberations through my whole body. I thought to myself, that surely the entire park must have heard it.
+
+At that moment I realized the futility of carrying bear spray. There was no way that I would want this thing to get close enough to me for the spray to be effective. If I had a gun, I would have already been shooting at it. This was neither a man nor a bear, it was a monster.
+
+I could see Mike’s hands shaking. I wasn’t the only one terrified of the beast before us. The monster was well over 10 feet tall and I might even go so far as to say that it was almost 14 feet tall. We have been close to bull elk, and in Yellowstone, we were not far from large grazing buffalo, but this thing must have easily been larger than those.
+
+It started rolling its head around like a weight lifter trying to get loose while swiping its arms back and forth in the air, and every few seconds, it would let out a loud grunt or growl. Then, as if things couldn’t get any worse, the beast took about 3 or 4 more rapid steps towards us before stopping to snarl at us, which to me was an intimidation move. He wanted to show us that he was the boss.
+
+Now, my own chest size is a 52. I wear a 2X in everything I buy. This monster’s chest must have been a 200X. It looked like a living bulldozer with gigantic hands, arms, and legs, and the speed with which it was able to move during the short burst told me that if it was going to really charge us, it would have already been on top of us. Suddenly, in the distance, we heard another howling noise which seemed to get this creature’s attention. It was prolonged and loud.
+
+After the distant howl faded, the beast turned his attention back to us. It grimaced, showing us its teeth, before slowly turning and walking away. As it did so, it craned its neck backward, looking at us several times before it disappeared into the trees.
+
+The two of us dropped our packs and sat down. I felt like every ounce of energy had left my body and we were in shock. We must have been holding our breath during the encounter, because we were both breathing heavily and panting, fighting to catch our breath.
+
+A little while later, we walked over where it had been sitting. The area reeked of shit, and we could see that the beast had been digging in the rotten log. Fat, white larvae occupied the decaying bark, and there were a couple of large leaves from some type of plant lying next to the log with a bunch of these larvae lying on top of them. It looked like a dinner plate. This thing must have gathering food when we had interrupted, so it’s no wonder it was pissed off.
+
+There were a few large prints around the area, and the impressions were very deep. I put my forefinger into one, and it was so deep that it reached my middle knuckle, and these prints were more than double the length and width of my hiking boots.
+
+Mike and I had been on many hikes together around North America. We had seen and experienced a great deal of wildlife together, and we had both heard many of the stories of Bigfoot and had talked about them often. Both of us had possessed the mindset that we would believe it when we see it. Well now we were believers, because we had just seen it. We never again went into the woods without a gun.
+
+At this point, I asked Dave to expound on any descriptive details of the creature which he may have left out, and here is what he said.
+
+Thinking back on what I said about the log smelling like shit, when it was walking away, you could see that the fur on its butt was all crusted and matted together. There was a lot of something sticking to the fur.
+
+From the side view, the creature must have been 3 feet thick, and I would say from shoulder to shoulder, it easily spanned 6 feet. Its muscles were like nothing you have ever seen on this earth, being exponentially larger than a human’s. What I mean to say is there is no chart to measure these things. It’s like saying an oak tree is its arm and the twig is mine. The creature was absolutely ridiculous in dimensions and proportions. It looked so strong, that it could probably pull over a rooted tree.
+
+When it grimaced at us I could see fangs, not like a tiger’s, but longer than the rest in its mouth. To me, that says that this thing eats meat, and thank God that we weren’t its next feast. Its hair was long and scraggly, unlike normal animal fur, and its jaw protruded from its face. The mouth area was massive when it howled, and you could have put a cantaloupe in there with no problem whatsoever. You could see some of its body through the hair, which made me wonder how they stay warm in the winter. As you know when the weather gets colder, an animal’s fur typically thickens, but who’s to say how these beasts were created? They are a complete and utter enigma to mankind.
+
+
+<div align="center"><b>Yellowstone Boy Scout Leader Blocked on Trail by Apelike Monster</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 27-29</div>
+
+The Yellowstone Scouting Encounter
+
+Who said that Boy Scouts isn’t worthwhile? This is the story of Hector Rodríguez’s encounter in Yellowstone Park:
+
+I had just retired from the N.Y.P.D. when I got involved with the Scouts as an adult, returning to an organization that I had first enjoyed as young boy. I should mention that I was a Cub and a Weblo, but by the time I was ready for full-blown Boy Scouts, things weren’t great in my family, so I couldn’t continue on. I wanted to help boys participate in a way that I was unable to when I was a kid.
+
+Our troop was in the Boroughs of N.Y.C., which is not much of a place for Scouting, but it’s better than hanging out in the streets, with many of the young boys having had a pretty rough life. Some came from families that didn’t have a pot to piss in, and if you can believe it, some of the boys had never seen a beach or been out of their Borough in their entire life. Such is the life of many inner city youths. Some of the older men and I would pool together cash to help the kids out when they needed it.
+
+The leaders and I had gotten together to plan a trip. We wanted to gear it around both Scouting and vacationing and when we unveiled our plan to the boys, they went nuts. In a year, we were going to go to Yellowstone. Now, for the most part, these kids could not count on family money to fund the trip, and we knew that. So we had the boys do some fundraisers in their churches, and pounding the bricks for some cash from local business. They actually did quite well, and the leaders and I kicked in about 5 grand in total to supplement the rest of the money that we needed.
+
+We had planned ahead and made reservations for two cabins right near the park. There were four adults and nine boys in total. Knowing that it would be a tight squeeze, nobody cared, for this would be the trip of a lifetime for all of us. The furthest I had ever been from home was a charter fishing trip in Montauk Point. Even though I was 51 years old, I was still very much like these little guys. In my heart, I knew that this trip would provide good and lasting memories for these boys as well. They were a great bunch of young people who were proud of being Boy Scouts.
+
+Finally, all the pieces came together and we arrived at the cabins. They were really cool, and the boys were already grinning from ear to ear. After a life of never seeing anything other than concrete and cars, this location was paradise, and it was the beginning of something that I never wanted to end. Our agenda was to do a little of everything, which involved a lot of walking, but we were all up to the task and wild horses could not have slowed the boys down.
+
+If I recall correctly, we were on our fourth day in the park when we scoped out a fairly rigorous trail that would take us high up the side of a mountain. Three of the men were at the head of the pack, and I was trailing behind to catch any stragglers. We reached an area where we hugged the side of a rock wall as we walked, with a steep hillside sloping off and down to our left side. This hillside was covered with a great deal of smaller and larger pine trees. Even though it was nowhere near the end of the trail, this was about as high as we could go, so we stopped for a refreshment break before starting our descent.
+
+As we set off, I realized that something inside of my boot was pinching my foot, so I stopped to take my shoe off without saying anything to the others, and they kept on walking without me. At the time I thought it would only take me a minute, and I would scurry to catch up with them. When I had finished and I looked up, they had already gone around the bend and passed out of my sight, and I couldn’t hear their voices anymore.
+
+As I was putting the boot back on, the tops of several trees off to my right side started to shake violently, like a cheerleader’s pompoms. A few seconds later a large apelike monster emerged from the side of the wooded slope, walking on all fours. It stopped directly in front of me, blocking the trail and my descent, and rose to its hind legs. It was almost the same height as me, which is a little over 6 feet tall, but it must have weighed 700 pounds, since its body was like a block of muscles.
+
+The creature’s face was kind of like a human’s, but it didn’t look entirely like a gorilla either. It was sort of like a hybrid face, if that makes any sense to you. All it did was stand there, moving its head around in a weird way while not really focusing its eyes on me. It kept opening and shutting its mouth to stretch its jaws without making a sound.
+
+After a minute, it started to swat the branches next to it and frankly, I didn’t know what to do. I didn’t want to shout for fear that I would startle it, so I started to slowly backtrack up the trail, hoping it would go back down the slope, but it didn’t. Instead, this thing started to follow me up the trail, and I didn’t know what I would do if this thing attacked me. I withdrew my knife, since it was the only thing I had on me, and braced myself for the inevitable.
+
+Suddenly, I could hear the group calling my name, and from the sounds of their voices, they were obviously getting closer, and they had no way of knowing what they were walking into. As their voices got louder and louder, this thing started shaking and twitching like a crack addict, when with one quick hop, it leaped off the trail and back down the slope. I could see some trees moving, and could hear it going down the side of the embankment.
+
+When we met back up, I was asked all the usual questions. “Where were you?” “Why didn’t you tell us to stop?” “We thought you got hurt.” All I said to them was that something was hurting my foot, and I had stopped to take my boot off. I didn’t want to scare the boys, so I said nothing of what had happened during the short encounter with the monster.
+
+That night, when the boys had all nodded off, the guys and I shared a couple of beers and I told them what had really happened on the trail. John said to me that he knew that something was up when he looked at my face, I had been white as a ghost. Hearing about what transpired left them just as baffled as I had been while I was experiencing it. To this day, the boys have never heard a word about it, in fact, one of the boys is about to retire from the N.Y.P.D. himself. Time really flies.
+
+And as I always do, I asked Hector to embellish on the description of the creature, and here is what he said.
+
+Well, its head was slightly cone-shaped. It didn’t come to a sharp point, but it wasn’t rounded like a man’s either. It also stunk a little, kind of like a locker room after a workout. The eyes were as black as an eight ball and very shiny, but they were deeply recessed in its head. It had an extremely large jaw that jutted out at the chin, which reminded me of an old cartoon character named Gigantor the Space-Age Robot.
+
+I was less than 15 feet away from this thing, and it had a lot of hair on it, but it was not entirely covered like a bear or a dog, and the hair was longer in length than animal fur. In some areas, it must have been 8-10 inches. It looked really nervous, and its movements were really jerky and abrupt. It made no sudden movement towards me, but who knows what might have happened if the circumstances were different.
+
+It was built like some kind of superhuman lineman. It had virtually no waist, rather, the beast was like a wide cube of muscles. Its arms were extremely long and thick, and I could see the individual muscles through the fur. When it wasn’t moving, its hands were a full length below its knees, and when it walked, it wasn’t like a monkey or a chimp. This thing walked like you and me, standing straight up except for a slight hunch in its posture. Most of that lean was with its head, which sat forward of its shoulders. I think that when I initially saw it emerge, it was climbing up the hillside like we would, using its hands and feet for grip. Well, that’s about all I can say. It was an astonishing experience.
+
+<div align="center"><b>Stone Mountain Bigfoot Carrying a Deer in the Meadow</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 30-32</div>
+
+The Stone Mountain Sighting
+
+Ricky Stegmeir was part of a team that intended film a group of climbers at Stone Mountain in North Carolina. From this point forward, Ricky will tell the story of what happened to him and the other cameramen that day:
+
+[Page 30]
+
+I was part of a photography class in college. One day while we were waiting for class to begin, a fellow student started showing us some stills he had shot of a group of rock climbers on Stone Mountain. He was going on and on about the climbers’ ascent up the sheer rock face, and the intensity he had felt while watching them. He thought that this would be a great opportunity and location to shoot some live action footage.
+
+Now, we had a small group of like-minded peers in our class, and after some discussion, we were in agreement that this would be a great opportunity for us to cut our teeth and show our filming skills, so over a period of a few weeks, we further discussed the particulars of what we would do and how we would accomplish it. Our only obstacle was that none of us were climbers, so a couple of the guys took it upon themselves to find some climbers who would be willing to climb under our direction. This actually turned out to be quite simple, and after we had spread the word, we were able to easily find some locals who were more than happy to assist us in our effort.
+
+Stone Mountain is a 600-foot tall granite outcropping, which is said to have formed over 300 million years ago when magma forced its way upward through the earth’s crust. This upheaval formed an approximately 25 square mile area of igneous rock, which forms the edge of North Carolina’s mountain range. The sides of Stone Mountain have been deeply grooved over millions of years by water running down its sides from the top, with these grooves appearing like deep wrinkles in the otherwise smooth surface of the dome’s face.
+
+After a few weeks passed, since we had committed ourselves to the project, we met and teamed up with three of climbers, two guys and a woman. We decided that we would go to the dome as a group in order to scope out the area for things that might be worthwhile to film, as well as mentally preparing ourselves for setting up the shoot.
+
+The climbers had told us that there was a trail called the Stone Mountain Loop which may be of some interest to us, following up by saying that it was quite treacherous and not for the faint of heart. Now, when you start talking treacherous, you start talking about a great filming opportunity.
+
+The following week, we got together for a hike and were immediately confronted with some formidable warning signs. “THIS AREA CONTAINS HAZARDS ASSOCIATED WITH ROCKS, STEEP SLOPES, AND CLIFFS. INJURY OR DEATH IS POSSIBLE. STAY ON THE MARKED TRAIL!” Now, I can only speak for myself, but that is quite the warning. Nobody had said anything about potentially dying here today.
+
+Having read the sign, and understood its potential ramifications, we commenced the hike. The trail begins going up and up and up. We had started our ascent through the forest, and when you finally break out, you find yourself in a field of gigantic slabs of granite. According to my pedometer, we had climbed about one mile, and from this vantage point, there were absolutely magnificent views as far as the eye could see. It was simply breathtaking. Our mountaineer buddies told us that if we were to continue on the trail, we would be in for a real treat, and on their lead, we continued.
+
+[Page 31]
+
+A short while later, we were approaching Stone Mountain Falls, a waterfall that descends some two or three hundred feet from the top of the dome, which was an absolutely fantastic sensory experience. There is a group of boardwalks where you can get a really good view of the falls, and then the descent brings you right back down to the base of the dome. As you are descending, the trail passes through the trees and overlooks a large meadow.
+
+As we were coming down that trail and looking out over the meadow, we could see a fairly large herd of deer grazing within the meadow itself. Having circumnavigated the dome, we put our heads together in order to devise the best plan for positioning ourselves to film the climbers on the face of the wall.
+
+Two days later, we had beautiful weather as the team approached the base of the dome. We had three cameras and the three climbers. I was to position myself over towards the meadow, Bobby was to be on the other side of the climbers, and Roberta was to be at the base, filming from a straight on position. We had several walkie-talkies as well with which to communicate.
+
+The climbers began their ascent, and I was in fear of their imminent death the entire time. How anybody could stay clinging to that rock face for such a long time is beyond me, and I don’t know where they get the strength and stamina from. It was a physical display beyond words, especially for the climber who takes the lead. The reality was that they were making incredible time, and like a well-oiled machine, the three of them went skyward.
+
+Finally, they were at the top waving at us, and cheering. From my perspective, everything had gone superbly well, and I knew that we had taken some great film of their ascent. It was so exciting for all of us.
+
+After a brief rest, the climbers began to repel back down the face. I was standing there, camera in hand, when I heard some commotion off to my left, which sounded like some type of animal squeal, though I couldn’t pinpoint the noise exactly. It was however coming from out in the meadow.
+
+As I turned my head, I saw what appeared to be a brown hump of fur protruding over the top of the grass, and I realized that the hump was moving up and down. It looked like something brown was bent over something else on the ground, and whatever it was had the appearance of someone pulling weeds out of the ground with both hands.
+
+Moments later, this thing stood up, and I immediately knew that it was a Bigfoot, having a large lifeless deer tucked under its arm. I didn’t know how tall the grass was out there or how far the distance was that I was looking at, but as an estimate, I would have to say that most of the field was about three feet or so high, and it appeared to reach the Bigfoot at mid-thigh. Going by that, it had to be somewhere between 7 and 9 feet tall, and it was extremely broad at the back and shoulders.
+
+[Page 32]
+
+As crazy as it sounds, I could still see some of the deer in the meadow not too far away from what I was seeing, they being maybe forty of fifty yards away from the kill. I thought that this was kind of odd, but then I recalled watching an African documentary, and seeing how the gazelles hung around after the lions had culled one of them out. I don’t know if this thing had stalked them while crawling through the weeds or what, and I wondered if maybe it hadn’t seen me. If it had been crawling down in the grass, it wouldn’t have. Even though I wasn’t moving or making any noise, I thought that it should have at least smelled me, but there was still no acknowledgement from the beast that I was there.
+
+At any rate, it started to walk away from my position very quickly, even while carrying the deer’s dead weight. I turned to grab the tripod and camera in order to position it for some footage of the beast, and when I did so, I knocked the whole tripod and camera to the ground. By the time I picked it up, and tried to reposition everything to film, the monster was already in the tree line and completely obscured from my view. I grabbed my radio and started frantically telling the others what had just transpired, but we had to keep filming. We had spent the whole day at the base of the rock wall and couldn’t stop now.
+
+As the climb ended and we all gathered together, the climbers became part of the conversation about the Bigfoot. Since their eyes had been transfixed on each other and the rock face the entire time, they had seen nothing. It’s too bad because they would have had a bird’s eye view of the whole event. Well, the rest is history as they say. That was my Bigfoot sighting.
+
+As is always the case, I asked Rick to embellish on any of the Bigfoot’s features and here is what he said.
+
+The creature appeared to be reddish-brown in color, and its hair was long. In particular, the head had much longer hair than the rest of its body. Its back was to me the entire time, so I never got a chance to see its face. It was huge and very well built, and it walked entirely upright, just like we do. I couldn’t see anything below the crotch because of the grass, but its strength was obvious. It had cradled this large deer in one hand, like you or I would hold a football. That same arm was actually swinging a bit while it walked and all of its movements appeared to be effortless. I mean, think about it for a minute. Loping away in the field with a 125 or 150lb deer in your hand is unbelievable. The whole thing is unbelievable!
+
+
+<div align="center"><b>Strawberry Lake Trail Bigfoot Family Observed on Distant Slope</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 32-35</div>
+
+The Strawberry Lake Trail 5 Sighting
+
+What follows is a sighting which was recounted to me by Marilyn Sorenson, a resident of Montana. Here are the details of Marilyn’s testimony:
+
+Now, in case you have never been in my home state, you should know that there are a ridiculous amount of gorgeous hiking venues. In the past 17 years or so, I have been on more than a few of them. It is very fine country, and I belong to an informal group or club of hikers. We have no name; we’re simply people of like mind and spirit who enjoy hiking and taking in all that nature has to offer.
+
+[Page 33]
+
+It was a Thursday morning in early September when I and two other ladies began the hike to Strawberry Lake. Now, just to give you a heads up about this area, the Strawberry Lake Trail Number 5 is about six miles in and out, ending near the Jewel Basin at Strawberry Lake. From there, you can then pick up on Alpine Trail Number 7 if you are an ambitious enough hiker who wants to extend your journey. So far as trails go, it’s not a very long hike, and it is multi-use trail, which means you can run into people on horseback or mountain bikes. This particular trail has a fair amount of elevation change and quite a few switchbacks, and can be extremely narrow when you’re walking along hillsides. At points, the low brush on either side of the trail is literally rubbing against your legs, so shorts are not advisable.
+
+The trail ends at Strawberry Lake, and in my opinion, it’s really nothing more than a large pond, but it is breathtaking nonetheless, and in season, many hikers go for a dip in the lake midway through their hike. The lake sits within a group of foothills. They are not large, but there are some surrounding mountains that reach about five thousand feet. However, you don’t deal with much elevation during the hike itself. There is visible bear scat throughout the entire hike which, of course, means that there is an ample supply of bears, and all the switchbacks and dense brush provide a perfect place to stumble upon something dangerous.
+
+Having said that, the denser and narrower areas of the trail are flanked by huge patches of huckleberries and raspberries, hence all the large bear population. The abundance of berries can also make for some great snacks for humans. On my previous trip, I had actually seen a black bear eating some huckleberries, and when I told her to scoot, she ran like the wind. Bears really don’t want anything to do with us, it’s only when you startle them or come upon a sow with cubs that you can get into trouble. Thankfully, this has never happened to me or anyone that I know.
+
+You are typically hiking on the side of one hill, which means that you are looking at the sides of some other hills as you walk. So as not to confuse you, the trail is not all dense underbrush. There are also some heavily forested areas with tightly packed stands of pines. In other locations, the view is comprised of patches of pines that grow here and there amid some twiggy, reddish-brown undergrowth that covers the majority of the visible slopes. In these areas, the dark green contrast of the trees against the slopes is quite dramatic.
+
+[Page 34]
+
+In many spots on the trail, you walk into grand open vistas comprised of large sloping grassy hillsides descending to the bottom of a valley. There are wildflowers in abundance, and in my opinion, this is some of the most scenic country in the world. We made it up to Strawberry Lake in a couple of hours which included numerous stops to take in the views and get our fill of the wild berries. One spot next to the lake is hard-packed dirt with some pea gravel mixed in, and although I would not call it a beach, we sat and rested there for about half an hour before we started heading back. At about the midway point of our return trek, an adjoining hill or mountainside came into view, and you can see it in your peripheral vision for quite a while as you walk along. As I mentioned before, this area is comprised of patches of dark green pines amidst reddish-brown undergrowth, and unless something was walking within the patches of trees, it would stand out like a sore thumb against the lighter colored undergrowth.
+
+Only moments after we had rounded this bend that opens up into that view, my girlfriend pointed and said, “Hey, you guys, look at that!” About midway up the slope of the opposite hill, we could clearly see three creatures. At first glance, I thought they were bears, but within seconds I could tell that one was sitting and the other two were standing on two legs. They were very darkly colored, much darker than anything else in the landscape. Even though we were very far away from them, we all crouched down and kept still to remain unseen. We were sharing a small pair of Zeiss binoculars, but at this distance, they were of very little help. The binoculars being so small that they could fit in the palm of your hand. So we mostly had to rely on our naked eyes.
+
+As we watched them intently, we could see the two smaller ones wrestling. They would stand opposite each other before running in to grapple. We could clearly see their arms extended towards each other as they kept doing this, breaking and grappling and breaking and grappling over and over again. Every so often, they would take a break and go over to the larger one for a few moments.
+
+We all said that these had to be Bigfoot. These were two youths playing while their father or mother watched them. What else could it be? A father and two children dressed in gorilla suits in the middle of nowhere? No. That would be ridiculous.
+
+For the better part of an hour, we stayed and watched them before they got up and walked out of our field of view. When they started walking, we could finally see the larger one in all its glory. It was at least three times larger than the two smaller ones. It was like the difference between an adult elk and a newborn calf in size.
+
+We just couldn’t see any other details other than its very long arm length and a distinct swing that matched the very methodical and steady stride of its walk. It was clear that the bigger one took very long steps, pausing at times to allow the little ones to catch up, just as we would when walking with a small child.
+
+[Page 35]
+
+It was really remarkable to have the privilege to see this. I have personally seen over 50 bears in my life, as well as innumerable elk, herds of bison, and groups of wild horses. I have even come fairly close to a mountain lion, but this really took the cake. It wasn’t only seeing the Bigfoot that was exciting. We got to observe their natural behavior. They were obviously a family out for a stroll and partaking in some play time.
+
+I didn’t bother asking Marilyn for any additional details. During the interview, it was obvious that the distance was too great for her to see anything more.
+
+
+<div align="center"><b>Mt. Rainier Camp Disturbance and Missing Quad Rider Attributed to “Big Boys”</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 35-37</div>
+
+Washington State Missing Person
+
+This account was told to me by Butch McCaskey. From this point forward, he will be telling his own story:
+
+At the time of this event, I was living in Redmond, Washington, and my co-worker, Paul, was living in Seattle. We owned a food service business together which operated out of Seattle. Paul was born and bred in the state, and I was a transplant from Texas.
+
+During our time working together, I had acquired a quad, being inspired by Paul, who had been an avid quad and trike rider since his youth, and he knew of a lot of great areas in the region for off-roading. Because of this, we would take excursions in the woods with a couple of our employees whenever the opportunity presented itself. We didn’t always obey the rules as far as where or when we could venture out with our quads, and although I won’t go so far as to justify such behavior, I will say that we were never destructive in any way. We loved the outdoors and respected it in every way possible.
+
+On this particular weekend, we were heading towards an area by Mt. Rainier. Our plan was to camp there for two nights and head back out on Sunday afternoon. We loaded up four quads on Paul’s trailer and packed all of our usual gear into the truck. Paul had a crew cab with a lid on the bed, and everything we would need for the weekend was under that lid. We also had a number of 5 gallon military fuel cans lashed to the trailer.
+
+Off we went on Friday afternoon, with Paul bringing us to a fairly secluded destination, as was his habit. Most of the places that we go to are old logging trails or fire breaks, and we like to make sure that we go fairly deep into the woods so that nobody will rat us out. After setting up camp, we pulled the quads off the trailer and went for a little exploratory stint.
+
+Rainier is surrounded by nice forests. It can be somewhat dense in some spots, but it’s considerably more open in others, creating perfect combination for rat racing through trails and timber. We had been gone for about 90 minutes or so before we returned to camp. It was getting late, so we started a fire, and after cooking up some grub and drinking a few brews, we hit the hay.
+
+In the morning, Paul was the first up and he was stoking the fire when I came out of the tent. As soon as he saw me, he said, “Hey, Butch! Check this out. All of the longer pieces of wood were pulled out of the fire when I got up.” They were all burnt up on one end and unburned on the other. It was weird, so I asked him if he was sure that was what happened.
+
+He replied, “Of course I’m sure. Do you think I am hallucinating or something? I’m telling you, all of these sticks were just like this when I got up and I left them here so you guys could see them for yourselves.”
+
+“So are you saying that something was pulling sticks out of our fire while we were sleeping?”
+
+[Page 36]
+
+“Answer the question yourself, bro. What else could it be? The sticks didn’t get out of there by themselves.”
+
+By this time, the other guys had climbed out of the sack and were all standing around. We were all in agreement that an animal would not want to get that close to a fire, and they certainly would not be willing to claw or bite the ends of burning sticks and drag them around. We all thought that some pranksters must be in the woods with us, but who would bother to traverse through the woods in the middle of the night to do such a thing? They could be shot if they spooked the wrong people.
+
+We ate breakfast and broke camp for a day of riding. Once we got back, that night was just like the previous night. We ate and drank and bullshitted until midnight, and then we crawled into our tents, completely spent. The following morning, Paul was the first one up yet again. This time, he dragged everyone out to see what had happened immediately. We all stood around, still half asleep, as he jabbered on about the sticks again.
+
+Now, I started thinking that he was getting up early and pulling the sticks out as a goof, making up a ghost story just to freak everyone out a little. In fact, if that was his aim, it was working rather well, but I didn’t tell him so. We hashed it out in much the same manner as the previous day before setting out for a ride.
+
+That night, we all had a little too much to drink and Rich had nodded off while sitting on a quad. One by one, we had all gone into our respective tents, and whoever was last didn’t bother to give Rich a shake so that he could get off the quad and go to sleep. We were fairly toasted, so nobody could really take the blame.
+
+As we were crawling out of the tents and shaking off the cobwebs in the morning, I was the first ask the others, “Where’s Rich?” Paul said that the last time he remembered seeing Rich, he was asleep on the quad. We started shouting his name and walking around in the woods, but we didn’t hear any reply. This was not good. Where could he have gone, and why would he have left the camp without saying something to someone? It just didn’t make sense.
+
+We decided that we needed to get help and fast, so Paul took the truck to get the police and left us at the camp with the quads. We kept looking while he was gone, but we didn’t venture too far from the camp, not wanting to compound the problem by making Paul come looking for us once he returned.
+
+About an hour and a half later, Paul returned with three cop cars in tow. As the morning turned to afternoon, there were more police arriving, and a chopper was combing the air as well. As you would imagine, they questioned us rigorously. We were now suspects, even though we hadn’t done anything.
+
+At some point, two K-9 units arrived. They took a piece of his clothing and his sleeping bag to let the dogs scent them before setting off into the woods. We were helping the effort by walking around and looking for anything that might give us a clue of his whereabouts. Everyone was calling out his name, and one of the cops was using a megaphone to amplify his call.
+
+I was wondering if he had succumbed to some type of medical condition that made him lose his capability to think rationally. Surely he had to have wandered away on his own. I mean, what else could have happened? I knew Alzheimer’s patients to do such things, and after all, he had been drunk, like the rest of us.
+
+[Page 37]
+
+This was turning into a full blown search and rescue effort. The police told us that the chopper had infrared, so he was lying anywhere, it would pick him up for sure. Several hours later, we heard that one of the canines had picked up a black riding glove. We didn’t see it; we were just told that a glove had been found. One of the officers asked if he had been wearing his gloves when he was asleep on the quad and we all agreed that he had been. They were lightweight, calfskin gloves, worn more for comfort and grip on the hand controls than for protection. The search continued for a couple of days. Close to a hundred people were involved with various search parties and nothing more was seen or heard of him. He had vanished.
+
+It took until the following spring, at the time when our softball league was starting up, for some light to be shed on the events of that fateful day. There were quite a few men’s teams from the area, and we played each other from time to time during league play. On this particular day, we were playing a team comprised of some local law enforcement guys, and I immediately recognized one of those guys from that day in the woods, so I walked over to talk to him.
+
+After some small talk, I asked if anything ever came of the search besides the glove. After confirming that I wouldn’t share this information with anyone, he told me that the glove still had two fingers in it that had been torn off from the hand. I asked if there had been any bite marks, but he said no. It was as though something had torn off the glove so violently that it had snatched two fingers in the process.
+
+I asked what the hell could tear the fingers off a man like that, and he looked around to make sure nobody was listening before saying, “The word is that they think one of the Big Boys got him.” I asked him what the hell a Big Boy was. He made some gestures with his body, which I took to mean that he was talking about a Bigfoot, a fact that he silently confirmed. We never held a funeral for Rich because there was no proof of death. They still haven’t found a body, and to this day, he is just another missing person in the woods of Washington.
+
+So there you have it, my dear reader. Some people like to think of Bigfoot as large, cuddly creatures, but that does not seem to be the case. Do be careful out there in the woods. Be very, very careful.
+
+
+<div align="center"><b>Overmountain Victory Trail Bigfoot Eating Apples in Orchard</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 37-39</div>
+
+The Overmountain Victory Trail Encounter
+
+The following is a brief but interesting encounter which was brought to my attention by Steven Casale, a resident of the Raleigh Durham area of North Carolina. This is his account in his own words:
+
+My friend Lance and I are avid United States history buffs with a special focus on military history, so we felt compelled to walk some sections of the Overland Mountain Victory Trail. Now, it is not my intent to give you some grandiose history lesson, but since most are unfamiliar with the trail, I will give you a very brief introduction to its history. The trail runs from Virginia to South Carolina. It is quite long and arduous if you attempt to traverse the whole thing which is exactly what some early American defenders of liberty and freedom did. We owe a lot to those brave individuals. Most of the pudgy Americans of today couldn’t even attempt it.
+
+[Page 38]
+
+In 1780, during the heat of the American Revolution, a British colonel named Patrick Ferguson sent a military messenger to a group located in the region of Tennessee and the western part of North Carolina known as The Backwater Men. His message was a simple one:
+
+“You must cease in your opposition to the British Army and lay down your arms immediately.”
+
+If they refused to do so, he said the following:
+
+“I will march with my army over the mountains and hang your leadership and I will lay your country to waste with fire and the sword.”
+
+Ferguson never got the chance to march through the mountains after them, because the following month, Ferguson was killed at Kings Mountain by the very same Backwater Men that he had threatened the month before. So much for Ferguson.
+
+Now, let me break for a moment to tell you something. These Backwater boys were tough and this trail is by no means a walk in the park. They also weren’t wearing Bean hiking boots and down jackets. These were rugged, no-bullshit men, made of the same kind of stuff this country was built on.
+
+The trail itself is beautiful in every aspect, and there are also a lot of artifacts and structures that are still intact along the route. Part of the old trail in Altapass, North Carolina was the location of a mountain pass through the Blue Ridge Mountains that was used during colonial times. There, we found ourselves passing through a mature apple orchard which had its apples ripened in all of their glorious splendor upon our arrival. We were making no noise when we entered the orchard. The trees were planted in and surrounded by lush, green grass growing in soft soil. Our entrance was as quiet as it could have possibly been.
+
+While we were sitting for a few minutes, munching on some apples, we noticed something dark moving maybe 150 or 200 feet away from us in the orchard. Because of all the trees, we could only see flashes of whatever it was. My immediate thought was that we were looking at a black bear, but that would be swiftly proven to be incorrect.
+
+Just a few moments later, we realized that we were only seeing the lower legs of this creature. Not only were they black and covered in hair, but they were exceptionally large in girth. This creature was standing on one foot and extending its other leg backwards for balance, which allowed us to see the soles of the feet. These feet looked like the bottom of a deerskin moccasin with black fur trim. It was not the foot of a black bear, it was a plus size, and I mean it was really big. Even at that distance, it looked like a snow shoe. Additionally, black bears generally don’t walk on their hind legs or balance on one leg.
+
+This thing really had our attention now, but it was only a moment before the legs disappeared from view. We were waiting quietly and patiently for its return when this thing suddenly came back into our view, walking on two legs between a couple of trees. In that brief moment, we knew that it was a Bigfoot, picking and eating apples in a daylight orchard. I started to tremble and my heart was racing a mile a minute. It was totally preoccupied with the feast at hand, so it didn’t see us, but we sure did see it.
+
+[Page 39]
+
+Judging by the heights of the surrounding trees, the creature must have been 9 or 10 feet tall and massive in its proportions. With one of its arms extended and a slight lean of its torso, it was able to reach into the center of a fairly large tree, which means that its arms must have been 6 or 7 feet long. The lean of its body extended its reach even further.
+
+At one point, it must have knocked down or dropped something that it wanted, because it grunted in a way that almost sounded frustrated. It stayed in a small area of 6 to 8 trees for quite a while before it was gone. We waited and waited, but it didn’t return, and we hadn’t seen where it had gone. Quite a while later, we found out that this was a public orchard, and I couldn’t help thinking about someone with a family running across this thing while picking apples.
+
+I asked Steve to elaborate on the creature, if possible, and here is what he said.
+
+I briefly caught a glimpse of the face as it turned from one branch to another. Its face was very weathered and wrinkly looking. The skin was dark and its nose was very broad and flat to the face. I would say the face was fifty percent covered with hair as well. The base of its foot looked like a giant piece of leather, like the finish on a really well used leather basketball that you might find lying in the street. The creature had to be all of 1500 lbs., with its forearms looking like my thighs, and I weigh about 235 lbs.
+
+I can’t understand how this thing walks around picking apples unseen. How does that happen? We weren’t exactly in the middle of nowhere when we saw it, and this was during a beautiful, sunny afternoon. You can’t make this up. I mean, I wish I could embellish it and tell you that we were stranded in a cabin in the snowy mountains, and this Abominable Bigfoot tried to trash the cabin and kill everyone, but such was not the case with this encounter.
+
+There you have it. Make sure you leave some apples for the Bigfoot.
+
+<div align="center"><b>The Mars Hill Deer Kills and Possible Bigfoot Predation</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 40-42</div>
+
+Now, I don’t recommend this to you or anybody else, but some of these boys were regularly hunting out of season. It’s not my place to judge them on whether or not that’s right or wrong, especially since I did it with them on this particular trip. I will give them this much: everything that they killed was eaten, letting nothing go to waste.
+
+On this occasion, we were bow hunting for some white-tailed deer, and I had brought along my old Barr Apache 38 lb. recurve bow. I won’t divulge where or when we were hunting, so don’t ask. What I will say is that one of the guy’s families owned an enormous tract of land, which covered hundreds of acres and abutted an area that was robust with cranberries. Cranberries are one of the main agricultural products in the state, and there are a lot of animals who love to eat them.
+
+The boys had a number of locations where they would regularly set up trail cameras to keep tabs on what was moving in and out, so we hiked in to retrieve some of the data cards and see what was around for the taking. If you have never been in the woods in Maine, the forest can be so dense that you could get lost 20 feet away from the road and never know the road was there, and many people do get lost there every year. Since these guys knew the area very well, they knew where we could find a couple of clearings in the woods. Some of them were quite small, but they were clearings nonetheless.
+
+So we made our way into the woods, taking the cards and resetting some of the cameras which we passed along the way. We reviewed the footage, but they were not impressed with what they saw. There were a lot of small females and short-antlered bucks coming and going, but nothing worth hunting.
+
+The next day, we went back and retrieved the cards from the newer areas that we had set the day before. Upon review, we saw not one, but two really decent bucks coming into the clearings. One was a healthy 8-pointer, and the other was a 10. However, while reviewing the film, we noticed something odd. There was a dark shadow that passed through the cameras field of view. Now, since the cameras take still shots when triggered, and those are only taken every so many seconds, the first shot totally obscured the lens, while the second shot looked like a blurry picture of a large elbow and forearm. One of the guys said it could have been the hind leg of a moose. All I knew was that it was a fuzzy image of something dark.
+
+The plan was that two of us were going to stake out one of the clearings while the other two staked out the other, and we flipped a coin for the 10-pointer.
+
+The next morning, we were in the woods really early. David and I were sitting with camo on and our backs up against some good foliage. I will try to describe the clearing as best as I can. Dave had told me that this was a cranberry and spruce bog. In the morning light, there was a heavy mist draped over the forest, and everything was soaking wet with dew. The clearing was oblong in shape, and tightly bordered by pointy, blue spruce trees that varied greatly in height. They had a staggered, misty look as they faded into the fog. The majority of the clearing was comprised of reddish-golden grass that was well-soaked and slumped over. Interspersed within that grass were hundreds of baby spruce trees, as well as some other plants with bright red leaves. If my memory is correct, these were the cranberries.
+
+We sat and waited for some time. Now, my range for my bow with accuracy was probably 25 to 30 yards max. I had never attempted to shoot at anything further away, so something would have to come relatively close for me to hit it. That’s the art of bow hunting. Everything is done quietly and at close range, especially with a re-curve.
+
+About two hours had gone by, and the mist was all but gone when a doe came into the clearing. She was about 50 yards away, but we weren’t here for a doe. We were looking for the 8-pointer, since we had lost the coin toss for the 10. A little while later, there were a total of three does eating in the clearing. They were in the grass that I spoke of earlier, which was wet and made virtually no noise as they walked about.
+
+Suddenly off to my left the 8-point buck emerged from the spruce trees. We didn’t hear him coming, but he was there all the same. He surveyed the clearing and the does within it, before he began to slowly wander around, eating all the while. I already was in position for a great shot at him; I just needed to get into a crouch so I could stand up.
+
+I put my broad head’s nock on the string and slowly started to stand. I drew back on the bow and took my shot. It was a great shot at a quarter angle and went right into the organs. I couldn’t believe it. The buck lurched and jumped, running into the woods, as Dave ran over and gave me a high-five, telling me what a great shot it was.
+
+There was an immediate blood trail, so it shouldn’t have taken long to find him. That is to say, it shouldn’t have taken long for Dave to find him. If it was just me, I would have never found it. However, we got to a point where Dave said that the trail of blood stopped and he couldn’t find anymore. He said that the deer had fallen in this spot, but it wasn’t there. It died, fell on the ground, and somehow disappeared. Even I could see that the area was flattened where the body had been.
+
+We looked for three hours and still couldn’t find the buck, and Dave said this was the first time that this had ever happened to him. At a loss for words, we made our way out of the forest. Good hunters never want to leave a shot animal in the woods. That is taboo. When we met up with the other guys, they couldn’t believe what had happened to us, and they said that they had no luck with the 10-pointer either.
+
+The next day, Dave and I went to check out the place where the 10 should have been, and the other guys had moved on to another location entirely. We made our way into the clearing very early. The conditions were just like the day before, misty and foggy with dew everywhere. The forest repeats itself here being comprised of very few plant varieties, but they are all abundant wherever you go. This field was slightly smaller in dimensions than yesterday’s clearing. Dave and I were sitting about 75 feet apart from each other, but we could see each other plainly, despite our camo.
+
+Pretty much the same scenario played out for us for the second day in a row. A couple of doe gradually entered the clearing, and then, almost like clockwork, the 10-pointer came out of the woods. He was about 150 feet away from Dave and over 200 feet away from me. He gradually lumbered around the clearing, and over a period of about 20 minutes, he was making his way towards my spot. Finally, he was positioned about 35 yards from me with his head down.
+
+I admit that I was a little bit antsy, but I put the arrow on the string and stood to draw it. A doe jumped, and the buck raised his head and started to turn. I let the arrow go as it began to jump which was not a good move on my part. A professional would have waited longer or passed on the shot altogether, but I’m not a pro. It wasn’t a terrible shot, but I think I hit the shoulder bone, seeing that the arrow did not sink into the body upon impact, and the buck took off. Dave asked if I hit him, and I told him that I thought I hit bone.
+
+If that was what had happened, we would be tracking a wounded animal that might not fall for another few hours, if it even fell today. However, we began to track it. Dave scoured the ground for blood, but there was very little. We surveyed a number of narrow game trails through the surrounding woods, trying as best as we could to determine which way this critter might have gone. We went back and forth for over an hour, but we couldn’t find the buck.
+
+Suddenly, Dave shouted, “Holy cow! What the hell is this mess?”
+
+We had stumbled upon a spot of the trail that was soaked in blood.
+
+Everything around this one area was trampled down and in the middle of it all was half of a deer’s leg. I couldn’t tell if it was the front or back leg. We couldn’t understand what happened here, and it was all very fresh. The blood was still warm to the touch, and Dave said that it must have been from the buck that I had hit. I didn’t know.
+
+We stood there, looking around in shock, and Dave began to tell me about some stories that he had heard through the years. Other hunters having said that their kill had been taken before they could retrieve it themselves, but none of them knew what might have taken them. Dave walked over to the mess and reached down, picking up a piece of antler. Bears don’t snap legs off and break antlers, and they sure as heck don’t run away with a deer in their mouth.
+
+Later on, we met up with the other guys, who had managed to score a nice buck for themselves. One of the guys had said that he once found a semi-eaten, day old doe lying in the woods, that had one of its legs ripped off.
+
+None of us had mentioned the name Bigfoot that day, but the thought had entered my mind years later, when I had heard of animals being taken down by a Bigfoot on the hunt. We had seen almost nothing, but we had seen enough.
+
+
+<div align="center"><b>The Logger’s Tale: Northern California Sasquatch Encounter</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 42-44</div>
+
+This story is very brief, but quite telling. It was brought to my ears by Jimmy Schmidt, who was a logger in Northern California many years ago. Without any further ado, here is Jimmy’s story:
+
+In the late eighties, I was a faller for a logging firm in Northern California. We were the guys who went into a sale ahead of all the heavy equipment. Our job was to take down all of the trees and ready the sale for haulage. Usually, we went in as a group of four to six men, depending on how big the workload was. We also frequently found ourselves in some very desolate areas, simply because of the nature of our trade. Some of these places were real no man’s land.
+
+On this particular job, four of us took the crummy into the far end of the sale. The crummy being a real shit box truck. This was some really thick and tall wood, the kind of place where men like us could get hurt if we weren’t being careful. We were what are called Gyppos, which are contract loggers. For this job, we had been contracted by a paper company to clear this particular sale and haul it to the mill.
+
+Late in the afternoon, I started to get wind of what I can only describe as a real stench. Not knowing what it was or where it was emanating from, I kept working. A short time later, the punk on our crew came over by me and asked me what the stink was, and I told him I didn’t know. By the end of the day, we had made it through about half of the sale and split.
+
+The next morning, we piled into the crummy with our gear and headed back into the sale for the second day’s work. The stench from the day before was still wafting around in the air which I thought was very unusual, because I had never smelled anything like it before. A couple of hours into the day, the punk had stepped away to take care of business when he started shouting, “Hey, you guys! Come over here! Check this shit out!”
+
+We all went over to see just what the commotion was about, and there it was – a big pile of shit. It must have been 10 lbs. of crap, and it was fresh. It looked human, but the pieces were really long and wide. Some appeared to be 14 to 18 inches long and maybe 3 inches thick. There are no humans who could back one out that large, I can assure you, and this was no animal turd either. We stood there, staring stupefied at a pile of shit and wondering just what was in here with us.
+
+Later that afternoon as we were tearing through the timber with our saws screaming, I felt like I was being watched. That’s all I can say. A few minutes later, I caught sight of something out of the corner of my eye, and turning my head to look, I saw a monster of mammoth proportions peering out from behind a large pine.
+
+Immediately, I knew it was a Sasquatch. It was 12 feet tall and as wide as an outhouse. It stood there, swaying back and forth, apparently unafraid of the saws’ noise. I ran to the other men and pointed in its direction. It had already started to move, but it was still unobstructed and we were all looking directly at it, and as it was walking away, it looked over its shoulder at us. Its butt must have been 4 feet wide and its legs and back were just as massive. The lat muscles in its back looked like 2 x 12 boards springing out of its body, and its arms were swinging slowly as it bobbed away from us and passed out of sight.
+
+We all jumped into the crummy and took off. I quit the crew that day and never went back into the woods again. I never saw the guys who were with me that day ever again, and I even left some uncollected pay on the table.
+
+I asked Jimmy to give me any specific details that he could. Here is what he said.
+
+It didn’t come out from behind the tree because it was three times as wide as the tree. It was just shielding itself from full view. Maybe it had been moving and had stopped there to hide once it saw me turn.
+
+At any rate, when its face appeared it was looking straight at me. We were eye to eye. That face did not look human. Yeah, it had a nose and a mouth and eyes, but this thing was an animal, not a man. The eyes were very dark, if not black. The face, chest, and inner thighs had some exposed skin, but the rest of it was entirely covered in hair that was so dark that it was almost black. For some reason, I clearly remember its fingers. They looked like they were 10 inches long, and I could see its teeth. It looked really angry, but it made no sounds at all. Its two fangs looked slightly longer than the rest of its teeth.
+
+When I ran to the guys and pointed at the beast, its back had been facing us, and it had already covered quite a bit of ground as it left the area. The back was completely covered in black hair, and its head swiveled with the shoulders. Compared to the dimensions of the body, the head looked somewhat small in size and was actually sunken down in front of the upper back muscles, so I could not even see the head from the back. Everything about it was pure muscle and totally beyond the realm of human normalcy. The thighs alone must have been several feet in circumference, and its back was V shaped in a way that looked like it could bench press a ton. The creature’s arms must have hung 7 feet from the shoulder.
+
+It was so gigantic, that it seemed there would have been no defense against it should it have decided to attack. I am not even sure a couple of well-placed rounds would have been enough to take it down.
+
+
+<div align="center"><b>The 1939 Cheyenne Mountain Bigfoot Sighting</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 44-46</div>
+
+This account was told to Joe Redmond by his Grandfather, and this is the story as it was presented to me by Joe:
+
+I think it was around 1980 or 1981 that my grandfather came for a visit. I was 21 or 22 at the time. Now, Grandpa was quite the character, and he was always goofing around and trying to make light of dark things; however, he was also quite sincere if you took the time to sit down with him for a conversation.
+
+Sometime during the evening, the conversation turned towards the Roger Patterson and Bob Gimlin Bigfoot film. I don’t recall what exactly started us down that path, but we began to talk about the film clip. At that time in my life, I thought that I had heard every story that Grandpa had to tell at least ten times over, but this night was going to bring me a new one.
+
+He broke into the conversation with a somewhat serious tone and said, “You know, Grandma and I saw some of these critters back in Colorado in the 30s.”
+
+We were all stunned about what we had just heard. I spoke up and asked him to tell us all about it, knowing that no story from Grandpa was ever going to be a short one. We were about to hear about the whole affair from start to finish. Now, when Grandpa told a story, you had best not laugh at him or disrespect him in any way. He was all business and all truth when it came to his stories. He was a man’s man.
+
+Grandpa wasn’t rich, but he wasn’t poor either. He and my Grandma had moved to Colorado Springs because he was the sole regional representative for a large mining supply company. There was plenty of mining going on in that entire region at the time, so it was both necessity and convenience that brought them to the area.
+
+He started to tell us that he and Grandma used to stay for the night at a place called the Cheyenne Lodge every couple of months. I guess it was a little retreat for them. He said that the round trip to the lodge from Colorado Springs was about 24 miles. I found it incredible that he could remember such a thing, but he always had a memory like a vice. He said that the Cheyenne Lodge was located at the top of Cheyenne Mountain, and at the summit, you were at 9,200 feet above sea level.
+
+The toll at the base of the mountain was a dollar and the trip to the summit was one of the most breathtaking rides and views that one could ever see. For most people a buck was a lot of money to pay for the toll, and many people did not even have a car suitable to safely make the climb or the decent. Things weren’t as they are today. He told us that some people lost their brakes and their lives on the mountain, but he bragged that his straight 8 Ford was up to the climb every time. He told us that the ascent was accomplished by a zigzag course with an average grade of 7 ½ percent and no more than 10 percent, and that the road was a minimum of 20 feet wide and was covered with crushed granite for traction. He also mentioned that cars could pass each other anywhere on the road.
+
+He remembered with vivid detail many of the points along the road as you climbed. Hell’s Gate, Spiral Shelves, Paradise Trail, Cloudland Loop, Swing Sublime, Vista Grand Swing, Multi Vista Swing and Devil’s Horns, each offering some spectacular view or formation that was unforgettable. His recollection was that they had taken this trip some 15 or 20 times while living there. They also had one of the best zoos in America alongside of the road at Swing 2 as he called it.
+
+When you reached the top, Cheyenne Lodge was there at the summit. He said it was like a small white castle with a rock wall and stairs leading you inside. I believe he said it was Southwest Indian architecture. He and Grandma thought that it was the most unique and beautiful structure that they had ever seen, and they loved this place. Inside, there was a large and spacious lounge area where you could see many valuable Indian artifacts. There was also an enclosed glass observation deck, both lunch and dining rooms, and a few guest rooms for those who wanted to stay the night.
+
+They had a custom of stopping to take in the view by Vista Grand Swing on every trip. This was their favorite observation point, and he said that you could see for a hundred miles from there. The rolling hills, trees, and mountains being always in view. On this particular day, they stood looking at a hillside with many pines growing on it. In between the pines there were a few open areas where the hillside could be seen, and the ground was sandy-colored which contrasted the dark green pine trees that surrounded it. You could see other mountains and snow covered peaks off in the distance as well, which is why they liked to stop there.
+
+On many occasions he and my Grandmother had seen wildlife walking on the slopes, especially on this particular slope. As fate would have it, while he and my Grandma stood gazing out at the landscape on one of their trips, they saw what seemed like two large gorillas emerge from the trees on the hillside, walking on two legs.
+
+Grandpa said the hill was not so far away that they couldn’t tell what they were looking at. He estimated the distance that they saw the creatures walk was about 800 yards or so before they walked into another group of trees and vanished from view.
+
+There were very few people hanging around outside at that time because it was too warm. Certainly, nobody would be walking in the mountains while covered in black from head-to-toe. He also said that the creatures were very tall and based on the way they were walking, had unusually long arms.
+
+My father asked why he had never heard this story before. Grandpa said that the one time he started talking about it, many years ago, and he almost got into a scuffle with the man he was talking to, since the guy told him that he was full of you-know-what. After that, Grandma told him it would be better to keep it to himself, so he did.
+
+Well, that was quite the story from the 1930s. Mountain gorillas walking the hills of Colorado. Simply amazing!
+
+
+<div align="center"><b>The Merced River Bigfoot Sighting</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 46-47</div>
+
+This is the story Mary Stein told me about a sighting that she had while hiking the Merced River:
+
+This trail is one of my favorite places for a short hike. It’s located near Coulterville, California, and I would say that it is a moderately difficult hike for someone with a good pair of legs. I’ve probably hiked this trail more than 20 times, but I haven’t been counting.
+
+There is an area where the trail takes a bend into somewhat of a canyon. This area of the trail can be kind of sketchy hiking at times, with there being a lot of rocks to walk and balance on. You could easily turn an ankle or worse if you are not careful. The trail also changes from year to year and even season to season, especially if any storms have passed through the area. It’s not uncommon to come across large trees that have fallen across the trail or even areas which have been completely washed out by torrential rains. It’s challenging, but it’s also quite unique and beautiful.
+
+After this bend, you enter into a small canyon where the trail starts to ascend, and this area can get really precarious. As you ascend, you pass several watering holes and a couple of cascading waterfalls. On this portion of trail, there are spots where one side is jagged rocks and unstable ground surfaces, while the other side is a steep hillside that is dense with trees.
+
+On this particular day, we were approaching a bend where you find yourself positioned just slightly above the river. The trail was extremely narrow, but at this junction, it was still passable, and you are tucked into a shallow canyon with hills rising up on both your right and left-hand sides. The river ahead of you disappears around the hill, but we could clearly see ahead of us several hundred yards. At this point, there isn’t much to obscure your view, with the hiking surface being comprised of flat and oddly shaped pieces of gray-colored stone, which are scattered everywhere along both sides of the river. As the slope ascends to your left, there are all kinds of low, scrubby-looking brush covering most of it. The slope itself is very steep and likely several hundred feet or more in elevation. The point that I am trying to make here, is that of you were to hop over the river and try to make this ascent, it would take you quite a while to do so, being extremely difficult.
+
+So we were hiking down this stretch, coming up on the bend some 5 or 6 hundred feet ahead of us, and we noticed something hunched over in the river up ahead. At this distance, all we could tell was that it was dark in color. We stopped to watch for a couple of minutes, and whatever it was stood up before quickly crouching back down again. Whatever this was, we had now seen with that simple movement that it had two legs, and from this distance, it appeared to be way larger than a man. My partner had already said to me that nobody would be dressed in black out here, and they definitely would not have a black hood on their head. I was in total agreement.
+
+As we started moving forward in the direction of whatever this was, it jumped up quickly and flailed around to face us. Seconds later, it took a couple of steps out of the river and passed out of our view, temporarily obscured by some trees and brush.
+
+No sooner had it disappeared then it reappeared out of the brush and started tearing it up the steep hillside that I just told you about. This creature made it up the entire hillside using its arms, hands and feet in about 30 seconds. As it went over the top, it stood up, took one leisurely step, and was gone. We both knew that we were looking at a Bigfoot and the encounter left both of us speechless.
+
+As we walked down to where it had been in the river, we could see some rocks flipped around. They were wet on both sides, so the Bigfoot must have been turning rocks over, searching for something in the river. We then saw the spot where it had disappeared into the brush for a moment, and based on what we had seen, we estimated that it was about 8 feet tall. We then moved to the base of the slope that it had just scaled, and looking up the side of the slope, we concluded that the stamina and strength of this creature must be incredible. I stood at the base and wondered how long it would it take for me to ascend the same slope at speed. I could probably have climbed it in no faster than about fifteen minutes, and I’d need a couple of wind and water breaks.
+
+Its agility reminded me of the fireman’s competition, where they race up to a tower, throw a long ladder up against it, and then climb the ladder as fast as they can to ring a bell. It was the fastest dash I had ever seen, and it had scaled close to 300 hundred feet of nearly vertical terrain, in 30 seconds.
+
+I then asked Mary to focus on any details of the creature that she could recall, and here is what she had to say.
+
+Well, first of all, it’s like I said before. It was very dark in color. When it turned towards us, we could see its face, but not with enough clarity that I could accurately describe its features. When it stepped out of the river, it had to quickly watch its footing on the uneven wet stones, like a human would have, so it didn’t immediately leap out of our view. However, when it started to bust it up the side of the hill, its speed was unreal. Its arms were extending and retracting as fast as its legs were pumping. It was very much like watching an old movie, when they sped action up for laughs being virtually a blur of movement. It didn’t pause for a single second. Dirt, rocks, and pieces of brush were flying behind it like a whirlwind. When one arm and one leg was extended during the climb, it had to have been 12 feet or so from hand to foot.
+
+I still walk this trail today, and I am hoping to see it again, and I didn’t feel threatened at all. After all, it ran away from us. It was easy to see that it didn’t want anything to do with people, however, that isn’t to say that I’d like to be cornered by such a beast. This was a large, large creature which easily could have been a thousand pounds or more in weight. I can personally attest that this was a life-changing experience.
+
+<div align="center"><b>Prospector William O’Leary Kills a “Wild Man” in California</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 48-50</div>
+
+Being a man of good conscience and in fear of the Lord God Almighty, I have taken the liberty to set right in pen and paper the events and happenings which lead to the demise of the Wild Man by my own hands in California on that July day. I had been in Sacramento for the second time, taking care of some business and refreshing myself and my animals. After several weeks, I decided that a man could die here more easily then he could alone in the woods, especially a man who is hunting for gold, so I packed my horse and mule and headed out once more. I had enough provisions for sixteen weeks or so without taking into account what I would kill and eat. My carbine and side arm were with me, as well as a large blade that I had won in a game of stud.
+
+After washing many a dead pan on my previous trip, I had come upon some color in the North Country. It was the most color in my pan that I had ever seen. At the time of the discovery, however, I had been running low on provisions, so I came back to Sacramento to resupply, before heading back up north in the hopes of locating the origins of what I had panned, and staking a claim to it.
+
+It was a steady, eleven-day ride to where I had found color, and I had no idea how much further it would take to find the lode, if indeed one was to be found at all. The Lord was good to me, and the weather was grand, having two good animals that were strong and able to take the journey at hand. It was on the eleventh day that I reached the tributary that had offered up gold on my last venture, and I started panning to confirm my whereabouts. My first six pans yielded enough gold to pay a man three full months of wages, and having confirmed my find, I spent the night in some contentment.
+
+The following morning, I packed up my bedroll and headed north for a day’s ride. It was there that I came upon a choke point in the water’s flow where I stopped to make camp. Since three days outside of Sacramento, I hadn’t run across another living soul. In the following 19 days, I panned enough gold to live out the rest of my days in luxury. I even handpicked some nuggets that were as big as my horse’s teeth.
+
+One evening, I sat on a hillside in the hope shooting some food, which I did. I came back to camp and made a little smoker out of boughs and branches, and commenced to lay out the slabs for smoking by draping them over the wood. Since I stoked the fire through the night, my meat was prepared by morning. I had hard tack, flour and some grits tucked into my saddle bags, and I now had an ample supply of smoked meat as well.
+
+I was not going to get greedy, knowing that it’s not enough to find gold in this country, but one must also return alive to make good use of it. This land is littered with the bones of dead men, who were murdered by the cold-blooded hands of those who relieved them of their finds.
+
+The next night I slept well with my carbine always loaded and at the ready next to me. During the night, I was awakened by my horse’s snort and a whinny as I leapt to my feet with my gun. As I tried to get my bearings, looking towards the animals over the fire’s glow, and I thought I saw something run away into the woods. However, since I was half asleep and it was very dark, I was uncertain of the shadow, so I calmed the animals and sat by the fire for the rest of the night. I was uneasy.
+
+It wasn’t until I was caring for the animals at sunup that, while reaching into my saddlebag, I realized that something had taken most of my smoked meat during the night. I must not have imagined something fleeing the scene that night, and I now knew that I wasn’t alone here. In these parts, a single rifle shot could be the death of me in an instant, so I determined to pack up and start heading back to stake my claim.
+
+Having secured my gear and mounted up, I headed out. I was working my way back down through a small grouping of trees when I heard something running to my right side, so I withdrew my carbine from its scabbard and held it at the ready. Perhaps a mere ten minutes after I had withdrawn my rifle, a hideous scream came bellowing out from within the trees and my horse bucked, sending me and my rifle ass over tea kettle into the ground. During my fall, a second scream sounded, and from my rather precarious position lying on the ground, I suddenly saw a wild man of a beast charging at me from some one hundred feet away.
+
+My rifle had fallen right next to me and I grabbed it. This beast was running at a rate that is not humanly possible, and it had maybe 30 feet before it would prevail upon me, so I squeezed the trigger. It stopped in its tracks with a monstrous shriek, as I chambered another round and shot it yet again. Still, it did not fall. It stood, groaning and staggering, before I finished it off with the third salvo, as the beast finally fell to the ground, lifeless.
+
+I laid hold of a long branch, and, stepping close to the creature, I poked it. Its chest was not moving, and its smell was horrific, like that of decaying meat.
+
+I took a few moments to compose myself and retrieve the animals that had bolted. Thankfully, the mule was tethered to the horse, so they had not gone far away. When I returned, I stood there, pondering the beast and the events that had unfolded. I was thankful that it had not killed me while I slept. With its enormous proportions, it could have easily dispatched me.
+
+I then realized that I must have drawn it into camp with the smoking of the meat. For it was the very same smell that must have directed it right into the saddlebag which had contained it. Perhaps it had thought that it would stop me from leaving and have its fill of the rest.
+
+I could not believe what my eyes beheld. The hairy man’s height was some 7 feet or so, and its mouth was open wide as blood trickled down its jaw. The exposed teeth were like those that could be found in the mouth of my mule, yellowed and cracked with age. It must have been the weight of a large grizzly, with its palms being blackened and grayish in color, cracked and worn like an old pair of chaps. Its fingers were the length of a large cigar, and hair covered its entire body, though it lacked any real density. It seemed more like the hair that covers a man’s head. The beast’s feet were at least two or three times the size of my own and its hands made mine look like those of a raccoon in comparison.
+
+I said a prayer for the beast and began to dig a shallow grave. I had to lash a rope to both the beast and my mule to drag it into the hole, and then I covered it over. I felt a certain guilt after having killed the creature. If it was a man, I would have confessed to it and rightly so, but it was not a man. However, it was not really an animal either, so it was with a heavy heart that I felt the need to pen this testimony as my personal confession to God and man
+
+
+<div align="center"><b>Manitoba Skiers Find Fresh Giant Footprints and Tree Destruction</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 50-52</div>
+
+The following evidential account was brought to my attention by Ashley Leveque. This is Ashley’s testimony regarding that which she and her girlfriend saw in the woods of Manitoba:
+
+I am a freelance software engineer. Firms hire me as needed, for periods that range from weeks to months to years, depending on what the work entails. Because of this makeshift lifestyle, I am afforded a fair amount of free time which I generally use for exercise and adventure. Cross-country skiing and hiking are two of the things that I enjoy the most. However, I generally do not go far from home to do either of these, my home being a small chalet constructed on a plot of land abutting a protected wilderness. I don’t remember exactly how much land lies behind me, but it is enormous and consists of millions of acres, so I typically hike and ski there. You couldn’t ask for a better location, and in all the years I have been living here, I have not so much as once run into another human being in the woods.
+
+In the winter of 2008, my best friend and I broke out the skis for some exercise. We never clock our distance or map our paths. The enormous amount of untouched land affords us a plethora of trails to follow, spanning out in any number of directions, and when snow has fallen, the potential for pathways is virtually endless. Generally, we go as far as we feel we can while still saving enough juice for the return trip home. Typically, I would say that we can travel between 15 and 20 miles in a single outing.
+
+On this day, we were skiing on pure, virgin snow, and if you were to look around, the only visible marks upon it were some small animal tracks here and there, having gotten 10 inches of the white stuff overnight, and the temperature was about 25 degrees Fahrenheit.
+
+We were fairly deep into our outbound ski, when we came upon a debris field, and quickly realized that what we were looking at was the strewn about remnants of a rotten tree’s interior. We could see that the rotten wood and chips extended about 20 feet or so away from the tree, and it was clear that this destruction had happened this very morning, because there wasn’t so much as a flake of snow covering the debris, with the snow having stopped falling around 4 in the morning.
+
+We could clearly see that the entire area in front of the tree was completely matted down, indicative that something must have stood in front of this decayed tree for some time, as it tore apart its interior. We also noticed a straight line of gigantic footprints both coming to and moving away from the tree, which were fresh and similar in shape those of a human. As we crouched down to examine them, we could clearly see toes, but they were slightly splayed apart. Additionally, the big toe was somewhat angled inward, unlike a human’s. It was so perfectly imprinted in the snow that it almost looked like it had been cast, with many of the prints still having snow raised up between the individual toes.
+
+I snapped out of my skis and stood next to a print in order to size it up against my own. The footprint was approximately 12 inches longer than my ski boot, which would make its length around 24 inches. Its width behind the toes was about twice the size of mine, which would make that around 10 inches, though it could have been a bit more.
+
+Between the snow that had fallen overnight and that which had already been on the ground, there was about a foot of snow in total. This snow was completely compressed within the print, being pressed all the way down to the pine needles. Whatever this thing was had incredible bulk. Even with my boots on and jumping and stomping down into the snow, I couldn’t come close to the degree of compression this thing had created while just casually walking. There was no melt in the prints, and very little snow had collapsed within them. They were very, very fresh, and because there was no wind that day, there was also no freshly-blown snow covering the prints either. They were as perfect as perfect could be. The stride length of the creature that had left these was incredibly long. We laid one of skis in front of the toes on one print, and even though my ski was about 7 feet long, it came up short of the next print by almost 2 feet. That made these steps almost 9 feet long from toe to toe.
+
+We decided to put our skis back on and try to follow the return trail for a while. It paralleled the entry trail for a mile or so before beginning to veer east into the woods, which leads to some heavily timbered forest. After about 2 miles or so, we ran across another tree that had been torn open. This one was nothing like the first, as it appeared that this thing had approached another tree, thinking that it was more rotten than it actually was. After it had dug into the bark about an inch or two, it had found that the tree was still fairly solid at its core. It was apparent to both of us that this thing had been walking through the timber and sampling decayed trees, as the trail then continued outbound into the forest.
+
+Since there was no end in sight, we didn’t want to follow the trail any further. Besides, whatever had left these tracks was walking with a 9 foot stride, and we were not looking forward to greeting it in these woods. Now, I had heard of Bigfoot and seen some footage, and I had also seen the footprints that supposedly belonged to the Abominable Snowman in the Himalayas. They went in a straight line across a mountain slope in the middle of nowhere.
+
+This beast must have been casually sauntering around in the timber and trying to scrounge up some food, and I am sure they have a number of things to survive on. Maybe whatever’s in those decayed trees is just another one of many things that it eats. This experience has not prevented me from going into these woods, with many winters having passed since this occurred, and to this day, I have never seen another set of prints.
+
+
+<div align="center"><b>Western Pennsylvania Farm Dog Killed and Thrown Onto Roof After Prowler Reports</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 52-54</div>
+
+Henry Jackson had contacted me with an unusual story regarding the disappearance of his mother’s dog in Western Pennsylvania. Here is that story:
+
+I believe that hindsight is 20/20, so what must have happened on that rainy autumn night, had actually started many weeks earlier. My parents owned a house in a relatively rural area of western Pennsylvania. They had inherited the house from my father’s parents, who had recently passed. Back in the day, it had been a fairly good-sized dairy farm with 3 large out buildings and plenty of grass. It was originally on 175 acres, but that had been reduced to about 20 as bits and pieces were sold off over the years. The house itself had 9 large rooms and had been built in the style of a southern plantation home. There hadn’t been any dairy farming going on here in many, many years, but it was a beautiful home with a wraparound porch that ran across the front of the house and partway down the two sides.
+
+My mother insisted on living alone on the farm after my father had passed away. Initially, I had considered moving there with my wife, but my wife wasn’t in favor of the idea. In order to keep the peace, my wife and I stayed in our current home, which was about 8 miles away from there.
+
+In the spring of 1981, my mother had started to make somewhat regular calls about a prowler lurking around her house. On some occasions, someone was even attempting to turn the door knob. Prior to my father’s passing, no such happenings were ever mentioned there, nor had anything of the sort occurred while I was growing up there. I had run over there at all times of the day and night to check things out for her, but I was never able to find anything unusual. I responded to her calls on at least twenty different occasions over a period of only a few months, and she, realizing that this was becoming a burden to me, had started to call the local police instead.
+
+At some point, I spoke to the police about her, and one of the officers suggested that maybe she shouldn’t be living alone there anymore. I was in total agreement, but in spite of the events, my mother would have none of it.
+
+The calls kept coming, so in late August, I told my mom that I was going to get her a dog. Now, my mom was in her late seventies, she liked animals, but she didn’t feel like she could walk it properly or take care of it, so I suggested that we could have a trainer work with a dog so that she could let it out alone. All she would have to do is open the door and let it out, and then let it back in again later. After much prodding, she agreed to my proposal, so we bought a beautiful German Shepard from a local breeder and she named him Freddie.
+
+After this, the nature of the calls changed. Instead saying that she saw or heard something, the call would always report that the dog was going crazy and barking at a window, or scratching at the door while trying to get out of the house, and this went on for a couple of months. Even though she had a dog, I was still going over there to calm her down and do a walk around the property. I told her to let the dog out if she heard something, and he would scare whatever it was off, but she would have no part of it. She thought he might get hurt.
+
+On one of the nights that I got a call, it was raining quite hard outside, and yet again, she said that something was walking on the porch, and Freddie was going ballistic. When I arrived, I walked up to the door in the usual way, but I noticed wet, muddy prints going around the porch. They ran up and down the entire length of the porch, but they didn’t have enough shape to be identifiable. I went in the house and asked my mother if she or the dog had been outside. She said that she let Freddie out prior to sunset, but that she had watched him go out and do his business and then called him right back into the house.
+
+Now, I didn’t tell her what I had just seen, but this entire ordeal had just taken a turn for the worse. There really had been something or someone on her deck that night, and knowing that, how could I possibly leave her alone? I told her that she would either have to let Freddie out if she heard something or she would have to move, saying, that we got this dog for her protection and that she had to let him do his job.
+
+About a week had gone by, and she hadn’t called once, so I stopped by to see how she was doing. She told me she wasn’t going to call and bother me anymore, and I told her that she had to call if she felt like she was in danger. This entire situation had gone from bad to worse, and I was beside myself. Once again, I insisted that she had to let the dog out the next time anything happened.
+
+On my way back home, I stopped by the police headquarters and told them about the muddy prints on the deck. They said that I had to get my mother out of there, saying that it could be a bear, and it might break in at some point. I agreed, but couldn’t help thinking about her saying that something was walking by the window. Bears don’t walk around on their hind feet.
+
+One stormy night in the fall of 1981, the phone rang, and I answered it. My mother had a scare and let Freddie out. She said she heard him make a loud yelp outside, and that all barking had stopped abruptly. After which, she heard what she thought was a large branch falling on the roof.
+
+I drove to her home, went inside, and asked where Freddie was. She was crying hysterically, and told me that he had disappeared after that yelp, so I went outside and called him over and over, but he never came. I couldn’t see anything. I told my mother to come and spend the night with us, and that I couldn’t leave her alone like this.
+
+The next day, we returned to her house with my wife in tow. My wife took my mother inside of the house while I stayed outside. As I walked around towards the backyard, I noticed some large depressions in the soft grass. There were about 6 of them in a line, and they all held a bit of water from the rain. These were massive footprints of some kind, and I put my fingers in one of them and it was about 5 inches deep. I could see more shallow prints going out into the pasture, so I followed them out for a bit, but found nothing else.
+
+As I walk back towards the house, I thought about what my mother had said about a branch falling on the roof, so I looked up, wondering if I could see whatever it was from the yard. Lying in one of the roofs valleys was Freddie’s body, and I knew it immediately. I didn’t tell my mom or my wife.
+
+We brought my mother back to our house, and in private, I told my wife I would explain everything later. When I had some time alone, I returned to the house with a policeman in tow. I showed him the dog, and told them of what had happened during the night. We put a ladder up to the house to get him down, and he was so heavy, that I had to drag him to the roofs edge, and let him fall the rest of the way to the ground. The dog’s head having been twisted all the way around.
+
+I dug a grave behind the barn, and we buried him together. The policeman took photos of both the dog and the depressions in the ground and this was a turning point for my mom. She didn’t know what I had found, but we convinced her to stay with us and sell the house. I have been wrestling with this mystery ever since. We all like to think that we have everything figured out, but when you stand there looking at a 125 lb. dead dog that’s been thrown up onto a 35 foot tall roof, you start to wonder if you know anything at all.
+
+
+<div align="center"><b>West Virginia Deer Feeder Bigfoot Photographed and Later Destroys Feeder and Barn Doors</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 54-57</div>
+
+The Deer Feeder Evidence
+
+The following is an account which was brought to my attention by Hank Lassiter, who is a former resident of Nassau County, Long Island. Here is Hank’s story:
+
+I had spent 30 years of my life working for one of the departments in the City of New York. Once my retirement came to fruition, my wife and I decided to make a drastic move. Our home had escalated in value from our $235, 000 purchase price to well over $900, 000, so we decided that it was time to move out into the country. On more than one occasion, we had seen some television footage of community gatherings and festivals in West Virginia, and we thought that this might be a good place for us to settle down in retirement.
+
+The two of us travelled down to Appalachia to have a look at the area for ourselves. For the most part, the people were very nice; however, there were still some losers who were hung up on the idea that Yankees were full of garbage and bigotry, which I found to be idiotic, considering they all drive cars which were invented by Yankees, and they all use electricity that was invented by Yankees. You never hear anyone complain about that. It’s a crying shame that even church-going people cannot love their fellow man. Nevertheless, we found some beautiful country down there and decided to pull the trigger on a move.
+
+There was no way that we would get hurt financially by making a purchase in that region, and we settled on buying a beautiful, older home that sat on 50 acres which included an apple orchard. We started to get real accustomed to this quiet style of living, it was a drastic change, but we liked it all the same. We found a nice church, and gradually tried to wiggle our way into some community activities and events. Over a period of about 2 years, we established a couple of good friendships, the strongest of them being with my neighbor Ted.
+
+Now, Ted was a real country gentleman, and he knew that I was head-over-heels in love with the wildlife around us, so he suggested that I put up a deer feeder in order to bring the deer into the property on a regular basis. He said that the only drawback would be that it also might attract some bears, but if we hung the feeder high enough, it shouldn’t be a problem.
+
+On one beautiful Saturday afternoon, Ted and I set about assembling my feeder, having gone shopping for all the necessary parts the previous week. Ted’s plan was to take a 30 gallon drum and make a chute that the food could move down through. Then, we were going to assemble a steel rod through the top of the drum to which we would attach some chain. In turn, this chain was going to be attached to a boat trailer winch, which would extend upward to an overhead cable suspended between two trees, which would help us hoist the feeder off the ground. The whole idea was quite ingenious, since you could lower the drum back down to the ground in order to fill it, while still keeping it out of the reach of any bears.
+
+After several hours of work, it was finished. Ted told me that if I really wanted to have a fun, I could buy 1 or 2 trail cameras, and by attaching them to trees in some key places, I could then see what was coming to the feeder. It would also help me to dial in the proper height for the drum. That all sounded great to me, so I purchased 2 cameras the following week.
+
+It was turning out to be quite a lot of fun. I was buying some bulk feed locally and keeping it in one of my barns, and every couple of days, my wife and I would go out and retrieve the data cards from the cameras, heading back into the house to review them. We had seen some black bears trying to get at the food, but they were unable to reach it, just as Ted had said. Even though the cameras only took still shots, it was fun to look through them and see what the animals were up to.
+
+This went on for a couple of years, but after a while, it kind of lost its luster. We always saw the same deer doing the same things, and there came a time when we were not retrieving the pictures on a regular basis, looking through them every month or so.
+
+Now, I should tell you that a small John Deere tractor came with the house. It had a trailer and a grass mower that could be towed behind it, and I used this to cut the grass around the orchard and to bring sacks of feed to the feeder. We had set the feeder up out on the edge of the orchard about 200 yards from the house, Ted having said that you don’t want to put it to close to the house because of the bears.
+
+About 3 years into residency, I went out to retrieve the camera cards and review them. As was always the case, they were loaded with pictures. There was no shortage of animals, and I was putting hundreds of pounds of food into the feeder on a monthly basis. Much to my surprise, between all the pictures of deer and bears, were eight perfect stills of a Bigfoot at my deer feeder. There was no mistaking it; it was gigantic!
+
+Judging by the height of the barrel, the Bigfoot was about 8 to 9 feet tall. In some of the photos, I could see him reaching into the chute with his fingers and grabbing grain, while in other shots, he had his hand to his mouth. I immediately called my wife in so that she could see what I had found. Her face immediately fell into an expression of indiscernible terror, before saying that she couldn’t live here anymore with that monster walking around. “Oh my God,” she said. “It could kill us!”
+
+I called Ted. A little while later, Ted and his wife came over, and after they had seen the footage, Ted seemed surprisingly calm while saying, “Well, well, well, my friends. It looks like you have a resident Booger.”
+
+I asked him if he had ever seen such a thing, and he said that he hadn’t, but that he knew many others that had. Ted also pointed out that the Bigfoot had probably been in our orchard for many years, eating the fruit while in season, and that we would have never known it was there. Now, it’s probably using the feeder to supplement for the fruit when it was all gone.
+
+I asked him what we should do, and he said, “If I were you, I would leave well enough alone and keep putting the food out. It’s obvious that the Booger means you no harm. He’s just eating.” After they left, my wife and I had a lengthy discussion about this whole “Booger” thing, and she was not a happy camper about the situation.
+
+Knowing that this Bigfoot was there, I started to take note of some impressions by the feeder over the next couple of months, and judging by both those and the images that continued to appear on the cameras, he was coming to the feeder on a regular basis.
+
+In November, my wife and I took a week to visit our northern family and friends for Thanksgiving. When we told our relatives the Bigfoot story, they fell into uproarious laughter, being quite the topic to breach among Long Islanders. Sometime during our stay, I realized that I had forgotten to fill the feeder before we left for the week, and I don’t know why, but it worried me. As with all good things, the week’s festivities came to an end all too soon, as we said our goodbyes and headed back south.
+
+Upon entering the house, I told my wife that I had to tend to something in the yard. No sooner had I stepped out of the back door than I set my eyes upon a set of doors that had been torn from the barn. The lock clasps and hinges had been completely ripped off, and carefully, I moved towards the barn. With the doors open, the space was well lit. Even though the circumstances were bizarre, I wasn’t looking into some dark, creepy space or anything like that. As I looked around, I couldn’t see that anything was missing, so I didn’t understand why someone would feel the need to break in so violently.
+
+A few moments later, I took notice of some feed on the ground, and saw that the pallet on which the feed sacks had been stored was empty. All four 100lb sacks that I stored there were gone, and I wondered who would risk jail time for stealing feed.
+
+I had come outside to fill the feeder that had so nagged at me while I was on vacation, but now I had nothing to fill it with, so I went back into the house and told my wife to come outside and check out the situation. The two of us started looking around for anything else that may be missing, but we found nothing out of order. Everything that a thief might have snatched was in its proper place and the house was as we had left it.
+
+We called the local police to report what had happened, and when the officer arrived, he was as mystified as we were about the whole thing. He wondered who would go through the trouble of ripping the locks apart to steal feed, and leave all of the valuable stuff untouched, especially since someone could drive in here with a pickup truck and remain unseen. After he wrote up his report and looked around, he left and wished us good luck.
+
+I told my wife I was going to run up to the feeder with the tractor and that I would be right back. I couldn’t believe my eyes as I approached the feeder, the entire setup of cables and chains had been torn out of the trees, with the chute being ripped from the side of the drum, and everything was thrown all over the place, like someone threw a tantrum. It dawned on me, that this all must have been the work of the Bigfoot.
+
+I went back to the house and immediately called Ted. He hustled over, even though he normally took his time, and I showed him the barn damage and pointed out the missing feed sacks. The two of us then went up to the feeder site and while there, Ted confirmed my suspicions. “This was all done by that Booger.”
+
+He had heard of people putting food out and damage being done once they stopped. Deer just move on once a food source dries up, but this Bigfoot had grown accustomed to his snack, and when he found it empty, he must have gotten really angry. Ted also said he bet it took several days before it actually did the damage, its anger building with every passing day until it all blew.
+
+We were in agreement that I should leave everything as it was. So I left the feeder site trashed and the barn door broken until winter was over. With no further food available for the eating in the feeder, and apples in the orchard long gone, we were certain that the Bigfoot would move on. I picked up on some tracks here and there around the property for the first month or two, but they slowly tapered off and disappeared. We have never had another incident around the home, and we still live there as of today. Seasonally, I sometimes see a print here or there in the far end of the orchard, so this Bigfoot is still around somewhere, but it has never come close to the house again.
+
+<div align="center"><b>Fire Jumpers See Bigfoot Fleeing Wildfire and Discover Oddly Dressed Human Remains</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 58-60</div>
+
+This account comes from Ronald Johnston, who was a two-tour veteran of the Army Airborne during the Vietnam War. This is his story as he told it to me:
+
+I was serving my second tour in Nam when the whole deal was called off. All the boys that could come home did, but unfortunately, many good men were left behind. As I try to recall the remainder of the 70s, it all seems to be a big blur. Both mentally and physically, I was shot, having left it all on the table in Nam. I was as lost as a soul can be, and I found myself drinking heavily and smoking a lot of weed, which went on unabated until around ‘79. At that time, I made a move to Lake Tahoe, hoping for a fresh start at life.
+
+[Page 58]
+
+While I was in the barber shop waiting for a cut one day, I noticed a magazine lying on a chair, and it was opened to a page that featured a picture of a blazing fire. I picked it up and began reading the article, which was a pictorial about a group of fire jumpers, and the work that they do fighting forest fires. That article had stirred something up within me. As I looked at the photos of those men arm-in-arm, with their faces covered in black soot, I realized that I had found my destiny, and it became my reason to live.
+
+I spent the next year researching and training, doing everything that I needed to do in order to become a fire jumper. The reality was, that I already had my foot in the door, thanks to my army training. I had been on several hundred parachute jumps and I was still physically fit, but during the year of training, I bolstered my fitness even further. On top of all of that, I was a certified field medic.
+
+Thanks to my training and experience, I was welcomed into a team in the Northwestern United States. Now, fire jumping can be incredibly dangerous. We are air-dropped into locations where a severe fire is believed to be heading based on the terrain, fuel supply, and the direction of the prevailing winds. Our job is to create fire breaks, so that once the fire makes it there, it will run out of fuel, and if we did our job properly, the fire burns itself out.
+
+Once we are dropped in, fire jumping can be a very lonely affair, and we must be attentive to the advancing fire at all times. In many situations, the only help we can rely on is ourselves and air support, though in some cases, we can receive ground support if we find suitable areas for them to reach us.
+
+When we were in the heat of it all, it was not unusual to see all kinds of wildlife running about here and there. Herds of wild horses or deer and everything else that you can imagine run for cover, trying to escape the flames and smoke.
+
+One August, a lightning strike started a blaze in northern California. There were already 5000 acres ablaze when we were called in. We began to work an adjacent hillside opposite from the most intense area of burn, felling trees and clearing the underbrush. We worked on clearing this break for hours before the team leader made the decision that we should climb the hillside and work our way down to a canyon area to our west. The thought was that if fire advanced in the direction of the canyon, it would either burn out by the edge or burn down into it, making it easier to contain. Everything in this business is a gamble of what ifs.
+
+As we began our descent, we noticed a line of creatures walking away from the canyon and heading north. They were black in color and walking like men. One of the members on our team pulled out her binoculars and said that they were Bigfoot. We couldn’t believe it, but we were all given a chance to look through the binoculars ourselves and had to admit that it was true. There were three large Bigfoot and one smaller one, fleeing from the smoke and impending danger like all of the other creatures. We had no time to continue watching, but had plenty to talk about.
+
+When we made our way down to the canyon and had begun our work, forming a line as was always the case. Steve Mays and I were closest to the canyon’s outcroppings, the two of us now occupying the area that the Bigfoot had just moved through.
+
+[Page 59]
+
+About two hours into the work, Steve said, “Hey Ron! What the hell is that?” He paused, and then added, “Oh my God, it’s a person! Or what’s left of them, anyway.”
+
+We both laid down our tools and motioned for the team to come down to where we were. We stood there, looking upon the skeletal remains of a human being with its clothes still on. The clothes were weather-beaten, so much so that the bones were visible through the fabric in many areas. This skeleton seemed to have been there for quite some time, and was wedged between two large boulders. As we stood there, we all started realizing that something was not right, the body had a collared shirt on, but according to the direction the boots were facing, the shirt was on the skeleton backwards. After a minute, one of the men pointed out that the shoes were on the wrong feet as well, and there was also no skull present.
+
+We wondered, who the hell would walk around in the middle of nowhere, with their shirt on backwards and their shoes on the wrong feet. There was no backpack or any type of gear whatsoever present with the corpse, only the remains of a blue shirt, a pair of tan trousers, and brown hiking boots. There weren’t even any socks or underwear visible.
+
+We started wondering if the clothes had been removed from the person at some point in time, but, who or what wouldn’t have known how to put them back on again in the right way? I mean, if you are going to go through the trouble of dressing a dead man, it’s easier to put the clothes on correctly. We all agreed not to touch the remains too much, though we did try to see if there was some type of I.D. and we could find none.
+
+We all knew that this person didn’t just lay down where we found them. This body must have been jammed into where we found it, and it didn’t get dragged there either. Someone or something had pushed this body into the opening to hide it. We also knew that we weren’t going to carry this skeleton out. Not without an investigation at the very least. However, given the fire, and the current state of affairs that we found ourselves in, there was no help in sight. Why, over the next couple of days, the entire area may even be overrun with wildfire.
+
+We radioed our find to command, and we continued to battle this fire over the next 10 days. At some point, we met up with ground support in order to relay where the body could be found.
+
+About one week later, three of us went back into the canyon with law enforcement. Thankfully, the fire had spared that particular area, and this time, we had come back in with a couple of stump jumpers, which were beefy, off-road firetrucks.
+
+The Sheriff’s Department was now treating this as a full blown crime scene. When we started to tell them about the clothes being on wrong, they said that this wasn’t the first time they had seen or heard about this. They said that quite a few bodies have been found in this fashion over the years, with some saying that it may be the M.O. of a mad serial killer. After that day, we didn’t hear about the body ever again.
+
+[Page 60]
+
+Now, I know that you are interested in what we saw as far as the Bigfoots go. First of all, anybody who has a brain could tell we were not looking at large people walking away from a fire. Secondly, even at a great distance, we could tell that the walk and stature of these creatures was inhuman. Their steps have very wide spacing, and the upper body has a definitive forward lean. The third and most definitive characteristic of these creatures are the arms. Their long arms swung forward and backward when they walked, moving very slowly and deliberately. You could also see that when they turned or twisted their upper body, the arms would flail outward, seeming almost like the movement of that carnival ride that has the twirling swings hanging on chains. It was very distinct.
+
+Well, my dear readers, at this time, I would like to offer special thanks to our brave fire fighters, for all of the hard work that they do. May God bless you all and keep you free from harm.
+
+
+<div align="center"><b>Hobo Camps, Hairy Men, and Disappearing Drifters</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 61-62</div>
+
+We soon found out that there was a network of camps running up and down the state. Thousands of guys like us, created these God-forsaken ghettos in the woods out of trash, scrap wood, and sheet metal. It was hell, and I was starting to wonder if I should give it up altogether.
+
+In the second camp that we hit, one of the drunks told us be make sure that we sleep close together. We looked at each other for a moment, and I know that we both thought the same thing. When I questioned him about his motivation, he told me that guys disappear from this place at night, especially when the farming season was over. This dude staggered off, and the two of us realized that you could lose your life in these woods for a five-dollar bill and no one would ever know the difference. We stayed awake that entire night.
+
+The next day, I caught up with the same cat from the night before, and this time, he was relatively sober. So I asked him about the guys disappearing. He looked me square in the eyes and said, that the hairy men took bums like us for food.
+
+I shook my head in disbelief, and asked him what the hell a hairy man was, and he told me there were things in these woods that man knows nothing about. When the food runs out in the fields, they come to us looking for a meal.
+
+This was the craziest thing that I had ever heard, hairy men eating humans. All I could think was that this guy had to be touched in the brain. That afternoon, we split yet again, there was no way we were going to hang here for another night. We slept in the woods by a freight yard for two days, hoping to find an open car and finally, we did.
+
+Being a hobo was a lot like being an addict, if people dug you, they would take you in and hook you up with what you needed to know. You became part of the in-crowd. Can you dig it, man? So on our next jump off, we found another camp and got hooked into a little work as well. We worked at a masonry yard for several weeks, crashing inside of some cesspool rings at night. The owner knew it, but he didn’t care, we were giving him a good day’s work on the cheap, and he knew that we were runners. He had a portable toilet in the yard, and let us use his sink during the day.
+
+In keeping with our philosophy of always moving on, we split this scene after about 12 days and went back to the camp. When we got back, a number of the guys said to watch our butts, because one of the guys was taken in his sleep the week before. When we asked what he had been taken by, they told us that one of the big hairy suckers had gotten him, pulling him right out of his box, screaming and kicking into the woods. All of his crap was still in the camp, and no hobo would ever leave his stuff anywhere.
+
+That was the end for me. I hung in the camp for a few more hours, while a couple of these guys talked about a boneyard they had found a few miles north that had human remains scattered everywhere. An hour later, I was on the highway thumbing a ride, and I didn’t care if I got caught or even arrested. I was done with this whole scene, man.
+
+It took me almost two months to get home, stopping to work for some food and lodging along the way. When I got home, my draft number hadn’t even come up. However, it did not too long after, at which point, I had a change of heart and went into service. Thankfully, I had a good working knowledge of engines, which parlayed me into a stateside gig, and I am obviously alive and here today to tell my tale.
+
+
+<div align="center"><b>Highway Patrolman’s Nighttime Bigfoot Encounter with Red Eyes</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 62-63</div>
+
+This account came to me from a retired law enforcement officer. He told me that he had faced such ridicule about this encounter that I agreed not to even mention what state he had worked in. Here is John Sorenson’s story:
+
+I was a 24-year veteran of the force when this encounter happened, and I was on highway patrol that night. Most of the old timers preferred the night shift, because it was typically quieter than the day shift, and on this particular night, the weather was crisp and clear.
+
+Now, there were a couple of stop signs that I would generally set up on early in the shift, and then later in the night, I would hit the main highway with the radar gun. I had a spot that I would back into, which was on a grassy edge of the highway. The forest was at my back, and a rock wall dominated my left side. By the time a speeder made it around the granite outcropping, and saw my squad car, the gun had already bagged their speed.
+
+I had already tagged a couple of speeders that night and was preparing for the next. I turned the car off momentarily and stepped into the trees to take care of some business. It was a pitch black and moonless night. Trust me when I tell you, there was no one around in this stretch of highway, just woods and rocky walls. I was finishing up and turning towards the car when I could see headlamps shining around the bend coming towards my position. Remember, nobody could see me here until they had virtually passed in front of me.
+
+Just as I had seen the glare of the oncoming lights, the car’s horn started sounding, and they were leaning on it heavily. They flew by and kept going, and I had taken maybe three steps toward the car, when a large dark mass came into view from around the wall on my left. Whatever it was came walking along the shoulder of the highway and it was huge. I immediately knew this was what the car had honked at.
+
+As I was reaching for my flashlight out of my belt loop, I said “Hey you! Stop right where you are!” and hit it with the light. When I did so, it had turned toward me and growled, and its eyes were glowing red before the flashlight had even hit them.
+
+When the flashlights beam met its face, it let out the loudest, most intense roar that you could possibly imagine. Its head held high into the air, and screaming like King Kong. The mouth was wide open, and I could see its teeth. I grabbed my revolver and prepared to fire, but I didn’t have time to shoot before it had fled.
+
+It took maybe four fast steps or leaps for it clear all 4 lanes of the highway and both shoulders, disappearing into the night. I jumped into the car and started it up, flipping on the headlights and I saw nothing, so I turned on my spotlight and moved across to the far shoulder. When I did, I caught it briefly looking in my direction, with its red eyes beaming in the darkness. The damn things were like red reflectors on a kid’s bike and it turned and high tailed it out of sight into the woods.
+
+In total, there were four units on patrol that night, with the dispatcher and sergeant being back at the station. When I got on the radio, I started to tell everyone what I had seen, which I didn’t think would be taken as a joke, that’s exactly what happened. The chatter coming over the speaker was ridiculous, and the dispatcher told me to fill out a report.
+
+[Page 63]
+
+The Bigfoot had to have been 7 to 8 feet tall, and when the light hit it, I could see dark skin on its face, along with some hair that served as a beard. Its teeth were large white squares, like big chicklets, and the hair was quite long and matted. Its head and shoulders were like one unit, kind of like a turret on a tank. It was the most frightening thing that you could imagine and then some. I don’t know why I didn’t pull the trigger, but when you fire a round as a cop, it’s a big deal, and firing a round at a Bigfoot… well, you can just imagine how well that would go over.
+
+As the thing turned to cross the street, I saw that it must have been 5 feet across at the shoulders, and the fur on its butt, was totally encrusted with leaves and crap. While it was near me, the stench which was emanating from it was sickening.
+
+The next day, I came back to the spot with my truck. I parked on the shoulder and then walked back to where it had come from. I could clearly see heavy impressions in the soft grass of the shoulder, and when I crossed over to the side where it had run from view, I could see even deeper impressions. These prints were large and maybe close to 20 inches long.
+
+You can’t believe the crap that I had to put up with after that night, and I retired shortly thereafter after doing 25 years of service.
+
+There you have it, my friends. Yet again another sighting by another policeman.
+
+
+<div align="center"><b>Family’s Bigfoot Sighting on the Helenbar Lookout Trail</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 63-66</div>
+
+This sighting was brought to my attention from a couple who reside in Toronto:
+
+My wife and I are amateur naturalists, with our home being filled with books and artifacts from years spent hiking in the woods. We have pressed leaf and fern collections, castings from wolves and other animal tracks, and all kinds of other oddities collected during our many excursions throughout the years. We have handmade lamps made from tree limbs that we gathered in the forest, and some of our furnishings were handcrafted by artisans from the forests to our north. I only mention this so that you can kind of get a feel for the type of people we are.
+
+At the time of this sighting, our two children were 9 and 12 years old, with Sofia being the oldest and Eddie was our youngest. At least twice a year, we would all go camping, but we spent many other days hiking and scavenging in a variety of locations together. One of our favorite locations is the Helenbar Lookout Trail in Mississagi Provincial Park. It’s not too far from Toronto, and it is an absolutely exceptional place to hike and camp, having been there more than a dozen times before.
+
+The trail takes a few hours to traverse, so we generally bring a picnic lunch along to eat, once we reach the midway point, typically in an area known as the Second Lookout, which is close to a lake named Helenbar. There are many animals in this region, including deer, moose, and wolves, and it is not uncommon to see wolf tracks on this trail, because it’s also used by the packs at times. In fact, this is where we had taken the casts which we have at home. Many people are afraid of wolves, but this is an unfounded fear. They are actually quite shy, and have extremely keen senses of both smell and sight. The only indication of the wolves’ presence, that most people will ever experience, is their howling, which we’ve heard on many occasions.
+
+[Page 64]
+
+This time, we had decided to travel in September. October and September are the rut season for the moose, and we were hoping to stay out of harm’s way and actually see a moose on this outing, which is easier said than done. As large as they are, it is extremely rare to see one here.
+
+I will do my best to give you a good idea of what we were seeing, and what you would see, if you were there with us.
+
+The trail is a large, oblong loop, which heads out towards Helenbar Lake and then swings back around, with the return leg running along the side of Semiwhite Lake. These are two entirely different bodies of water with Helenbar being very shallow, and Semiwhite being much deeper. Semiwhite is home to lake trout, whitefish, and a lot of minnows, most of which like the deeper water, while on the other hand, Helenbar Lake is less than 15 feet at its deepest point, but it does support a robust population of brook trout.
+
+As you enter the trail you get a real sense that you are leaving the world as you know it, like entering Middle Earth or some other fantasy forest. As you begin, you move uphill, and there are many boulders that were left behind by the glaciers. They are referred to as conglomerate rock or glacial erratic’s. One of these rocks, which had more than likely had been dragged hundreds of miles by the ice, is of immense size and proportions. There are also quite a lot of ferns growing both on and around this huge boulder.
+
+Passing the boulder field, you start to enter into the heart of an upland forest, an area filled with red oak, yellow birch, and sugar maples. All of these trees are at the extreme northern limits of where they can grow and thrive. Directly alongside of them, you begin to see what is known as the northern boreal forest, where spruce and balsam firs take over. While on the trail, you walk at the very cusp of the transition zone between the two different forests, and as you continue your hike, you also begin to see many stumps which are remnants of the logging for white pine which occurred here years ago.
+
+As you continue along the route, you will see a large swath cut through the forest, which was done intentionally by the Province of Ontario. The young growth which springs up in these areas provides reachable and edible food for the deer population.
+
+As you approach what is known as the First Lookout, you are confronted by steep rock-faces, which stand in stark contrast to the beautiful forests that surround them. From both the First and Second Lookouts, you can see the shallow and lovely Lake Helenbar, and in this area between the two lookouts, there are many large trees which have been uprooted by the wind, leaving their enormous root balls exposed.
+
+[Page 65]
+
+On this day, we began our descent from the Second Lookout and walked about a quarter of a mile, passing many of these fallen trees, when just up ahead of us, a large bull moose emerged from the forest, more than likely after a trip to Lake Semiwhite, which is one of their favorite feeding zones. They love the aquatic plants that grow in the shallows at the lake’s edges. He was right in our path, making mating calls as he lumbered along, and we didn’t want to get too close, so we started to backtrack. As we did so, we snapped some pictures and tried to enjoy the moment while remaining cautious. He seemed as though he was not going to move on any time soon, so we decided to back up near the area of the fallen trees and hang out for a while, since our only other alternative was to hike all the way back the way we had come.
+
+As we were waiting, Sofia told me that she had seen something come out from behind a tree. There were quite a few dead trees, so I asked her which one, and she pointed at a large root ball maybe 150 feet away from us.
+
+As we all stood there focusing on this giant root ball, my eyes were drawn to a large, black, furry arm that was wrapped through and around some of the old roots extending from the side of this ball. No sooner had I begun focusing on it than a large head jutted out from behind the ball, looking right at us.
+
+Almost simultaneously, my daughter and wife said, “Oh my God, look at that!” The head started twitching back and forth in a crazy manner, moving back and forth incredibly fast, and the arm was pulled back out of view. My daughter told me that she was scared, and both children moved closer to us.
+
+I reached down to grab a large piece of branch, breaking it off into a club, and as I did so, this thing took off at a frantic pace, running through the trees. It moved so quickly that it was almost a blur, and we could hear it crashing and thrashing through the trees as it ran.
+
+We were absolutely in shock, and my daughter was so frightened that she was in tears. After a long minute, we started to walk back to where the moose had been, looking back over our shoulders the entire time. Thankfully when we reached that area again, the bull had moved on. About 45 minutes later, we were back at camp and safe.
+
+Though brief, we had had a good enough look at the creature that I can describe it in detail. I would estimate that its arm was over 5 feet in length and heavily covered in what seemed to be thick, blackish-brown fur. When its head moved into view, we could see a portion of its body through the root ball of the downed tree, and it looked like a big gorilla, but of course, we all know that there are no gorillas present here or anywhere else in the states. Even if one fell to earth here, it would never survive the climate. This was a Bigfoot.
+
+The head had longer hair on it than the rest of its body, and when it started flipping its head left and right, we could see that long hair flipping back and forth. It looked like a lead guitarist in the middle of some mad jam session, performing this twitching motion so fast, that it was hard to comprehend why it would do so, but it was.
+
+When it ran into the woods, it led with its arms and hands, plowing everything out of its way. It was like a whirlwind of activity as it parted the brush and pushed forward through the undergrowth, slapping saplings and brush aside with seemingly no regard for getting hurt.
+
+[Page 66]
+
+We could clearly see when it moved out of the cover of the roots, that everything about its body was tall, well-formed, and muscular. The biceps and forearms looked like tree limbs, and from front to back, its upper thighs must have been 16 inches deep, and its butt cheeks stuck out well beyond the thickness of its thighs. It was completely different from a human’s buttocks. Its hands and feet were extremely long, and when the feet were lifted as it stepped, I noticed that their bottoms looked like a leather shoe’s sole with fur coming down the edges.
+
+At no time did it show its teeth, and when it disappeared, we could faintly hear it thrashing away for a fair amount of time before everything went silent. Of course, we don’t know if it had broken into a clearing or if it was just too far away for us to hear it, but at that point, the encounter was over.
+
+
+<div align="center"><b>Rutland County Bigfoot Seen Fishing for Trout in Otter Creek</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 66-69</div>
+
+This account came to me by way of Danny Sheehan, who is unrelated to me. Let’s read what Danny had to tell us about his encounter:
+
+In retirement, my Uncle Jack moved to Rutland County in Vermont, having been employed as a graphic artist for most of his life, he also dabbled in watercolor painting as a hobby for an equally long period of time. Being a city boy for most of his life, he would head to the country whenever possible in search of some interesting subject matter to paint, with his favorite themes being fly fisherman, covered bridges, old farmhouses, and boats.
+
+He not only painted fly fisherman, but was totally taken to the hobby himself. I would go to visit him periodically in order to fly fish with him, and within the immediate surroundings of his area alone, there were many great places to fish for brook trout. It was a veritable potpourri of fly fishing pleasure.
+
+On this day, we headed to a place where we had fished several times in the past, it being my uncle’s favorite spot to fish, and with good reason. Not only was the fishing superb, but this location was some of the most beautiful Vermont property that you will ever set eyes on. While I fished on the rocky bank of this creek several years before, he had been on the other side of the creek with an easel, using me as a model for a painting, and I have this painting in my home to this very day.
+
+We were near a town called Wallingford and were fishing a body of water known as Otter Creek. He knew a gentleman who owned an old farmstead that this creek passed through, and it was the combination of the man’s property and outbuildings, in conjunction with the shape and natural design of the creek in this area, which made it such an outstanding location. I will do my best to bring you into this picture.
+
+The original owners of the farm had been cheesemakers, and created what we now know as Vermont cheddar. I would say that the acreage was about 40, give or take a few, and there was a large farmhouse that sat in the middle of the land, as well as two very large unpainted and well weathered barns. When you looked out over the farm from the elevation of the house, it was mostly cleared, rolling, terraced land, aside from a few trees that had been left for shade and aesthetics. It was comprised of a number of large sections, which were separated from each other, with split rail fences and gates. This allowed the cows to graze in certain areas, while allowing the rest to grow back.
+
+[Page 67]
+
+This terraced land rolled down to the edge of the creek where we were standing, with the creek itself being maybe 40 feet wide at this point, including its rock strewn banks. Now, if you were to stand on the western side of the creek, your back would be to the farm, and if you crossed over to the eastern side, your back was now against a steep embankment that had trees of many shapes and sizes growing on it. The creek had grayish-colored, sharply-angled stones on both of its banks, as well as within it. Some weighed hundreds of pounds, and most of the larger stones within the river had fish hiding behind them. For the most part, the creek was about a foot deep, but there were also some smaller, deeper pools.
+
+The day was very overcast and grey, which I prefer over bright sunlight for fishing, so for me, it was perfect. There was not another soul in sight, as we had permission to be here by the owner, and he was away on a Christian mercy mission in South America. Since he was a doctor by trade, he and a medical team occasionally donated their skills and time to help others, who are less fortunate than the rest of us, and so we were alone and tucked down into this creek.
+
+For those of you who don’t fish, there are times when fisherman laugh and joke around, but most of the time is spent in silence and solitude. We had been quietly working the creek for two to three hours, when we heard a large splash on the water that came from somewhere around the bend. I saw my uncle look in the direction of the splash, but we kept on fishing.
+
+Moments later, we heard a couple more splashes in quick succession, as we quietly began to move together towards the sounds, exchanging a couple of quiet words, and wondering what might have made the noise. A splash always gets the utmost attention from a fisherman. It doesn’t matter if you are in the bay, ocean, lake, river or creek. A fisherman always wants to know what’s splashing and why, so the two of us began to stealthily creep along the bank. We both were hunched over, trying to catch a first glimpse under some tree branches.
+
+All of a sudden I saw a long, dark arm reach down and hit the water with a splash, and my uncle reeled backwards and almost fell. He turned and mouthed to me, ‘It’s a damn Bigfoot!’ and waved for me to move back. We must have retreated about 100 yards away, moving to a point far beyond where we had begun, and for additional protection, we crossed to the other side of the creek and climbed up the farm’s first grassy berm, to a point where we were about 15 feet or so above the creek.
+
+Slowly, we started to make our way to a place where we could see the creature, doing our utmost to use some bushes and small trees as cover. Finally, we reached a favorable position and hunkered down to observe its movements. We were further away, but we could see even more now than we had seen from the creek.
+
+[Page 68]
+
+This Bigfoot must have been so preoccupied with trying to grab a trout, that it didn’t stand a chance of noticing us, he was bent over, staring at the water, without taking so much as a single break to look away. We watched him try to grab a trout at least twenty times without success, but he just kept trying. This thing was determined. Now, just in case you don’t know, trout are extremely slimy, and this slime acts as a protective coating. It’s generally only after a good fight, that you are able to cradle them very gently in your hand, and take the hook out of their mouth. No matter who or what you are, the act of grabbing one while it was swimming is nearly impossible, hence the creature’s obvious frustration.
+
+We must have watched for 45 minutes, and it still hadn’t had any success in catching a trout. Finally, it looked up, surveyed the area briefly, and turned, climbing up the steep bank in 3 steps, and having reached the top, it walked away out of our sight. The bank that it had climbed must have been about 15 feet tall, and was on a very steep angle. When the monster had been standing next to this embankment, it had been well over half the height of this slope, and it took 3 strides up this steep embankment, without using any hand grabs, before was gone over the top and out of our sight. It was absolutely out of this world. It was only once the thing was out of our site, that we began to talk quietly.
+
+When I had initially seen the arm come into view, I thought that had to be 5 feet long. It turns out that my uncle had seen the head and upper body at that same time that I had seen the extended arm, so he knew what the thing was way before I did. Its hair had some rusty-colored undertones to it, and I think that if the sun was shining, we would have been able to see even more reddish hues. The hair was actually very long, and on some areas of its body, in particular the head, I would say that it was 10 inches or so in length. It hung off the back of its arms as well.
+
+The head was somewhat conical, but not pointy, and the upper part of the skull stood out much prouder than ours. Its face was much flattened, and the jaw protruded well beyond its nose. Its facial skin was also very dark and deeply furrowed, in fact, the wrinkles were so deep, that they appeared as painted black lines on the face and brow of the creature.
+
+I would estimate its weight at about 1500 lbs. This beast’s back was 5 times as thick as those of the most massive weightlifters that you have ever seen in your life. I would venture to say that it could probably snap a baseball bat in half with just its fingers. When we had briefly caught a back view of the creature, it appeared to me that its triceps were maybe 12 inches wide, and perhaps even more than that. Now, try standing in front of a mirror while holding a ruler next to your arm and visualize what I am saying.
+
+When we saw it take the 3 steps up the embankment, its legs were obviously flexed to the maximum, with the thigh muscles having bulged to the point where they looked to be 2 feet thick. The body strength that would be needed to make this motion so quickly and without grabbing so much as a branch, would be off the charts in the human realm, but this thing is in no way a human being, nor is it our mutated offspring. This is some kind of animal.
+
+[Page 69]
+
+I remember seeing a film clip of a grizzly bear running down a deer on a mountain slope. This grizzly was booking it, and its musculature was all business. When I watch a deer get spooked and run on my own property, it is incomprehensible that anything else could catch it, and yet, this 1500 lb. grizzly had the wherewithal to do so.
+
+It’s was all so real and yet so unreal at the same time. I know you get it, but when you are there, seeing it with your own two eyes, it is only then that the legends can ring true and become part of your reality.
+
+Well, readers, I think that Danny just hit one over the wall with that sighting and description, so I will leave well enough alone.
+
+
+<div align="center"><b>Wagon Train Kills Hideous Man-Beast Raiding Chuck Wagon</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 69-70</div>
+
+The following is a brief but factual excerpt from the diary of Mary Skelton, which she kept while heading west in the early days of our nation:
+
+We have been on the trail for many days now. By my own accounting, it must be fifty-nine. The men have deemed it necessary to rest our animals and hunt for a spell, now that we have found a seemingly suitable location for both of our needs, settling on good water, grass, and ample timber to find their mark.
+
+Last evening, we were all settled down for a night’s rest. Many of the gentlemen stood watch by the fire while the women and the children slept. At the rear was our chuck wagon, which contained our provisions. Since the men had had good success over the past two days, they were smoking the meat from the previous day’s kills. We hoped that this would be able to sustain us until our journey’s end.
+
+Some kind of commotion erupted during the night, awakening the entirety of the camp. Knowing that the members of our troop were all accounted for and resting easy, the men were surprised by the sudden rocking emanating from the chuck wagon, as well as a large crash.
+
+As several of our bravest and stoutest men approached the wagons rear, a beast of the most hideous appearance and immense proportions leaped upon them from within the wagon, striking one of the men with a fierce blow. It then screamed with such a devilish sound that it sounded almost as a banshee must.
+
+The remaining men set loose with their arms, prevailing upon the beast and killing it. Since we had all been awakened by the ruckus, the entire troop stood gazing at the beast that had been laid to waste under the starlit sky. It was covered in fur from head to toe and had the appearance of a man beast. It was taller in stature than any man in our group, and wider than an ox when lying down to rest. The hands and feet were several times that of our own in size. The mouth was agape, and as we viewed the beast’s teeth, we could see that they were broad and somewhat yellowed, well-worn from apparent age and reason of wear. None would think of making a feast of the creature, although the meat was substantial indeed. Not knowing from where it came and being unfamiliar with the breed. We deemed it so to bury the creature where it had come to rest, which was no small feat in and of itself, since it was so massive.
+
+<div align="center"><b>New Brunswick Hunter Sees “Hairy Man” and Records It in Game Tally</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 70</div>
+
+During the first few days at camp, we saw numerous cow moose and many deer. David Riis became the laughing stock of the camp, when he and a guide returned with a tale of a large, unclothed, hair-covered man that they had seen darting through the trees. --- Total game seen: 20 moose, 3 of which were bulls, 3 calves, 35 deer, 1 hairy man.
+
+
+<div align="center"><b>Oregon Presbyterian Farmer’s Sons Abducted and Killed by “Behemoth, Hairy Men”</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 70-71</div>
+
+He learned by degrees to walk alone, having lost his two sons in the most hideous of events thought possible to man, saying that he had now ventured to bring much of the land that his predecessor had thought worthless for wheat into cultivation. This year that land was producing between fifteen to twenty five bushels per acre, while much of his wheat land yielded from forty to fifty bushels of the same. He has a very comfortable eight room house, and a splendid, twelve-acre orchard full of fruit trees.
+
+This gentleman told us that he had enjoyed life to the fullest, but some years back, he had fallen prey to a great depression brought about by some demons from hell. While working the harvest, he, his two young sons, and three hired hands were in the fields, with the sons being more involved in play than any work, since they were not of age for strenuous activities. From some distance, one of the hands had sighted, two of what he described as behemoth, hairy men running from the wood line across the wheat field towards his sons. Once they had reached the youths and seized upon them, the beasts from hell retreated back to the wood line with the speed of a horse in full gallop, carrying the boys kicking and screaming under their arms.
+
+By the time the help had reached the gentleman, and he had gathered his wits, no small amount of time had passed. The four men retrieved a shotgun and several rifles and commenced to follow the trail through the parted wheat into the trees, in swift pursuit of the hairy man-beasts. Even after searching for hours, nothing had been seen or heard.
+
+A posse of some twenty-five locals were assembled and headed back into the forest on horseback, and many more men and women joined the search as the days wore on. The trackers came upon a trail of great prints which led them to a scene of horrific carnage beneath the pines. The youths were discovered sprawled over the high boughs of a pine many, many miles from the gentlemen’s farmstead. They seemed to have been torn apart with many large pieces of their flesh having been bitten away.
+
+The demons had been covered in fur like that of a bear, and were of the greatest stature and girth. They seemed to spirit themselves across the field with the greatest speed and dexterity. The gentleman, a local Presbyterian, laid his only sons to rest with the community by his side.
+
+
+<div align="center"><b>Alaska Fur Trapper Snares and Finds Severed Hairy “Human-Like” Foot of Sasquatch</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 72-74</div>
+
+On this day, I had gone about setting my line in the usual fashion, and later on in the week, I returned to check the traps. Everything was fine, until I got to the ones located by the timberline. This area has some low-lying hills that run right up to the timber, as well as a fair amount of varied and well-dispersed vegetation. I had seen a large population of hares and pine squirrels working in this area, and had actually set three traps in a one mile span because it looked so promising, even though one trap per mile tends to be typical for me. When I came upon the first pole set, it was ripped apart and the trap had been sprung, which is very hard to do without the strength and dexterity of human hands. There was blood on the trap, so I could tell that a marten had been caught in it at some point, and something or someone had stolen my marten. This got me aggravated, because men can and do, often rip-off trapper’s catches.
+
+When I approached the second trap, I was shocked to see that the same thing had occurred. If I hadn’t been mad before, I was certainly mad now. Proceeding onward, the rest of the traps had not been tampered with, and I had actually done quite well, despite of the interference. With all of the traps reset and baited, I finished my loop and left.
+
+The next time that I came to check them, I was met with the grim realization that all of my timberline traps had been opened, with each one of the traps having caught a marten, and all of the martens having been stolen. Now, three out of three traps having caught something is damn near impossible, but three out of three traps being found opened and the catch removed is beyond impossible.
+
+It wasn’t until I had made it all the way down by the marsh’s edge that I began to realize what was going on. The marsh trap was set just inside of a soft area, and the marten had also been stolen from it, and next to it, I could see some very large, water-soaked impressions in the muddy soil. Now, there was no way of telling what type of tracks these were, since the depressions were so soggy and indistinct, so I guessed that it was a bear.
+
+I had never experienced such a thing before. The only thing I had ever seen was some evidence of a lynx or fox tearing at the flesh of a marten, while it was snared in the trap, but I had never come across opened traps with the prey completely removed from them. This was most unusual, so I decided that I was going to place two bear traps near the marten traps. I would conceal them totally and post them into the earth to secure them. These bear traps would require a considerable weight to trigger them, and if there was a bear coming to my traps, I would get it.
+
+The first time back through my set with the added bear traps, nothing was awry, and I had gotten four martens. So I reset and baited everything in the same way I had always done. It was on the following check that things got a little weird, which is why you and I came in contact with each other. After seeing the previous set had been untouched, I believed that all was well, and that whatever or whoever had robbed my catch had moved on, but that was about to change.
+
+When I reached the second bear trap, my set was destroyed and the bear trap was not only sprung, but it was empty. It had been jammed into the ground some 5 or 6 inches deep, which is not an easy thing to do with a wide, steel object that weighed north of 40 lbs. I examined it and saw some blood, indicating that something had gotten caught by it, and had escaped. That in and of itself was beyond belief.
+
+I started to look around for further evidence, and my eye caught something lying about 3 feet from where the trap had been set. At first, I thought that it was a bloody portion of a large, furry paw which had been sheared off in the bear trap, but upon closer inspection, it was not a paw at all, it was a hair covered segment of a large, human-like foot. It appeared to be the front half of the foot and featured four very large, very wide toes.
+
+I flipped it over with a stick and saw that the sole was flat and leathery, but here’s the really odd thing: It had no claws, just thick, nasty-looking nails. Each of the toes was between 2 ½ and 3 inches wide, being very thick and about 3 inches long. I knew it wasn’t a bear’s foot, and it certainly hadn’t come from a human. It had to belong to a Sasquatch.
+
+I set about to do a little tracking. There was still some snow around under the trees, but most of the area was completely devoid of snow. I followed the trail of blood which brought me into the timber and there were still some patches of snow there, where I could see large footprints. One print was from the bloodied, chopped-off foot, and the other print appeared as normal. I could see that the other undamaged foot was about 22 or so inches long and maybe 10 inches wide. This thing must have been in incredible pain and limping badly when it left the site, and who knows where it was going, and if it would be able to survive an infection and or anything else that would occur from such a wound.
+
+I dared not follow any further in pursuit of a wounded monster, and I never set any traps in that area again.
+
+
+<div align="center"><b>Sasquatch Seen Swimming Across Sulfide Lake and Walking from Shore</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 74-76</div>
+
+On the third or fourth day of fishing, our guide recommended that we take a little boat ride to the northeast section of the lake, in order to check out the action in that area. As we rounded a bend in the shoreline, the guide pointed out what he believed to be a moose swimming across the lake. Now, we city boys didn’t even know that moose could swim, but there it was. Or so we thought.
+
+He moved a little closer and then stopped the motor, so as not to frighten it. The creature was about 150 yards from where it had presumably entered the water, and it was still at least 400 yards from where it seemed to be heading. Now, that’s a fairly good swim in anyone’s book. I would say that we were about 200 yards away from it when he stopped the engine, and there we sat, watching.
+
+There was no wind and no current in the water, but there was visibly a large wake emanating from behind the large, dark head that protruded over the top of the lake as the animal swam. We were mesmerized by the sight.
+
+The animal came into some shallower water, where now that it was able to touch the lake’s bottom, and it began walking. But as the body came into view, it was not that of a cow moose at all, in fact, it wasn’t even walking on four legs, it was of humanlike stature. It was then that we realized that it was also turning its head towards us from time to time. A little bit into the walk, the water must have become deeper again, and it began to swim. It wasn’t until it was maybe 20 or 30 feet from the lake’s edge, that it had completely emerged from the water, and turned its head to look at us one last time, before walking back into the woods.
+
+When I tell you that we were absolutely blown away by what we saw, that is an understatement. Our guide was scratching his head in disbelief, saying that he couldn’t believe that we had just seen a Sasquatch, which is what the local population had always called these things, but he had never believed in them before. We could see a couple of depressions on the shore from its feet, but we were not going to go any closer to get a better look at them.
+
+It looked like a hairy human, but its bodily dimensions had been staggering. There was only a very narrow shoreline where it had come out of the lake, if you could even call it a shore. At best, it was maybe 6 feet wide, and this thing’s body had been about as thick from front to back as the shore was wide, and judging by the height of the tree branches, it must have been at least 10 feet tall.
+
+There was one wet footprint right at the edge of the water, and a second just shy of the brush, which made its stride about 5 feet long. It didn’t even stop to catch its breath after swimming about 600 yards, having simply emerged from the water it began walking away in a casual, matter-of-fact manner. Why it would swim the lake rather than walk around it is anyone’s guess.
+
+It was difficult to see great detail during such a short time, but from our viewpoint, it seemed completely covered in dark hair. I saw nothing to indicate white skin on the face or anywhere else on its body, and in my opinion, the legs were shorter than the upper body. Its arms were so long that its hands swung below the knee.
+
+Even though we only saw it walk briefly, it appeared kind of wobbly at the knees, or maybe it had a knock-knee deformity. It was very hard to judge either way. We headed back to the cabin in the boat, and we could not stop talking about the experience. It was certainly something that none of us will ever forget.
+
+
+<div align="center"><b>Fly Fisher and Dog Hear Terrifying Howl and See Giant Hairy Biped on Mountainside</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 76-77</div>
+
+It was our second day on the river together, and the weather was picture perfect. Puffy white cumulous clouds were drifting over the peaks, and I could see their shadows sliding over the valley’s floor. In the early afternoon, Ruby started to growl, and as she sat down and stared at the mountainside in front of us, growling and puffing her mouth up. I was looking in the same direction, but saw nothing. Who knows what she was seeing, for all I knew, it was nothing more than a rabbit hopping around on the mountainside. She was unrelenting, and yet I could still not see a thing moving on the entire mountainside. What I could see were several large stands of fir, and a fair amount of patchy thicket, but none of them revealed any clues as to why she was on edge.
+
+Suddenly, she started to bark and would not stop, and it got to the point where she was actually howling. When from seemingly out of nowhere, a roaring howl that is beyond description, starting ringing out through the canyon, responding to my dogs howl. This howl reverberated throughout the entire valley, and it was so deep and long that you could actually feel it. I had heard grizzlies roar on many occasions, but this was no grizzly.
+
+When this happened, Ruby hunkered down on the ground, and started to whimper, still staring at the mountain. I still couldn’t see anything, and the truth be told, I wasn’t even sure what direction the howl had come from. Ruby kept looking straight ahead of our position, and I didn’t know what to think or do, so I just squatted next to Ruby, and kept petting and talking to her in an attempt to calm her down.
+
+About five minutes after this howling roar stopped, a figure emerged from the firs on the mountainside. I guessed that it was about thousand yards away, though it could have been a great deal further. This figure was making its way along the side of the mountain, walking upright on two legs, swinging its arms in time with its steps, and I knew immediately, that this was not and could not be a man.
+
+First of all, I had never seen another human being here, let alone a human walking the side of the mountain while covered from head to toe in black, and definitely not after hearing a roar that could have knocked you down if it had happened right next to you.
+
+Besides, this creature was very tall and thick, and would have dwarfed any bear. I was convinced that I was looking at the same creature that had made the roar, and Ruby started to bark like crazy again. She was barking and growling while hopping up and down on her front legs, and this creature didn’t even stop to look at her. It was casually strutting across the base of the mountain, heading directly for another stand of firs to the north.
+
+I stood there in utter amazement at what I was looking at, and I made an immediate decision to break camp and head on out of there. No way, was I going to spend another night, with something like that prowling around the area while I slept.
+
+
+<div align="center"><b>Pheasant Hunters Blast Bigfoot at Close Range; Creature Escapes Unharmed Through Bramble</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 78-79</div>
+
+This one was even denser than the other had been, and I began to wonder if the dog could even work it at all. We began to work southward as the dog moved through the mess, and after about 20 minutes, the dog was so deep inside, that we couldn’t see or hear him, so I called him out. We pet him and gave him a snack, before sending him back in.
+
+It must have been only a few minutes, before we heard him yelp and start to bark frantically. We thought that perhaps he had found a bobcat, because that was the only other time I had heard him sound like this. For today’s hunt, I had switched my ammo to a 7 ½ shot, knowing that the 7 ½ shot would give me a range of about 30 to 35 yards which is better than the 8 shot. The pellets are slightly larger and heavier, which also gives them more flight time to the target.
+
+The dog was barking frantically in the thicket, and he didn’t respond to my call at all, he had obviously seen something that we could not. When all of a sudden, a monstrous Bigfoot erupted from the thicket, and we both knew immediately what it was. I turned my over and under double towards it, and hit it squarely with both loads at very close range. I’m not bragging, but I am a very proficient shot, and I nailed this critter broadside with both barrels, and it didn’t even flinch.
+
+Now, if a human had tried to run through this patch, it would be like trying to pull free from a pair of razorblade handcuffs, but this thing was bowling through this shit like he was running through a wheat field. He took one quick glance at us and tore out. I don’t know what they’re made out of, but if you or I attempted to do what it did, you couldn’t. It would take you 10 minutes to go 10 feet, and you would be so cut up we would have to call an ambulance. It was tearing through this mess at full giddy up, like a weed whacker on steroids. My partner quickly squeezed off two more rounds, but by that time, it wasn’t worth the effort. If my two loads didn’t take him down at 20 yards nothing would.
+
+In about thirty seconds, he was gone. We tried to hustle down the thicket. Mike had 3 more chambered, and I was trying to reload, but it was all to no avail. This booger was gone, and we were shocked that we couldn’t even see him running away. Talk about excitement, we had gone from zero to hero and back in about 45 seconds. My heart was racing a mile a minute, and I know Mike felt the same way. We both kept saying to each other that we couldn’t believe it, but believe it we did, we had just witnessed and shot at a giant booger in the soybean field’s thicket.
+
+This sucker had to have been 9 feet tall, easily. I say this, because no matter where you stood by the side of this thicket, it was a foot taller than me, and this critter was head and shoulders above the top. He was kind of grayish-white, and his fur was longer than I thought it would be, even though I had heard all of the stories beforehand. The upper body looked like two fifty-gallon drums welded together.
+
+Sometime after all this, I couldn’t stop thinking about the shotgun blasts that had showed no effect on the creature. This thing’s outer skin must be as thick as a board. I hit him squarely with close to 1200 pellets at 50 to 60 feet, and I didn’t notice so much as a clump of fur come flying off. There was nothing. It was like I had fired 2 blanks at it. I got to thinking that maybe its skin was like an elephant’s, or maybe its hair follicles reach a couple of inches deep or something. A shotgun wouldn’t take an elephant down, and it wouldn’t take this booger down either.
+
+When we got back to town, we told all the boys what we had seen, and they were beside themselves. You do not want to run into one of these bad boys with anything less than a 30/06, and that’s the truth of the whole matter.
+
+<div align="center"><b>Bigfoot Raids Chicken Coop, Greenhouse, and Pigpen Near Newport, Vermont</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 80-82</div>
+
+Max and Marissa Vandergroff came to me with some rather unusual and telling evidence, which I believe you will find very interesting. At the time of this account, they had been living north of Newport, Vermont, near the Canadian border. Here is their story:
+
+At that time in our lives, my wife and I were not full-fledged homesteaders, but we were certainly very self-sufficient. We lived this lifestyle not out of necessity, but because we enjoyed the activities and the rewards associated with them. My wife was making some money with a mail-order rubber stamp business, and I was engaged in more than my fair share of mechanic work for many of the locals. I had an old bread truck equipped with pretty much everything that I needed for my job, with the best part of my work being, that I made my own hours and determined when I would work or not.
+
+We had purchased our home for 1800 dollars cash, and it came with 5 acres of property which had already been cleared, I had also bought an old tractor from a local farmer and a couple of attachments to go along with it. Over the course of the next 3 years or so, we constructed a pig pen and a fairly good size chicken coop. We also erected three greenhouses, building one per year, and not starting the next until the first was up and running. We also had wood-burning furnaces to pump some heat into the greenhouses; however, you could only use them to get things going in the early spring, the temperatures being much too cold, to keep them warm prior to that time of the year.
+
+At that time, our bills were so insignificant in comparison to what we made, that we wanted for nothing. We were doing very well for ourselves, and we had learned both on our own, and through the help of many locals through the years, how to better our homestead, and how to get the most out of what we were doing, be it the pigs, chickens, or the greenhouses.
+
+Despite everything we were doing, we still needed to buy a fair number of things. We were not wiping our butts with leaves in the woods, by any means. We had electricity, running water, and plumbing, just like most of America.
+
+One day in late April, my wife had gone out to get some eggs, when she realized that a large section of chicken wire had been torn from the coop’s fence. She also noticed a good deal of feathers and blood on the ground around the coop, which meant that something had broken into the coop and gotten to some of our birds. When I came home from a repair job later that same day, the two of us went out to survey the damage, and whatever had done this damage had good strength. I say this because the wire had been applied to the the 6 x 6 posts with 1” deep staples, the kind that had to be hammered in, with most of them having been pulled loose as the wire had been torn away. If you or I were to try doing the same, we would achieve nothing except getting cuts and lacerations; it would be that tough.
+
+After I had made the repair, and taken a head count of birds lost, I learned that three chickens had been taken. I had never seen a bear here before, but I assumed that a bear had done this. The two of us started to look around for tracks and other evidence, and it was then that we started to notice some large flat impressions in the ground. I wouldn’t call them footprints, because the ground was much too hard for proper prints, but I will say that they appeared to be flat spots on the ground, kind of like when someone tamps down gravel for a new walkway.
+
+About a week later, the hen house was ravaged during the night yet again, and my wife had discovered it in the same way she had the previous week. The wire had once again been ripped off the posts, and this time, a section of the plywood house had been torn away, with most of the eggs being gone or broken. Broken shells and yolks were scattered all over the place. This time, we had a little bit of a trail to follow, because whatever had tried to carry these eggs away had broken or lost most of them in the process. We could now follow this trail into the edge of the woods, but no further.
+
+I consulted with a few of my neighbors who were big-time hunters, and in the end, they were all in agreement that I had a bear problem, and that I could either trap it or kill it. Either way, all of them thought it would just keep coming back for the chickens and maybe even the pigs. My neighbor, Ernie, gave me an old bear trap which I baited with some thawed raw pork, and my wife and I decided to sit up all night for however many days it would take, in order to get this thing. We spent our nights sitting near a back window, from which we could see the coop. The room next to us had hand-crank casement windows, and a door that led outside into the yard, and I figured that when we saw the bear, I would try to get a shot off through the casement window that was cranked wide open. If not. I would then gently swing the door open and try the same. That was my plan.
+
+On the first night, we saw a fox surveying the meat in the trap. It was trying to cautiously reach its snout over the trap and take a bite, but for some reason, it was afraid to commit fully and wandered off without having eaten anything. On the second night’s watch, we saw nothing from our post, but that same day, my wife went out to check on the greenhouses and found the back end of one of the houses was torn open. It looked like something had opened the door and forced its way through the frame, because it was too big to walk through the door. At least, that was my impression at the time. All of this must have happened while we were awake and watching the coop, because we couldn’t see that end of the greenhouse from where we were. We had also somehow heard nothing, and when we went inside, there were gigantic footprints in the vegetable beds throughout the greenhouse. We had staked the beds with metal every 4 feet for strength, and they were filled with the softest, loamiest soil you could imagine. Why, a grasshopper could have left a footprint in here. Whatever had walked through here had pulled out most of the small plants and eaten them. Its weight had compressed the loam down to its base, which was about 12 to 14 inches of depth in total. The prints were perfectly formed by gigantic, human-like feet, with the only difference being the shaping of the toes, which were very broad and angled kind of funny.
+
+Just so you understand, each greenhouse had 6 boxes in them that were 6 x 12 feet. Between these boxes were pea gravel pathways to walk on when you were tending to the vegetables, and whatever this animal was, had walked right into the beds, grabbed whatever it wanted, and left.
+
+I called in the local game warden and when he had arrived and saw what had been done, he was speechless. He was a young man, and all he could say was that it looked like a giant walked through our beds.
+
+Later that morning, I called some of the men over to have a look, and one fellow named George, who was an old-timer in the area, said that he wouldn’t have believed it if he hadn’t seen it with his own eyes, but that this looked like the work of the Hairy Man of the Woods. He then went on to speak about a giant gorilla or hair-covered man, who had attacked people and killed livestock in days gone by, according to the locals. However, none of them had heard of or seen anything of the sort in their lifetimes. George started saying, that whatever this is needed to be put down and put down as soon as possible. We were all in agreement, that with feet that size, we could only imagine what the rest of it would look like.
+
+Together we had devised a plan. We were going to leave everything else in the yard as it had always been, including the now damaged greenhouse. One of the boys had a Winnebago mobile home, and we were going to station the mobile home in the yard where all aspects of the greenhouses, the pen, and the coop could be seen. We would then stake out the property from within the Winnebago with our rifles at the ready. The men were all fired up, and everyone wanted to be in on the action.
+
+Two days later, we were all dressed for hunting and sitting in the truck, with the louvered windows open and the door ajar. In the middle of the night, one of the guys pointed towards the pigpen, but said nothing. The pigpen was most visible from the Winnebago’s door, and as fate would have, it was the hardest part of the vehicle to see from, but he could see a little bit, and that was enough for now.
+
+We were all trying to get some kind of look toward the pen, which was almost completely devoid of light. As I focused my eyes, I could make out the pigs with their lightly-colored skin all huddled together on one end of the pen, which was something they would only do when trying to escape from a predator. Next, I saw a large, dark mass come into view, and at the same time, all the pigs ran to the other side of the pen and out of our view. Ernie mouthed the words, “It’s there let’s, go!” while pointing his finger emphatically at the pen. We jumped out, and Ernie fired the first shot, as I and Joe Hollander followed. When we were all out, this place was lit up like the 4th of July. We must have shot 30 rounds into the darkness and Ernie was certain that he had hit his mark with the first shot, saying that he had his sight right on it. We all looked around for blood, or anything else that would indicate it had been hit, but we found nothing. We had all been hoping for a scenario where several guys would take it down, but as it turned out, the first guy out of this small door was going to have the only shot worth taking, especially when you’re shooting in the dark at something that is dark itself.
+
+The next day, I did manage to find some blood on the ground, right where Ernie had said he hit his mark. He was firing an M1 from the Korean conflict, and one would think that would have had to hurt at 30 yards. The pen had a fence around it that was 6 feet tall, and the black mass that I had seen was at least 4 or 5 feet taller than the top of the fence, and appeared to be very large in every sense of the word.
+
+At any rate, all of the activity around our house ceased after that night, so we had been successful, even if we hadn’t seen a dead body. I filed a report with the warden about what we had done, and he was more than a little peeved about us firing in the dark at an unknown target. But all’s well that ends well, I guess, and it did end well.
+
+Well my readers that is a Bigfoot encounter for the record book. It will make you think twice the next time you’re in the greenhouse alone.
+
+
+<div align="center"><b>Idaho Bigfoot Researcher “Charlie,” His Evidence, and the Sighting of “Big Daddy”</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 82-88</div>
+
+Ziggy Stardust
+
+Trevor Riley and his wife, Sarah, brought this amazing sighting to my attention last spring. Here is what Trevor had to say:
+
+Although I swore never to speak of exactly where we were when this took place, I am free to tell you that we were in Idaho. My wife and I had a favorite little picnic area that we frequented at the time. It was a little getaway where we could drive in, cook up some dogs and burgers, and walk around a little in the woods, enjoying nature and each other’s company.
+
+On one of these outings, I had my old boom box sitting on the tailgate of the truck, as we usually did, and we were playing some old David Bowie, or Ziggy Stardust, to be more exact. As the music was playing and we were eating, a fellow came walking by and said, “I love your music, guys.” My wife asked, “Are you a Bowie fan?” To which he said, “I am the biggest Bowie fan alive.”
+
+So we invited him over for a beer and a dog. His name was Charlie, and we soon found out that he was retired from the railroad and living out here on a pension. As the conversation progressed, we found out that he had come from the Tri- State area, as did we, and he then asked us if we had ever seen Bowie live. We told him that we had only seen him once at Radio City, during a seventies winter, to which he said, that he must have been at the same show. “Ziggy Stardust and the Spiders from Mars.”
+
+We started laughing and reminiscing about that night and the lifestyles we had living at the time. Now, what are the odds of people from the same area, having seen the same show, bumping into each other in Idaho over 40 years later? It was kind of freaky, but also very cool.
+
+We had been bullshitting and eating for about an hour, when the conversation took an unexpected turn. We were chatting about our mutual love for the wilderness and this countryside in particular, when Charlie said, “I do a lot of hiking up north, hunting for Bigfoot.”
+
+My wife and I glanced at each other like this dude had dropped too many hits of acid, but he was persistent and quite sincere in his speech, so we listened. He asked us what we thought of the whole Bigfoot thing, and if we believed they were actually real. We told him that we guessed that we hadn’t really thought about it that much, and then, we asked, “What about you? Have you seen any?” Well, let me tell you, we had no idea the can of worms that we had just opened.
+
+He pulled out his IPod and started showing us pictures and even some live video that he had taken. It was incredible. Again, I cannot emphasize enough the dude’s sincerity and forthrightness about this whole deal. The stills and video were outstanding, and he said that he spends about 2 months exploring and hiking around the same area every year. He had learned to look for the signs of their habitations, coming to the understanding of how they live and what they do, and that he had reached a point where he felt that they knew him, and were okay with him being around.
+
+Now, I know that you and most people immediately take the jump that the photos and everything else today are staged or manipulated on the computer, as did we, but when we asked him if he sees them on a regular basis, he answered emphatically, “Absolutely!” He then asked if we would like to come by his place at some point in time, so that he could show us some really cool stuff he had found. Now, don’t get me wrong, we were not afraid of this guy. He seemed very down to earth and normal, but this whole affair about Bigfoot and the pictures that came with it, was a little more than strange.
+
+At any rate, we exchanged numbers, saying that it was nice to meet you and all that jazz, and then we wrapped up the afternoon’s barbecue. For weeks after we met Charlie, my wife and I had endless discussions about what we had seen and had been told, which led us to call Charlie and arrange to see everything else that he said he had.
+
+When we finally made it over to his house, we learned that he had a surprisingly nice pad. The décor screamed of someone who loved the outdoors, and there was woodsy and nature-related stuff everywhere. Antlers on the wall, rock collections in wooden trays, photos of birds and animals and fish, and on one section of the wall, there were about 20 photos of Bigfoot. We stood there and stared as he told us in great detail about each photo and where he was when he took them. He then pointed out one in particular and said to us, “Do you see this picture here? I was less than 20 feet away from this Bigfoot when I took this picture. We stood that close to each other for over 10 minutes before it walked away.”
+
+He then offered us something to drink and eat, and told us to hang for a minute, because he had some other things which he wanted to show us. He stepped into another room and returned with a sturdy old milk bottle crate. He placed it gently on the table and started to carefully remove some items that were wrapped in burlap. As he began to carefully unwrap them, he placed them around on the table top, and we could see that they were plaster casts of footprints. He went on to tell us that these casts had been gathered from many of his favorite locations. He showed us the first one that he had ever found, cradling it in his arms like it was a baby, and as he went on, we found out that he no longer makes any casts, telling us that if he kept making them, he would have no place to live. That’s how many footprints he comes across now. He told us that he is so tuned in to where this group lives, that finding their footprints would be like your wife picking up your socks from around the house. We held some of the casts in our hands. There were large ones and small ones. In other words, they belonged to children and adults and he referred to the family groups as clans of Bigfoot.
+
+I will get back to this in a moment, but there is something that I must interject with at this time. Later on, my husband and I were both in total agreement about a single point. Why would a guy whose house was filled with so many beautiful natural artifacts, have fake photos and staged footprints as part of his collection? It wouldn’t make sense for him or anyone else to do something like that. In our opinion, these items and photos were real. He took the photos, and he had found the footprints, just like he had said. He saw we were more than interested in his evidence, so he said the following to us, “I want you to know that I have never taken anyone into this area before, but if you are game, I will invite you to come with me, if you would like to.” I told him that I would love to, after which Sarah immediately interjected that we would let him know. Charlie just smiled. Happy wife, happy life.
+
+Later on in the week, after having had many discussions about whether to go or not to go with Charlie, my wife agreed that I could go, but that she would not go herself under any circumstances, saying that it was much too dangerous. We wouldn’t know where we would be going or what we would be getting ourselves into.
+
+At any rate, Charlie and I got together and met up. I was really excited, but before we began our excursion, he said the following:  “These creatures are very quiet and docile. We are entering their home and should act in kind. I can’t guarantee you anything other than this: if you follow my lead and stick with me, I promise you that you will see Bigfoot for yourself. Rome wasn’t built in a day, and everything that I have discovered can’t be seen or hiked to in a day either, but if you are willing to spend the time, I would be glad to have you tag along.”
+
+I just smiled and started walking. He referred to the region that we were entering as their home. According to Charlie, this region was about 200 square miles, and perhaps even more. It was some fairly rugged real estate, yet over time, I realized that it wasn’t all rugged. At times, we walked through relatively level timber and fire trails, but we will get back to that as we move along with this series of hikes and events. We hiked for hours through some rocky crags and hillsides, eventually breaking out into some tall pines.
+
+Charlie stopped by one spot to examine some trees that were toppled together. They were leaning against each other, forming something like a teepee, and he pointed out that these types of tree formations were some of the first indications that he needed when locating Bigfoot. It was his belief that these arrangements were territorial markers or signposts, and as we walked around this teepee, he went on to explain that the trees had been placed and had not fallen here. In fact, some of these trees had come from hundreds of yards away, and many of them were very long and extremely heavy. On closer inspection, we could also see that one of the trees was fairly new. Charlie said that this tree had not been part of the stack the last time he came here, which indicates that the Bigfoot are looking after this signpost to make sure it remains in good shape.
+
+It was obvious that none of the trees had fallen right there against each other. There were no stumps, and for the most part, the trees that were part of the structure were not the same as the surrounding trees. They were most definitely brought there and set in place, in my opinion, but the question remained. Who, or what, had done that? There is no way that a crew of strong men had ventured in here to play a hoax on nobody, because, according to Charlie, that’s exactly how many people come through here.
+
+“Let’s press on,” Charlie said, “Because there is something else that you have got to see.”
+
+We hiked for about another 45 minutes and came upon an old shack that had almost completely collapsed in on itself over time. As we got closer, Charlie said that when he first found this shack, he had still been able to walk inside. Now, however, that was impossible. All we could do was look through what was left of a window, since the roof was almost entirely folded in. However, we could still see what he had brought me here for.
+
+He pointed out that there were a lot of branches heaped up and flattened on one end of the room. When he first came here, he said that it was in much better condition, and even then he could tell that it hadn’t been used in a while. He said that there was a huge pile of scat that was dried up over in the corner. The scat had looked human, but it was much larger, and I could still see the pile, but it was now like a dust heap, and he believed that the Bigfoot were actually sheltering here at some point in time. Obviously, they had moved on since then. In all the time he had spent here and with all the sightings he had had, this was the only time that he had run across something that even remotely looked like a home or den.
+
+We started to head back when Charlie said to keep the faith. “This is a marathon not a sprint. I have been in here well over 500 times and have spent countless hours, and all of that time had been spent just to come across some of the things you are now seeing and that I have showed you at my house. There is much, much more to see and do, and who knows, we may see something on the way back.”
+
+As it turns out, we saw and heard nothing on the return hike, having retraced the steps we had taken coming in. I said to Charlie that what we had seen that day was very interesting, but that I had been hoping for more, and of course, he agreed with me. However, he stood his ground that this was a battle of attrition, and without the expenditure of time and effort, nothing would or could be gained. We parted ways with him telling me to let him know when I wanted to go out with him again.
+
+That night, my wife pretended to be amazed when I told her what we had seen and done; however, the reality was that she was unimpressed, that Charlie and I had not encountered a Bigfoot. I contacted Charlie about a month later, and we were back on the trail once again. We hiked right back into the same zone we had been in the last time, so I knew he was really committed to this area. Today, we were going to detour into what he called the choke point.
+
+As we were hiking, we began to enter a point where we were above a miniature canyon. There were two steep hillsides that flanked each other, and the hillsides formed what I will describe as an entrance and an exit. Both of these sides were covered with sporadic instances of brush and pines, which sometimes made it difficult to see. It all depended on where you were positioned and where you were looking. We sat down in a fairy high location where we had a good view of what he called the ambush point.
+
+As we sat down, Charlie said that we were going to be staying here for a while, so I should get comfortable. We were talking, and he began to tell me of how he found this location and why we were staying here. He said that on two different occasions several years apart, he had found a deer carcass not far from the ambush point. One was most of the skeleton of a dead deer, and on the other occasion, he had found a deer that had been killed just a couple of days prior. Charlie noticed that one of the front legs of the skeleton had been snapped in half, and when he had found the second deer several years later, he could see not only that its leg was also broke, but that its head had been twisted around. Both carcasses had been found in the same area, close to this ambush point. At that time, he believed that these deer were being killed and eaten near here, because they had been ambushed here.
+
+As we were sitting and talking, we were interrupted by a loud and clear knock. There was no doubt about it. This was wood on wood and as clear as day to our ears. One clean knock with nothing else following it. So we sat and sat and sat.
+
+Three hours later, after not having seen or heard anything else, we left. Once we were well clear of the zone, we began talking about the knock, as well as the ambush spot. His opinion was that the knock was either a signal that we had been recognized, or a Bigfoot was signaling others of its own position. He said that he never knocks back. He only waits quietly to see what develops after the knock has occurred. It was during one of these waiting sessions following a knock two years ago, that three Bigfoot entered this small canyon. His view sitting on that day was that of what became known as the ambush point. Out of his view on the other end or entryway as he now refers to it, there were two more Bigfoot.
+
+He said that this was actually a deer trail, but because the population was well-dispersed, he had only seen a few walking in here through the years. His theory was that the Bigfoot somehow plan the days that the deer will be coming through. It was just a theory, and he had no way of proving it, but I thought that it was as good a theory as any other. On that day, he watched as the small group which was comprised of several different sized creatures, began hiding and crouching behind some brush and boulders. He said that what transpired next had actually taken about an hour to develop.
+
+A doe entered into his field of view, apparently having walked in from the side he could not see. Suddenly, the deer bolted, followed close behind by two other Bigfoot that were running in hot pursuit. The deer, having nowhere to go, ran squarely into the place where the others were lying in wait. It was then that one of the Bigfoot grabbed its leg, knocking it to the ground and killing it with what appeared to be a twist of the head, thereby breaking the creature’s neck. This is the way that these Bigfoot were dispatching their prey: a broken leg and then a broken neck.
+
+Charlie also developed another theory. He had found many of what he called blinds in the woods, which he said we would take a look at down the road. He felt that during the day, they would individually use a blind to conceal themselves by trails, or they would act as a group by different choke points like this little canyon. At night, he felt that they could conceal themselves well enough, since they were also dark in color, though he personally never comes in here at night. All of his sightings and photos had occurred only during daylight hours.
+
+I have to tell you that I was really becoming a believer. When someone is on the cutting edge of something, there will always be doubters and naysayers, but he had quite a bit of proof, and I had seen much of it with my own eyes.
+
+Now, for your sake, I will do a little fast-forwarding, or we will be here for days. Over the next 8 or 9 months, I had been going out with him about one day a month. He had taken me to see some of the blinds, which were really impressive. They had been constructed just like a duck blind, put together with boughs from pines as shielding. Some sturdier branches had been used for support, and all of them were in close proximity to well-used trails. Looking at them, one could clearly see that they had been constructed, not arbitrarily formed by any natural means.
+
+Charlie was insistent that he had never heard so much as a single gunshot while here, and in the 9 months that we were together, I could have taken dozens of casts myself. It was in the tail end of month nine that we were once again positioned to observe the ambush point. Suddenly, a tremendous Bigfoot appeared on the opposite slope. Charlie turned to look at me with his eyes wide open, and we both looked back at the creature. We saw it walk for about 50 feet before it was once again concealed by trees. At no point did it turn or indicate that it had known that we were there. Later on, Charlie said that he believes they always know that we are there. His opinion was that if you don’t bother them, they won’t bother you.
+
+He called this Bigfoot “Big Daddy.” He said it was the largest of the clan. When I tell you that this thing was enormous, the available verbiage is not adequate. It had to have been 12 feet tall, and the proportions of its body were like nothing you can imagine. The utter thickness of its frame was incredible. If you have ever seen a movie of a large grizzly standing on its hind legs to look around in a field, this thing would have made that grizzly look like it was junior-sized. As big as it was, its feet still looked too big for its body. Now, I wear a size 13. Picture me walking in one day while wearing a size 25-wide. This creature’s feet looked that disproportionate to me. It looked like it was wearing clown shoes.
+
+It was completely covered in dark, reddish-brown fur, and its upper trap muscles seemed to hug its ear area. From the side, that made it look as though the head was somehow tucked into the upper body. It had a very lethargic and deliberate stride, and its arm swing appeared as slow motion. It seemed like it was gliding not walking, but it had still covered some 50 feet in 7 or 8 steps. Watching this thing was almost like an out of body experience, and I can’t really describe it. It was as if something had taken hold of me while it was there. I know that sounds weird, but that’s the best that I can do to describe what I was feeling at the time. After it passed, Charlie clenched his fist while mouthing, “Yes!”
+
+That afternoon, Charlie came home with me. He wanted to be there to see my wife’s reaction when I told her what had happened today. Up to this point in time, she had been very stand offish about the whole affair. Well, when she saw us come in together, her immediate reaction was curiosity and wonderment. She was so happy for me, knowing in her heart that this had become a big deal for me personally, as I had now become the newest member of the Bigfoot sighting club. It was absolutely incredible.
+
+
+<div align="center"><b>Trooper Follows Giant Tracks During Manhunt and Later Finds Victim’s Skull Crushed</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 88-90</div>
+
+The Trooper’s Tale
+
+The following story was brought to my attention by Gary Adair, who at the time of this event, was a trooper in the Northeast. He encountered something very interesting while pursuing something entirely different:
+
+Dispatch had sent out a call asking all available units to report to the scene of a domestic dispute. A woman was calling for help, saying that her husband was going to kill her with a sword. Now, any type of law enforcement officer will tell you that these are the worst types of calls to go on. Nationwide, many officers have been shot trying to diffuse such situations. As soon as the call came over the radio, I was on my way with two other units.
+
+As I arrived at the location, which was a house trailer located deep into a wooded lot, car 605 was ahead of me. We got out of the cars and went to the door with guns drawn. We could hear that there was a heated dispute still going on inside of the home, including a lot of cursing and yelling coming from a man and a woman. My partner pounded on the door, shouting “Police!” while I watched, standing off to one end of the trailer home.
+
+Just after he knocked the female voice shouted, “Good they’re here! Now you’re going to jail, you low-life creep!” Seconds after this, I heard a crash from the backside of the home, which was followed by the sighting of a man running out into a field while wearing nothing but a pair of shorts and sneakers, having forced his way out, jumping through a window. I shouted to my partner that we had a runner and started in pursuit of the man just as the third unit was arriving.
+
+Upon seeing me giving chase to the man, the third officer started driving out into the field with his Bronco in pursuit of the same. It had been about 4p.m. in the afternoon when the pursuit began, as I heard over the radio, that the man was unarmed.
+
+I had stumbled and fell, and at virtually the same time, the Bronco had reached a deep furrow that the truck could not cross. Now, that officer and myself were both on foot, chasing after this guy. The runner had already reached the woods, and additional backup was on the way as the two of us joined forces, entering the forest together.
+
+We spaced ourselves about 40 yards apart and started walking in. Now, a running man going into a desolate forest, wearing only a pair of shorts is not going to last very long. I must have been several hundred yards into the forest when I came across a creek, and I radioed to my partner about the find. There was a slight embankment comprised of some moist, brown soil that appeared drier as you moved away from the water.
+
+After I told my partner about the creek he moved forward, coming across it himself. This officer was now going to move easterly, looking for tracks the man might have left while crossing the creek, and I was going to follow behind him. Both of us believed that he had gone more in my partner’s direction. As I was closing the gap between where I had started and where my partner had begun, I came across some gigantic impressions by the creek’s edge. The impressions were so fresh that they were still filling with water from the wet soil. One of them looked to be 2 or even 3 feet deep, and the prints had to have been close to 2 feet long and very wide. I radioed my partner immediately, telling him to backtrack to my position.
+
+We stood there, examining the tracks, and we could see one more print on the other side of the creek as well, indicating that something had crossed the creek here. Now, just so you can visualize this, the creek was about a foot deep at its deepest point, and maybe 12 feet wide in total, including several feet of bank on each side, and there was no way that these tracks were those of the man we were chasing.
+
+We both walked through the water and into the woods, following the tracks. Maybe 40 feet into the woods on the other side, we found a sneaker, and at this point, there was no reason for the two of us to go any further while alone. We retreated back to the field and the trailer. Our reinforcements had already arrived, and I presented the sneaker to the wife, who confirmed it was her husband’s.
+
+With the assistance of another agency, our office began a manhunt. We staked out the various roads and areas where the man would eventually have to emerge, knowing that he couldn’t last long in the woods, with no clothing and one sneaker. After several days, the man had not been seen or taken into custody, and the wife said that she hadn’t seen him on or near the property, and neither she nor any of their relatives had heard from him.
+
+During this time, the giant impressions by the creek had been the topic of much discussion, as well as the sneaker that we had found. Some felt that the prints had been enlarged by the softness of the creek’s edge, even after I had insisted they were not, since I had seen then within moments of when they had been made.
+
+After the passage of about two years’ time, this turned into a missing person case. The man still not been seen in all that time. About three years later, some hunters came across human skeletal remains about 5 miles north of where the chase had begun. They had been hunting in some thick timber and had found the bones in a patch of tangled briars. After the report, the remains were retrieved by our forensics people.
+
+After much examination, we believed that the bones belonged to our missing man. DNA was retrieved from the remaining spouse’s child, and it turned up as a match. The skeleton was that of the runaway man from some three years earlier.
+
+But here is the real clincher of the story, and why I called you in the first place. According to the coroner, the man’s skull had been caved in past the midsagittal line. In other words, the head had been smashed in more than halfway by blunt force trauma. Now, just to give you an idea of this type of force. If I was to take a full swing at your head with a large baseball bat, I couldn’t even come close to this type of impact on your skull. Not even with 2 or even 3 repeated forceful blows could I create such damage.
+
+Also, numerous ribs had been broken via compound fractures. They were all clean fractures, where the bones had been broken into two separate pieces. All of this must have occurred while the man was in the forest, running and alone.
+
+It seems to me, my dear readers that something else had delivered the justice that was due to this violent man. You live by the sword and you die by the sword. What are your thoughts?
+
+<div align="center"><b>Bigfoot-Like Creature Kills Bull and Ends Cattle Mutilations</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 91-92</div>
+
+This story actually began seven years later, when I was a year into retirement, and one of the ranchers whose farm we were leasing, had begun to show a few losses of our cattle. It started as some calves coming up missing, with some of them being found in the woods, badly mauled and partially eaten. As time went on, other larger cattle were being found in the pastures with enormous wounds and flesh torn out of their hides. We had all gone out to personally survey the damage that was being done to the livestock.
+
+It was the general suspicion that a bear or cougar was the culprit, which would probably have to be shot to stop the mayhem. The farmer decided to hire a local hunter to both stake out and protect the herd. The herd on this farm alone represented over 1 million dollars, and when you lose one of these animals to a predator, it represents a big hit to the pocket both now and into the future. Now, it’s not like these incidents had occurred within a weeks’ time; they had been observed over a period of many months. Two of these attacks had resulted in mutilation and death, and the others in injury to a still-living animal. Our hired hand was patrolling the pastures on horseback, making it virtually impossible for him to be everywhere at once, and even after hiring this gentleman, one mature female and another calf had still been taken under his watch. Both were found in the woods, partially eaten.
+
+One of the oddities was that none of the fences had been taken down or damaged in any way, which would indicate that something had breached it. Whatever was doing this had come over the fence and went back over the fence, carrying hundreds of pounds with it, all while doing no apparent damage to the fence in the process.
+
+To date, all that the hand had seen was some bobcats and a couple of coyotes. None of which were capable of inflicting the carnage on the herd. One night in the fall, the hand had planned to ride the pastures up until about midnight. Upon our request, he was mixing up his shifts a bit in hopes of catching whatever was killing the cattle. On this day, he was riding through one pasture, heading over to check on another herd.
+
+Suddenly, he heard an uproar from the herd he had left some 10 minutes earlier. He turned his horse around and galloped back, and was shocked see the herd huddled in one end of the pasture as he came over the hill. He immediately began to survey the pasture, and his eyes became fixed on a large mass in the middle that was not moving. As he approached the mass, he realized that he was looking at the bull lying on the grass. He began to circle it, but his horse started to buck, unwilling to continue in the area. He dismounted to discover the grim reason behind why the bull had been lying there. Its head had been torn from its body, and was nowhere to be seen.
+
+He went back to the house to tell the owner of his discovery, after which they took the pickup truck and a floodlight and headed back out into the pasture together. When they got up on the scene, they saw something incredible. The bull’s head had been torn from the shoulders, including its spinal column. It had been ripped off, not severed. This was a strong, viable bull, and the most important animal in the pasture. It was through his prowess that the herd continued to grow, and they could not begin to even guess what had been capable of such a thing.
+
+He was worth his weight in gold, and now he was dead. A decision had to be made about how we were going to deal with this dilemma moving forward. To date, the losses were mounting into the tens of thousands of dollars with no end in sight. Either whatever was doing this was going to be killed, or we would abandon this pastureland and move our herds elsewhere.
+
+So we devised a plan to stake out the acreage with as many armed men as was thought might needed to kill the beast that was attacking the herd. In the end, we hired 13 men. Each was to be stationed in a different area, and all would be in contact via radio. We were now fully committed to killing this monstrosity. Of the 13 men, 7 had night vision sights on their guns.
+
+The pastures were staked out for 3 weeks, but nothing happened. It was on the 23rd night of 24 hour stakeouts that one of the men over the radio reported something running across the pasture on all fours, which looked like a massive bear. Moments later, he was heard saying, “Oh my God! It’s standing on two legs and walking toward the herd. It’s gigantic”!
+
+Seconds later the sound of two rifle shots broke the silence of the night, as he started shouting, “I got it! I got it!” Everyone started to converge on that end of the pasture, when the hunter suddenly started shouting into the radio that the beast was running towards the fence. The search continued throughout the night for whatever he had shot, but nothing had been found.
+
+He said he had been able to see it clearly in the night vision scope. It was some type of massive, furry beast that walked like man after running through most of the pasture like a bear. He said that when it was on its feet, nearing the herd, he could see that it was at least twice the height of the cattle’s backs.
+
+After the men had given the search their all, they called the police, with nothing being found until two days later. On the local news, it was reported that a motorist had seen what she described as a dead Bigfoot on the side of the highway. After hearing the report, we had made calls to the police department, but they denied there being any Bigfoot found. They said that she had seen a dead black bear and nothing more.
+
+As it turns out, after our man had put two rounds in the giant hairy beast that night, and after the woman said she saw a dead Bigfoot on the roadside, our problem ended rather abruptly. Not a single head of cattle was ever injured or found dead in that pastureland again.
+
+
+<div align="center"><b>Bigfoot “Ghoul” at the Kitchen Window and Fruit-Tree Raids</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 93-97</div>
+
+In the summer and fall of our second year, things started getting a little weird around the property. My wife and I had started hearing some loud howling emanating in the distance, way back in the far end of our land or beyond. It would always begin around dusk, and there were many nights when it would rouse us from our sleep in the middle of the night. It was a long, steady howl, very much like a fire departments siren in both volume and duration; however, it was much deeper. I don’t really remember saying anything to my wife other than remarking that there must be some animals in the woods. The funny thing was, that I didn’t recall any such sounds being present there while I was growing up.
+
+Now, as I said earlier, I had begun cutting the fields. And because of this, my wife and I had regained access to the fruit trees once again, and this was the season for harvesting. Don’t get me wrong, we weren’t like my mom, making preserves and pies or anything like that, but we were picking some of the fruits to eat. When I tell you that I am not a farmer, that would be an understatement, but I started to notice that the fruits on the trees were disappearing. My wife and I were picking only a couple of dozen pieces a week, which wasn’t even a smidgeon of what was there for the picking. I wasn’t even pruning them, and each tree had to have been producing hundreds of pieces of fruit.
+
+The trees combined output was incredible, producing bushels and bushels of fruit. When I was young, my mother and father would grab almost every piece that the insects or birds didn’t damage, and the rest would fall to the ground and rot. What I was seeing was quite the contrary, fruit was disappearing from the trees, and virtually nothing was being left on the ground. These trees were being stripped of their fruit just as fast as it ripened, and I couldn’t wrap my mind around what might be doing such a thing.
+
+One night after the fall had changed to winter and the trees had stopped yielding fruit, my wife was in the kitchen preparing our dinner, when I heard what sounded like a pot falling into the sink, as my wife exclaimed, “Oh my gosh!” and ran into the den. She was visibly shaking and as white as a ghost, and she sat down in a chair, holding her head in her hands.
+
+I asked her what was wrong and she didn’t answer me. I asked her what had happened, and she just stared at me as she was gathering her composure. A moment later, she answered. “I was washing the dishes, not really paying attention to anything in particular. As I lifted my head to put a clean pot into the dishrack, the most hideous face that you could imagine was looking at me through the window, and as quickly as I had seen it, the face was gone. Honey, you have to call the police right away. I’m not kidding. Whatever that was is out there in our yard right now.”
+
+I picked up the phone and made the call. I told them that there was a prowler in our yard, and that my wife had seen him looking in our window. They said that an officer would be right over.
+
+We watched as the officer pulled in to the driveway a few minutes later. We opened the door and stepped out to greet him, and my wife started to frantically tell him what had happened to her. He told her to try and calm down and asked her to show him the window she had seen the prowler from. I could tell he was trying to see if there was anything that could have made a reflection in the glass that might have looked like a man. That’s when my wife said to him. “It wasn’t a man. It was the face of a ghoul. It was horrible beyond description.”
+
+I could see in his face that he was wondering what kind of people we were, as my wife started to describe to him what happened. She told him that it had wide-set eyes that were much larger than ours, and she said that it was smiling with what she said was the biggest, most demonic grin she had ever seen, and as soon as she had locked eyes with it, the thing vanished from sight.
+
+The officer said that he was going to go outside and have a look around, and as I closed the steel door behind us, I began to think that it might have been installed for a reason. I walked alongside the officer, carrying a fire poker in my hand, and the officer carried a large Maglite. As he began shining it around, he put the beam right on the barn doors, and the doors were wide open. Before I could say anything, he asked me if I always left my barn open.
+
+I told him that the one door on the right was always open a crack for the barn owls to go in and out, but on this day, they were wide open, so the two of us walked over to have a look around.
+
+The hair was standing up on the back of my head as we walked towards the barn, and I felt as though something was breathing down my neck. As he put the light into the barn and shined it around, we could see that there was nothing inside except the tractor and the tools used around the house. He asked me if I could see anything missing, to which I said no. We kept walking around the house, shining the light here and there and saw absolutely nothing, but I had the creepiest feeling that we were being watched as he and I went back into the house.
+
+The officer sat us both down, looked us square in the eyes and told us, “I am not about to say that you didn’t see anything, because I can see that you are obviously still shaken up over this. The doors were open on your barn, so maybe there was some local hoodlum prowling around, looking to walk off with something they could sell.”
+
+My wife broke in hysterically, saying, “It was not man. It was some kind of monster!” He said, “I understand, but there is really nothing more I can do here tonight. Why don’t you leave all the lights on and stay up until you have calmed down? Have a glass of wine and try to compose yourself. Whoever or whatever this was has gone off. If anything else should happen, just call the station and we will be right over.”
+
+My wife was beside herself as the officer said goodbye and left. She said to me, “Honey, I cannot and will not stay here.” I tried to console her, by saying that whatever she saw was just passing through and had probably moved on.
+
+“Oh yeah?” she said. “What about those darn fruit trees being picked clean? Maybe it was this same demon from hell eating our fruit, and how about that door? Has it dawned on you that maybe your mother had this steel door installed for protection? I’d be willing to bet that she saw something and didn’t want to bother us over it. You know how she was, all stubborn and everything. She probably saw that monster through the kitchen window just like I did.”
+
+At that point in time, I didn’t want to get into a debate with her. Besides, something really didn’t feel right out there in the yard. And when I saw those barns doors opened wide, I knew that something had been wandering around my house while my wife and I were inside relaxing. That can most definitely make you feel a little uneasy inside.
+
+As it turns out we both fell asleep in the living room that night, and when morning came, I went outside to have a look around. Everything that had seemed so eerie during the night had changed dramatically with the coming of a new day. I didn’t see anything unusual around the property, and I actually fired up the tractor to take a ride around the land. I thought about my father who loved to cut the fields in any kind of weather, and it was great therapy for me, especially after the night we had. Later that morning, my wife and I took a ride into town to get a few things. When we were leaving the store, we saw a small newspaper rack on the way out, which held a local gazette that was free of charge.
+
+Today, a certain headline on the lower right side of the front page caught my attention. “Booger Sighted by Woman on Highway.” I grabbed a copy without mentioning it to my wife, and later that day, I pulled out the paper to read the article while my wife was showering. It said that a local woman had sighted a Bigfoot walking down the shoulder of a highway, and that area of the highway was only a few miles from our property. This sighting had happened the day before my wife said she saw a ghoul in the kitchen window. If I was to take a walk way up through my land, and cut across the woods instead of taking the long way around, this sighting had taken place only a mile from our house.
+
+That very night, I heard the howling again while my wife was sleeping. In my heart, I was now convinced that my wife had seen the same beast this woman had seen on the highway, and that the source of this howling was one in the same. I was also becoming increasingly more certain that my wife was correct about the door change on the house. What else could be the reason for swapping out a beautiful wooden door, a door that more than likely would have lasted for another 200 years? I was also convinced that this thing was responsible for eating the fruit off the trees in our fields.
+
+Maybe three or four days after my change of heart, I went for a long walk out into the field behind our home. I was really troubled as to what to do, and now, I had become the one who was concerned about this beast. I was strolling slowly, kicking the grass, looking up at the sky, and thinking about my wife and parents.
+
+I reached a point in the field where I could see the back part of the property. From the house, you could only see this portion of the land from the third story windows. It was then that I could see a large, black creature walking along the edge of the field. I ducked down just enough to allow my eyes to continue watching it without being seen myself, and even at the distance I was watching from, I could easily gauge the enormity of this thing.
+
+I could use every adjective imaginable to describe it: tall, big, thick, muscular, hairy, and damn near anything else you can think of. It was an instantaneous sensory overload. This thing stood out clearly against the land, and I could see the sun shining on its fur.
+
+It was very tall, though I couldn’t even begin venture a guess as to how tall. It looked like a black block of living creature walking along. Its arms were extremely long and swung in a slow cadence with each of the steps it took. Every movement it made was very deliberate, in a way that said to me it knew that it was the king. I don’t believe that it has any competition in these woods, and now having seen it for myself, I am certain that it could make short work of anything or anyone that got in its way. It covered about 2 acres of land walking ,before it disappeared into the woods.
+
+I went back to the house without saying a word to my wife. She knows about the sighting now, but I hadn’t dared disturb her with it back then. Instead, I casually brought up the sale of the house, saying that it was more than we really needed at this stage of our lives, and that I missed the old house that we had been renting to tenants. She was not against my decision to sell, so our saga ended. The house was sold, and we moved into another rental house until our tenants’ lease was up.
+
+My uncle used to live about six miles away from a busy train station in Atlanta. If you were outside during the morning commute time, you could hear the train at the station sound its horn. This Bigfoot’s howl was so loud and resounding, that I am sure people can hear it for miles around, just like the trains horn, and yet, I had never heard a single soul speak of hearing it. I don’t know if people are afraid to speak about it or what, but it has to be being heard in many other places and by many other people.
+
+Well, my dear readers, I cannot even begin to comprehend looking through my kitchen window and seeing a Bigfoot staring back at me. Can you?
+
+
+<div align="center"><b>Roosevelt Elk Hunters Confront a Giant Bigfoot in Washington Rainforest</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 97-100</div>
+
+Every year, Eddie and I plan a week of fall hunting in Washington’s rainforest. Our target for this year’s hunt was Roosevelt Elk. The elk live in the thick, dense underbrush and forest, and the coastal mountain range of Washington State, is one of the only locations in the world where they can be found. This region of the United States receives well over 100 inches of rainfall annually, and because of this, the underbrush is extremely lush.
+
+Now, any hunter will tell you that this thick underbrush brings with it advantages and disadvantages. The advantages are that it can provide plenty of cover for the hunter as well as being an ideal habitat for the animals. The disadvantages are the constant rain and dampness, as well as the extremely limited visibility for taking a quality shot at your prey. Most rifle shots will be taken at a range of 50 yards or less, and your typical bow shot is between 20 and 30 yards. I once took a bow shot at 5 yards in there, that’s how close you can get to the animals in these forests.
+
+Because of the diverse weather and habitat challenges in this region, Roosevelt elk are one of the most difficult species to hunt. It is because of this difficulty that time spent on the hunt has a direct correlation to your success rate. Eddie and I keep a detailed hunting log on each of our trips. By doing so, we can fine tune our techniques to help ensure that we have successful hunts in the future. We have found that when we plan hunts for 10 to 12 days, we have a 100% success rate, whereas a 5-day hunt only yields between say 60 and 80% success.
+
+Our typical hunt consists of both bow and rifle hunting. We start with the bow, since it’s our preferred method, but if we find ourselves running out of time, the rifle becomes our weapon of choice. There are so many times when the animal is so close to us in the undergrowth and yet still too far away to land an effective bow shot; however, the rifle can be effective on day one for a well-schooled hunter.
+
+If you are going to have success with the bow, all of your ducks must be in order, and that starts with technique and location. Our most successful methodology to date is hunting either within the confines of a well-timbered canyon or near any river drainage areas that you can find. We also construct blinds in well-travelled areas and use calls to attract bulls, getting real aggressive with them when they start to get in tight to our position.
+
+Generally, the two of us like to situate ourselves closely to each other whenever possible, with the slope of a canyon being our preferred haunt. From that position, we have had the greatest success in sighting moving animals both above and below us. An elk can surprise you by moving right across your path while you’re stalking and be taken down with a quick shot.
+
+Whenever possible we will also bring our quad with us in the truck. We want to get as close as possible to the target area before the hiking begins. It’s also a great help in transporting the meat back with us when we get lucky.
+
+For this particular hunt, we had planned for 4 days. Even though this is on the lowest end of the success window, we knew the area extremely well and our confidence level was very high, having experienced good success here in the past, we felt that we would score again.
+
+After setting up our tent by the truck, we took the quad into the forest and began our day’s hunt. It’s a rough hike into this terrain, but the two of us workout during the year to prepare ourselves for such excursions. The area that were heading into was a steeply sloped canyon that had a very well used trail running up and down within it. The trick in here was to position yourself in the best possible way to get off a quality bow shot. Too many times an elk is just out of effective range or slips behind some cover right as you are ready to let go. That, my friend, is the struggle of hunting.
+
+Day one came and went without seeing any Roosevelts. On day two, we headed directly back into the same location since we were satisfied with the overall animal population that we had seen the day before. We had better luck from the get go. We saw a giant 5 x 5 Roosevelt bull walk by us at about 50 yards. We waited for him to come closer, but we had no such luck. We also saw a 3 x 3 after him, but we passed, hoping to bag the larger, more mature bull.
+
+Typically, when hunting with a guide, they will always advise that to take what you can because you may not get another opportunity. This is the best course of action for most hunters, especially if you don’t hunt that frequently, however, we hunt quite frequently, and have an experience level higher than most of our peers. Because of this, we were determined to get the 5 x 5, or perhaps something even better.
+
+The next day, we moved our makeshift blinds into a slightly lower position. If he passed by again, the bull should be marginally closer to us than he had been the day before, however, we still didn’t know if he would even come back, so we positioned ourselves and began the wait.
+
+It was 11:17 in the morning when about 30 elk came running down the trail. I know the exact time because I had just looked down at my watch, and you never see these animals running unless they’ve been frightened. We looked at each other through the opening in the brush between the two blinds. Just four minutes after the herd ran through, I heard the snap of a branch, and my eyes rolled in the direction of the sound.
+
+I could see a tremendous black figure moving down the trail, passing behind an opening in some pine boughs. I gave a small finger signal to Eddie, and a moment later, a gigantic Bigfoot appeared, walking through a break in the trees where the herd had just run by. Three steps later, he was once again concealed by the pines, before reappearing yet again. We watched him as he walked down the entire trail toward the base of the canyon, the creature coming in and out of our view numerous times before it completely left our sight.
+
+The two of us came out of our blinds. Speechless, we first looked at each other and then looked down into the canyon where he had walked. We were unable to put any words together, and I was completely and totally dumfounded by what had just transpired.
+
+I was in a complete and utter daze, being as close as I will ever come to a true state of shock. Feeling like my mind had short circuited, I was momentarily shut off as a human being. I’m surprised I didn’t crap in my pants, and If it had come towards us, I’m not even sure if I could have pulled my rifle out and shot it. It almost I felt like I was under some type of mind control as it came into view and passed by, as if all of my abilities had been put on hold. It is very difficult to describe or put into words.
+
+I think it must have been about 15 or 20 minutes before we had regained full functionality. At that point, the forest had become completely still, and there were no signs of life whatsoever. We walked over to the trail, and there were no indications of any prints, just wide, flattened areas of pine needles where it had walked. The ground was very hard and well-travelled, which made it impossible to make real prints.
+
+The two of us had heard all of the talk of Bigfoot. We were living and hunting in places where many people claimed to have seen them, and yet, up to that point in time we had seen nothing ourselves. When the fog in our minds had dissipated, we went back to the truck and recorded all of the details in a notebook.
+
+Our sighting had occurred at about 11:20 a.m. It was drizzling out, and we had our rain gear on in the blinds. We had seen the elk herd run by, followed by hearing the branch snapping. When it first came into view, the Bigfoot did not seem like it was chasing the elk. It was just travelling and had more than likely spooked the herd unintentionally. It must be seen as a predatory animal to them, otherwise they would not have run from it in such a fashion.
+
+Because of our position in the blinds, it was much higher than us. It didn’t stop or turn to look in our direction, rather, it seemed to be completely unaware of our presence. The two of us agreed that it had to be every bit of 8 to 10 feet tall, a tremendous monster of a beast. Neither one of us could remember measuring it up to anything it had either passed through or by. It was like a mega-monster from a comic book or something, reminding me of the way they depict the Hulk, busting out of a shirt and flexing his muscles.
+
+When it was passing in front of us, we could see its dark, brownish-black hair. It hung off the body and looked kind of shaggy, not at all like a bear’s coat, more like a long haired dog breed.
+
+I distinctly remember the hands being about 20 inches long. They were massive, like an oversized baseball mitt. Its head and shoulders looked like one piece, and there was no visible neck. As it descended the slope, the upper torso was a cut into a clear V shape, like that of a body builder, and if I had to venture a guess as to its width, I would say that it spanned 5 feet or more across the shoulders.
+
+Another thing comes to mind. From the back view, the muscles of its upper back were so enormous, that its head was virtually concealed when you looked at it from the side. Its jaw line clearly protruded forward from the rest of the face, whereas the nose appeared almost flush to the face.
+
+I only recall seeing skin on the face and fingers, but what skin that I did see looked to be an extremely dark grey color. Its face also seemed deeply wrinkled, almost like it had grooves in it instead of wrinkles. Even though we hadn’t scored a kill, we left that day and headed back to Oregon.
+
+I think I speak for both of us when I say that we are different people today because of that event. We will never hunt or go into the woods with the same mindset that we had had before, and seeing that Bigfoot had transformed both of our lives and our thinking.
+
+<div align="center"><b>Joggers Pursued by a Bigfoot in Prairie Creek Redwoods State Park</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 101-102</div>
+
+The Prairie Creek Redwoods State Park Sighting
+
+This testimony really got my attention, because I have personally walked through the very area where the encounter took place. Here is Debbie Stillman’s account of just what she saw while she was out jogging during August 2011:
+
+My girlfriend and I decided to spend the weekend in Elk Prairie Campground in California, which is located at the Prairie Creek Redwoods State Park in Orick. The two of us are avid runners, so after breakfast, we slipped on our sneakers and went out for a run. Our plan was to take Cal Barrel to Rhododendron Trail which is about a 4 mile loop. Depending on how we were feeling, we were also open to cutting down some secondary trails.
+
+Most of this area is extremely difficult to run in, with the trails being very narrow and tight, and cut between large trees, hills, ferns, and felled trees. Even though we intended to run, we often found ourselves speed walking and taking in the scenery around us.
+
+Even during bright, sunny days, the forest here feels almost mystical. There are glimpses and glimmers of sunlight shimmering through the canopy of this magnificent, old-growth, redwood forest. Everywhere, the space between the trees is filled with ferns and a floating haze. In places, there are really old hollowed out or tunneled trees that form open arches and just beckon you to walk through them. We had quite a lot of fun climbing around and through them.
+
+Well into our run, we had already veered off of the trail and opted for a secondary fork, where we stopped to take a look around at the foliage surrounding us. After a moment, my girlfriend asked, “What the heck is that?” She was pointing at a large redwood off to our right. I hadn’t seen anything, but she told me that she had just seen something duck behind a large tree nearby.
+
+[Page 101]
+
+About two minutes later, I finally saw it. The top of a head and single eye peered out from the side of the tree. It was a furry head, and looked like that of a gorilla or a large chimpanzee. As soon as we had set eyes on it, the creature ducked back behind the tree. Just as quickly, it jumped from that tree to the next one over. It was a leap of well over 10 feet or more, and the creature had performed it in one clean motion. It moved so fast that if we hadn’t already been watching it, I believe we would have missed it completely.
+
+This was no little monkey. It must have been crouching down when we first caught a glimpse of it, because when it jumped, we could see that it was about 7 or 8 feet tall and really wide. My girlfriend put both of her hands against her mouth and said, “Oh my God, It’s a Bigfoot!” With that we quickly turned and started walking away in the same direction from which we had come. I kept looking over my shoulder, and I saw it dart into the woods in the same direction in which we were now heading.
+
+There are so many parts of this forest where your visibility is very limited by a host of different things. The enormous trees, huge downed trunks, the ferns, and the dappled light filtering through the canopy, all conspire to hide any number of things that might be lurking within the forest.
+
+Increasingly panicked, we began to break into a run, and I could hear this thing running in the woods next to us. It was flanking our movements and keeping pace with us. I saw its body briefly flash by an opening in the underbrush once or twice, and I was so frightened that tears were rolling down my cheeks, and I couldn’t stop them. My girlfriend screamed, worried that it was going to attack us. “God please help us! Please help us!” she shouted as we ran.
+
+Branches whacked us in the face like dozens of whips, and as we passed between some tightly-packed trees, my pinky finger caught an edge and broke, moving clean out to the side of my hand with a sharp snap. I didn’t look down, but I knew it was bad. We kept running.
+
+As best as I could tell, we were still at least 3 miles from camp, and this monster was still trailing us. I could hear it puffing and grunting, and it couldn’t have been more than 40 feet off to our side. I grabbed my still-panicking girlfriend and told her that she had to stop, or she was going to have a heart attack. Her chest was pounding in and out from crying and running. “We can’t stop it will kill us!” she insisted.
+
+I said to her if it wanted to kill us it would have done so already. I picked up a hefty branch and gave it to her, and then grabbed another one for myself. I told her to try and calm down a little. We would keep moving fast, but there was no way that we can continue to outrun this thing. At least now, we had a weapon.
+
+We kept walking fast, and my girlfriend kept sobbing. I could still hear the Bigfoot cracking and smashing its way through the brush, and I couldn’t help wondering why it wasn’t exposing itself or charging us. Maybe this was some crazy game, after all, it had hiding behind the trees when we first saw it. Even then, it could have rushed us right then and there and been done with it, but it hadn’t.
+
+After a few long minutes, I realized that I couldn’t hear it any more. Another half a mile later, I was convinced that it must have left. We stopped where we were and just stood there for a while, gasping and hugging and telling each other that everything was going to be fine.
+
+[Page 102]
+
+A little further on, the trail opened up slightly and we could see much further in most directions, and the Bigfoot was nowhere to be seen. Maybe it had just scared us away, and If that was the case, it had done its job well.
+
+When we got back to camp, I got an ambulance ride to get my finger splinted after we reported what had just happened to the park rangers. They were completely blown away by our report, and we could see them going into the trail as the ambulance was taking us out.
+
+I asked Debbie to tell me all the details that she could remember from the few moments they had seen the creature, and here is what she told me.
+
+When I first saw it, I saw only a very small piece of its head and one black eyeball before it ducked back behind a huge redwood. Based on the height of what I had seen at that time, I thought that it was about 4 feet tall. When it jumped, its height had doubled to maybe 7 or 8 feet in my mind. The area over which it had leapt had been at least 10 feet wide, and I don’t know anything that can do such a thing.
+
+During that jump, we saw it fairly well, and it was either reddish-blonde or a reddish-grey in color. The lighting had not been good enough to pinpoint the exact color. The hair on the head was noticeably longer than the hair covering the rest of its body. It had very long and muscular legs and arms, just like all the pictures you have seen through the years, and for the record, its feet were big. I could see the hair hanging off of them while it was in the air, and very briefly, I saw that its back and rump were covered in all kind of debris.
+
+As we began to run, I saw it again out of the corner of my eye, but only briefly. From that angle, I couldn’t glean anything more than I already had, but I will say that I don’t know how anything could run crashing through the brush like that thing did without being badly hurt.
+
+
+<div align="center"><b>UFO Abducts a Bigfoot at Dead Falls Lake</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 103-104</div>
+
+The Dead Falls Lake Affair
+
+Coming into this tale, I am going to warn you that this may be the freakiest sighting that I have ever heard. Follow along, as Marion Lane and her brother Chris weave this amazing story:
+
+In July of 1984, a group of about twenty people and the two of us, had planned to head into the Shasta National Forest and hike up to Dead Falls Lake for a little overnighter with guitars and beers. If you’ve never been there, Mount Eddy Lake and Dead Falls Lake sit in what I would call a bowl surrounded by mountain peaks. There isn’t much of a shoreline to speak of, instead, the surrounding hills and trees abruptly meet the edge of the water. It is a fantastic and desolate spot, and it’s a great destination for those who want to hike in and crash on a blanket once you can’t stay awake any longer.
+
+We began the night’s festivities and it was turning out to be a pretty good night. We had some campfire singalongs, some hotdogs, and quite a lot of beer.
+
+We first noticed the blue light at about 2am. This light was emanating from thousands of feet up, glowing over one of the northern peaks. Considering that there isn’t anything out here in this hour of the night aside from people like us, it was a bizarre sight. Needless to say, it had all of our attention. Some of us sat and others stood as we watched the blue light grow in intensity. It seemed as though the unknown source of the light was about to come over the peak.
+
+[Page 103]
+
+About ten minutes later, there it was. It was miles away, but we could now make out a large, glowing disk exuding what appeared to be a combination of extremely bright blue and white light. From a distance, it almost appeared like the disk was alive. I know this is really weird, but you will know why I mention it in a minute. If it hadn’t had our attention before, it certainly had our attention now.
+
+It slowly made its way over the peak and was gradually making its way down into the valley in which we were gathered. As it began its descent, beams of light started to emanate from different sides of the object. They moved from one side to the other, flashing on and off as it appeared to be scouring the terrain. Some members of the group were already getting antsy and afraid, especially the girls, but there was nowhere to run and hide, especially since the searchlights were so bright.
+
+It was getting closer and closer to our position. We realized that whatever it was could certainly see our blazing fire, so some of us started to throw dirt on the flames and squirting them with beer. Others filled empty bottles with water from the lake in order to extinguish it. It was difficult to gauge the distance and size of this object, but it was slowly coming towards the lake and the entire landscape was glowing beneath it.
+
+All of us could now see that the craft was organic. Now, it was glowing with a yellowish-white color, but bright blue still swirled around its base, which appeared like pigment being mixed into a can of fresh paint. It was beyond my wildest imagination. Another ten minutes passed when half of the group said that they were getting the heck out of there, and the rest of us stayed. In movies, the people who run always get attacked, and I wasn’t planning on being one of them.
+
+This craft had now reached other end of the lake, which was still a considerable distance away from us. By this time, I could now see that this disk was at least 200 feet across, when all of a sudden, it stopped and began to pulse, growing brighter and then dimmer, like a heartbeat. All of the searchlights had stopped moving, and a ring of fuzzy, multi-colored lights started to circle its outer edge. They were red, green, and yellow, and they weren’t sharp beams like the searchlights.
+
+Our fire was completely out now, and we were standing in the pitch dark, totally awed by what we were seeing, as the thing hovered over this one spot for almost 20 minutes. Suddenly, a wide column of powder blue light flashed from its base to the ground below as the craft continued to pulse. From our vantage point, it was little more than a speck, but there was something being drawn up from the ground within the tube of light. The thing stopped about midway between the ground and the craft, literally suspended in midair within the light.
+
+Everything stayed still for another 10 or 15 minutes, but then several other specks started to descend from the craft’s base. These specks were much smaller than the first. Again, from the distance we were, there was no way of telling what any of these things were. The descending specks stopped in the middle of the tube, right where the first thing was.
+
+[Page 104]
+
+After another half an hour of stillness, the specks that had descended from the craft were drawn back upward and vanished from our sight. However, the other one remained suspended in the middle of the tube of light. Suddenly, the craft stopped pulsing and began to glow brightly again, illuminating the entire lake area and the countryside below, and then it started to move. It glided slowly and silently over the lake, heading directly for us.
+
+Not a word was spoken among those who remained. We were awestruck and silent, staring in utter amazement. It was only a football field away and coming closer, and I could now see that this was a glowing structure. It was definitely a large disk, but it had to be 400 feet wide, not the 200 feet that I had originally thought. It was enormous. The shaft of blue light remained totally intact and unmoving as the ship itself moved over the lake.
+
+The water started to grow choppy, just like it would on a windy day; however, it was only choppy within the confines of where the light contacted the lakes surface. Everything around the perimeter was still calm. The light was drawing on and or disturbing the water as it passed over it.
+
+Now, I could see beyond the shadow of doubt, that the speck that had been lifted from the earth and into the tube of light, was a gigantic Bigfoot. It looked like it was in a state of suspended animation, being held in the light some 75 feet off the lakes surface. It didn’t move an inch and was completely aglow in the soft blue light.
+
+The saucer passed just to our east and we all turned like automatons, watching it move away. Suddenly, there was a bright flash of light, and it was all over. The disk was totally and completely gone. It had not flown away at a high rate of speed; it had vanished.
+
+We all stood in a daze for a few moments, almost as if we had been taken over by some type of mystic force while these events had unfolded. Seeing the Bigfoot motionless within the tube of light was unbelievable, to say the least, and what the connection was between it and the craft is still unknown to all of us. We simply saw what we saw.
+
+To stand in the open country and watch this silent, massive, glowing disc move across the landscape was intimidating. I mean, we all know jets, prop planes, ultralights, and rockets, but to behold something 400 feet in diameter moving at a snail’s pace and hovering motionless, while not so much as making a sound was mind-blowing. It had to run on some sort of inexhaustible energy source. The lights were so bright, and they never stopped pulsing and glowing. I mean, think about it. When we fly on a jetliner, there are the cabin lights and a few lights on the fuselage of the jet. This entire craft was a light, and it contained numerous other tremendously powerful lights within it as well.
+
+The entire skin of this thing was moving, or at least, that’s the way it appeared to our eyes. It was like liquid contained within some type of casing, moving plasma shifting and melting and swirling together.
+
+Well, well, well my readers. Bigfoot and spaceships. They saw what they saw, as the man said. Who am I to argue? That was a jaw-dropping account in anyone’s book, and it just so happens to be in mine.
+
+
+<div align="center"><b>Guide Observes a Giant Bigfoot Among Bears and High Tree Breaks</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 105-108</div>
+
+The Black Bear Incident
+
+The following account was told to me by a guide named Chase Redmond. Here is what Chase had to say:
+
+[Page 105]
+
+As you already know, I am a hunter who offers my guide services to paying customers. Let’s face it; if someone is ponying up several thousand dollars to hunt with me, I have an obligation to put forward my best effort in order to help them get what they came for. Sometimes, this means exposing my best hunting areas to total strangers. The area that I am about to talk about is one such place. All that I am willing to tell you is that this location is near the shore in the Pacific Northwest. This is my absolute favorite site for black bear hunting, and it is a former logging area located in the coastal hills. There are still many logging roads in this location which are well worn and easily accessible by four-wheeler, so you can scope out your hunt by truck fairly easily.
+
+There is one area in particular that looks like an atomic bomb went off. Your first thought would be that the loggers really messed this place up good, however, the reality is that the location’s appearance is actually the result of a massive landslide. This event was so large that it dragged entire trees right down to the shoreline. It is an incredible sight to see the power of nature’s fury. It is my general habit to go here and seek out active bears before parking and going out to continue the hunt on foot.
+
+Now, I’m not really giving up any of my trade secrets here. Every black bear hunter worth their salt knows that they mark their territories by snapping off tree tops, and it’s because of this that I actually came across Bigfoot. I already told you that there are many logging roads still available for use here, but many others are so overgrown on the sides that they are impassable unless you are on foot, and the bears make good use of these. I have scored many bears by walking down such trails, and when they are walking down them, the bears reach up and grab some low brush trees, snapping the tops down.
+
+I know you are more than likely already wondering, what does this have to do with Bigfoot? Well, the average bear in these parts is between four and five hundred pounds. When they stand up to snap a tree, the visible breaks are somewhere around 6 or 7 feet off the ground. The freshness of the break can be a very good indicator of what has been frequenting any trail in particular. It’s a simple enough tool in my bag of tricks. The trails in here are extremely hard-packed, so I typically won’t see any hardcore tracks; however, I will find superficial pad prints on the loose surface soil, and at best, these prints are a quarter of an inch deep.
+
+On this day, I was going into the area alone to prep for a hunt the following week with a paid client. I liked to save some time and try to narrow down the best locations to find our mark in advance. Of course, the clients know that there are no guarantees when hunting, but as a guide, you won’t get many repeat clients or recommendations if you don’t produce. At the very least, the clients want to see what they came for, and if they miss their shot, it’s not my fault.
+
+At this time, I will attempt to give you a picture of the area where the landslide had occurred. Visually, you are looking at a river of tree trunks and branches, piled one upon another just like Pickup Sticks dumped out onto the table. The bears actually can navigate over and through this mess of timber with great agility, and there are literally hundreds of creatures which have made this tangled maze their home.
+
+[Page 106]
+
+Now, let me get back to the trails for a moment. I was walking the trails looking for tree snaps when I ran across a break that was well out of my reach. Now, I can easily reach to seven feet, which is a height that would indicate the presence of a large bear in the area. However, this particular break must have been 16 feet from the ground. This tree had a very viable trunk of maybe 3 or 4 inches in diameter, and wouldn’t have been easy for even the largest bear to bend over. The typical bushes or small trees that the bears snap are about 2 inches thick at the most.
+
+The snap that I was looking at was fresh and viable. Think about this for a moment: I am an experienced hunter within the confines of an area that I know very well. I have spent hundreds and hundreds of hours tracking and hunting bear using this methodology. I do not suddenly see this break and assume that there is a 14 foot tall black bear running around in here. That is impossible. It also seemed to me that no man had come in here just to climb a skinny tree and mangle the top of it for fun. So, like any person would do, I wondered what might have been able to reach that height and break a tree.
+
+The next day, I returned to search for additional bears in the area. As I was walking one of the trails, I saw yet another high tree break, just like the one that I had seen the day before. Now that I had found two, I could safely declare that this was a pattern, not an accident. To me, it seemed as though something was mimicking what the bears were doing.
+
+Most of the old logging roads here overlook the area that had been logged, with the entire area now being filled with new growth. Rather than being empty fields, there are seas of small trees and bushes. The new trees range in height from ten to twenty feet tall, and this growth is, for the most part, dense and impassable. In a hundred years it will thin out to a certain degree, but for now, it is a jungle. It is extremely easy to accidentally stumble across a bear in there, and for that reason, most of my clients are very uneasy about following me through this brush, but they will follow where their guide leads.
+
+I spotted some bear in this new growth from an elevated logging road, so I went down into the brush to figure out where they might be traveling. I also came across some fresh scat and a number of tree breaks that marked their trail fairly easily.
+
+When I got back up to the truck, I decided to spend a little more time looking around with my glasses, and from my position by the side of the truck, I could look down into the sea of trees that I had just explored, and noticed some of the trees moving around, which is a sure indication that something was walking through them. I would never be able to spot a bear from up here, since they are far too low to the ground. The only time you do see them is on the trail, in the open brush, or when they are climbing on the log piles. This was not a bear.
+
+I looked more closely and began to see some flashes of color. Black and dark, reddish-brown spots appeared and disappeared as something continued moving through the trees. Now, mind you, the trees in the area were between ten and twenty feet tall, with the vast majority of them falling between eight and fourteen feet. Whatever I was seeing had to be clearing that height in order for me to occasionally lay eyes on it. I could see it was steadily moving, parting the trees out of its way as it did so.
+
+[Page 107]
+
+My hope was that I would soon be able to see it in full, once it reached the river of logs. At that point, it would either have to stop and retreat back into the woods or climb up onto the pile like a bear. I watched intently as it approached the end of the trees, and suddenly, there it was. A huge Bigfoot was climbing up onto the logs.
+
+The creature started walking around on the pile as though it was looking for something inside of the logs. Occasionally, it crouched down and reached inside of the heap, and every now and then, I would see it put its hand to its mouth after pulling something from the logs. It must have been getting some type of food from within the maze of fallen trees. Personally, I knew that there were birds’ nests, mice, and all sorts of small critters that made this maze of wood their home, but I couldn’t tell what this Bigfoot was actually eating.
+
+I was wondering why I had never seen it before, or seen the high tree breaks any of the other times I had frequented the area. Maybe it had recently moved into the area and was letting the bears know that it was around. Who knows what interaction it might have with the other animals? It is most definitely a mystery.
+
+The creature maneuvered with great dexterity around the logs like a child on the monkey bars. Its fur was long and shaggy, and now that it was in the open sunlight, it appeared to be predominantly blondish-red in color with darker undertones. From my vantage point and having seen glimpses of it going through the trees, I would have to say that it was close to, if not fully, twelve feet tall.
+
+At one point, I noticed a black bear coming up onto the trees maybe 100 yards away from the beast, and as the bear came up onto the pile, it froze before quickly climbing back down and scampering away. I now knew who the boss was, seeing that this bear didn’t want anything to do with the Bigfoot.
+
+When I took a moment to look directly at the Bigfoot’s face, I think that it either saw me or the sunlight reflecting off my binoculars. Whichever it was made the beast stop what it was doing and climb back down into the trees. After a few minutes, I was able to see a little bit of its color and wondered if it had just ducked into the cover to observe me.
+
+Perhaps 10 minutes or so had passed, when I could once again see the trees and brush shaking, indicating it was moving away from me. I watched this pattern of movement for several hundred yards until the Bigfoot reached a hillside, when I saw it emerge from the dense brush and walk in the open until it was completely out of sight. At that point, it was easily more than 1500 yards away from my position. Even though I still hunt there, I have never seen it again, but from time to time, I still encounter some fresh, high tree breaks. I get the feeling that it really doesn’t want anything to do with me or you.
+
+[Page 108]
+
+I know there is plenty of food around here because of the ongoing dense bear population. We hunt many bear in here, and for every one we take down, there is another one to take its place in the food chain. Now, I know you want to hear about the details, and I am sure that you’ve heard most of these before. It had to have been 4 feet wide at the mid-section and maybe 6 feet at the shoulders. These creatures are totally out of the box when it comes to human comprehension. It must be like when someone first comes face to face with a Bengal tiger or a large crocodile; you are immediately overwhelmed by how big they really are. When on a hunt in Africa, I saw a croc that was 6 feet wide at the middle and 25 feet long. Seeing this Bigfoot was that type of encounter. It is a once in a lifetime event. Think about it for a moment. How many of the 6 billion people on earth have seen a 25 foot long crocodile, and how many do you think will see a 12 foot tall Bigfoot? To me it’s all the same, being simply a matter of time and chance.
+
+This thing exhibited great dexterity on the log pile. Its ability to balance and maneuver in and around the logs was amazing, and it appeared to be very comfortable doing so. You and I would be stumbling and trying not to fall, but this Bigfoot was walking around on a random pile of broken limbs and shattered trees like it was no chore at all. Also, the way it was able to walk through this dense woodland for long distances with so little visible effort, that it might as well have been crossing a field of wheat, showed me that the sheer strength and stamina of these beasts is off the charts.
+
+When I had the glasses on it and we were face-to-face for a moment, I could see that its lower jaw was very wide, and I could also tell that a fair amount of its darkly-colored face had no hair on it. As far as its leg, arm, and back muscles go, just visualize a large humans and multiply that bulk twenty times over. The thing was absolutely enormous in every sense of the word. Its upper arm looked like a bull’s thigh, and one of these creatures could likely pick the tail end of a car up with ease. Also the size of its feet added to its great balance, and ability to walk amongst the logs, and at no point did it appear to lose balance or stumble. It was an incredible sight.
+
+
+<div align="center"><b>Turkey Hunters Confront a Bigfoot Emerging from the Fog</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 108-110</div>
+
+The Turkey Hunter’s Sighting
+
+This account came to me from Danny Rodriguez, a turkey hunter working the western Pennsylvania woods. Here is Danny’s story:
+
+There are 3 of us who get together on a property in Pennsylvania every turkey season. I have been hunting here for about 12 or 13 years. We pay the landowner a nominal fee to be there, and we typically throw him a nice bird at the hunt’s end. His property is a large tract of land that butts up against another family’s farm, and all in all, this tract totals about 300 acres.
+
+Both of these landholdings are against a semi-mountainous area, and are mostly comprised of heavily-wooded hills and some low-lying fields, predominantly made up of low grasses and some patches of scrubby brush. Part of this area used to be farmland, but the area in which we hunt is mostly the rolling hills, which are patched with deep, wheat-like grass, trees, and some open fields of green grass. We keep coming back because we never go home empty-handed.
+
+[Page 109]
+
+On our first morning’s set up in 1999, we had positioned ourselves with our backs against the trees in the usual manner, facing a field where we had had very good success the previous year. I must mention to you that the Real Tree camo that we all wear, is just about as perfect a match for this land’s tree cover as you can imagine. If you didn’t know that we were there, I guarantee you that you would walk right by us, and never know that we were sitting next to you. That’s how perfect the blend is against this bark and cover; we are virtually invisible.
+
+We began our calls and heard a number of birds respond. After about maybe an hour or so, a couple of nice toms entered the field behind some hens, and moments later, my friend Jimmy had bagged our first bird of the trip. After the first shots are fired, you are pretty much out of luck for the rest of day, unless you are game to come back in the later part of the afternoon.
+
+The second morning, we had set up the same way as we had the day before. Our habit was to spread out in a line, with each of us selecting the largest tree or grouping of trees we could find to lean against. We get ourselves comfortable, and then the calling and waiting begins. On this particular morning, there was a heavy, damp fog laying in the valley, which severely diminished our visibility.
+
+Now typically one guy in a group is labeled the caller. It’s never a good idea to have several men calling all over the place and stepping on each other’s toes, which would completely destroy the realism of what we are trying to create. On this particular morning, I was doing the calling.
+
+We had heard a number of birds, but then everything had come to a standstill. This is not all that unusual when you are turkey hunting, but this location is usually busy, and we had been batting a thousand here for a dozen years. Typically, when we called, they came. Now, whether or not they would come in range for a shot is another story all together, but most of the time, they would at the very least come into view. However, this day all of the responses had stopped.
+
+While we were lying in wait, the fog was thickening. The forecast was for heavy rain later in the day, but our visibility had already dropped to 40 yards or less, and it seemed like it was going to continue to close in on us. I kept calling periodically, but we still heard nothing, so we sat and waited. It’s rare, but sometimes you don’t get much of a vocal response, and they will still appear.
+
+It was about 7:30 when I noticed a shadowy figure moving just in the fringe of our visibility at the time. If it had moved 3 feet further away, it would have been completely obscured by the fog, but I saw it and I am sure the other guys did as well. My initial thought was that it was a big guy in a Ghillie suit, since the silhouette of the figure was so enormous. However, we knew that there was nobody else authorized by the owner to be where we were. That is not to say that a loose cannon couldn’t be running around out here, but a guy like that could easily be shot.
+
+The silhouette was totally obscured from view by the fog for a brief moment, before it came stepping right out of it again, like an actor emerging from behind the curtain, or a magician walking through a cloud of smoke. It was walking right toward me. I am sure that the boys saw it too, and a fear came over me that I can’t describe.
+
+[Page 110]
+
+Of course, I had my 12 gauge loaded and ready, but I just couldn’t drop the gun and shoot. Whatever it was, it had reached a point about 30 yards away before I said, “Hey man! What the hell do you think you’re doing?” Just as I attempted to address the dude, a face came into focus. It was not a man at all. It was a Bigfoot. I knew that immediately, but I couldn’t retrieve my words. I could see large black eyes and a big mouth. Its face was ancient-looking and partially covered in hair, and the visible skin was weathered and worn. This Bigfoot had to be at least 7 feet tall and maybe 4 feet wide. I could see that its hair or fur was really long like that of a Shetland pony, and as it came closer, there was a distinct rotten smell that didn’t quite register at the time.
+
+In my peripheral vision, I could see the others guys getting to their feet. And when they did so, this thing let out a loud roar like a pissed off lion, and as it roared, it kind of twisted its head and moved its arms. I guess it was pissed off, but I wondered if this movement helped it to roar. Maybe two seconds after it roared, it turned and disappeared into the fog with a few fast steps.
+
+The guys moved over quickly with their guns at the ready. We all knew this was a monster not a stray hunter, and once it had disappeared, they ran over to me, asking, “What the hell was that?” We looked around, catching sight of the impressions that the thing’s big, hairy feet had left in the grass. We could see exactly where it had come from and where it had gone. Even though we could have tracked it pretty easily, none of us were willing to go looking for this thing in the fog.
+
+I was just glad it hadn’t attacked. The quickness with which it had moved away showed me that it could have been on me in a split second. The creature was so big and thick that I’m not even sure my 12 gauge could have stopped it.
+
+As we made our way back to the owner’s house, each of us kept looking over our shoulders, wondering if we were going to be rushed by this thing. When we made it to the house, the owner was amazed at our tale, and he said that there had always been stories and rumors of such creatures in the state, but he had never seen anything himself.
+
+He added that these types of things were always spoken about in private circles for fear of what others might think. It was certainly a day that none of us will ever forget.
+
+<div align="center"><b>Salesman Sees Little Girl Transform into a Monster on Quartz Mountain</b></div>
+<div align="center">"Bigfoot Terror in the Woods: Sightings and Encounters Volume I" Pages 111-112</div>
+
+The Shape-Shifter Encounter
+
+Ernest Smitgowski got a little more than he bargained for while on a routine sales trip to Spokane. I invite you to follow along as Ernest spins his fantastic tale:
+
+I visited Spokane, Washington on a sales trip in the summer of 2004. I was then, as I am now, employed by a major electronics distribution firm that had a number of clients and prospects in the region. This was a four-day trip, which depending on the client, typically involves a little wining and dining, as well as other activities. A fair amount of my clients are younger and game for just about anything. I have hiked, skied, and fished with more than a few of them, but on this particular day, I had no takers, so I was braving the Quartz Mountain Lookout Trail alone. I was told that there were some fantastic views of the surrounding area once you reach the fire lookout station.
+
+[Page 111]
+
+Now, as I begin, I must tell you that this isn’t called Quartz Mountain for nothing. In fact, the mountain is predominantly made up of quartz. In the world of the paranormal, quartz and limestone are said to be engines for weird and strange occurrences. I mention this now, because what I am about to unveil to you and your readers is very strange indeed.
+
+I began my day’s hike up to the fire tower. There are actually a number of trails that you can take up the mountain, all of which vary on the level of difficulty. Relatively speaking, the first three-quarters of the hike was uneventful. It was on the last quarter where the trail started to tighten up and becomes closely flanked by hanging branches and trees.
+
+Once I had made it to the top, I climbed up into the fire tower to have a look around and eat a bite of food, and from that point, four lakes were visible sprawling across the surrounding area. I knew all their names: Spirit, Hauser, Newman, and Liberty. I was checking out the lay of the land with my binoculars when my eyes locked on to something white moving around on a grassy field far below me. It was too far to tell for certain, but it appeared to be a small girl wearing a white dress with no shoes on. She was frolicking in this field just like any other small child would.
+
+I watched her spin and run around the field for almost 20 minutes, and I kept saying to myself that at any moment, someone would surely come into the field to get her. I mean, she couldn’t be out here alone. Unless, of course, she had somehow gotten lost.
+
+Finally, my fatherly instincts kicked in and I decided that I had to go down and try to locate her. What if she was really lost? She could die out here and nobody would know. I couldn’t walk away from here without knowing she was okay. I estimated the distance between us and figured out which trail was the most direct before I departed from the fire station heading in her direction.
+
+Once I entered the trails, I could no longer keep an eye on her. It was a blind hike downhill, and I could only hope that I was heading in the right direction. A strong sense of urgency had welled up within me about this little girl, and I was going down the slope at a frantic pace, hoping that the forest would break open revealing the field as quickly as possible.
+
+After about 30 minutes, the forest gave way and I entered a field. Immediately, I started to look in every direction, searching for the small child, but I didn’t see her anywhere. I thought that maybe I had found the wrong field.
+
+I was about to continue onward, when I heard what sounded like a little girl singing but it was very faint. Frantically, I started to look around in every direction, when suddenly, standing far out in the field was the little girl. I couldn’t understand it; I had just looked in that same direction and saw nothing. There was nothing in this field to hide behind, yet there she was, dancing around as though she had been standing there all along. She couldn’t have just run out there in a matter of seconds.
+
+For a moment, I could only stand where I was and question my own sanity. After a long moment, I yelled, “Little girl, are you lost?”
+
+She didn’t respond at all. She just kept skipping, dancing, and singing. I shouted again, taking care to raise my voice. “Hey there! Little girl, are you alright?”
+
+[Page 112]
+
+Suddenly, she stopped dancing and just stood with her back to me. My hair is actually standing up as I am telling you this, because what happens next is out of this world. That little girl, wearing a white flowing dress and no shoes, was maybe 80 to 100 yards away from me, and she suddenly started to transform before my very eyes. The dress seemed to melt away from her as she grew and began to turn dark. I wanted to run, but I was frozen where I stood.
+
+There, right where that girl had been standing mere seconds ago, was a monster. I grabbed the sides of my head and fell to the ground. I thought that I must have had a stroke, and I was going to die out here – delusional and alone. All I could do was lie there in the grass, holding my head and trying to sort out the pieces of what was happening.
+
+After a time, I rolled onto my side and sat up. Once again, my eyes fell upon that monster as it walked away. It crossed the length of the field before disappearing into the trees. Even when it was gone, I remained where I was. Even now, I am unsure how long I sat there, not being able to come to grips with what I had just seen.
+
+At some point, I managed to get my feet back under me and made my way back to my car. That afternoon, I walked into a doctor’s office. I wasn’t sure of what I was going to say, but I had to make sure that I was okay. I was eventually called in, and the doctor asked me what he could help me with.
+
+I spun my yarn quickly and with a great deal of personal shame. He told me that the mind can do funny things, and he then asked me if I had been working long hours and travelling a lot. He must have thought I was off my rocker and popping some pills, and frankly, I couldn’t blame him. Who would believe my story?
+
+The doctor wrote me a prescription for something to help me sleep, telling me to follow up with my regular doctor when I got back home. To this day, I cannot shake the events of that afternoon. It haunts me like a reoccurring nightmare.
+
+Well, my dear readers, there you have it. Yet another incredible testimonial from a man who had absolutely nothing to gain by telling his story to me. He’s a credible, well-spoken, energetic and well educated man, and the father of three to boot. He had found himself trapped as he went about his normal day, trapped between reality and something more. What is it that people are seeing and experiencing? The whole world cannot have simply gone mad. Or could it?
