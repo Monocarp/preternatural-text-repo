@@ -156,11 +156,9 @@
             "Moose": {}
         },
         "Feline": {},
-        "Reptilian": {
-            "_stories": [
-                "2001 Cape Town Festival Vision of Reptilians, Robots, Greys, and Ganesha"
-            ]
-        }
+        "Reptilian": [
+            "2001 Cape Town Festival Vision of Reptilians, Robots, Greys, and Ganesha"
+        ]
     },
     "Demonic Activity": {
         "Obsession": {
@@ -2396,6 +2394,7 @@
         "Sheffield Restaurant Witness\u2019s Saucer Sighting, Psychic Noises, Moving Objects, and Dead Husband\u2019s Apparition"
     ],
     "Psychic Phenomena": {
+        "Communication": [],
         "Electromagnetic Phenomena": [
             "Electromagnetic Response To NDE",
             "Electrical Interference Around Multiple Abductees and Witnesses"
