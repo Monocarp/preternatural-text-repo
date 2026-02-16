@@ -2407,11 +2407,9 @@
         "Sheffield Restaurant Witness\u2019s Saucer Sighting, Psychic Noises, Moving Objects, and Dead Husband\u2019s Apparition"
     ],
     "Psychic Phenomena": {
-        "Automatic Writing": {
-            "_stories": [
-                "Florida Housewife\u2019s Documented Psychic Talents, Stigmata, Apports, and Later Orange Globe UFOs"
-            ]
-        },
+        "Automatic Writing": [
+            "Florida Housewife\u2019s Documented Psychic Talents, Stigmata, Apports, and Later Orange Globe UFOs"
+        ],
         "Communication": [
             "Abductee\u2019s Post-Encounter Telepathy and Precognition with Childhood Friend"
         ],
@@ -2422,7 +2420,11 @@
         "Healing": [
             "Florida Housewife\u2019s Documented Psychic Talents, Stigmata, Apports, and Later Orange Globe UFOs"
         ],
-        "Occult Knowledge": {},
+        "Occult Knowledge": {
+            "_stories": [
+                "Florida Housewife\u2019s Documented Psychic Talents, Stigmata, Apports, and Later Orange Globe UFOs"
+            ]
+        },
         "Precognition": {},
         "Prophecy": [
             "Florida Housewife\u2019s Documented Psychic Talents, Stigmata, Apports, and Later Orange Globe UFOs"
