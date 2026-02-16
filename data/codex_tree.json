@@ -1315,7 +1315,11 @@
         },
         "Contactees": {
             "Message Received": {
-                "Occult Knowledge": {}
+                "Occult Knowledge": {
+                    "_stories": [
+                        "Reinerio Hernandez\u2019s 2013 Visionary Mandate and Time Gain in Traffic"
+                    ]
+                }
             },
             "New Psychical Ability": {
                 "Automatic Writing": {
