@@ -1905,8 +1905,7 @@
             "Ritzmann\u2019s Mirror Glyph and Waxy Substance",
             "Randles\u2019s Witnesses Reporting Water Falling from Mid-Air",
             "Harvey-Wilson\u2019s Witness and the Table Oozing Water with Moved Stove",
-            "Rita Malley Receives UFO-Borne Message of Imminent Death",
-            "Facius Cardan\u2019s 1491 Encounter with Seven Visitors and Teaching on the Soul"
+            "Rita Malley Receives UFO-Borne Message of Imminent Death"
         ]
     },
     "Forteana": [
@@ -2342,11 +2341,9 @@
         ]
     },
     "Non-Human Visitation": {
-        "Communication of Occult Knowledge": {
-            "_stories": [
-                "Facius Cardan\u2019s 1491 Encounter with Seven Visitors and Teaching on the Soul"
-            ]
-        },
+        "Communication of Occult Knowledge": [
+            "Facius Cardan\u2019s 1491 Encounter with Seven Visitors and Teaching on the Soul"
+        ],
         "_stories": [
             "Facius Cardan\u2019s 1491 Encounter with Seven Visitors and Teaching on the Soul"
         ]
