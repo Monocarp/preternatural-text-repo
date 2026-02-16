@@ -2394,7 +2394,11 @@
         "Sheffield Restaurant Witness\u2019s Saucer Sighting, Psychic Noises, Moving Objects, and Dead Husband\u2019s Apparition"
     ],
     "Psychic Phenomena": {
-        "Communication": [],
+        "Communication": {
+            "_stories": [
+                "Abductee\u2019s Post-Encounter Telepathy and Precognition with Childhood Friend"
+            ]
+        },
         "Electromagnetic Phenomena": [
             "Electromagnetic Response To NDE",
             "Electrical Interference Around Multiple Abductees and Witnesses"
