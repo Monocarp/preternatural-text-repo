@@ -230,12 +230,37 @@ async def startup():
         except Exception as e:
             log.warning(f"Failed to cleanup Haystack orphaned entries: {e}")
     
-    # 6. Warm up embedding model
-    log.info("Warming up embedding model...")
-    
+    # 6. Auto-rebuild search index if new stories are missing
     if USE_DIRECT_SEARCH:
         from search.engine import get_search_engine
         engine = get_search_engine()
+        indexed_titles = {
+            m.get("title")
+            for m in engine.faiss_index.metadata.values()
+            if m and m.get("title")
+        }
+        dict_titles = set(app_state.stories_dict.keys())
+        missing = dict_titles - indexed_titles
+        if missing:
+            log.info(
+                f"Search index is missing {len(missing)} stories – "
+                f"triggering full rebuild. Sample: {list(missing)[:5]}"
+            )
+            from search.engine_compat import rebuild_search_index
+            rebuild_search_index()
+            log.info("Search index rebuild complete")
+        else:
+            log.info(
+                f"Search index up-to-date: {len(indexed_titles)} indexed, "
+                f"{len(dict_titles)} in stories_dict"
+            )
+    
+    # 7. Warm up embedding model
+    log.info("Warming up embedding model...")
+    
+    if USE_DIRECT_SEARCH:
+        from search.engine import get_search_engine as _get_engine
+        engine = _get_engine()
         engine.warm_up()
         test_results = engine.search("warmup query", top_k=1)
         log.info(f"Direct search engine warmed up (test returned {len(test_results)} results)")
