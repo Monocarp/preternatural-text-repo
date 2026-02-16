@@ -230,9 +230,11 @@ async def startup():
         except Exception as e:
             log.warning(f"Failed to cleanup Haystack orphaned entries: {e}")
     
-    # 6. Auto-rebuild search index if new stories are missing
-    #    The rebuild is DEFERRED to a background thread so the server can
-    #    bind its port immediately and satisfy Render's health-check timeout.
+    # 6. Auto-index missing stories (incremental, non-destructive)
+    #    Instead of a full rebuild (which wipes the index and takes ~60 min),
+    #    we only embed & add stories that are missing from the current index.
+    #    The work runs in a background thread so the server binds its port
+    #    immediately and satisfies Render's health-check timeout.
     _rebuilding_in_background = False
     if USE_DIRECT_SEARCH:
         from search.engine import get_search_engine
@@ -247,20 +249,53 @@ async def startup():
         if missing:
             log.info(
                 f"Search index is missing {len(missing)} stories – "
-                f"scheduling background rebuild. Sample: {list(missing)[:5]}"
+                f"scheduling background incremental index. "
+                f"Sample: {list(missing)[:5]}"
             )
             import asyncio, concurrent.futures
             _rebuild_executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
 
-            def _background_rebuild():
+            def _background_index_missing():
+                """Add only the missing stories to the existing index."""
                 try:
-                    from search.engine_compat import rebuild_search_index
-                    rebuild_search_index()
-                    log.info("Background search index rebuild complete")
+                    from search.models import StoryDocument
+                    docs = []
+                    for title in missing:
+                        story_data = app_state.stories_dict.get(title)
+                        if not story_data:
+                            continue
+                        doc_id = f"{story_data['book_slug']}_{title}"
+                        content_parts = [title]
+                        keywords = story_data.get("keywords", "")
+                        if keywords:
+                            content_parts.append(keywords)
+                        content = " | ".join(content_parts)
+                        meta = {
+                            "title": title,
+                            "book": story_data["book_slug"],
+                            "pages": story_data.get("pages", ""),
+                            "keywords": keywords,
+                            "start_char": story_data.get("start_char", 0),
+                            "end_char": story_data.get("end_char", 0),
+                            "type": "story",
+                        }
+                        docs.append(StoryDocument(
+                            id=doc_id, content=content, meta=meta,
+                            embedding=None, score=0.0,
+                        ))
+                    if docs:
+                        count = engine.add_documents(docs)
+                        engine.save()
+                        log.info(
+                            f"Background incremental index complete – "
+                            f"added {count} stories (total now: {engine.document_count})"
+                        )
+                    else:
+                        log.info("No documents to add after filtering")
                 except Exception as e:
-                    log.error(f"Background search index rebuild failed: {e}", exc_info=True)
+                    log.error(f"Background incremental index failed: {e}", exc_info=True)
 
-            asyncio.get_event_loop().run_in_executor(_rebuild_executor, _background_rebuild)
+            asyncio.get_event_loop().run_in_executor(_rebuild_executor, _background_index_missing)
             _rebuilding_in_background = True
         else:
             log.info(
