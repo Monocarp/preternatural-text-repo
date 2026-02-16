@@ -231,6 +231,9 @@ async def startup():
             log.warning(f"Failed to cleanup Haystack orphaned entries: {e}")
     
     # 6. Auto-rebuild search index if new stories are missing
+    #    The rebuild is DEFERRED to a background thread so the server can
+    #    bind its port immediately and satisfy Render's health-check timeout.
+    _rebuilding_in_background = False
     if USE_DIRECT_SEARCH:
         from search.engine import get_search_engine
         engine = get_search_engine()
@@ -244,27 +247,35 @@ async def startup():
         if missing:
             log.info(
                 f"Search index is missing {len(missing)} stories – "
-                f"triggering full rebuild. Sample: {list(missing)[:5]}"
+                f"scheduling background rebuild. Sample: {list(missing)[:5]}"
             )
-            from search.engine_compat import rebuild_search_index
-            rebuild_search_index()
-            log.info("Search index rebuild complete")
+            import asyncio, concurrent.futures
+            _rebuild_executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+
+            def _background_rebuild():
+                try:
+                    from search.engine_compat import rebuild_search_index
+                    rebuild_search_index()
+                    log.info("Background search index rebuild complete")
+                except Exception as e:
+                    log.error(f"Background search index rebuild failed: {e}", exc_info=True)
+
+            asyncio.get_event_loop().run_in_executor(_rebuild_executor, _background_rebuild)
+            _rebuilding_in_background = True
         else:
             log.info(
                 f"Search index up-to-date: {len(indexed_titles)} indexed, "
                 f"{len(dict_titles)} in stories_dict"
             )
     
-    # 7. Warm up embedding model
-    log.info("Warming up embedding model...")
-    
-    if USE_DIRECT_SEARCH:
-        from search.engine import get_search_engine as _get_engine
-        engine = _get_engine()
+    # 7. Warm up embedding model (skip if rebuild is running – it loads the model itself)
+    if USE_DIRECT_SEARCH and not _rebuilding_in_background:
+        log.info("Warming up embedding model...")
         engine.warm_up()
         test_results = engine.search("warmup query", top_k=1)
         log.info(f"Direct search engine warmed up (test returned {len(test_results)} results)")
-    else:
+    elif not USE_DIRECT_SEARCH:
+        log.info("Warming up embedding model...")
         from utils import both_pipeline
         dummy_results = both_pipeline.run({
             "embedder": {"text": "warmup query"},
