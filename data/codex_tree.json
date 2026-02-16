@@ -1313,7 +1313,11 @@
         "Contactees": {
             "New Psychical Ability": {
                 "Automatic Writing": {
-                    "Occult Knowledge": []
+                    "Occult Knowledge": {
+                        "_stories": [
+                            "Gerry Armstrong\u2019s School-Skipping Darkness, Missing Hours, and Alien Contact"
+                        ]
+                    }
                 },
                 "Foreknowledge": [
                     "Abductee\u2019s Post-Encounter Telepathy and Precognition with Childhood Friend"
