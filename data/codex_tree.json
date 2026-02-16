@@ -1312,11 +1312,9 @@
         },
         "Contactees": {
             "New Psychical Ability": {
-                "Foreknowledge": {
-                    "_stories": [
-                        "Abductee\u2019s Post-Encounter Telepathy and Precognition with Childhood Friend"
-                    ]
-                }
+                "Foreknowledge": [
+                    "Abductee\u2019s Post-Encounter Telepathy and Precognition with Childhood Friend"
+                ]
             },
             "_stories": [
                 "Contactee Milkman on Sydney Beach Addressed Telepathically by Space-Suited Men",
@@ -2343,6 +2341,7 @@
             "Enocia\u2019s Childhood Accident, OBE, and Mystical Realm"
         ]
     },
+    "Non-Human Visitation": [],
     "OBEs": {
         "Entity Encountered": {
             "Allegedly Human": {
