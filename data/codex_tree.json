@@ -1898,7 +1898,6 @@
             "Ritzmann\u2019s Mirror Glyph and Waxy Substance",
             "Randles\u2019s Witnesses Reporting Water Falling from Mid-Air",
             "Harvey-Wilson\u2019s Witness and the Table Oozing Water with Moved Stove",
-            "Abductee\u2019s Post-Encounter Telepathy and Precognition with Childhood Friend",
             "Rita Malley Receives UFO-Borne Message of Imminent Death",
             "Facius Cardan\u2019s 1491 Encounter with Seven Visitors and Teaching on the Soul"
         ]
@@ -2394,11 +2393,9 @@
         "Sheffield Restaurant Witness\u2019s Saucer Sighting, Psychic Noises, Moving Objects, and Dead Husband\u2019s Apparition"
     ],
     "Psychic Phenomena": {
-        "Communication": {
-            "_stories": [
-                "Abductee\u2019s Post-Encounter Telepathy and Precognition with Childhood Friend"
-            ]
-        },
+        "Communication": [
+            "Abductee\u2019s Post-Encounter Telepathy and Precognition with Childhood Friend"
+        ],
         "Electromagnetic Phenomena": [
             "Electromagnetic Response To NDE",
             "Electrical Interference Around Multiple Abductees and Witnesses"
