@@ -1314,7 +1314,9 @@
             ]
         },
         "Contactees": {
-            "Message Received": [],
+            "Message Received": {
+                "Occult Knowledge": []
+            },
             "New Psychical Ability": {
                 "Automatic Writing": {
                     "Occult Knowledge": [
