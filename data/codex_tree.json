@@ -2342,7 +2342,11 @@
         ]
     },
     "Non-Human Visitation": {
-        "Communication of Occult Knowledge": [],
+        "Communication of Occult Knowledge": {
+            "_stories": [
+                "Facius Cardan\u2019s 1491 Encounter with Seven Visitors and Teaching on the Soul"
+            ]
+        },
         "_stories": [
             "Facius Cardan\u2019s 1491 Encounter with Seven Visitors and Teaching on the Soul"
         ]
