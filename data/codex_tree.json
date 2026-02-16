@@ -1315,7 +1315,11 @@
         },
         "Contactees": {
             "Message Received": {
-                "Future Events": [],
+                "Future Events": {
+                    "_stories": [
+                        "Rita Malley Receives UFO-Borne Message of Imminent Death"
+                    ]
+                },
                 "Occult Knowledge": [
                     "Reinerio Hernandez\u2019s 2013 Visionary Mandate and Time Gain in Traffic"
                 ]
