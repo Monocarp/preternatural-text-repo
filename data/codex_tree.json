@@ -129,7 +129,11 @@
             ],
             "Sasquatch": {
                 "Attack": {
-                    "Disappearance": []
+                    "Disappearance": {
+                        "_stories": [
+                            "Logging Boss Vanishes After Fuel Drums Are Crushed and Hurled Downhill"
+                        ]
+                    }
                 },
                 "_stories": [
                     "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians",
