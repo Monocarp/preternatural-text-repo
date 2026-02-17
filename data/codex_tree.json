@@ -128,7 +128,9 @@
                 "Horned Hairy Biped Near Tennessee Burial Sites And Half-Man Half-Dog Demanding Reburial Of Artifacts"
             ],
             "Sasquatch": {
-                "Attack": [],
+                "Attack": {
+                    "Disappearance": []
+                },
                 "_stories": [
                     "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians",
                     "General Description of Child Changelings and Nonhuman Abductors",
