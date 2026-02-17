@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useSwipeable } from 'react-swipeable'
 import apiClient from '../utils/api'
@@ -67,6 +67,7 @@ export default function BookDetailPage() {
   const [loadingPreview, setLoadingPreview] = useState(false)
   const [previewMode, setPreviewMode] = useState<'story' | 'context'>('story')
   const [showPreview, setShowPreview] = useState(false)
+  const previewRef = useRef<HTMLDivElement>(null)
 
   const swipeHandlers = useSwipeable({
     onSwipedRight: () => {
@@ -150,6 +151,22 @@ export default function BookDetailPage() {
     setPreviewMode('story')
   }, [selectedStory?.title])
 
+  // After context preview loads, scroll to the highlighted story
+  useEffect(() => {
+    if (previewHtml && previewMode === 'context' && previewRef.current) {
+      // Small delay to let dangerouslySetInnerHTML render
+      const timer = setTimeout(() => {
+        const container = previewRef.current
+        const highlight = container?.querySelector('#story-highlight') as HTMLElement | null
+        if (container && highlight) {
+          // Calculate offset relative to scrollable container and scroll there
+          container.scrollTop = highlight.offsetTop - container.offsetTop - 20
+        }
+      }, 100)
+      return () => clearTimeout(timer)
+    }
+  }, [previewHtml, previewMode])
+
   // Load inline preview content
   const loadPreview = async (mode: 'story' | 'context') => {
     if (!selectedStory) return
@@ -163,7 +180,13 @@ export default function BookDetailPage() {
         start_char: selectedStory.start_char,
         end_char: selectedStory.end_char,
       })
-      setPreviewHtml(res.data.html)
+      let html = res.data.html
+      // Strip backend's fixed-height scroll container so mobile's own container controls scrolling
+      if (mode === 'context') {
+        html = html.replace(/height:\s*500px;\s*/g, '')
+        html = html.replace(/overflow-y:\s*scroll;\s*/g, '')
+      }
+      setPreviewHtml(html)
     } catch (err) {
       console.error('Error loading preview:', err)
       setPreviewHtml('<p class="text-red-400">Failed to load story content</p>')
@@ -456,6 +479,7 @@ export default function BookDetailPage() {
                   ) : previewHtml ? (
                     <div className="relative">
                       <div
+                        ref={previewRef}
                         className="max-h-64 overflow-y-auto px-4 py-3"
                         style={{ overscrollBehavior: 'contain' }}
                       >
