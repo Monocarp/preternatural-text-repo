@@ -127,17 +127,20 @@
             "Other": [
                 "Horned Hairy Biped Near Tennessee Burial Sites And Half-Man Half-Dog Demanding Reburial Of Artifacts"
             ],
-            "Sasquatch": [
-                "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians",
-                "General Description of Child Changelings and Nonhuman Abductors",
-                "Don Worley\u2019s Contactee Sue Jones: Para-Apes, Deceased Humans, Wood Sprites, and a Brownie",
-                "Rendlesham Forest Hauntings and Nearby Sutton Hoo Burial Mounds",
-                "Maeroero Sitting on Stones Near Owaka Farm",
-                "The Michigan Upper Peninsula Bigfoot Attack on Camp and Truck",
-                "Bigfoot Kills a Black Bear Near Corbin Cabin in Shenandoah National Park",
-                "Bigfoot (\u201cHairy Man\u201d) Seen Near Lake and Later Announced by Terrifying Howl in Fitzpatrick Wilderness",
-                "Logging Boss Vanishes After Fuel Drums Are Crushed and Hurled Downhill"
-            ]
+            "Sasquatch": {
+                "Attack": [],
+                "_stories": [
+                    "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians",
+                    "General Description of Child Changelings and Nonhuman Abductors",
+                    "Don Worley\u2019s Contactee Sue Jones: Para-Apes, Deceased Humans, Wood Sprites, and a Brownie",
+                    "Rendlesham Forest Hauntings and Nearby Sutton Hoo Burial Mounds",
+                    "Maeroero Sitting on Stones Near Owaka Farm",
+                    "The Michigan Upper Peninsula Bigfoot Attack on Camp and Truck",
+                    "Bigfoot Kills a Black Bear Near Corbin Cabin in Shenandoah National Park",
+                    "Bigfoot (\u201cHairy Man\u201d) Seen Near Lake and Later Announced by Terrifying Howl in Fitzpatrick Wilderness",
+                    "Logging Boss Vanishes After Fuel Drums Are Crushed and Hurled Downhill"
+                ]
+            }
         },
         "Canine": {
             "Chupacabra": {},
