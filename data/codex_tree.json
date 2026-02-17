@@ -129,11 +129,9 @@
             ],
             "Sasquatch": {
                 "Attack": {
-                    "Disappearance": {
-                        "_stories": [
-                            "Logging Boss Vanishes After Fuel Drums Are Crushed and Hurled Downhill"
-                        ]
-                    }
+                    "Disappearance": [
+                        "Logging Boss Vanishes After Fuel Drums Are Crushed and Hurled Downhill"
+                    ]
                 },
                 "_stories": [
                     "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians",
@@ -143,8 +141,7 @@
                     "Maeroero Sitting on Stones Near Owaka Farm",
                     "The Michigan Upper Peninsula Bigfoot Attack on Camp and Truck",
                     "Bigfoot Kills a Black Bear Near Corbin Cabin in Shenandoah National Park",
-                    "Bigfoot (\u201cHairy Man\u201d) Seen Near Lake and Later Announced by Terrifying Howl in Fitzpatrick Wilderness",
-                    "Logging Boss Vanishes After Fuel Drums Are Crushed and Hurled Downhill"
+                    "Bigfoot (\u201cHairy Man\u201d) Seen Near Lake and Later Announced by Terrifying Howl in Fitzpatrick Wilderness"
                 ]
             }
         },
