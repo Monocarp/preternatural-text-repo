@@ -9,6 +9,7 @@ Should only be called on server startup or explicit reload.
 import os
 import json
 import time
+import hashlib
 import logging
 from datetime import datetime
 
@@ -225,6 +226,28 @@ def sync_books_from_metadata(db) -> int:
     return synced_count
 
 
+def _compute_disk_hash() -> str:
+    """
+    Compute a hash of all story_positions.json + stories_meta.json files.
+    If the hash matches the last boot, we can skip the expensive DB sync.
+    """
+    h = hashlib.sha256()
+    for book_slug in sorted(os.listdir(app_state.books_dir)):
+        book_path = os.path.join(app_state.books_dir, book_slug)
+        if not os.path.isdir(book_path) or book_slug.startswith('.'):
+            continue
+        for fname in ("story_positions.json", "stories_meta.json"):
+            fpath = os.path.join(book_path, fname)
+            if os.path.exists(fpath):
+                h.update(fpath.encode())
+                with open(fpath, "rb") as f:
+                    h.update(f.read())
+    return h.hexdigest()
+
+
+_HASH_FILE = "sync_hash.txt"
+
+
 def sync_disk_to_db() -> None:
     """
     Heavy operation: Read all story_positions.json files and sync to database.
@@ -234,11 +257,38 @@ def sync_disk_to_db() -> None:
     - stories_dict in memory
     - stories_dict.json on disk
     - Book and Story records in database
+    
+    Optimizations:
+    - Skips entirely if disk files haven't changed since last boot (hash check)
+    - Uses bulk SQL upserts instead of per-row SELECT+INSERT/UPDATE
     """
     logger.info("Starting disk → DB sync...")
     start_time = time.monotonic()
     
-    # First, sync book metadata from stories_meta.json files
+    # --- Hash check: skip sync if nothing changed ---
+    hash_path = os.path.join(str(app_state.data_dir), _HASH_FILE)
+    current_hash = _compute_disk_hash()
+    try:
+        if os.path.exists(hash_path):
+            with open(hash_path, "r") as f:
+                stored_hash = f.read().strip()
+            if stored_hash == current_hash:
+                # Data unchanged — still need to populate in-memory stories_dict
+                disk_stories = load_all_stories()
+                app_state.stories_dict.clear()
+                app_state.stories_dict.update(disk_stories)
+                elapsed = time.monotonic() - start_time
+                logger.info(
+                    f"Disk hash unchanged — skipped DB sync. "
+                    f"Loaded {len(disk_stories)} stories into memory in {elapsed:.2f}s"
+                )
+                return
+    except Exception as e:
+        logger.warning(f"Hash check failed, proceeding with full sync: {e}")
+    
+    # --- Full sync path (hash changed or first boot) ---
+    
+    # Sync book metadata from stories_meta.json files
     if app_state.USE_DB and app_state.SessionLocal:
         try:
             with app_state.SessionLocal() as db:
@@ -287,9 +337,11 @@ def sync_disk_to_db() -> None:
     except Exception as e:
         logger.error(f"Failed to write stories_dict.json: {e}")
     
-    # If DB is enabled, sync disk → DB (upsert)
+    # If DB is enabled, sync disk → DB (bulk upsert)
     if app_state.USE_DB and app_state.SessionLocal:
         try:
+            from sqlalchemy.dialects.postgresql import insert as pg_insert
+            
             with app_state.SessionLocal() as db:
                 books_synced = sync_books_from_metadata(db)
                 logger.info(f"Synced {books_synced} books from metadata")
@@ -297,49 +349,46 @@ def sync_disk_to_db() -> None:
                 # Build book_slug -> book_id mapping
                 book_map = {book.slug: book.id for book in db.query(Book).all()}
                 
-                existing_story_ids = {s.id for s in db.query(Story).all()}
-                
-                for title, data in disk_stories.items():
-                    story = db.query(Story).filter_by(title=title).first()
-                    book_id = book_map.get(data["book_slug"])
+                # --- Bulk upsert all stories in one statement ---
+                if disk_stories:
+                    rows = []
+                    for title, data in disk_stories.items():
+                        rows.append({
+                            "title": title,
+                            "book_slug": data["book_slug"],
+                            "book_id": book_map.get(data["book_slug"]),
+                            "pages": data["pages"],
+                            "keywords": data["keywords"],
+                            "start_char": data["start_char"],
+                            "end_char": data["end_char"],
+                        })
                     
-                    if story:
-                        # Update existing story
-                        story.book_slug = data["book_slug"]
-                        story.book_id = book_id
-                        story.pages = data["pages"]
-                        story.keywords = data["keywords"]
-                        story.start_char = data["start_char"]
-                        story.end_char = data["end_char"]
-                    else:
-                        # Create new story
-                        new_story = Story(**data, book_id=book_id)
-                        db.add(new_story)
-                        db.flush()
-                
-                db.commit()
-                
-                new_story_ids = {s.id for s in db.query(Story).all()}
-                added_stories = new_story_ids - existing_story_ids
-                
-                if added_stories:
-                    logger.info(f"Added {len(added_stories)} new stories to DB")
+                    stmt = pg_insert(Story.__table__).values(rows)
+                    stmt = stmt.on_conflict_do_update(
+                        index_elements=["title"],
+                        set_={
+                            "book_slug": stmt.excluded.book_slug,
+                            "book_id": stmt.excluded.book_id,
+                            "pages": stmt.excluded.pages,
+                            "keywords": stmt.excluded.keywords,
+                            "start_char": stmt.excluded.start_char,
+                            "end_char": stmt.excluded.end_char,
+                        }
+                    )
+                    db.execute(stmt)
+                    db.commit()
+                    logger.info(f"Bulk upserted {len(rows)} stories")
                 
                 # DELETE stories from DB that are no longer on disk (critical for sync!)
                 disk_titles = set(disk_stories.keys())
-                db_stories = db.query(Story).all()
-                stories_to_delete = []
+                orphaned = db.query(Story).filter(~Story.title.in_(disk_titles)).all()
                 
-                for story in db_stories:
-                    if story.title not in disk_titles:
-                        stories_to_delete.append(story)
-                        logger.info(f"Will delete orphaned story from DB: '{story.title}'")
-                
-                if stories_to_delete:
-                    for story in stories_to_delete:
+                if orphaned:
+                    orphaned_titles = [s.title for s in orphaned]
+                    for story in orphaned:
                         db.delete(story)
                     db.commit()
-                    logger.info(f"Deleted {len(stories_to_delete)} orphaned stories from DB (not on disk)")
+                    logger.info(f"Deleted {len(orphaned)} orphaned stories from DB: {orphaned_titles}")
                     
                     # Also cleanup any orphaned NodeStory entries
                     cleanup_orphaned_node_stories(db)
@@ -347,7 +396,14 @@ def sync_disk_to_db() -> None:
                 elapsed = time.monotonic() - start_time
                 logger.info(f"Synced {len(disk_stories)} stories from disk to DB in {elapsed:.2f}s")
         except Exception as e:
-            logger.error(f"DB sync failed: {e}")
+            logger.error(f"DB sync failed: {e}", exc_info=True)
     else:
         elapsed = time.monotonic() - start_time
         logger.info(f"Loaded {len(disk_stories)} stories from disk (no DB) in {elapsed:.2f}s")
+    
+    # Save hash so next boot can skip sync if nothing changed
+    try:
+        with open(hash_path, "w") as f:
+            f.write(current_hash)
+    except Exception as e:
+        logger.warning(f"Failed to save sync hash: {e}")

@@ -303,12 +303,26 @@ async def startup():
                 f"{len(dict_titles)} in stories_dict"
             )
     
-    # 7. Warm up embedding model (skip if rebuild is running – it loads the model itself)
+    # 7. Warm up embedding model in background (skip if rebuild is running – it loads the model itself)
+    #    Deferring to background means the server binds its port immediately.
+    #    The first real search request takes a one-time cold-start hit (~5-15s)
+    #    while the model loads, but subsequent searches are instant.
     if USE_DIRECT_SEARCH and not _rebuilding_in_background:
-        log.info("Warming up embedding model...")
-        engine.warm_up()
-        test_results = engine.search("warmup query", top_k=1)
-        log.info(f"Direct search engine warmed up (test returned {len(test_results)} results)")
+        import concurrent.futures as _cf
+        _warmup_executor = _cf.ThreadPoolExecutor(max_workers=1)
+
+        def _background_warmup():
+            try:
+                log.info("Background: warming up embedding model...")
+                engine.warm_up()
+                test_results = engine.search("warmup query", top_k=1)
+                log.info(f"Background: search engine warmed up (test returned {len(test_results)} results)")
+            except Exception as e:
+                log.error(f"Background warmup failed: {e}", exc_info=True)
+
+        import asyncio
+        asyncio.get_event_loop().run_in_executor(_warmup_executor, _background_warmup)
+        log.info("Embedding model warm-up scheduled in background thread")
     elif not USE_DIRECT_SEARCH:
         log.info("Warming up embedding model...")
         from utils import both_pipeline
