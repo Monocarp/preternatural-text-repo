@@ -134,11 +134,9 @@
                         "Mt. Rainier Camp Disturbance and Missing Quad Rider Attributed to \u201cBig Boys\u201d"
                     ]
                 },
-                "Non-Sighting Evidence": {
-                    "_stories": [
-                        "The Mars Hill Incident"
-                    ]
-                },
+                "Non-Sighting Evidence": [
+                    "The Mars Hill Incident"
+                ],
                 "_stories": [
                     "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians",
                     "General Description of Child Changelings and Nonhuman Abductors",
@@ -152,7 +150,8 @@
                     "Yellowstone Boy Scout Leader Blocked on Trail by Apelike Monster",
                     "Stone Mountain Bigfoot Carrying a Deer in the Meadow",
                     "Strawberry Lake Trail Bigfoot Family Observed on Distant Slope",
-                    "Overmountain Victory Trail Bigfoot Eating Apples in Orchard"
+                    "Overmountain Victory Trail Bigfoot Eating Apples in Orchard",
+                    "The Logger\u2019s Tale: Northern California Sasquatch Encounter"
                 ]
             }
         },
