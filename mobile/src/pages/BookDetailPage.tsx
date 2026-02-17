@@ -4,7 +4,6 @@ import { useSwipeable } from 'react-swipeable'
 import apiClient from '../utils/api'
 import StoryCard from '../components/StoryCard'
 import CategoryPicker from '../components/CategoryPicker'
-import { useStore } from '../store'
 
 interface BookDetail {
   id: number
@@ -44,7 +43,6 @@ type TabType = 'stories' | 'fulltext' | 'review'
 export default function BookDetailPage() {
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
-  const { setSelectedStory: setStoreSelectedStory } = useStore()
   const [book, setBook] = useState<BookDetail | null>(null)
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState<TabType>('stories')
@@ -63,6 +61,12 @@ export default function BookDetailPage() {
   const [aiError, setAiError] = useState<string | null>(null)
   const [committingAll, setCommittingAll] = useState(false)
   const [showAiPanel, setShowAiPanel] = useState(false)
+
+  // Inline preview state
+  const [previewHtml, setPreviewHtml] = useState<string | null>(null)
+  const [loadingPreview, setLoadingPreview] = useState(false)
+  const [previewMode, setPreviewMode] = useState<'story' | 'context'>('story')
+  const [showPreview, setShowPreview] = useState(false)
 
   const swipeHandlers = useSwipeable({
     onSwipedRight: () => {
@@ -136,12 +140,50 @@ export default function BookDetailPage() {
     }
   }
 
-  // Reset AI state when story changes
+  // Reset AI state and preview when story changes
   useEffect(() => {
     setAiSuggestions([])
     setAiError(null)
     setShowAiPanel(false)
+    setPreviewHtml(null)
+    setShowPreview(false)
+    setPreviewMode('story')
   }, [selectedStory?.title])
+
+  // Load inline preview content
+  const loadPreview = async (mode: 'story' | 'context') => {
+    if (!selectedStory) return
+    setLoadingPreview(true)
+    setPreviewMode(mode)
+    setShowPreview(true)
+    try {
+      const res = await apiClient.post('/render-story', {
+        title: selectedStory.title,
+        mode: mode === 'context' ? 'book' : 'static',
+        start_char: selectedStory.start_char,
+        end_char: selectedStory.end_char,
+      })
+      setPreviewHtml(res.data.html)
+    } catch (err) {
+      console.error('Error loading preview:', err)
+      setPreviewHtml('<p class="text-red-400">Failed to load story content</p>')
+    } finally {
+      setLoadingPreview(false)
+    }
+  }
+
+  // Advance to next unassigned story (or clear if none left)
+  const advanceToNext = (justAssignedTitle: string) => {
+    const remaining = unassignedStories.filter(s => s.title !== justAssignedTitle)
+    setUnassignedStories(remaining)
+    if (remaining.length > 0) {
+      setSelectedStory(remaining[0])
+    } else {
+      setSelectedStory(null)
+    }
+    setAiSuggestions([])
+    setShowAiPanel(false)
+  }
 
   const handleAutoSuggest = async () => {
     if (!selectedStory || !fullText) {
@@ -222,11 +264,8 @@ export default function BookDetailPage() {
         })
       }
       
-      // Remove from unassigned list and clear selection
-      setUnassignedStories(prev => prev.filter(s => s.title !== selectedStory.title))
-      setSelectedStory(null)
-      setAiSuggestions([])
-      setShowAiPanel(false)
+      // Advance to next unassigned story
+      advanceToNext(selectedStory.title)
     } catch (err) {
       console.error('Error committing categories:', err)
       setAiError('Failed to save categories. Make sure you are logged in as an editor.')
@@ -272,9 +311,11 @@ export default function BookDetailPage() {
           </button>
           <div className="flex-1 min-w-0">
             <h1 className="text-lg font-bold text-white truncate">
-              {selectedStory ? 'Assign Story' : book.title}
+              {selectedStory ? selectedStory.title : book.title}
             </h1>
-            {!selectedStory && (
+            {selectedStory ? (
+              <p className="text-sm text-gray-400 truncate">Assign to category</p>
+            ) : (
               <div className="flex items-center gap-2 text-sm text-gray-400">
                 {book.author && <span>{book.author}</span>}
                 {book.author && book.year && <span className="text-gray-600">•</span>}
@@ -282,6 +323,19 @@ export default function BookDetailPage() {
               </div>
             )}
           </div>
+          {/* Skip button when assigning */}
+          {selectedStory && unassignedStories.length > 1 && (
+            <button
+              onClick={() => {
+                const idx = unassignedStories.findIndex(s => s.title === selectedStory.title)
+                const next = unassignedStories[(idx + 1) % unassignedStories.length]
+                setSelectedStory(next)
+              }}
+              className="text-gray-400 active:text-white ml-2 px-2 py-1 text-sm"
+            >
+              Skip →
+            </button>
+          )}
         </div>
 
         {/* Tab buttons - hide when assigning */}
@@ -331,40 +385,97 @@ export default function BookDetailPage() {
         {/* Assignment modal view */}
         {selectedStory ? (
           <div className="space-y-4">
-            {/* Story info card */}
-            <div className="bg-gray-800 rounded-xl p-4 border border-gray-700">
-              <h3 className="text-white font-medium">{selectedStory.title}</h3>
-              {selectedStory.pages && (
-                <p className="text-sm text-gray-400 mt-1">Pages: {selectedStory.pages}</p>
-              )}
-              {selectedStory.keywords && (
-                <div className="mt-2 flex flex-wrap gap-1">
-                  {selectedStory.keywords.split(',').slice(0, 5).map((kw, i) => (
-                    <span key={i} className="px-2 py-0.5 bg-gray-700 text-gray-300 text-xs rounded-full">
-                      {kw.trim()}
-                    </span>
+            {/* Progress indicator */}
+            {unassignedStories.length > 0 && (
+              <div className="flex items-center justify-between text-xs text-gray-400">
+                <span>
+                  Story {unassignedStories.findIndex(s => s.title === selectedStory.title) + 1} of {unassignedStories.length}
+                </span>
+                <div className="flex gap-1">
+                  {unassignedStories.map((s, i) => (
+                    <div
+                      key={i}
+                      className={`w-2 h-2 rounded-full ${
+                        s.title === selectedStory.title ? 'bg-blue-400' : 'bg-gray-600'
+                      }`}
+                    />
                   ))}
                 </div>
+              </div>
+            )}
+
+            {/* Story info card with inline preview */}
+            <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
+              <div className="p-4">
+                <h3 className="text-white font-medium">{selectedStory.title}</h3>
+                {selectedStory.pages && (
+                  <p className="text-sm text-gray-400 mt-1">Pages: {selectedStory.pages}</p>
+                )}
+                {selectedStory.keywords && (
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {selectedStory.keywords.split(',').slice(0, 5).map((kw, i) => (
+                      <span key={i} className="px-2 py-0.5 bg-gray-700 text-gray-300 text-xs rounded-full">
+                        {kw.trim()}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {/* Preview toggle buttons */}
+                <div className="mt-3 flex gap-2">
+                  <button
+                    onClick={() => showPreview && previewMode === 'story' ? setShowPreview(false) : loadPreview('story')}
+                    className={`flex-1 py-2 rounded-lg font-medium text-sm transition-colors ${
+                      showPreview && previewMode === 'story'
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-gray-700 text-gray-300 active:bg-gray-600'
+                    }`}
+                  >
+                    {loadingPreview && previewMode === 'story' ? '⏳' : '📖'} Story Text
+                  </button>
+                  <button
+                    onClick={() => showPreview && previewMode === 'context' ? setShowPreview(false) : loadPreview('context')}
+                    className={`flex-1 py-2 rounded-lg font-medium text-sm transition-colors ${
+                      showPreview && previewMode === 'context'
+                        ? 'bg-amber-600 text-white'
+                        : 'bg-gray-700 text-gray-300 active:bg-gray-600'
+                    }`}
+                  >
+                    {loadingPreview && previewMode === 'context' ? '⏳' : '🔍'} In Context
+                  </button>
+                </div>
+              </div>
+
+              {/* Expandable inline preview */}
+              {showPreview && (
+                <div className="border-t border-gray-700">
+                  {loadingPreview ? (
+                    <div className="flex items-center justify-center py-8">
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-400"></div>
+                    </div>
+                  ) : previewHtml ? (
+                    <div className="relative">
+                      <div
+                        className="max-h-64 overflow-y-auto px-4 py-3"
+                        style={{ overscrollBehavior: 'contain' }}
+                      >
+                        <div
+                          className="prose prose-invert prose-sm max-w-none text-sm"
+                          style={{ fontFamily: "'Georgia', 'Times New Roman', serif", lineHeight: 1.7 }}
+                          dangerouslySetInnerHTML={{ __html: previewHtml }}
+                        />
+                      </div>
+                      {/* Fade-out gradient at bottom */}
+                      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-gray-800 to-transparent" />
+                    </div>
+                  ) : null}
+                  <div className="px-4 py-2 bg-gray-800/80 text-center">
+                    <span className="text-xs text-gray-500">
+                      {previewMode === 'story' ? 'Story text only' : 'Story highlighted in book context'} • Scroll to read
+                    </span>
+                  </div>
+                </div>
               )}
-              
-              {/* Read story button */}
-              <button
-                onClick={() => {
-                  setStoreSelectedStory({
-                    title: selectedStory.title,
-                    book_slug: selectedStory.book_slug,
-                    book_title: selectedStory.book_title,
-                    pages: selectedStory.pages,
-                    keywords: selectedStory.keywords,
-                    start_char: selectedStory.start_char,
-                    end_char: selectedStory.end_char,
-                  })
-                  navigate(`/story/${encodeURIComponent(selectedStory.title)}`)
-                }}
-                className="mt-3 w-full py-2 rounded-lg font-medium bg-gray-700 text-gray-300 active:bg-gray-600 text-sm"
-              >
-                📖 Read Story First
-              </button>
             </div>
 
             {/* AI Suggestions Panel */}
@@ -488,9 +599,8 @@ export default function BookDetailPage() {
                     path: path
                   })
                   
-                  // Remove from list and clear selection
-                  setUnassignedStories(prev => prev.filter(s => s.title !== selectedStory.title))
-                  setSelectedStory(null)
+                  // Advance to next unassigned story
+                  advanceToNext(selectedStory.title)
                 } catch (err) {
                   console.error('Error assigning story:', err)
                   alert('Failed to assign story. Make sure you are logged in as an editor.')
