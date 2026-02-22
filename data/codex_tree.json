@@ -1694,9 +1694,11 @@
             "Galloway Tale of a Blue Light Revealing a Tiny Fairy Carriage Crowded with Elfin Figures"
         ],
         "Fairy": {
-            "Brownie": [
-                "Norwegian Brownie with Fiery Glowing Eyes in a Stable"
-            ],
+            "Brownie": {
+                "_stories": [
+                    "Norwegian Brownie With Fiery Glowing Eyes in a Stable"
+                ]
+            },
             "Changeling": [
                 "Wrinkled, Corpse\u2011Like Faeries and a Norwegian Nisse Sighting",
                 "Changelings, Double Bodies, and the Dead Living in Fairyland",
