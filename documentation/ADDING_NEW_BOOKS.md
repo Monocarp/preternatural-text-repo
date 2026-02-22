@@ -1,6 +1,6 @@
 # Adding New Books to the Lexicon
 
-**Last Updated:** 2026-02-06
+**Last Updated:** 2026-02-21
 
 This document provides step-by-step instructions for adding a new book to the Preternatural Text Repository. Following these steps will ensure the book integrates properly with the search system, database, and user interface.
 
@@ -40,6 +40,8 @@ books/
 ## Step 2: Fix Book Slug in stories_meta.json
 
 **CRITICAL:** The `book_slug` field in `stories_meta.json` **MUST match the directory name exactly**.
+
+> **⚠️ This has caused issues with EVERY book added so far.** Pre-processing scripts generate long slugs with hyphens (e.g., `the-terror-that-comes-in-the-night-an-experience-centered-study`). These MUST be changed to match the directory name (short, underscored). If they don't match, the **source filter in Search & Curate will return 0 results** for that book because the backend maps directory → slug via this field, and the search index stores the directory name.
 
 Open `books/your_book_name/stories_meta.json` and verify/update:
 
@@ -246,16 +248,101 @@ After the rebuild completes, test on your production site:
 
 ---
 
+### Issue: `git push` rejected due to file size limit
+
+**Cause:** `documents.json` exceeds GitHub's 100 MB file size limit. `document_store.json` may also trigger a warning at ~80 MB.
+
+**Solution:** Do NOT commit the Haystack files (`documents.json`, `document_store.json`) to git. These are only needed locally to generate the direct search indexes. Instead:
+1. Keep `documents.json` and `document_store.json` local only
+2. Run the Haystack-to-Direct migration locally (see Step 5)
+3. Commit only the direct search files (`stories.faiss`, `stories.faiss.map.json`, `stories_fts.db`) — these are small (~2-10 MB)
+
+---
+
+## Re-Processing an Existing Book
+
+When a book has been re-processed (text cleanup, story boundary changes, title changes):
+
+### What Changes
+
+- `Full_Text.md` — Updated source text
+- `Stories.md` — Updated extracted stories (if regenerated)
+- `story_positions.json` — New story boundaries, often **new story titles**
+- `document_store.json` / `documents.json` — Updated Haystack data with new embeddings
+
+### Critical Considerations
+
+1. **Story titles are identifiers** — If titles change, old titles become orphans in the codex tree and search index. The `sync_disk_to_db()` function on startup will delete DB stories that no longer exist on disk, but codex tree references (`_stories` arrays) may retain orphaned titles.
+
+2. **Do NOT modify `codex_tree.json` as part of re-processing** — A previous attempt to include tree changes in a re-processing commit accidentally deleted 117 stories from OTHER books. The tree file is large and easy to corrupt. Let the site's auto-commit handle tree changes.
+
+3. **Do NOT convert file encodings** — Story positions and metadata files must stay UTF-8. A previous attempt to "fix" UTF-16 encoding corrupted binary data in these files.
+
+4. **Haystack files are too large for GitHub** — `documents.json` typically exceeds 100 MB. Generate direct search indexes locally and commit only those.
+
+### Step-by-Step Re-Processing Workflow
+
+```bash
+# 1. Place updated files in books/{slug}/
+#    - Full_Text.md, Stories.md, story_positions.json, stories_meta.json
+
+# 2. Verify stories_meta.json book_slug matches directory name
+#    (pre-processing may regenerate this with the wrong slug)
+
+# 3. Regenerate direct search indexes from updated Haystack files
+cd backend
+python -m search.migrate_haystack_to_direct --input ../data/document_store.json --output ../data/
+
+# 4. Stage files (force-add gitignored files)
+cd ..
+git add books/{slug}/Full_Text.md
+git add books/{slug}/Stories.md
+git add -f books/{slug}/story_positions.json
+git add -f books/{slug}/stories_meta.json
+git add data/stories.faiss
+git add data/stories.faiss.map.json
+git add data/stories_fts.db
+# Do NOT add documents.json or document_store.json (too large for GitHub)
+
+# 5. Commit and push
+git commit -m "Re-process {Book Title} - text cleanup and updated search indexes"
+git push origin main
+
+# 6. After Render deploys, run in Render Shell:
+python -c "from utils import sync_disk_to_db; sync_disk_to_db()"
+python -c "from search.engine_compat import rebuild_search_index; count = rebuild_search_index(); print(f'Rebuilt: {count} documents')"
+```
+
+### If Something Goes Wrong
+
+If a re-processing commit corrupts data:
+```bash
+# Find the last clean commit
+git log --oneline -10
+
+# Hard reset to the clean commit
+git reset --hard <commit_hash>
+
+# Force push to overwrite the bad commits
+git push --force-with-lease origin main
+```
+
+Then start the re-processing workflow fresh. **Do not try to surgically fix corrupted data** — a clean revert is safer even if it means re-doing the processing.
+
+---
+
 ## Summary Checklist
 
 Before pushing a new book, verify:
 
 - [ ] Directory name is lowercase with underscores
-- [ ] `book_slug` in stories_meta.json matches directory name exactly
+- [ ] `book_slug` in stories_meta.json matches directory name exactly (**check this twice — it breaks every time**)
 - [ ] story_positions.json has correct format (keywords as array)
+- [ ] story_positions.json and stories_meta.json are UTF-8 encoded (not UTF-16)
 - [ ] All 4 required files exist: Full_Text.md, Stories.md, story_positions.json, stories_meta.json
 - [ ] Files added with `git add -f` for the JSON files
-- [ ] Local rebuild succeeds and shows increased document count
+- [ ] Direct search indexes rebuilt from Haystack files (if Haystack data was updated)
+- [ ] `documents.json` and `document_store.json` are NOT staged (too large for GitHub)
 - [ ] Local testing shows book in all 3 views (Book Archive, Story Archive, Search)
 
 After deployment:
@@ -270,13 +357,17 @@ After deployment:
 
 ## For AI Models Reading This
 
-When a user asks to add a new book, follow this exact sequence:
+When a user asks to add or re-process a book, follow this exact sequence:
 
 1. **Verify directory structure** matches the naming convention
-2. **Check and fix** `book_slug` in stories_meta.json to match directory name
-3. **Commit with force-add** for the JSON files
-4. **Test locally** before pushing
-5. **After deployment**, provide the user with the exact shell commands:
+2. **Check and fix** `book_slug` in stories_meta.json to match directory name — this has been wrong for every book so far
+3. **Verify encoding** — story_positions.json and stories_meta.json must be UTF-8 (check for BOM: first bytes should be `7b`, not `ff fe`)
+4. **Regenerate direct search indexes** from Haystack files: `python -m search.migrate_haystack_to_direct --input ../data/document_store.json --output ../data/`
+5. **Do NOT stage** `documents.json` or `document_store.json` — they exceed GitHub's 100 MB limit
+6. **Do NOT modify** `codex_tree.json` as part of book ingestion — only the site should modify the tree
+7. **Do NOT convert** file encodings — leave files as-is if they parse correctly
+8. **Commit with force-add** for the JSON files
+9. **After deployment**, provide the user with the exact shell commands:
    ```bash
    python -c "from utils import sync_disk_to_db; sync_disk_to_db()"
    python -c "from search.engine_compat import rebuild_search_index; count = rebuild_search_index(); print(f'Rebuilt: {count} documents')"
