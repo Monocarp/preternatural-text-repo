@@ -143,7 +143,11 @@
                     "Pet": [
                         "Western Pennsylvania Farm Dog Killed and Thrown Onto Roof After Prowler Reports"
                     ],
-                    "Rock Throwing": [],
+                    "Rock Throwing": {
+                        "_stories": [
+                            "1974 Monongahela, Pennsylvania \u201cDevil\u201d With Green Glowing Eyes and Rock-Throwing"
+                        ]
+                    },
                     "_stories": [
                         "Prospector William O\u2019Leary Kills a \u201cWild Man\u201d in California"
                     ]
