@@ -66503,5 +66503,15 @@
         "keywords": [
             "Trueblood UFO Grey Mission"
         ]
+    },
+    "Shamans Dismemberment": {
+        "start_char": 238172,
+        "end_char": 238700,
+        "pages": "",
+        "keywords": [
+            "Shaman",
+            "dismemberment",
+            "underworld"
+        ]
     }
 }
