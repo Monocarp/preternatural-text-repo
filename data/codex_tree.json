@@ -2308,7 +2308,11 @@
                 "Jane\u2019s Niece In The Suicide House: Footsteps, Rocking Chair, Doors, And A Suffocating Presence On Her Throat",
                 "Silesian Vampire \u201cSpectrum\u201d Suffocating And Marking Townspeople; Undecayed Corpse Destroyed"
             ],
-            "Habitual Behavior": {},
+            "Habitual Behavior": {
+                "_stories": [
+                    "Ghost Girl of Fifth Street Hill Causes Car Failure in West Virginia"
+                ]
+            },
             "Visual": [
                 "Farm Boy\u2019s Employer and the Roman Entity Lucretius",
                 "Walter Gibson Sees His Fictional Character \u201cThe Shadow\u201d as a Ghost",
