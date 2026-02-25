@@ -2475,7 +2475,9 @@
             ]
         },
         "Life Review": {},
-        "Message Received": [],
+        "Message Received": {
+            "Mission/Warning": []
+        },
         "_stories": [
             "Derrick Scull\u2019s Two Near-Death Out-of-Body Experiences During Heart Attacks",
             "Maria\u2019s 1984 NDE and Verification of a Tennis Shoe Seen Out-of-Body",
