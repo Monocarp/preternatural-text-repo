@@ -2476,7 +2476,11 @@
         },
         "Life Review": {},
         "Message Received": {
-            "Mission/Warning": []
+            "Mission/Warning": {
+                "_stories": [
+                    "NDEr Visions of Global Heating and Meteoric Destruction of Australia"
+                ]
+            }
         },
         "_stories": [
             "Derrick Scull\u2019s Two Near-Death Out-of-Body Experiences During Heart Attacks",
