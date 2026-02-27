@@ -25767,66 +25767,6 @@
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
     },
-    "Ray Palmer’s “Dangerous Theory” that Flying Saucers Are Spirits of the Dead": {
-        "start_char": 465970,
-        "end_char": 466397,
-        "pages": "142",
-        "keywords": [
-            "ray palmer",
-            "kenneth arnold",
-            "flying saucers",
-            "ufology",
-            "spirits of the dead",
-            "20th century",
-            "1977"
-        ],
-        "verbatim": "Ray Palmer—a controversial figure from Ufology’s earliest days, prone to credulously accepting fictions as facts—recorded “a dangerous theory” two months before his 1977 death. Palmer shared his idea with the “first” flying saucer witness, Kenneth Arnold. Drawing upon his understanding of the latest developments in physics, Palmer came to an alarming conclusion: “I think that the flying saucers are the spirits of the dead.”",
-        "temporal": {
-            "years": [
-                1977
-            ],
-            "centuries": [
-                20
-            ],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "flying saucers",
-                "ufology"
-            ],
-            "secondary": [
-                "spirits of the dead",
-                "ray palmer",
-                "kenneth arnold"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Flying Saucers"
-                ],
-                "entities": [
-                    "Spirits of the Dead"
-                ],
-                "implements": [],
-                "context": [
-                    "Ufology"
-                ],
-                "people": [
-                    "Ray Palmer",
-                    "Kenneth Arnold"
-                ],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.66,
-        "status": "NEEDS_REVIEW"
-    },
     "1912 Codigoro Italy Glowing Orb, Ghost Rebuke, and Skeletal Hand Slap": {
         "start_char": 466563,
         "end_char": 466868,
