@@ -26397,68 +26397,6 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
-    "Fátima Globes of Light as Heavenly Vehicle Carrying the Mother of God": {
-        "start_char": 474391,
-        "end_char": 474610,
-        "pages": "145",
-        "keywords": [
-            "fátima",
-            "portugal",
-            "marian apparitions",
-            "globes of light",
-            "mother of god",
-            "priest",
-            "heavenly vehicle"
-        ],
-        "verbatim": "Among the many Marian apparitions reported at Fátima (Chapter 11) were globes of light which vanished into the sun. One priest explained this as “a heavenly vehicle that carried the Mother of God from her throne above.”",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [
-                "Fátima"
-            ],
-            "regions": [],
-            "countries": [
-                "Portugal"
-            ]
-        },
-        "topics": {
-            "primary": [
-                "marian apparitions",
-                "globes of light",
-                "fátima"
-            ],
-            "secondary": [
-                "mother of god",
-                "priest",
-                "heavenly vehicle"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Marian Apparitions",
-                    "Globes of Light"
-                ],
-                "entities": [
-                    "Mother of God",
-                    "Priest"
-                ],
-                "implements": [
-                    "Heavenly Vehicle"
-                ],
-                "context": [
-                    "Fátima"
-                ],
-                "people": [],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.66,
-        "status": "NEEDS_REVIEW"
-    },
     "Saaremaa Cigar-Shaped Craft and Rumors of a Vessel of the Dead": {
         "start_char": 474612,
         "end_char": 474985,
