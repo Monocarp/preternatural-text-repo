@@ -26397,62 +26397,6 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
-    "Micah Hanks’ Speculation on Disembodied Intelligences with Psychic Embodiment": {
-        "start_char": 471089,
-        "end_char": 471451,
-        "pages": "143",
-        "keywords": [
-            "raymond fowler",
-            "ann druffel",
-            "micah hanks",
-            "psychic embodiment",
-            "ufos",
-            "ufo intelligences"
-        ],
-        "verbatim": "Speculation along these lines also appears in the work of Raymond Fowler, Ann Druffel, and, more recently, Micah Hanks. Hanks speculated intelligences behind UFOs “may have even divorced themselves from the necessity for having bodies at all, favoring instead a variety of ‘psychic embodiment’ that frees them from having any physical and intellectual confines.”",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "psychic embodiment",
-                "ufos"
-            ],
-            "secondary": [
-                "ufo intelligences",
-                "raymond fowler",
-                "ann druffel",
-                "micah hanks"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Psychic Embodiment",
-                    "UFOs"
-                ],
-                "entities": [
-                    "UFO Intelligences"
-                ],
-                "implements": [],
-                "context": [],
-                "people": [
-                    "Raymond Fowler",
-                    "Ann Druffel",
-                    "Micah Hanks"
-                ],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Dennis McKenna’s Attempt to Immanentize the Soul as a Spinning Disc": {
         "start_char": 471465,
         "end_char": 473006,
