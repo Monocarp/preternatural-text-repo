@@ -3669,8 +3669,12 @@
         ],
         "Necromancy": {
             "Dialogue": {
-                "Family Member/Loved One": {},
-                "Stranger": []
+                "Family Member/Loved One": {
+                    "_stories": [
+                        "Marjorie\u2019s Afterlife Nursing and High-Speed Saucerlike Vehicle"
+                    ]
+                },
+                "Stranger": {}
             }
         },
         "Rejection of Sacraments": [
