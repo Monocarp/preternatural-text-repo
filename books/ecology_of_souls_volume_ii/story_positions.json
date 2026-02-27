@@ -25494,59 +25494,6 @@
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
     },
-    "Zapotec Orbs as Ancestors": {
-        "start_char": 459527,
-        "end_char": 459736,
-        "pages": "140",
-        "keywords": [
-            "orbs",
-            "lights",
-            "ancestors",
-            "aztecs",
-            "zapotec"
-        ],
-        "verbatim": "Despite the distance, such belief remains consistent further south. For the Aztecs, death was “a way for the light to show itself.” “We regard the orbs as our ancestors,” a Mexican Zapotec informant explained.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "orbs",
-                "lights"
-            ],
-            "secondary": [
-                "ancestors",
-                "aztecs",
-                "zapotec"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Orbs",
-                    "Lights"
-                ],
-                "entities": [
-                    "Ancestors"
-                ],
-                "implements": [],
-                "context": [],
-                "people": [],
-                "functional_purpose": [],
-                "historical_groups": [
-                    "Aztecs",
-                    "Zapotec"
-                ]
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Sanumá Invisible Spheres and Tiny People": {
         "start_char": 459737,
         "end_char": 459914,
