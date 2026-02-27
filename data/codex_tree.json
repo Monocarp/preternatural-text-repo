@@ -3668,7 +3668,9 @@
             "De Lancre\u2019s Accounts of Sexual Intercourse with Satan at the Sabbath"
         ],
         "Necromancy": {
-            "Dialogue": []
+            "Dialogue": {
+                "Family Member/Loved One": []
+            }
         },
         "Rejection of Sacraments": [
             "Accusations of Apostasy, Sorcery, and Demonic Worship in the Trial of the Templars"
