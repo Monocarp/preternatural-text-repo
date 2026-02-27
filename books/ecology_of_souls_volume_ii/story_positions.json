@@ -25767,69 +25767,6 @@
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
     },
-    "Arthur Constance’s 1957 Speculation on Human Spirits as UFO-Shaped": {
-        "start_char": 465623,
-        "end_char": 465968,
-        "pages": "142",
-        "keywords": [
-            "arthur constance",
-            "ufos",
-            "ufology",
-            "flying saucer review",
-            "ghost",
-            "human spirit",
-            "20th century",
-            "1957"
-        ],
-        "verbatim": "Despite never coalescing into a hypothesis per se, similarities between ghosts and UFOs themselves have been discussed since the beginning of Ufology. “It may be that the shape of a human spirit—if it has any shape—is that which we have come to associate with the UFOs,” Arthur Constance wrote in the November 1957 issue of Flying Saucer Review.",
-        "temporal": {
-            "years": [
-                1957
-            ],
-            "centuries": [
-                20
-            ],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "ufos",
-                "ufology",
-                "flying saucer review"
-            ],
-            "secondary": [
-                "ghost",
-                "human spirit",
-                "arthur constance"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "UFOs"
-                ],
-                "entities": [
-                    "Ghost",
-                    "Human Spirit"
-                ],
-                "implements": [],
-                "context": [
-                    "Ufology",
-                    "Flying Saucer Review"
-                ],
-                "people": [
-                    "Arthur Constance"
-                ],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.66,
-        "status": "NEEDS_REVIEW"
-    },
     "Ray Palmer’s “Dangerous Theory” that Flying Saucers Are Spirits of the Dead": {
         "start_char": 465970,
         "end_char": 466397,
