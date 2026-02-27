@@ -3669,7 +3669,8 @@
         ],
         "Necromancy": {
             "Dialogue": {
-                "Family Member/Loved One": []
+                "Family Member/Loved One": {},
+                "Stranger": []
             }
         },
         "Rejection of Sacraments": [
