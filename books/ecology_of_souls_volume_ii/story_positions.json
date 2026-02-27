@@ -26397,66 +26397,6 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
-    "Sequoyah Trueblood via John Mack on Aliens Traveling as Spirits": {
-        "start_char": 470719,
-        "end_char": 471087,
-        "pages": "143",
-        "keywords": [
-            "john mack",
-            "sequoyah trueblood",
-            "spiritual transportation",
-            "spirit travel",
-            "instant materialization",
-            "spirits",
-            "aliens"
-        ],
-        "verbatim": "“Spacecraft are a very rudimentary sort of travel,” John Mack wrote, conveying the sentiments of Sequoyah Trueblood (Chapter 12). “Sequoyah says the time will come when such vehicles will not be necessary and we will be able to ‘travel anywhere as spirits.’ The so-called aliens have already mastered a way to materialize instantly from millions of light-years away….”",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "spirit travel",
-                "instant materialization",
-                "spiritual transportation"
-            ],
-            "secondary": [
-                "spirits",
-                "aliens",
-                "john mack",
-                "sequoyah trueblood"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Spirit Travel",
-                    "Instant Materialization"
-                ],
-                "entities": [
-                    "Spirits",
-                    "Aliens"
-                ],
-                "implements": [],
-                "context": [],
-                "people": [
-                    "John Mack",
-                    "Sequoyah Trueblood"
-                ],
-                "functional_purpose": [
-                    "Spiritual Transportation"
-                ],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Micah Hanks’ Speculation on Disembodied Intelligences with Psychic Embodiment": {
         "start_char": 471089,
         "end_char": 471451,
