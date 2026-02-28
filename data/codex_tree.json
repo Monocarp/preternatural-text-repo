@@ -160,13 +160,16 @@
                 "Dead Sasquatch": [
                     "Prospector William O\u2019Leary Kills a \u201cWild Man\u201d in California"
                 ],
-                "Non-Sighting Evidence": [
-                    "The Mars Hill Incident",
-                    "Manitoba Skiers Find Fresh Giant Footprints and Tree Destruction",
-                    "Western Pennsylvania Farm Dog Killed and Thrown Onto Roof After Prowler Reports",
-                    "Lisa Shiel\u2019s Repeated Orb Photos And Visual Orb Encounter",
-                    "Wes Germer\u2019s Three Drifting Orbs Near Yacolt, Washington"
-                ],
+                "Non-Sighting Evidence": {
+                    "Vocalizations": [],
+                    "_stories": [
+                        "The Mars Hill Incident",
+                        "Manitoba Skiers Find Fresh Giant Footprints and Tree Destruction",
+                        "Western Pennsylvania Farm Dog Killed and Thrown Onto Roof After Prowler Reports",
+                        "Lisa Shiel\u2019s Repeated Orb Photos And Visual Orb Encounter",
+                        "Wes Germer\u2019s Three Drifting Orbs Near Yacolt, Washington"
+                    ]
+                },
                 "Orbs": [
                     "Pamir Mountains Hominid Carrying Glowing Orb",
                     "Beaver, Pennsylvania White\u0393\u00c7\u00e6Haired Bigfoot With Orb And Possible UFO",
