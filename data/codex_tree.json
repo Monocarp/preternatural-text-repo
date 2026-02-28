@@ -1246,7 +1246,11 @@
             "Anomalous Being": [
                 "Greg Bishop\u2019s Dismissed Sighting of an Eight-Armed Three-Dimensional Object"
             ],
-            "Lights": [],
+            "Lights": {
+                "_stories": [
+                    "The Boneyard Green Flash, Sacred Words, And Approaching Howls"
+                ]
+            },
             "Pilot Seen": [
                 "1790 Alen\u00e7on Globe Landing, Humanlike Occupant, And Silent Explosion",
                 "Linn Grove Airship Landing, Bearded Occupants, And Thrown Boulders",
