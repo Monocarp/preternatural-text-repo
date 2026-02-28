@@ -162,11 +162,9 @@
                 ],
                 "Non-Sighting Evidence": {
                     "Tracks": {},
-                    "Vocalizations": {
-                        "_stories": [
-                            "The Boneyard Green Flash, Sacred Words, And Approaching Howls"
-                        ]
-                    },
+                    "Vocalizations": [
+                        "The Boneyard Green Flash, Sacred Words, And Approaching Howls"
+                    ],
                     "_stories": [
                         "The Mars Hill Incident",
                         "Manitoba Skiers Find Fresh Giant Footprints and Tree Destruction",
