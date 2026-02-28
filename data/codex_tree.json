@@ -2270,7 +2270,9 @@
         ]
     },
     "Forteana": {
-        "Auditory Phenomena": [],
+        "Auditory Phenomena": {
+            "Hummadruz": []
+        },
         "_stories": [
             "1846 Rains Of Blood And Spring\u2011Heeled Jacks In Silver Uniforms",
             "Materializing Rocks, Pebbles, and Other Debris in Rooms",
