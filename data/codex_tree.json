@@ -2274,7 +2274,11 @@
     },
     "Forteana": {
         "Auditory Phenomena": {
-            "Disembodied Screams": [],
+            "Disembodied Screams": {
+                "_stories": [
+                    "Yakima Reservation UFOs, Underground Rumblings, Screams, And Giant Ape\u0393\u00c7\u00e6Men"
+                ]
+            },
             "Hummadruz": [
                 "Yakima Reservation UFOs, Underground Rumblings, Screams, And Giant Ape\u0393\u00c7\u00e6Men"
             ],
