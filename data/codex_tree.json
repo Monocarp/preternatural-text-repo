@@ -239,7 +239,8 @@
                     "Philip\u2019s \u201cDevil\u201d After A Flaming \u201cComet\u201d At Haverigg Beach",
                     "Kankakee Glowing Disc And Ape\u0393\u00c7\u00e6Like Creature",
                     "Rising Sun Hairy Creature And Neighbor\u2019s Glowing Object",
-                    "Yakima Reservation UFOs, Underground Rumblings, Screams, And Giant Ape\u0393\u00c7\u00e6Men"
+                    "Yakima Reservation UFOs, Underground Rumblings, Screams, And Giant Ape\u0393\u00c7\u00e6Men",
+                    "Oxford Canal Bigfoot And Flying Disc"
                 ]
             }
         },
@@ -2274,11 +2275,9 @@
     },
     "Forteana": {
         "Auditory Phenomena": {
-            "Disembodied Screams": {
-                "_stories": [
-                    "Yakima Reservation UFOs, Underground Rumblings, Screams, And Giant Ape\u0393\u00c7\u00e6Men"
-                ]
-            },
+            "Disembodied Screams": [
+                "Yakima Reservation UFOs, Underground Rumblings, Screams, And Giant Ape\u0393\u00c7\u00e6Men"
+            ],
             "Hummadruz": [
                 "Yakima Reservation UFOs, Underground Rumblings, Screams, And Giant Ape\u0393\u00c7\u00e6Men"
             ],
