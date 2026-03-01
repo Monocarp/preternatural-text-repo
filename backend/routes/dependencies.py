@@ -274,6 +274,12 @@ class DeleteCategoryBody(BaseModel):
     path: List[str]  # Full path to category to delete
 
 
+class RenameCategoryBody(BaseModel):
+    """Rename category request."""
+    path: List[str]  # Full path to the category to rename
+    new_name: str = Field(..., min_length=1, max_length=100)
+
+
 class BookResponse(BaseModel):
     """Book response model."""
     id: int

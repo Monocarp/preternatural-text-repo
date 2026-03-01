@@ -526,6 +526,80 @@ def delete_category(tree: dict, path: list) -> tuple:
     return tree, affected_stories
 
 
+def rename_category(tree: dict, path: list, new_name: str) -> dict:
+    """
+    Rename a category node in the tree, preserving all children and stories.
+
+    Args:
+        tree: The codex tree dict
+        path: Full path to the category to rename (e.g. ["Extraterrestrial", "Aerial Phenomenon", "UFO"])
+        new_name: The new name for the category
+
+    Returns:
+        The modified tree
+
+    Raises:
+        ValueError: If path doesn't exist, new_name already exists at that level, or new_name == old_name
+    """
+    if not path:
+        raise ValueError("Cannot rename root of tree")
+
+    old_name = path[-1]
+
+    if old_name == new_name:
+        raise ValueError(f"New name is the same as the current name: '{old_name}'")
+
+    if not new_name or not new_name.strip():
+        raise ValueError("New name cannot be empty")
+
+    new_name = new_name.strip()
+
+    # Navigate to the parent node
+    parent = tree
+    for i, level in enumerate(path[:-1]):
+        if level not in parent:
+            raise ValueError(f"Path not found: {'/'.join(path[:i+1])}")
+        node = parent[level]
+        if isinstance(node, list):
+            raise ValueError(f"Cannot navigate through leaf node at: {'/'.join(path[:i+1])}")
+        if not isinstance(node, dict):
+            raise ValueError(f"Invalid tree structure at: {'/'.join(path[:i+1])}")
+        parent = node
+
+    if old_name not in parent:
+        raise ValueError(f"Category not found: {'/'.join(path)}")
+
+    if new_name in parent:
+        raise ValueError(
+            f"A category named '{new_name}' already exists "
+            f"under '{'/'.join(path[:-1]) or 'root'}'"
+        )
+
+    # Rename: preserve value (subtree + stories) exactly, just swap the key
+    # Rebuild the dict to keep insertion order intact (new name in same position)
+    new_parent = {}
+    for k, v in parent.items():
+        if k == old_name:
+            new_parent[new_name] = v
+        else:
+            new_parent[k] = v
+
+    # Write back into the tree
+    if len(path) == 1:
+        # Root-level rename: replace entire tree contents
+        tree.clear()
+        tree.update(new_parent)
+    else:
+        # Write new_parent back into its grandparent slot
+        grandparent = tree
+        for level in path[:-2]:
+            grandparent = grandparent[level]
+        grandparent[path[-2]] = new_parent
+
+    logger.info(f"Renamed category '{old_name}' -> '{new_name}' at path '{'/'.join(path[:-1]) or 'root'}'")
+    return tree
+
+
 def get_category_info(tree: dict, path: list) -> dict:
     """
     Get information about a category.

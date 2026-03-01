@@ -327,3 +327,12 @@ def on_category_deleted(name: str, parent_path: List[str]):
         sync_codex_tree(f"Delete category '{name}' from {path_str}")
     else:
         sync_codex_tree(f"Delete root category '{name}'")
+
+
+def on_category_renamed(old_name: str, new_name: str, parent_path: List[str]):
+    """Call after renaming a category."""
+    if parent_path:
+        path_str = " > ".join(parent_path)
+        sync_codex_tree(f"Rename category '{old_name}' -> '{new_name}' under {path_str}")
+    else:
+        sync_codex_tree(f"Rename root category '{old_name}' -> '{new_name}'")

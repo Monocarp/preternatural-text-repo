@@ -20,14 +20,14 @@ from typing import Optional, Dict
 
 from fastapi import APIRouter, HTTPException, Depends
 
-from .dependencies import AssignBody, RemoveBody, CreateCategoryBody, DeleteCategoryBody, require_editor
+from .dependencies import AssignBody, RemoveBody, CreateCategoryBody, DeleteCategoryBody, RenameCategoryBody, require_editor
 from utils import (
     get_cached_tree, get_stories_at_path, invalidate_cache,
     assign_to_path, remove_from_path, save_codex_tree_to_json,
     stories_dict, stories_dict_path, enrich_stories_with_book_metadata
 )
 from utils.cache import get_assigned_titles_set
-from tree.operations import create_category, delete_category, get_category_info
+from tree.operations import create_category, delete_category, get_category_info, rename_category
 
 log = logging.getLogger(__name__)
 
@@ -391,6 +391,76 @@ def delete_category_endpoint(body: DeleteCategoryBody, user: Dict = Depends(requ
         "affected_stories": affected_stories,
         "story_count": len(affected_stories),
         "had_children": info.get('has_children', False)
+    }
+
+
+@router.post("/rename-category")
+def rename_category_endpoint(body: RenameCategoryBody, user: Dict = Depends(require_editor)):
+    """
+    Rename a category or subcategory.
+
+    Preserves all stories and children under the node — only the name changes.
+    Updates both database (if enabled) and JSON file.
+
+    Args:
+        body.path: Full path to the category to rename
+        body.new_name: The new name for the category
+    """
+    from utils import USE_DB, SessionLocal
+    from models import CodexNode
+
+    tree = get_cached_tree()
+
+    # Validate and rename in tree
+    try:
+        updated_tree = rename_category(tree, body.path, body.new_name)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    old_name = body.path[-1]
+
+    # Update database if enabled
+    if USE_DB and SessionLocal:
+        with SessionLocal() as db:
+            # Navigate to the node
+            parent_id = None
+            target_node = None
+
+            for level_name in body.path:
+                query = db.query(CodexNode).filter_by(name=level_name)
+                if parent_id:
+                    query = query.filter_by(parent_id=parent_id)
+                else:
+                    query = query.filter_by(parent_id=None)
+                target_node = query.first()
+
+                if not target_node:
+                    log.warning(f"Node '{level_name}' not found in database for path: {body.path}")
+                    break
+
+                parent_id = target_node.id
+
+            if target_node:
+                target_node.name = body.new_name
+                db.commit()
+                log.info(f"Renamed DB node '{old_name}' -> '{body.new_name}'")
+
+    # Save to JSON
+    save_codex_tree_to_json(updated_tree)
+    invalidate_cache()
+
+    # Auto-sync to GitHub
+    try:
+        from sync.github_sync import on_category_renamed
+        on_category_renamed(old_name, body.new_name, body.path[:-1])
+    except Exception as e:
+        log.debug(f"GitHub sync skipped: {e}")
+
+    return {
+        "status": "renamed",
+        "old_name": old_name,
+        "new_name": body.new_name,
+        "path": body.path[:-1] + [body.new_name],
     }
 
 
