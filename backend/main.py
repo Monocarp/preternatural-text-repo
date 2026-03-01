@@ -154,6 +154,53 @@ def _apply_category_renames():
     except Exception as e:
         log.error(f"Category rename migration failed: {e}", exc_info=True)
 
+
+# Each entry: (node_name, old_parent_name, new_parent_name)
+_NODE_REPARENTS = [
+    ("Pilot Seen", "Aerial Phenomenon", "UFO"),
+]
+
+def _apply_tree_reparents():
+    """
+    Move CodexNodes to a different parent. Idempotent — skips if already correct.
+    Used to repair structural tree changes that bypass sync_disk_to_db.
+    """
+    if not app_state.USE_DB or app_state.SessionLocal is None:
+        return
+    from models import CodexNode
+    try:
+        with app_state.SessionLocal() as db:
+            changed = False
+            for node_name, old_parent_name, new_parent_name in _NODE_REPARENTS:
+                new_parent = db.query(CodexNode).filter_by(name=new_parent_name).first()
+                if not new_parent:
+                    log.warning(f"Reparent skipped: new parent '{new_parent_name}' not found")
+                    continue
+                old_parent = db.query(CodexNode).filter_by(name=old_parent_name).first()
+                if not old_parent:
+                    log.warning(f"Reparent skipped: old parent '{old_parent_name}' not found")
+                    continue
+                node = db.query(CodexNode).filter_by(
+                    name=node_name, parent_id=old_parent.id
+                ).first()
+                if node:
+                    log.info(
+                        f"Reparenting '{node_name}': "
+                        f"'{old_parent_name}' → '{new_parent_name}'"
+                    )
+                    node.parent_id = new_parent.id
+                    changed = True
+                else:
+                    log.debug(
+                        f"Reparent not needed: '{node_name}' is not under '{old_parent_name}'"
+                    )
+            if changed:
+                db.commit()
+                log.info("Tree reparents applied successfully")
+    except Exception as e:
+        log.error(f"Tree reparent migration failed: {e}", exc_info=True)
+
+
 # ------------------------------------------------------------------ #
 # 7. Startup Event
 # ------------------------------------------------------------------ #
