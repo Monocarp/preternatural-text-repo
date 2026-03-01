@@ -20,14 +20,14 @@ from typing import Optional, Dict
 
 from fastapi import APIRouter, HTTPException, Depends
 
-from .dependencies import AssignBody, RemoveBody, CreateCategoryBody, DeleteCategoryBody, RenameCategoryBody, require_editor
+from .dependencies import AssignBody, RemoveBody, CreateCategoryBody, DeleteCategoryBody, RenameCategoryBody, MoveCategoryBody, require_editor
 from utils import (
     get_cached_tree, get_stories_at_path, invalidate_cache,
     assign_to_path, remove_from_path, save_codex_tree_to_json,
     stories_dict, stories_dict_path, enrich_stories_with_book_metadata
 )
 from utils.cache import get_assigned_titles_set
-from tree.operations import create_category, delete_category, get_category_info, rename_category
+from tree.operations import create_category, delete_category, get_category_info, rename_category, move_category
 
 log = logging.getLogger(__name__)
 
@@ -461,6 +461,88 @@ def rename_category_endpoint(body: RenameCategoryBody, user: Dict = Depends(requ
         "old_name": old_name,
         "new_name": body.new_name,
         "path": body.path[:-1] + [body.new_name],
+    }
+
+
+@router.post("/move-category")
+def move_category_endpoint(body: MoveCategoryBody, user: Dict = Depends(require_editor)):
+    """
+    Move a category (with all children and stories) to a new parent.
+
+    Atomically updates both the database and codex_tree.json.
+
+    Args:
+        body.source_path: Full path to the category to move
+        body.dest_parent_path: Full path to the destination parent ([] = root level)
+    """
+    from utils import USE_DB, SessionLocal
+    from models import CodexNode
+
+    if not body.source_path:
+        raise HTTPException(status_code=400, detail="source_path cannot be empty")
+
+    tree = get_cached_tree()
+
+    # Validate and move in tree
+    try:
+        updated_tree = move_category(tree, body.source_path, body.dest_parent_path)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    node_name = body.source_path[-1]
+
+    # Update database if enabled
+    if USE_DB and SessionLocal:
+        with SessionLocal() as db:
+            # Find the node to move
+            parent_id = None
+            target_node = None
+            for level_name in body.source_path:
+                query = db.query(CodexNode).filter_by(name=level_name)
+                query = query.filter_by(parent_id=parent_id)
+                target_node = query.first()
+                if not target_node:
+                    log.warning(f"Node '{level_name}' not found in DB for source path")
+                    break
+                parent_id = target_node.id
+
+            # Find destination parent node
+            new_parent_id = None
+            if body.dest_parent_path:
+                for level_name in body.dest_parent_path:
+                    query = db.query(CodexNode).filter_by(name=level_name)
+                    query = query.filter_by(parent_id=new_parent_id)
+                    dest_node = query.first()
+                    if not dest_node:
+                        log.warning(f"Destination node '{level_name}' not found in DB")
+                        dest_node = None
+                        break
+                    new_parent_id = dest_node.id
+
+            if target_node:
+                target_node.parent_id = new_parent_id
+                db.commit()
+                log.info(
+                    f"Moved DB node '{node_name}' to parent_id={new_parent_id} "
+                    f"({'root' if new_parent_id is None else '/'.join(body.dest_parent_path)})"
+                )
+
+    # Save to JSON
+    save_codex_tree_to_json(updated_tree)
+    invalidate_cache()
+
+    # Auto-sync to GitHub
+    try:
+        from sync.github_sync import on_category_moved
+        on_category_moved(node_name, body.source_path[:-1], body.dest_parent_path)
+    except Exception as e:
+        log.debug(f"GitHub sync skipped: {e}")
+
+    return {
+        "status": "moved",
+        "node": node_name,
+        "from": body.source_path[:-1],
+        "to": body.dest_parent_path + [node_name],
     }
 
 

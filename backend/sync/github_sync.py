@@ -336,3 +336,10 @@ def on_category_renamed(old_name: str, new_name: str, parent_path: List[str]):
         sync_codex_tree(f"Rename category '{old_name}' -> '{new_name}' under {path_str}")
     else:
         sync_codex_tree(f"Rename root category '{old_name}' -> '{new_name}'")
+
+
+def on_category_moved(name: str, old_parent_path: List[str], new_parent_path: List[str]):
+    """Call after moving a category to a new parent."""
+    old_str = " > ".join(old_parent_path) if old_parent_path else "root"
+    new_str = " > ".join(new_parent_path) if new_parent_path else "root"
+    sync_codex_tree(f"Move category '{name}' from {old_str} to {new_str}")

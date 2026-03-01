@@ -280,6 +280,12 @@ class RenameCategoryBody(BaseModel):
     new_name: str = Field(..., min_length=1, max_length=100)
 
 
+class MoveCategoryBody(BaseModel):
+    """Move category request."""
+    source_path: List[str]      # Full path to the category to move
+    dest_parent_path: List[str] # Full path to the destination parent ([] = root)
+
+
 class BookResponse(BaseModel):
     """Book response model."""
     id: int

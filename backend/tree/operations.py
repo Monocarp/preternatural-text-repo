@@ -600,6 +600,84 @@ def rename_category(tree: dict, path: list, new_name: str) -> dict:
     return tree
 
 
+def move_category(tree: dict, source_path: list, dest_parent_path: list) -> dict:
+    """
+    Move a category node (with all its children and stories) to a new parent.
+
+    Args:
+        tree: The codex tree dict
+        source_path: Full path to the category to move
+                     e.g. ["Extraterrestrial", "Aerial Phenomenon", "Pilot Seen"]
+        dest_parent_path: Full path to the destination parent
+                          e.g. ["Extraterrestrial", "Aerial Phenomenon", "UFO"]
+                          Pass [] to move to root level.
+
+    Returns:
+        The modified tree
+
+    Raises:
+        ValueError: If source doesn't exist, destination parent doesn't exist,
+                    a node with the same name already exists at destination,
+                    or the destination is inside the source.
+    """
+    if not source_path:
+        raise ValueError("source_path cannot be empty")
+
+    node_name = source_path[-1]
+
+    # Guard: dest cannot be inside source (would create a cycle)
+    if len(dest_parent_path) >= len(source_path) and dest_parent_path[:len(source_path)] == source_path:
+        raise ValueError(
+            f"Cannot move '{node_name}' into its own descendant '{'/'.join(dest_parent_path)}'"
+        )
+
+    # --- 1. Detach from current parent ---
+    source_parent = tree
+    for i, level in enumerate(source_path[:-1]):
+        if level not in source_parent:
+            raise ValueError(f"Source path not found: {'/'.join(source_path[:i+1])}")
+        node = source_parent[level]
+        if not isinstance(node, dict):
+            raise ValueError(f"Cannot navigate through leaf at: {'/'.join(source_path[:i+1])}")
+        source_parent = node
+
+    if node_name not in source_parent:
+        raise ValueError(f"Category not found: {'/'.join(source_path)}")
+
+    node_value = source_parent.pop(node_name)  # detach
+
+    # --- 2. Attach to destination parent ---
+    if not dest_parent_path:
+        dest = tree
+    else:
+        dest = tree
+        for i, level in enumerate(dest_parent_path):
+            if level not in dest:
+                raise ValueError(f"Destination path not found: {'/'.join(dest_parent_path[:i+1])}")
+            child = dest[level]
+            if isinstance(child, list):
+                # Convert leaf to dict so it can hold children
+                dest[level] = {'_stories': child}
+                child = dest[level]
+            if not isinstance(child, dict):
+                raise ValueError(f"Invalid tree structure at: {'/'.join(dest_parent_path[:i+1])}")
+            dest = child
+
+    if node_name in dest:
+        raise ValueError(
+            f"A category named '{node_name}' already exists "
+            f"under '{'/'.join(dest_parent_path) or 'root'}'"
+        )
+
+    dest[node_name] = node_value
+
+    logger.info(
+        f"Moved '{node_name}' from '{'/'.join(source_path[:-1]) or 'root'}' "
+        f"to '{'/'.join(dest_parent_path) or 'root'}'"
+    )
+    return tree
+
+
 def get_category_info(tree: dict, path: list) -> dict:
     """
     Get information about a category.
