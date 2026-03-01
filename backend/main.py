@@ -123,8 +123,10 @@ from state import app_state
 # 6. Category Renames (idempotent DB migration)
 # ------------------------------------------------------------------ #
 _CATEGORY_RENAMES = [
-    ("UFO", "Extraterrestrial", None),  # top-level rename
+    ("UFO", "Extraterrestrial", None),  # top-level rename (root only)
     ("Theories Related TO THE UFO Phenomenon", "Theories Related to the Extraterrestrial Phenomenon", "Extraterrestrial"),
+    # One-time repair: undo the accidental rename of the UFO subcategory under Aerial Phenomenon
+    ("Extraterrestrial", "UFO", "Aerial Phenomenon"),
 ]
 
 def _apply_category_renames():
@@ -143,6 +145,9 @@ def _apply_category_renames():
                         query = query.filter_by(parent_id=parent.id)
                     else:
                         continue
+                else:
+                    # No parent specified means root-level only
+                    query = query.filter_by(parent_id=None)
                 node = query.first()
                 if node:
                     log.info(f"Renaming category '{old_name}' → '{new_name}'")
