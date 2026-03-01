@@ -3974,107 +3974,6 @@
         "confidence": 0.99,
         "status": "AUTO_APPROVED"
     },
-    "Beaver, Pennsylvania WhiteΓÇæHaired Bigfoot With Orb And Possible UFO": {
-        "start_char": 34146,
-        "end_char": 35282,
-        "pages": "11-12",
-        "keywords": [
-            "beaver, pennsylvania",
-            "pennsylvania",
-            "united states",
-            "abduction",
-            "prophesying",
-            "cryptid sighting",
-            "ufo sighting",
-            "light beam projection",
-            "missing time",
-            "amnesia",
-            "end-times prophecy",
-            "wooded area",
-            "forest",
-            "1973",
-            "bipedal white-haired creature",
-            "glowing orb",
-            "aerial object",
-            "light beam",
-            "20th century"
-        ],
-        "verbatim": "Around 9:30 p.m. on September 27, 1973, two teenage girls witnessed a bipedal creature, covered in white hair, running toward a wooded area of Beaver, Pennsylvania. The creature was between seven and eight feet tall and carried a glowing orb in one hand.\n\nThe pair ran to one witness’s home and related the sighting to her father, who decided to follow the creature’s path into the forest. As he entered the treeline, his daughter observed an object in the sky, which she believed was some type of aircraft. The object moved over the wooded area, projecting some type of beam down into the trees. The girl said her father stayed in the woods for over an hour.\n\nWhen an investigator interviewed him after the incident, the father denied ever entering the forest that night. He then declared, “There are some things that shouldn’t be discussed” and denied the investigator access to the wooded area. He stated he “did not want anyone tramping around” in his woods and refused to discuss his missing hour of time in the forest. The father later began espousing end-times prophecies, predicting that the world would end in six months’ time.",
-        "temporal": {
-            "years": [
-                1973
-            ],
-            "centuries": [
-                20
-            ],
-            "decades": []
-        },
-        "locations": {
-            "cities": [
-                "Beaver, Pennsylvania"
-            ],
-            "regions": [
-                "Pennsylvania"
-            ],
-            "countries": [
-                "United States"
-            ]
-        },
-        "topics": {
-            "primary": [
-                "cryptid sighting",
-                "ufo sighting",
-                "light beam projection",
-                "missing time",
-                "amnesia",
-                "end-times prophecy",
-                "wooded area",
-                "forest",
-                "beaver, pennsylvania",
-                "1973",
-                "abduction",
-                "prophesying"
-            ],
-            "secondary": [
-                "bipedal white-haired creature",
-                "glowing orb",
-                "aerial object",
-                "light beam"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Cryptid Sighting",
-                    "UFO Sighting",
-                    "Light Beam Projection",
-                    "Missing Time",
-                    "Amnesia",
-                    "End-Times Prophecy"
-                ],
-                "entities": [
-                    "Bipedal White-Haired Creature"
-                ],
-                "implements": [
-                    "Glowing Orb",
-                    "Aerial Object",
-                    "Light Beam"
-                ],
-                "context": [
-                    "Wooded Area",
-                    "Forest",
-                    "Beaver, Pennsylvania",
-                    "1973"
-                ],
-                "people": [],
-                "functional_purpose": [
-                    "Abduction",
-                    "Prophesying"
-                ],
-                "historical_groups": []
-            }
-        },
-        "confidence": 1.0,
-        "status": "AUTO_APPROVED"
-    },
     "Jeremy’s Repeated Bigfoot Encounters And Correlated Light Phenomena": {
         "start_char": 35284,
         "end_char": 36314,
@@ -40025,5 +39924,106 @@
         },
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
+    },
+    "Beaver, Pennsylvania White-Haired Bigfoot With Orb And Possible UFO": {
+        "start_char": 34146,
+        "end_char": 35282,
+        "pages": "11-12",
+        "keywords": [
+            "beaver, pennsylvania",
+            "pennsylvania",
+            "united states",
+            "abduction",
+            "prophesying",
+            "cryptid sighting",
+            "ufo sighting",
+            "light beam projection",
+            "missing time",
+            "amnesia",
+            "end-times prophecy",
+            "wooded area",
+            "forest",
+            "1973",
+            "bipedal white-haired creature",
+            "glowing orb",
+            "aerial object",
+            "light beam",
+            "20th century"
+        ],
+        "verbatim": "Around 9:30 p.m. on September 27, 1973, two teenage girls witnessed a bipedal creature, covered in white hair, running toward a wooded area of Beaver, Pennsylvania. The creature was between seven and eight feet tall and carried a glowing orb in one hand.\n\nThe pair ran to one witness’s home and related the sighting to her father, who decided to follow the creature’s path into the forest. As he entered the treeline, his daughter observed an object in the sky, which she believed was some type of aircraft. The object moved over the wooded area, projecting some type of beam down into the trees. The girl said her father stayed in the woods for over an hour.\n\nWhen an investigator interviewed him after the incident, the father denied ever entering the forest that night. He then declared, “There are some things that shouldn’t be discussed” and denied the investigator access to the wooded area. He stated he “did not want anyone tramping around” in his woods and refused to discuss his missing hour of time in the forest. The father later began espousing end-times prophecies, predicting that the world would end in six months’ time.",
+        "temporal": {
+            "years": [
+                1973
+            ],
+            "centuries": [
+                20
+            ],
+            "decades": []
+        },
+        "locations": {
+            "cities": [
+                "Beaver, Pennsylvania"
+            ],
+            "regions": [
+                "Pennsylvania"
+            ],
+            "countries": [
+                "United States"
+            ]
+        },
+        "topics": {
+            "primary": [
+                "cryptid sighting",
+                "ufo sighting",
+                "light beam projection",
+                "missing time",
+                "amnesia",
+                "end-times prophecy",
+                "wooded area",
+                "forest",
+                "beaver, pennsylvania",
+                "1973",
+                "abduction",
+                "prophesying"
+            ],
+            "secondary": [
+                "bipedal white-haired creature",
+                "glowing orb",
+                "aerial object",
+                "light beam"
+            ],
+            "raw_analysis": {
+                "phenomena": [
+                    "Cryptid Sighting",
+                    "UFO Sighting",
+                    "Light Beam Projection",
+                    "Missing Time",
+                    "Amnesia",
+                    "End-Times Prophecy"
+                ],
+                "entities": [
+                    "Bipedal White-Haired Creature"
+                ],
+                "implements": [
+                    "Glowing Orb",
+                    "Aerial Object",
+                    "Light Beam"
+                ],
+                "context": [
+                    "Wooded Area",
+                    "Forest",
+                    "Beaver, Pennsylvania",
+                    "1973"
+                ],
+                "people": [],
+                "functional_purpose": [
+                    "Abduction",
+                    "Prophesying"
+                ],
+                "historical_groups": []
+            }
+        },
+        "confidence": 1.0,
+        "status": "AUTO_APPROVED"
     }
 }
