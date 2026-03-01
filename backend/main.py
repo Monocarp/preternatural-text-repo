@@ -179,6 +179,9 @@ async def startup():
     
     # 1b. Apply category renames (idempotent)
     _apply_category_renames()
+
+    # 1c. Apply tree structural reparents (idempotent)
+    _apply_tree_reparents()
     
     # 2. Preload book metadata
     log.info("Preloading book metadata...")
