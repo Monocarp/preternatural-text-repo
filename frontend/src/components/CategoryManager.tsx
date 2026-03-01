@@ -35,7 +35,7 @@ interface CategoryInfo {
   child_count?: number
 }
 
-type Mode = 'view' | 'create' | 'delete'
+type Mode = 'view' | 'create' | 'delete' | 'rename' | 'move'
 
 export default function CategoryManager({
   currentPath,
@@ -51,6 +51,8 @@ export default function CategoryManager({
   const [error, setError] = useState<string | null>(null)
   const [categoryInfo, setCategoryInfo] = useState<CategoryInfo | null>(null)
   const [deleteConfirm, setDeleteConfirm] = useState('')
+  const [renameValue, setRenameValue] = useState('')
+  const [moveDestPath, setMoveDestPath] = useState('')
   const popupRef = useRef<HTMLDivElement>(null)
 
   // Load category info on mount
@@ -93,6 +95,66 @@ export default function CategoryManager({
     } catch (err) {
       console.error('Failed to load category info:', err)
       setCategoryInfo({ exists: false })
+    }
+  }
+
+  const handleRename = async () => {
+    if (!renameValue.trim()) {
+      setError('New name cannot be empty')
+      return
+    }
+    if (renameValue.trim() === categoryName) {
+      setError('New name is the same as the current name')
+      return
+    }
+
+    setLoading(true)
+    setError(null)
+
+    try {
+      await axios.post('/rename-category', {
+        path: currentPath,
+        new_name: renameValue.trim(),
+      })
+      setRenameValue('')
+      setMode('view')
+      onTreeChange()
+      onClose()
+    } catch (err: any) {
+      setError(err.response?.data?.detail || 'Failed to rename category')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleMove = async () => {
+    const raw = moveDestPath.trim()
+    if (!raw) {
+      setError('Destination path cannot be empty')
+      return
+    }
+    // Parse "A → B → C" or "A > B > C" into array
+    const destParentPath = raw
+      .split(/→|>|\//)
+      .map((s) => s.trim())
+      .filter(Boolean)
+
+    setLoading(true)
+    setError(null)
+
+    try {
+      await axios.post('/move-category', {
+        source_path: currentPath,
+        dest_parent_path: destParentPath,
+      })
+      setMoveDestPath('')
+      setMode('view')
+      onTreeChange()
+      onClose()
+    } catch (err: any) {
+      setError(err.response?.data?.detail || 'Failed to move category')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -186,8 +248,8 @@ export default function CategoryManager({
         <h3 className="text-sm font-semibold text-white">
           {mode === 'view' && 'Category Options'}
           {mode === 'create' && 'Create Subcategory'}
-          {mode === 'delete' && 'Delete Category'}
-        </h3>
+          {mode === 'delete' && 'Delete Category'}          {mode === 'rename' && 'Rename Category'}
+          {mode === 'move' && 'Move Category'}        </h3>
         <button
           onClick={onClose}
           className="text-gray-400 hover:text-white p-1 rounded hover:bg-gray-700"
@@ -239,6 +301,30 @@ export default function CategoryManager({
 
           {currentPath.length > 0 && (
             <button
+              onClick={() => { setRenameValue(categoryName || ''); setError(null); setMode('rename') }}
+              className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-200 hover:bg-gray-700 rounded transition-colors"
+            >
+              <svg className="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+              Rename This Category
+            </button>
+          )}
+
+          {currentPath.length > 0 && (
+            <button
+              onClick={() => { setMoveDestPath(''); setError(null); setMode('move') }}
+              className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-200 hover:bg-gray-700 rounded transition-colors"
+            >
+              <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
+              Move This Category
+            </button>
+          )}
+
+          {currentPath.length > 0 && (
+            <button
               onClick={() => setMode('delete')}
               className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-200 hover:bg-gray-700 rounded transition-colors"
             >
@@ -286,6 +372,81 @@ export default function CategoryManager({
               className="flex-1 px-3 py-2 text-sm text-white bg-green-600 hover:bg-green-500 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Creating...' : 'Create'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Rename Mode */}
+      {mode === 'rename' && isEditor && (
+        <div className="space-y-3">
+          <div>
+            <label className="block text-xs text-gray-400 mb-1">New name</label>
+            <input
+              type="text"
+              value={renameValue}
+              onChange={(e) => setRenameValue(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleRename()}
+              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white text-sm placeholder-gray-400 focus:outline-none focus:border-yellow-500"
+              autoFocus
+              disabled={loading}
+            />
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => { setMode('view'); setRenameValue(''); setError(null) }}
+              className="flex-1 px-3 py-2 text-sm text-gray-300 bg-gray-700 hover:bg-gray-600 rounded transition-colors"
+              disabled={loading}
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleRename}
+              disabled={loading || !renameValue.trim() || renameValue.trim() === categoryName}
+              className="flex-1 px-3 py-2 text-sm text-white bg-yellow-600 hover:bg-yellow-500 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? 'Renaming...' : 'Rename'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Move Mode */}
+      {mode === 'move' && isEditor && (
+        <div className="space-y-3">
+          <div className="text-xs text-gray-400 p-2 bg-gray-700/50 rounded">
+            Moving: <span className="text-white">{currentPath.join(' → ')}</span>
+          </div>
+          <div>
+            <label className="block text-xs text-gray-400 mb-1">
+              Destination parent path
+            </label>
+            <input
+              type="text"
+              value={moveDestPath}
+              onChange={(e) => setMoveDestPath(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleMove()}
+              placeholder="e.g. Extraterrestrial → Aerial Phenomenon → UFO"
+              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white text-sm placeholder-gray-400 focus:outline-none focus:border-blue-500"
+              autoFocus
+              disabled={loading}
+            />
+            <p className="text-xs text-gray-500 mt-1">Separate levels with → or &gt;</p>
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => { setMode('view'); setMoveDestPath(''); setError(null) }}
+              className="flex-1 px-3 py-2 text-sm text-gray-300 bg-gray-700 hover:bg-gray-600 rounded transition-colors"
+              disabled={loading}
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleMove}
+              disabled={loading || !moveDestPath.trim()}
+              className="flex-1 px-3 py-2 text-sm text-white bg-blue-600 hover:bg-blue-500 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? 'Moving...' : 'Move'}
             </button>
           </div>
         </div>
