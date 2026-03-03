@@ -28621,67 +28621,6 @@
         "confidence": 1.0,
         "status": "AUTO_APPROVED"
     },
-    "Jung on UFOs as Portents of a “Great Dying”": {
-        "start_char": 505261,
-        "end_char": 505700,
-        "pages": "154",
-        "keywords": [
-            "portent of great dying",
-            "portent of war",
-            "portent of pestilence",
-            "ufo sightings",
-            "space-ships",
-            "portents",
-            "premonitions",
-            "earlier centuries"
-        ],
-        "verbatim": "The apparent increase in UFO sightings in recent years has caused disquiet in the popular mind and might easily give rise to the conclusion that, if so many space-ships appear from the beyond, a corresponding number of deaths may be expected. We know that such phenomena were interpreted like this in earlier centuries: they were portents of a “great dying,” of war and pestilence, like the dark premonitions that underlie our modern fear.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "ufo sightings",
-                "space-ships",
-                "portents",
-                "premonitions",
-                "earlier centuries",
-                "portent of great dying",
-                "portent of war",
-                "portent of pestilence"
-            ],
-            "secondary": [],
-            "raw_analysis": {
-                "phenomena": [
-                    "UFO Sightings",
-                    "Space-ships",
-                    "Portents",
-                    "Premonitions"
-                ],
-                "entities": [],
-                "implements": [],
-                "context": [
-                    "Earlier Centuries"
-                ],
-                "people": [],
-                "functional_purpose": [
-                    "Portent of Great Dying",
-                    "Portent of War",
-                    "Portent of Pestilence"
-                ],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Maurice Masse’s UFO Encounter and Subsequent Thoughts About Death": {
         "start_char": 507007,
         "end_char": 507648,
