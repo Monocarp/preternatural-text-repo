@@ -1897,7 +1897,11 @@
         ],
         "Extraterrestrial Observed": {
             "Double": {},
-            "Hybrid": [],
+            "Hybrid": {
+                "_stories": [
+                    "Abductees\u2019 Visions of Alien \u201cIncubatoriums\u201d and Deliberate Destruction of Fetuses"
+                ]
+            },
             "_stories": [
                 "The Varginha \u201cDevil\u201d and the Death of Policeman Marco Eli Chereze",
                 "Idaho Boy\u2019s Grey Encounter, Sunburn, Telepathy, and Later UFO/MIB Contacts",
