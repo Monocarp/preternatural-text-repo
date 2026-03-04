@@ -35688,62 +35688,6 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
-    "Buck Nelson’s Venusian “Little Bucky”": {
-        "start_char": 634248,
-        "end_char": 634455,
-        "pages": "193",
-        "keywords": [
-            "buck nelson",
-            "venus",
-            "overworld",
-            "little bucky",
-            "venusian",
-            "diminutive soul"
-        ],
-        "verbatim": "Contactee Buck Nelson primarily interacted with “Little Bucky” of Venus, but the name is rarely remarked upon. His designation literally implies “little self of the overworld,” i.e. Nelson’s diminutive soul.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "venus",
-                "overworld"
-            ],
-            "secondary": [
-                "little bucky",
-                "venusian",
-                "diminutive soul",
-                "buck nelson"
-            ],
-            "raw_analysis": {
-                "phenomena": [],
-                "entities": [
-                    "Little Bucky",
-                    "Venusian",
-                    "Diminutive Soul"
-                ],
-                "implements": [],
-                "context": [
-                    "Venus",
-                    "Overworld"
-                ],
-                "people": [
-                    "Buck Nelson"
-                ],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Strieber Experiencer Asked “What Do You Want?” By Visitor": {
         "start_char": 634457,
         "end_char": 634667,
