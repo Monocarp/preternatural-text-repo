@@ -36319,48 +36319,6 @@
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
     },
-    "Whitley Strieber: “We Are” Behind Our Experiences": {
-        "start_char": 642512,
-        "end_char": 642870,
-        "pages": "196",
-        "keywords": [
-            "strieber",
-            "aliens"
-        ],
-        "verbatim": "“What is really behind our experiences?” Strieber asked. “We are. This is a human thing. However, I would also say that it indicates that we—and our world—are vastly different, and far more strange, than we have ever dreamed, or dared imagine.” Aliens, by extension human beings, may be walking contradictions: interior yet exterior, ourselves yet the Other.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [],
-            "secondary": [
-                "aliens",
-                "strieber"
-            ],
-            "raw_analysis": {
-                "phenomena": [],
-                "entities": [
-                    "Aliens"
-                ],
-                "implements": [],
-                "context": [],
-                "people": [
-                    "Strieber"
-                ],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.0,
-        "status": "NEEDS_REVIEW"
-    },
     "Male Abductee Encounters Female Entity Who Identifies Herself as His \"Self-Control\"": {
         "start_char": 645223,
         "end_char": 645655,
