@@ -59640,5 +59640,16 @@
             "stern response",
             "brink of death"
         ]
+    },
+    "Elderly Patient Encounter with Greys": {
+        "start_char": 568742,
+        "end_char": 569020,
+        "pages": "173",
+        "keywords": [
+            "Raymond Fowler",
+            "elderly patient",
+            "gray creatures",
+            "sleep"
+        ]
     }
 }
