@@ -38373,69 +38373,6 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
-    "Abductees Rage Against Being Incarnated or Reincarnated Back on Earth": {
-        "start_char": 671283,
-        "end_char": 671522,
-        "pages": "205",
-        "keywords": [
-            "mack",
-            "crying",
-            "rage",
-            "reincarnation",
-            "incarnation",
-            "abduction",
-            "earth",
-            "god"
-        ],
-        "verbatim": "“Abductees also commonly experience a poignant sense that they have themselves become too separated from Home, Source, or God and will cry and rage against the fact that they have been incarnated or reincarnated back on Earth,” Mack wrote.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "crying",
-                "rage",
-                "reincarnation",
-                "incarnation",
-                "abduction",
-                "earth"
-            ],
-            "secondary": [
-                "god",
-                "mack"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Crying",
-                    "Rage",
-                    "Reincarnation",
-                    "Incarnation"
-                ],
-                "entities": [
-                    "God"
-                ],
-                "implements": [],
-                "context": [
-                    "Abduction",
-                    "Earth"
-                ],
-                "people": [
-                    "Mack"
-                ],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Ron Card Meets Venusian in 1962 Who Explains Death as \"Change of Worlds\" and Choice of Next Planet": {
         "start_char": 671524,
         "end_char": 671772,
