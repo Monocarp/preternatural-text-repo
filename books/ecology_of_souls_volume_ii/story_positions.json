@@ -59534,5 +59534,16 @@
             "Coffin",
             "Crystal"
         ]
+    },
+    "Sighting on Road in Wiltshire": {
+        "start_char": 563911,
+        "end_char": 564319,
+        "pages": "172",
+        "keywords": [
+            "Wiltshire",
+            "spheres",
+            "humanoids",
+            "blood-covered youth"
+        ]
     }
 }
