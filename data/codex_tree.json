@@ -1895,26 +1895,29 @@
         "Crashed Ship": [
             "Alleged California UFO Crash With Four Bigfoot\u0393\u00c7\u00e6Like Bodies"
         ],
-        "Extraterrestrial Observed": [
-            "The Varginha \u201cDevil\u201d and the Death of Policeman Marco Eli Chereze",
-            "Idaho Boy\u2019s Grey Encounter, Sunburn, Telepathy, and Later UFO/MIB Contacts",
-            "Finnish Brothers Threatened with Imminent Death by UFO Occupants",
-            "Glowing Humanoid on Balcony Predicts Relative\u2019s Death and Invites Space Visit",
-            "Maurice Masse\u2019s UFO Encounter and Subsequent Thoughts About Death",
-            "Latvian UFO Witness Visited by the Grim Reaper",
-            "Jos\u00e9 Ant\u00f4nio da Silva\u2019s Toothless Dwarfs and Travis Walton\u2019s Silent, Possibly Deadly Abduction",
-            "Bulgarian Meadow UFO Landing, Psychic\u2019s Vision of Thoth, and Prophecies",
-            "Lucretia Heart\u2019s Daylight Grey and Imposed White Owl Screen Memory",
-            "Horses, Grey-Like Eyes, Equine-Headed Aliens, and Altered Horses",
-            "British Columbia White Horses as Screen Memories for Tall Humanoids",
-            "Whitley Strieber\u2019s Pack of Non-Physical Doglike Visitors and Black Dog Encounter",
-            "1966 Eliot Maine UFO Watchers Encounter Enormous Dog and Odorous Figure",
-            "1986 Spanish Witness Sees Large Black Dog Escorting Two Greys to Saucer",
-            "Kristin\u2019s Boyfriend Sees Pack of Large Black Dogs Dancing Outside During Abduction-Like Events",
-            "Laudelino Ortiz Grey Sighting With Coffin",
-            "Sightings on Road in Wiltshire",
-            "Elderly Patient Encounter with Greys"
-        ],
+        "Extraterrestrial Observed": {
+            "Double": [],
+            "_stories": [
+                "The Varginha \u201cDevil\u201d and the Death of Policeman Marco Eli Chereze",
+                "Idaho Boy\u2019s Grey Encounter, Sunburn, Telepathy, and Later UFO/MIB Contacts",
+                "Finnish Brothers Threatened with Imminent Death by UFO Occupants",
+                "Glowing Humanoid on Balcony Predicts Relative\u2019s Death and Invites Space Visit",
+                "Maurice Masse\u2019s UFO Encounter and Subsequent Thoughts About Death",
+                "Latvian UFO Witness Visited by the Grim Reaper",
+                "Jos\u00e9 Ant\u00f4nio da Silva\u2019s Toothless Dwarfs and Travis Walton\u2019s Silent, Possibly Deadly Abduction",
+                "Bulgarian Meadow UFO Landing, Psychic\u2019s Vision of Thoth, and Prophecies",
+                "Lucretia Heart\u2019s Daylight Grey and Imposed White Owl Screen Memory",
+                "Horses, Grey-Like Eyes, Equine-Headed Aliens, and Altered Horses",
+                "British Columbia White Horses as Screen Memories for Tall Humanoids",
+                "Whitley Strieber\u2019s Pack of Non-Physical Doglike Visitors and Black Dog Encounter",
+                "1966 Eliot Maine UFO Watchers Encounter Enormous Dog and Odorous Figure",
+                "1986 Spanish Witness Sees Large Black Dog Escorting Two Greys to Saucer",
+                "Kristin\u2019s Boyfriend Sees Pack of Large Black Dogs Dancing Outside During Abduction-Like Events",
+                "Laudelino Ortiz Grey Sighting With Coffin",
+                "Sightings on Road in Wiltshire",
+                "Elderly Patient Encounter with Greys"
+            ]
+        },
         "Livestock/Animal Interaction": [
             "Alexander Hamilton\u2019s Affidavit Of Airship, Six Strange Beings, And Calf Abduction",
             "UFOs and Mounds Cont.",
