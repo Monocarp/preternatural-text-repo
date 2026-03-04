@@ -36248,66 +36248,6 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
-    "Anne Strieber And The Master Of The Key: “We Are” God And “You Are Christ”": {
-        "start_char": 640039,
-        "end_char": 640353,
-        "pages": "195",
-        "keywords": [
-            "anne strieber",
-            "spiritual awakening",
-            "self-realization",
-            "mystical revelation",
-            "master of the key",
-            "god",
-            "christ"
-        ],
-        "verbatim": "When her husband asked, “Who is god?”, Anne Strieber quipped, “We are.” The Master of the Key shared the same sentiment:\n\nStop imagining that you are not Christ and that God is somewhere outside of you. Face the true contents of your own being. Seek the kingdom within you and you will find the kingdom everywhere.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "mystical revelation",
-                "spiritual awakening",
-                "self-realization"
-            ],
-            "secondary": [
-                "master of the key",
-                "god",
-                "christ",
-                "anne strieber"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Mystical Revelation"
-                ],
-                "entities": [
-                    "Master of the Key",
-                    "God",
-                    "Christ"
-                ],
-                "implements": [],
-                "context": [],
-                "people": [
-                    "Anne Strieber"
-                ],
-                "functional_purpose": [
-                    "Spiritual Awakening",
-                    "Self-Realization"
-                ],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Whitley Strieber Faces The Female Visitor As His Own Unconscious": {
         "start_char": 640355,
         "end_char": 640924,
