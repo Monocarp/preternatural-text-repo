@@ -60,14 +60,66 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
   const [editedKeywords, setEditedKeywords] = useState('')
   const [savingKeywords, setSavingKeywords] = useState(false)
 
+  // Category assignment state
+  const [codexTree, setCodexTree] = useState<any>(null)
+  const [currentAssignments, setCurrentAssignments] = useState<string[][]>([])
+  const [selectedPath, setSelectedPath] = useState<string[]>([])
+  const [assigning, setAssigning] = useState(false)
+
+  // AI suggestion state
+  interface AISuggestion {
+    path: string[]
+    confidence: number
+    reason?: string
+    confirmed: boolean
+  }
+  const [aiSuggestions, setAiSuggestions] = useState<AISuggestion[]>([])
+  const [loadingAi, setLoadingAi] = useState(false)
+  const [aiError, setAiError] = useState<string | null>(null)
+  const [committingAll, setCommittingAll] = useState(false)
+
   const reviewContainerRef = useRef<HTMLDivElement>(null)
 
-  // Load full text on mount
+  // Load full text and codex tree on mount
   useEffect(() => {
     if (slug && !fullText) {
       loadFullText()
     }
+    if (!codexTree) {
+      apiClient.get('/get-tree').then(res => setCodexTree(res.data)).catch(err => console.error('Error loading tree:', err))
+    }
   }, [slug])
+
+  // Find current assignments when story or tree changes
+  useEffect(() => {
+    if (!selectedStory || !codexTree) {
+      setCurrentAssignments([])
+      return
+    }
+    const findAssignments = (node: any, path: string[] = []): string[][] => {
+      const assignments: string[][] = []
+      if (typeof node === 'object' && node !== null) {
+        if (Array.isArray(node)) {
+          if (node.includes(selectedStory.title)) assignments.push([...path])
+        } else {
+          if (node._stories && Array.isArray(node._stories) && node._stories.includes(selectedStory.title)) {
+            assignments.push([...path])
+          }
+          for (const [key, value] of Object.entries(node)) {
+            if (key !== '_stories') assignments.push(...findAssignments(value, [...path, key]))
+          }
+        }
+      }
+      return assignments
+    }
+    setCurrentAssignments(findAssignments(codexTree))
+  }, [selectedStory?.title, codexTree])
+
+  // Reset AI state when story changes
+  useEffect(() => {
+    setAiSuggestions([])
+    setAiError(null)
+  }, [selectedStory?.title])
 
   // Reset selections when mode changes
   useEffect(() => {
@@ -488,6 +540,135 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
     }
   }
 
+  // --- CATEGORY ASSIGNMENT ---
+
+  const getPathOptions = (tree: any, currentPath: string[] = []): string[] => {
+    if (!tree || typeof tree !== 'object') return []
+    let node = tree
+    for (const level of currentPath) {
+      if (node[level]) node = node[level]
+      else return []
+    }
+    if (Array.isArray(node)) return []
+    return Object.keys(node).filter(k => k !== '_stories').sort((a, b) => a.localeCompare(b))
+  }
+
+  const handlePathLevelChange = (level: number, value: string) => {
+    const newPath = selectedPath.slice(0, level)
+    if (value) newPath.push(value)
+    setSelectedPath(newPath)
+  }
+
+  const handleAssignCategory = async () => {
+    if (!selectedStory || selectedPath.length === 0) return
+    setAssigning(true)
+    try {
+      await apiClient.post('/assign-category', {
+        path: selectedPath,
+        story: {
+          title: selectedStory.title,
+          book_slug: selectedStory.book_slug || slug,
+          pages: selectedStory.pages,
+          keywords: selectedStory.keywords,
+          start_char: selectedStory.start_char,
+          end_char: selectedStory.end_char,
+        },
+      })
+      const treeRes = await apiClient.get('/get-tree')
+      setCodexTree(treeRes.data)
+      setSelectedPath([])
+      alert(`Assigned to ${selectedPath.join(' > ')}`)
+    } catch (err: any) {
+      const status = err?.response?.status
+      if (status === 401 || status === 403) alert('You must be signed in as an editor.')
+      else alert('Failed to assign category.')
+    } finally {
+      setAssigning(false)
+    }
+  }
+
+  const handleRemoveCategory = async (path: string[]) => {
+    if (!selectedStory) return
+    if (!confirm(`Remove "${selectedStory.title}" from ${path.join(' > ')}?`)) return
+    setAssigning(true)
+    try {
+      await apiClient.delete('/remove-category', {
+        data: { path, title: selectedStory.title },
+      })
+      const treeRes = await apiClient.get('/get-tree')
+      setCodexTree(treeRes.data)
+      alert(`Removed from ${path.join(' > ')}`)
+    } catch (err: any) {
+      const status = err?.response?.status
+      if (status === 401 || status === 403) alert('You must be signed in as an editor.')
+      else alert('Failed to remove category.')
+    } finally {
+      setAssigning(false)
+    }
+  }
+
+  const handleAutoSuggest = async () => {
+    if (!selectedStory || !fullText) return
+    const storyText = fullText.slice(selectedStory.start_char, selectedStory.end_char)
+    setLoadingAi(true)
+    setAiError(null)
+    try {
+      const res = await apiClient.post('/ai/suggest-categories', {
+        story_title: selectedStory.title,
+        story_text: storyText.slice(0, 15000),
+      })
+      const suggestions = (res.data.suggestions || []).map((s: any) => ({
+        ...s,
+        confirmed: s.confidence >= 0.7,
+      }))
+      setAiSuggestions(suggestions)
+    } catch (err: any) {
+      const detail = err?.response?.data?.detail || err.message || 'Unknown error'
+      setAiError(`Failed: ${detail}`)
+    } finally {
+      setLoadingAi(false)
+    }
+  }
+
+  const handleToggleSuggestion = (idx: number) => {
+    setAiSuggestions(prev => prev.map((s, i) => i === idx ? { ...s, confirmed: !s.confirmed } : s))
+  }
+
+  const handleCommitConfirmed = async () => {
+    if (!selectedStory) return
+    const confirmed = aiSuggestions.filter(s => s.confirmed)
+    if (confirmed.length === 0) return
+    setCommittingAll(true)
+    let successCount = 0
+    let errorCount = 0
+    for (const suggestion of confirmed) {
+      try {
+        await apiClient.post('/assign-category', {
+          path: suggestion.path,
+          story: {
+            title: selectedStory.title,
+            book_slug: selectedStory.book_slug || slug,
+            pages: selectedStory.pages,
+            keywords: selectedStory.keywords,
+            start_char: selectedStory.start_char,
+            end_char: selectedStory.end_char,
+          },
+        })
+        successCount++
+      } catch {
+        errorCount++
+      }
+    }
+    try {
+      const treeRes = await apiClient.get('/get-tree')
+      setCodexTree(treeRes.data)
+    } catch {}
+    setCommittingAll(false)
+    setAiSuggestions([])
+    if (errorCount === 0) alert(`Assigned ${successCount} categories!`)
+    else alert(`Assigned ${successCount}, ${errorCount} failed.`)
+  }
+
   // --- RENDER ---
 
   if (loadingText) {
@@ -876,6 +1057,173 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
                 >
                   Delete
                 </button>
+              </div>
+
+              {/* Category Assignment Section */}
+              <div className="border-t border-gray-700 pt-3 space-y-3">
+                {/* Current Assignments */}
+                <div>
+                  <p className="text-xs font-medium text-gray-400 mb-1">Current Assignments</p>
+                  {currentAssignments.length === 0 ? (
+                    <p className="text-xs text-gray-500 italic">Not assigned to any category</p>
+                  ) : (
+                    <div className="space-y-1">
+                      {currentAssignments.map((path, idx) => (
+                        <div key={idx} className="flex items-center justify-between p-2 bg-gray-700 rounded text-xs">
+                          <span className="text-gray-200 flex-1 min-w-0 truncate" title={path.join(' > ')}>
+                            {path.join(' › ')}
+                          </span>
+                          <button
+                            onClick={() => handleRemoveCategory(path)}
+                            disabled={assigning}
+                            className="ml-2 px-1.5 py-0.5 text-xs bg-red-600 text-white rounded active:bg-red-700 disabled:opacity-50 flex-shrink-0"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* AI Category Suggestions */}
+                <div className="p-3 bg-gradient-to-br from-purple-900/40 to-blue-900/40 rounded-lg border border-purple-500/50">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg">🤖</span>
+                    <h4 className="text-sm font-medium text-purple-300">AI Category Suggestions</h4>
+                  </div>
+
+                  <button
+                    onClick={handleAutoSuggest}
+                    disabled={loadingAi}
+                    className="w-full py-2.5 bg-purple-600 active:bg-purple-500 disabled:bg-gray-600 text-white rounded-lg font-medium text-sm transition-colors mb-2"
+                  >
+                    {loadingAi ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <span className="animate-spin">⏳</span> Analyzing...
+                      </span>
+                    ) : (
+                      '✨ Auto-Suggest Categories'
+                    )}
+                  </button>
+
+                  {aiError && (
+                    <div className="p-2 bg-red-900/50 border border-red-500 rounded text-xs text-red-200 mb-2">
+                      {aiError}
+                    </div>
+                  )}
+
+                  {aiSuggestions.length > 0 && (
+                    <div className="space-y-1.5">
+                      {aiSuggestions.map((suggestion, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => handleToggleSuggestion(idx)}
+                          className={`w-full text-left p-2.5 rounded-lg transition-colors ${
+                            suggestion.confirmed
+                              ? 'bg-green-900/50 border-2 border-green-500'
+                              : 'bg-gray-800 border border-gray-600'
+                          }`}
+                        >
+                          <div className="flex items-start gap-2">
+                            <div className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                              suggestion.confirmed ? 'bg-green-500 border-green-500' : 'border-gray-500'
+                            }`}>
+                              {suggestion.confirmed && (
+                                <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                </svg>
+                              )}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="text-xs text-white mb-1">
+                                {suggestion.path.join(' → ')}
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <span className={`px-1.5 py-0.5 text-xs rounded ${
+                                  suggestion.confidence >= 0.8 ? 'bg-green-600 text-white' :
+                                  suggestion.confidence >= 0.5 ? 'bg-yellow-600 text-white' :
+                                  'bg-gray-600 text-gray-200'
+                                }`}>
+                                  {Math.round(suggestion.confidence * 100)}%
+                                </span>
+                                {suggestion.reason && (
+                                  <span className="text-xs text-gray-400 truncate">{suggestion.reason}</span>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </button>
+                      ))}
+
+                      <button
+                        onClick={handleCommitConfirmed}
+                        disabled={committingAll || aiSuggestions.filter(s => s.confirmed).length === 0}
+                        className="w-full mt-2 py-2.5 bg-green-600 active:bg-green-500 disabled:bg-gray-600 text-white rounded-lg font-medium text-sm transition-colors"
+                      >
+                        {committingAll ? (
+                          <span className="flex items-center justify-center gap-2">
+                            <span className="animate-spin">⏳</span> Saving...
+                          </span>
+                        ) : (
+                          `✓ Commit ${aiSuggestions.filter(s => s.confirmed).length} Selected`
+                        )}
+                      </button>
+                    </div>
+                  )}
+
+                  {aiSuggestions.length === 0 && !loadingAi && !aiError && (
+                    <p className="text-xs text-gray-400 text-center">
+                      Tap above to get AI-powered category suggestions
+                    </p>
+                  )}
+                </div>
+
+                {/* Manual Assignment */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs text-gray-400">— or assign manually —</span>
+                  </div>
+                  {codexTree ? (
+                    <div className="space-y-1.5">
+                      {/* Dynamic path level selects */}
+                      {Array.from({ length: 8 }).map((_, level) => {
+                        const parentPath = selectedPath.slice(0, level)
+                        const options = level === 0 ? getPathOptions(codexTree, []) : getPathOptions(codexTree, parentPath)
+                        if (level > 0 && (selectedPath.length < level || options.length === 0)) return null
+                        return (
+                          <select
+                            key={level}
+                            value={selectedPath[level] || ''}
+                            onChange={(e) => handlePathLevelChange(level, e.target.value)}
+                            className="w-full px-2 py-1.5 bg-gray-700 border border-gray-600 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                          >
+                            <option value="">{level === 0 ? 'Select category...' : 'Select subcategory...'}</option>
+                            {options.map((opt) => (
+                              <option key={opt} value={opt}>{opt}</option>
+                            ))}
+                          </select>
+                        )
+                      })}
+
+                      {selectedPath.length > 0 && (
+                        <div className="p-2 bg-gray-700 rounded text-xs text-gray-200">
+                          {selectedPath.join(' › ')}
+                        </div>
+                      )}
+
+                      <button
+                        onClick={handleAssignCategory}
+                        disabled={selectedPath.length === 0 || assigning}
+                        className="w-full py-2 bg-green-600 active:bg-green-500 disabled:bg-gray-600 text-white rounded-lg text-sm font-medium transition-colors"
+                      >
+                        {assigning ? 'Assigning...' : 'Assign Manually'}
+                      </button>
+                    </div>
+                  ) : (
+                    <p className="text-xs text-gray-500">Loading categories...</p>
+                  )}
+                </div>
               </div>
             </div>
           )}
