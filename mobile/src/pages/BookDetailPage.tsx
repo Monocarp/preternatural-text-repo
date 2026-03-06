@@ -4,6 +4,7 @@ import { useSwipeable } from 'react-swipeable'
 import apiClient from '../utils/api'
 import StoryCard from '../components/StoryCard'
 import CategoryPicker from '../components/CategoryPicker'
+import StoryReviewTab from '../components/StoryReviewTab'
 
 interface BookDetail {
   id: number
@@ -51,7 +52,6 @@ export default function BookDetailPage() {
   
   // Review tab state
   const [unassignedStories, setUnassignedStories] = useState<UnassignedStory[]>([])
-  const [loadingUnassigned, setLoadingUnassigned] = useState(false)
   const [selectedStory, setSelectedStory] = useState<UnassignedStory | null>(null)
   const [assigning, setAssigning] = useState(false)
   
@@ -116,7 +116,6 @@ export default function BookDetailPage() {
   }
 
   const loadUnassigned = async () => {
-    setLoadingUnassigned(true)
     try {
       const res = await apiClient.get('/get-unassigned')
       // Filter to only this book's stories
@@ -126,8 +125,6 @@ export default function BookDetailPage() {
       setUnassignedStories(bookStories)
     } catch (err) {
       console.error('Error loading unassigned:', err)
-    } finally {
-      setLoadingUnassigned(false)
     }
   }
 
@@ -404,7 +401,7 @@ export default function BookDetailPage() {
       </header>
 
       {/* Content */}
-      <div className="px-4 pt-4">
+      <div className={activeTab === 'review' && !selectedStory ? '' : 'px-4 pt-4'}>
         {/* Assignment modal view */}
         {selectedStory ? (
           <div className="space-y-4">
@@ -682,40 +679,21 @@ export default function BookDetailPage() {
             )}
           </>
         ) : (
-          // Review tab
-          <>
-            {loadingUnassigned ? (
-              <div className="flex items-center justify-center py-12">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400"></div>
-              </div>
-            ) : unassignedStories.length > 0 ? (
-              <div className="space-y-3">
-                <p className="text-sm text-gray-400">
-                  {unassignedStories.length} unassigned {unassignedStories.length === 1 ? 'story' : 'stories'}
-                </p>
-                {unassignedStories.map((story, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedStory(story)}
-                    className="w-full bg-gray-800 hover:bg-gray-700 active:bg-gray-600 border border-orange-500/30 rounded-xl p-4 text-left transition-colors"
-                  >
-                    <h3 className="text-base font-medium text-white">{story.title}</h3>
-                    {story.pages && (
-                      <p className="text-sm text-gray-400 mt-1">Pages: {story.pages}</p>
-                    )}
-                    <p className="text-sm text-orange-400 mt-2">Tap to assign →</p>
-                  </button>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12 text-gray-400">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto mb-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <p>All stories from this book are assigned!</p>
-              </div>
-            )}
-          </>
+          // Review tab – full-text viewer with story highlighting
+          <StoryReviewTab
+            slug={book.slug}
+            stories={(book.stories || []).map((s: any) => ({
+              title: s.title,
+              book_slug: book.slug,
+              pages: s.pages,
+              keywords: s.keywords,
+              start_char: s.start_char ?? 0,
+              end_char: s.end_char ?? 0,
+            }))}
+            onStoriesChange={(updated) => {
+              setBook({ ...book, stories: updated, story_count: updated.length })
+            }}
+          />
         )}
       </div>
 
