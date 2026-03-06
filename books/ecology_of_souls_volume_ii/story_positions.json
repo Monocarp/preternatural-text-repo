@@ -39918,63 +39918,6 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
-    "Donald Ware’s Homo sapiens alterios Bodies for Future Soul Incarnations": {
-        "start_char": 698635,
-        "end_char": 698892,
-        "pages": "213",
-        "keywords": [
-            "donald ware",
-            "soul housing",
-            "facilitating incarnations",
-            "developing unconditional love",
-            "reincarnation",
-            "hybrid program"
-        ],
-        "verbatim": "Some, like Donald Ware, have obliquely flirted with this idea, suggesting the hybrid program’s goal is to fashion bodies “to house our souls in future incarnations.” Ware called this Homo sapiens alterios, destined “to develop unconditional love of others.”",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "reincarnation",
-                "hybrid program",
-                "soul housing",
-                "facilitating incarnations",
-                "developing unconditional love"
-            ],
-            "secondary": [
-                "donald ware"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Reincarnation"
-                ],
-                "entities": [],
-                "implements": [],
-                "context": [
-                    "Hybrid Program"
-                ],
-                "people": [
-                    "Donald Ware"
-                ],
-                "functional_purpose": [
-                    "Soul Housing",
-                    "Facilitating Incarnations",
-                    "Developing Unconditional Love"
-                ],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Angie Told Her Stored Dead Child’s Soul Was Recycled": {
         "start_char": 698894,
         "end_char": 699369,
