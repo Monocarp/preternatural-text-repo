@@ -39467,66 +39467,6 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
-    "Aliens Know We Will Forget Source After Incarnation": {
-        "start_char": 689150,
-        "end_char": 689393,
-        "pages": "211",
-        "keywords": [
-            "ian stevenson",
-            "jim tucker",
-            "reincarnation",
-            "alien abduction",
-            "memory loss",
-            "reincarnation research",
-            "aliens"
-        ],
-        "verbatim": "As Ian Stevenson and Jim Tucker noted in their reincarnation research, all of us, including alien abductees, gradually lose knowledge of our true selves. This is expected—the aliens “know that you’re going to lose the knowledge of the Source.”",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "reincarnation",
-                "alien abduction",
-                "memory loss",
-                "reincarnation research"
-            ],
-            "secondary": [
-                "aliens",
-                "ian stevenson",
-                "jim tucker"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Reincarnation",
-                    "Alien Abduction",
-                    "Memory Loss"
-                ],
-                "entities": [
-                    "Aliens"
-                ],
-                "implements": [],
-                "context": [
-                    "Reincarnation Research"
-                ],
-                "people": [
-                    "Ian Stevenson",
-                    "Jim Tucker"
-                ],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Casey’s Difficult Decision to Return to Embodiment": {
         "start_char": 689395,
         "end_char": 689836,
