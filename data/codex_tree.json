@@ -110,9 +110,12 @@
         "Crop Circle Disappears and Reappears in Relation to Death of Man Claiming to be Alien"
     ],
     "Cryptid": {
-        "Aquatic": [
-            "Rendlesham Forest Hauntings and Nearby Sutton Hoo Burial Mounds"
-        ],
+        "Aquatic": {
+            "Loch Ness": [],
+            "_stories": [
+                "Rendlesham Forest Hauntings and Nearby Sutton Hoo Burial Mounds"
+            ]
+        },
         "Avian": {
             "Mothman": [
                 "Winged and Headless Beings Associated with UFOs",
