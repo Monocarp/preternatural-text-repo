@@ -39407,52 +39407,6 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
-    "Karin’s Uncertain Presoul or This-Life Agreement with Aliens": {
-        "start_char": 688816,
-        "end_char": 688956,
-        "pages": "211",
-        "keywords": [
-            "karin",
-            "presoul agreement",
-            "this life agreement"
-        ],
-        "verbatim": "Karin agreed her experiences were consensual, but remained unsure whether they constituted “a presoul agreement or a ‘this life’ agreement.”",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "presoul agreement",
-                "this life agreement"
-            ],
-            "secondary": [
-                "karin"
-            ],
-            "raw_analysis": {
-                "phenomena": [],
-                "entities": [],
-                "implements": [],
-                "context": [],
-                "people": [
-                    "Karin"
-                ],
-                "functional_purpose": [
-                    "Presoul Agreement",
-                    "This Life Agreement"
-                ],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Catherine’s Council with Source to Choose Earthly Incarnation": {
         "start_char": 688957,
         "end_char": 689149,
