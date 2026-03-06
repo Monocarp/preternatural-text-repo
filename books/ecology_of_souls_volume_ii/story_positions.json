@@ -39845,59 +39845,6 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
-    "Gary’s Call for More Shamans to Lift Human Consciousness": {
-        "start_char": 693114,
-        "end_char": 693227,
-        "pages": "212",
-        "keywords": [
-            "gary",
-            "lifting consciousness",
-            "evangelizing",
-            "shaman"
-        ],
-        "verbatim": "Gary recast this in an evangelizing light: “More shamans” must unite to “lift the consciousness of their people.”",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "evangelizing",
-                "lifting consciousness",
-                "evangelizing"
-            ],
-            "secondary": [
-                "shaman",
-                "gary"
-            ],
-            "raw_analysis": {
-                "phenomena": [],
-                "entities": [
-                    "Shaman"
-                ],
-                "implements": [],
-                "context": [
-                    "Evangelizing"
-                ],
-                "people": [
-                    "Gary"
-                ],
-                "functional_purpose": [
-                    "Lifting Consciousness",
-                    "Evangelizing"
-                ],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Strieber’s View of Earth as a School for Evolving Souls": {
         "start_char": 693229,
         "end_char": 693419,
