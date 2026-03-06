@@ -301,11 +301,9 @@
         ],
         "Tripedal": {
             "Humanoid": {
-                "Hairy": {
-                    "_stories": [
-                        "The Enfield Horror and the Tripod Steed to a Faerie Fort"
-                    ]
-                }
+                "Hairy": [
+                    "The Enfield Horror and the Tripod Steed to a Faerie Fort"
+                ]
             }
         }
     },
