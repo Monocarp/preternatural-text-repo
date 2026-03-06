@@ -111,7 +111,11 @@
     ],
     "Cryptid": {
         "Aquatic": {
-            "Loch Ness": [],
+            "Loch Ness": {
+                "_stories": [
+                    "St. Columba\u2019s Miracle at Loch Ness and Later Exorcism"
+                ]
+            },
             "_stories": [
                 "Rendlesham Forest Hauntings and Nearby Sutton Hoo Burial Mounds"
             ]
