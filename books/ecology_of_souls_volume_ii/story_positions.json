@@ -56356,5 +56356,21 @@
             "18-inch footprint",
             "bigfoot footprint"
         ]
+    },
+    "Bigfoot Harassing Burial Ground": {
+        "start_char": 716252,
+        "end_char": 716494,
+        "pages": "219",
+        "keywords": [
+            "1967",
+            "Bigfoot",
+            "Chicago",
+            "forest",
+            "preserve",
+            "Indian burial ground",
+            "lithobolia",
+            "religious aversion",
+            "Jesus"
+        ]
     }
 }
