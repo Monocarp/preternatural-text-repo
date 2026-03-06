@@ -39845,67 +39845,6 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
-    "Strieber’s View of Earth as a School for Evolving Souls": {
-        "start_char": 693229,
-        "end_char": 693419,
-        "pages": "212",
-        "keywords": [
-            "strieber",
-            "soul development",
-            "soul growth",
-            "soul evolution",
-            "alien abduction",
-            "earth as soul school",
-            "souls"
-        ],
-        "verbatim": "To that end, alien abductees describe our world as a place for souls to develop. Recall Strieber’s Chapter 14 assessment that this planet “is a school… where souls are growing and evolving.”",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "alien abduction",
-                "earth as soul school",
-                "soul development",
-                "soul growth",
-                "soul evolution"
-            ],
-            "secondary": [
-                "souls",
-                "strieber"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Alien Abduction"
-                ],
-                "entities": [
-                    "Souls"
-                ],
-                "implements": [],
-                "context": [
-                    "Earth as Soul School"
-                ],
-                "people": [
-                    "Strieber"
-                ],
-                "functional_purpose": [
-                    "Soul Development",
-                    "Soul Growth",
-                    "Soul Evolution"
-                ],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Robin Collyns’s Earth as a Waystation for Reincarnated Souls": {
         "start_char": 693766,
         "end_char": 694109,
