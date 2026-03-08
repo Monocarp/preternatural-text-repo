@@ -6380,62 +6380,6 @@
         "confidence": 1.0,
         "status": "AUTO_APPROVED"
     },
-    "Dematerializing Bigfoot and Elusive UFO Craft": {
-        "start_char": 75905,
-        "end_char": 76269,
-        "pages": "24",
-        "keywords": [
-            "dematerialization",
-            "slipping like wisps of smoke",
-            "impossible speeds",
-            "white house lawn",
-            "m├╢bius strip",
-            "nuts-and-bolts ufo craft"
-        ],
-        "verbatim": "Flesh-and-blood apes seem to dematerialize and slip through our fingers like wisps of smoke. Nuts-and-bolts UFO craft refuse to land on the White House lawn, but shoot away at impossible speeds. Clinging to one side of the M├╢bius strip, we may not notice the twist, but viewed from afar we see the very twist itself allows things to walk on both sides of the loop.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "dematerialization",
-                "slipping like wisps of smoke",
-                "impossible speeds",
-                "white house lawn",
-                "m├╢bius strip"
-            ],
-            "secondary": [
-                "nuts-and-bolts ufo craft"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Dematerialization",
-                    "Slipping like wisps of smoke",
-                    "Impossible speeds"
-                ],
-                "entities": [],
-                "implements": [
-                    "Nuts-and-bolts UFO craft"
-                ],
-                "context": [
-                    "White House lawn",
-                    "M├╢bius strip"
-                ],
-                "people": [],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Flores Wild Beings Ebu Gogo and Lae ho’a Mimic Human Speech": {
         "start_char": 79651,
         "end_char": 80275,
