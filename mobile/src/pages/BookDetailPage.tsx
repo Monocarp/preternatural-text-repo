@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { useSwipeable } from 'react-swipeable'
 import apiClient from '../utils/api'
 import StoryCard from '../components/StoryCard'
 import CategoryPicker from '../components/CategoryPicker'
@@ -68,18 +67,6 @@ export default function BookDetailPage() {
   const [previewMode, setPreviewMode] = useState<'story' | 'context'>('story')
   const [showPreview, setShowPreview] = useState(false)
   const previewRef = useRef<HTMLDivElement>(null)
-
-  const swipeHandlers = useSwipeable({
-    onSwipedRight: () => {
-      if (selectedStory) {
-        setSelectedStory(null)
-      } else {
-        navigate(-1)
-      }
-    },
-    trackMouse: false,
-    delta: 50,
-  })
 
   useEffect(() => {
     if (slug) {
@@ -317,7 +304,7 @@ export default function BookDetailPage() {
   }
 
   return (
-    <div {...swipeHandlers} className="min-h-full bg-gray-900 pb-20">
+    <div className="min-h-full bg-gray-900 pb-20">
       {/* Header */}
       <header className="sticky top-0 z-10 bg-gray-800 border-b border-gray-700 safe-area-top">
         <div className="flex items-center px-4 py-3">
@@ -697,12 +684,6 @@ export default function BookDetailPage() {
         )}
       </div>
 
-      {/* Swipe hint */}
-      {!selectedStory && (
-        <div className="fixed bottom-24 left-4 text-xs text-gray-500">
-          ← Swipe right to go back
-        </div>
-      )}
     </div>
   )
 }

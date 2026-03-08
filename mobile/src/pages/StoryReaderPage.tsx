@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSwipeable } from 'react-swipeable'
 import { useStore } from '../store'
 import apiClient from '../utils/api'
 
@@ -10,20 +9,6 @@ export default function StoryReaderPage() {
   const [content, setContent] = useState<string>('')
   const [loading, setLoading] = useState(true)
   const [viewMode, setViewMode] = useState<'static' | 'book'>('static')
-
-  // Swipe down to close
-  const swipeHandlers = useSwipeable({
-    onSwipedDown: (eventData) => {
-      if (eventData.velocity > 0.5) {
-        navigate(-1)
-      }
-    },
-    onSwipedRight: () => {
-      navigate(-1)
-    },
-    trackMouse: false,
-    delta: 50,
-  })
 
   useEffect(() => {
     if (selectedStory) {
@@ -74,7 +59,7 @@ export default function StoryReaderPage() {
   const bookDisplay = selectedStory.book_title || selectedStory.book_slug?.replace(/_/g, ' ') || 'Unknown Book'
 
   return (
-    <div {...swipeHandlers} className="min-h-screen bg-gray-900 flex flex-col">
+    <div className="min-h-screen bg-gray-900 flex flex-col">
       {/* Header */}
       <header className="sticky top-0 z-10 bg-gray-800 border-b border-gray-700 safe-area-top">
         <div className="flex items-center px-2 py-3">

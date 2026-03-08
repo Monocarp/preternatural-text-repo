@@ -1,6 +1,5 @@
 import { useEffect, useState, useMemo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { useSwipeable } from 'react-swipeable'
 import { useStore } from '../store'
 import apiClient from '../utils/api'
 import StoryCard from '../components/StoryCard'
@@ -24,20 +23,6 @@ export default function CategoryPage() {
 
   const isUnassigned = pathSegments.length === 1 && pathSegments[0].toLowerCase() === 'unassigned'
   const currentCategory = pathSegments[pathSegments.length - 1] || ''
-
-  // Swipe right to go back
-  const swipeHandlers = useSwipeable({
-    onSwipedRight: () => {
-      if (pathSegments.length > 1) {
-        const parentPath = encodePathSegmentsForRoute(pathSegments.slice(0, -1))
-        navigate(`/archive/${parentPath}`)
-      } else {
-        navigate('/archive')
-      }
-    },
-    trackMouse: false,
-    delta: 50,
-  })
 
   useEffect(() => {
     // Load tree if not loaded
@@ -128,7 +113,7 @@ export default function CategoryPage() {
   }
 
   return (
-    <div {...swipeHandlers} className="min-h-full bg-gray-900 pb-4">
+    <div className="min-h-full bg-gray-900 pb-4">
       {/* Header with back button */}
       <header className="sticky top-0 z-10 bg-gray-800 border-b border-gray-700 safe-area-top">
         <div className="flex items-center px-2 py-3">
