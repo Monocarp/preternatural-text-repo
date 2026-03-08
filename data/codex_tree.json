@@ -121,7 +121,11 @@
                 "Remote Viewers Describe Loch Ness Monster as Dematerializing Plesiosaur and Possible Dinosaur Ghost",
                 "Willox Steals a Water Horse\u2019s Bridle at Loch Ness and Becomes a Necromancer"
             ],
-            "Newly Developed Psychical Abilities": [],
+            "Newly Developed Psychical Abilities": {
+                "_stories": [
+                    "Klamath Youths and Crater Lake Initiates Taken Beneath Serpent-Haunted Waters and Returned Shamanized"
+                ]
+            },
             "_stories": [
                 "Rendlesham Forest Hauntings and Nearby Sutton Hoo Burial Mounds",
                 "1913 Horse-like Sea Serpent with Baby\u2019s Wail",
