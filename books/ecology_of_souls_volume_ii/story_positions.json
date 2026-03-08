@@ -45483,62 +45483,6 @@
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
     },
-    "Roger Scarberry’s Nightmare of a Great Eye in the Sky": {
-        "start_char": 808494,
-        "end_char": 808665,
-        "pages": "247",
-        "keywords": [
-            "roger scarberry",
-            "point pleasant",
-            "united states",
-            "flying saucers",
-            "nightmares",
-            "point pleasant flap"
-        ],
-        "verbatim": "Flying saucers notwithstanding, little about the Point Pleasant flap suggests totality (though Roger Scarberry did suffer nightmares of “a great eye floating in the sky”).",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [
-                "Point Pleasant"
-            ],
-            "regions": [],
-            "countries": [
-                "United States"
-            ]
-        },
-        "topics": {
-            "primary": [
-                "flying saucers",
-                "nightmares",
-                "point pleasant flap"
-            ],
-            "secondary": [
-                "roger scarberry"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Flying Saucers",
-                    "Nightmares"
-                ],
-                "entities": [],
-                "implements": [],
-                "context": [
-                    "Point Pleasant flap"
-                ],
-                "people": [
-                    "Roger Scarberry"
-                ],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.66,
-        "status": "NEEDS_REVIEW"
-    },
     "Gray Barker’s Tale of Frank Wentworth, His Wife Ida, and a Bedside Mothman Apparition": {
         "start_char": 808967,
         "end_char": 809952,
