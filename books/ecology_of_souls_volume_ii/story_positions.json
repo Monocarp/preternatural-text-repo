@@ -55561,5 +55561,18 @@
             "poultry",
             "live dogs"
         ]
+    },
+    "Scandinavian Dragon Encounter": {
+        "start_char": 763355,
+        "end_char": 763531,
+        "pages": "236",
+        "keywords": [
+            "Scandanavia",
+            "dragon",
+            "lindorm",
+            "bite",
+            "three bleeding holes",
+            "right ankle"
+        ]
     }
 }
