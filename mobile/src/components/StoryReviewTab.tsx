@@ -39,13 +39,15 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
   // Boundary editing state
   const [editedStart, setEditedStart] = useState(0)
   const [editedEnd, setEditedEnd] = useState(0)
-  const [selectingStart, setSelectingStart] = useState(true)
   const [savingBoundaries, setSavingBoundaries] = useState(false)
+
+  // Tap-to-select: user must press a button before tapping text
+  // null = scrolling freely, 'start'/'end' = next tap sets that boundary
+  const [placingBoundary, setPlacingBoundary] = useState<'start' | 'end' | null>(null)
 
   // New story state
   const [newStoryStart, setNewStoryStart] = useState<number | null>(null)
   const [newStoryEnd, setNewStoryEnd] = useState<number | null>(null)
-  const [newStorySelectingStart, setNewStorySelectingStart] = useState(true)
   const [newStoryTitle, setNewStoryTitle] = useState('')
   const [newStoryKeywords, setNewStoryKeywords] = useState('')
   const [newStoryPages, setNewStoryPages] = useState('')
@@ -126,10 +128,9 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
     if (mode === 'view') {
       setEditedStart(0)
       setEditedEnd(0)
-      setSelectingStart(true)
+      setPlacingBoundary(null)
       setNewStoryStart(null)
       setNewStoryEnd(null)
-      setNewStorySelectingStart(true)
       setNewStoryTitle('')
       setNewStoryKeywords('')
       setNewStoryPages('')
@@ -286,9 +287,11 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
     return segments
   }, [mode, fullText, newStoryStart, newStoryEnd])
 
-  // Handle tapping text to set boundary positions  
+  // Handle tapping text to set boundary positions.
+  // Only acts when placingBoundary is non-null (user pressed "Set Start" / "Set End" first).
   const handleTextTap = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
     if (mode === 'view') return
+    if (!placingBoundary) return  // not in placement mode — let scroll pass through
     if (!fullText || !reviewContainerRef.current) return
 
     e.preventDefault()
@@ -334,31 +337,22 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
 
     charPos = Math.min(Math.max(0, charPos), fullText.length)
 
-    if (mode === 'edit-boundary') {
-      if (selectingStart) {
+    if (placingBoundary === 'start') {
+      if (mode === 'edit-boundary') {
         setEditedStart(charPos)
-        setSelectingStart(false)
-      } else {
-        if (charPos > editedStart) {
-          setEditedEnd(charPos)
-        } else {
-          setEditedStart(charPos)
-        }
-        setSelectingStart(true)
-      }
-    } else if (mode === 'new-story') {
-      if (newStorySelectingStart) {
+      } else if (mode === 'new-story') {
         setNewStoryStart(charPos)
-        setNewStorySelectingStart(false)
-      } else {
-        if (charPos > (newStoryStart || 0)) {
-          setNewStoryEnd(charPos)
-        } else {
-          setNewStoryStart(charPos)
-        }
-        setNewStorySelectingStart(true)
+      }
+    } else if (placingBoundary === 'end') {
+      if (mode === 'edit-boundary') {
+        setEditedEnd(charPos)
+      } else if (mode === 'new-story') {
+        setNewStoryEnd(charPos)
       }
     }
+
+    // Done placing — return to scroll mode
+    setPlacingBoundary(null)
   }
 
   // Story actions
@@ -367,7 +361,7 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
     setMode('edit-boundary')
     setEditedStart(selectedStory.start_char)
     setEditedEnd(selectedStory.end_char)
-    setSelectingStart(true)
+    setPlacingBoundary(null)
   }
 
   const handleSaveBoundaries = async () => {
@@ -408,7 +402,7 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
     setMode('new-story')
     setNewStoryStart(null)
     setNewStoryEnd(null)
-    setNewStorySelectingStart(true)
+    setPlacingBoundary(null)
     setNewStoryTitle('')
     setNewStoryKeywords('')
     setNewStoryPages('')
@@ -723,15 +717,13 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
           )}
         </div>
         <div className="text-xs text-gray-400">
-          {mode === 'edit-boundary' && (
-            <span className={selectingStart ? 'text-blue-400' : 'text-green-400'}>
-              Tap to set {selectingStart ? 'START' : 'END'}
+          {(mode === 'edit-boundary' || mode === 'new-story') && placingBoundary && (
+            <span className={placingBoundary === 'start' ? 'text-blue-400 font-semibold animate-pulse' : 'text-green-400 font-semibold animate-pulse'}>
+              Tap text to place {placingBoundary.toUpperCase()}
             </span>
           )}
-          {mode === 'new-story' && (
-            <span className={newStorySelectingStart ? 'text-green-400' : 'text-yellow-400'}>
-              Tap to set {newStorySelectingStart ? 'START' : 'END'}
-            </span>
+          {(mode === 'edit-boundary' || mode === 'new-story') && !placingBoundary && (
+            <span className="text-gray-500">Use buttons below to set positions</span>
           )}
           {mode === 'view' && (
             <span>Tap highlighted text to select</span>
@@ -772,17 +764,17 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
       <div
         ref={reviewContainerRef}
         className={`flex-1 overflow-y-auto px-3 py-3 ${
-          mode !== 'view' ? 'border-2 border-blue-500' : ''
+          placingBoundary ? 'border-2 border-blue-500' : mode !== 'view' ? 'border border-gray-600' : ''
         }`}
         style={{
           whiteSpace: 'pre-wrap',
           wordBreak: 'break-word',
           overscrollBehavior: 'contain',
-          WebkitUserSelect: mode !== 'view' ? 'none' : 'auto',
-          userSelect: mode !== 'view' ? 'none' : 'auto',
+          WebkitUserSelect: placingBoundary ? 'none' : 'auto',
+          userSelect: placingBoundary ? 'none' : 'auto',
         }}
-        onClick={mode !== 'view' ? handleTextTap : undefined}
-        onTouchEnd={mode !== 'view' ? handleTextTap : undefined}
+        onClick={placingBoundary ? handleTextTap : undefined}
+        onTouchEnd={placingBoundary ? handleTextTap : undefined}
       >
         <div className="font-mono text-xs leading-relaxed">
           {/* Normal view mode */}
@@ -869,16 +861,36 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
                 <span className="text-xs text-gray-400 truncate ml-2">{selectedStory.title}</span>
               </div>
               <div className="grid grid-cols-2 gap-2 text-xs">
-                <div className={`p-2 rounded ${selectingStart ? 'bg-blue-900/50 border border-blue-500' : 'bg-gray-700'}`}>
-                  <p className="text-gray-400">Start</p>
+                <button
+                  onClick={() => setPlacingBoundary(placingBoundary === 'start' ? null : 'start')}
+                  className={`p-2 rounded text-left transition-colors ${
+                    placingBoundary === 'start'
+                      ? 'bg-blue-600 border-2 border-blue-400 ring-2 ring-blue-400/50'
+                      : 'bg-gray-700 border border-gray-600 active:bg-gray-600'
+                  }`}
+                >
+                  <p className="text-gray-300 text-[10px] uppercase tracking-wider">Start</p>
                   <p className="text-white font-mono">{editedStart.toLocaleString()}</p>
-                  {selectingStart && <p className="text-blue-400 mt-0.5">← Tap text</p>}
-                </div>
-                <div className={`p-2 rounded ${!selectingStart ? 'bg-green-900/50 border border-green-500' : 'bg-gray-700'}`}>
-                  <p className="text-gray-400">End</p>
+                  {placingBoundary === 'start'
+                    ? <p className="text-blue-200 mt-0.5 font-semibold">Tap text now...</p>
+                    : <p className="text-blue-400 mt-0.5">Tap here to set ▸</p>
+                  }
+                </button>
+                <button
+                  onClick={() => setPlacingBoundary(placingBoundary === 'end' ? null : 'end')}
+                  className={`p-2 rounded text-left transition-colors ${
+                    placingBoundary === 'end'
+                      ? 'bg-green-600 border-2 border-green-400 ring-2 ring-green-400/50'
+                      : 'bg-gray-700 border border-gray-600 active:bg-gray-600'
+                  }`}
+                >
+                  <p className="text-gray-300 text-[10px] uppercase tracking-wider">End</p>
                   <p className="text-white font-mono">{editedEnd.toLocaleString()}</p>
-                  {!selectingStart && <p className="text-green-400 mt-0.5">← Tap text</p>}
-                </div>
+                  {placingBoundary === 'end'
+                    ? <p className="text-green-200 mt-0.5 font-semibold">Tap text now...</p>
+                    : <p className="text-green-400 mt-0.5">Tap here to set ▸</p>
+                  }
+                </button>
               </div>
               <div className="text-xs text-gray-400 text-center">
                 Length: {editedEnd > editedStart ? (editedEnd - editedStart).toLocaleString() + ' chars' : '—'}
@@ -892,7 +904,7 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
                   {savingBoundaries ? 'Saving...' : 'Save Boundaries'}
                 </button>
                 <button
-                  onClick={() => setMode('view')}
+                  onClick={() => { setMode('view'); setPlacingBoundary(null) }}
                   disabled={savingBoundaries}
                   className="flex-1 py-2 bg-gray-600 active:bg-gray-500 text-white text-sm font-medium rounded-lg"
                 >
@@ -930,16 +942,36 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
                 />
               </div>
               <div className="grid grid-cols-2 gap-2 text-xs">
-                <div className={`p-2 rounded ${newStorySelectingStart ? 'bg-green-900/50 border border-green-500' : 'bg-gray-700'}`}>
-                  <p className="text-gray-400">Start</p>
+                <button
+                  onClick={() => setPlacingBoundary(placingBoundary === 'start' ? null : 'start')}
+                  className={`p-2 rounded text-left transition-colors ${
+                    placingBoundary === 'start'
+                      ? 'bg-green-600 border-2 border-green-400 ring-2 ring-green-400/50'
+                      : 'bg-gray-700 border border-gray-600 active:bg-gray-600'
+                  }`}
+                >
+                  <p className="text-gray-300 text-[10px] uppercase tracking-wider">Start</p>
                   <p className="text-white font-mono">{newStoryStart?.toLocaleString() ?? '—'}</p>
-                  {newStorySelectingStart && <p className="text-green-400 mt-0.5">← Tap text</p>}
-                </div>
-                <div className={`p-2 rounded ${!newStorySelectingStart ? 'bg-yellow-900/50 border border-yellow-500' : 'bg-gray-700'}`}>
-                  <p className="text-gray-400">End</p>
+                  {placingBoundary === 'start'
+                    ? <p className="text-green-200 mt-0.5 font-semibold">Tap text now...</p>
+                    : <p className="text-green-400 mt-0.5">Tap here to set ▸</p>
+                  }
+                </button>
+                <button
+                  onClick={() => setPlacingBoundary(placingBoundary === 'end' ? null : 'end')}
+                  className={`p-2 rounded text-left transition-colors ${
+                    placingBoundary === 'end'
+                      ? 'bg-yellow-600 border-2 border-yellow-400 ring-2 ring-yellow-400/50'
+                      : 'bg-gray-700 border border-gray-600 active:bg-gray-600'
+                  }`}
+                >
+                  <p className="text-gray-300 text-[10px] uppercase tracking-wider">End</p>
                   <p className="text-white font-mono">{newStoryEnd?.toLocaleString() ?? '—'}</p>
-                  {!newStorySelectingStart && <p className="text-yellow-400 mt-0.5">← Tap text</p>}
-                </div>
+                  {placingBoundary === 'end'
+                    ? <p className="text-yellow-200 mt-0.5 font-semibold">Tap text now...</p>
+                    : <p className="text-yellow-400 mt-0.5">Tap here to set ▸</p>
+                  }
+                </button>
               </div>
               <div className="flex gap-2">
                 <button
@@ -950,7 +982,7 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
                   {addingStory ? 'Adding...' : 'Add Story'}
                 </button>
                 <button
-                  onClick={() => setMode('view')}
+                  onClick={() => { setMode('view'); setPlacingBoundary(null) }}
                   disabled={addingStory}
                   className="flex-1 py-2 bg-gray-600 active:bg-gray-500 text-white text-sm font-medium rounded-lg"
                 >
