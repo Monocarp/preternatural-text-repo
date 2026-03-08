@@ -6380,63 +6380,6 @@
         "confidence": 1.0,
         "status": "AUTO_APPROVED"
     },
-    "Harpur on the Reality of UFO Apparitions": {
-        "start_char": 72488,
-        "end_char": 73170,
-        "pages": "23",
-        "keywords": [
-            "patrick harpur",
-            "jung",
-            "discernment of reality",
-            "ufos",
-            "apparitions",
-            "philosophical debate"
-        ],
-        "verbatim": "Patrick Harpur continued in Jung’s wake, writing about UFOs in his absolutely essential volume, Daimonic Reality:\n\n…the reality of UFOs—and of all apparitions—remains a vexed question. They compel us to ask ourselves what we mean by reality, a very old and knotty philosophical problem. In particular, they ask us to decide whether our encounters with apparitions are subjective or objective—that is, whether a UFO, for example is somehow a product of our minds or whether it exists out there in the world. If it is objectively real, then we have to decide further whether it is physically real or only apparently so; whether, that is, it is material or immaterial (though visible).",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "ufos",
-                "apparitions",
-                "philosophical debate",
-                "discernment of reality"
-            ],
-            "secondary": [
-                "patrick harpur",
-                "jung"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "UFOs",
-                    "Apparitions"
-                ],
-                "entities": [],
-                "implements": [],
-                "context": [
-                    "Philosophical Debate"
-                ],
-                "people": [
-                    "Patrick Harpur",
-                    "Jung"
-                ],
-                "functional_purpose": [
-                    "Discernment of Reality"
-                ],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "NEEDS_REVIEW"
-    },
     "Dematerializing Bigfoot and Elusive UFO Craft": {
         "start_char": 75905,
         "end_char": 76269,
