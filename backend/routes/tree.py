@@ -406,33 +406,26 @@ def rename_category_endpoint(body: RenameCategoryBody, user: Dict = Depends(requ
         body.path: Full path to the category to rename
         body.new_name: The new name for the category
     """
+    import time as _time
     from utils import USE_DB, SessionLocal
     from models import CodexNode
+    from state import app_state
+    from utils.cache import clear_assigned_titles_cache
 
     tree = get_cached_tree()
-
-    # Validate and rename in tree
-    try:
-        updated_tree = rename_category(tree, body.path, body.new_name)
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
     old_name = body.path[-1]
 
-    # Update database if enabled
+    # 1. Update database FIRST (fail loudly to prevent tree/DB divergence)
     if USE_DB and SessionLocal:
         with SessionLocal() as db:
-            # Navigate to the node
+            # Navigate to the node by path
             parent_id = None
             target_node = None
 
             for level_name in body.path:
-                query = db.query(CodexNode).filter_by(name=level_name)
-                if parent_id:
-                    query = query.filter_by(parent_id=parent_id)
-                else:
-                    query = query.filter_by(parent_id=None)
-                target_node = query.first()
+                target_node = db.query(CodexNode).filter_by(
+                    name=level_name, parent_id=parent_id
+                ).first()
 
                 if not target_node:
                     log.warning(f"Node '{level_name}' not found in database for path: {body.path}")
@@ -440,16 +433,94 @@ def rename_category_endpoint(body: RenameCategoryBody, user: Dict = Depends(requ
 
                 parent_id = target_node.id
 
+            # Fallback: if path traversal failed, try finding the node by name+parent
+            if not target_node and len(body.path) > 1:
+                parent_name = body.path[-2]
+                parent_node = db.query(CodexNode).filter_by(name=parent_name).first()
+                if parent_node:
+                    target_node = db.query(CodexNode).filter_by(
+                        name=old_name, parent_id=parent_node.id
+                    ).first()
+                    if target_node:
+                        log.info(f"Found node '{old_name}' via fallback parent search")
+
+            # Fallback for root-level renames
+            if not target_node and len(body.path) == 1:
+                target_node = db.query(CodexNode).filter_by(
+                    name=old_name, parent_id=None
+                ).first()
+                if target_node:
+                    log.info(f"Found root node '{old_name}' via fallback search")
+
             if target_node:
-                target_node.name = body.new_name
-                db.commit()
-                log.info(f"Renamed DB node '{old_name}' -> '{body.new_name}'")
+                # Check if a node with the new name already exists under same parent
+                from models import NodeStory
+                dup_node = db.query(CodexNode).filter_by(
+                    name=body.new_name, parent_id=target_node.parent_id
+                ).first()
 
-    # Save to JSON
+                if dup_node and dup_node.id != target_node.id:
+                    # Merge: move all children and stories from old node to new node
+                    log.info(f"Merging duplicate node '{old_name}' (id={target_node.id}) into '{body.new_name}' (id={dup_node.id})")
+
+                    # Move children
+                    children = db.query(CodexNode).filter_by(parent_id=target_node.id).all()
+                    for child in children:
+                        existing_child = db.query(CodexNode).filter_by(
+                            name=child.name, parent_id=dup_node.id
+                        ).first()
+                        if not existing_child:
+                            child.parent_id = dup_node.id
+                        # else: child already exists under new parent, skip
+
+                    # Move story assignments
+                    old_stories = db.query(NodeStory).filter_by(node_id=target_node.id).all()
+                    for ns in old_stories:
+                        existing_ns = db.query(NodeStory).filter_by(
+                            node_id=dup_node.id, story_id=ns.story_id
+                        ).first()
+                        if not existing_ns:
+                            ns.node_id = dup_node.id
+                        else:
+                            db.delete(ns)
+
+                    # Delete the old node
+                    db.delete(target_node)
+                    db.commit()
+                    log.info(f"Merged and deleted old node '{old_name}'")
+                else:
+                    target_node.name = body.new_name
+                    db.commit()
+                    log.info(f"Renamed DB node '{old_name}' -> '{body.new_name}'")
+            else:
+                # Node not found — check if already renamed (idempotent)
+                already_renamed = db.query(CodexNode).filter_by(name=body.new_name).first()
+                if already_renamed:
+                    log.info(f"Node already has name '{body.new_name}' in DB — skipping DB rename")
+                else:
+                    log.error(f"Could not find node '{old_name}' in database for rename. Path: {body.path}")
+                    raise HTTPException(
+                        status_code=500,
+                        detail=f"Database node '{old_name}' not found. Rename aborted to prevent data divergence."
+                    )
+
+    # 2. Validate and rename in tree dict
+    try:
+        updated_tree = rename_category(tree, body.path, body.new_name)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    # 3. Save to JSON
     save_codex_tree_to_json(updated_tree)
-    invalidate_cache()
 
-    # Auto-sync to GitHub
+    # 4. Update cache WITHOUT triggering a DB reload.
+    #    The tree dict was modified in place, so app_state.tree_cache is already correct.
+    #    Calling invalidate_cache() would trigger load_codex_tree() on next access,
+    #    which rebuilds from DB and could revert the rename if DB was stale.
+    app_state.cache_timestamp = _time.monotonic()
+    clear_assigned_titles_cache()
+
+    # 5. Auto-sync to GitHub
     try:
         from sync.github_sync import on_category_renamed
         on_category_renamed(old_name, body.new_name, body.path[:-1])
@@ -475,8 +546,11 @@ def move_category_endpoint(body: MoveCategoryBody, user: Dict = Depends(require_
         body.source_path: Full path to the category to move
         body.dest_parent_path: Full path to the destination parent ([] = root level)
     """
+    import time as _time
     from utils import USE_DB, SessionLocal
     from models import CodexNode
+    from state import app_state
+    from utils.cache import clear_assigned_titles_cache
 
     if not body.source_path:
         raise HTTPException(status_code=400, detail="source_path cannot be empty")
@@ -498,9 +572,9 @@ def move_category_endpoint(body: MoveCategoryBody, user: Dict = Depends(require_
             parent_id = None
             target_node = None
             for level_name in body.source_path:
-                query = db.query(CodexNode).filter_by(name=level_name)
-                query = query.filter_by(parent_id=parent_id)
-                target_node = query.first()
+                target_node = db.query(CodexNode).filter_by(
+                    name=level_name, parent_id=parent_id
+                ).first()
                 if not target_node:
                     log.warning(f"Node '{level_name}' not found in DB for source path")
                     break
@@ -510,9 +584,9 @@ def move_category_endpoint(body: MoveCategoryBody, user: Dict = Depends(require_
             new_parent_id = None
             if body.dest_parent_path:
                 for level_name in body.dest_parent_path:
-                    query = db.query(CodexNode).filter_by(name=level_name)
-                    query = query.filter_by(parent_id=new_parent_id)
-                    dest_node = query.first()
+                    dest_node = db.query(CodexNode).filter_by(
+                        name=level_name, parent_id=new_parent_id
+                    ).first()
                     if not dest_node:
                         log.warning(f"Destination node '{level_name}' not found in DB")
                         dest_node = None
@@ -529,7 +603,10 @@ def move_category_endpoint(body: MoveCategoryBody, user: Dict = Depends(require_
 
     # Save to JSON
     save_codex_tree_to_json(updated_tree)
-    invalidate_cache()
+
+    # Update cache WITHOUT triggering a DB reload
+    app_state.cache_timestamp = _time.monotonic()
+    clear_assigned_titles_cache()
 
     # Auto-sync to GitHub
     try:

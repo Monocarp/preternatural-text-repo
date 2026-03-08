@@ -127,32 +127,65 @@ _CATEGORY_RENAMES = [
     ("Theories Related TO THE UFO Phenomenon", "Theories Related to the Extraterrestrial Phenomenon", "Extraterrestrial"),
     # One-time repair: undo the accidental rename of the UFO subcategory under Aerial Phenomenon
     ("Extraterrestrial", "UFO", "Aerial Phenomenon"),
+    # Repair: rename done via UI may not have stuck in DB
+    ("Non-Sighting Evidence", "Evidence", "Sasquatch"),
 ]
 
 def _apply_category_renames():
-    """Rename categories in the codex_nodes table. Skips if already renamed."""
+    """Rename categories in the codex_nodes table. Skips if already renamed.
+    Also merges duplicate nodes if both old and new names exist under the same parent.
+    """
     if not app_state.USE_DB or app_state.SessionLocal is None:
         return
-    from models import CodexNode
+    from models import CodexNode, NodeStory
     try:
         with app_state.SessionLocal() as db:
             changed = False
             for old_name, new_name, parent_name in _CATEGORY_RENAMES:
-                query = db.query(CodexNode).filter_by(name=old_name)
+                # Determine parent_id
+                parent_id = None
                 if parent_name:
                     parent = db.query(CodexNode).filter_by(name=parent_name).first()
                     if parent:
-                        query = query.filter_by(parent_id=parent.id)
+                        parent_id = parent.id
                     else:
                         continue
-                else:
-                    # No parent specified means root-level only
-                    query = query.filter_by(parent_id=None)
+
+                query = db.query(CodexNode).filter_by(name=old_name, parent_id=parent_id)
                 node = query.first()
+
                 if node:
-                    log.info(f"Renaming category '{old_name}' → '{new_name}'")
-                    node.name = new_name
-                    changed = True
+                    # Check if a node with new_name already exists (duplicate)
+                    dup = db.query(CodexNode).filter_by(
+                        name=new_name, parent_id=parent_id
+                    ).first()
+                    if dup:
+                        # Merge: move children and stories from old node to new node
+                        log.info(f"Merging duplicate '{old_name}' (id={node.id}) into '{new_name}' (id={dup.id})")
+                        children = db.query(CodexNode).filter_by(parent_id=node.id).all()
+                        for child in children:
+                            existing_child = db.query(CodexNode).filter_by(
+                                name=child.name, parent_id=dup.id
+                            ).first()
+                            if not existing_child:
+                                child.parent_id = dup.id
+
+                        old_stories = db.query(NodeStory).filter_by(node_id=node.id).all()
+                        for ns in old_stories:
+                            existing_ns = db.query(NodeStory).filter_by(
+                                node_id=dup.id, story_id=ns.story_id
+                            ).first()
+                            if not existing_ns:
+                                ns.node_id = dup.id
+                            else:
+                                db.delete(ns)
+
+                        db.delete(node)
+                        changed = True
+                    else:
+                        log.info(f"Renaming category '{old_name}' → '{new_name}'")
+                        node.name = new_name
+                        changed = True
             if changed:
                 db.commit()
                 log.info("Category renames applied successfully")
