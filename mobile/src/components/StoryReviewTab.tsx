@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import apiClient from '../utils/api'
 
 interface Story {
@@ -82,6 +82,13 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
 
   const reviewContainerRef = useRef<HTMLDivElement>(null)
 
+  // Long-press detection refs
+  const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const touchStartPos = useRef<{ x: number; y: number } | null>(null)
+  const longPressTriggered = useRef(false)
+  const LONG_PRESS_MS = 500
+  const MOVE_THRESHOLD = 10
+
   // Load full text and codex tree on mount
   useEffect(() => {
     if (slug && !fullText) {
@@ -154,7 +161,7 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
     }
   }, [selectedStory?.title, mode])
 
-  // Auto-scroll when entering boundary edit mode
+  // Auto-scroll ONLY when first entering boundary edit mode (not on every boundary change)
   useEffect(() => {
     if (mode === 'edit-boundary' && selectedStory && reviewContainerRef.current) {
       setTimeout(() => {
@@ -167,7 +174,8 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
         }
       }, 150)
     }
-  }, [mode, editedStart, editedEnd])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode])  // Only trigger on mode change, NOT on editedStart/editedEnd
 
   const loadFullText = async () => {
     setLoadingText(true)
@@ -287,28 +295,11 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
     return segments
   }, [mode, fullText, newStoryStart, newStoryEnd])
 
-  // Handle tapping text to set boundary positions.
-  // Only acts when placingBoundary is non-null (user pressed "Set Start" / "Set End" first).
-  const handleTextTap = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
-    if (mode === 'view') return
-    if (!placingBoundary) return  // not in placement mode — let scroll pass through
-    if (!fullText || !reviewContainerRef.current) return
-
-    e.preventDefault()
-    e.stopPropagation()
-
-    let clientX: number, clientY: number
-    if ('touches' in e) {
-      const touch = e.changedTouches[0]
-      clientX = touch.clientX
-      clientY = touch.clientY
-    } else {
-      clientX = e.clientX
-      clientY = e.clientY
-    }
-
+  // Resolve a screen position to a character offset in the text
+  const resolveCharPos = useCallback((clientX: number, clientY: number): number | null => {
+    if (!fullText || !reviewContainerRef.current) return null
     const range = document.caretRangeFromPoint?.(clientX, clientY)
-    if (!range) return
+    if (!range) return null
 
     const textContainer = reviewContainerRef.current
     let charPos = 0
@@ -335,25 +326,114 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
       }
     }
 
-    charPos = Math.min(Math.max(0, charPos), fullText.length)
+    return Math.min(Math.max(0, charPos), fullText.length)
+  }, [fullText])
 
-    if (placingBoundary === 'start') {
-      if (mode === 'edit-boundary') {
-        setEditedStart(charPos)
-      } else if (mode === 'new-story') {
-        setNewStoryStart(charPos)
-      }
-    } else if (placingBoundary === 'end') {
-      if (mode === 'edit-boundary') {
-        setEditedEnd(charPos)
-      } else if (mode === 'new-story') {
-        setNewStoryEnd(charPos)
-      }
+  // Apply a character position to the current boundary being placed
+  const applyBoundary = useCallback((charPos: number, which: 'start' | 'end') => {
+    if (which === 'start') {
+      if (mode === 'edit-boundary') setEditedStart(charPos)
+      else if (mode === 'new-story') setNewStoryStart(charPos)
+    } else {
+      if (mode === 'edit-boundary') setEditedEnd(charPos)
+      else if (mode === 'new-story') setNewStoryEnd(charPos)
     }
+  }, [mode])
 
-    // Done placing — return to scroll mode
+  // Handle tapping text to set boundary positions.
+  // Only acts when placingBoundary is non-null (user pressed "Set Start" / "Set End" first).
+  const handleTextTap = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (mode === 'view') return
+    if (!placingBoundary) return
+
+    e.preventDefault()
+    e.stopPropagation()
+
+    const charPos = resolveCharPos(e.clientX, e.clientY)
+    if (charPos === null) return
+
+    applyBoundary(charPos, placingBoundary)
     setPlacingBoundary(null)
   }
+
+  // --- Long-press handlers for touch devices ---
+  // A long-press (~500ms hold with minimal movement) places the boundary
+  // that is currently selected (via button), OR auto-alternates start→end
+  // if no button was explicitly pressed.
+  const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    if (mode === 'view') return
+    longPressTriggered.current = false
+    const touch = e.touches[0]
+    touchStartPos.current = { x: touch.clientX, y: touch.clientY }
+
+    longPressTimer.current = setTimeout(() => {
+      if (!touchStartPos.current) return
+      const charPos = resolveCharPos(touchStartPos.current.x, touchStartPos.current.y)
+      if (charPos === null) return
+
+      // Determine which boundary to set
+      let which: 'start' | 'end'
+      if (placingBoundary) {
+        which = placingBoundary
+      } else {
+        // Auto-pick: if start hasn't been set yet or is 0 (for new-story), set start; otherwise end
+        if (mode === 'new-story') {
+          which = newStoryStart === null ? 'start' : 'end'
+        } else {
+          which = 'start'
+        }
+      }
+
+      applyBoundary(charPos, which)
+      setPlacingBoundary(null)
+      longPressTriggered.current = true
+
+      // Haptic feedback if available
+      if (navigator.vibrate) navigator.vibrate(30)
+    }, LONG_PRESS_MS)
+  }, [mode, placingBoundary, newStoryStart, resolveCharPos, applyBoundary])
+
+  const handleTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    if (!touchStartPos.current || !longPressTimer.current) return
+    const touch = e.touches[0]
+    const dx = touch.clientX - touchStartPos.current.x
+    const dy = touch.clientY - touchStartPos.current.y
+    if (Math.sqrt(dx * dx + dy * dy) > MOVE_THRESHOLD) {
+      // Finger moved too much — this is a scroll, cancel long-press
+      clearTimeout(longPressTimer.current)
+      longPressTimer.current = null
+    }
+  }, [])
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current)
+      longPressTimer.current = null
+    }
+    // If long-press already triggered, block the tap from also firing
+    if (longPressTriggered.current) {
+      e.preventDefault()
+      e.stopPropagation()
+      longPressTriggered.current = false
+      return
+    }
+    // If placingBoundary is active and this was a quick tap (not a scroll), handle it
+    if (mode !== 'view' && placingBoundary && touchStartPos.current) {
+      const touch = e.changedTouches[0]
+      const dx = touch.clientX - touchStartPos.current.x
+      const dy = touch.clientY - touchStartPos.current.y
+      if (Math.sqrt(dx * dx + dy * dy) <= MOVE_THRESHOLD) {
+        e.preventDefault()
+        e.stopPropagation()
+        const charPos = resolveCharPos(touch.clientX, touch.clientY)
+        if (charPos !== null) {
+          applyBoundary(charPos, placingBoundary)
+          setPlacingBoundary(null)
+        }
+      }
+    }
+    touchStartPos.current = null
+  }, [mode, placingBoundary, resolveCharPos, applyBoundary])
 
   // Story actions
   const handleStartBoundaryEdit = () => {
@@ -723,7 +803,7 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
             </span>
           )}
           {(mode === 'edit-boundary' || mode === 'new-story') && !placingBoundary && (
-            <span className="text-gray-500">Use buttons below to set positions</span>
+            <span className="text-gray-500">Long-press text or use buttons below</span>
           )}
           {mode === 'view' && (
             <span>Tap highlighted text to select</span>
@@ -770,11 +850,13 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
           whiteSpace: 'pre-wrap',
           wordBreak: 'break-word',
           overscrollBehavior: 'contain',
-          WebkitUserSelect: placingBoundary ? 'none' : 'auto',
-          userSelect: placingBoundary ? 'none' : 'auto',
+          WebkitUserSelect: (placingBoundary || mode !== 'view') ? 'none' : 'auto',
+          userSelect: (placingBoundary || mode !== 'view') ? 'none' : 'auto',
         }}
-        onClick={placingBoundary ? handleTextTap : undefined}
-        onTouchEnd={placingBoundary ? handleTextTap : undefined}
+        onClick={mode !== 'view' ? handleTextTap : undefined}
+        onTouchStart={mode !== 'view' ? handleTouchStart : undefined}
+        onTouchMove={mode !== 'view' ? handleTouchMove : undefined}
+        onTouchEnd={mode !== 'view' ? handleTouchEnd : undefined}
       >
         <div className="font-mono text-xs leading-relaxed">
           {/* Normal view mode */}
