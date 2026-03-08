@@ -39831,5 +39831,11 @@
         },
         "confidence": 1.0,
         "status": "AUTO_APPROVED"
+    },
+    "Bigfoot Mimicry Collete Story": {
+        "start_char": 83194,
+        "end_char": 83913,
+        "pages": "",
+        "keywords": []
     }
 }
