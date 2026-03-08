@@ -161,21 +161,7 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
     }
   }, [selectedStory?.title, mode])
 
-  // Auto-scroll ONLY when first entering boundary edit mode (not on every boundary change)
-  useEffect(() => {
-    if (mode === 'edit-boundary' && selectedStory && reviewContainerRef.current) {
-      setTimeout(() => {
-        const highlight = reviewContainerRef.current?.querySelector('.boundary-highlight') as HTMLElement | null
-        if (highlight && reviewContainerRef.current) {
-          const containerRect = reviewContainerRef.current.getBoundingClientRect()
-          const hRect = highlight.getBoundingClientRect()
-          const relTop = hRect.top - containerRect.top + reviewContainerRef.current.scrollTop
-          reviewContainerRef.current.scrollTop = relTop - reviewContainerRef.current.clientHeight / 3
-        }
-      }, 150)
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mode])  // Only trigger on mode change, NOT on editedStart/editedEnd
+  // No auto-scroll when entering boundary edit mode — user decides scroll position
 
   const loadFullText = async () => {
     setLoadingText(true)
@@ -843,8 +829,8 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
       {/* Text viewer - takes remaining space */}
       <div
         ref={reviewContainerRef}
-        className={`flex-1 overflow-y-auto px-3 py-3 ${
-          placingBoundary ? 'border-2 border-blue-500' : mode !== 'view' ? 'border border-gray-600' : ''
+        className={`flex-1 overflow-y-auto px-3 py-3 border-2 ${
+          placingBoundary ? 'border-blue-500' : mode !== 'view' ? 'border-gray-600' : 'border-transparent'
         }`}
         style={{
           whiteSpace: 'pre-wrap',
@@ -945,10 +931,10 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <button
                   onClick={() => setPlacingBoundary(placingBoundary === 'start' ? null : 'start')}
-                  className={`p-2 rounded text-left transition-colors ${
+                  className={`p-2 rounded text-left transition-colors border-2 ${
                     placingBoundary === 'start'
-                      ? 'bg-blue-600 border-2 border-blue-400 ring-2 ring-blue-400/50'
-                      : 'bg-gray-700 border border-gray-600 active:bg-gray-600'
+                      ? 'bg-blue-600 border-blue-400 ring-2 ring-blue-400/50'
+                      : 'bg-gray-700 border-gray-600 active:bg-gray-600'
                   }`}
                 >
                   <p className="text-gray-300 text-[10px] uppercase tracking-wider">Start</p>
@@ -960,10 +946,10 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
                 </button>
                 <button
                   onClick={() => setPlacingBoundary(placingBoundary === 'end' ? null : 'end')}
-                  className={`p-2 rounded text-left transition-colors ${
+                  className={`p-2 rounded text-left transition-colors border-2 ${
                     placingBoundary === 'end'
-                      ? 'bg-green-600 border-2 border-green-400 ring-2 ring-green-400/50'
-                      : 'bg-gray-700 border border-gray-600 active:bg-gray-600'
+                      ? 'bg-green-600 border-green-400 ring-2 ring-green-400/50'
+                      : 'bg-gray-700 border-gray-600 active:bg-gray-600'
                   }`}
                 >
                   <p className="text-gray-300 text-[10px] uppercase tracking-wider">End</p>
@@ -1026,10 +1012,10 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <button
                   onClick={() => setPlacingBoundary(placingBoundary === 'start' ? null : 'start')}
-                  className={`p-2 rounded text-left transition-colors ${
+                  className={`p-2 rounded text-left transition-colors border-2 ${
                     placingBoundary === 'start'
-                      ? 'bg-green-600 border-2 border-green-400 ring-2 ring-green-400/50'
-                      : 'bg-gray-700 border border-gray-600 active:bg-gray-600'
+                      ? 'bg-green-600 border-green-400 ring-2 ring-green-400/50'
+                      : 'bg-gray-700 border-gray-600 active:bg-gray-600'
                   }`}
                 >
                   <p className="text-gray-300 text-[10px] uppercase tracking-wider">Start</p>
@@ -1041,10 +1027,10 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
                 </button>
                 <button
                   onClick={() => setPlacingBoundary(placingBoundary === 'end' ? null : 'end')}
-                  className={`p-2 rounded text-left transition-colors ${
+                  className={`p-2 rounded text-left transition-colors border-2 ${
                     placingBoundary === 'end'
-                      ? 'bg-yellow-600 border-2 border-yellow-400 ring-2 ring-yellow-400/50'
-                      : 'bg-gray-700 border border-gray-600 active:bg-gray-600'
+                      ? 'bg-yellow-600 border-yellow-400 ring-2 ring-yellow-400/50'
+                      : 'bg-gray-700 border-gray-600 active:bg-gray-600'
                   }`}
                 >
                   <p className="text-gray-300 text-[10px] uppercase tracking-wider">End</p>
