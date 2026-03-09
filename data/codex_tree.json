@@ -607,15 +607,18 @@
                     "The Whirlwind Zither-Player and Dog Spirit of Hessimont",
                     "The Eight-Year Dog Haunt in the Cologne Diocese Cloister"
                 ],
-                "Shadow People": [
-                    "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary",
-                    "Investigator\u2019s Encounters with Men in Black, Poltergeists, and a Dark Apparition",
-                    "Case 24: Laura's Old Hag Attacks \u2013 Paralysis, Bright Light, and Shadow Presence in Pennsylvania",
-                    "Heurn's Report of Childhood Haunting",
-                    "Ron\u2019s Afternoon Attack by a Murky, Enveloping Presence",
-                    "Jack\u2019s Recurrent Shadowy Caped Figure, Paralysis, Chest Pressure, Footfalls, and Attempted Projection",
-                    "Shadow Figure In Mound, Minnesota And Men-In-Black After Serpent Mound UFO"
-                ],
+                "Shadow People": {
+                    "Hatman": [],
+                    "_stories": [
+                        "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary",
+                        "Investigator\u2019s Encounters with Men in Black, Poltergeists, and a Dark Apparition",
+                        "Case 24: Laura's Old Hag Attacks \u2013 Paralysis, Bright Light, and Shadow Presence in Pennsylvania",
+                        "Heurn's Report of Childhood Haunting",
+                        "Ron\u2019s Afternoon Attack by a Murky, Enveloping Presence",
+                        "Jack\u2019s Recurrent Shadowy Caped Figure, Paralysis, Chest Pressure, Footfalls, and Attempted Projection",
+                        "Shadow Figure In Mound, Minnesota And Men-In-Black After Serpent Mound UFO"
+                    ]
+                },
                 "Sleep Paralysis": {
                     "Entity Encountered": [
                         "The Lineback Storehouse Ghost That \u201cGot On\u201d A Sleeper And Nearly Smothered Him",
