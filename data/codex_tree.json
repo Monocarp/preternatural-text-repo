@@ -150,7 +150,11 @@
             ]
         },
         "Avian": {
-            "Humanoid": [],
+            "Humanoid": {
+                "_stories": [
+                    "Headless Winged Beings in UFO Phenomena and Keel\u2019s Cases"
+                ]
+            },
             "Mothman": [
                 "Winged and Headless Beings Associated with UFOs",
                 "John Keels Window Areas",
