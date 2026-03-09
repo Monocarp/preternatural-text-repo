@@ -79,6 +79,7 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
   const [loadingAi, setLoadingAi] = useState(false)
   const [aiError, setAiError] = useState<string | null>(null)
   const [committingAll, setCommittingAll] = useState(false)
+  const [aiMethod, setAiMethod] = useState<'local' | 'grok'>('local')
 
   const reviewContainerRef = useRef<HTMLDivElement>(null)
 
@@ -672,8 +673,11 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
     const storyText = fullText.slice(selectedStory.start_char, selectedStory.end_char)
     setLoadingAi(true)
     setAiError(null)
+    const endpoint = aiMethod === 'grok'
+      ? '/ai/suggest-categories'
+      : '/ai/suggest-categories-local'
     try {
-      const res = await apiClient.post('/ai/suggest-categories', {
+      const res = await apiClient.post(endpoint, {
         story_title: selectedStory.title,
         story_text: storyText.slice(0, 15000),
       })
@@ -1190,20 +1194,46 @@ export default function StoryReviewTab({ slug, stories, onStoriesChange }: Story
                 <div className="p-3 bg-gradient-to-br from-purple-900/40 to-blue-900/40 rounded-lg border border-purple-500/50">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-lg">🤖</span>
-                    <h4 className="text-sm font-medium text-purple-300">AI Category Suggestions</h4>
+                    <h4 className="text-sm font-medium text-purple-300">Category Suggestions</h4>
+                  </div>
+
+                  {/* Method toggle */}
+                  <div className="flex rounded-lg overflow-hidden border-2 border-gray-600 mb-2">
+                    <button
+                      onClick={() => setAiMethod('local')}
+                      className={`flex-1 py-1.5 text-xs font-medium transition-colors ${
+                        aiMethod === 'local'
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-gray-800 text-gray-400'
+                      }`}
+                    >
+                      🔍 Local (k-NN)
+                    </button>
+                    <button
+                      onClick={() => setAiMethod('grok')}
+                      className={`flex-1 py-1.5 text-xs font-medium transition-colors ${
+                        aiMethod === 'grok'
+                          ? 'bg-purple-600 text-white'
+                          : 'bg-gray-800 text-gray-400'
+                      }`}
+                    >
+                      🤖 Grok AI
+                    </button>
                   </div>
 
                   <button
                     onClick={handleAutoSuggest}
                     disabled={loadingAi}
-                    className="w-full py-2.5 bg-purple-600 active:bg-purple-500 disabled:bg-gray-600 text-white rounded-lg font-medium text-sm transition-colors mb-2"
+                    className={`w-full py-2.5 active:opacity-80 disabled:bg-gray-600 text-white rounded-lg font-medium text-sm transition-colors mb-2 ${
+                      aiMethod === 'grok' ? 'bg-purple-600' : 'bg-blue-600'
+                    }`}
                   >
                     {loadingAi ? (
                       <span className="flex items-center justify-center gap-2">
-                        <span className="animate-spin">⏳</span> Analyzing...
+                        <span className="animate-spin">⏳</span> {aiMethod === 'grok' ? 'Asking Grok...' : 'Finding similar stories...'}
                       </span>
                     ) : (
-                      '✨ Auto-Suggest Categories'
+                      aiMethod === 'grok' ? '✨ Ask Grok AI' : '🔍 Find Similar Stories'
                     )}
                   </button>
 

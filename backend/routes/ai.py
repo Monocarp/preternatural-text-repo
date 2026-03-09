@@ -216,3 +216,130 @@ async def ai_status():
         "configured": bool(GROK_API_KEY),
         "model": XAI_MODEL if GROK_API_KEY else None
     }
+
+
+# ------------------------------------------------------------------ #
+# Local k-NN Category Suggestion (uses sentence transformer + FAISS)
+# ------------------------------------------------------------------ #
+
+def _build_title_to_paths(tree: dict, path: list = None) -> dict:
+    """
+    Walk the codex tree and return {story_title: [path1, path2, ...]}
+    where each path is a list like ["Cryptid", "Bipedal", "Sasquatch"].
+    """
+    if path is None:
+        path = []
+    mapping: dict = {}
+    if isinstance(tree, list):
+        for title in tree:
+            if isinstance(title, str):
+                mapping.setdefault(title, []).append(list(path))
+    elif isinstance(tree, dict):
+        for key, value in tree.items():
+            if key == "_stories":
+                if isinstance(value, list):
+                    for title in value:
+                        if isinstance(title, str):
+                            mapping.setdefault(title, []).append(list(path))
+            else:
+                sub = _build_title_to_paths(value, path + [key])
+                for t, paths in sub.items():
+                    mapping.setdefault(t, []).extend(paths)
+    return mapping
+
+
+@router.post("/suggest-categories-local", response_model=SuggestCategoriesResponse)
+async def suggest_categories_local(request: SuggestCategoriesRequest):
+    """
+    Suggest categories using local k-NN: embed the story, find nearest
+    neighbours in FAISS, map them to their assigned categories, and
+    return a weighted vote.
+    """
+    from search.engine import get_search_engine
+
+    log.info(f"Local k-NN suggest called for: {request.story_title[:50]}...")
+
+    try:
+        engine = get_search_engine()
+    except RuntimeError:
+        raise HTTPException(status_code=503, detail="Search engine not initialised yet")
+
+    # 1. Build title → category-paths mapping from the live tree
+    codex_tree = get_cached_tree()
+    title_to_paths = _build_title_to_paths(codex_tree)
+
+    log.info(f"Title-to-paths mapping: {len(title_to_paths)} assigned stories")
+
+    # 2. Embed the query story
+    story_text = request.story_text[:15000]  # same cap as Grok path
+    query_vec = engine.embed_query(story_text)
+
+    # 3. Search FAISS for nearest neighbours (more than we need so we
+    #    can filter to only stories that are already categorised)
+    raw_hits = engine.faiss_index.search(query_vec, top_k=200)
+
+    # 4. Keep only neighbours that are assigned to at least one category
+    neighbours = []  # (title, similarity)
+    seen_titles: set = set()
+    for doc_id, score in raw_hits:
+        meta = engine.faiss_index.get_metadata(doc_id)
+        if not meta:
+            continue
+        title = meta.get("title", "")
+        if title in seen_titles:
+            continue
+        seen_titles.add(title)
+        # Skip the query story itself
+        if title == request.story_title:
+            continue
+        if title in title_to_paths:
+            neighbours.append((title, float(score)))
+        if len(neighbours) >= 30:
+            break
+
+    if not neighbours:
+        log.warning("No categorised neighbours found")
+        return SuggestCategoriesResponse(suggestions=[], model_used="local-knn")
+
+    log.info(f"Found {len(neighbours)} categorised neighbours "
+             f"(top sim={neighbours[0][1]:.3f})")
+
+    # 5. Weighted vote: each neighbour votes for its categories
+    #    weighted by cosine similarity
+    path_scores: dict = {}   # tuple(path) → cumulative score
+    path_voters: dict = {}   # tuple(path) → list of voter titles
+
+    for title, sim in neighbours:
+        for cat_path in title_to_paths.get(title, []):
+            key = tuple(cat_path)
+            path_scores[key] = path_scores.get(key, 0.0) + sim
+            path_voters.setdefault(key, []).append(title)
+
+    if not path_scores:
+        return SuggestCategoriesResponse(suggestions=[], model_used="local-knn")
+
+    # 6. Normalise scores to 0..1 range and build suggestions
+    max_score = max(path_scores.values())
+    suggestions = []
+    for path_tuple, raw_score in sorted(path_scores.items(),
+                                         key=lambda x: x[1], reverse=True):
+        confidence = round(raw_score / max_score, 3) if max_score > 0 else 0.0
+        voters = path_voters.get(path_tuple, [])
+        reason = (f"Based on {len(voters)} similar "
+                  f"{'story' if len(voters) == 1 else 'stories'}: "
+                  f"{', '.join(voters[:3])}"
+                  + (f" +{len(voters)-3} more" if len(voters) > 3 else ""))
+        suggestions.append(CategorySuggestion(
+            path=list(path_tuple),
+            confidence=confidence,
+            reason=reason,
+        ))
+
+    # Cap at 8 suggestions
+    suggestions = suggestions[:8]
+    log.info(f"Local k-NN returned {len(suggestions)} suggestions")
+
+    return SuggestCategoriesResponse(
+        suggestions=suggestions,
+        model_used="local-knn",
+    )
