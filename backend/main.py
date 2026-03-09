@@ -259,6 +259,9 @@ def _apply_tree_reparents():
                             if not existing_child:
                                 child.parent_id = existing.id
                             # else: child already exists, skip
+                        # Flush moves before delete so SQLAlchemy's identity map
+                        # knows the node_stories rows have been relocated
+                        db.flush()
                         db.delete(node)
                         changed = True
                     else:
