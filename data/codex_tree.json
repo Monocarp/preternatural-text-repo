@@ -150,11 +150,9 @@
             ]
         },
         "Avian": {
-            "Humanoid": {
-                "_stories": [
-                    "Headless Winged Beings in UFO Phenomena and Keel\u2019s Cases"
-                ]
-            },
+            "Humanoid": [
+                "Headless Winged Beings in UFO Phenomena and Keel\u2019s Cases"
+            ],
             "Mothman": [
                 "Winged and Headless Beings Associated with UFOs",
                 "John Keels Window Areas",
@@ -1494,7 +1492,8 @@
                 "UFO Window at Lake Champlain and Craft over Lochs",
                 "Keel's Anomalous Lights Sighting",
                 "Ravenswood Couple\u2019s Missing Time after Encounter with a Ball of Bluish Fire",
-                "Witness Amnesia after Strange Lights and Mary Hyre\u2019s Forgotten Globe of Light"
+                "Witness Amnesia after Strange Lights and Mary Hyre\u2019s Forgotten Globe of Light",
+                "Headless Winged Beings in UFO Phenomena and Keel\u2019s Cases"
             ],
             "UFO": {
                 "Pilot Seen": [
