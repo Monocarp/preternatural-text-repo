@@ -88,6 +88,7 @@ const BookDetail = () => {
   const [loadingAiSuggestions, setLoadingAiSuggestions] = useState(false)
   const [aiError, setAiError] = useState<string | null>(null)
   const [committingAll, setCommittingAll] = useState(false)
+  const [aiMethod, setAiMethod] = useState<'local' | 'grok'>('local')
   
   // Manual paste AI suggestions state
   const [showPasteInput, setShowPasteInput] = useState(false)
@@ -283,7 +284,10 @@ const BookDetail = () => {
       // Extract story text from full text using boundaries
       const storyText = fullText.substring(selectedStory.start_char, selectedStory.end_char)
       
-      const res = await axios.post('/ai/suggest-categories', {
+      const endpoint = aiMethod === 'grok'
+        ? '/ai/suggest-categories'
+        : '/ai/suggest-categories-local'
+      const res = await axios.post(endpoint, {
         story_title: selectedStory.title,
         story_text: storyText
       })
@@ -1797,20 +1801,46 @@ const BookDetail = () => {
                   <div className="mb-4 p-3 bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-lg border border-purple-500/50">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-lg">🤖</span>
-                      <h4 className="text-sm font-medium text-purple-300">AI Category Suggestions</h4>
+                      <h4 className="text-sm font-medium text-purple-300">Category Suggestions</h4>
+                    </div>
+
+                    {/* Method toggle */}
+                    <div className="flex rounded-lg overflow-hidden border border-gray-600 mb-3">
+                      <button
+                        onClick={() => setAiMethod('local')}
+                        className={`flex-1 py-1.5 text-xs font-medium transition-colors ${
+                          aiMethod === 'local'
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                        }`}
+                      >
+                        🔍 Local (k-NN)
+                      </button>
+                      <button
+                        onClick={() => setAiMethod('grok')}
+                        className={`flex-1 py-1.5 text-xs font-medium transition-colors ${
+                          aiMethod === 'grok'
+                            ? 'bg-purple-600 text-white'
+                            : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                        }`}
+                      >
+                        🤖 Grok AI
+                      </button>
                     </div>
                     
                     <button
                       onClick={handleAutoSuggest}
                       disabled={loadingAiSuggestions || !fullText}
-                      className="w-full px-3 py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-sm font-medium rounded transition-colors mb-3"
+                      className={`w-full px-3 py-2 hover:opacity-90 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-sm font-medium rounded transition-colors mb-3 ${
+                        aiMethod === 'grok' ? 'bg-purple-600' : 'bg-blue-600'
+                      }`}
                     >
                       {loadingAiSuggestions ? (
                         <span className="flex items-center justify-center gap-2">
-                          <span className="animate-spin">⏳</span> Analyzing story...
+                          <span className="animate-spin">⏳</span> {aiMethod === 'grok' ? 'Asking Grok...' : 'Finding similar stories...'}
                         </span>
                       ) : (
-                        '✨ Auto-Suggest Categories'
+                        aiMethod === 'grok' ? '✨ Ask Grok AI' : '🔍 Find Similar Stories'
                       )}
                     </button>
                     
