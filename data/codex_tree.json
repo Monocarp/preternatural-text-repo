@@ -608,7 +608,11 @@
                     "The Eight-Year Dog Haunt in the Cologne Diocese Cloister"
                 ],
                 "Shadow People": {
-                    "Hatman": [],
+                    "Hatman": {
+                        "_stories": [
+                            "Hat Man Shadow Figure and Child\u2019s Seizure following a Death Dream"
+                        ]
+                    },
                     "_stories": [
                         "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary",
                         "Investigator\u2019s Encounters with Men in Black, Poltergeists, and a Dark Apparition",
