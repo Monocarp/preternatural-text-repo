@@ -283,79 +283,6 @@ def _apply_tree_reparents():
 
 
 # ------------------------------------------------------------------ #
-# 6c. Sync JSON tree assignments to DB (idempotent)
-# ------------------------------------------------------------------ #
-def _sync_json_tree_to_db():
-    """
-    Ensure all story→category assignments in codex_tree.json exist in the DB.
-    
-    This bridges the gap where codex_tree.json is updated with new assignments
-    (e.g., batch classification scripts) but the DB wasn't updated directly.
-    Only adds missing assignments — never removes existing ones.
-    """
-    if not app_state.USE_DB or app_state.SessionLocal is None:
-        return
-
-    from models import CodexNode, NodeStory, Story
-    from tree.persistence import load_codex_tree_from_json
-
-    try:
-        tree_json = load_codex_tree_from_json()
-        with app_state.SessionLocal() as db:
-            added = 0
-
-            def sync_node(subtree, parent_id=None):
-                nonlocal added
-                for key, value in subtree.items():
-                    if key == '_stories':
-                        continue
-
-                    # Find or skip node
-                    q = db.query(CodexNode).filter_by(name=key)
-                    if parent_id:
-                        q = q.filter_by(parent_id=parent_id)
-                    else:
-                        q = q.filter_by(parent_id=None)
-                    node = q.first()
-
-                    if not node:
-                        # Create the node if it doesn't exist
-                        node = CodexNode(name=key, parent_id=parent_id)
-                        db.add(node)
-                        db.flush()
-                        log.info(f"Created missing node '{key}' (parent_id={parent_id})")
-
-                    # Handle story lists
-                    stories_list = []
-                    if isinstance(value, list):
-                        stories_list = value
-                    elif isinstance(value, dict):
-                        stories_list = value.get('_stories', [])
-                        # Recurse into children
-                        sync_node(value, node.id)
-
-                    for title in stories_list:
-                        story = db.query(Story).filter_by(title=title).first()
-                        if not story:
-                            continue
-                        existing = db.query(NodeStory).filter_by(
-                            node_id=node.id, story_id=story.id
-                        ).first()
-                        if not existing:
-                            db.add(NodeStory(node_id=node.id, story_id=story.id))
-                            added += 1
-
-            sync_node(tree_json)
-            if added:
-                db.commit()
-                log.info(f"Synced {added} missing story→category assignments from JSON to DB")
-            else:
-                log.info("All JSON tree assignments already in DB")
-    except Exception as e:
-        log.error(f"JSON tree sync failed: {e}", exc_info=True)
-
-
-# ------------------------------------------------------------------ #
 # 7. Startup Event
 # ------------------------------------------------------------------ #
 @app.on_event("startup")
@@ -383,9 +310,6 @@ async def startup():
 
     # 1c. Apply tree structural reparents (idempotent)
     _apply_tree_reparents()
-
-    # 1d. Sync JSON tree assignments to DB (idempotent)
-    _sync_json_tree_to_db()
     
     # 2. Preload book metadata
     log.info("Preloading book metadata...")
