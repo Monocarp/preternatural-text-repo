@@ -12,6 +12,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 
 from .dependencies import DATA_DIR
+from utils.cache import get_cached_tree
 
 log = logging.getLogger(__name__)
 
@@ -118,17 +119,12 @@ async def suggest_categories(request: SuggestCategoriesRequest):
             detail="GROK_API_KEY environment variable is not set"
         )
     
-    # Load the codex tree
-    tree_path = os.path.join(DATA_DIR, "codex_tree.json")
-    log.info(f"Loading codex tree from: {tree_path}")
-    log.info(f"File exists: {os.path.exists(tree_path)}")
-    
+    # Load the codex tree from cache (DB-backed, has renames applied)
     try:
-        with open(tree_path, "r", encoding="utf-8") as f:
-            codex_tree = json.load(f)
+        codex_tree = get_cached_tree()
         log.info(f"Loaded codex tree with {len(codex_tree)} top-level categories")
     except Exception as e:
-        log.error(f"Failed to load codex tree from {tree_path}: {e}")
+        log.error(f"Failed to load codex tree: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to load category tree: {str(e)}")
     
     # Build the prompt

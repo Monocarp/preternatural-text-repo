@@ -194,8 +194,10 @@ def _apply_category_renames():
 
 
 # Each entry: (node_name, old_parent_name, new_parent_name)
+# Use None as old_parent_name for root-level (orphaned) nodes.
 _NODE_REPARENTS = [
     ("Pilot Seen", "Aerial Phenomenon", "UFO"),
+    ("Vocalizations", None, "Evidence"),
 ]
 
 def _apply_tree_reparents():
@@ -205,7 +207,7 @@ def _apply_tree_reparents():
     """
     if not app_state.USE_DB or app_state.SessionLocal is None:
         return
-    from models import CodexNode
+    from models import CodexNode, NodeStory
     try:
         with app_state.SessionLocal() as db:
             changed = False
@@ -214,20 +216,58 @@ def _apply_tree_reparents():
                 if not new_parent:
                     log.warning(f"Reparent skipped: new parent '{new_parent_name}' not found")
                     continue
-                old_parent = db.query(CodexNode).filter_by(name=old_parent_name).first()
-                if not old_parent:
-                    log.warning(f"Reparent skipped: old parent '{old_parent_name}' not found")
-                    continue
+
+                # old_parent_name=None means root-level (orphaned) node
+                if old_parent_name is None:
+                    old_parent_id = None
+                else:
+                    old_parent = db.query(CodexNode).filter_by(name=old_parent_name).first()
+                    if not old_parent:
+                        log.warning(f"Reparent skipped: old parent '{old_parent_name}' not found")
+                        continue
+                    old_parent_id = old_parent.id
+
                 node = db.query(CodexNode).filter_by(
-                    name=node_name, parent_id=old_parent.id
+                    name=node_name, parent_id=old_parent_id
                 ).first()
                 if node:
-                    log.info(
-                        f"Reparenting '{node_name}': "
-                        f"'{old_parent_name}' → '{new_parent_name}'"
-                    )
-                    node.parent_id = new_parent.id
-                    changed = True
+                    # Check if a node with the same name already exists under new_parent
+                    existing = db.query(CodexNode).filter_by(
+                        name=node_name, parent_id=new_parent.id
+                    ).first()
+                    if existing:
+                        # Merge: move stories from orphan into existing node
+                        log.info(
+                            f"Merging orphaned '{node_name}' (id={node.id}) "
+                            f"into existing under '{new_parent_name}' (id={existing.id})"
+                        )
+                        orphan_stories = db.query(NodeStory).filter_by(node_id=node.id).all()
+                        for ns in orphan_stories:
+                            dup = db.query(NodeStory).filter_by(
+                                node_id=existing.id, story_id=ns.story_id
+                            ).first()
+                            if not dup:
+                                ns.node_id = existing.id
+                            else:
+                                db.delete(ns)
+                        # Re-parent any children of orphan too
+                        orphan_children = db.query(CodexNode).filter_by(parent_id=node.id).all()
+                        for child in orphan_children:
+                            existing_child = db.query(CodexNode).filter_by(
+                                name=child.name, parent_id=existing.id
+                            ).first()
+                            if not existing_child:
+                                child.parent_id = existing.id
+                            # else: child already exists, skip
+                        db.delete(node)
+                        changed = True
+                    else:
+                        log.info(
+                            f"Reparenting '{node_name}': "
+                            f"'{old_parent_name}' → '{new_parent_name}'"
+                        )
+                        node.parent_id = new_parent.id
+                        changed = True
                 else:
                     log.debug(
                         f"Reparent not needed: '{node_name}' is not under '{old_parent_name}'"
