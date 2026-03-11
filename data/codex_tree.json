@@ -3377,11 +3377,9 @@
             "NDErs\u2019 Post-Experience Precognition of Deaths and Accidents Verified by Others",
             "Geralyn\u2019s Burkitt Lymphoma Disappearing After Dying in Surgery and Meeting Three Angels"
         ],
-        "Newly Developed Sensitivity To Spirits": {
-            "_stories": [
-                "Lynn\u2019s Post-NDE Ability to See and Converse with Dead People in the Hospital"
-            ]
-        },
+        "Newly Developed Sensitivity To Spirits": [
+            "Lynn\u2019s Post-NDE Ability to See and Converse with Dead People in the Hospital"
+        ],
         "Supernatural Healing": [
             "Moody\u2019s \u201cSupernatural Rescues\u201d Including a Detached Hand Appearing from Nowhere to Save Someone",
             "Geralyn\u2019s Burkitt Lymphoma Disappearing After Dying in Surgery and Meeting Three Angels"
@@ -3406,7 +3404,6 @@
             "Feverish Five-Year-Old Surrounded by Four White-Clad Elves or Nymphs Speaking in Song",
             "NDEr Interpreting the Light as Christ-Consciousness and Jesus as \u201cLight of the World\u201d",
             "Anita\u2019s Stage 4 Hodgkin\u2019s Lymphoma Vanishing After an NDE",
-            "Lynn\u2019s Post-NDE Ability to See and Converse with Dead People in the Hospital",
             "Cherylee Black\u2019s Post-NDE Recurrent Spontaneous Psychokinesis and \u201cMs. Black Effect\u201d",
             "Georgie's Overdose NDE Guided by Shamanic Voice",
             "NDErs Describe Shrinking to Atomic Size During Near-Death Experiences",
