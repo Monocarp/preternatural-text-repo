@@ -1619,7 +1619,6 @@
                     "Winged and Headless Beings Associated with UFOs",
                     "Fiery Ball of Light, Little Blue Men, and Message from the Dead Brother Charlie",
                     "Aladino Felix\u2019s Contact with a Saucer Captain and Subsequent Visits",
-                    "Tom Dawson\u2019s Encounter with Hairless Humanoids and the Voice of \u201cJimmy Hoffa\u201d",
                     "Robert Monroe\u2019s Out-of-Body Encounter with a Shape-Shifting Flying Saucer and a W.C. Fields Entity",
                     "Jean Hingley\u2019s 1979 Encounter with Three Winged, Corpse-Faced Humanoids and Their Scorpion-Tailed Craft",
                     "Australian UFO Abduction with Transformation into a Fox and Subsequent Premonitions and Apparition",
@@ -3259,11 +3258,9 @@
                 "Medieval Accounts of Striking Embodied Spirits"
             ]
         },
-        "Tulpas": {
-            "_stories": [
-                "Walter Gibson Sees His Fictional Character \u201cThe Shadow\u201d as a Ghost"
-            ]
-        },
+        "Tulpas": [
+            "Walter Gibson Sees His Fictional Character \u201cThe Shadow\u201d as a Ghost"
+        ],
         "Woman In White": [
             "Globular Lights and a Woman in White at Captain Lamber\u2019s Home in Szeged, Hungary",
             "Cabeco, Portugal: White Headless Figure",
