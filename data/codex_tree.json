@@ -3377,7 +3377,11 @@
                 "Adult and Young NDErs Feeling Homesick"
             ]
         },
-        "Newly Developed Psychical Abilities": {},
+        "Newly Developed Psychical Abilities": {
+            "_stories": [
+                "NDErs\u2019 Post-Experience Precognition of Deaths and Accidents Verified by Others"
+            ]
+        },
         "_stories": [
             "Maria\u2019s 1984 NDE and Verification of a Tennis Shoe Seen Out-of-Body",
             "Plato\u2019s Account of Er\u2019s Near-Death Journey with Judges and Portals in Earth and Heaven",
@@ -3505,7 +3509,7 @@
         "Automatic Writing": [
             "Florida Housewife\u2019s Documented Psychic Talents, Stigmata, Apports, and Later Orange Globe UFOs"
         ],
-        "Clairvoyance": [],
+        "Clairvoyance": {},
         "Communication": [
             "Abductee\u2019s Post-Encounter Telepathy and Precognition with Childhood Friend",
             "Friedrich J\u00fcrgenson\u2019s EVP Messages From The Dead And Telepathic Messages From A Space \u201cCentral Investigation Station\u201d"
