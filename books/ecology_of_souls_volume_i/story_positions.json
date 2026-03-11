@@ -623,69 +623,6 @@
             "No specific locations identified"
         ]
     },
-    "Dennis Stillings on Putative ETs as Human Psychic Components and Rebirth": {
-        "start_char": 25030,
-        "end_char": 25351,
-        "pages": "7",
-        "keywords": [
-            "dennis stillings",
-            "rebirth",
-            "psychological transformation",
-            "psychic economy",
-            "ets"
-        ],
-        "verbatim": "\"The putative ETs have all the earmarks of human psychic components in symbolic form, which are in the process of manifesting in the psychic economy of a person undergoing a psychological transformation of a typical sort,\" wrote Dennis Stillings. \"Perhaps that very transformation traditionally referred to as 'rebirth.'\"",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": [],
-            "raw_mentions": [],
-            "normalized": []
-        },
-        "topics": {
-            "primary": [
-                "rebirth",
-                "psychological transformation",
-                "psychic economy",
-                "rebirth"
-            ],
-            "secondary": [
-                "ets",
-                "dennis stillings"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "rebirth"
-                ],
-                "entities": [
-                    "ETs"
-                ],
-                "context": [
-                    "psychological transformation",
-                    "psychic economy"
-                ],
-                "functional_purpose": [
-                    "rebirth"
-                ],
-                "people": [
-                    "Dennis Stillings"
-                ],
-                "historical_groups": [],
-                "implements": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "REVIEW",
-        "warnings": [
-            "No temporal data extracted",
-            "No specific locations identified"
-        ]
-    },
     "Dave’s Lifetime of Alien Encounters, Past-Life as a Susquehannock, and Rebirth in Virginia": {
         "start_char": 25388,
         "end_char": 26297,
