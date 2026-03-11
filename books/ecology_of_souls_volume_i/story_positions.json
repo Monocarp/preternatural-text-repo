@@ -1363,56 +1363,6 @@
             "No specific locations identified"
         ]
     },
-    "Moody’s Description of Rapid Passage Through Dark Spaces Like Tunnels, Caves, and Voids": {
-        "start_char": 53892,
-        "end_char": 54201,
-        "pages": "15",
-        "keywords": [
-            "moody",
-            "rapid passage through dark space"
-        ],
-        "verbatim": "\"Often concurrently with the occurrence of the noise, people have the sensation of being pulled very rapidly through a dark space of some kind,\" Moody wrote. \"I have heard this space described as a cave, a well, a trough, an enclosure, a tunnel, a funnel, a vacuum, a void, a sewer, a valley, and a cylinder.\"",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": [],
-            "raw_mentions": [],
-            "normalized": []
-        },
-        "topics": {
-            "primary": [
-                "rapid passage through dark space"
-            ],
-            "secondary": [
-                "moody"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "rapid passage through dark space"
-                ],
-                "entities": [],
-                "context": [],
-                "functional_purpose": [],
-                "people": [
-                    "Moody"
-                ],
-                "historical_groups": [],
-                "implements": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "REVIEW",
-        "warnings": [
-            "No temporal data extracted",
-            "No specific locations identified",
-            "Very few topics identified - may need manual review"
-        ]
-    },
     "NDErs’ Testimonies of Being Drawn into and Becoming One with a Beautiful Light": {
         "start_char": 54215,
         "end_char": 54737,
