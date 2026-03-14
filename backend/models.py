@@ -20,9 +20,9 @@ DATABASE_URL = (
 engine = create_engine(
     DATABASE_URL,
     pool_pre_ping=True,  # Test connections before using them
-    pool_recycle=3600,   # Recycle connections after 1 hour
-    pool_size=5,         # Maximum number of connections to keep
-    max_overflow=10      # Maximum number of connections that can be created beyond pool_size
+    pool_recycle=300,    # Recycle connections after 5 minutes (Neon auto-suspends at 5min idle)
+    pool_size=2,         # Keep minimal idle connections (serverless-friendly)
+    max_overflow=3       # Allow up to 5 total connections if needed
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

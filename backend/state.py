@@ -155,8 +155,8 @@ class AppState:
                     db_url,
                     pool_pre_ping=True,  # Test connections before using them
                     pool_recycle=300,    # Recycle connections after 5 minutes (serverless friendly)
-                    pool_size=5,
-                    max_overflow=10
+                    pool_size=2,         # Keep minimal idle connections
+                    max_overflow=3       # Allow up to 5 total if needed
                 )
                 self.SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
                 Base.metadata.create_all(bind=self.engine)

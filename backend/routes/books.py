@@ -9,6 +9,7 @@ Endpoints:
 """
 
 import logging
+import time
 from typing import List
 
 from fastapi import APIRouter
@@ -22,10 +23,20 @@ log = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api", tags=["books"])
 
+# ------------------------------------------------------------------ #
+# Books cache — refreshes every 60s (books rarely change)
+# ------------------------------------------------------------------ #
+_books_cache: dict = {"data": None, "timestamp": 0}
+_BOOKS_CACHE_TTL = 60  # seconds
+
 
 @router.get("/books", response_model=List[BookResponse])
 def get_books():
     """Get all books with story counts."""
+    now = time.monotonic()
+    if _books_cache["data"] is not None and (now - _books_cache["timestamp"]) < _BOOKS_CACHE_TTL:
+        return _books_cache["data"]
+
     try:
         with SessionLocal() as db:
             books = db.query(Book).all()
@@ -39,6 +50,8 @@ def get_books():
                     "year": book.year,
                     "story_count": len(book.stories) if book.stories else 0
                 })
+            _books_cache["data"] = result
+            _books_cache["timestamp"] = now
             return result
     except Exception as e:
         log.error(f"Failed to fetch books: {e}")
