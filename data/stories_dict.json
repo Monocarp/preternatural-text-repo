@@ -10409,7 +10409,7 @@
     },
     "Missing Time and Gear Malfunctions": {
         "book_slug": "ecology_of_souls_volume_i",
-        "end_char": 268620,
+        "end_char": 268608,
         "keywords": "beverley nichols, john janaway, chuck carte, charlotte, surrey, united kingdom, united states, supernatural interference, caution in investigations, time slip, missing time, equipment malfunction, battery corrosion, ghost hunt, paranormal investigation, ghost story, ghost, paranormal equipment, batteries, 19th century, 1895",
         "pages": "",
         "start_char": 267589,
@@ -11878,6 +11878,14 @@
         "pages": "145",
         "start_char": 559864,
         "title": "Pech Merle and Cougnac Cave Petroglyphs of Wounded and Dismembered Therianthropic Men"
+    },
+    "Pembrokeshire Lad Taken By Fairies": {
+        "book_slug": "ecology_of_souls_volume_i",
+        "end_char": 271619,
+        "keywords": "pembrokeshire, young lad, faerie dance, taken by fairies, prohibited from drinking, returned to Earth",
+        "pages": "71",
+        "start_char": 271286,
+        "title": "Pembrokeshire Lad Taken By Fairies"
     },
     "Pennsylvania Girl Sees Faceless Figure in Mother\u2019s Dress and Is Told It Was a Witch Coming to Ride Her": {
         "book_slug": "the_terror_that_comes_at_night",
