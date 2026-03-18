@@ -6057,10 +6057,10 @@
     },
     "Faeries Haunting Sepulchral Monuments and Burial Sites": {
         "book_slug": "ecology_of_souls_volume_i",
-        "end_char": 279425,
-        "keywords": "spence, cornwall, ireland, united kingdom, haunting, sepulchral monuments, burial mounds, cemeteries, stone circles, faerie, spriggan, elf, 1th century, 2th century, 3th century, 4th century, 5th century, 19th century, 20th century, 1853, 1983",
+        "end_char": 277139,
+        "keywords": "haunting, sepulchral monuments, burial mounds, cemeteries, stone circles, faerie",
         "pages": "73-74",
-        "start_char": 275347,
+        "start_char": 276643,
         "title": "Faeries Haunting Sepulchral Monuments and Burial Sites"
     },
     "Faeries Hoarding Treasure in Mounds and Heroes Capturing Death": {
@@ -9462,6 +9462,14 @@
         "pages": "93",
         "start_char": 303423,
         "title": "Litchfield Hills Single-Foot Trackway and Subsequent Experiences"
+    },
+    "Little People in Cemeteries": {
+        "book_slug": "ecology_of_souls_volume_i",
+        "end_char": 277753,
+        "keywords": "faeries, burials, FIS, marjorie johnson, pontrhydfendigaid, wales, evans wentz, singing, dikes, big hole, tunnel, human bones and urns, tylwyth teg",
+        "pages": "73",
+        "start_char": 277141,
+        "title": "Little People in Cemeteries"
     },
     "Little Rock Airship Light of December 12, 1909": {
         "book_slug": "operation_trojan_horse",
