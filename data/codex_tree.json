@@ -19,15 +19,11 @@
     },
     "Altered States of Consciousness": {
         "Entheogens": {
-            "Knowledge of Future Events": {
-                "_stories": [
-                    "Ayahuasca Drinkers Learn Of Distant Deaths Before Conventional Notification"
-                ]
-            }
+            "Knowledge of Future Events": [
+                "Ayahuasca Drinkers Learn Of Distant Deaths Before Conventional Notification"
+            ]
         },
-        "Knowledge of Future Events": [
-            "Ayahuasca Drinkers Learn Of Distant Deaths Before Conventional Notification"
-        ],
+        "Knowledge of Future Events": [],
         "Occult Knowledge": [
             "LSD As Source Of Scientific Inspiration For DNA Techniques"
         ],
