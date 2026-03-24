@@ -11501,159 +11501,6 @@
         "confidence": 0.99,
         "status": "OK"
     },
-    "Faerie and Ghostly Beings with Large Eyes and Deathly Odors": {
-        "start_char": 285776,
-        "end_char": 286317,
-        "pages": "75-76",
-        "keywords": [
-            "m.c.f. morris",
-            "yorkshire",
-            "hampshire",
-            "britain",
-            "ireland",
-            "italy",
-            "united kingdom",
-            "discernment",
-            "identification",
-            "shapeshifting",
-            "apparition",
-            "supernatural odor",
-            "folklore",
-            "witness account",
-            "faerie lore",
-            "faerie",
-            "ghost",
-            "demon",
-            "mermaid",
-            "fachan",
-            "orculli",
-            "drake",
-            "pooka",
-            "djinn",
-            "21th century",
-            "2006"
-        ],
-        "verbatim": "As explained in the previous chapter, faeries' small size and intermittent wings may derive from soul traditions. With the exception of beings such as mermaids and more exotic outliers like the one-eyed, one-handed, one-legged fachan, they are humanoid---but can shapeshift, just as demons or ghosts might. A Hampshire faerie witness described \"a skeleton made out of sticks... twice human height\" which jumped from a tree, made eye contact, then returned to the canopy and fled across the branches, accompanied by \"a strong smell of decay.\"\n\nSimilar death-stenches appear across faerie lore: Italian orculli giants smell like corpses, household British drakes exude rotten egg odors, some Irish pookas reek of sulfur. Yorkshire clergyman M.C.F. Morris was told faeries smelled like \"a very crowded 'place of worship' wherein the people had been congregated for a length of time\"; Morris perceived a resemblance to \"the gushes of hot air one sometimes comes across on broken ground,\" i.e. sulfur compounds, key components in decomposition.\n\nThis decay motif is further expressed in telltale defects common among Otherworld denizens, from faeries to djinn. Folklore describes faeries often as beautiful, yet possessed of a single deformity which they are not always able to conceal. While commonly fanciful---goat hooves, single nostrils, webbed feet, ludicrously pendulous breasts---other faults signify deterioration (limping, the aforementioned hollow backs), and all point to corruption.\n\nOversized eyes and heads, as Spence noted, are recurrent, though not defining, faerie features. German nixen, drowned-babies-cum-water-faeries, \"could be recognized by their large, dreadful eyes,\" as could some changelings. Many modern sightings describe these eyes as entirely black. \\[Page 76\\]\n\nIn the early 2000s, a County Meath witness perceived several \"passive but curious\" beings with \"large, black slanted eyes except for one who was bearded and seemed to be in charge\" inside a Neolithic tomb; they otherwise looked human. A 15-year old British Columbia girl hiking with friends on March 30, 2006, glimpsed an androgynous 5'6\" figure with dark brown skin and fair straight hair, wearing only a long skirt or dark pants: \"They had a mostly human looking face but their eyes were a bit too big,\" she said, \"I couldn't see any whites in their eyes, just dark.\" Non-European fae analogues like djinn, duppies, menehune, and Memegwesi (mannegishi) can all sport large eyes and/or heads.\n\nAs death symbols, gigantic, black e",
-        "temporal": {
-            "years": [
-                2006
-            ],
-            "centuries": [
-                21
-            ],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [
-                "Yorkshire",
-                "Hampshire"
-            ],
-            "countries": [
-                "Britain",
-                "Ireland",
-                "Italy",
-                "United Kingdom"
-            ],
-            "raw_mentions": [
-                "Hampshire",
-                "Yorkshire",
-                "Italy",
-                "Ireland",
-                "Britain"
-            ],
-            "normalized": [
-                {
-                    "name": "Hampshire",
-                    "type": "region",
-                    "country": "United Kingdom",
-                    "confidence": 0.95
-                },
-                {
-                    "name": "Yorkshire",
-                    "type": "region",
-                    "country": "United Kingdom",
-                    "confidence": 0.95
-                },
-                {
-                    "name": "Italy",
-                    "type": "country",
-                    "country": "Italy",
-                    "confidence": 0.9
-                },
-                {
-                    "name": "Ireland",
-                    "type": "country",
-                    "country": "Ireland",
-                    "confidence": 0.9
-                },
-                {
-                    "name": "Britain",
-                    "type": "country",
-                    "country": "United Kingdom",
-                    "confidence": 0.9
-                }
-            ]
-        },
-        "topics": {
-            "primary": [
-                "shapeshifting",
-                "apparition",
-                "supernatural odor",
-                "folklore",
-                "witness account",
-                "faerie lore",
-                "discernment",
-                "identification"
-            ],
-            "secondary": [
-                "faerie",
-                "ghost",
-                "demon",
-                "mermaid",
-                "fachan",
-                "orculli",
-                "drake",
-                "pooka",
-                "djinn",
-                "m.c.f. morris"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "shapeshifting",
-                    "apparition",
-                    "supernatural odor"
-                ],
-                "entities": [
-                    "faerie",
-                    "ghost",
-                    "demon",
-                    "mermaid",
-                    "fachan",
-                    "orculli",
-                    "drake",
-                    "pooka",
-                    "djinn"
-                ],
-                "context": [
-                    "folklore",
-                    "witness account",
-                    "faerie lore"
-                ],
-                "functional_purpose": [
-                    "discernment",
-                    "identification"
-                ],
-                "people": [
-                    "M.C.F. Morris"
-                ],
-                "historical_groups": [],
-                "implements": []
-            }
-        },
-        "confidence": 0.99,
-        "status": "OK"
-    },
     "Wrinkled, Corpse‑Like Faeries and a Norwegian Nisse Sighting": {
         "start_char": 288678,
         "end_char": 290098,
@@ -51931,5 +51778,158 @@
             "psychic",
             "troll"
         ]
+    },
+    "Faerie Beings and Deathly Odors": {
+        "start_char": 285776,
+        "end_char": 286317,
+        "pages": "75-76",
+        "keywords": [
+            "m.c.f. morris",
+            "yorkshire",
+            "hampshire",
+            "britain",
+            "ireland",
+            "italy",
+            "united kingdom",
+            "discernment",
+            "identification",
+            "shapeshifting",
+            "apparition",
+            "supernatural odor",
+            "folklore",
+            "witness account",
+            "faerie lore",
+            "faerie",
+            "ghost",
+            "demon",
+            "mermaid",
+            "fachan",
+            "orculli",
+            "drake",
+            "pooka",
+            "djinn",
+            "21th century",
+            "2006"
+        ],
+        "verbatim": "As explained in the previous chapter, faeries' small size and intermittent wings may derive from soul traditions. With the exception of beings such as mermaids and more exotic outliers like the one-eyed, one-handed, one-legged fachan, they are humanoid---but can shapeshift, just as demons or ghosts might. A Hampshire faerie witness described \"a skeleton made out of sticks... twice human height\" which jumped from a tree, made eye contact, then returned to the canopy and fled across the branches, accompanied by \"a strong smell of decay.\"\n\nSimilar death-stenches appear across faerie lore: Italian orculli giants smell like corpses, household British drakes exude rotten egg odors, some Irish pookas reek of sulfur. Yorkshire clergyman M.C.F. Morris was told faeries smelled like \"a very crowded 'place of worship' wherein the people had been congregated for a length of time\"; Morris perceived a resemblance to \"the gushes of hot air one sometimes comes across on broken ground,\" i.e. sulfur compounds, key components in decomposition.\n\nThis decay motif is further expressed in telltale defects common among Otherworld denizens, from faeries to djinn. Folklore describes faeries often as beautiful, yet possessed of a single deformity which they are not always able to conceal. While commonly fanciful---goat hooves, single nostrils, webbed feet, ludicrously pendulous breasts---other faults signify deterioration (limping, the aforementioned hollow backs), and all point to corruption.\n\nOversized eyes and heads, as Spence noted, are recurrent, though not defining, faerie features. German nixen, drowned-babies-cum-water-faeries, \"could be recognized by their large, dreadful eyes,\" as could some changelings. Many modern sightings describe these eyes as entirely black. \\[Page 76\\]\n\nIn the early 2000s, a County Meath witness perceived several \"passive but curious\" beings with \"large, black slanted eyes except for one who was bearded and seemed to be in charge\" inside a Neolithic tomb; they otherwise looked human. A 15-year old British Columbia girl hiking with friends on March 30, 2006, glimpsed an androgynous 5'6\" figure with dark brown skin and fair straight hair, wearing only a long skirt or dark pants: \"They had a mostly human looking face but their eyes were a bit too big,\" she said, \"I couldn't see any whites in their eyes, just dark.\" Non-European fae analogues like djinn, duppies, menehune, and Memegwesi (mannegishi) can all sport large eyes and/or heads.\n\nAs death symbols, gigantic, black e",
+        "temporal": {
+            "years": [
+                2006
+            ],
+            "centuries": [
+                21
+            ],
+            "decades": []
+        },
+        "locations": {
+            "cities": [],
+            "regions": [
+                "Yorkshire",
+                "Hampshire"
+            ],
+            "countries": [
+                "Britain",
+                "Ireland",
+                "Italy",
+                "United Kingdom"
+            ],
+            "raw_mentions": [
+                "Hampshire",
+                "Yorkshire",
+                "Italy",
+                "Ireland",
+                "Britain"
+            ],
+            "normalized": [
+                {
+                    "name": "Hampshire",
+                    "type": "region",
+                    "country": "United Kingdom",
+                    "confidence": 0.95
+                },
+                {
+                    "name": "Yorkshire",
+                    "type": "region",
+                    "country": "United Kingdom",
+                    "confidence": 0.95
+                },
+                {
+                    "name": "Italy",
+                    "type": "country",
+                    "country": "Italy",
+                    "confidence": 0.9
+                },
+                {
+                    "name": "Ireland",
+                    "type": "country",
+                    "country": "Ireland",
+                    "confidence": 0.9
+                },
+                {
+                    "name": "Britain",
+                    "type": "country",
+                    "country": "United Kingdom",
+                    "confidence": 0.9
+                }
+            ]
+        },
+        "topics": {
+            "primary": [
+                "shapeshifting",
+                "apparition",
+                "supernatural odor",
+                "folklore",
+                "witness account",
+                "faerie lore",
+                "discernment",
+                "identification"
+            ],
+            "secondary": [
+                "faerie",
+                "ghost",
+                "demon",
+                "mermaid",
+                "fachan",
+                "orculli",
+                "drake",
+                "pooka",
+                "djinn",
+                "m.c.f. morris"
+            ],
+            "raw_analysis": {
+                "phenomena": [
+                    "shapeshifting",
+                    "apparition",
+                    "supernatural odor"
+                ],
+                "entities": [
+                    "faerie",
+                    "ghost",
+                    "demon",
+                    "mermaid",
+                    "fachan",
+                    "orculli",
+                    "drake",
+                    "pooka",
+                    "djinn"
+                ],
+                "context": [
+                    "folklore",
+                    "witness account",
+                    "faerie lore"
+                ],
+                "functional_purpose": [
+                    "discernment",
+                    "identification"
+                ],
+                "people": [
+                    "M.C.F. Morris"
+                ],
+                "historical_groups": [],
+                "implements": []
+            }
+        },
+        "confidence": 0.99,
+        "status": "OK"
     }
 }
