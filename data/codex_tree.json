@@ -27,7 +27,11 @@
             ]
         },
         "Sleep": {
-            "Knowledge of Future Events": []
+            "Knowledge of Future Events": {
+                "_stories": [
+                    "Precognitive Dream Of Daughter\u2019s Death On Train Tracks That Comes True"
+                ]
+            }
         },
         "_stories": [
             "Shared Psilocybin Vision Of A UFO Attempting To Take A Young Man",
