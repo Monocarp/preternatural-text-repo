@@ -18,14 +18,16 @@
         ]
     },
     "Altered States of Consciousness": {
-        "Entheogens": {},
+        "Entheogens": {
+            "Knowledge of Future Events": []
+        },
         "Knowledge of Future Events": [
             "Ayahuasca Drinkers Learn Of Distant Deaths Before Conventional Notification"
         ],
         "Occult Knowledge": [
             "LSD As Source Of Scientific Inspiration For DNA Techniques"
         ],
-        "Sleep": [],
+        "Sleep": {},
         "_stories": [
             "Shared Psilocybin Vision Of A UFO Attempting To Take A Young Man",
             "Precognitive Dream Of Daughter\u2019s Death On Train Tracks That Comes True",
