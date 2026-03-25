@@ -19,11 +19,9 @@
     },
     "Altered States of Consciousness": {
         "Entheogens": {
-            "Alternate Life Lived": {
-                "_stories": [
-                    "Tao Lin\u2019s Experience of 50,000 Years in a Five\u2011Minute DMT Trip"
-                ]
-            },
+            "Alternate Life Lived": [
+                "Tao Lin\u2019s Experience of 50,000 Years in a Five\u2011Minute DMT Trip"
+            ],
             "Entity Encountered": {
                 "Allegedly Human Entity": {
                     "Family Member/Loved One": [
@@ -67,7 +65,6 @@
         },
         "_stories": [
             "Shared Psilocybin Vision Of A UFO Attempting To Take A Young Man",
-            "Tao Lin\u2019s Experience of 50,000 Years in a Five\u2011Minute DMT Trip",
             "Terence McKenna\u2019s Journey Through the DMT Chrysanthemum into the Dome of Self\u2011Transforming Machine Elves",
             "Lucas\u2019s DMT Trip Coinciding with a Friend\u2019s Suicide and Another Friend\u2019s Imminent Death",
             "Rick Strassman\u2019s Series of Misfortunes During His Psychedelic Research",
