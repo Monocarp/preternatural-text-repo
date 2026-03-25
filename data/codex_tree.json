@@ -19,7 +19,11 @@
     },
     "Altered States of Consciousness": {
         "Entheogens": {
-            "Alternate Life Lived": [],
+            "Alternate Life Lived": {
+                "_stories": [
+                    "Tao Lin\u2019s Experience of 50,000 Years in a Five\u2011Minute DMT Trip"
+                ]
+            },
             "Entity Encountered": {
                 "Allegedly Human Entity": {
                     "Family Member/Loved One": [
