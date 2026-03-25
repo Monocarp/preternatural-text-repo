@@ -17149,157 +17149,6 @@
         "confidence": 1.0,
         "status": "OK"
     },
-    "Psilocybin Mushrooms, the Dead, Faeries, and UFO Contact": {
-        "start_char": 435128,
-        "end_char": 436001,
-        "pages": "113-114",
-        "keywords": [
-            "ralph metzner",
-            "siberia",
-            "baltic",
-            "lithuania",
-            "mexico",
-            "russia",
-            "healing",
-            "knowledge",
-            "obtaining spiritual visions",
-            "spiritual visions",
-            "visions of the land of the dead",
-            "communing with spirits",
-            "ceremonial use",
-            "mushroom usage in indigenous communities",
-            "tomb effigies",
-            "velnias",
-            "dead",
-            "human souls",
-            "spirits of the natural world",
-            "lords of xibalba",
-            "faeries",
-            "mushroom effigies",
-            "psilocybin mushrooms",
-            "lithuanians",
-            "19th century"
-        ],
-        "verbatim": "Mushrooms present obvious connections to the dead, appearing on rot and aiding in decomposition of organic material (this, coupled with their vague resemblance to penises, also imbues fertility symbolism). Some cultures rendered this death connection explicit. Lithuanians once considered mushrooms the fingers of Velnias, cycloptic god of the Baltic dead, \"reaching up from the underworld to feed the poor.\" Some Africans view mushrooms as repositories of human souls, and Siberia's Oroch believe the dead are reborn on the moon as mushrooms.\n\n\"Contemporary patterns of usage of the mushroom among indigenous communities in Mexico, although long unknown to Western science, are consistent with \\[psychedelic\\] use patterns \\[worldwide\\]: they are used ceremonially for obtaining spiritual visions of the land of the dead and for communing with the spirits of the natural world for healing and knowledge,\" wrote psychologist Ralph Metzner. \"Finds of mushroom effigies in the tomb of Mayan nobles suggest an association with the Lords of Xibalba, deity rulers of the land of the dead....\"\n\nMetzner's \"land of the dead\" and \"spirits of the natural world\" should be familiar by now. Faeries and mushrooms appear together extensively in art, encoding centuries of shared folklore. Mushroom caps became faerie tables or gathering places in European art and literature. Welsh and Gaelic names for fungi like pookies or fairy-mushrooms deliberately reference fae folk, and the connection between mushroom circles and faerie rings was noted in Chapter 4. Writes author Mike Jay on the Romantic, rural sensibilities of Victorian faerie lore:\n\nIn parallel to a growing scientific interest in toxic and hallucinogenic fungi, a vast body of Victorian fairy lore connected mushrooms and toadstools with elves, pixies, hollow hills, and the unwitting transport of subjects to fairyland, a world of shifting perspectives seething with elemental spirits. The similarity of this otherworld to those engendered by plant psychedelics in New World cultures, where psilocybin-containing mushrooms have been used for millennia, is suggestive. Is it possible that the Victorian fairy tradition, beneath its innocent exterior, operated as a conduit for a hidden tradition of psychedelic knowledge?... Fairy rings and toadstool-dwelling elves were recycled through a pictorial culture of motif and decoration until they became emblematic of fairyland itself. \\[Page 114\\]\n\nThe connection extends deeper and farther afield than Victorian England. Breton corrigans left mushrooms after dancing. Some Chinese folklore describes mushrooms shapeshifting into mountain dwarfs, seven-to-eight inches high; catching and eating them grants immortality. Indigenous tribes from Guyana, Honduras, and Belize believe \"little spirits inhabit the forest,\" opening \"jumbie umbrellas\"---mushrooms---whenever it rains, leaving them behind afterward. \"Little earth beings are mushroom stems that turn into little men during Mazatec trances induced by eating Psilocybe mushrooms,\" wrote faerie story collector John E. Roth. One Chinantecan tribe believes in \"pretty female and male children who resemble one-inch-high female and male mushrooms.\"\n\nUnsurprisingly, UFOs are staples of psychedelic states, including those from mushrooms, whose caps superficially resemble classic flying saucers. Taking psilocybin, comedian Bill Hicks watched \"UFOs split the sky like a sheet,\" emitting seven lights that escorted him to their \"ship,\" where he learned \"we all are one and there is no such thing as death.\" Like an NDE, the trip left Hicks with profound feelings of oneness, love, and universality. McKenna felt this \"ideological catalyst\" of UFO contact was the most common motif in psilocybin trips, \"apocalyptic concrescences that haunt the historical continuum, igniting religions and various hysterias, and seeping ideas into highly tuned nervous systems.\" Inspired by the discovery that mushroom spores can survive deep space, McKenna espoused a panspermic model wherein Psilocybe arrived on Earth to impart a message.\n\n\"I've mentioned that psilocin, which is what psilocybin quickly becomes as it enters your metabolism, is 4-hydroxy-N,N-dimethyltryptamine,\" he said, \"the only 4-substituted indole in all of organic nature.\" This \"unique chemical signature,\" to McKenna, suggested artificiality, or perhaps off-world origins. \"I was suggesting that it was a gene---an artificial gene---carried perhaps by a space-borne virus or something brought artificially to this planet, and that this gene has insinuated itself into the genome of these mushrooms.\"\n\nMcKenna felt Psilocybe mushrooms could represent an extraterrestrial invasion---not as a conquering force, but as benign messengers. \"Look at how delicately the mushroom touches the earth,\" he said. \"It lives only on decaying matter.\" McKenna detected irony in our search for aliens amongst the stars, while \"within the shadow\" of \"the world's largest radio telescope \\[at\\] Arecibo in Puerto Rico... mushrooms grow in the fields and the cows munch quietly in the sunshine.\"\n\nYet for all his pontificating on extraterrestrial fungi, McKenna saw in the mushroom something far grander, a mysterium tremendum not unlike staring into the yawning grave.\n\nWhatever this thing is, it keeps itself masked. I've literally had the experience on mushrooms of saying to it, \"Show me what you are, for yourself.\" Well, it's like there's this enormous organ chord, the temperature falls, black velvet curtains are raised---and after about 20 seconds of that, I'm saying, \"That's enough of what you are for yourself! Let's go back to the dancing mice...\" So what I mean is that our journey through time, our historical journey to this moment, has not been unaccompanied. We have always been accompanied by this thing.",
-        "temporal": {
-            "years": [],
-            "centuries": [
-                19
-            ],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [
-                "Siberia",
-                "Baltic"
-            ],
-            "countries": [
-                "Lithuania",
-                "Mexico",
-                "Russia"
-            ],
-            "raw_mentions": [
-                "Lithuania",
-                "Baltic",
-                "Siberia",
-                "Mexico"
-            ],
-            "normalized": [
-                {
-                    "name": "Lithuania",
-                    "type": "country",
-                    "country": "Lithuania",
-                    "confidence": 0.95
-                },
-                {
-                    "name": "Baltic",
-                    "type": "region",
-                    "confidence": 0.9
-                },
-                {
-                    "name": "Siberia",
-                    "type": "region",
-                    "country": "Russia",
-                    "confidence": 0.9
-                },
-                {
-                    "name": "Mexico",
-                    "type": "country",
-                    "country": "Mexico",
-                    "confidence": 0.95
-                }
-            ]
-        },
-        "topics": {
-            "primary": [
-                "spiritual visions",
-                "visions of the land of the dead",
-                "communing with spirits",
-                "ceremonial use",
-                "mushroom usage in indigenous communities",
-                "tomb effigies",
-                "healing",
-                "knowledge",
-                "obtaining spiritual visions"
-            ],
-            "secondary": [
-                "velnias",
-                "dead",
-                "human souls",
-                "spirits of the natural world",
-                "lords of xibalba",
-                "faeries",
-                "mushroom effigies",
-                "psilocybin mushrooms",
-                "ralph metzner",
-                "lithuanians",
-                "oroch",
-                "indigenous communities in mexico",
-                "mayan nobles"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "spiritual visions",
-                    "visions of the land of the dead",
-                    "communing with spirits"
-                ],
-                "entities": [
-                    "Velnias",
-                    "dead",
-                    "human souls",
-                    "spirits of the natural world",
-                    "Lords of Xibalba",
-                    "faeries"
-                ],
-                "context": [
-                    "ceremonial use",
-                    "mushroom usage in indigenous communities",
-                    "tomb effigies"
-                ],
-                "functional_purpose": [
-                    "healing",
-                    "knowledge",
-                    "obtaining spiritual visions"
-                ],
-                "people": [
-                    "Ralph Metzner"
-                ],
-                "historical_groups": [
-                    "Lithuanians",
-                    "Oroch",
-                    "indigenous communities in Mexico",
-                    "Mayan nobles"
-                ],
-                "implements": [
-                    "mushroom effigies",
-                    "psilocybin mushrooms"
-                ]
-            }
-        },
-        "confidence": 0.99,
-        "status": "OK"
-    },
     "5-MeO-DMT Vision of a Dead Friend and Apparition": {
         "start_char": 437761,
         "end_char": 438489,
@@ -44528,5 +44377,156 @@
             "dark brown skin",
             "fair straight hair"
         ]
+    },
+    "Psilocybin Mushrooms and UFO Contact": {
+        "start_char": 435128,
+        "end_char": 436001,
+        "pages": "113-114",
+        "keywords": [
+            "ralph metzner",
+            "siberia",
+            "baltic",
+            "lithuania",
+            "mexico",
+            "russia",
+            "healing",
+            "knowledge",
+            "obtaining spiritual visions",
+            "spiritual visions",
+            "visions of the land of the dead",
+            "communing with spirits",
+            "ceremonial use",
+            "mushroom usage in indigenous communities",
+            "tomb effigies",
+            "velnias",
+            "dead",
+            "human souls",
+            "spirits of the natural world",
+            "lords of xibalba",
+            "faeries",
+            "mushroom effigies",
+            "psilocybin mushrooms",
+            "lithuanians",
+            "19th century"
+        ],
+        "verbatim": "Mushrooms present obvious connections to the dead, appearing on rot and aiding in decomposition of organic material (this, coupled with their vague resemblance to penises, also imbues fertility symbolism). Some cultures rendered this death connection explicit. Lithuanians once considered mushrooms the fingers of Velnias, cycloptic god of the Baltic dead, \"reaching up from the underworld to feed the poor.\" Some Africans view mushrooms as repositories of human souls, and Siberia's Oroch believe the dead are reborn on the moon as mushrooms.\n\n\"Contemporary patterns of usage of the mushroom among indigenous communities in Mexico, although long unknown to Western science, are consistent with \\[psychedelic\\] use patterns \\[worldwide\\]: they are used ceremonially for obtaining spiritual visions of the land of the dead and for communing with the spirits of the natural world for healing and knowledge,\" wrote psychologist Ralph Metzner. \"Finds of mushroom effigies in the tomb of Mayan nobles suggest an association with the Lords of Xibalba, deity rulers of the land of the dead....\"\n\nMetzner's \"land of the dead\" and \"spirits of the natural world\" should be familiar by now. Faeries and mushrooms appear together extensively in art, encoding centuries of shared folklore. Mushroom caps became faerie tables or gathering places in European art and literature. Welsh and Gaelic names for fungi like pookies or fairy-mushrooms deliberately reference fae folk, and the connection between mushroom circles and faerie rings was noted in Chapter 4. Writes author Mike Jay on the Romantic, rural sensibilities of Victorian faerie lore:\n\nIn parallel to a growing scientific interest in toxic and hallucinogenic fungi, a vast body of Victorian fairy lore connected mushrooms and toadstools with elves, pixies, hollow hills, and the unwitting transport of subjects to fairyland, a world of shifting perspectives seething with elemental spirits. The similarity of this otherworld to those engendered by plant psychedelics in New World cultures, where psilocybin-containing mushrooms have been used for millennia, is suggestive. Is it possible that the Victorian fairy tradition, beneath its innocent exterior, operated as a conduit for a hidden tradition of psychedelic knowledge?... Fairy rings and toadstool-dwelling elves were recycled through a pictorial culture of motif and decoration until they became emblematic of fairyland itself. \\[Page 114\\]\n\nThe connection extends deeper and farther afield than Victorian England. Breton corrigans left mushrooms after dancing. Some Chinese folklore describes mushrooms shapeshifting into mountain dwarfs, seven-to-eight inches high; catching and eating them grants immortality. Indigenous tribes from Guyana, Honduras, and Belize believe \"little spirits inhabit the forest,\" opening \"jumbie umbrellas\"---mushrooms---whenever it rains, leaving them behind afterward. \"Little earth beings are mushroom stems that turn into little men during Mazatec trances induced by eating Psilocybe mushrooms,\" wrote faerie story collector John E. Roth. One Chinantecan tribe believes in \"pretty female and male children who resemble one-inch-high female and male mushrooms.\"\n\nUnsurprisingly, UFOs are staples of psychedelic states, including those from mushrooms, whose caps superficially resemble classic flying saucers. Taking psilocybin, comedian Bill Hicks watched \"UFOs split the sky like a sheet,\" emitting seven lights that escorted him to their \"ship,\" where he learned \"we all are one and there is no such thing as death.\" Like an NDE, the trip left Hicks with profound feelings of oneness, love, and universality. McKenna felt this \"ideological catalyst\" of UFO contact was the most common motif in psilocybin trips, \"apocalyptic concrescences that haunt the historical continuum, igniting religions and various hysterias, and seeping ideas into highly tuned nervous systems.\" Inspired by the discovery that mushroom spores can survive deep space, McKenna espoused a panspermic model wherein Psilocybe arrived on Earth to impart a message.\n\n\"I've mentioned that psilocin, which is what psilocybin quickly becomes as it enters your metabolism, is 4-hydroxy-N,N-dimethyltryptamine,\" he said, \"the only 4-substituted indole in all of organic nature.\" This \"unique chemical signature,\" to McKenna, suggested artificiality, or perhaps off-world origins. \"I was suggesting that it was a gene---an artificial gene---carried perhaps by a space-borne virus or something brought artificially to this planet, and that this gene has insinuated itself into the genome of these mushrooms.\"\n\nMcKenna felt Psilocybe mushrooms could represent an extraterrestrial invasion---not as a conquering force, but as benign messengers. \"Look at how delicately the mushroom touches the earth,\" he said. \"It lives only on decaying matter.\" McKenna detected irony in our search for aliens amongst the stars, while \"within the shadow\" of \"the world's largest radio telescope \\[at\\] Arecibo in Puerto Rico... mushrooms grow in the fields and the cows munch quietly in the sunshine.\"\n\nYet for all his pontificating on extraterrestrial fungi, McKenna saw in the mushroom something far grander, a mysterium tremendum not unlike staring into the yawning grave.\n\nWhatever this thing is, it keeps itself masked. I've literally had the experience on mushrooms of saying to it, \"Show me what you are, for yourself.\" Well, it's like there's this enormous organ chord, the temperature falls, black velvet curtains are raised---and after about 20 seconds of that, I'm saying, \"That's enough of what you are for yourself! Let's go back to the dancing mice...\" So what I mean is that our journey through time, our historical journey to this moment, has not been unaccompanied. We have always been accompanied by this thing.",
+        "temporal": {
+            "years": [],
+            "centuries": [
+                19
+            ],
+            "decades": []
+        },
+        "locations": {
+            "cities": [],
+            "regions": [
+                "Siberia",
+                "Baltic"
+            ],
+            "countries": [
+                "Lithuania",
+                "Mexico",
+                "Russia"
+            ],
+            "raw_mentions": [
+                "Lithuania",
+                "Baltic",
+                "Siberia",
+                "Mexico"
+            ],
+            "normalized": [
+                {
+                    "name": "Lithuania",
+                    "type": "country",
+                    "country": "Lithuania",
+                    "confidence": 0.95
+                },
+                {
+                    "name": "Baltic",
+                    "type": "region",
+                    "confidence": 0.9
+                },
+                {
+                    "name": "Siberia",
+                    "type": "region",
+                    "country": "Russia",
+                    "confidence": 0.9
+                },
+                {
+                    "name": "Mexico",
+                    "type": "country",
+                    "country": "Mexico",
+                    "confidence": 0.95
+                }
+            ]
+        },
+        "topics": {
+            "primary": [
+                "spiritual visions",
+                "visions of the land of the dead",
+                "communing with spirits",
+                "ceremonial use",
+                "mushroom usage in indigenous communities",
+                "tomb effigies",
+                "healing",
+                "knowledge",
+                "obtaining spiritual visions"
+            ],
+            "secondary": [
+                "velnias",
+                "dead",
+                "human souls",
+                "spirits of the natural world",
+                "lords of xibalba",
+                "faeries",
+                "mushroom effigies",
+                "psilocybin mushrooms",
+                "ralph metzner",
+                "lithuanians",
+                "oroch",
+                "indigenous communities in mexico",
+                "mayan nobles"
+            ],
+            "raw_analysis": {
+                "phenomena": [
+                    "spiritual visions",
+                    "visions of the land of the dead",
+                    "communing with spirits"
+                ],
+                "entities": [
+                    "Velnias",
+                    "dead",
+                    "human souls",
+                    "spirits of the natural world",
+                    "Lords of Xibalba",
+                    "faeries"
+                ],
+                "context": [
+                    "ceremonial use",
+                    "mushroom usage in indigenous communities",
+                    "tomb effigies"
+                ],
+                "functional_purpose": [
+                    "healing",
+                    "knowledge",
+                    "obtaining spiritual visions"
+                ],
+                "people": [
+                    "Ralph Metzner"
+                ],
+                "historical_groups": [
+                    "Lithuanians",
+                    "Oroch",
+                    "indigenous communities in Mexico",
+                    "Mayan nobles"
+                ],
+                "implements": [
+                    "mushroom effigies",
+                    "psilocybin mushrooms"
+                ]
+            }
+        },
+        "confidence": 0.99,
+        "status": "OK"
     }
 }
