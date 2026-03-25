@@ -25,11 +25,9 @@
                         "5-MeO-DMT Vision of a Dead Friend and Apparition"
                     ]
                 },
-                "Allegedly Non Human Entity": {
-                    "_stories": [
-                        "Psilocybin Mushrooms and UFO Contact"
-                    ]
-                }
+                "Allegedly Non Human Entity": [
+                    "Psilocybin Mushrooms and UFO Contact"
+                ]
             },
             "Knowledge of Future Events": [
                 "Ayahuasca Drinkers Learn Of Distant Deaths Before Conventional Notification"
@@ -3588,7 +3586,6 @@
     ],
     "Theories": {
         "ASC": [
-            "DMT, Ayahuasca, and Encounters with the Dead, Ancestors, and Other Beings",
             "Lucas\u2019s DMT Trip Coinciding with a Friend\u2019s Suicide and Another Friend\u2019s Imminent Death",
             "Strassman\u2019s Pineal\u201149\u2011Day Correlation with Tibetan Teachings on Reincarnation and the Soul",
             "Ren\u00e9 Descartes Declares the Pineal Gland the Principal Seat of the Soul",
