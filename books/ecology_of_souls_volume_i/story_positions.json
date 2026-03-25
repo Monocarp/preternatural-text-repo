@@ -17992,60 +17992,6 @@
             "No specific locations identified"
         ]
     },
-    "Survey of Psychonauts Reporting Out‑of‑Body Experiences on Material and Other Planes": {
-        "start_char": 459114,
-        "end_char": 459290,
-        "pages": "120",
-        "keywords": [
-            "levitation",
-            "obe",
-            "psychedelic trips",
-            "study"
-        ],
-        "verbatim": "Levitation/OBE. In the same study, 64.7% of psychonauts reported OBEs \"on the material plane\" (44.7% during trips), 52.9% reported OBEs \"on another plane\" (43.5% during trips).",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": [],
-            "raw_mentions": [],
-            "normalized": []
-        },
-        "topics": {
-            "primary": [
-                "levitation",
-                "obe",
-                "psychedelic trips",
-                "study"
-            ],
-            "secondary": [],
-            "raw_analysis": {
-                "phenomena": [
-                    "levitation",
-                    "OBE"
-                ],
-                "entities": [],
-                "context": [
-                    "psychedelic trips",
-                    "study"
-                ],
-                "functional_purpose": [],
-                "people": [],
-                "historical_groups": [],
-                "implements": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "REVIEW",
-        "warnings": [
-            "No temporal data extracted",
-            "No specific locations identified"
-        ]
-    },
     "Vietnam War Soldier on Ketamine Becomes a Bodiless Point of Awareness": {
         "start_char": 459292,
         "end_char": 459457,
