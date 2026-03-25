@@ -19,7 +19,9 @@
     },
     "Altered States of Consciousness": {
         "Entheogens": {
-            "Entity Encountered": [],
+            "Entity Encountered": {
+                "Allegedly Human Entity": []
+            },
             "Knowledge of Future Events": [
                 "Ayahuasca Drinkers Learn Of Distant Deaths Before Conventional Notification"
             ],
