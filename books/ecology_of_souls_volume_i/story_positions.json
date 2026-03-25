@@ -20861,66 +20861,6 @@
         ],
         "verbatim": ""
     },
-    "Failed Soul Retrievals and Shamans as Psychopomps to Death": {
-        "start_char": 505753,
-        "end_char": 505936,
-        "pages": "132",
-        "keywords": [
-            "soul hunting",
-            "soul retrieval",
-            "psychopomp",
-            "soul",
-            "shaman"
-        ],
-        "verbatim": "Not all shamans are as successful. Failed soul retrievals result in death. The shaman shifts roles from soul hunter to psychopomp, no longer leading souls from death but rather to it.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": [],
-            "raw_mentions": [],
-            "normalized": []
-        },
-        "topics": {
-            "primary": [
-                "soul retrieval",
-                "psychopomp",
-                "soul hunting"
-            ],
-            "secondary": [
-                "soul",
-                "shaman"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "soul retrieval"
-                ],
-                "entities": [
-                    "soul",
-                    "shaman"
-                ],
-                "context": [
-                    "psychopomp"
-                ],
-                "functional_purpose": [
-                    "soul hunting"
-                ],
-                "people": [],
-                "historical_groups": [],
-                "implements": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "REVIEW",
-        "warnings": [
-            "No temporal data extracted",
-            "No specific locations identified"
-        ]
-    },
     "Shamans Escorting Souls, Working with Haunting Dead, and Sending Them to the Lower World": {
         "start_char": 506205,
         "end_char": 506595,
