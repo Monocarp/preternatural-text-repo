@@ -21,8 +21,9 @@
         "Entheogens": {
             "Entity Encountered": {
                 "Allegedly Human Entity": {
-                    "Family Member/Loved One": []
-                }
+                    "Family Member/Loved One": {}
+                },
+                "Allegedly Non Human Entity": []
             },
             "Knowledge of Future Events": [
                 "Ayahuasca Drinkers Learn Of Distant Deaths Before Conventional Notification"
