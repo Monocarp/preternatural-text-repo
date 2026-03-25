@@ -17738,63 +17738,6 @@
             "No temporal data extracted"
         ]
     },
-    "René Descartes Declares the Pineal Gland the Principal Seat of the Soul": {
-        "start_char": 452964,
-        "end_char": 453280,
-        "pages": "119",
-        "keywords": [
-            "rené descartes",
-            "seat of the soul",
-            "common sense",
-            "17th century",
-            "1640"
-        ],
-        "verbatim": "Philosophers long suspected our pineal glands were spiritually important. \"Since \\[the pineal gland\\] is the only solid part in the whole brain which is single \\[unpaired\\], it must necessarily be the seat of the common sense,\" wrote René Descartes in the 17 century, designating it \"the principal seat of the soul.\"",
-        "temporal": {
-            "years": [
-                1640
-            ],
-            "centuries": [
-                17
-            ],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": [],
-            "raw_mentions": [],
-            "normalized": []
-        },
-        "topics": {
-            "primary": [
-                "seat of the soul",
-                "common sense"
-            ],
-            "secondary": [
-                "rené descartes"
-            ],
-            "raw_analysis": {
-                "phenomena": [],
-                "entities": [],
-                "context": [],
-                "functional_purpose": [
-                    "seat of the soul",
-                    "common sense"
-                ],
-                "people": [
-                    "René Descartes"
-                ],
-                "historical_groups": [],
-                "implements": []
-            }
-        },
-        "confidence": 0.66,
-        "status": "OK",
-        "warnings": [
-            "No specific locations identified"
-        ]
-    },
     "Bret Oldham’s Abduction by a Human‑Grey‑Reptilian Hybrid Who Activates His Third Eye": {
         "start_char": 453594,
         "end_char": 453919,
