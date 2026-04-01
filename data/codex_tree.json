@@ -2388,7 +2388,11 @@
             "Negative Personality Impact": [
                 "1961 Pinhal Disc Landing, Beings, and Missing Time"
             ],
-            "Negative Residual Emotions": [],
+            "Negative Residual Emotions": {
+                "_stories": [
+                    "Mike Clelland's Experiences"
+                ]
+            },
             "Poltergeist Activity": [
                 "Poltergeist Phenomena and Invisible Hand at the Butlers' Home",
                 "Historical Poltergeist-like Activity at Mr. Dimant's House"
