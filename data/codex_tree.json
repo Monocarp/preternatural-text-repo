@@ -18,7 +18,11 @@
         ]
     },
     "Altered States of Consciousness": {
-        "Astral Travel": [],
+        "Astral Travel": {
+            "_stories": [
+                "Diana\u2019s Nocturnal Ride and the Game of Diana"
+            ]
+        },
         "Entheogens": {
             "Alternate Life Lived": [
                 "Tao Lin\u2019s Experience of 50,000 Years in a Five\u2011Minute DMT Trip",
