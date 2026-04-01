@@ -2876,6 +2876,7 @@
                 "Lady Wilde\u2019s Inishark Fairy Herb, Trance, and Death of the Lover\u2019s Bride",
                 "M\u0101ori Woman Ferried to Ancestor Village and Warned Not to Eat",
                 "Davy Roche Dances with the Dead at a Supernatural Funeral",
+                "Walchelin's Wild Hunt",
                 "Robert Kirk Taken by Fairies and the Failed Dirk\u2011Throwing Rescue",
                 "Cornish Spotted Dog Transforming into a Husband\u2019s Ghost and Visiting a Spirit Churchyard",
                 "County Laois Witness Sees Dead Vicar Dragged by Fairy People",
@@ -2904,8 +2905,7 @@
                 "All the Dancers Revealed as the Dead in Shrouds at a Fairy Gathering",
                 "Dead Neighbours Among Helpful Fairies Building a Wall",
                 "A Man Beaten by Fairies Sees Many of His Dead Friends Among Them",
-                "A Dead Woman Among the Fairies Saves a Boy from Being Taken",
-                "Walchelin's Wild Hunt"
+                "A Dead Woman Among the Fairies Saves a Boy from Being Taken"
             ],
             "Behavior": [
                 "Grace\u2019s Hallway Turmoil And Protective Appearance Of Her Great-Grandmother After Psalm Ritual"
@@ -3563,6 +3563,7 @@
     },
     "The Wild Hunt": [
         "Walchelin's Wild Hunt",
+        "Hutton Writes of Ekkehard von Aura Record of Dead Knights Roaming Worms",
         "Barbara Fisher\u2019s Phantom Horsemen in Athens, Ohio",
         "The Wild or Infernal Hunt as a Nocturnal Host of the Damned",
         "Fixed Routes of the Wild Hunt and Aerial Abductions",
