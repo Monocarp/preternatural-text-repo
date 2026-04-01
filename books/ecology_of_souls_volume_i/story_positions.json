@@ -28011,140 +28011,6 @@
         "confidence": 0.99,
         "status": "OK"
     },
-    "Infernal Hunts and Mobile Purgatories: Historical Wild Hunt Encounters": {
-        "start_char": 706985,
-        "end_char": 710113,
-        "pages": "183-184",
-        "keywords": [
-            "walchelin",
-            "ekkehard von aura",
-            "province of worms",
-            "france",
-            "germany",
-            "intercessory prayers",
-            "expiation",
-            "deliverance from torment",
-            "wild hunt",
-            "infernal hunt",
-            "ancestor worship",
-            "cult of the dead",
-            "purgatory",
-            "vision",
-            "giant",
-            "dead villagers",
-            "dead knights",
-            "souls of the dead",
-            "11th century",
-            "12th century",
-            "15th century",
-            "16th century",
-            "1092",
-            "1123",
-            "1135",
-            "1450",
-            "1508",
-            "1516",
-            "1539"
-        ],
-        "verbatim": "\"In one way or another, the Wild Hunt fell into the vast complex of ancestor worship, the cult of the dead, who are the go-betweens between man and the gods,\" Lecouteux wrote. It is a tired story: a simple belief (the wandering, nocturnal dead) retrofitted with Christian baggage, transforming the entire concept into a highly dogmatized tradition of souls---unbaptized or unrepentant, killed violently or prematurely---desperately seeking expiation through the living's intercessory prayers.\n\nIf ever a pagan basis for the Wild Hunt as an army of the dead existed, it became, in essence, a mobile purgatory among Christians. A few examples:\n\nIn one of the earliest recorded instances, a French priest named Walchelin allegedly saw an \"Infernal Hunt\" circa 1092 which included a club-wielding giant and \"many of his fellow villagers who had died recently... lamenting the fact that they were in torment because of their sins.\" Among them was his deceased brother.\n\nWrote Hutton, \"the German chronicler Ekkehard von Aura recorded under the year 1123 a host of dead knights roaming the province of Worms, tortured for their sins by red-hot arms and armour, and needing prayers and alms to deliver them; while a monastic text from Alsace told of the apparition of two hordes of the dead, one destined for heaven but wandering awhile to atone for sins, and another bound for hell because they were knights who had died without penance.\"\n\nThe Hunt sometimes appeared in conjunction with poltergeist activity, as in the 1135 case of a \"knocking ghost\" who revealed itself as a dead family member. He confessed to joining \"a wicked throng,\" begging his relatives, \"So that I may leave the pernicious road they travel and fully enjoy eternal rest, please celebrate a Mass for me tomorrow....\"\n\nA tale of the mid 12 century describes \"a crowd of people passing through the air,\" including the witness's father, \"doomed to roam\" until their earthly wrongs were righted.\n\nA 1508 sermon by Strasbourg preacher Johann Geiler alludes to the postmortem fate of France's King Charles V, who wandered with \"the Wild Army\" before finally finding redemption \"thanks to the prayers of St. Denis.\"\n\nIn 1516, historian Jacques Trausch described a phantom army of 50-200 members which \"hastens through the fields\" and towns of France, \"playing drums and fifes,\" their wounds corresponding to \"the manner in which each found his death in battle.\" They carried bright candles. \"A man always preceded them, ceaselessly shouting, 'Make way, lest you suffer!'\"\n\nIn 1539 Nuremburg cobbler Hans Sachs heard distant horns, accompanied by \"a loud and tempestuous wind\" heralding the arrival of \"the atrocious and horrible Furious Army,\" populated by more than three hundred dead miscreants. Sachs supposedly saw one of their number earlier that day executed at a hanging.\n\nDenmark's knarkevognen, an aerial ghost cart reminiscent of the ankou's wagon, was a death omen which became part of Wild Hunt tradition circa 1450. Elsewhere in Scandinavia, Christmas traditions supplicating nocturnal hosts of the dead with food were incorporated into the Hunt as well.",
-        "temporal": {
-            "years": [
-                1092,
-                1123,
-                1135,
-                1450,
-                1508,
-                1516,
-                1539
-            ],
-            "centuries": [
-                11,
-                12,
-                15,
-                16
-            ],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [
-                "Province of Worms"
-            ],
-            "countries": [
-                "France",
-                "Germany"
-            ],
-            "raw_mentions": [
-                "France",
-                "Province of Worms"
-            ],
-            "normalized": [
-                {
-                    "name": "France",
-                    "type": "country",
-                    "confidence": 0.9
-                },
-                {
-                    "name": "Province of Worms",
-                    "type": "region",
-                    "country": "Germany",
-                    "confidence": 0.95
-                }
-            ]
-        },
-        "topics": {
-            "primary": [
-                "wild hunt",
-                "infernal hunt",
-                "ancestor worship",
-                "cult of the dead",
-                "purgatory",
-                "vision",
-                "intercessory prayers",
-                "expiation",
-                "deliverance from torment"
-            ],
-            "secondary": [
-                "giant",
-                "dead villagers",
-                "dead knights",
-                "souls of the dead",
-                "walchelin",
-                "ekkehard von aura"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Wild Hunt",
-                    "Infernal Hunt"
-                ],
-                "entities": [
-                    "giant",
-                    "dead villagers",
-                    "dead knights",
-                    "souls of the dead"
-                ],
-                "context": [
-                    "ancestor worship",
-                    "cult of the dead",
-                    "purgatory",
-                    "vision"
-                ],
-                "functional_purpose": [
-                    "intercessory prayers",
-                    "expiation",
-                    "deliverance from torment"
-                ],
-                "people": [
-                    "Walchelin",
-                    "Ekkehard von Aura"
-                ],
-                "historical_groups": [],
-                "implements": []
-            }
-        },
-        "confidence": 0.99,
-        "status": "OK"
-    },
     "Fixed Routes of the Wild Hunt and Aerial Abductions": {
         "start_char": 710128,
         "end_char": 712950,
@@ -34745,6 +34611,21 @@
             "mountain",
             "faceless hooded figures",
             "stone courtyard"
+        ]
+    },
+    "Walchelin's Wild Hunt": {
+        "start_char": 707628,
+        "end_char": 707948,
+        "pages": "183",
+        "keywords": [
+            "french priest",
+            "walchelin",
+            "infernal hunt",
+            "1092",
+            "club-wielding giant",
+            "recently dead",
+            "tormented by sins",
+            "dead relative"
         ]
     }
 }
