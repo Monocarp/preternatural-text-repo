@@ -3123,26 +3123,10 @@
             ]
         },
         "Stranger": {
-            "Auditory": [
-                "The Elephant in the Bedroom",
-                "Oldham\u2019s EVPs of Ghosts Seeing Him on Their Side",
-                "Friedrich J\u00fcrgenson\u2019s EVP Messages From The Dead And Telepathic Messages From A Space \u201cCentral Investigation Station\u201d",
-                "Tesla\u2019s Claimed Detection Of Interplanetary Signals And Sarah Estep\u2019s 3,000 Extraterrestrial/Interdimensional EVPs",
-                "Momo's Residual Effects"
-            ],
-            "Behavior": [
-                "Betty Hill\u2019s Precognitive Death Dreams and Her Family\u2019s Spiritualist and Haunting Experiences",
-                "Carol\u2019s Earlier Encounter With A Shimmering Ghost That Paralyzed Her And Sat On Her Bed",
-                "College Student Feels Horrible, Hyper-Real Presence Enter His Room at Night",
-                "Dead Correspondent Continues Writing To Ufologists Years After His Death",
-                "Ghosts and Wanyudo Fire Wheels That Burn Onlookers"
-            ],
-            "Habitual Behavior": [
-                "Carol\u2019s Earlier Encounter With A Shimmering Ghost That Paralyzed Her And Sat On Her Bed"
-            ],
-            "Visual": [
+            "Appearance": [
                 "Cabeco, Portugal: White Headless Figure",
                 "Hutton Writes of Ekkehard von Aura Record of Dead Knights Roaming Worms",
+                "Jacques Trausch Describes Phantom Army in France",
                 "The Elephant in the Bedroom",
                 "Twins Jack and Jim Weiner\u2019s Childhood Bedside Ghosts and Later Allagash Abduction",
                 "Teenage Paranormal Precursors to Abduction: Patricia, Angela, and Michael",
@@ -3159,8 +3143,24 @@
                 "Headless and Legless Figure Seen in Gettysburg Bush",
                 "Paralyzing Encounter with a Green-Glowing Headless Figure in a Bolivian Hospital",
                 "Named Dead Individuals Encountered in Fairyland in Scottish Witch Trials",
-                "A Dead Girl Dancing in a Fairy Fort",
-                "Jacques Trausch Describes Phantom Army in France"
+                "A Dead Girl Dancing in a Fairy Fort"
+            ],
+            "Auditory": [
+                "The Elephant in the Bedroom",
+                "Oldham\u2019s EVPs of Ghosts Seeing Him on Their Side",
+                "Friedrich J\u00fcrgenson\u2019s EVP Messages From The Dead And Telepathic Messages From A Space \u201cCentral Investigation Station\u201d",
+                "Tesla\u2019s Claimed Detection Of Interplanetary Signals And Sarah Estep\u2019s 3,000 Extraterrestrial/Interdimensional EVPs",
+                "Momo's Residual Effects"
+            ],
+            "Behavior": [
+                "Betty Hill\u2019s Precognitive Death Dreams and Her Family\u2019s Spiritualist and Haunting Experiences",
+                "Carol\u2019s Earlier Encounter With A Shimmering Ghost That Paralyzed Her And Sat On Her Bed",
+                "College Student Feels Horrible, Hyper-Real Presence Enter His Room at Night",
+                "Dead Correspondent Continues Writing To Ufologists Years After His Death",
+                "Ghosts and Wanyudo Fire Wheels That Burn Onlookers"
+            ],
+            "Habitual Behavior": [
+                "Carol\u2019s Earlier Encounter With A Shimmering Ghost That Paralyzed Her And Sat On Her Bed"
             ],
             "_stories": [
                 "Possession of a Jewish Woman in Ferrara and Exorcism of a Ruach by R. Chaim Vital",
