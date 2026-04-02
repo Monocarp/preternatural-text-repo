@@ -2398,7 +2398,11 @@
             "Negative Residual Emotions": [
                 "Mike Clelland's Experiences"
             ],
-            "Paralysis": [],
+            "Paralysis": {
+                "_stories": [
+                    "Belgian Farmer Paralyzed by Alien\u2019s Wand after Being Told the Time Was Incorrect"
+                ]
+            },
             "Physical Impacts On Environment": {},
             "Poltergeist Activity": [
                 "Poltergeist Phenomena and Invisible Hand at the Butlers' Home",
