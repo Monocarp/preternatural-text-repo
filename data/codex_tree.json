@@ -2989,7 +2989,11 @@
         ]
     },
     "Ghostly Activity": {
-        "Car Trouble/Electronics Trouble": [],
+        "Car Trouble/Electronics Trouble": {
+            "_stories": [
+                "Ghost Girl of Fifth Street Hill Causes Car Failure in West Virginia"
+            ]
+        },
         "Double": [
             "Walchelin and Herlechin as Doppelg\u00e4ngers",
             "Radnorshire Phantom Arrival and Deaths",
