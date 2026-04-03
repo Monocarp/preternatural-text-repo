@@ -2331,7 +2331,11 @@
             "UFO Window at Lake Champlain and Craft over Lochs",
             "Fairy Lights and UFO Occupants with Halos"
         ],
-        "Death Omen": [],
+        "Death Omen": {
+            "_stories": [
+                "Merton Haskell\u2019s Repeated Lights Ending with His Grandfather\u2019s Death"
+            ]
+        },
         "Extraterrestrial Observed": {
             "Double": [
                 "Virginia Meets Her Cloned Sister In The Beings\u2019 Sky House",
