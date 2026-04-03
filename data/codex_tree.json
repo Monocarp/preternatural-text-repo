@@ -2989,11 +2989,10 @@
         ]
     },
     "Ghostly Activity": {
-        "Car Trouble/Electronics Trouble": {
-            "_stories": [
-                "Ghost Girl of Fifth Street Hill Causes Car Failure in West Virginia"
-            ]
-        },
+        "Car Trouble/Electronics Trouble": [
+            "Ghost Girl of Fifth Street Hill Causes Car Failure in West Virginia",
+            "Mystery Mile (Kelley Road) Haunting Causes Animal Agitation and Car Stalls"
+        ],
         "Double": [
             "Walchelin and Herlechin as Doppelg\u00e4ngers",
             "Radnorshire Phantom Arrival and Deaths",
