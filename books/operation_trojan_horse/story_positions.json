@@ -19414,51 +19414,6 @@
             "No temporal data extracted"
         ]
     },
-    "Human Bodies Found Cremated While Surroundings Barely Burned": {
-        "start_char": 492900,
-        "end_char": 493297,
-        "pages": "139-141",
-        "keywords": [
-            "spontaneous human combustion"
-        ],
-        "verbatim": "There have also been several cases in which human beings have been found burned to ashes, even though the chairs or beds they were in were only slightly scorched. It takes a very hot flame to reduce human bones to ashes. In recent years, there has been an increasing number of cases in which people have been found totally cremated in their automobiles while the upholstery was only mildly singed.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": [],
-            "raw_mentions": [],
-            "normalized": []
-        },
-        "topics": {
-            "primary": [
-                "spontaneous human combustion"
-            ],
-            "secondary": [],
-            "raw_analysis": {
-                "phenomena": [
-                    "spontaneous human combustion"
-                ],
-                "entities": [],
-                "context": [],
-                "functional_purpose": [],
-                "people": [],
-                "historical_groups": [],
-                "implements": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "REVIEW",
-        "warnings": [
-            "No temporal data extracted",
-            "No specific locations identified",
-            "Very few topics identified - may need manual review"
-        ]
-    },
     "Mysterious Torrents of Water in Poltergeist Phenomena": {
         "start_char": 493299,
         "end_char": 493576,
