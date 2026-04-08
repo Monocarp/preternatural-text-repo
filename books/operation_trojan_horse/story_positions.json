@@ -23034,63 +23034,6 @@
         ],
         "verbatim": ""
     },
-    "Cycles of Psychic and Occult Events Matching UFO Flaps": {
-        "start_char": 636587,
-        "end_char": 637694,
-        "pages": "182",
-        "keywords": [
-            "psychic events",
-            "occult events",
-            "ufo phenomenon",
-            "window areas",
-            "flap periods"
-        ],
-        "verbatim": "The study and interpretation of all this belongs in the hands of historians, philosophers, psychiatrists, and theologians. However, physical scientists can also make a contribution by applying standard scientific methods to the wealth of data and preparing statistical studies of the events themselves. My own attempts at this are admittedly very limited, but it is obvious that the phenomenon is controlled by hidden laws and cycles. Psychic and occult events seem to follow the same cycles as the UFO phenomenon. The Wednesday-Saturday phenomenon exists in all the frames of reference. For some reason, the twenty-fourth days of April, June, September, November, and December seem to produce exceptional activity year after year. It is probable that manifestations are dependent upon unknown conditions that have an electromagnetic basis. When specific individuals (people with latent or active psychic abilities) are in specific places (window areas) at specific times (flap periods when the undefined electromagnetic conditions exist), the phenomenon is able to manifest itself in one of its many forms.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": [],
-            "raw_mentions": [],
-            "normalized": []
-        },
-        "topics": {
-            "primary": [
-                "psychic events",
-                "occult events",
-                "ufo phenomenon",
-                "window areas",
-                "flap periods"
-            ],
-            "secondary": [],
-            "raw_analysis": {
-                "phenomena": [
-                    "psychic events",
-                    "occult events",
-                    "UFO phenomenon"
-                ],
-                "entities": [],
-                "context": [
-                    "window areas",
-                    "flap periods"
-                ],
-                "functional_purpose": [],
-                "people": [],
-                "historical_groups": [],
-                "implements": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "REVIEW",
-        "warnings": [
-            "No temporal data extracted",
-            "No specific locations identified"
-        ]
-    },
     "Radiation Death of Arcesio Bermudez After a UFO Encounter": {
         "start_char": 637709,
         "end_char": 639198,
