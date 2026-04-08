@@ -19414,53 +19414,6 @@
             "No temporal data extracted"
         ]
     },
-    "Mysterious Torrents of Water in Poltergeist Phenomena": {
-        "start_char": 493299,
-        "end_char": 493576,
-        "pages": "139-141",
-        "keywords": [
-            "poltergeist",
-            "torrents of water"
-        ],
-        "verbatim": "Water also plays an enigmatic role in the poltergeist phenomenon. Torrents of water from unknown sources have flooded houses, gushing from walls containing no pipes, squirting from ceilings, pouring down staircases, splashing by buckets full out of nowhere to drench witnesses.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": [],
-            "raw_mentions": [],
-            "normalized": []
-        },
-        "topics": {
-            "primary": [
-                "poltergeist",
-                "torrents of water"
-            ],
-            "secondary": [],
-            "raw_analysis": {
-                "phenomena": [
-                    "poltergeist",
-                    "torrents of water"
-                ],
-                "entities": [],
-                "context": [],
-                "functional_purpose": [],
-                "people": [],
-                "historical_groups": [],
-                "implements": []
-            }
-        },
-        "confidence": 0.33,
-        "status": "REVIEW",
-        "warnings": [
-            "No temporal data extracted",
-            "No specific locations identified"
-        ]
-    },
     "William Denton’s Claimed Telepathic Contact and Visits to Venus and Mars": {
         "start_char": 497963,
         "end_char": 498604,
