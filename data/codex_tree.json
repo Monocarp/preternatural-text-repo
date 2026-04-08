@@ -187,7 +187,11 @@
             ]
         },
         "Symbols in the Sky": {
-            "Religious": []
+            "Religious": {
+                "_stories": [
+                    "Momo's Residual Effects"
+                ]
+            }
         }
     },
     "Crop Circles": [
