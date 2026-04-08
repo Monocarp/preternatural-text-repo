@@ -174,7 +174,9 @@
         ]
     },
     "Astrological": {
-        "Omens": []
+        "Omens": {
+            "Death": []
+        }
     },
     "Crop Circles": [
         "Crop Circles And Phone Battery Anomalies At Or Near Serpent Mound And Adena Territory",
