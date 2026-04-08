@@ -2576,6 +2576,15 @@
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
     },
+    "George Van Tassel’s Encounter with Solgonda, an Angel of Space, and His Teaching on Auras Determining Who Is Taken Aboard Ships": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "19-20",
+        "keywords": [
+            "george van tassels encounter with solgonda an angel of space and his teaching on auras determining who is taken aboard ships"
+        ],
+        "verbatim": ""
+    },
     "Howard Menger’s Venusian Scout Ship and Teaching That the Unaware Dead Are Prisoners of Earth While the Aware May Be Reborn on Other Planets": {
         "start_char": 63225,
         "end_char": 63918,
@@ -2961,6 +2970,76 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
+    "Gabriel Green’s Attempted Interplanetary Contact with His Deceased Wife": {
+        "start_char": 66457,
+        "end_char": 66714,
+        "pages": "21",
+        "keywords": [
+            "gabriel green",
+            "interplanetary contact",
+            "communication with deceased",
+            "earth orbit",
+            "interplanetary",
+            "extraterrestrials",
+            "ghost",
+            "mothership",
+            "20th century",
+            "1970"
+        ],
+        "verbatim": "Following his wife’s death in 1970, Gabriel Green “spent the remainder of his life attempting to establish interplanetary contact with his dearly departed,” believing she had joined a mothership orbiting the Earth, piloted by beings he met 13 years earlier.",
+        "temporal": {
+            "years": [
+                1970
+            ],
+            "centuries": [
+                20
+            ],
+            "decades": []
+        },
+        "locations": {
+            "cities": [],
+            "regions": [],
+            "countries": []
+        },
+        "topics": {
+            "primary": [
+                "earth orbit",
+                "interplanetary",
+                "interplanetary contact",
+                "communication with deceased"
+            ],
+            "secondary": [
+                "extraterrestrials",
+                "ghost",
+                "mothership",
+                "gabriel green"
+            ],
+            "raw_analysis": {
+                "phenomena": [],
+                "entities": [
+                    "Extraterrestrials",
+                    "Ghost"
+                ],
+                "implements": [
+                    "Mothership"
+                ],
+                "context": [
+                    "Earth Orbit",
+                    "Interplanetary"
+                ],
+                "people": [
+                    "Gabriel Green"
+                ],
+                "functional_purpose": [
+                    "Interplanetary Contact",
+                    "Communication with Deceased"
+                ],
+                "historical_groups": []
+            }
+        },
+        "confidence": 0.66,
+        "status": "NEEDS_REVIEW"
+    },
     "Rumored Angelic Apparitions to Russian Cosmonauts": {
         "start_char": 67105,
         "end_char": 67595,
@@ -3187,6 +3266,81 @@
                 "people": [
                     "Gina Willoughby",
                     "Ring"
+                ],
+                "functional_purpose": [],
+                "historical_groups": []
+            }
+        },
+        "confidence": 0.33,
+        "status": "NEEDS_REVIEW"
+    },
+    "Keith Daniel’s Lifelong Psi Events, Ghosts, UFOs, Premonitions, and Timeslips": {
+        "start_char": 76758,
+        "end_char": 77175,
+        "pages": "24",
+        "keywords": [
+            "keith daniel",
+            "jenny randles",
+            "striebers",
+            "psi events",
+            "premonitions",
+            "timeslips",
+            "ufo sightings",
+            "out-of-body experiences",
+            "raps",
+            "childhood",
+            "home",
+            "ghosts"
+        ],
+        "verbatim": "Keith Daniel (“a walking dictionary of the paranormal,” Jenny Randles called him) related a childhood of psi-events, ghosts, UFOs, premonitions, and “timeslips,” wherein he felt temporarily transported to another era. In a letter to the Striebers, another experiencer said they “could write a book, so many paranormal things have happened to me,” including UFO sightings, OBEs, and hearing raps throughout their home.",
+        "temporal": {
+            "years": [],
+            "centuries": [],
+            "decades": []
+        },
+        "locations": {
+            "cities": [],
+            "regions": [],
+            "countries": []
+        },
+        "topics": {
+            "primary": [
+                "psi events",
+                "premonitions",
+                "timeslips",
+                "ufo sightings",
+                "out-of-body experiences",
+                "raps",
+                "childhood",
+                "home"
+            ],
+            "secondary": [
+                "ghosts",
+                "keith daniel",
+                "jenny randles",
+                "striebers"
+            ],
+            "raw_analysis": {
+                "phenomena": [
+                    "Psi Events",
+                    "Premonitions",
+                    "Timeslips",
+                    "UFO Sightings",
+                    "Out-of-Body Experiences",
+                    "Raps"
+                ],
+                "entities": [
+                    "Ghosts"
+                ],
+                "implements": [],
+                "context": [
+                    "Childhood",
+                    "Home"
+                ],
+                "people": [
+                    "Keith Daniel",
+                    "Jenny Randles",
+                    "Striebers"
                 ],
                 "functional_purpose": [],
                 "historical_groups": []
@@ -13026,6 +13180,82 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
+    "Connie’s Warner Robins Abduction and Synchronous Web Hit from Same Town": {
+        "start_char": 178363,
+        "end_char": 178773,
+        "pages": "55",
+        "keywords": [
+            "connie",
+            "macgregors",
+            "robins air force base",
+            "warner robins",
+            "georgia",
+            "united states",
+            "synchronicity",
+            "alien abduction",
+            "air force base",
+            "website",
+            "blog",
+            "alien"
+        ],
+        "verbatim": "Synchronicities may be contagious. While corresponding with an alien abductee named Connie with an experience from Warner Robins Air Force Base, the MacGregors’ website was visited by “someone from Warner Robins, Georgia… In the more than three years we’ve had the blog, we had never noticed a hit from Warner Robins, Georgia. What are the odds that someone dropped by… just as we were writing Connie’s story?”",
+        "temporal": {
+            "years": [],
+            "centuries": [],
+            "decades": []
+        },
+        "locations": {
+            "cities": [
+                "Robins Air Force Base",
+                "Warner Robins"
+            ],
+            "regions": [
+                "Georgia"
+            ],
+            "countries": [
+                "United States"
+            ]
+        },
+        "topics": {
+            "primary": [
+                "synchronicity",
+                "alien abduction",
+                "air force base",
+                "website",
+                "blog",
+                "georgia"
+            ],
+            "secondary": [
+                "alien",
+                "connie",
+                "macgregors"
+            ],
+            "raw_analysis": {
+                "phenomena": [
+                    "Synchronicity",
+                    "Alien Abduction"
+                ],
+                "entities": [
+                    "Alien"
+                ],
+                "implements": [],
+                "context": [
+                    "Air Force Base",
+                    "Website",
+                    "Blog",
+                    "Georgia"
+                ],
+                "people": [
+                    "Connie",
+                    "MacGregors"
+                ],
+                "functional_purpose": [],
+                "historical_groups": []
+            }
+        },
+        "confidence": 0.66,
+        "status": "NEEDS_REVIEW"
+    },
     "Kathleen Marden’s Son Swatting a Light Orb in His Bedroom": {
         "start_char": 180231,
         "end_char": 180541,
@@ -17434,6 +17664,15 @@
         },
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
+    },
+    "Wayne Heald’s Childhood UFO Terror and Retrospective Reinterpretation": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "80-81",
+        "keywords": [
+            "wayne healds childhood ufo terror and retrospective reinterpretation"
+        ],
+        "verbatim": ""
     },
     "Juan Pérez’s 1978 Venado Tuerto Abduction, Healing, and Vision of His Dead Grandfather": {
         "start_char": 274618,
@@ -22599,6 +22838,15 @@
         "confidence": 1.0,
         "status": "AUTO_APPROVED"
     },
+    "Near-Fatal Childhood Illness as Shamanic Battle with Death": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "115",
+        "keywords": [
+            "nearfatal childhood illness as shamanic battle with death"
+        ],
+        "verbatim": ""
+    },
     "Sister of Mercy as Possible Dead Nun or Psychopompic Being": {
         "start_char": 378829,
         "end_char": 379567,
@@ -22810,6 +23058,15 @@
         },
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
+    },
+    "December 26, 1985 Cabin Abduction by Multiple Types of Visitors": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "116-118",
+        "keywords": [
+            "december 26 1985 cabin abduction by multiple types of visitors"
+        ],
+        "verbatim": ""
     },
     "Kobold Visitors as Blue Death-Demons Controlling Movement of Souls": {
         "start_char": 385442,
@@ -24412,7 +24669,7 @@
         "status": "NEEDS_REVIEW"
     },
     "Activation of Whitley’s Implant and Streaming Words in a Slit of Light": {
-        "start_char": 436075,
+        "start_char": 436059,
         "end_char": 437056,
         "pages": "133-134",
         "keywords": [
@@ -28635,6 +28892,15 @@
         "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
+    "Discarnate Alien Tells Tony Dodd Humans Misperceive Them as Gods": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "158",
+        "keywords": [
+            "discarnate alien tells tony dodd humans misperceive them as gods"
+        ],
+        "verbatim": ""
+    },
     "Betty Andreasson Told Extraterrestrials Are Caretakers of Nature": {
         "start_char": 519016,
         "end_char": 519164,
@@ -32712,102 +32978,6 @@
             }
         },
         "confidence": 0.66,
-        "status": "NEEDS_REVIEW"
-    },
-    "Japanese Katawaguruma as Flaming Wheel Demon That Steals Souls": {
-        "start_char": 587086,
-        "end_char": 587555,
-        "pages": "179-180",
-        "keywords": [
-            "soul harvesting",
-            "stealing impure souls",
-            "soul devouring",
-            "soul stealing",
-            "european faerie lore",
-            "japanese legends",
-            "egyptian mythology",
-            "world mythologies",
-            "katawaguruma yokai",
-            "dead-woman-cum-demon",
-            "soul-harvesting aliens",
-            "soul-devourer",
-            "ammit",
-            "faerie",
-            "flaming wheel",
-            "japanese",
-            "egyptian"
-        ],
-        "verbatim": "In addition to European faerie lore, soul-harvesting aliens are prefigured in legends like the Japanese katawaguruma yokai, who is not only a nude, dead-woman-cum-demon, but manifests the flying saucer motif by appearing as a large, flaming wheel which steals impure souls. More broadly speaking, another variation on the harvest theme, the soul-devourer, appears in diverse mythologies around the world, notably as the Egyptian crocodile-hippopotamus-lion deity Ammit.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": []
-        },
-        "topics": {
-            "primary": [
-                "soul harvesting",
-                "soul stealing",
-                "soul devouring",
-                "european faerie lore",
-                "japanese legends",
-                "egyptian mythology",
-                "world mythologies",
-                "soul harvesting",
-                "stealing impure souls",
-                "soul devouring"
-            ],
-            "secondary": [
-                "katawaguruma yokai",
-                "dead-woman-cum-demon",
-                "soul-harvesting aliens",
-                "soul-devourer",
-                "ammit",
-                "faerie",
-                "flaming wheel",
-                "japanese",
-                "egyptian"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "Soul Harvesting",
-                    "Soul Stealing",
-                    "Soul Devouring"
-                ],
-                "entities": [
-                    "Katawaguruma Yokai",
-                    "Dead-Woman-Cum-Demon",
-                    "Soul-Harvesting Aliens",
-                    "Soul-Devourer",
-                    "Ammit",
-                    "Faerie"
-                ],
-                "implements": [
-                    "Flaming Wheel"
-                ],
-                "context": [
-                    "European Faerie Lore",
-                    "Japanese Legends",
-                    "Egyptian Mythology",
-                    "World Mythologies"
-                ],
-                "people": [],
-                "functional_purpose": [
-                    "Soul Harvesting",
-                    "Stealing Impure Souls",
-                    "Soul Devouring"
-                ],
-                "historical_groups": [
-                    "Japanese",
-                    "Egyptian"
-                ]
-            }
-        },
-        "confidence": 0.33,
         "status": "NEEDS_REVIEW"
     },
     "John Lear’s Lunar “Soul Collector” and ET Bargain for a Woman’s Soul": {
@@ -41225,6 +41395,15 @@
         "confidence": 1.0,
         "status": "AUTO_APPROVED"
     },
+    "Quebec Monster Lakes, Werewolves, Earthquakes, and Frog Rain": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "230",
+        "keywords": [
+            "quebec monster lakes werewolves earthquakes and frog rain"
+        ],
+        "verbatim": ""
+    },
     "1913 Horse-like Sea Serpent with Baby’s Wail": {
         "start_char": 753701,
         "end_char": 753899,
@@ -41458,6 +41637,15 @@
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
     },
+    "Ogopogo as Lake Demon and Sacrifice-Demanding Spirit": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "230",
+        "keywords": [
+            "ogopogo as lake demon and sacrificedemanding spirit"
+        ],
+        "verbatim": ""
+    },
     "Alkali Lake Monster’s Stench and Madness-Inducing Gaze": {
         "start_char": 755193,
         "end_char": 755658,
@@ -41646,6 +41834,15 @@
         },
         "confidence": 0.99,
         "status": "AUTO_APPROVED"
+    },
+    "Holiday’s Parallels Between Lake Monsters and UFOs": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "232-233",
+        "keywords": [
+            "holidays parallels between lake monsters and ufos"
+        ],
+        "verbatim": ""
     },
     "Men in Black, Orbs, and Nightmares at Loch Ness": {
         "start_char": 763533,
@@ -42377,6 +42574,15 @@
         },
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
+    },
+    "Alien Abductee Carlos and the Friendly Seal at Iona’s Bay of Seals": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "235",
+        "keywords": [
+            "alien abductee carlos and the friendly seal at ionas bay of seals"
+        ],
+        "verbatim": ""
     },
     "HMS Hilary Fires on Cow-Headed Sea Serpent and Is Sunk Three Days Later": {
         "start_char": 770856,
@@ -46228,6 +46434,15 @@
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
     },
+    "The Butterfly People of Joplin Protect Children during the 2011 Tornado": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "249",
+        "keywords": [
+            "the butterfly people of joplin protect children during the 2011 tornado"
+        ],
+        "verbatim": ""
+    },
     "Corpse-like Appearance and Odors of MIB, WIB, and BEKs": {
         "start_char": 822576,
         "end_char": 823962,
@@ -48891,6 +49106,15 @@
         },
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
+    },
+    "Headless Horses as Spectral Psychopomps and Decapitated Horse Burials": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "271",
+        "keywords": [
+            "headless horses as spectral psychopomps and decapitated horse burials"
+        ],
+        "verbatim": ""
     },
     "Ankou’s Hidden Head and Goazic’s Beheading after Otherworld Sojourn": {
         "start_char": 890244,
