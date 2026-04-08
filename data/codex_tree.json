@@ -2484,6 +2484,7 @@
                 "Abductees Used As Emotional Test Subjects; Implants Possibly Monitor Human Emotions"
             ],
             "_stories": [
+                "Edmund Lenthal Swifte\u2019s Cylindrical Apparition in the Tower of London",
                 "Ufonauts Gliding, Flying, and Walking Through Craft Walls",
                 "Sidney Padrick\u2019s Encounter with Zeeno on Manresa Beach",
                 "Arthur Bryant\u2019s Devon Landing, Greek Parchment, and Ufonaut Yamski",
@@ -2649,8 +2650,7 @@
                 "Ingo Swann\u2019s Remote Viewing of Lunar Civilization and Being Seen",
                 "Adrian\u2019s NDE Vision of a Large Ship and Glowing Feminine Being",
                 "March 8, 1967 Minnesota Repeated Nightly Hovering Light",
-                "Contactee Milkman on Sydney Beach Addressed Telepathically by Space-Suited Men",
-                "Edmund Lenthal Swifte\u2019s Cylindrical Apparition in the Tower of London"
+                "Contactee Milkman on Sydney Beach Addressed Telepathically by Space-Suited Men"
             ]
         },
         "Livestock/Animal Interaction": [
@@ -3461,7 +3461,11 @@
         "MIB Impersonating the Frick Brothers after Their TV Portrayal of MIB",
         "Salt Lake City Abductees See Headless Leather-Clad Beings in a Vanishing Camper"
     ],
-    "Misc. Apparation": {},
+    "Misc. Apparation": {
+        "_stories": [
+            "Edmund Lenthal Swifte\u2019s Cylindrical Apparition in the Tower of London"
+        ]
+    },
     "NDE": {
         "Entity Encountered": {
             "Alleged Human Entity": {
