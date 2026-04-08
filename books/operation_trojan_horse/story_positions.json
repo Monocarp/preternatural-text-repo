@@ -2263,6 +2263,119 @@
         "confidence": 1.0,
         "status": "OK"
     },
+    "Post-1966 Pattern of Nighttime Landings and Objects Disappearing into Thin Air": {
+        "start_char": 35278,
+        "end_char": 36841,
+        "pages": "11-12",
+        "keywords": [
+            "midwestern states",
+            "usa",
+            "pattern analysis",
+            "evidence against psychological phenomenon",
+            "ufo sightings",
+            "landings",
+            "objects disappearing into thin air",
+            "nighttime sightings",
+            "rural areas",
+            "remote sectors",
+            "ufo flap",
+            "ufos",
+            "unidentified objects",
+            "air force",
+            "20th century",
+            "1967"
+        ],
+        "verbatim": "The flap of March 8 seemed to be largely concentrated in the states of Kansas and Illinois. In fact, much of the UFO activity in recent years has been focused on the Midwestern states. Until the fall of 1967, a simple pattern seems to have emerged: less densely populated areas had a higher ratio of sightings than heavily populated sections. The Air Force discovered this odd fact back in the late 1940s. If this were a purely psychological phenomenon, then there should be more reports in the more densely populated areas. Instead, the reverse has been true. The objects still apparently prefer remote sectors such as hill country, deserts, forested areas, swamplands, and places where the risk of being observed is the least. As you will note from the sample cases mentioned previously, the majority of the sightings were made between 7:30 and 9:30 P.M. But throughout rural America, most of the population is at home and planted in front of the TV sets at that hour, particularly on weekday nights. In other studies we have determined that the majority of the reported landings occur very late at night in very isolated locales, where the chances of being observed are very slight. In most farming areas, the people are early risers, and therefore most of the population is in bed before 10 P.M. It is after 10 P.M. that the unidentified flying objects cut loose. When they do happen to be observed on the ground, it is either by accident or design. And usually they take off the moment they have been discovered, or they inexplicably disappear into thin air!",
+        "temporal": {
+            "years": [
+                1967
+            ],
+            "centuries": [
+                20
+            ],
+            "decades": []
+        },
+        "locations": {
+            "cities": [],
+            "regions": [
+                "Midwestern states"
+            ],
+            "countries": [
+                "USA"
+            ],
+            "raw_mentions": [
+                "Kansas",
+                "Illinois",
+                "Midwestern states"
+            ],
+            "normalized": [
+                {
+                    "name": "Kansas",
+                    "type": "state",
+                    "country": "USA",
+                    "confidence": 1.0
+                },
+                {
+                    "name": "Illinois",
+                    "type": "state",
+                    "country": "USA",
+                    "confidence": 1.0
+                },
+                {
+                    "name": "Midwestern states",
+                    "type": "region",
+                    "country": "USA",
+                    "confidence": 0.95
+                }
+            ]
+        },
+        "topics": {
+            "primary": [
+                "ufo sightings",
+                "landings",
+                "objects disappearing into thin air",
+                "nighttime sightings",
+                "rural areas",
+                "remote sectors",
+                "ufo flap",
+                "pattern analysis",
+                "evidence against psychological phenomenon"
+            ],
+            "secondary": [
+                "ufos",
+                "unidentified objects",
+                "air force"
+            ],
+            "raw_analysis": {
+                "phenomena": [
+                    "UFO sightings",
+                    "landings",
+                    "objects disappearing into thin air"
+                ],
+                "entities": [
+                    "UFOs",
+                    "unidentified objects"
+                ],
+                "context": [
+                    "nighttime sightings",
+                    "rural areas",
+                    "remote sectors",
+                    "UFO flap"
+                ],
+                "functional_purpose": [
+                    "pattern analysis",
+                    "evidence against psychological phenomenon"
+                ],
+                "people": [],
+                "historical_groups": [
+                    "Air Force"
+                ],
+                "implements": []
+            }
+        },
+        "confidence": 0.99,
+        "status": "OK"
+    },
     "August 3, 1966 Erie Policemen’s Two-Hour Observation of Color-Changing Silvery Object over Lake Erie": {
         "start_char": 38307,
         "end_char": 38925,
@@ -2902,6 +3015,485 @@
         "confidence": 0.99,
         "status": "OK"
     },
+    "World War II Military and Ship Crews’ Unidentified Flying Object Reports": {
+        "start_char": 54098,
+        "end_char": 54744,
+        "pages": "16",
+        "keywords": [
+            "western hemisphere",
+            "united states",
+            "witness reliability",
+            "unidentified flying objects",
+            "ufo sightings",
+            "world war ii",
+            "military intelligence",
+            "air force reports",
+            "u.s. air force",
+            "military pilots",
+            "ship crews",
+            "20th century",
+            "1947"
+        ],
+        "verbatim": "Apparently the U.S. Air Force intelligence teams realized early in the game (1947-49) that it would be logistically impossible for any foreign power, or even any extraterrestrial source, to maintain such a huge force of flying machines in the Western Hemisphere without suffering an accident that would expose the whole operation, or without producing patterns which would reveal their bases. There was never any real question about the reliability of the witnesses. Pilots, top military men, and whole crews of ships had seen unidentified flying objects during World War II and had submitted excellent technical reports to military intelligence.",
+        "temporal": {
+            "years": [
+                1947
+            ],
+            "centuries": [
+                20
+            ],
+            "decades": []
+        },
+        "locations": {
+            "cities": [],
+            "regions": [
+                "Western Hemisphere"
+            ],
+            "countries": [
+                "United States"
+            ],
+            "raw_mentions": [
+                "Western Hemisphere",
+                "United States"
+            ],
+            "normalized": [
+                {
+                    "name": "Western Hemisphere",
+                    "type": "region",
+                    "confidence": 0.95
+                },
+                {
+                    "name": "United States",
+                    "type": "country",
+                    "confidence": 0.95
+                }
+            ]
+        },
+        "topics": {
+            "primary": [
+                "unidentified flying objects",
+                "ufo sightings",
+                "world war ii",
+                "military intelligence",
+                "air force reports",
+                "witness reliability"
+            ],
+            "secondary": [
+                "u.s. air force",
+                "military pilots",
+                "ship crews"
+            ],
+            "raw_analysis": {
+                "phenomena": [
+                    "unidentified flying objects",
+                    "UFO sightings"
+                ],
+                "entities": [],
+                "context": [
+                    "World War II",
+                    "military intelligence",
+                    "air force reports"
+                ],
+                "functional_purpose": [
+                    "witness reliability"
+                ],
+                "people": [],
+                "historical_groups": [
+                    "U.S. Air Force",
+                    "military pilots",
+                    "ship crews"
+                ],
+                "implements": []
+            }
+        },
+        "confidence": 0.99,
+        "status": "OK"
+    },
+    "RAF Air Marshal Lord Dowding Describes Paraphysical UFO Occupants": {
+        "start_char": 61858,
+        "end_char": 62758,
+        "pages": "18-21",
+        "keywords": [
+            "lord dowding",
+            "raf air marshal lord dowding",
+            "raf spokesman",
+            "disclosure",
+            "awareness of paraphysical beings",
+            "discernment",
+            "ufo sightings",
+            "paraphysical manifestations",
+            "invisibility",
+            "shape-shifting",
+            "ufo study",
+            "public lecture",
+            "press statement",
+            "ufo occupants",
+            "raf",
+            "20th century",
+            "1940",
+            "1955"
+        ],
+        "verbatim": "On April 24, 1955, an RAF spokesman told the press that the UFO study was completed but that the findings would be withheld from the public because they would only create more controversy and could not be adequately explained without revealing \"certain top secrets.\" This enigmatic statement hardly satisfied anyone, but soon afterward RAF Air Marshal Lord Dowding, the man who had directed the Battle of Britain in 1940, gave a public lecture in which he openly discussed the paraphysical aspects of the phenomenon and declared the UFO occupants were immortal, could render themselves invisible to human eyes, and could even take on human form and walk and work among us unnoticed. This was very strong stuff in 1955, and the UFO enthusiasts didn't quite know what to make of it. The cultists still circulate his earlier pro-extraterrestrial statements made before he reached the paraphysical stage.\n\nStill another excellent British researc",
+        "temporal": {
+            "years": [
+                1940,
+                1955
+            ],
+            "centuries": [
+                20
+            ],
+            "decades": []
+        },
+        "locations": {
+            "cities": [],
+            "regions": [],
+            "countries": [],
+            "raw_mentions": [],
+            "normalized": []
+        },
+        "topics": {
+            "primary": [
+                "ufo sightings",
+                "paraphysical manifestations",
+                "invisibility",
+                "shape-shifting",
+                "ufo study",
+                "public lecture",
+                "press statement",
+                "disclosure",
+                "awareness of paraphysical beings",
+                "discernment"
+            ],
+            "secondary": [
+                "ufo occupants",
+                "lord dowding",
+                "raf air marshal lord dowding",
+                "raf spokesman",
+                "raf"
+            ],
+            "raw_analysis": {
+                "phenomena": [
+                    "UFO sightings",
+                    "paraphysical manifestations",
+                    "invisibility",
+                    "shape-shifting"
+                ],
+                "entities": [
+                    "UFO occupants"
+                ],
+                "context": [
+                    "UFO study",
+                    "public lecture",
+                    "press statement"
+                ],
+                "functional_purpose": [
+                    "disclosure",
+                    "awareness of paraphysical beings",
+                    "discernment"
+                ],
+                "people": [
+                    "Lord Dowding",
+                    "RAF Air Marshal Lord Dowding",
+                    "RAF spokesman"
+                ],
+                "historical_groups": [
+                    "RAF"
+                ],
+                "implements": []
+            }
+        },
+        "confidence": 0.66,
+        "status": "OK",
+        "warnings": [
+            "No specific locations identified"
+        ]
+    },
+    "Wilbert B. Smith’s Verified Scientific Information from UFO “Entities”": {
+        "start_char": 67419,
+        "end_char": 67977,
+        "pages": "20-21",
+        "keywords": [
+            "wilbert b. smith",
+            "ottawa",
+            "canada",
+            "scientific verification",
+            "ufo contact",
+            "ufo study",
+            "contactees",
+            "ufo entities",
+            "project magnet",
+            "20th century",
+            "1954"
+        ],
+        "verbatim": "There are other examples of sensible researchers who tried to penetrate the thunder of the UFO enthusiasts and reach the lightning. In 1954, Wilbert B. Smith, superintendent of Radio Regulations Engineering, Department of Transport, Ottawa, Canada, became the head of a semiofficial Canadian UFO study dubbed Project Magnet. Smith had fine credentials, and the UFO enthusiasts were thrilled with the announcement. But as the years passed, Smith began to realize that the quickest way to the source of the problem was through a study of the contactees. In some cases the UFO \"entities\" had actually passed on scientific information that Smith was able to check and confirm in his laboratory. Toward the end of his life (he died of cancer on December 27, 1962), he gave lectures and wrote papers about what he had learned.\n\n\"I began for the first time in my life to realize the basic oneness of the universe-science, philosophy, and all that is in it,\" he remarked in 1958. \"Substance and energy are all facets of the same jewel, and before any one facet can be appreciated, the form of the jewel itself must be perceived.\"",
+        "temporal": {
+            "years": [
+                1954
+            ],
+            "centuries": [
+                20
+            ],
+            "decades": []
+        },
+        "locations": {
+            "cities": [
+                "Ottawa"
+            ],
+            "regions": [],
+            "countries": [
+                "Canada"
+            ],
+            "raw_mentions": [
+                "Ottawa",
+                "Canada"
+            ],
+            "normalized": [
+                {
+                    "name": "Ottawa",
+                    "type": "city",
+                    "country": "Canada",
+                    "confidence": 0.95
+                },
+                {
+                    "name": "Canada",
+                    "type": "country",
+                    "confidence": 0.95
+                }
+            ]
+        },
+        "topics": {
+            "primary": [
+                "ufo contact",
+                "ufo study",
+                "contactees",
+                "scientific verification"
+            ],
+            "secondary": [
+                "ufo entities",
+                "wilbert b. smith",
+                "project magnet"
+            ],
+            "raw_analysis": {
+                "phenomena": [
+                    "UFO contact"
+                ],
+                "entities": [
+                    "UFO entities"
+                ],
+                "context": [
+                    "UFO study",
+                    "contactees"
+                ],
+                "functional_purpose": [
+                    "scientific verification"
+                ],
+                "people": [
+                    "Wilbert B. Smith"
+                ],
+                "historical_groups": [
+                    "Project Magnet"
+                ],
+                "implements": []
+            }
+        },
+        "confidence": 1.0,
+        "status": "OK"
+    },
+    "Sir Victor Goddard on Paraphysical UFOs, Astral Spirits, and “Devil of It” Deceptions": {
+        "start_char": 72964,
+        "end_char": 75064,
+        "pages": "22-23",
+        "keywords": [
+            "sir victor goddard",
+            "london",
+            "united kingdom",
+            "paraphysical hypothesis",
+            "discernment of ufo origins",
+            "deceptions",
+            "paraphysical ufos",
+            "ghost-like visibility",
+            "ultrahigh speed transitions",
+            "diaphanous mass",
+            "public lecture",
+            "ufo observations",
+            "paraphysical denizens",
+            "astral spirits",
+            "raf",
+            "20th century",
+            "1969"
+        ],
+        "verbatim": "What exactly is the paraphysical hypothesis? It is the central theme of this book. It can best be summarized by the remarks of RAF Air Marshal Sir Victor Goddard, KCB, CBE, MA, a very high-ranking member of the British government. On May 3, 1969, he gave a public lecture at Caxton Hall in London, in which he cited these main points: \\[Page 22\\]\n\n\"That while it may be that some operators of UFO are normally the paraphysical denizens of a planet other than Earth, there is no logical need for this to be so. For, if the materiality of UFO is paraphysical (and consequently normally invisible), UFO could more plausibly be creations of an invisible world coincident with the space of our physical Earth planet than creations in the paraphysical realms of any other physical planet in the solar system... Given that real UFO are paraphysical, capable of reflecting light like ghosts; and given also that (according to many observers) they remain visible as they change position at ultrahigh speeds from one point to another, it follows that those that remain visible in transition do not dematerialize for that swift transition, and therefore, their mass must be of a diaphanous (very diffuse) nature, and their substance relatively etheric... The observed validity of this supports the paraphysical assertion and makes the likelihood of UFO being Earth-created greater than the likelihood of their creation on another planet... The astral world of illusion, which (on psychical evidence) is greatly inhabited by illusion-prone spirits, is well known for its multifarious imaginative activities and exhortations. Seemingly some of its denizens are eager to exemplify principalities and powers. Others pronounce upon morality, spirituality, Deity, etc. All of these astral exponents who invoke human consciousness may be sincere, but many of their theses may be framed to propagate some special phantasm, perhaps of an earlier incarnation, or to indulge an inveterate and continuing technological urge toward materialistic progress, or simply to astonish and disturb the gullible for the devil of it.\"\n\nSir Victor's remarks are, admittedly, even harder to believe than the claims of the various UFO cults. If you are not familiar with the massive, well-documented occult and religious literature, his words may be incomprehensible to you. In essence, he means that the UFO phenomenon is actually a staggering cosmic put-on: a joke perpetrated by invisible entities who have always delighted in frightening, confusing and misleading the human race. The activities of these entities have been carefully recorded throughout history, and we will be leaning heavily on those historical records in",
+        "temporal": {
+            "years": [
+                1969
+            ],
+            "centuries": [
+                20
+            ],
+            "decades": []
+        },
+        "locations": {
+            "cities": [
+                "London"
+            ],
+            "regions": [],
+            "countries": [
+                "United Kingdom"
+            ],
+            "raw_mentions": [
+                "London",
+                "Caxton Hall"
+            ],
+            "normalized": [
+                {
+                    "name": "London",
+                    "type": "city",
+                    "country": "United Kingdom",
+                    "confidence": 1.0
+                },
+                {
+                    "name": "Caxton Hall",
+                    "type": "venue",
+                    "country": "United Kingdom",
+                    "confidence": 1.0
+                }
+            ]
+        },
+        "topics": {
+            "primary": [
+                "paraphysical ufos",
+                "ghost-like visibility",
+                "ultrahigh speed transitions",
+                "diaphanous mass",
+                "public lecture",
+                "ufo observations",
+                "paraphysical hypothesis",
+                "discernment of ufo origins",
+                "deceptions"
+            ],
+            "secondary": [
+                "paraphysical denizens",
+                "astral spirits",
+                "sir victor goddard",
+                "raf"
+            ],
+            "raw_analysis": {
+                "phenomena": [
+                    "paraphysical UFOs",
+                    "ghost-like visibility",
+                    "ultrahigh speed transitions",
+                    "diaphanous mass"
+                ],
+                "entities": [
+                    "paraphysical denizens",
+                    "astral spirits"
+                ],
+                "context": [
+                    "public lecture",
+                    "UFO observations"
+                ],
+                "functional_purpose": [
+                    "paraphysical hypothesis",
+                    "discernment of UFO origins",
+                    "deceptions"
+                ],
+                "people": [
+                    "Sir Victor Goddard"
+                ],
+                "historical_groups": [
+                    "RAF"
+                ],
+                "implements": []
+            }
+        },
+        "confidence": 1.0,
+        "status": "OK"
+    },
+    "Lynn E. Catoe on UFOs, Invisible Entities, Poltergeists, and Demoniac Possession": {
+        "start_char": 75667,
+        "end_char": 76546,
+        "pages": "22-23",
+        "keywords": [
+            "lynn e. catoe",
+            "discernment",
+            "poltergeist manifestations",
+            "possession",
+            "demoniac possession",
+            "mental telepathy",
+            "automatic writing",
+            "psychic phenomena",
+            "mysticism",
+            "metaphysical",
+            "ufo literature",
+            "ufo reports",
+            "invisible entities"
+        ],
+        "verbatim": "Recently the U.S. Government Printing Office issued a publication compiled by the Library of Congress for the Air Force Office of Scientific Research: UFOs and Related Subjects: An Annotated Bibliography. In preparing this work, the senior bibliographer, Miss Lynn E. Catoe, actually read thousands of UFO articles, books and publications. In her preface to this 400-page book she states:\n\n\"A large part of the available UFO literature is closely linked with mysticism and the metaphysical. It deals with subjects like mental telepathy, automatic writing, and invisible entities, as well as phenomena like poltergeist manifestations and possession... Many of the UFO reports now being published in the popular press recount alleged incidents that are strikingly similar to demoniac possession and psychic phenomena which has long been known to theologians and parapsychologists.\"",
+        "temporal": {
+            "years": [],
+            "centuries": [],
+            "decades": []
+        },
+        "locations": {
+            "cities": [],
+            "regions": [],
+            "countries": [],
+            "raw_mentions": [],
+            "normalized": []
+        },
+        "topics": {
+            "primary": [
+                "poltergeist manifestations",
+                "possession",
+                "demoniac possession",
+                "mental telepathy",
+                "automatic writing",
+                "psychic phenomena",
+                "mysticism",
+                "metaphysical",
+                "ufo literature",
+                "ufo reports",
+                "discernment"
+            ],
+            "secondary": [
+                "invisible entities",
+                "lynn e. catoe"
+            ],
+            "raw_analysis": {
+                "phenomena": [
+                    "poltergeist manifestations",
+                    "possession",
+                    "demoniac possession",
+                    "mental telepathy",
+                    "automatic writing",
+                    "psychic phenomena"
+                ],
+                "entities": [
+                    "invisible entities"
+                ],
+                "context": [
+                    "mysticism",
+                    "metaphysical",
+                    "UFO literature",
+                    "UFO reports"
+                ],
+                "functional_purpose": [
+                    "discernment"
+                ],
+                "people": [
+                    "Lynn E. Catoe"
+                ],
+                "historical_groups": [],
+                "implements": []
+            }
+        },
+        "confidence": 0.33,
+        "status": "REVIEW",
+        "warnings": [
+            "No temporal data extracted",
+            "No specific locations identified"
+        ]
+    },
     "Contactee Milkman on Sydney Beach Addressed Telepathically by Space-Suited Men": {
         "start_char": 105097,
         "end_char": 106160,
@@ -3014,6 +3606,84 @@
         },
         "confidence": 1.0,
         "status": "OK"
+    },
+    "Radar-Only UFOs and Objects That Instantly Appear and Disappear": {
+        "start_char": 106537,
+        "end_char": 107069,
+        "pages": "31",
+        "keywords": [
+            "hidden ufo phenomenon",
+            "limits of human perception",
+            "radar-only ufo sighting",
+            "instantaneous appearance",
+            "instantaneous disappearance",
+            "radar sightings",
+            "soft sightings",
+            "witness observation",
+            "ufo",
+            "unidentified object",
+            "entity"
+        ],
+        "verbatim": "There have been numerous confirmed radar sightings of UFOs that could not be seen by the naked eye. We also have the thousands of soft sightings in which the objects suddenly appeared and/or disappeared instantaneously in front of the witnesses. All of these events seem to prove that a large part of the UFO phenomenon is hidden from us and is taking place beyond the limited range of our eyes. We can only see the objects and the entities under certain circumstances, and perhaps only certain types of people can see them at all. \\[Page 31\\]\n\nThus, by",
+        "temporal": {
+            "years": [],
+            "centuries": [],
+            "decades": []
+        },
+        "locations": {
+            "cities": [],
+            "regions": [],
+            "countries": [],
+            "raw_mentions": [],
+            "normalized": []
+        },
+        "topics": {
+            "primary": [
+                "radar-only ufo sighting",
+                "instantaneous appearance",
+                "instantaneous disappearance",
+                "radar sightings",
+                "soft sightings",
+                "witness observation",
+                "hidden ufo phenomenon",
+                "limits of human perception"
+            ],
+            "secondary": [
+                "ufo",
+                "unidentified object",
+                "entity"
+            ],
+            "raw_analysis": {
+                "phenomena": [
+                    "radar-only UFO sighting",
+                    "instantaneous appearance",
+                    "instantaneous disappearance"
+                ],
+                "entities": [
+                    "UFO",
+                    "unidentified object",
+                    "entity"
+                ],
+                "context": [
+                    "radar sightings",
+                    "soft sightings",
+                    "witness observation"
+                ],
+                "functional_purpose": [
+                    "hidden UFO phenomenon",
+                    "limits of human perception"
+                ],
+                "people": [],
+                "historical_groups": [],
+                "implements": []
+            }
+        },
+        "confidence": 0.33,
+        "status": "REVIEW",
+        "warnings": [
+            "No temporal data extracted",
+            "No specific locations identified"
+        ]
     },
     "Seattle 1947 Purple and Light-Blue Spots of Light in the Sky": {
         "start_char": 108413,
@@ -3606,9 +4276,125 @@
         "confidence": 1.0,
         "status": "OK"
     },
+    "Magonia’s Cloud Ships And The Stoning Of Three Men And A Woman From A Fallen Sky Ship": {
+        "start_char": 137501,
+        "end_char": 137934,
+        "pages": "40",
+        "keywords": [
+            "w. r. drake",
+            "agobard",
+            "lyons",
+            "france",
+            "illustrate superstition",
+            "cloud ships",
+            "fallen sky ship",
+            "crop raiding",
+            "stoning",
+            "medieval legend",
+            "magonians",
+            "5th century",
+            "6th century",
+            "7th century",
+            "8th century",
+            "9th century",
+            "10th century",
+            "11th century",
+            "12th century",
+            "13th century",
+            "14th century",
+            "15th century",
+            "840"
+        ],
+        "verbatim": "Historian W. R. Drake has unearthed references to \"Magonia,\" a strange country that was a legend among the peasants of medieval France. They believed that the Magonians rode about in \"cloud ships\" and frequently raided their crops. Agobard, Archbishop of Lyons, wrote that one of these ships is supposed to have fallen from the sky around A.D. 840, and its occupants, three men and a woman, were stoned to death by the angry farmers.",
+        "temporal": {
+            "years": [
+                840
+            ],
+            "centuries": [
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15
+            ],
+            "decades": []
+        },
+        "locations": {
+            "cities": [
+                "Lyons"
+            ],
+            "regions": [],
+            "countries": [
+                "France"
+            ],
+            "raw_mentions": [
+                "France",
+                "Lyons"
+            ],
+            "normalized": [
+                {
+                    "name": "France",
+                    "type": "country",
+                    "confidence": 1.0
+                },
+                {
+                    "name": "Lyons",
+                    "type": "city",
+                    "country": "France",
+                    "confidence": 0.95
+                }
+            ]
+        },
+        "topics": {
+            "primary": [
+                "cloud ships",
+                "fallen sky ship",
+                "crop raiding",
+                "stoning",
+                "medieval legend",
+                "illustrate superstition"
+            ],
+            "secondary": [
+                "magonians",
+                "w. r. drake",
+                "agobard"
+            ],
+            "raw_analysis": {
+                "phenomena": [
+                    "cloud ships",
+                    "fallen sky ship"
+                ],
+                "entities": [
+                    "Magonians"
+                ],
+                "context": [
+                    "crop raiding",
+                    "stoning",
+                    "medieval legend"
+                ],
+                "functional_purpose": [
+                    "illustrate superstition"
+                ],
+                "people": [
+                    "W. R. Drake",
+                    "Agobard"
+                ],
+                "historical_groups": [],
+                "implements": []
+            }
+        },
+        "confidence": 1.0,
+        "status": "OK"
+    },
     "1790 Alençon Globe Landing, Humanlike Occupant, And Silent Explosion": {
         "start_char": 137936,
-        "end_char": 139759,
+        "end_char": 139747,
         "pages": "40-41",
         "keywords": [
             "alberto fengolio",
@@ -4024,7 +4810,7 @@
     },
     "1871 Trouvelot’s Formation Of Objects And Falling‑Leaf Motion Disk": {
         "start_char": 142512,
-        "end_char": 143748,
+        "end_char": 143243,
         "pages": "41",
         "keywords": [
             "trouvelot",
@@ -5938,6 +6724,15 @@
         "confidence": 1.0,
         "status": "OK"
     },
+    "Baptism in the River Thames Accompanied by a Heavenly Light": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "58-59",
+        "keywords": [
+            "baptism in the river thames accompanied by a heavenly light"
+        ],
+        "verbatim": ""
+    },
     "Presque Isle Landing with Rod-Like Beams of Light": {
         "start_char": 205636,
         "end_char": 206158,
@@ -7156,6 +7951,15 @@
         },
         "confidence": 1.0,
         "status": "OK"
+    },
+    "Brilliant Lights and Mysterious Flying Machine over New England, December 1909": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "66-68",
+        "keywords": [
+            "brilliant lights and mysterious flying machine over new england december 1909"
+        ],
+        "verbatim": ""
     },
     "Three Huge Lights over Huntington, West Virginia": {
         "start_char": 236214,
@@ -9075,6 +9879,234 @@
         "confidence": 1.0,
         "status": "OK"
     },
+    "Major General Reutersward’s Statement on Illegal Ghost‑Flier Overflights": {
+        "start_char": 264722,
+        "end_char": 265343,
+        "pages": "76",
+        "keywords": [
+            "major general reutersward",
+            "upper norrland",
+            "sweden",
+            "territorial defense",
+            "intruder identification",
+            "ghost-flier overflights",
+            "unidentified aerial phenomena",
+            "secret military areas",
+            "illegal air traffic",
+            "ghost fliers",
+            "20th century",
+            "1934"
+        ],
+        "verbatim": "On April 30, 1934, Major General Reutersward, commanding general of upper Norrland, Sweden, issued the following statement to the press:\n\nComparison of these reports shows that there can be no doubt about illegal air traffic over our secret military areas. There are many reports from reliable people which describe close observations of the enigmatic fliers. And in every case the same remark has been noted: No insignias or identifying marks were visible on the machine ...It is impossible to explain away the whole thing as imagination. The question is: Who are they? And why have they been invading our air territory?",
+        "temporal": {
+            "years": [
+                1934
+            ],
+            "centuries": [
+                20
+            ],
+            "decades": []
+        },
+        "locations": {
+            "cities": [],
+            "regions": [
+                "upper Norrland"
+            ],
+            "countries": [
+                "Sweden"
+            ],
+            "raw_mentions": [
+                "upper Norrland",
+                "Sweden"
+            ],
+            "normalized": [
+                {
+                    "name": "upper Norrland",
+                    "type": "region",
+                    "country": "Sweden",
+                    "confidence": 1.0
+                },
+                {
+                    "name": "Sweden",
+                    "type": "country",
+                    "confidence": 1.0
+                }
+            ]
+        },
+        "topics": {
+            "primary": [
+                "ghost-flier overflights",
+                "unidentified aerial phenomena",
+                "secret military areas",
+                "illegal air traffic",
+                "territorial defense",
+                "intruder identification"
+            ],
+            "secondary": [
+                "ghost fliers",
+                "major general reutersward"
+            ],
+            "raw_analysis": {
+                "phenomena": [
+                    "ghost-flier overflights",
+                    "unidentified aerial phenomena"
+                ],
+                "entities": [
+                    "ghost fliers"
+                ],
+                "context": [
+                    "secret military areas",
+                    "illegal air traffic"
+                ],
+                "functional_purpose": [
+                    "territorial defense",
+                    "intruder identification"
+                ],
+                "people": [
+                    "Major General Reutersward"
+                ],
+                "historical_groups": [],
+                "implements": []
+            }
+        },
+        "confidence": 0.99,
+        "status": "OK"
+    },
+    "Enigmatic Radio Messages Apparently Linked to Ghost Fliers": {
+        "start_char": 266524,
+        "end_char": 269322,
+        "pages": "77",
+        "keywords": [
+            "hjalmar hedstrom",
+            "umea",
+            "hudiksvall",
+            "norway",
+            "sweden",
+            "intelligence service",
+            "radio navigation",
+            "ghost fliers",
+            "enigmatic radio signals",
+            "mystery airplanes",
+            "radio transmissions",
+            "flights",
+            "wireless transmitters",
+            "radio navigational aids",
+            "loudspeakers",
+            "air force",
+            "20th century",
+            "1934",
+            "1936"
+        ],
+        "verbatim": "Radio Signals from Nowhere\n\nEnigmatic radio signals were widely received throughout Sweden and Norway during the flights of the ghost fliers. These also became a topic of discussion in the press.\n\nA widely published dispatch datelined Umea, Sweden, January 11, 1934, noted: \"Members of the headquarters of the Air Force are of the opinion that the mystery airplanes are equipped with wireless transmitters and radio navigational aides... The airplanes are part of an extraordinary organization.\"\n\nAn item in the Hudiksvalls Tidningen, January 1, 1934, states: \\[Page 77\\]\n\nRadio listeners in Umea have been receiving conversations on their loudspeakers containing information about the ghost fliers, indicating that their intelligence service is modern ...The conversations are on the wavelength of a popular gramophone program in Umea and discussed a meeting at a special point. The broadcast concluded with a discussion of which radio station should be used the next time.\\[8\\]\n\nAt 6 P.M. on Thursday, January 25, 1934, a workman named Hjalmar Hedstrom reportedly picked up the following message on \"a lower wavelength\" in Norrbyskar, Sweden: \"The sea is calm; two degrees warmly; therefore you can go down on the water and catch what you shall have... Returning quarter to eight for further message.\" There was also a statement on wind direction and position, all in broken Swedish, but Hedstrom couldn't remember all of it.\n\nAnother radio listener, in Hedesunda, picked up an identical message that same day. And additional messages were received at the appointed hour of 7:45.\n\nSome messages came over the 900-meter band. Others were received between 230-275 meters.\n\nA majority of all the 1934 sightings took place at 6 P.M., no matter where the locale. The flap died down in March 1934, but there were periodic reports throughout the 1930s. Here's one datelined Harstad, Norway, November 21, 1936:\n\nReports of a mysterious light have arrived from several different places. The Norwegian Telegraphic Agency correspondent learned of the sightings during an interview with the Sixth Division. An inquiry into the reports is being conducted by the county constabulary. The division has also received a message about mysterious lights seen Tuesday evening outside Tromso.\n\nThere is every reason to believe that the observations are real. During the last sighting in upper Norway many people received mysterious radio signals.\n\nThe ghost fliers returned to Scandinavia in 1936, following the same routes and patterns of the 1934 sightings. They were again accompanied by baffling radio signals. The New York Times correspondent, who had tried to blame Japan in 1934, now accused Germany of broadcasting the signals. But none of the Scandinavian newspapers mentioned Germany in connection with the planes or the ra",
+        "temporal": {
+            "years": [
+                1934,
+                1936
+            ],
+            "centuries": [
+                20
+            ],
+            "decades": []
+        },
+        "locations": {
+            "cities": [
+                "Umea",
+                "Hudiksvall"
+            ],
+            "regions": [],
+            "countries": [
+                "Norway",
+                "Sweden"
+            ],
+            "raw_mentions": [
+                "Umea",
+                "Norrbyskar",
+                "Hudiksvall",
+                "Sweden",
+                "Norway"
+            ],
+            "normalized": [
+                {
+                    "name": "Umea",
+                    "type": "city",
+                    "country": "Sweden",
+                    "confidence": 1.0
+                },
+                {
+                    "name": "Norrbyskar",
+                    "type": "location",
+                    "country": "Sweden",
+                    "confidence": 1.0
+                },
+                {
+                    "name": "Hudiksvall",
+                    "type": "city",
+                    "country": "Sweden",
+                    "confidence": 0.95
+                },
+                {
+                    "name": "Sweden",
+                    "type": "country",
+                    "confidence": 1.0
+                },
+                {
+                    "name": "Norway",
+                    "type": "country",
+                    "confidence": 1.0
+                }
+            ]
+        },
+        "topics": {
+            "primary": [
+                "ghost fliers",
+                "enigmatic radio signals",
+                "mystery airplanes",
+                "radio transmissions",
+                "flights",
+                "intelligence service",
+                "radio navigation"
+            ],
+            "secondary": [
+                "ghost fliers",
+                "wireless transmitters",
+                "radio navigational aids",
+                "loudspeakers",
+                "hjalmar hedstrom",
+                "air force"
+            ],
+            "raw_analysis": {
+                "phenomena": [
+                    "ghost fliers",
+                    "enigmatic radio signals"
+                ],
+                "entities": [
+                    "ghost fliers"
+                ],
+                "context": [
+                    "mystery airplanes",
+                    "radio transmissions",
+                    "flights"
+                ],
+                "functional_purpose": [
+                    "intelligence service",
+                    "radio navigation"
+                ],
+                "people": [
+                    "Hjalmar Hedstrom"
+                ],
+                "historical_groups": [
+                    "Air Force"
+                ],
+                "implements": [
+                    "wireless transmitters",
+                    "radio navigational aids",
+                    "loudspeakers"
+                ]
+            }
+        },
+        "confidence": 1.0,
+        "status": "OK"
+    },
     "Fishing Boat Approaches Large Airplane That Vanishes in Smoke": {
         "start_char": 269798,
         "end_char": 270713,
@@ -9159,6 +10191,15 @@
         },
         "confidence": 1.0,
         "status": "OK"
+    },
+    "Ghost Rockets Over Scandinavia and Europe in 1946": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "78",
+        "keywords": [
+            "ghost rockets over scandinavia and europe in 1946"
+        ],
+        "verbatim": ""
     },
     "Brilliant Object Over Wanaque Reservoir and Formation of Mystery Helicopters": {
         "start_char": 276536,
@@ -9511,7 +10552,7 @@
     },
     "1966 Brilliant Object Over Northeastern United States and Associated Anomalies": {
         "start_char": 287201,
-        "end_char": 293659,
+        "end_char": 297478,
         "pages": "83-84",
         "keywords": [
             "northeastern united states",
@@ -9745,7 +10786,7 @@
         "status": "OK"
     },
     "1962 Radar‑Tracked Object, Nevada Tremors, and Power Station Landing": {
-        "start_char": 301078,
+        "start_char": 301055,
         "end_char": 301967,
         "pages": "86",
         "keywords": [
@@ -10920,95 +11961,6 @@
             }
         },
         "confidence": 1.0,
-        "status": "OK"
-    },
-    "South American Landings, Low-Level Sightings, and Contacts, June 1968": {
-        "start_char": 321268,
-        "end_char": 321632,
-        "pages": "92",
-        "keywords": [
-            "robert kennedy",
-            "argentina",
-            "ufo landings",
-            "low-level sightings",
-            "ufo contacts",
-            "flying saucers",
-            "major cities",
-            "newspaper coverage",
-            "ufo news",
-            "20th century",
-            "1968"
-        ],
-        "verbatim": "This same explanation has now been used by the Air Force for several other flaps, including the worldwide flaps of the summer of 1967. In July 1968, Walter Sullivan, the New York Times science editor, published a review of the March 3 sightings, using the rocket explanation and quoting the National Investigation Committees on Aerial Phenomena as claiming that there had been a sharp decline in UFO reports and no significant flaps for two years. Apparently NICAP had not heard of the massive waves in Pennsylvania, Georgia, and New York State in the fall of 1967.\n\nAll hell broke loose in South America again in 1968, with innumerable landings, low-level sightings over major cities, and a wide variety of contacts. There was so much UFO news in June 1968 that some newspapers in Argentina had to relegate the story of Senator Robert Kennedy's tragic murder to the inside pages, their front pages being devoted to flying saucers.",
-        "temporal": {
-            "years": [
-                1968
-            ],
-            "centuries": [
-                20
-            ],
-            "decades": []
-        },
-        "locations": {
-            "cities": [],
-            "regions": [],
-            "countries": [
-                "Argentina"
-            ],
-            "raw_mentions": [
-                "South America",
-                "Argentina"
-            ],
-            "normalized": [
-                {
-                    "name": "South America",
-                    "type": "continent",
-                    "country": "",
-                    "confidence": 1.0
-                },
-                {
-                    "name": "Argentina",
-                    "type": "country",
-                    "country": "Argentina",
-                    "confidence": 1.0
-                }
-            ]
-        },
-        "topics": {
-            "primary": [
-                "ufo landings",
-                "low-level sightings",
-                "ufo contacts",
-                "flying saucers",
-                "major cities",
-                "newspaper coverage",
-                "ufo news"
-            ],
-            "secondary": [
-                "robert kennedy"
-            ],
-            "raw_analysis": {
-                "phenomena": [
-                    "UFO landings",
-                    "low-level sightings",
-                    "UFO contacts",
-                    "flying saucers"
-                ],
-                "entities": [],
-                "context": [
-                    "major cities",
-                    "newspaper coverage",
-                    "UFO news"
-                ],
-                "functional_purpose": [],
-                "people": [
-                    "Robert Kennedy"
-                ],
-                "historical_groups": [],
-                "implements": []
-            }
-        },
-        "confidence": 0.99,
         "status": "OK"
     },
     "Spanish Air Force Jet Pursues Glowing Pyramid-Shaped Object Over Madrid, September 8, 1968": {
@@ -20165,6 +21117,15 @@
         "confidence": 1.0,
         "status": "OK"
     },
+    "Reverend Arthur Ford, Fletcher, and the Secret Houdini Code": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "146-147",
+        "keywords": [
+            "reverend arthur ford fletcher and the secret houdini code"
+        ],
+        "verbatim": ""
+    },
     "Fletcher’s Indifference to Reverend Ford’s Health": {
         "start_char": 512349,
         "end_char": 513805,
@@ -20248,6 +21209,15 @@
         "warnings": [
             "No temporal data extracted"
         ]
+    },
+    "The Fox Sisters’ Spirit Rappings and Their Confession": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "147-148",
+        "keywords": [
+            "the fox sisters spirit rappings and their confession"
+        ],
+        "verbatim": ""
     },
     "Slag, Blood, Frogs, and Poltergeists in 1846": {
         "start_char": 515463,
@@ -24080,6 +25050,15 @@
             "No specific locations identified"
         ]
     },
+    "Howard Menger on People from Mars and Undiscovered People": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "179",
+        "keywords": [
+            "howard menger on people from mars and undiscovered people"
+        ],
+        "verbatim": ""
+    },
     "General Douglas MacArthur’s Warnings of an Interplanetary War with Evil Forces": {
         "start_char": 627140,
         "end_char": 627400,
@@ -24236,6 +25215,15 @@
             "No temporal data extracted",
             "No specific locations identified"
         ]
+    },
+    "Dr. Meade Layne’s Etherians and Supersonic Frequencies Causing Amnesia and Deterioration": {
+        "start_char": -1,
+        "end_char": -1,
+        "pages": "181",
+        "keywords": [
+            "dr meade laynes etherians and supersonic frequencies causing amnesia and deterioration"
+        ],
+        "verbatim": ""
     },
     "Ultraterrestrials, God‑Kings, Spiritualism, and Lincoln’s Séances": {
         "start_char": 633863,
@@ -24710,8 +25698,8 @@
         "status": "OK"
     },
     "Keel's Superspectrum Theory": {
-        "start_char": 94358,
-        "end_char": 95251,
+        "start_char": 92404,
+        "end_char": 95804,
         "pages": "27-28",
         "keywords": [
             "verification of supernatural truths",
@@ -24822,117 +25810,6 @@
         "status": "OK",
         "warnings": [
             "No specific locations identified"
-        ]
-    },
-    "UFOs Seen Heading Towards Thule Greenland": {
-        "start_char": 4394,
-        "end_char": 5637,
-        "pages": "2",
-        "keywords": [
-            "1960",
-            "wednesday",
-            "ufos. radar recognized",
-            "thule",
-            "greenland",
-            "soviet union",
-            "iceberg",
-            "submarine cable"
-        ]
-    },
-    "Rader and Police Encounter With UFO": {
-        "start_char": 7397,
-        "end_char": 7877,
-        "pages": "3",
-        "keywords": [
-            "federal aviation agency tower",
-            "greensboro-high point airport",
-            "greensboro",
-            "north carolina",
-            "ufo",
-            "1966",
-            "police officers.",
-            "high point-randolph county. 500 feet altitude. round",
-            "brilliant red-green. flashes of light"
-        ]
-    },
-    "Lambert and Rose UFO Sighting": {
-        "start_char": 8939,
-        "end_char": 9835,
-        "pages": "3",
-        "keywords": [
-            "8 am",
-            "c. phillip lambert",
-            "donny russel rose",
-            "good reputations",
-            "charleston",
-            "south carolina",
-            "circular object",
-            "eight minutes",
-            "sterling-silver disk",
-            "14 feet tall",
-            "20 foot diameter",
-            "military members",
-            "800 900 foot altitude"
-        ]
-    },
-    "Object Seen in Kent, Washington in 1908": {
-        "start_char": 212097,
-        "end_char": 213118,
-        "pages": "61",
-        "keywords": [
-            "1908",
-            "february",
-            "red object",
-            "kent",
-            "washington",
-            "cigar-shaped",
-            "colored lights",
-            "rocket"
-        ]
-    },
-    "UFOs Near Point Pleasant": {
-        "start_char": 249501,
-        "end_char": 251036,
-        "pages": "72",
-        "keywords": [
-            "1968",
-            "point pleasant",
-            "west virginia",
-            "ufo lights",
-            "highway 62",
-            "1967",
-            "tnt area"
-        ]
-    },
-    "Ghost Rockets": {
-        "start_char": 270746,
-        "end_char": 271668,
-        "pages": "78",
-        "keywords": [
-            "1946",
-            "finland",
-            "lights",
-            "cylindrical objects",
-            "norway",
-            "sweden",
-            "greece",
-            "switzerland",
-            "1946"
-        ]
-    },
-    "Alleged UFO Over Mexico Around Earthquake": {
-        "start_char": 294872,
-        "end_char": 297433,
-        "pages": "84 - 85",
-        "keywords": [
-            "ufos",
-            "algeria",
-            "1968",
-            "mexico",
-            "ball of fire. multiple objects",
-            "veracruz",
-            "rumbling",
-            "tremors"
         ]
     }
 }
