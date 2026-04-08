@@ -175,7 +175,11 @@
     },
     "Astrological": {
         "Omens": {
-            "Death": []
+            "Death": {
+                "_stories": [
+                    "Celestial Omens at the Deaths of Caesar, Pertinax, and Merovech"
+                ]
+            }
         }
     },
     "Crop Circles": [
