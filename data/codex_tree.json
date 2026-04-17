@@ -3858,7 +3858,11 @@
     ],
     "Strange Falls": {
         "Inorganic Matter": {
-            "Coins": [],
+            "Coins": {
+                "_stories": [
+                    "Rain of Coins near Kankakee, Illinois, Accompanied by Whizzing Noise (1909)"
+                ]
+            },
             "Fire": [
                 "1867 Thames Ditton Shower of Fire and Sulphur Deposit",
                 "Thunderstone-like Polished Stone after Green Fireball at Wolverhampton, England (1876)"
