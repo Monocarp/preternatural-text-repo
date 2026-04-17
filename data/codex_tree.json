@@ -7,8 +7,12 @@
                 ]
             },
             "Material Released": {
-                "Insects": {},
-                "Organic Materials": [],
+                "Insects": {
+                    "_stories": [
+                        "Luminous Cloud Over Hutchinson Drops Non\u2011Luminous Insects"
+                    ]
+                },
+                "Organic Materials": {},
                 "Rocks/Stones": [
                     "Exploding Rumbling Cloud Over Agen Rains Stones"
                 ],
