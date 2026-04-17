@@ -3850,7 +3850,11 @@
             "Fire": [
                 "1867 Thames Ditton Shower of Fire and Sulphur Deposit"
             ],
-            "Rocks/Stones": [],
+            "Rocks/Stones": {
+                "_stories": [
+                    "Stones Falling in England in the 19th Century"
+                ]
+            },
             "Sulphur": [
                 "1867 Thames Ditton Shower of Fire and Sulphur Deposit",
                 "1879 Eastern Pennsylvania Snowfall with Burning Sulphur-Like Substance"
