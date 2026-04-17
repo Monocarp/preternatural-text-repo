@@ -6,10 +6,13 @@
                     "Exploding Rumbling Cloud Over Agen Rains Stones"
                 ]
             },
-            "Material Released": [
-                "Teacher Attacked By Shape\u2011Changing Water\u2011Spraying Cloud",
-                "Exploding Rumbling Cloud Over Agen Rains Stones"
-            ]
+            "Material Released": {
+                "Water": [],
+                "_stories": [
+                    "Teacher Attacked By Shape\u2011Changing Water\u2011Spraying Cloud",
+                    "Exploding Rumbling Cloud Over Agen Rains Stones"
+                ]
+            }
         }
     },
     "Alleged Angel Contact": {
