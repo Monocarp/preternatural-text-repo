@@ -3858,11 +3858,10 @@
     ],
     "Strange Falls": {
         "Inorganic Matter": {
-            "Coins": {
-                "_stories": [
-                    "Rain of Coins near Kankakee, Illinois, Accompanied by Whizzing Noise (1909)"
-                ]
-            },
+            "Coins": [
+                "Rain of Coins near Kankakee, Illinois, Accompanied by Whizzing Noise (1909)",
+                "Falling Coins at St. Elisabeth\u2019s Church, Redding, near Manchester, England (1982)"
+            ],
             "Fire": [
                 "1867 Thames Ditton Shower of Fire and Sulphur Deposit",
                 "Thunderstone-like Polished Stone after Green Fireball at Wolverhampton, England (1876)"
