@@ -61273,5 +61273,20 @@
         },
         "confidence": 0.66,
         "status": "NEEDS_REVIEW"
+    },
+    "Stones Falling in England in the 19th Century": {
+        "start_char": 88719,
+        "end_char": 88858,
+        "pages": "28",
+        "keywords": [
+            "small black stones",
+            "birmingham",
+            "england",
+            "august",
+            "1858",
+            "wolverhampton",
+            "june",
+            "1860"
+        ]
     }
 }
