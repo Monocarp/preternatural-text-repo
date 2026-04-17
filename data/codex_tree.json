@@ -3847,7 +3847,11 @@
     ],
     "Strange Falls": {
         "Inorganic Matter": {
-            "Sulphur": [],
+            "Sulphur": {
+                "_stories": [
+                    "1867 Thames Ditton Shower of Fire and Sulphur Deposit"
+                ]
+            },
             "Unknown": [
                 "1832 Kourianof Russia Fall of Combustible Yellowish Substance"
             ]
