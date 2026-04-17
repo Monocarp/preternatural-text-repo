@@ -2,9 +2,13 @@
     "Aerial Phenomena": {
         "Anomalous Clouds": {
             "Auditory Phenomena": {
-                "Thunder": []
+                "Thunder": {}
             },
-            "Material Released": {}
+            "Material Released": {
+                "_stories": [
+                    "Teacher Attacked By Shape\u2011Changing Water\u2011Spraying Cloud"
+                ]
+            }
         }
     },
     "Alleged Angel Contact": {
