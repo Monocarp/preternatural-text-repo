@@ -2,7 +2,11 @@
     "Aerial Phenomena": {
         "Anomalous Clouds": {
             "Auditory Phenomena": {
-                "Thunder": {}
+                "Thunder": {
+                    "_stories": [
+                        "Exploding Rumbling Cloud Over Agen Rains Stones"
+                    ]
+                }
             },
             "Material Released": [
                 "Teacher Attacked By Shape\u2011Changing Water\u2011Spraying Cloud"
