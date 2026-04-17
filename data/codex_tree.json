@@ -3847,7 +3847,11 @@
     ],
     "Strange Falls": {
         "Inorganic Matter": {
-            "Fire": [],
+            "Fire": {
+                "_stories": [
+                    "1867 Thames Ditton Shower of Fire and Sulphur Deposit"
+                ]
+            },
             "Sulphur": [
                 "1867 Thames Ditton Shower of Fire and Sulphur Deposit"
             ],
