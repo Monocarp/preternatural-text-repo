@@ -3846,7 +3846,9 @@
         "Naga Were-Leopard Shamanism and a Soul Living in a Leopard\u2019s Head"
     ],
     "Strange Falls": {
-        "Inorganic Matter": []
+        "Inorganic Matter": {
+            "Unknown": []
+        }
     },
     "Supernatural Phenomena": {
         "Spontaneous Human Combustion": {},
