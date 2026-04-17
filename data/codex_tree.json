@@ -1,7 +1,9 @@
 {
     "Aerial Phenomena": {
         "Anomalous Clouds": {
-            "Auditory Phenomena": [],
+            "Auditory Phenomena": {
+                "Thunder": []
+            },
             "Material Released": {}
         }
     },
