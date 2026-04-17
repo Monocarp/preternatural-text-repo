@@ -3847,11 +3847,10 @@
     ],
     "Strange Falls": {
         "Inorganic Matter": {
-            "Unknown": {
-                "_stories": [
-                    "1832 Kourianof Russia Fall of Combustible Yellowish Substance"
-                ]
-            }
+            "Sulphur": [],
+            "Unknown": [
+                "1832 Kourianof Russia Fall of Combustible Yellowish Substance"
+            ]
         }
     },
     "Supernatural Phenomena": {
