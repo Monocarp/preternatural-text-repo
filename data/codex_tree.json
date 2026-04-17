@@ -7,8 +7,12 @@
                 ]
             },
             "Material Released": {
-                "Rocks/Stones": [],
-                "Water": {},
+                "Rocks/Stones": {},
+                "Water": {
+                    "_stories": [
+                        "Teacher Attacked By Shape\u2011Changing Water\u2011Spraying Cloud"
+                    ]
+                },
                 "_stories": [
                     "Teacher Attacked By Shape\u2011Changing Water\u2011Spraying Cloud",
                     "Exploding Rumbling Cloud Over Agen Rains Stones"
