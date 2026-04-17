@@ -3847,13 +3847,12 @@
     ],
     "Strange Falls": {
         "Inorganic Matter": {
-            "Fire": {
-                "_stories": [
-                    "1867 Thames Ditton Shower of Fire and Sulphur Deposit"
-                ]
-            },
-            "Sulphur": [
+            "Fire": [
                 "1867 Thames Ditton Shower of Fire and Sulphur Deposit"
+            ],
+            "Sulphur": [
+                "1867 Thames Ditton Shower of Fire and Sulphur Deposit",
+                "1879 Eastern Pennsylvania Snowfall with Burning Sulphur-Like Substance"
             ],
             "Unknown": [
                 "1832 Kourianof Russia Fall of Combustible Yellowish Substance"
