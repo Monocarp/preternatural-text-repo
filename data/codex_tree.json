@@ -3893,7 +3893,9 @@
             ]
         },
         "Organic Matter": {
-            "Aquatic Animals": []
+            "Aquatic Animals": {
+                "Fish": []
+            }
         }
     },
     "Supernatural Phenomena": {
