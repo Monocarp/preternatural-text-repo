@@ -3892,7 +3892,9 @@
                 "1832 Kourianof Russia Fall of Combustible Yellowish Substance"
             ]
         },
-        "Organic Matter": []
+        "Organic Matter": {
+            "Aquatic Animals": []
+        }
     },
     "Supernatural Phenomena": {
         "Spontaneous Human Combustion": {},
