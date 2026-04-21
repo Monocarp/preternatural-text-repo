@@ -3893,12 +3893,10 @@
             ]
         },
         "Organic Matter": {
-            "Aquatic Animals": {
-                "Fish": {
-                    "_stories": [
-                        "John Lewis Of Wales 1859 Account of a Fish Fall"
-                    ]
-                }
+            "It's A Water Animal": {
+                "Fish": [
+                    "John Lewis Of Wales 1859 Account of a Fish Fall"
+                ]
             }
         }
     },
