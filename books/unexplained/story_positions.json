@@ -61491,5 +61491,18 @@
             "francis mccarthy",
             "car struck"
         ]
+    },
+    "1985 Fort Worth Fish Fall": {
+        "start_char": 126507,
+        "end_char": 126775,
+        "pages": "40",
+        "keywords": [
+            "fort worth",
+            "texas",
+            "may 8th",
+            "1985",
+            "small fish",
+            "louis castorano"
+        ]
     }
 }
