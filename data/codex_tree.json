@@ -3894,11 +3894,9 @@
         },
         "Organic Matter": {
             "It's A Water Animal": {
-                "Crabs": {
-                    "_stories": [
-                        "Showers of Small Crabs in San Francisco, California"
-                    ]
-                },
+                "Crabs": [
+                    "Showers of Small Crabs in San Francisco, California"
+                ],
                 "Fish": [
                     "John Lewis Of Wales 1859 Account of a Fish Fall",
                     "Fish Fall in Louisiana in 1947",
@@ -3922,6 +3920,7 @@
                 ]
             },
             "Terrestrial": {
+                "Snails": [],
                 "Toads/Frogs": [
                     "French Toad Fall in 1973",
                     "French Toad Fall in 1922",
