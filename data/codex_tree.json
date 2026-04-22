@@ -3907,7 +3907,11 @@
                     "French Toad Fall in 1973",
                     "French Toad Fall in 1922"
                 ],
-                "Worms": []
+                "Worms": {
+                    "_stories": [
+                        "Unidentified Brown Worms in Clifton Indiana"
+                    ]
+                }
             }
         }
     },
