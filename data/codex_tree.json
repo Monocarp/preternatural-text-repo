@@ -11,7 +11,8 @@
                     "Luminous Cloud Over Hutchinson Drops Non\u2011Luminous Insects"
                 ],
                 "Organic Materials": [
-                    "Luminous Cloud Over Hutchinson Drops Non\u2011Luminous Insects"
+                    "Luminous Cloud Over Hutchinson Drops Non\u2011Luminous Insects",
+                    "Flesh and Blood Fall in Tennessee in 1841"
                 ],
                 "Rocks/Stones": [
                     "Exploding Rumbling Cloud Over Agen Rains Stones"
@@ -3893,11 +3894,9 @@
             ]
         },
         "Organic Matter": {
-            "Flesh/Blood": {
-                "_stories": [
-                    "Flesh and Blood Fall in Tennessee in 1841"
-                ]
-            },
+            "Flesh/Blood": [
+                "Flesh and Blood Fall in Tennessee in 1841"
+            ],
             "It's A Water Animal": {
                 "Crabs": [
                     "Showers of Small Crabs in San Francisco, California"
