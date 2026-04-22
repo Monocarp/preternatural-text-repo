@@ -61532,5 +61532,19 @@
             "olamon",
             "grand falls"
         ]
+    },
+    "Shower of Toads near Delphos Ohio": {
+        "start_char": 135306,
+        "end_char": 135503,
+        "pages": "42",
+        "keywords": [
+            "delphos",
+            "ohio",
+            "june 7th",
+            "1896",
+            "rains",
+            "toads",
+            "small"
+        ]
     }
 }
