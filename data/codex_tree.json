@@ -3920,11 +3920,10 @@
                 ]
             },
             "Terrestrial": {
-                "Snails": {
-                    "_stories": [
-                        "Heavy Shower of Snails in Tiffin, Ohio"
-                    ]
-                },
+                "Snails": [
+                    "Heavy Shower of Snails in Tiffin, Ohio",
+                    "Millions of Diminutive Snails Fall in Crawford County, Ohio"
+                ],
                 "Toads/Frogs": [
                     "French Toad Fall in 1973",
                     "French Toad Fall in 1922",
