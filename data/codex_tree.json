@@ -3920,11 +3920,9 @@
                 ]
             },
             "Terrestrial": {
-                "Caterpillars": {
-                    "_stories": [
-                        "Black Caterpillars Found on Snow During Snowfall Near Danville, Pennsylvania"
-                    ]
-                },
+                "Caterpillars": [
+                    "Black Caterpillars Found on Snow During Snowfall Near Danville, Pennsylvania"
+                ],
                 "Snails": [
                     "Heavy Shower of Snails in Tiffin, Ohio",
                     "Millions of Diminutive Snails Fall in Crawford County, Ohio",
@@ -3959,7 +3957,8 @@
                     "Millions of Small Toads Appear After Thunderstorm Near Ogden, Utah"
                 ],
                 "Worms": [
-                    "Unidentified Brown Worms in Clifton Indiana"
+                    "Unidentified Brown Worms in Clifton Indiana",
+                    "Unusual Worms Crawling Over Fresh Snow in Lyndon, New York"
                 ]
             }
         }
