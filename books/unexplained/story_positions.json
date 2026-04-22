@@ -61431,5 +61431,21 @@
             "heavy snow fall",
             "fish fall"
         ]
+    },
+    "1893 Kansas Fish Fall": {
+        "start_char": 124753,
+        "end_char": 125274,
+        "pages": "39",
+        "keywords": [
+            "emporia",
+            "kansas",
+            "june 30th",
+            "1893",
+            "small fish",
+            "e. a. tobias",
+            "black bass",
+            "live fish",
+            "governor c. v. eskridge"
+        ]
     }
 }
