@@ -3920,7 +3920,11 @@
                 ]
             },
             "Terrestrial": {
-                "Caterpillars": [],
+                "Caterpillars": {
+                    "_stories": [
+                        "Black Caterpillars Found on Snow During Snowfall Near Danville, Pennsylvania"
+                    ]
+                },
                 "Snails": [
                     "Heavy Shower of Snails in Tiffin, Ohio",
                     "Millions of Diminutive Snails Fall in Crawford County, Ohio",
