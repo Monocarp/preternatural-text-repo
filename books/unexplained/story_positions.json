@@ -61224,5 +61224,18 @@
             "multiple falls",
             "specimens collected"
         ]
+    },
+    "French Toad Fall in 1973": {
+        "start_char": 119209,
+        "end_char": 119375,
+        "pages": "38",
+        "keywords": [
+            "september 23rd",
+            "1973",
+            "toads",
+            "brignoles",
+            "france",
+            "young toads"
+        ]
     }
 }
