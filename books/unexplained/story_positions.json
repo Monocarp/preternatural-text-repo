@@ -61490,5 +61490,20 @@
             "glowing head",
             "angel like"
         ]
+    },
+    "Light Seen on Ermine Street": {
+        "start_char": 182272,
+        "end_char": 183169,
+        "pages": "58",
+        "keywords": [
+            "winter",
+            "light",
+            "cross roads",
+            "ermine street",
+            "old leys manor",
+            "bicycle lamp",
+            "willoughton",
+            "atterby lane"
+        ]
     }
 }
