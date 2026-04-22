@@ -3899,11 +3899,10 @@
                 ]
             },
             "Terrestrial": {
-                "Toads/Frogs": {
-                    "_stories": [
-                        "French Toad Fall in 1973"
-                    ]
-                }
+                "Toads/Frogs": [
+                    "French Toad Fall in 1973",
+                    "French Toad Fall in 1922"
+                ]
             }
         }
     },
