@@ -3868,11 +3868,9 @@
                 "1867 Thames Ditton Shower of Fire and Sulphur Deposit",
                 "Thunderstone-like Polished Stone after Green Fireball at Wolverhampton, England (1876)"
             ],
-            "Leaves": {
-                "_stories": [
-                    "All-Day Shower of Leaves Over Rockdale, Texas, in Calm Weather"
-                ]
-            },
+            "Leaves": [
+                "All-Day Shower of Leaves Over Rockdale, Texas, in Calm Weather"
+            ],
             "Misc": [
                 "Mysterious Wheel Falling onto Car Hood in Palm Springs, California (1969)"
             ],
@@ -3896,7 +3894,8 @@
                 "1879 Eastern Pennsylvania Snowfall with Burning Sulphur-Like Substance"
             ],
             "Unknown": [
-                "1832 Kourianof Russia Fall of Combustible Yellowish Substance"
+                "1832 Kourianof Russia Fall of Combustible Yellowish Substance",
+                "Greasy Flakes Like Snow Fall from Clear Sky in Boonville, North Carolina"
             ]
         },
         "Organic Matter": {
