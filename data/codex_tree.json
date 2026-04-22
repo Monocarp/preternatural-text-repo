@@ -3928,11 +3928,9 @@
                 ]
             },
             "Terrestrial": {
-                "Alligator": {
-                    "_stories": [
-                        "Alligators Seen Falling on Turpentine Farm in Silverton Township, South Carolina"
-                    ]
-                },
+                "Alligator": [
+                    "Alligators Seen Falling on Turpentine Farm in Silverton Township, South Carolina"
+                ],
                 "Caterpillars": [
                     "Black Caterpillars Found on Snow During Snowfall Near Danville, Pennsylvania"
                 ],
@@ -3982,7 +3980,8 @@
                     "Unusual Worms Crawling Over Fresh Snow in Lyndon, New York",
                     "Cold Sleet Brings Shower of Strange Worms Near Clifton, Indiana",
                     "Grub Worms Found on Snow During Storm in Winsted, Connecticut",
-                    "Worms Reported Falling from Heavens Near Grass Valley, California"
+                    "Worms Reported Falling from Heavens Near Grass Valley, California",
+                    "Railroad Yards at Canton, South Dakota, Covered with \u201cHair Snakes\u201d After Big Rain"
                 ]
             }
         }
