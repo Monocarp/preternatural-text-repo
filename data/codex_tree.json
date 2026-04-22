@@ -3920,7 +3920,11 @@
                 ]
             },
             "Terrestrial": {
-                "Snails": [],
+                "Snails": {
+                    "_stories": [
+                        "Heavy Shower of Snails in Tiffin, Ohio"
+                    ]
+                },
                 "Toads/Frogs": [
                     "French Toad Fall in 1973",
                     "French Toad Fall in 1922",
