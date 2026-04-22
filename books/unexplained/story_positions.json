@@ -61464,5 +61464,18 @@
             "live fish",
             "foreign fish"
         ]
+    },
+    "1913 New York Small Fish Fall": {
+        "start_char": 125877,
+        "end_char": 126272,
+        "pages": "40",
+        "keywords": [
+            "theresa",
+            "new york",
+            "july 16th",
+            "1913",
+            "small fish",
+            "shiners"
+        ]
     }
 }
