@@ -11821,59 +11821,6 @@
         "confidence": 1.0,
         "status": "AUTO_APPROVED"
     },
-    "1918–1920s Stony Point Lights as a Short-Lived Manifestation": {
-        "start_char": 211740,
-        "end_char": 211857,
-        "pages": "68",
-        "keywords": [
-            "stony point",
-            "brown mountain",
-            "united states",
-            "mysterious lights",
-            "luminosities"
-        ],
-        "verbatim": "If these lights existed, their manifestation was short-lived. The luminosities of Brown Mountain, however, continued.",
-        "temporal": {
-            "years": [],
-            "centuries": [],
-            "decades": []
-        },
-        "locations": {
-            "cities": [
-                "Stony Point"
-            ],
-            "regions": [
-                "Brown Mountain"
-            ],
-            "countries": [
-                "United States"
-            ]
-        },
-        "topics": {
-            "primary": [
-                "mysterious lights",
-                "luminosities",
-                "brown mountain"
-            ],
-            "secondary": [],
-            "raw_analysis": {
-                "phenomena": [
-                    "Mysterious Lights",
-                    "Luminosities"
-                ],
-                "entities": [],
-                "implements": [],
-                "context": [
-                    "Brown Mountain"
-                ],
-                "people": [],
-                "functional_purpose": [],
-                "historical_groups": []
-            }
-        },
-        "confidence": 0.66,
-        "status": "NEEDS_REVIEW"
-    },
     "Yakima: Bill Vogel’s Teardrop Object with Multicolored Antenna Tail": {
         "start_char": 216238,
         "end_char": 217640,
