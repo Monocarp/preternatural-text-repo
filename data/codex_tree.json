@@ -438,7 +438,11 @@
                         "Idaho Red-Haired Bigfoot with Metallic-Sounding Laugh",
                         "Bigfoot Mimicking Train Whistle Far from Tracks"
                     ],
-                    "Whistling": [],
+                    "Whistling": {
+                        "_stories": [
+                            "Miniature Eighteen-Inch Hairy \u201cHuman Being\u201d Captured in Waldoboro"
+                        ]
+                    },
                     "Woodknocks": [
                         "Courtney\u2019s Wild Turkey Clucks and Wood Knock"
                     ],
