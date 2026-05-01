@@ -397,7 +397,11 @@
                         "Monroe, Michigan HB Grabs Teen\u2019s Head Through Car Window",
                         "Noxie HBs With Glowing Eyes Ignore Rifle Fire and Emit Terrifying Cries"
                     ],
-                    "Hair": [],
+                    "Hair": {
+                        "_stories": [
+                            "Hairy Nebraska HB Vanishes at 30 Feet Yet Leaves Hair on Fence"
+                        ]
+                    },
                     "Nest": [
                         "Hairy Gorilla\u2011Like Wild Man and Cave Storeroom Found Near Vernon, Indiana"
                     ],
