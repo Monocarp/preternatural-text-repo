@@ -500,7 +500,11 @@
                     "Bigfoot Transforming Into and Carrying Ghost Lights"
                 ],
                 "Sighting": {
-                    "Repeated Sightings At Home": [],
+                    "Repeated Sightings At Home": {
+                        "_stories": [
+                            "Roachdale \u201cGorilla\u201d Appears Semi-Intangible and Impervious to Gunfire"
+                        ]
+                    },
                     "_stories": [
                         "Typhoid Healing, Precognition, and Life Changes After Bigfoot Encounters",
                         "Baboon-Like Creature Attacks Reverend Harpole Near Mount Vernon",
