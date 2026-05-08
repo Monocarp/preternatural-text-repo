@@ -255,6 +255,7 @@
             "_stories": [
                 "Lake Geneva, Wisconsin Giant Serpent with Hooked Teeth",
                 "Lough Nahooin, Ireland Black Multi-Humped Lake Creature",
+                "1946 Clearwater River Dragon Devouring a Calf",
                 "1913 Horse-like Sea Serpent with Baby\u2019s Wail",
                 "Doc Shiels\u2019s Monster-Raising Rituals and Morgawr Flap",
                 "Manipogo\u2019s Color Changes and Manitou Cries",
@@ -271,8 +272,7 @@
                 "Modern Nessie and Sea Serpent Sightings with Horse Heads, Manes, and Fur-Like Coats",
                 "Lake Monsters as Mutilated Livestock: Pigs Turning Inside Out, Skinned Horse Dragon, and Deformed Calves",
                 "Donald Omand\u2019s Encounter with Norwegian Lake Monster and Its Moral Evil",
-                "Apocalyptic Water Dragons in Seealpsee, Lagarflj\u00f6t, and Loch-B\u00e9l-Dracon, and Nidh\u00f6ggr Devouring Corpses",
-                "1946 Clearwater River Dragon Devouring a Calf"
+                "Apocalyptic Water Dragons in Seealpsee, Lagarflj\u00f6t, and Loch-B\u00e9l-Dracon, and Nidh\u00f6ggr Devouring Corpses"
             ]
         },
         "Avian": {
@@ -763,7 +763,11 @@
             "Moose": {}
         },
         "Equine": {
-            "Water Horse": {}
+            "Water Horse": {
+                "_stories": [
+                    "1938 Loch Garget Beag Water Horse and Thirteen Ponies"
+                ]
+            }
         },
         "Feline": [
             "Royal Marines Hunt the Beast of Exmoor and Multiple Giant Feline Sightings",
