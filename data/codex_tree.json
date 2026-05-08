@@ -761,7 +761,9 @@
             "Deer": {},
             "Moose": {}
         },
-        "Equine": [],
+        "Equine": {
+            "Water Horse": []
+        },
         "Feline": [
             "Royal Marines Hunt the Beast of Exmoor and Multiple Giant Feline Sightings",
             "1974 Hampshire and Cheshire Half Cat, Half Dog Mystery Creature",
