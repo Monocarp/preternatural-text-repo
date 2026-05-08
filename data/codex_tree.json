@@ -763,11 +763,12 @@
             "Moose": {}
         },
         "Equine": {
-            "Water Horse": {
-                "_stories": [
-                    "1938 Loch Garget Beag Water Horse and Thirteen Ponies"
-                ]
-            }
+            "Water Horse": [
+                "1938 Loch Garget Beag Water Horse and Thirteen Ponies"
+            ],
+            "_stories": [
+                "1897 Loch Duvat Nocturnal Creature with Hideous Scream"
+            ]
         },
         "Feline": [
             "Royal Marines Hunt the Beast of Exmoor and Multiple Giant Feline Sightings",
