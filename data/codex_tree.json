@@ -316,16 +316,13 @@
                 "Doc Shiels\u2019s Monster-Raising Rituals and Morgawr Flap",
                 "Lake Ontario Serpent Seen by Eight Boaters, 1867"
             ],
-            "Unknown/Unique Creature": {
-                "_stories": [
-                    "Hairy Monster of Goose Lake Pursues Boats, 1881"
-                ]
-            },
+            "Unknown/Unique Creature": [
+                "Hairy Monster of Goose Lake Pursues Boats, 1881"
+            ],
             "Water Bull": [
                 "Lake Monsters as Mutilated Livestock: Pigs Turning Inside Out, Skinned Horse Dragon, and Deformed Calves"
             ],
             "_stories": [
-                "Hairy Monster of Goose Lake Pursues Boats, 1881",
                 "Manipogo\u2019s Color Changes and Manitou Cries",
                 "Ogopogo of British Columbia",
                 "Bunyips\u2019 Supernatural Power over Death and Misfortune",
