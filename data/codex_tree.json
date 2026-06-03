@@ -924,11 +924,9 @@
             "Ghosts, UFOs, and Malevolent Forces at Loch Ness and Boleskine House"
         ],
         "Reptilian": {
-            "Lindorm/Dragon": {
-                "_stories": [
-                    "Hylt\u00e9n-Cavallius\u2019s Description of the Lindorm and Its Attacks"
-                ]
-            },
+            "Lindorm/Dragon": [
+                "Hylt\u00e9n-Cavallius\u2019s Description of the Lindorm and Its Attacks"
+            ],
             "_stories": [
                 "2001 Cape Town Festival Vision of Reptilians, Robots, Greys, and Ganesha",
                 "Scaled, Web-Footed, Tail-Whipping Monster Attacks Hunter Near Olney"
@@ -937,7 +935,8 @@
         "Tripedal": {
             "Humanoid": {
                 "Hairy": [
-                    "The Enfield Horror and the Tripod Steed to a Faerie Fort"
+                    "The Enfield Horror and the Tripod Steed to a Faerie Fort",
+                    "Enfield, Illinois Ape-Like and Three-Legged Pink-Eyed Creature"
                 ]
             }
         },
