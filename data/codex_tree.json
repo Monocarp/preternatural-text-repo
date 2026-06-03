@@ -240,7 +240,11 @@
             "Attacked": [
                 "Alkali Lake Monster\u2019s Stench and Madness-Inducing Gaze"
             ],
-            "Child's Wail Heard": [],
+            "Child's Wail Heard": {
+                "_stories": [
+                    "1913 Horse-like Sea Serpent with Baby\u2019s Wail"
+                ]
+            },
             "Cow": [
                 "HMS Hilary Fires on Cow-Headed Sea Serpent and Is Sunk Three Days Later"
             ],
