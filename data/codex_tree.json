@@ -240,7 +240,11 @@
             "Attacked": [
                 "Alkali Lake Monster\u2019s Stench and Madness-Inducing Gaze"
             ],
-            "Bunyip": [],
+            "Bunyip": {
+                "_stories": [
+                    "Bunyips\u2019 Supernatural Power over Death and Misfortune"
+                ]
+            },
             "Child's Wail Heard": [
                 "1913 Horse-like Sea Serpent with Baby\u2019s Wail"
             ],
