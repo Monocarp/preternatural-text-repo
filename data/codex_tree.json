@@ -448,7 +448,11 @@
             ]
         },
         "Bipedal": {
-            "Goatman": [],
+            "Goatman": {
+                "_stories": [
+                    "Lake Worth Monster Jumps from Tree onto Car and Leaves Claw Mark"
+                ]
+            },
             "Humanoid": [
                 "Ihk\u2019al Rocket-Flying Little Men of the Tzeltal Indians",
                 "Philippine Aswang Appearing As A Half-Bodied Old Woman And Paralyzing Aguas",
