@@ -237,11 +237,9 @@
     ],
     "Cryptid": {
         "Aquatic": {
-            "Attacked": {
-                "_stories": [
-                    "Alkali Lake Monster\u2019s Stench and Madness-Inducing Gaze"
-                ]
-            },
+            "Attacked": [
+                "Alkali Lake Monster\u2019s Stench and Madness-Inducing Gaze"
+            ],
             "Dragon": [
                 "Lake Monsters as Mutilated Livestock: Pigs Turning Inside Out, Skinned Horse Dragon, and Deformed Calves",
                 "Serpentine Doubles: Yakut Shaman of Snakes, Len\u00e2p\u00e9 Big Serpents, and the Making of Oniare",
@@ -293,7 +291,8 @@
                 "Modern Nessie and Sea Serpent Sightings with Horse Heads, Manes, and Fur-Like Coats",
                 "St. Columba\u2019s Miracle at Loch Ness and Later Exorcism",
                 "Narrow Lake \u201cSea Monster\u201d Rises Ten Feet from Water, 1886",
-                "Walled Lake Giant Snake Watched by Crowds, 1884"
+                "Walled Lake Giant Snake Watched by Crowds, 1884",
+                "Donald Omand\u2019s Encounter with Norwegian Lake Monster and Its Moral Evil"
             ],
             "Water Bull": [
                 "Lake Monsters as Mutilated Livestock: Pigs Turning Inside Out, Skinned Horse Dragon, and Deformed Calves"
