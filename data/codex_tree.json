@@ -316,7 +316,11 @@
                 "Doc Shiels\u2019s Monster-Raising Rituals and Morgawr Flap",
                 "Lake Ontario Serpent Seen by Eight Boaters, 1867"
             ],
-            "Unknown/Unique Creature": [],
+            "Unknown/Unique Creature": {
+                "_stories": [
+                    "Hairy Monster of Goose Lake Pursues Boats, 1881"
+                ]
+            },
             "Water Bull": [
                 "Lake Monsters as Mutilated Livestock: Pigs Turning Inside Out, Skinned Horse Dragon, and Deformed Calves"
             ],
