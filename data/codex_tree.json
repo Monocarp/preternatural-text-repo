@@ -261,7 +261,11 @@
                 "Remote Viewers Describe Loch Ness Monster as Dematerializing Plesiosaur and Possible Dinosaur Ghost",
                 "Willox Steals a Water Horse\u2019s Bridle at Loch Ness and Becomes a Necromancer"
             ],
-            "Madness Induced": [],
+            "Madness Induced": {
+                "_stories": [
+                    "Alkali Lake Monster\u2019s Stench and Madness-Inducing Gaze"
+                ]
+            },
             "Malodorous Smell": [
                 "Alkali Lake Monster\u2019s Stench and Madness-Inducing Gaze"
             ],
