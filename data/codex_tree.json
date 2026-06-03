@@ -237,11 +237,9 @@
     ],
     "Cryptid": {
         "Aquatic": {
-            "Dragon": {
-                "_stories": [
-                    "Lake Monsters as Mutilated Livestock: Pigs Turning Inside Out, Skinned Horse Dragon, and Deformed Calves"
-                ]
-            },
+            "Dragon": [
+                "Lake Monsters as Mutilated Livestock: Pigs Turning Inside Out, Skinned Horse Dragon, and Deformed Calves"
+            ],
             "Equine": [
                 "Lake Monsters as Mutilated Livestock: Pigs Turning Inside Out, Skinned Horse Dragon, and Deformed Calves"
             ],
@@ -262,6 +260,7 @@
                 "Willox Steals a Water Horse\u2019s Bridle at Loch Ness and Becomes a Necromancer"
             ],
             "Serpentine": {},
+            "Water Bull": [],
             "_stories": [
                 "Lake Geneva, Wisconsin Giant Serpent with Hooked Teeth",
                 "Lough Nahooin, Ireland Black Multi-Humped Lake Creature",
