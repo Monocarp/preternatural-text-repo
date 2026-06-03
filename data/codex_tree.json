@@ -449,8 +449,12 @@
         },
         "Bipedal": {
             "Goatman": {
-                "Attack": {},
-                "Physical Evidence": [],
+                "Attack": {
+                    "_stories": [
+                        "Lake Worth Monster Jumps from Tree onto Car and Leaves Claw Mark"
+                    ]
+                },
+                "Physical Evidence": {},
                 "Tracks": {},
                 "_stories": [
                     "Lake Worth Monster Jumps from Tree onto Car and Leaves Claw Mark"
