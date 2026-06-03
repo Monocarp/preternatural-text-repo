@@ -274,7 +274,11 @@
                 "1856 Leurbost Freshwater \u201cSea Serpent\u201d in Highland Lake",
                 "Anomalous Lights and Fireballs at Monster Lakes"
             ],
-            "Lake Champ": [],
+            "Lake Champ": {
+                "_stories": [
+                    "Railroad Crew Sees Enormous Serpent Near Dresden, New York"
+                ]
+            },
             "Loch Ness": [
                 "St. Columba Repels River Ness Monster by Command, 565 C.E.",
                 "Retrospective Loch Ness Sighting of Overturned-Boat-Like Creature, 1871\u201372",
