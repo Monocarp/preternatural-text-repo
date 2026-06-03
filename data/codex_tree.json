@@ -240,11 +240,9 @@
             "Attacked": [
                 "Alkali Lake Monster\u2019s Stench and Madness-Inducing Gaze"
             ],
-            "Bunyip": {
-                "_stories": [
-                    "Bunyips\u2019 Supernatural Power over Death and Misfortune"
-                ]
-            },
+            "Bunyip": [
+                "Bunyips\u2019 Supernatural Power over Death and Misfortune"
+            ],
             "Child's Wail Heard": [
                 "1913 Horse-like Sea Serpent with Baby\u2019s Wail"
             ],
@@ -333,7 +331,6 @@
             "_stories": [
                 "Manipogo\u2019s Color Changes and Manitou Cries",
                 "Ogopogo of British Columbia",
-                "Bunyips\u2019 Supernatural Power over Death and Misfortune",
                 "Ach\u00f3mawi Lake of Tinihowis Spirits and the Deadly Dive to Meet a Saving Spirit"
             ]
         },
