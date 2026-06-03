@@ -237,7 +237,8 @@
     ],
     "Cryptid": {
         "Aquatic": {
-            "Equine": [],
+            "Dragon": [],
+            "Equine": {},
             "Loch Ness": [
                 "1856 Leurbost Freshwater \u201cSea Serpent\u201d in Highland Lake",
                 "St. Columba\u2019s Miracle at Loch Ness and Later Exorcism",
