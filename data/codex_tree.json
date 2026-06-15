@@ -936,7 +936,9 @@
         ],
         "Reptilian": {
             "Dinosaur": {
-                "Attack": [],
+                "Attack": {
+                    "Pet": []
+                },
                 "Evidence": {
                     "Dead Animal": [
                         "Emela Ntouka, Irizima, and Other Horned or Plated African Lake Creatures"
