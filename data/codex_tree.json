@@ -925,7 +925,8 @@
         ],
         "Reptilian": {
             "Dinosaur": {
-                "Sighting": []
+                "Evidence": [],
+                "Sighting": {}
             },
             "Lindorm/Dragon": [
                 "Hylt\u00e9n-Cavallius\u2019s Description of the Lindorm and Its Attacks",
