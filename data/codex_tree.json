@@ -952,7 +952,11 @@
                         "Roosevelt, Barrett, and Prospector Reports of Plesiosaur-like Lake Creatures in the Andes",
                         "Oscar W. Clark\u2019s Fire-breathing Death Valley Monster"
                     ],
-                    "Vocalizations": []
+                    "Vocalizations": {
+                        "_stories": [
+                            "Oscar W. Clark\u2019s Fire-breathing Death Valley Monster"
+                        ]
+                    }
                 },
                 "Sighting": [
                     "Early Reports of Mokele-mbembe and Brontosaurus-like Creatures in Central Africa",
