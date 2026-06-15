@@ -925,7 +925,9 @@
         ],
         "Reptilian": {
             "Dinosaur": {
-                "Evidence": [],
+                "Evidence": {
+                    "Tracks": []
+                },
                 "Sighting": {}
             },
             "Lindorm/Dragon": [
