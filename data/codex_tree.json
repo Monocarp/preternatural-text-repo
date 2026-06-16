@@ -406,7 +406,11 @@
         },
         "Avian": {
             "Dinosaur": {
-                "Sighting": {}
+                "Sighting": {
+                    "_stories": [
+                        "1976 Texas Ranch Hands\u2019 Stock-Tank Sighting of a Silent Flying Creature"
+                    ]
+                }
             },
             "Humanoid": [
                 "Mount Vernon, Illinois, Flying Man with Electric Light",
