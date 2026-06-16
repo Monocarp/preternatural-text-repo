@@ -405,7 +405,9 @@
             ]
         },
         "Avian": {
-            "Dinosaur": [],
+            "Dinosaur": {
+                "Sighting": []
+            },
             "Humanoid": [
                 "Mount Vernon, Illinois, Flying Man with Electric Light",
                 "Silver City, New Mexico, Children See Flying Gray Man",
