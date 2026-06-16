@@ -406,11 +406,10 @@
         },
         "Avian": {
             "Dinosaur": {
-                "Sighting": {
-                    "_stories": [
-                        "1976 Texas Ranch Hands\u2019 Stock-Tank Sighting of a Silent Flying Creature"
-                    ]
-                }
+                "Sighting": [
+                    "1976 Texas Ranch Hands\u2019 Stock-Tank Sighting of a Silent Flying Creature",
+                    "Ford Sisters\u2019 \u201cBig Black Bird\u201d with a Batlike Face near Brownsville, Texas"
+                ]
             },
             "Humanoid": [
                 "Mount Vernon, Illinois, Flying Man with Electric Light",
